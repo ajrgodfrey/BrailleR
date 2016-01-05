@@ -1,0 +1,8 @@
+RDirectory: C:\Program Files\R\R-3.2.2\bin\Rscript.exe
+buildcommand: knitr::knit2html("{}")
+dirname: none
+filename: HelpPage.Rmd
+lastdir: C:\Users\ajgodfre\Documents\Research\BrailleR\PackageFiles\inst\Python\WriteR
+newText: WriteR
+repo: http://cran.stat.auckland.ac.nz/
+templates: none

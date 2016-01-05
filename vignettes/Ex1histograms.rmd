@@ -1,0 +1,49 @@
+---
+title: "The BrailleR package Example 1"
+author: "A. Jonathan R. Godfrey"
+bibliography: BrailleRPublications.bib
+vignette: >
+  %\VignetteIndexEntry{Example 1: Histograms}
+    %\VignetteEngine{knitr::rmarkdown}
+output: knitr:::html_vignette
+---
+
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.width=7, fig.height=5, comment="")
+library(BrailleR)
+```
+
+
+# The BrailleR package Example 1.
+
+## Histograms
+
+The first and most commonly used example demonstrating the value of the BrailleR  package to a blind user is the creation of a histogram.
+
+```{r hist, fig.cap="A histogram of 1000 random values from a normal distribution"}
+x=rnorm(1000)
+VI(hist(x))
+```
+
+The VI() command actually calls the VI.histogram() command as the hist() command creates an object of class "histogram".
+
+## Important features
+
+The VI() command has added to the impact of issuing the hist() command as the actual graphic is generated for the sighted audience. The blind student can read from the text description so that they can interpret the information that the histogram offers the sighted world.
+
+The above example showed the standard implementation of the hist() function. The hist() function of the graphics package does not store the additional arguments that improve the visual attractiveness. The solution (perhaps temporary) is to mask the original function with one included in the BrailleR package that calls the graphics package function, and then adds extra detail for any added plotting arguments.
+
+This is best illustrated using the example included in the BrailleR::hist() function.
+
+```{r BrailleRHistExample}
+example(hist)
+```
+
+
+## Warning
+
+The VI() function is partially reliant on the use of the hist() function that is included in the BrailleR package. If a histogram is created using a command that directly links to the original hist() command found in the graphics package, then the VI() command's output will not be as useful to the blind user. This mainly affects the presentation of the title and axis labels; it should not affect the details of the counts etc. within the histogram itself.
+
+This behaviour could arise if the histogram is sought indirectly. If for example, a function offers (as a side effect) to create a histogram, the author of the function may have explicitly stated use of the hist() function from the graphics package using graphics::hist() instead of hist(). Use of graphics::hist() will bypass the BrailleR::hist() function that the VI() command needs. This should not create error messages.

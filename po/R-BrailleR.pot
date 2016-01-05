@@ -1,0 +1,26 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BrailleR 0.9\n"
+"POT-Creation-Date: 2013-09-24 16:31\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "Please enter a filename and press <enter>. \nPressing <enter> alone will generate a default  filename \nbased on the current date and time."
+msgstr ""
+
+msgid "file must be a character string or connection"
+msgstr ""
+
+msgid "If y is not supplied, x must have two numeric columns"
+msgstr ""
+
+msgid "This function will fail because y is not numeric"
+msgstr ""
+
+msgid "This function will fail because x is not numeric"
+msgstr ""

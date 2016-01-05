@@ -1,0 +1,44 @@
+Package: BrailleR
+Type: Package
+Title: Improved Access for Blind Users
+Version: 0.23.6
+Date: 2015-12-29
+Author: A. Jonathan R. Godfrey [aut, cre], Duncan Murdoch [ctb], Greg Snow
+    [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], Paul Murrell [ctb], Timothy Bilton [ctb], Yihui Xie
+    [ctb]
+Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
+Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.j.godfrey@massey.ac.nz"),
+    person("Duncan", "Murdoch", email = "murdoch.duncan@gmail.com", role = "ctb"),
+    person("Greg", "Snow", email = "greg.snow@imail.org", role = "ctb"),
+    person("Henrik", "Bengtsson", email = "henrikb@braju.com", role = "ctb"),
+    person("James", "Curtis", email = "james@curtis.net.nz", role = "ctb"),
+    person("Paul", "Murrell", email = "paul@stat.auckland.ac.nz", role = "ctb"),
+    person("Timothy", "Bilton", email = "tbilton@gmail.com", role = "ctb"),
+    person("Yihui", "Xie", email = "xie@yihui.name", role = "ctb"))
+Description: Blind users do not have access to the graphical output from R
+    without printing the content of graphics windows to an embosser of some kind. This
+    is not as immediate as is required for efficient access to statistical output.
+    The functions here are created so that blind people can make even better use
+    of R. This includes the text descriptions of graphs, convenience functions
+    to replace the functionality offered in many GUI front ends, and experimental
+    functionality for optimising graphical content to prepare it for embossing as
+    tactile images.
+Repository: CRAN
+License: GPL-2
+Depends:
+    R (>= 3.0.0),
+    knitr
+Imports:
+    devtools,
+    extrafont,
+    grid,
+    gridGraphics,
+    gridSVG,
+    moments,
+    nortest,
+    pander,
+     rmarkdown,
+    utils,
+    xtable
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1

@@ -1,0 +1,37 @@
+---
+title: "The BrailleR package Example 4"
+author: "A. Jonathan R. Godfrey"
+bibliography: BrailleRPublications.bib
+vignette: >
+  %\VignetteIndexEntry{Example 4: A single continuous response with one grouping factor}
+    %\VignetteEngine{knitr::rmarkdown}
+output: knitr:::html_vignette
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.width=7, fig.height=5, comment="")
+library(BrailleR)
+```
+
+## Analysis of a single continuous variable with respect to a single grouping factor
+
+There are many commands needed to get the numeric and graphic summary measures that might be required to collect all relevant information on a single numeric variable when it might depend on a  grouping factor. The OneFactor() command has been written as a shortcut for a blind user who wishes to obtain:
+- the counts of observations within each group,
+- the mean, standard deviation and standard error for each group,
+- boxplots and/or dotplots, 
+- the one-way analysis of variance, and
+- Tukey's Honestly Significant Difference (HSD) test on the significance of the between group differences.moments package).
+
+In addition, the blind user may need any/all of the graphs in a variety of formats (png, pdf, eps, or svg), nicely formatted tables for insertion into documents (LaTeX or HTML), and access to the code that generated these graphs and tables (an R script). 
+
+The OneFactor() function can deliver all of this with minimal effort from the user. In addition, the output HTML file is opened automatically if using R interactively, giving the blind user immediate access to the information. The content is presented using sufficiently marked up HTML code including headings and tables so that the blind user can make best use of their  screen reading software. All graphs included in the HTML file can be presented using a text description available from the VI() functionality of the BrailleR package.
+
+
+The main output document (HTML) can be viewed by issuing the command 
+```{r Example, eval=FALSE}
+example(OneFactor)
+```
+while running R interactively.
+
+

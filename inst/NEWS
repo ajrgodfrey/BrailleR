@@ -1,0 +1,116 @@
+v0.23.6
+- reinstated use of a local file for local settings
+- Added creation of "MyBrailleR" folder for user preferences and files. This only happens if the user agrees otherwise a temporary folder is created Code suggestions and comments from Henrik Bengtsson.
+- settings files will be copied to the user folder if needed.
+- fixed case sensitive typo in BrailleROptions settings file for BrailleR.Embosser
+- SaveMySettings() and RestoreMySettings() functions now redundant; removed as they were never released publicly.
+- introduced use of normalizePath(). Thanks to Henrik Bengtsson.
+- made some changes to replace cat() with message(). Suggestion from Henrik Bengtsson. (might be more of them to fix.)
+- added creation of Readme.txt file in the MyBrailleR folder which contains the date and the version of BrailleR being used.
+
+
+v0.23.5
+- Implemented use of local settings stored in .BrailleROptions object (hidden)
+- There is now  a set of defaults that can be restored in addition to the currently active set of preferences in the BrailleROptions file within the package.
+- SaveMySettings() and RestoreMySettings() functions created for obvious outcomes. These are needed to protec from losing settings when the package is updated.
+- A wrapper for WriteR is now included.
+- MakeAllFormats() added to create pandoc settings files based on the foo.pandoc file in the inst folder.
+- What's this figure? function WTF() now incorporated.
+- added necessary import of grid package
+
+v0.23.4
+- changed preferences to use local options files. Removed PREFERENCES from Inst folder.
+
+v0.23.3
+- added fitted line plot to OnePredictor().
+- altered tables to wide format instead of long where only one set of results given by UniDesc()
+- added new version of history() that uses the file.edit() instead of file.show(). Thanks to Duncan Murdoch.
+- added note to the VI.Rd help page so that the explicit two step procedure for VI.lm() is described.
+- made more use of message() and warning() for package feedback in preparation for multiple language support.
+- removed windows architecture from batch file creations scripts.
+
+v0.23.2
+- introduced use of pander for tables in html
+
+v0.23.1
+- fixed MakeBatch() and PrepareWriteR() so that it works for new representations of windows versions. Discovered at the SZS 8 July 2015.
+- fixed bug in OnePredictor() with use of Response when ResponseName was required. Discovered on 9 July 2015 during Skype call with SD.
+
+v0.23.0
+- moved from import to importFrom in the namespace. This was required for the base packages being used so I did it for all packages.
+
+v0.22.0
+Successfully uploaded to CRAN
+
+v0.21.1
+- added option for braille font installation status
+- ensured BRL options are of correct type on load of BrailleR.
+- created functions to change paper size and braille font point size.- included options for paper size and embosser type
+- established DEFAULTS and PREFERENCES files so an update does not overwrite a user's preferences. If PREFERENCES does not exist, then it is created when next the package is loaded.
+- created ResetDefaults() to overwrite PREFERENCES with DEFAULTS.
+- added package dependency to devtools so that package reload can be managed.
+- added package dependency to extrafont so that braille fonts can be embedded in pdf files.
+- added functions for setting specific embosser models.
+- added SVGThis into package as experimental function.
+- added BRLThis into package as experimental function.
+
+v0.21.0
+- fixed bug in the batch file that converted an Rmd file to html. Now uses knitr::knit2html instead of rmarkdown::render.
+- altered startup so that explicit use of the packages is initiated
+- investigated using Roxygen for package documentation. Conclusion is that it must be all or nothing. Nothing preferred at present.
+- fixed use of css for VI.lm()
+- added extra braille options in readiness for the experimental BRLThis() function.
+- added fonts folder to package that includes the single font file "BRAILLE1.ttf" for Windows users and its licence file.
+
+v0.20
+- uploaded to CRAN
+
+v0.19-5
+- replaced settings folder with individual files for each setting with a single devian control file called PREFERENCES
+- updated zzz.R functions so that they use the dcf format for settings
+- updated all functions for updating the package settings values to use the dcf format
+- Included the OnePredictor() convenience function, and related additions to the VI() method
+
+v0.19-4
+- added analysis of tick marks for axes to existing graph types
+- introduced dotplot() as wrapper  for graphics::stripchart()
+- added VI.dotplot()
+- made adding quote marks to strings easier using in internal function InQuotes()
+- made sure the boxes in HTML documents are appropriate and that spacing is nicer.
+
+v0.19-3
+- incorporated the BrailleR.css file for use in formatting HTML content from the convenience functions.
+- updated UniDesc(), OneFactor(), TwoFactors() to use the BrailleR.css
+- fixed the example for SetOptionsRd so that the author setting is not altered during package creation.
+- included the author in the HTML files for convenience functions.
+- added a choice for the css style file to use
+
+v0.19-2
+- tried (unsuccessfully) to make the tables in UniDesc() more visually appealing, without altering their accessibility.
+- Added links to Getting Started vignette for RStudio and pandoc downloads.
+- cross references in vignettes sorted out.
+- found the vignettes were unacceptably large files and how to get them smaller without loss of information.
+- more tidy up of vignettes
+
+v0.19-1
+- updated the primary vignette on the BrailleR package's history.
+- added a getting started vignette
+- included the previously overlooked need for the rmarkdown package.
+- added the SetPValDigits() function and improved the SetSigLevel() which now both mirror the SetAuthor() behaviour.
+- Added detail to the GetGoing() function for these options.
+- Updated UniDesc() so it uses the BrailleR.PValDigits option.
+- updated UniDesc() so it generates a more complete R script when purled.
+
+
+v0.19-0
+- Made some minor changes to UniDesc(), OneFactor(), TwoFactors()  so that packages are explicitly loaded when a code chunk needs them. Notably moments, xtable, and nortest
+- added GetGoing() function for setting options. Altered package startup message to mention it.
+- altered VI.boxplot() so that lower/upper terminology is only used for vertical boxplots and left/right is used for horizontal ones.
+- NEWS file established.
+
+v0.18-1
+- Move gridSVG and gridGraphics to Imports. Neither is actually used in this version but will be in a subsequent release
+- Satisfactory CRAN release version
+
+v0.18-0 
+- This version was rejected by CRAN because it had too many other packages listed as depends and CRAN wants them to be imports instead.

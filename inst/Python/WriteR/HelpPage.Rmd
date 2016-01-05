@@ -1,0 +1,81 @@
+# First notes about WriteR --- an R markdown editor
+#### last updated by Jonathan Godfrey on 5 January 2016
+
+Version: 0.160105a
+
+Credits: Original concept by Jonathan Godfrey, coding by James Curtis.
+
+Feedback: Bugs and enhancement suggestions should be sent to 	Jonathan Godfrey <a.j.godfrey@massey.ac.nz>  
+
+
+	## What is WriteR?
+
+This editor was created because blind R users cannot use the excellent RStudio integrated development environment (IDE) with their screen reader software. The first task that the WriteR application makes possible for blind users is the processing of markdown with embedded R code. This could prove invaluable for blind students completing assignment work.
+
+## What do I need?
+
+In addition to the files in the current download, you need to have three other applications installed on your computer to make the editor fully functional:  
+
+1. you must have R installed on your computer. If you do not edit the settings file, the first time you run the WriteR editor, it  will search for the latest version of R that you have installed. This is necessary because some users will have multiple versions of R on their system. 
+2. the WriteR editor is written in Python so needs it to be installed on your computer. This will change once we've slowed down the pace of development. At that time, the download will be an executable file for each operating system or similar solution instead of source code that must be interpreted
+3. to convert the markdown document you create into a fully accessible HTML document, you will also need pandoc. If you have pandoc installed on your computer it is already listed in your path as part of its default installation.
+
+
+## Getting started with WriteR outside R
+
+Put the downloaded file into a folder where you want to do your working. Unzip it here. You will have two folders and a single HTML file (this file actually). The original versions of the help files are kept in the Program folder so that there is less chance of corrupting them. The Working folder already has some Rmd files and their associated HTML documents.
+
+
+Before you do anything else: Go into the Program folder and edit the "WriteROptions" file that has the settings in it. In particular, you must ensure the R folder is correct. The easiest way to do this might be to edit it using a simple text editor like Notepad for Windows users.
+
+Windows users: go into the Program folder and Hit enter on the file called "WriteR.pyw" which is the single program file necessary. 
+
+Linux users: do what?
+
+Mac users: do what?
+
+All users: When the editor first opens, it will ask you which file you want to open. If you do not want to edit an existing file, hit the "Escape" key or the "Cancel." button. If you have used the application before, the last file you edited will be opened.
+
+You will then be asked how you want to save the file. If you want to overwrite the existing file selected at the previous step, you would just hit enter. At the moment there is a small bug that means you will need to browse to the folder you want to use for storing files. This only happens if you did not edit the "WriteROptions" file properly before running the program file. This will also continue to occur if you don't change the settings later.
+
+You may need to be patient at this point. The program is searching your system for the files it needs to process  R markdown documents.
+
+Go to the section  which continues the getting started for everyone.
+
+
+## Getting started with WriteR from inside R
+
+WriteR is bundled in the BrailleR ppackage for R. Convenience functions have been written to get you started as easily as we can manage.
+
+
+## Getting started for everyone
+
+Start editing your file once you can see WriteR has opened up a window properly. Some default text was put in the otherwise blank file, but if you did select one of the template files from the Working folder then you're already on your way.
+
+Have a look at the GettingStarted.Rmd and GettingStarted.html files to see how we write R markdown and what we get in HTML.
+
+When you have typed enough and want to see how it is represented in HTML, you will "build" the HTML document. A menu item does exist for this but the hot key is set to f5.
+
+At present, the newly updated HTML file is in the same folder as the Rmd file you are editing. If all has gone to plan, that will be the Working folder. You will need to browse to that folder manually to find the new file and open it in the browser of your choice. You can keep this file open. After you update the Rmd file in the editor and re-build the HTML, you will need to refresh the HTML file being viewed by hitting f5 in the browser. We'll try to make this a smoother exercise in future releases.
+
+ 
+## Removing the WriteR editor
+
+The installation process is about as clean as it can be. To remove WriteR you only need to delete the folder where you put the files for the application. There is no uninstallation process to work through.
+
+## Known bugs and suggestions
+
+### Minor
+- the word editor appears when the file is first opened and needs to be deleted. This "starting text" can be tailored to whatever you like in the settings menu item.
+- the save as points to the wrong folder initially. Change this in the settings menu item.
+- the About dialogue needs the version number put in it. I'm using the date (in yymmdd format) as the minor version number at present. The major version number will remain at zero until we have a satisfactory level of development for a public release.
+- standard highlighting and hot keys for modification. e.g. highlight a word and bold it with ctrl+b.
+
+### Major
+- a settings file and menu would definitely help. This was introduced in v0.150227 although it has a quirk about the labelling of the dialogue boxes when using Jaws as the screen reader.
+- perhaps we can allow other file types down the track. This could be useful for Rnw files for example. 
+- spell checking would be nice.
+- as well as Build, can we have a Build and View hot key?
+- can we update the browser on build and view?
+
+### Resolved:
