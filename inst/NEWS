@@ -7,6 +7,7 @@ v0.23.6
 - introduced use of normalizePath(). Thanks to Henrik Bengtsson.
 - made some changes to replace cat() with message(). Suggestion from Henrik Bengtsson. (might be more of them to fix.)
 - added creation of Readme.txt file in the MyBrailleR folder which contains the date and the version of BrailleR being used.
+- established GitHub repository at ajrgodfrey/BrailleR
 
 
 v0.23.5
