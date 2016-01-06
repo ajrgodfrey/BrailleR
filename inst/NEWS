@@ -1,3 +1,5 @@
+v0.23.7
+
 v0.23.6
 - reinstated use of a local file for local settings
 - Added creation of "MyBrailleR" folder for user preferences and files. This only happens if the user agrees otherwise a temporary folder is created Code suggestions and comments from Henrik Bengtsson.
@@ -7,6 +9,7 @@ v0.23.6
 - introduced use of normalizePath(). Thanks to Henrik Bengtsson.
 - made some changes to replace cat() with message(). Suggestion from Henrik Bengtsson. (might be more of them to fix.)
 - added creation of Readme.txt file in the MyBrailleR folder which contains the date and the version of BrailleR being used.
+- New version of WriteR 0.160105.3
 - established GitHub repository at ajrgodfrey/BrailleR
 
 
