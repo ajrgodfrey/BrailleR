@@ -1,7 +1,7 @@
 # First notes about WriteR --- an R markdown editor
-#### last updated by Jonathan Godfrey on 5 January 2016
+#### last updated by Jonathan Godfrey on 6 January 2016
 
-Version: 0.160105a
+Version: 0.160105.3
 
 Credits: Original concept by Jonathan Godfrey, coding by James Curtis.
 
