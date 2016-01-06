@@ -10,8 +10,8 @@ Improved Access for Blind Users}
 \tabular{ll}{
 Package: \tab BrailleR\cr
 Type: \tab Package\cr
-Version: \tab 0.23.6\cr
-Date: \tab 2015-12-26\cr
+Version: \tab 0.23.7\cr
+Date: \tab 2016-01-06\cr
 License: \tab GPL-2\cr
 }
 }
