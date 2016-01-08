@@ -95,6 +95,13 @@ BrailleR also includes some tools for helping run your R jobs without running R.
 
 Once you've played with a few examples, you might want to settle on the way you want BrailleR to work for you.
 
+You might want your analyses to use your name instead of the default name `BrailleR`. Do this using the `SetAuthor()` function. e.g.
+```{r SetAuthor}
+SetAuthor("Jonathan Godfrey")
+```
+OK, you ought to use your name not mine, but you get the point.
+
+
 
 
 

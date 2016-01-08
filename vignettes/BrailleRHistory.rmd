@@ -66,7 +66,7 @@ On my way to the 5^th^ Summer University event, I managed to attend the principa
 
 The introduction of R markdown to the BrailleR package has made a huge difference. I've been able to write enough example code that once I found a friendly postgraduate student (Timothy Bilton) to put some time into it, we've managed to add more convenience functionality. Timothy has improved some of my earlier work and tried a few things of his own. This has left me with the time to add increased functionality for helping blind users get into  markdown for themselves.
 
-One of my irritations of working with markdown is that everyone else seems to write markdown and check their findings using RStudio, which remains inaccessible for me and other screen reader users. I took an old experiment where I wrote an accessible text editor in wxPython, and with the help of a postgraduate student from Computer Science (James Curtis) we've modified it to process Rmd files. This is still quite experimental so there is still a need for me to do some other work for processing RmdFiles.
+One of my irritations of working with markdown is that everyone else seems to write markdown and check their findings using RStudio, which remains inaccessible for me and other screen reader users. I took an old experiment where I wrote an accessible text editor in wxPython, and with the help of a postgraduate student from Computer Science (James Curtis) we've modified it to process Rmd files. This is still quite experimental so there is still a need for me to do some other work for processing RmdFiles, but it does look very promising.
 
 ## Acknowledgements
 
@@ -82,10 +82,6 @@ his TeachingDemos package [@TeachingDemos].
 The Lions clubs of Karlsruhe supported my attendance at the 3^rd^ Summer
 University event in 2013. This gave me the first opportunity to
 put the package in front of an audience that I hope will gain from the
-packages existence. 
-
-
-
-
+package's existence. 
 
 ## References
