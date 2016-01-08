@@ -30,6 +30,7 @@ else {message("Using a temporary folder for this session.\nN.B. You will be aske
 file.copy(BrailleRSettings, paste0(tempPath, "BrailleROptions"), overwrite=FALSE)
     WriteRSettings = system.file("WriteROptions", package="BrailleR")
 file.copy(WriteRSettings, paste0(tempPath, "WriteROptions"), overwrite=FALSE)
+dir.create(paste0(tempPath, "/css"))
 
 return(    invisible(tempPath))
 }

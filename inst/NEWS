@@ -1,6 +1,7 @@
 v0.23.7
 - WriteR() goes live. Does not make use of everything yet though.
 - updated some of the vignette files
+- added option for BrailleR.SlidesCSS in readiness for MakeSlideShow() function that will turn a series of Rmd files into a set of html slides.
 
 v0.23.6
 - reinstated use of a local file for local settings
