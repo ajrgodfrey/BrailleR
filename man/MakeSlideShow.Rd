@@ -5,10 +5,10 @@
 \description{
 Takes a set of Rmd files in alphabetical order and makes them a set of linked HTML files suitable for a presentation.}
 \usage{
-MakeSlideShow(folder, Style = getOption("BrailleR.SlidesCSS"), ContentsSlide = FALSE)
+MakeSlideShow(Folder, Style = getOption("BrailleR.SlidesCSS"), ContentsSlide = FALSE)
 }
 \arguments{
-  \item{folder}{name of the folder in the current working directory that contains the set of Rmd files.}
+  \item{Folder}{name of the folder in the current working directory that contains the set of Rmd files.}
   \item{Style}{Choose the cascading style sheet file to be applied.}
   \item{ContentsSlide}{Do you want links for the extra slide th at has the links to all slides?}
 }
