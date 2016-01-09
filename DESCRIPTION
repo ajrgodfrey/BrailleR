@@ -41,4 +41,6 @@ Imports:
     utils,
     xtable
 VignetteBuilder: knitr
+URL: http://github.com/ajrgodfrey/BrailleR
+BugReports: http://github.com/ajrgodfrey/BrailleR/issues
 RoxygenNote: 5.0.1

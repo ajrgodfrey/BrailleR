@@ -145,7 +145,7 @@ print(xtable(anova(', ModelName, '), caption=TabCapt, label="', ResponseName, '-
 }
 
 # stop writing markdown and process the written file into html and an R script
-knit2html(Filename, quiet=TRUE)
+knit2html(Filename, quiet=TRUE, stylesheet=FindCSSFile(getOption("BrailleR.Style")))
 file.remove(sub(".Rmd", ".md", Filename))
 purl(Filename, quiet=TRUE, documentation=0)
 if(View) browseURL(sub(".Rmd", ".html", Filename))

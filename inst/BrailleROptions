@@ -2,7 +2,7 @@ BrailleR.Author: BrailleR
 BrailleR.VI: TRUE
 BrailleR.Latex: TRUE
 BrailleR.Style: BrailleR.css
-BrailleR.SlidesStyle: JGSlides.css
+BrailleR.SlideStyle: JGSlides.css
 BrailleR.SigLevel: 0.05
 BrailleR.PValDigits: 4
 BrailleR.DotplotBins: 6

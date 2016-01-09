@@ -1,4 +1,4 @@
-MakeSlideShow = function(Folder, Style = getOption("BrailleR.SlidesCSS"), ContentsSlide = FALSE){
+MakeSlideShow = function(Folder, Style = getOption("BrailleR.SlideStyle"), ContentsSlide = TRUE){
 
 if(dir.exists(Folder)){ # only continue if the folder specified exists
 
@@ -8,11 +8,12 @@ if(file.exists(paste0("./",Folder,"/",Style))){StyleUsed = paste0("./",Folder,"/
 
 if(!is.null(StyleUsed)){ # only continue if a css file was found
 # get lists of master slides and output slides
-MasterSlideSet=list.files(path="slides", pattern="Rmd", full.names=TRUE)
-SlideSet=gsub("slides/", "", MasterSlideSet)
+MasterSlideSet=list.files(path=Folder, pattern="Rmd", full.names=TRUE)
+SlideSet = gsub(paste0(Folder, "/"), "", MasterSlideSet)
 OutSet=gsub(".Rmd", ".html", SlideSet)
 # make temporary copy of slides
 file.copy(from=MasterSlideSet, to=SlideSet, overwrite=TRUE)
+
 if(ContentsSlide){
 cat("## Contents\n\n", file="00_Contents.Rmd")
 for(i in SlideSet){ # add contents link
@@ -20,6 +21,7 @@ for(i in SlideSet){ # add contents link
 temp=readLines(i,  n=5)
 temp=temp[temp!=""]
 cat(paste0("#", temp[1], "\n\n"), file="00_Contents.Rmd", append=TRUE)
+    cat(paste0("[", gsub(".Rmd", "", i), "](", gsub(".Rmd", ".html", i), ")\n\n"), file="00_Contents.Rmd", append=TRUE)
 }
 knit2html("00_Contents.Rmd", stylesheet= StyleUsed)
 file.remove("00_Contents.md")
