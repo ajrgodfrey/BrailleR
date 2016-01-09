@@ -1,5 +1,6 @@
 \name{SetOptions}
 \alias{ChooseEmbosser}
+\alias{ChooseSlideStyle}
 \alias{ChooseStyle}
 \alias{ResetDefaults}
 \alias{SetAuthor}
@@ -15,6 +16,7 @@ Some package options have arguments which need validation. Setting the default s
 ChooseEmbosser(Embosser = "none", Permanent = TRUE, Local = TRUE)
 
 ChooseStyle(css = "BrailleR.css", Permanent = TRUE, Local = TRUE)
+ChooseSlideStyle(css = "JGSlides.css", Permanent = TRUE, Local = TRUE)
 
 ResetDefaults(Local=TRUE)
 
@@ -30,18 +32,18 @@ SetSigLevel(alpha, Permanent = TRUE, Local = TRUE)
 }
 \arguments{
   \item{alpha}{The level of alpha to be used for analyses. Must be between zero and one or a warning is given and the option is not changed.}
-  \item{css}{a cascading style sheet file to be inserted in HTML documents created by convenience functions. The file must be placed in the css folder within the BrailleR package folder for this to work.}
+  \item{css}{a cascading style sheet file to be inserted in HTML documents created by convenience functions. The file must be placed in the css folder within the MyBrailleR folder created by the user when prompted, for this to work.}
   \item{digits}{The number of decimal places to display. Must be an integer greater than one or a warning is given and the option is not changed.}
   \item{Embosser}{the name of the embosser to be used for tactile images. Not all embossers will be immediately supported by the package. The supported embossers are listed in the relevant section below. Please contact the package maintainer to introduce a new embosser to the list of supported models.}
   \item{Inches}{The size of the area to use for embossing. This should be the size of the embossed area not the actual size of the paper itself.}
-\item{Local}{Should the local copy of BrailleROptions.dcf be updated?}
+\item{Local}{Should the local copy of BrailleROptions be updated?}
   \item{name}{a character string to be used for author details in various file writing functions.}
   \item{Permanent}{Should the change be made permanent? Set to FALSE for a temporary change.}
 \item{pt}{The point size of the chosen braille font.}
 }
 \details{More convenience functions for BrailleR users. Most are self explanatory, but the following details should be noted.
 
-The Choose...() functions are used for establishing default parameters for other details. The ChooseStyle() command can be used to alter the appearance of HTML output by way of cascading style sheets. You can create your own css file and add it to the package before calling this function. Please also submit it to the package maintainer so that you don't lose it when the package is updated on your system.
+The Choose...() functions are used for establishing default parameters for other details. The ChooseStyle() command can be used to alter the appearance of HTML output by way of cascading style sheets. You can create your own css file and add it to your user folder called MyBrailleR before calling this function. 
 
 The ChooseEmbosser() will look for the default settings recommended for particular types of embosser. Initial testing was done on a Tiger Premier 100 embosser manufactured by ViewPlus Inc. The default paper size is 11 by 11.5 inches, but the recommended embossing area for graphics is 10 by 10 inches. Please submit your preferences for any embosser to the pacakge maintainer.
 

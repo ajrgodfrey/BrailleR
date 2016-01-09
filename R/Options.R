@@ -35,6 +35,31 @@ else{warning("A text string was expected. No action taken.\n")}
 return(invisible(NULL))
 }
 
+ChooseSlideStyle=function(css="JGSlides.css", Permanent=TRUE, Local=TRUE){
+if(is.character(css)){
+options(BrailleR.SlideStyle=css)
+if(system.file("css", css, package="BrailleR")==""){
+warning("The file", css, "is not in the css folder of the BrailleR package.\nPlease put it there before re-issuing this command.\n")
+}
+else{
+message("The BrailleR.SlideStyle option has been updated to ", css, ".")
+if(Permanent){
+Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
+OpSet=as.data.frame(read.dcf(Prefs, all=TRUE))
+OpSet$BrailleR.SlideStyle=css
+write.dcf(OpSet, file=Prefs)
+message("and has overwritten the setting for all folders.")}
+if(Local){
+Prefs="BrailleROptions"
+if(file.exists(Prefs)){OpSet=as.data.frame(read.dcf(Prefs, all=TRUE))}
+OpSet$BrailleR.SlideStyle=css
+write.dcf(OpSet, file=Prefs)
+message("The new setting will remain in effect next time you load the BrailleR package in this directory.")}
+}}
+else{warning("A text string was expected. No action taken.\n")}
+return(invisible(NULL))
+}
+
 ChooseStyle=function(css="BrailleR.css", Permanent=TRUE, Local=TRUE){
 if(is.character(css)){
 options(BrailleR.Style=css)
