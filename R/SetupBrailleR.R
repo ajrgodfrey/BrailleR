@@ -30,7 +30,10 @@ else {message("Using a temporary folder for this session.\nN.B. You will be aske
 file.copy(BrailleRSettings, paste0(tempPath, "BrailleROptions"), overwrite=FALSE)
     WriteRSettings = system.file("WriteROptions", package="BrailleR")
 file.copy(WriteRSettings, paste0(tempPath, "WriteROptions"), overwrite=FALSE)
-dir.create(paste0(tempPath, "/css"))
+if(!dir.exists(paste0(tempPath, "/css"))){dir.create(paste0(tempPath, "/css"))}
+CSSFolder=paste0(system.file(package="BrailleR"), "/css")
+CSSFiles=list.files(path=CSSFolder, pattern="css")
+file.copy(paste0(CSSFolder, "/", CSSFiles), paste0(tempPath, "/css/", CSSFiles), overwrite=FALSE)
 
 return(    invisible(tempPath))
 }

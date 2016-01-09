@@ -1,3 +1,10 @@
+FindCSSFile=function(file){
+out=NULL
+if(file.exists(paste0(getOption("BrailleR.Folder"), "/css/",file))){out=normalizePath(paste0(getOption("BrailleR.Folder"), "/css/", file))}
+if(file.exists(file)){out=file}
+return(out)
+}
+
 
 GetAxisTicks=function(x){
 A=x[1]
