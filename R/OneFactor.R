@@ -51,7 +51,7 @@ if(is.null(Filename)) Filename = paste0(ResponseName, ".", FactorName, "-OneFact
 
 # start writing to the R markdown file
 cat('# Analysis of the', DataName, 'data, using', ResponseName, 'as the response variable and', FactorName, 'as the single grouping factor.  
-#### Prepared by `r getOption("BrailleR.Author")`  \n\n', file=Filename)
+#### Prepared by ', getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}  
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))  

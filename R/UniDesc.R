@@ -28,7 +28,7 @@ Filename = paste0(ResponseName, "-UniDesc.Rmd")
 if(is.null(Title)) {Title=paste0('Univariate analysis for ', ResponseName)}
 
 cat('#', Title, '  
-#### Prepared by `r getOption("BrailleR.Author")`  \n\n', file=Filename)
+#### Prepared by ', getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))

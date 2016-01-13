@@ -1,5 +1,6 @@
 # v0.23.8
 - Small changes to TwoFactors() so variable names get printed properly in tables.
+- added author credentials to OnePredictor() and TwoFactors()
 
 
 

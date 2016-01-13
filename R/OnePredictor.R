@@ -51,7 +51,8 @@ if(is.null(Filename)) { Filename = paste0(ResponseName, ".", PredictorName, "-On
 ModelName=paste0(ResponseName, ".", PredictorName, ".lm")
 
 # start writing to the R markdown file
-cat('# Analysis of the', DataName, 'data, using', ResponseName, 'as the response variable and', PredictorName, 'as the single predictor.  \n\n', file=Filename)
+cat('# Analysis of the', DataName, 'data, using', ResponseName, 'as the response variable and', PredictorName, 'as the single predictor.
+#### Prepared by ', getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup2, purl=FALSE, include=FALSE}  
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))  
