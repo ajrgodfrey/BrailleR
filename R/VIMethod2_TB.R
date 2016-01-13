@@ -69,7 +69,7 @@ VI.TukeyHSD <- function(x) # Last Edited: 25/02/15
 	  SignPValues = (CTable[,4] <= (1-CI))
 	  if (any(SignPValues==TRUE))
 	  { 
-	    cat("For term ", names(x)[Comparison], " the comparisons which are significant to ", (1-CI)*100, "% are:\n", sep="") 
+	    cat("For term ", names(x)[Comparison], " the comparisons which are significant at ", (1-CI)*100, "% are:\n", sep="") 
 	    for (DRow in 1:length(SignPValues))
         {
           if(SignPValues[DRow]==TRUE)
@@ -80,7 +80,7 @@ VI.TukeyHSD <- function(x) # Last Edited: 25/02/15
 	    }
  	  }
 	}
-	else{ cat("For term ", names(x)[Comparison], " there are no comparisons significant to ", (1-CI)*100, "%\n", sep="") }
+	else{ cat("For term ", names(x)[Comparison], " there are no comparisons significant at ", (1-CI)*100, "%\n", sep="") }
 	cat("\n")
   }
 return(invisible(NULL))

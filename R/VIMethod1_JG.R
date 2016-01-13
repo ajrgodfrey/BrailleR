@@ -168,7 +168,7 @@ InflObs = data.frame(', ModelName, '$model, Fit=Fits, St.residual=Residuals, Lev
 
 ```{r ListInfObsLatex, purl=FALSE}  
 library(xtable)  
-print(xtable(InflObs, caption="Listing of suspected outliers and influential observations.", label="InflObs', ModelName, '", digits=4), file = "', FolderName, '/InflObs.tex")  
+print(xtable(InflObs, caption="Listing of suspected outliers and influential observations.", label="InflObs', ModelName, '", digits=4), file = "', FolderName, '/Influential.tex")  
 ```  
 
 ```{r ListInfObsKabled, results="asis", purl=FALSE}  

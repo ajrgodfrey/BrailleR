@@ -1,6 +1,6 @@
-## Last Edited: 26/02/15
+## Last Edited: 13/01/16
 
-TwoFactors = function(Response, Factor1, Factor2, HSD=TRUE, AlphaE = 0.05, Data=NULL, Inter=FALSE, 
+TwoFactors = function(Response, Factor1, Factor2, Inter=FALSE, HSD=TRUE, AlphaE = getOption("BrailleR.SigLevel"), Data=NULL, 
     Filename=NULL, Folder=NULL,
     VI=getOption("BrailleR.VI"), Latex=getOption("BrailleR.Latex"), View=getOption("BrailleR.View"))
 {
@@ -51,11 +51,11 @@ with(Data, {
 # create folder and filenames
 if(is.null(Folder)) Folder=DataName
 if(Folder!="" & !file.exists(Folder)) dir.create(Folder)
-if(is.null(Filename)) Filename = paste0(ResponseName, ".", Factor1Name, ".", Factor2Name, "-TwoFactors.Rmd")
+if(is.null(Filename)) Filename = paste0(ResponseName, ".", Factor1Name, ".", Factor2Name, "-TwoFactors", ifelse(Inter, 'WithInt', 'NoInt'), ".Rmd")
 
 # start writing to the R markdown file
-cat('# Analysis of the', DataName, 'data, using', ResponseName, 'as the response variable and the variables', Factor1Name,  'and', Factor2Name, 'as factors.  
-#### Prepared by `r getOption("BrailleR.Author")`  \n\n', file=Filename)
+cat(paste0('# Analysis of the ', DataName, ' data, using ', ResponseName, ' as the response variable and the variables ', Factor1Name,  ifelse(Inter, ", ", " and "), Factor2Name, ifelse(Inter, ", and their interaction", ""), ' as factors.  
+#### Prepared by ', getOption("BrailleR.Author"), '  \n\n'), file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}  
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))  
@@ -75,7 +75,7 @@ Data.n <- aggregate(', ResponseName,', list(', Factor1Name,', ', Factor2Name, ')
 Data.StdErr = Data.StDev[,3]/sqrt(Data.n[,3])
 detach(', DataName, ')  
 DataSummary = cbind(Data.Mean, Data.StDev[,3], Data.n[,3], Data.StdErr)
-colnames(DataSummary) = c("F1 Level", "F2 Level", "Mean", "Standard deviation", "n", "Standard error")
+colnames(DataSummary) = c("',Factor1Name, ' Level", "',Factor2Name,' Level", "Mean", "Standard deviation", "n", "Standard error")
 ```  
 
 The ratio of the largest group standard deviation to the smallest is `r round(max(Data.StDev[,3])/min(Data.StDev[,3]),2)`  
@@ -93,7 +93,7 @@ print(xtable(DataSummary, caption=TabCapt, label="', ResponseName, 'GroupSummary
     ```  \n\n'), file=Filename, append=TRUE)
 }
 
-############# Produce EDA plots depending on whether interactions are included or not.
+### Produce the EDA plots depending on whether interactions are included or not.
 
 nNonMissing <- function(x){
   length(na.omit(x)) # length() includes NAs
@@ -174,8 +174,8 @@ summary(MyANOVA2)
 if(Latex){
 cat(paste0('```{r ANOVA-TEX, purl=FALSE}  
 library(xtable)  
-ThisTexFile = "', Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name, '-ANOVA.tex"  
-TabCapt = "Two-way ANOVA for ', ResponseName, ' with the group factors ', Factor1Name, 'and', Factor2Name, '."  
+ThisTexFile = "', Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name, ifelse(Inter, "WithInt", "NoInt"), '-ANOVA.tex"  
+TabCapt = "Two-way ANOVA for ', ResponseName, ' with the group factors ', Factor1Name, 'and', Factor2Name, ifelse(Inter, " as well as their interaction", "without their interaction"), '."  
 print(xtable(MyANOVA, caption=TabCapt, label="', ResponseName, '-', Factor1Name, '-ANOVA", digits=4), file = ThisTexFile)  
 ```  \n\n'), file=Filename, append=TRUE)
 }
