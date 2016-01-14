@@ -18,7 +18,7 @@ message(prompt)
 UserPref = menu(list(paste("Yes: create", defaultPath, "now"), "No, use a temporary folder"), title = "Do you want to create the (almost) permanent folder?")
 if(UserPref==1){
     dir.create(defaultPath)
-cat("This folder is for the BrailleR package to be used with the R statistical software application.\nIt was created on", format(Sys.Date(), "%A %d %B %Y"), "\nusing version", as.character(packageVersion("BrailleR")), "of BrailleR.\n", file= paste0(defaultPath, "Readme.txt"))
+cat("This folder is for the BrailleR package to be used with the R statistical software application.\nIt was created on", format(Sys.Date(), "%A %d %B %Y"), "\nusing version", as.character(utils::packageVersion("BrailleR")), "of BrailleR.\n", file= paste0(defaultPath, "Readme.txt"))
 message("Using the permanent folder for this session and every session from now onwards.\nYou can delete the folder at any time.")
         tempPath <- defaultPath
 }
