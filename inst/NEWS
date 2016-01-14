@@ -2,9 +2,9 @@
 - Small changes to TwoFactors() so variable names get printed properly in tables.
 - added author credentials to OneFactor(), OnePredictor(), TwoFactors(), and UniDesc().
 - removed over-writing of files in example for TwoFactors(). Filenames will now indicate with or No interaction.
+- fixed creation of ReadMe.txt in the MyBrailleR folder so that it gets the package version properly. Needed to include packageVersion() in the NAMESPACE file; also explicitly linked this command to the utils apckage in SetupBrailleR().
 
-
-
+# v0.23.7
 - WriteR() goes live. Does not make use of all arguments just yet.
 - updated some of the vignette files
 - added option for BrailleR.SlideStyle in readiness for MakeSlideShow() function that will turn a series of Rmd files into a set of html slides.
