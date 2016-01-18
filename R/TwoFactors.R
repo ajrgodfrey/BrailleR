@@ -67,6 +67,7 @@ opts_chunk$set(echo=FALSE, comment="", fig.path="', Folder, '/', ResponseName, '
 ```{r GroupSummary}  
 attach(', DataName, ')  
 Data.Mean <- aggregate(', ResponseName,', list(', Factor1Name,', ', Factor2Name, '), mean, na.rm=TRUE)
+colnames(Data.Mean) = c("',Factor1Name,'","', Factor2Name,'", "Mean") 
 Data.StDev <- aggregate(', ResponseName,', list(', Factor1Name,', ', Factor2Name, '), sd, na.rm=TRUE)
 nNonMissing <- function(x){
     length(na.omit(x)) # length() includes NAs
@@ -147,13 +148,17 @@ F1.Big = length(levels(Data[[Factor2Name]])) < length(levels(Data[[Factor1Name]]
 xFactor = ifelse(F1.Big ,Factor1Name, Factor2Name)
 Trace = ifelse(!F1.Big, Factor1Name, Factor2Name)
   
-cat(paste0('## Interaction Plot \n
+cat(paste0('## Interaction Plot  
+
 ```{r InteractionPlot, fig.cap="Interaction Plot"}
-with(',DataName, ', interaction.plot(', xFactor, ',', Trace, ',', ResponseName, ')) 
-colnames(Data.Mean) = c("',Factor1Name,'","', Factor2Name,'", "Mean") 
-cat("Means table: Rows are for the trace factor, ', Trace ,', and columns are for the factor along the x-axis, ', xFactor, '.")
+with(',DataName, ', interaction.plot(', xFactor, ',', Trace, ',', ResponseName, '))  
+```  \n\n',
+
+ifelse(VI, "Means table: Rows are for the trace factor, ', Trace ,', and columns are for the factor along the x-axis, ', xFactor, '.
+
+```{r }  
 xtabs(Mean~',Trace, '+', xFactor,',data=Data.Mean) 
-```  \n\n'), file=Filename, append=TRUE)
+```  \n\n", "")), file=Filename, append=TRUE)
 }
 
 
