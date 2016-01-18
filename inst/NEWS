@@ -2,7 +2,8 @@
 - Small changes to TwoFactors() so variable names get printed properly in tables.
 - added author credentials to OneFactor(), OnePredictor(), TwoFactors(), and UniDesc().
 - removed over-writing of files in example for TwoFactors(). Filenames will now indicate with or No interaction.
-- fixed creation of ReadMe.txt in the MyBrailleR folder so that it gets the package version properly. Needed to include packageVersion() in the NAMESPACE file; also explicitly linked this command to the utils apckage in SetupBrailleR().
+- dotplots in TwoFactors() have mroe meaningful filenames that reflect grouping variable used.
+- fixed creation of ReadMe.txt in the MyBrailleR folder so that it gets the package version properly. Needed to include packageVersion() in the NAMESPACE file; also explicitly linked this command to the utils package in SetupBrailleR().
 
 # v0.23.7
 - WriteR() goes live. Does not make use of all arguments just yet.
@@ -17,7 +18,7 @@
 
 # v0.23.6
 - reinstated use of a local file for local settings
-- Added creation of "MyBrailleR" folder for user preferences and files. This only happens if the user agrees otherwise a temporary folder is created Thanks to Henrik Bengtssonfor code suggestions and comments.
+- Added creation of "MyBrailleR" folder for user preferences and files. This only happens if the user agrees otherwise a temporary folder is created Thanks to Henrik Bengtsson for code suggestions and comments.
 - settings files will be copied to the user folder if needed.
 - fixed case sensitive typo in BrailleROptions settings file for BrailleR.Embosser
 - SaveMySettings() and RestoreMySettings() functions now redundant; removed as they were never released publicly.

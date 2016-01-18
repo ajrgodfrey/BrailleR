@@ -1,4 +1,4 @@
-## Last Edited: 13/01/16
+## Last Edited: 16/01/16
 
 TwoFactors = function(Response, Factor1, Factor2, Inter=FALSE, HSD=TRUE, AlphaE = getOption("BrailleR.SigLevel"), Data=NULL, 
     Filename=NULL, Folder=NULL,
@@ -100,7 +100,7 @@ nNonMissing <- function(x){
 }
 Data.n <- with(get(DataName), aggregate(get(ResponseName), list(get(Factor1Name),get(Factor2Name)), nNonMissing))
 
-if(isTRUE(Inter)){
+if(Inter){
 if(min(Data.n[,3])>4){
 cat(paste0('## Comparative boxplots
 ```{r boxplots, fig.cap="Comparative boxplots"}  \n',
@@ -108,10 +108,9 @@ ifelse(VI,"VI(",""), 'boxplot(', ResponseName, '~interaction(', Factor1Name, ','
 ```\n\n'), file=Filename, append=TRUE)
 }
 else{
-cat(paste0('## Comparative boxplots
-```{r NoBoxplots, purl=FALSE}  
-cat("When boxplots are not included, it is  because at least one group size is too small.")  
-``` \n\n'), file=Filename, append=TRUE)
+cat(paste0('## Comparative boxplots  
+
+When boxplots are not included, it is  because at least one group size is too small.  \n\n'), file=Filename, append=TRUE)
 }
 }
 else{
@@ -123,24 +122,26 @@ ifelse(VI,"VI(",""), 'boxplot(', ResponseName, '~', Factor2Name, ', data=', Data
 ``` \n\n'), file=Filename, append=TRUE)
 }
 else{
-cat(paste0('## Comparative boxplots
-```{r NoBoxplots, eval=min(Data.n[,3])<5, purl=FALSE}  
-cat("When boxplots are not included, it is  because at least one group size is too small.")  
-``` \n\n'), file=Filename, append=TRUE)
+cat(paste0('## Comparative boxplots  
+
+When boxplots are not included, it is  because at least one group size is too small.   \n\n'), file=Filename, append=TRUE)
 }
 }
 
 cat(paste0('## Comparative dotplots  
 
-```{r dotplots, fig.cap="Comparative dotplots"}  
+```{r Dotplots-by-', Factor1Name, ', fig.cap="Comparative dotplots for ', ResponseName, ' by ', Factor1Name, '"}  
 ', ifelse(VI, "VI(", ""), 'stripchart(', ResponseName, '~', Factor1Name, ', data=', DataName, ifelse(VI,")", ""), ')  
-\n', ifelse(VI, "VI(", ""), 'stripchart(', ResponseName, '~', Factor2Name, ', data=', DataName, ifelse(VI,")", ""), ')  
+```  
+
+```{r Dotplots-by-', Factor2Name, ', fig.cap="Comparative dotplots for ', ResponseName, ' by ', Factor2Name, '"}  
+', ifelse(VI, "VI(", ""), 'stripchart(', ResponseName, '~', Factor2Name, ', data=', DataName, ifelse(VI,")", ""), ')  
 ``` \n\n'), file=Filename, append=TRUE)
 
 
 #### Interaction plot (if specified)
 
-if(isTRUE(Inter)){
+if(Inter){
   
 F1.Big = length(levels(Data[[Factor2Name]])) < length(levels(Data[[Factor1Name]]))
 xFactor = ifelse(F1.Big ,Factor1Name, Factor2Name)
@@ -161,11 +162,11 @@ xtabs(Mean~',Trace, '+', xFactor,',data=Data.Mean)
 cat(paste0('## Two-way Analysis of Variance
 
 ```{r TwoWayANOVA}
-MyANOVA <- aov(', ResponseName, '~', Factor1Name, ifelse(isTRUE(Inter),"*","+") , Factor2Name, ', data=', DataName, ')
+MyANOVA <- aov(', ResponseName, '~', Factor1Name, ifelse(Inter, "*", "+") , Factor2Name, ', data=', DataName, ')
 ', ifelse(VI, "VI(MyANOVA)", ""), '
 summary(MyANOVA)  
 if(length(unique(Data.n[,3]))!=1){ 
-MyANOVA2 <- aov(', ResponseName, '~', Factor2Name, ifelse(isTRUE(Inter),"*","+") , Factor1Name, ', data=', DataName, ')
+MyANOVA2 <- aov(', ResponseName, '~', Factor2Name, ifelse(Inter, "*", "+") , Factor1Name, ', data=', DataName, ')
 ', ifelse(VI, "VI(MyANOVA2)", ""),'
 summary(MyANOVA2)
 }
@@ -175,12 +176,12 @@ if(Latex){
 cat(paste0('```{r ANOVA-TEX, purl=FALSE}  
 library(xtable)  
 ThisTexFile = "', Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name, ifelse(Inter, "WithInt", "NoInt"), '-ANOVA.tex"  
-TabCapt = "Two-way ANOVA for ', ResponseName, ' with the group factors ', Factor1Name, 'and', Factor2Name, ifelse(Inter, " as well as their interaction", "without their interaction"), '."  
+TabCapt = "Two-way ANOVA for ', ResponseName, ' with the group factors ', Factor1Name, ' and ', Factor2Name, ifelse(Inter, ", as well as their interaction", " without their interaction"), '."  
 print(xtable(MyANOVA, caption=TabCapt, label="', ResponseName, '-', Factor1Name, '-ANOVA", digits=4), file = ThisTexFile)  
 ```  \n\n'), file=Filename, append=TRUE)
 }
 
-if(isTRUE(Inter)){
+if(Inter){
 cat(paste0("```{r TwoWayANOVA2, fig.cap=\"Residual analysis\"}
 par(mfrow=c(2,2)) 
 plot(MyANOVA) 
