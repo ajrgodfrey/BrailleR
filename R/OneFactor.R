@@ -108,10 +108,12 @@ cat('## Comparative boxplots  \n
 When boxplots are not included, it is  because at least one group size is too small.  \n\n',
 file=Filename, append=TRUE) }
 
-cat('## Comparative dotplots  \n\n',
-'```{r dotplots, fig.cap="Comparative dotplots"}  \n',
-paste0('with(', DataName, ', ', ifelse(VI,'VI(dotplot(', 'stripchart('), ResponseName, '~', FactorName, ', xlab=', InQuotes(ResponseName), ', ylab=', InQuotes(FactorName), ifelse(VI,')', ''), '))  \n'),
-'``` \n\n',
+cat(paste0('## Comparative dotplots  
+
+```{r dotplots, fig.cap="Comparative dotplots"}  
+with(', DataName, ', 
+', ifelse(VI,'VI(dotplot(', 'stripchart('), ResponseName, '~', FactorName, ', xlab=', InQuotes(ResponseName), ', ylab=', InQuotes(FactorName), ifelse(VI,')', ''), '))  
+``` \n\n'),
 file=Filename, append=TRUE)
 
 cat(paste0('## One-way Analysis of Variance  
