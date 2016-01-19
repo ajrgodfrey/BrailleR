@@ -22,9 +22,18 @@ GridLS=grid::grid.ls(print=FALSE, flatten= TRUE)
 #cat("\n\n")
 
 
-NPoints = length(grid.get("graphics-plot-1-points-1")$x)
-UniquePCH =  unique(grid.get("graphics-plot-1-points-1")$pch)
+if(is.null(names(grid.get("graphics-plot-1-points-2")))){
+PointSet=na.omit(data.frame(x=unclass(grid.get("graphics-plot-1-points-1")$x), y=unclass(grid.get("graphics-plot-1-points-1")$y), pch=unclass(grid.get("graphics-plot-1-points-1")$pch)))
+}
+else{
+PointSet=na.omit(data.frame(x=unclass(grid.get("graphics-plot-1-points-2")$x), y=unclass(grid.get("graphics-plot-1-points-2")$y), pch=unclass(grid.get("graphics-plot-1-points-2")$pch)))
+}
+
+# col=grid.get("graphics-plot-1-points-1")$col
+NPoints = nrow(PointSet)
+UniquePCH =  unique(PointSet$pch)
 NPCH = length(UniquePCH)
+
 XAxisLabel = grid.get("graphics-plot-1-xlab-1")$label
 YAxisLabel = grid.get("graphics-plot-1-ylab-1")$label
 MainTitle=grid.get("graphics-plot-1-main-1")$label
