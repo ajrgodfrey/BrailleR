@@ -132,6 +132,31 @@ return(invisible(NULL))
 }
 
 
+
+SetMakeUpper = function(Upper, Permanent=TRUE, Local=TRUE){
+Upper = as.logical(Upper)
+if(is.logical(Upper)){
+options(BrailleR.MakeUpper = Upper)
+message("The BrailleR.MakeUpper option for capitalising the initial letter of variable names has been changed to ", Upper, ".")
+if(Permanent){
+Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
+OpSet=as.data.frame(read.dcf(Prefs, all=TRUE))
+OpSet$BrailleR.MakeUpper = Upper
+write.dcf(OpSet, file=Prefs)
+message("and has overwritten the setting for all folders.")}
+if(Local){
+Prefs="BrailleROptions"
+if(file.exists(Prefs)){OpSet=as.data.frame(read.dcf(Prefs, all=TRUE))}
+OpSet$BrailleR.MakeUpper = Upper
+write.dcf(OpSet, file=Prefs)
+message("The new setting will remain in effect next time you load the BrailleR package in this directory.")}
+}
+else{
+warning("The option must be either TRUE or FALSE.\nNo change has been made to this setting.\n")
+}
+return(invisible(NULL))
+}
+
 SetPaperHeight = function(Inches, Permanent=FALSE, Local=TRUE){
 if((5<Inches)&(Inches<14)){
 options(BrailleR.PaperHeight=Inches)

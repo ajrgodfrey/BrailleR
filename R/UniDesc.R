@@ -20,19 +20,19 @@ if(Folder!="."&& !file.exists(Folder)) dir.create(Folder)
 
 # make sure there is a filename to write the markdown to.
 if(is.null(Filename)){
-Filename = paste0(ResponseName, "-UniDesc.Rmd")
+Filename = paste0(.simpleCap(ResponseName), "-UniDesc.Rmd")
 }
 
 
 # Start writing mark down here.
-if(is.null(Title)) {Title=paste0('Univariate analysis for ', ResponseName)}
+if(is.null(Title)) {Title=paste0('Univariate analysis for ', .simpleCap(ResponseName))}
 
 cat('#', Title, '  
-#### Prepared by ', getOption("BrailleR.Author"), '  \n\n', file=Filename)
+#### Prepared by',  getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
-opts_chunk$set(comment="", echo=FALSE, fig.path="', Folder, '/', ResponseName, '-", fig.width=7)
+opts_chunk$set(comment="", echo=FALSE, fig.path="', Folder, '/', .simpleCap(ResponseName), '-", fig.width=7)
 ```  \n\n'), file=Filename, append=TRUE)
 
 
@@ -102,17 +102,17 @@ Value | `r ', ResponseName, '.skew` | `r ', ResponseName, '.kurt`   \n\n'), file
 if(Graphs){
 cat("\n## Basic univariate graphs    \n### Histogram    \n", file=Filename, append=TRUE)
 GraphHead("Hist", "The histogram")
-cat(paste0(ifelse(VI, 'VI(',''), 'hist(', ResponseName, ', xlab="', ResponseName, '", main="Histogram of ', ResponseName, '")', ifelse(VI, ')', '') ), file=Filename, append=TRUE)
+cat(paste0(ifelse(VI, 'VI(',''), 'hist(', ResponseName, ', xlab="', ResponseName, '", main="Histogram of ', .simpleCap(ResponseName), '")', ifelse(VI, ')', '') ), file=Filename, append=TRUE)
 CloseChunk()
 
 cat("\n### Boxplot    \n", file=Filename, append=TRUE)
 GraphHeadWide("Boxplot", "The boxplot")
-cat(paste0(ifelse(VI, 'VI(',''), 'boxplot(', ResponseName, ', horizontal=TRUE, main = "Boxplot of ', ResponseName, '")', ifelse(VI, ')','')), file=Filename, append=TRUE)
+cat(paste0(ifelse(VI, 'VI(',''), 'boxplot(', ResponseName, ', horizontal=TRUE, main = "Boxplot of ', .simpleCap(ResponseName), '")', ifelse(VI, ')','')), file=Filename, append=TRUE)
 CloseChunk()
 
 #cat("\n### Density plot    \n", file=Filename, append=TRUE)
 #GraphHead("Density")
-#cat(paste0('density(', ResponseName, ', na.rm=TRUE, main = "Density plot for ', ResponseName, '")'), file=Filename, a#ppend=TRUE)
+#cat(paste0('density(', ResponseName, ', na.rm=TRUE, main = "Density plot for ', .simpleCap(ResponseName), '")'), file=Filename, a#ppend=TRUE)
 #CloseChunk()
 #MyDensity=plot(density(x, xlab=ResponseName)
 #cat(paste0("The title put on this density plot was: Density plot of",ResponseName,"\n"))
@@ -166,7 +166,7 @@ print(xtable(Results, caption=TabCapt, label=paste0(ResponseName,"Normality"), d
 if(Graphs){
 cat("\n### Normality plot    \n", file=Filename, append=TRUE)
 GraphHeadSq("NormPlot", "The normality plot")
-cat(paste0('qqnorm(', ResponseName, ', main = "Normality Plot for ', ResponseName, '")\nqqline(', ResponseName, ')'), file=Filename, append=TRUE)
+cat(paste0('qqnorm(', ResponseName, ', main = "Normality Plot for ', .simpleCap(ResponseName), '")\nqqline(', ResponseName, ')'), file=Filename, append=TRUE)
 CloseChunk()
 }# end of normality plot section
 

@@ -131,11 +131,11 @@ When boxplots are not included, it is  because at least one group size is too sm
 
 cat(paste0('## Comparative dotplots  
 
-```{r Dotplots-by-', Factor1Name, ', fig.cap="Comparative dotplots for ', ResponseName, ' by ', Factor1Name, '"}  
+```{r Dotplots-by', .simpleCap(Factor1Name), ', fig.cap="Comparative dotplots for ', .simpleCap(ResponseName), ' by ', .simpleCap(Factor1Name), '"}  
 ', ifelse(VI, "VI(", ""), 'stripchart(', ResponseName, '~', Factor1Name, ', data=', DataName, ifelse(VI,")", ""), ')  
 ```  
 
-```{r Dotplots-by-', Factor2Name, ', fig.cap="Comparative dotplots for ', ResponseName, ' by ', Factor2Name, '"}  
+```{r Dotplots-by', .simpleCap(Factor2Name), ', fig.cap="Comparative dotplots for ', .simpleCap(ResponseName), ' by ', .simpleCap(Factor2Name), '"}  
 ', ifelse(VI, "VI(", ""), 'stripchart(', ResponseName, '~', Factor2Name, ', data=', DataName, ifelse(VI,")", ""), ')  
 ``` \n\n'), file=Filename, append=TRUE)
 
@@ -154,7 +154,7 @@ cat(paste0('## Interaction Plot
 with(',DataName, ', interaction.plot(', xFactor, ',', Trace, ',', ResponseName, '))  
 ```  \n\n',
 
-ifelse(VI, "Means table: Rows are for the trace factor, ', Trace ,', and columns are for the factor along the x-axis, ', xFactor, '.
+ifelse(VI, "Means table: Rows are for the trace factor, ', .simpleCap(Trace), ', and columns are for the factor along the x-axis, ', .simpleCap(xFactor), '.
 
 ```{r }  
 xtabs(Mean~',Trace, '+', xFactor,',data=Data.Mean) 
@@ -181,7 +181,7 @@ if(Latex){
 cat(paste0('```{r ANOVA-TEX, purl=FALSE}  
 library(xtable)  
 ThisTexFile = "', Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name, ifelse(Inter, "WithInt", "NoInt"), '-ANOVA.tex"  
-TabCapt = "Two-way ANOVA for ', ResponseName, ' with the group factors ', Factor1Name, ' and ', Factor2Name, ifelse(Inter, ", as well as their interaction", " without their interaction"), '."  
+TabCapt = "Two-way ANOVA for ', .simpleCap(ResponseName), ' with the group factors ', .simpleCap(Factor1Name), ' and ', .simpleCap(Factor2Name), ifelse(Inter, ", as well as their interaction", " without their interaction"), '."  
 print(xtable(MyANOVA, caption=TabCapt, label="', ResponseName, '-', Factor1Name, '-ANOVA", digits=4), file = ThisTexFile)  
 ```  \n\n'), file=Filename, append=TRUE)
 }

@@ -5,6 +5,7 @@
 \alias{ResetDefaults}
 \alias{SetAuthor}
 \alias{SetBRLPointSize}
+\alias{SetMakeUpper}
 \alias{SetPaperHeight}
 \alias{SetPaperWidth}
 \alias{SetPValDigits}
@@ -26,6 +27,8 @@ SetBRLPointSize(pt, Permanent = FALSE, Local = TRUE)
 SetPaperHeight(Inches, Permanent = FALSE, Local = TRUE)
 SetPaperWidth(Inches, Permanent = FALSE, Local = TRUE)
 
+SetMakeUpper(Upper, Permanent=TRUE, Local=TRUE)
+
 SetPValDigits(digits, Permanent = TRUE, Local = TRUE)
 
 SetSigLevel(alpha, Permanent = TRUE, Local = TRUE)
@@ -40,6 +43,7 @@ SetSigLevel(alpha, Permanent = TRUE, Local = TRUE)
   \item{name}{a character string to be used for author details in various file writing functions.}
   \item{Permanent}{Should the change be made permanent? Set to FALSE for a temporary change.}
 \item{pt}{The point size of the chosen braille font.}
+\item{Upper}{Should th initial letter of variable names be capitalised in captions and filenames? Logical, initially set to TRUE.}
 }
 \details{More convenience functions for BrailleR users. Most are self explanatory, but the following details should be noted.
 

@@ -12,3 +12,4 @@ BrailleR.BRLFontInstalled: FALSE
 BrailleR.Embosser: none
 BrailleR.PaperWidth: 10
 BrailleR.PaperHeight: 10
+BrailleR.MakeUpper: TRUE
