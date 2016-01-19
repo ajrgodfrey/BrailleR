@@ -6,7 +6,7 @@
 - fixed creation of ReadMe.txt in the MyBrailleR folder so that it gets the package version properly. Needed to include packageVersion() in the NAMESPACE file; also explicitly linked this command to the utils package in SetupBrailleR().
 - added internal function .simpleCap() which is based on code in the example for toupper(); outcome is dependent on a new BrailleR option BrailleR.MakeUpper which is set to TRUE by default.
 - added function SetMakeUpper() to control the presentation of variable names on graphs.
-- made use of  .simpleCap() in UniDesc(), TwoFactors()
+- made use of  .simpleCap() in UniDesc(), TwoFactors(), OneFactor(), and 
 
 
 # v0.23.7

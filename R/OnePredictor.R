@@ -46,22 +46,22 @@ if(!is.numeric(get(PredictorName))) stop("The Predictor variable is not numeric.
 # create folder and filenames
 if(is.null(Folder)) Folder=DataName
 if(Folder!="" & !file.exists(Folder)) dir.create(Folder)
-if(is.null(Filename)) { Filename = paste0(ResponseName, ".", PredictorName, "-OnePredictor.Rmd") }
+if(is.null(Filename)) { Filename = paste0(.simpleCap(ResponseName), ".", .simpleCap(PredictorName), "-OnePredictor.Rmd") }
 
 ModelName=paste0(ResponseName, ".", PredictorName, ".lm")
 
 # start writing to the R markdown file
-cat('# Analysis of the', DataName, 'data, using', ResponseName, 'as the response variable and', PredictorName, 'as the single predictor.
+cat('# Analysis of the', .simpleCap(DataName), 'data, using', .simpleCap(ResponseName), 'as the response variable and', .simpleCap(PredictorName), 'as the single predictor.
 #### Prepared by ', getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup2, purl=FALSE, include=FALSE}  
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))  
-opts_chunk$set(echo=FALSE, comment="", fig.path="', Folder, '/', ResponseName, '.', PredictorName, '-", fig.width=7)  
+opts_chunk$set(echo=FALSE, comment="", fig.path="', Folder, '/', .simpleCap(ResponseName), '.', .simpleCap(PredictorName), '-", fig.width=7)  
 ```    
 
 ## Variable summaries  
 
-The response variable is ', ResponseName ,' and the predictor variable is ', PredictorName,'.
+The response variable is ', .simpleCap(ResponseName) ,' and the predictor variable is ', .simpleCap(PredictorName), '.
 
 ```{r VariableSummary}  
 attach(', DataName, ')
@@ -82,9 +82,9 @@ kable(t(SummaryTable), row.names=T, align=rep("c",8))
 if(Latex){
 cat(paste0('```{r VariableSummaryTex, purl=FALSE}
 library(xtable)
-ThisTexFile = "', Folder, '/', ResponseName, '.', PredictorName, '-VariableSummary.tex"  
-TabCapt = "Summary statistics for variables ', ResponseName, ' and ', PredictorName, '"  
-print(xtable(t(SummaryTable), caption=TabCapt, label="', ResponseName, 'VariableSummary", digits=4, align="lrrrrrrrr"), include.rownames = FALSE, file = ThisTexFile)  
+ThisTexFile = "', Folder, '/', .simpleCap(ResponseName), '.', .simpleCap(PredictorName), '-VariableSummary.tex"  
+TabCapt = "Summary statistics for variables ', .simpleCap(ResponseName), ' and ', .simpleCap(PredictorName), '."  
+print(xtable(t(SummaryTable), caption=TabCapt, label="', .simpleCap(ResponseName), '-VariableSummary", digits=4, align="lrrrrrrrr"), include.rownames = FALSE, file = ThisTexFile)  
 ```  \n\n'), file=Filename, append=TRUE)
 }
 
@@ -95,7 +95,7 @@ cat(paste0('## Scatter Plot
 completeCases <- complete.cases(Data[ResponseName])*complete.cases(Data[PredictorName])
 assign(DataName, Data[completeCases==1,])
 
-plot(',ResponseName,'~',PredictorName,', data=',DataName,')
+plot(',ResponseName,'~',PredictorName,', data=',DataName, ', ylab=', .simpleCap(ResponseName), ', xlab=', .simpleCap(PredictorName), ')
 attach(',DataName,')
 WhereXY(',ResponseName,',',PredictorName,')
 detach(',DataName,')
@@ -112,9 +112,10 @@ summary(', ModelName, ')
 ```  
 
 ```{r FittedLinePlot}   
-plot(',ResponseName,'~',PredictorName,', data=',DataName,')
+plot(',ResponseName,'~',PredictorName,', data=',DataName, ', ylab=', .simpleCap(ResponseName), ', xlab=', .simpleCap(PredictorName), ')
 abline(', ModelName, ')  
 ```  
+
 
 ```{r SimpleLinModResAnal, fig.cap="Residual analysis"}  
 par(mfrow=c(2,2))  
@@ -133,8 +134,8 @@ anova(', ModelName, ')
 
 if(Latex){
 cat(paste0('```{r SimpleLinMod-TEX, purl=FALSE}  
-ThisTexFile = "', Folder, '/', ResponseName, '-', PredictorName, '-lm.tex"  
-TabCapt = "Linear regression model for ', ResponseName, ' with the single Predictor ', PredictorName, '."  
+ThisTexFile = "', Folder, '/', .simpleCap(ResponseName), '-', .simpleCap(PredictorName), '-lm.tex"  
+TabCapt = "Linear regression model for ', .simpleCap(ResponseName), ' with the single Predictor ', .simpleCap(PredictorName), '."  
 print(xtable(', ModelName, ', caption=TabCapt, label="', ResponseName, '-', PredictorName, '-lm", digits=4), file = ThisTexFile)  
 ```  
 
