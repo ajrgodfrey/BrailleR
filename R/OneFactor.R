@@ -112,24 +112,24 @@ cat(paste0('## Comparative dotplots
 
 ```{r dotplots, fig.cap="Comparative dotplots"}  
 with(', DataName, ', 
-', ifelse(VI,'VI(dotplot(', 'stripchart('), ResponseName, '~', FactorName, ', xlab=', InQuotes(ResponseName), ', ylab=', InQuotes(FactorName), ifelse(VI,')', ''), '))  
+', ifelse(VI,'VI(dotplot(', 'stripchart('), ResponseName, '~', FactorName, ', xlab=', InQuotes(.simpleCap(ResponseName)), ', ylab=', InQuotes(.simpleCap(FactorName)), ifelse(VI,')', ''), '))  
 ``` \n\n'),
 file=Filename, append=TRUE)
 
 cat(paste0('## One-way Analysis of Variance  
 
-```{r OneWayANOVA1}  \n',
-ifelse(VI, "VI(", ""), 
-"MyANOVA <- aov(", ResponseName, "~", FactorName, ", data=", DataName, ")", 
-ifelse(VI, ")", "")), 
-'\n```  \n\n', file=Filename, append=TRUE)
+```{r OneWayANOVA1}  
+', ifelse(VI, "VI(", ""), '
+MyANOVA <- aov(', ResponseName, '~', FactorName, ', data=', DataName, ')', 
+ifelse(VI, ")", "")), '
+```  \n\n', file=Filename, append=TRUE)
 
 if(Latex){
 cat(paste0('```{r ANOVA-TEX, purl=FALSE}  
 library(xtable)  
-ThisTexFile = "', Folder, '/', ResponseName, '-', FactorName, '-ANOVA.tex"  
-TabCapt = "One-way ANOVA for ', ResponseName, ' with the group factor ', FactorName, '."  
-print(xtable(MyANOVA, caption=TabCapt, label="', ResponseName, '-', FactorName, '-ANOVA", digits=4), file = ThisTexFile)  
+ThisTexFile = "', Folder, '/', .simpleCap(ResponseName), '-', .simpleCap(FactorName), '-ANOVA.tex"  
+TabCapt = "One-way ANOVA for ', .simpleCap(ResponseName), ' with the group factor ', .simpleCap(FactorName), '."  
+print(xtable(MyANOVA, caption=TabCapt, label="', .simpleCap(ResponseName), '-', .simpleCap(FactorName), '-ANOVA", digits=4), file = ThisTexFile)  
 ```  \n\n'), file=Filename, append=TRUE)
 }
 
