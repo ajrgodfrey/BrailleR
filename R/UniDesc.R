@@ -158,7 +158,7 @@ cat('```{r NormalityTestsTex, purl=FALSE}
 library(xtable)  
 ', paste0('ThisTexFile = "', Folder, "/", ResponseName, '-Normality.tex"'),'
 TabCapt= "Tests for normality: Variable is', ResponseName, '"
-print(xtable(Results, caption=TabCapt, label=paste0(ResponseName,"Normality"), digits=4, align="lrr"), file=ThisTexFile)
+print(xtable(Results, caption=TabCapt, label=\"', ResponseName, 'Normality", digits=4, align="lrr"), file=ThisTexFile)
 ```   \n', file=Filename, append=TRUE)
 }
 }# end of normality test statistics section
