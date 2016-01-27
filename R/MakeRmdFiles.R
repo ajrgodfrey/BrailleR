@@ -9,10 +9,11 @@ cat("# History from R session on", format(Sys.Date(), "%A %d %B %Y"),
 "\n\n", file = file)
 cat(paste0("```{r line", LineNo, "}  \n", Lines, "\n```  \n\n"), 
 file=file, append=TRUE)
-message("File ", file, "has been created in your working directory.")
+message("There is a new file in your working directory. Look for: ")
+return(file)
 }
-else{warning("This function is intended for use in an interactive R session.\n")}
-return(invisible(NULL))
+else{warning("This function is intended for use in an interactive R session.\n")
+return(invisible(NULL))}
 }
 
 
@@ -35,8 +36,9 @@ cat(paste0("\n", Lines, "  "),
 file=RmdFile, append=TRUE)
 cat("\n# end of input  \n```  \n\n",file=RmdFile, append=TRUE)
 
-message("File", RmdFile, "has been created in your working directory.")
+message("A new file has been created in your working directory.")
+return(RmdFile)
 }
-else{warning("The specified file does not exist.\n")}
-return(invisible(NULL))
+else{warning("The specified file does not exist.\n")
+return(invisible(NULL))}
 }

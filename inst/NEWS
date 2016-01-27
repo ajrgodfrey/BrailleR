@@ -1,5 +1,6 @@
 # v0.23.9
 - added NewFunction() for creating a template R script file for a new function including Roxygen comment lines.
+- fixed spacing problems in the output messages for MakeRmd()
 
  
 # v0.23.8
