@@ -31,6 +31,7 @@ cat('#', Title, '
 #### Prepared by',  getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}
+library(BrailleR)
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 opts_chunk$set(comment="", echo=FALSE, fig.path="', Folder, '/', .simpleCap(ResponseName), '-", fig.width=7)
 ```  \n\n'), file=Filename, append=TRUE)

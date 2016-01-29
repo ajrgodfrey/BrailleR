@@ -1,8 +1,10 @@
 # v0.23.9
 - added NewFunction() for creating a template R script file for a new function including Roxygen comment lines.
 - fixed spacing problems in the output messages for MakeRmd()
+- added constraint that some version of Python must be installed for WriteR() to work.
+- added library(BrailleR) to first chunk created by UniDesc() and ifelse(VI, "library(BrailleR)", "library(knitr)") to the first chunk of the other convenience functions so the Rmd files can be converted without BrailleR being loaded. Discovered at University of Pretria Boot Camp.
 
- 
+
 # v0.23.8
 - Small changes to TwoFactors() so variable names get printed properly in tables.
 - added author credentials to OneFactor(), OnePredictor(), TwoFactors(), and UniDesc().

@@ -58,6 +58,7 @@ cat(paste0('# Analysis of the ', DataName, ' data, using ', ResponseName, ' as t
 #### Prepared by ', getOption("BrailleR.Author"), '  \n\n'), file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}  
+', ifelse(VI, "library(BrailleR)", "library(knitr)"), '
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))  
 opts_chunk$set(echo=FALSE, comment="", fig.path="', Folder, '/', ResponseName, '.', Factor1Name, '.',Factor2Name, '-", fig.width=7)  
 ```    

@@ -54,6 +54,7 @@ cat('# Analysis of the', .simpleCap(DataName), 'data, using', .simpleCap(Respons
 #### Prepared by', getOption("BrailleR.Author"), '  \n\n', file=Filename)
 
 cat(paste0('```{r setup, purl=FALSE, include=FALSE}  
+', ifelse(VI, "library(BrailleR)", "library(knitr)"), '
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))  
 opts_chunk$set(echo=FALSE, comment="", fig.path="', Folder, '/', .simpleCap(ResponseName), '.', .simpleCap(FactorName), '-", fig.width=7)  
 ```    
