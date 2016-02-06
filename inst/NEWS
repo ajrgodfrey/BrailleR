@@ -5,6 +5,7 @@
 - added scope for WriteR() to call a file name for a file that does not yet exist. The file is created and then the application opens.
 - added library(BrailleR) to first chunk created by UniDesc() and ifelse(VI, "library(BrailleR)", "library(knitr)") to the first chunk of the other convenience functions so the Rmd files can be converted without BrailleR being loaded. Discovered at University of Pretoria Boot Camp.
 - Fixed MakeSlideshow() so that warnings for empty blank lines at the end of slides no longer appears.
+- added MakeAllInOneSlide() function to be able to deliver slide show as a single file. Required for distributing talks given at DEIMS 2016
 
 
 # v0.23.8
