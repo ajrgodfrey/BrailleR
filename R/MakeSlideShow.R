@@ -1,3 +1,39 @@
+# file contains MakeAllInOneSlide() and MakeSlideShow()
+
+MakeAllInOneSlide = function(Folder, Style = getOption("BrailleR.SlideStyle"), file=NULL){
+
+if(dir.exists(Folder)){ # only continue if the folder specified exists
+
+# find the CSS file wanted.
+StyleUsed=FindCSSFile(Style)
+if(file.exists(paste0("./",Folder,"/",Style))){StyleUsed = paste0("./",Folder,"/",Style)}
+
+if(!is.null(StyleUsed)){ # only continue if a css file was found
+# get lists of master slides and output slide
+MasterSlideSet=list.files(path=Folder, pattern="Rmd", full.names=TRUE)
+
+OutRMD=paste0(file, ".Rmd")
+OutMD=paste0(file, ".md")
+
+cat("<!---  
+ one HTML document to concatinate an entire slide show presented as a series of HTML slides.  
+--->\n\n", file=OutRMD)
+
+file.append(OutRMD, MasterSlideSet)
+cat("\n\n", file=OutRMD, append=TRUE)
+
+knit2html(OutRMD, stylesheet= StyleUsed)
+# remove temporary files
+file.remove(OutRMD)
+ file.remove(OutMD)
+
+}# end css file condition
+else{warning("Cannot find the specified css file.")}
+} # end folder existence condition
+else{warning("Specified folder does not exist. No action taken.")}
+return(invisible(NULL))
+}
+
 MakeSlideShow = function(Folder, Style = getOption("BrailleR.SlideStyle"), ContentsSlide = TRUE){
 
 if(dir.exists(Folder)){ # only continue if the folder specified exists
@@ -29,9 +65,9 @@ file.remove("00_Contents.Rmd")
 }
 
 for(i in 2:length(SlideSet)){ #  add back link
-    cat(paste0("\n\n[back](", OutSet[i-1], ")"), file=SlideSet[i], append=TRUE)}
+    cat(paste0("\n\n[back](", OutSet[i-1], ")\n"), file=SlideSet[i], append=TRUE)}
 for(i in 1:(length(SlideSet)-1)){ # add next link
-    cat(paste0(" [next](", OutSet[i+1], ")"), file=SlideSet[i], append=TRUE)}
+    cat(paste0(" [next](", OutSet[i+1], ")\n"), file=SlideSet[i], append=TRUE)}
 
 for(i in SlideSet){
 knit2html(i, stylesheet= StyleUsed)
