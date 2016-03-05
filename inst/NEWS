@@ -1,3 +1,7 @@
+# v0.23.10
+- added MakeReadable() which cleans up vignette source files from installed packages, by converting tabs to spaces and Linux line breaks to Windows line breaks. Thi currently requires Python 2.7 to be installed.
+-
+
 # v0.23.9
 - added NewFunction() for creating a template R script file for a new function including Roxygen comment lines.
 - fixed spacing problems in the output messages for MakeRmd()
