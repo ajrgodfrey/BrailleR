@@ -1,6 +1,8 @@
 # v0.23.10
-- added MakeReadable() which cleans up vignette source files from installed packages, by converting tabs to spaces and Linux line breaks to Windows line breaks. Thi currently requires Python 2.7 to be installed.
--
+- added MakeReadable() which cleans up vignette source files from installed packages, by converting tabs to spaces and Linux line breaks to Windows line breaks. This currently requires Python 2.7 to be installed.
+-Added BrailleRHome() which takes the user to the BrailleR Project home page.
+- Added JoinBlindRUG() which creates the email message needed for joining the Blind R User Group email list.
+
 
 # v0.23.9
 - added NewFunction() for creating a template R script file for a new function including Roxygen comment lines.

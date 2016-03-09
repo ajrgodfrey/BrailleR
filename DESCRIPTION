@@ -40,6 +40,7 @@ Imports:
      rmarkdown,
     utils,
     xtable
+SystemRequirements: Python 2.7 and wxPython 2.8
 VignetteBuilder: knitr
 URL: http://github.com/ajrgodfrey/BrailleR
 BugReports: http://github.com/ajrgodfrey/BrailleR/issues
