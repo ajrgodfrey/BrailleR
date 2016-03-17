@@ -18,7 +18,7 @@ You obviously have R installed or an intention to do so soon if you are reading 
 
 ### The document converter --- pandoc
 
-Future versions of BrailleR will require the very useful file converter called pandoc. Get it from the 
+BrailleR requires the very useful file converter called pandoc. Get it from the 
 [pandoc download page](https://github.com/jgm/pandoc/releases)
 
 ### The principal integrated development environment --- RStudio
@@ -40,7 +40,7 @@ chooseCRANmirror(ind=1)
 install.packages("BrailleR")
 ```
 
-If for some reason you have difficulty with the CRAN repository, you can install the BrailleR package using a zip file version available from . 
+If for some reason you have difficulty with the above commands, you can install the BrailleR package using a zip file version available from a CRAN repository or the latest version on GitHub. 
 
 From time to time, you should check that you are using the most recent version of the BrailleR package. You  can update all installed packages using the commands:
 ```{r update, eval=FALSE}
@@ -87,7 +87,7 @@ BrailleR includes some functions which generate pro forma analyses. When these f
 
 ## Why will I use the BrailleR package if I am not a novice?
 
-I think some of the reasons for using the package while you are  a novice R user remain relevant to more-experienced users, but perhaps the main reason for continuing to use BrailleR is that of efficiency. The convenience functions give you a starting point for analyses. Behind those convenience functions was an R markdown file that generated the Rscript and the HTML document. Getting into markdown is a great idea and will not take you long to learn.
+I think some of the reasons for using the package while you are  a novice R user remain relevant to more-experienced users, but perhaps the main reason for continuing to use BrailleR is that of efficiency. The convenience functions give you a starting point for analyses. Behind those convenience functions was an R markdown file that generated the R script and the HTML document. Getting into markdown is a great idea and will not take you long to learn.
 
 BrailleR also includes some tools for helping run your R jobs without running R. Experienced users do this all the time so these tools aren't really meant for blind users alone.
  

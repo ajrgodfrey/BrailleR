@@ -1,3 +1,6 @@
+# v0.24.0
+- Made ready for CRAN submission
+
 # v0.23.10
 - added MakeReadable() which cleans up vignette source files from installed packages, by converting tabs to spaces and Linux line breaks to Windows line breaks. This currently requires Python 2.7 to be installed.
 -Added BrailleRHome() which takes the user to the BrailleR Project home page.

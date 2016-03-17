@@ -1,8 +1,0 @@
-RDirectory: C:\Program Files\R\R-devel\bin\x64\Rscript.exe
-buildcommand: rmarkdown::render("{}")
-dirname: none
-filename: GettingStarted.Rmd
-lastdir: C:\Users\ajgodfre\Documents\Research\BrailleR\PackageFiles\vignettes
-newText: WriteR
-repo: http://cran.stat.auckland.ac.nz/
-templates: none
