@@ -49,7 +49,7 @@ update.packages(ask=FALSE)
 ```
 
 Once you've got the package installed, you still need to get it running in your current R session by issuing one last command. When you issue the first of hte following lines, the package start messages will also appear.
-```{r start}
+```{r start, eval=FALSE}
 library(BrailleR)
 ```
 
@@ -96,7 +96,7 @@ BrailleR also includes some tools for helping run your R jobs without running R.
 Once you've played with a few examples, you might want to settle on the way you want BrailleR to work for you.
 
 You might want your analyses to use your name instead of the default name `BrailleR`. Do this using the `SetAuthor()` function. e.g.
-```{r SetAuthor}
+```{r SetAuthor, eval=FALSE}
 SetAuthor("Jonathan Godfrey")
 ```
 OK, you ought to use your name not mine, but you get the point.

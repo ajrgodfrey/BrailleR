@@ -14,24 +14,24 @@
 \description{
 Some package options have arguments which need validation. Setting the default significance level for analyses was the first function of this kind. Setting the name of the user to be inserted into documents was the second. Others are detailed further below.}
 \usage{
-ChooseEmbosser(Embosser = "none", Permanent = TRUE, Local = TRUE)
+ChooseEmbosser(Embosser = "none", Permanent = interactive(), Local = interactive())
 
-ChooseStyle(css = "BrailleR.css", Permanent = TRUE, Local = TRUE)
-ChooseSlideStyle(css = "JGSlides.css", Permanent = TRUE, Local = TRUE)
+ChooseStyle(css = "BrailleR.css", Permanent = interactive(), Local = interactive())
+ChooseSlideStyle(css = "JGSlides.css", Permanent = interactive(), Local = interactive())
 
-ResetDefaults(Local=TRUE)
+ResetDefaults(Local = interactive())
 
-SetAuthor(name = "BrailleR", Permanent = TRUE, Local = TRUE)
+SetAuthor(name = "BrailleR", Permanent = interactive(), Local = interactive())
 
-SetBRLPointSize(pt, Permanent = FALSE, Local = TRUE)
-SetPaperHeight(Inches, Permanent = FALSE, Local = TRUE)
-SetPaperWidth(Inches, Permanent = FALSE, Local = TRUE)
+SetBRLPointSize(pt, Permanent = FALSE, Local = interactive())
+SetPaperHeight(Inches, Permanent = FALSE, Local = interactive())
+SetPaperWidth(Inches, Permanent = FALSE, Local = interactive())
 
-SetMakeUpper(Upper, Permanent=TRUE, Local=TRUE)
+SetMakeUpper(Upper, Permanent = interactive(), Local = interactive())
 
-SetPValDigits(digits, Permanent = TRUE, Local = TRUE)
+SetPValDigits(digits, Permanent = interactive(), Local = interactive())
 
-SetSigLevel(alpha, Permanent = TRUE, Local = TRUE)
+SetSigLevel(alpha, Permanent = interactive(), Local = interactive())
 }
 \arguments{
   \item{alpha}{The level of alpha to be used for analyses. Must be between zero and one or a warning is given and the option is not changed.}
@@ -57,10 +57,6 @@ The Set..() commands will let the user specify any desired value for the options
 SetPaperHeight and SetPaperWidth are temporary changes by default because some types of images are not meant to use the maximum area set down by the original default settings for an embosser. Careful experimentation may be required to get optimal results. If permanent changes are desired, then please contact the package maintainer to explain why you have made these changes so that we can help other users get the best from a wide range of embossers.
 
 SetPValDigits() is used for rounding purposes to avoid the use of scientific notation. It is not used for determining significance.
-
-These settings are stored locally when you first load the BrailleR package in a new folder. When changes are made, they will affect the current session only (both Local=FALSE and Permanent=FALSE), all work done in this folder from now onwards (Local=TRUE and Permanent=FALSE), or will be used for all future sessions in folders yet to be used (Local=FALSE and Permanent=TRUE).
-
-When the package is next updated, the settings you make permanent will be overwritten. As this is highly undesirable, it is suggested you make a copy of your settings if you want to keep them. Use the SaveMySettings() function to put your settings into a local file and after packages are updated, you will be able to use RestoreMySettings() to use your own settings and not the factory default settings.
 }
 \author{A. Jonathan R. Godfrey}
 \examples{

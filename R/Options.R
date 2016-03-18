@@ -3,18 +3,21 @@
 # these ones do have arguments
 
 
-ResetDefaults = function(Local=TRUE){
+ResetDefaults = function(Local=interactive()){
+if(interactive()){
     DefSettings=system.file("BrailleROptions", package="BrailleR")
-    PrefSettings = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
+    PrefSettings = file.path(getOption("BrailleR.Folder"), "BrailleROptions")
     file.copy(DefSettings, PrefSettings, overwrite=TRUE)
 message("You have reset all preferences to the original package defaults.\n")
 if(Local) file.remove("BrailleROptions")
 devtools::reload("BrailleR")
+}
+ else{warning("This function is meant for use in interactive mode only.\n")}
 return(invisible(NULL))
 }
 
 
-ChooseEmbosser=function(Embosser="none", Permanent=TRUE, Local=TRUE){
+ChooseEmbosser=function(Embosser="none", Permanent=interactive(), Local=interactive()){
 if(is.character(Embosser)){
 options(BrailleR.Embosser=Embosser)
 message("The BrailleR.Embosser option has been updated to ", Embosser, ".")
@@ -35,7 +38,7 @@ else{warning("A text string was expected. No action taken.\n")}
 return(invisible(NULL))
 }
 
-ChooseSlideStyle=function(css="JGSlides.css", Permanent=TRUE, Local=TRUE){
+ChooseSlideStyle=function(css="JGSlides.css", Permanent=interactive(), Local=interactive()){
 if(is.character(css)){
 options(BrailleR.SlideStyle=css)
 if(system.file("css", css, package="BrailleR")==""){
@@ -60,7 +63,7 @@ else{warning("A text string was expected. No action taken.\n")}
 return(invisible(NULL))
 }
 
-ChooseStyle=function(css="BrailleR.css", Permanent=TRUE, Local=TRUE){
+ChooseStyle=function(css="BrailleR.css", Permanent=interactive(), Local=interactive()){
 if(is.character(css)){
 options(BrailleR.Style=css)
 if(system.file("css", css, package="BrailleR")==""){
@@ -86,7 +89,7 @@ return(invisible(NULL))
 }
 
 
-SetAuthor=function(name="BrailleR", Permanent=TRUE, Local=TRUE){
+SetAuthor=function(name="BrailleR", Permanent=interactive(), Local=interactive()){
 if(is.character(name)){
 options(BrailleR.Author=name)
 message("The BrailleR.Author option has been updated to ", name, ".")
@@ -108,7 +111,7 @@ return(invisible(NULL))
 }
 
 
-SetBRLPointSize = function(pt, Permanent=FALSE, Local=TRUE){
+SetBRLPointSize = function(pt, Permanent=FALSE, Local=interactive()){
 if((10<pt)&(pt<40)){
 options(BrailleR.BRLPointSize=pt)
 message("The BrailleR.BRLPointSize option for the braille font has been changed to ", pt, " inches.")
@@ -133,7 +136,7 @@ return(invisible(NULL))
 
 
 
-SetMakeUpper = function(Upper, Permanent=TRUE, Local=TRUE){
+SetMakeUpper = function(Upper, Permanent=interactive(), Local=interactive()){
 Upper = as.logical(Upper)
 if(is.logical(Upper)){
 options(BrailleR.MakeUpper = Upper)
@@ -157,7 +160,7 @@ warning("The option must be either TRUE or FALSE.\nNo change has been made to th
 return(invisible(NULL))
 }
 
-SetPaperHeight = function(Inches, Permanent=FALSE, Local=TRUE){
+SetPaperHeight = function(Inches, Permanent=FALSE, Local=interactive()){
 if((5<Inches)&(Inches<14)){
 options(BrailleR.PaperHeight=Inches)
 message("The BrailleR.PaperHeight option for the height of the embossed images has been changed to ", Inches, " inches.")
@@ -180,7 +183,7 @@ warning("The height must be between 5 and 14 inches. \nNo change has been made t
 return(invisible(NULL))
 }
 
-SetPaperWidth = function(Inches, Permanent=FALSE, Local=TRUE){
+SetPaperWidth = function(Inches, Permanent=FALSE, Local=interactive()){
 if((5<Inches)&(Inches<14)){
 options(BrailleR.PaperWidth=Inches)
 message("The BrailleR.PaperWidth option for the width of the embossed images has been changed to ", Inches, " inches.")
@@ -205,7 +208,7 @@ return(invisible(NULL))
 
 
 
-SetPValDigits=function(digits, Permanent=TRUE, Local=TRUE){
+SetPValDigits=function(digits, Permanent=interactive(), Local=interactive()){
 digits=as.integer(digits)
 if(digits>1){
 options(BrailleR.PValDigits=digits)
@@ -229,7 +232,7 @@ warning("The number of digits must be an integer greater than one.\nNo change ha
 return(invisible(NULL))
 }
 
-SetSigLevel=function(alpha, Permanent=TRUE, Local=TRUE){
+SetSigLevel=function(alpha, Permanent=interactive(), Local=interactive()){
 if((0<alpha)&(alpha<1)){
 options(BrailleR.SigLevel=alpha)
 message("The BrailleR.SigLevel option for the level of alpha has been changed to ", alpha, ".")

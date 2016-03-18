@@ -9,14 +9,17 @@ packageStartupMessage("The BrailleR.View,  option is set to FALSE.")
 
 .onLoad=function(libname, pkgname){
     ns <- getNamespace(pkgname)
-#    pkg <- Package(pkgname)
-#    assign(pkgname, pkg, envir = ns)
 
 Folder =     SetupBrailleR()
 
 if(file.exists("BrailleROptions")){OpSet=read.dcf("BrailleROptions", all=TRUE)}
 else { # first time package is used in this directory
-OpSet = read.dcf(paste0(Folder, "BrailleROptions"), all=TRUE)
+if(is.null(Folder)){
+OpSet = read.dcf(system.file("BrailleROptions", package="BrailleR"), all=TRUE)
+}
+else {
+OpSet = read.dcf(file.path(Folder, "/BrailleROptions"), all=TRUE)
+}
 # to do: # ask for permission to write a local copy
 ## write.dcf(OpSet, file="BrailleROptions")
 }
