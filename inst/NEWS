@@ -1,3 +1,6 @@
+# v0.24.2
+- CRAN check uncovered need to have dependency of R >= 3.2.0. 
+
 # v0.24.1
 - fixed issue with inappropriate use of tempdir() in conjunction with paste0() instead of the more correct file.path(). Direct request from Brian Ripley on behalf of CRAN.
 - removed use of tempdir() entirely for saving BrailleROptions and WriteROptions. Users must pull the defaults from the package until such time as they accept use of a folder on their own system, or a local copy of the settings.

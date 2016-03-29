@@ -1,8 +1,8 @@
 Package: BrailleR
 Type: Package
 Title: Improved Access for Blind Users
-Version: 0.24.1
-Date: 2016-03-18
+Version: 0.24.2
+Date: 2016-03-30
 Author: A. Jonathan R. Godfrey [aut, cre], Duncan Murdoch [ctb], Greg Snow
     [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], Paul Murrell [ctb], Timothy Bilton [ctb], Yihui Xie
     [ctb]
@@ -26,7 +26,7 @@ Description: Blind users do not have access to the graphical output from R
 Repository: CRAN
 License: GPL-2
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.2.0),
     knitr
 Imports:
     devtools,
