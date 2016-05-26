@@ -1,10 +1,10 @@
 Package: BrailleR
 Type: Package
 Title: Improved Access for Blind Users
-Version: 0.24.2
-Date: 2016-03-30
+Version: 0.25.0
+Date: 2016-05-30
 Author: A. Jonathan R. Godfrey [aut, cre], Duncan Murdoch [ctb], Greg Snow
-    [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], Paul Murrell [ctb], Timothy Bilton [ctb], Yihui Xie
+    [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], Paul Murrell [ctb], Timothy Bilton [ctb], Tony Hurst [ctb], Yihui Xie
     [ctb]
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
 Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.j.godfrey@massey.ac.nz"),
@@ -14,6 +14,7 @@ Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.
     person("James", "Curtis", email = "james@curtis.net.nz", role = "ctb"),
     person("Paul", "Murrell", email = "paul@stat.auckland.ac.nz", role = "ctb"),
     person("Timothy", "Bilton", email = "tbilton@gmail.com", role = "ctb"),
+    person("Tony", "Hurst", email = "tony.hurst@open.ac.uk", role = "ctb"),
     person("Yihui", "Xie", email = "xie@yihui.name", role = "ctb"))
 Description: Blind users do not have access to the graphical output from R
     without printing the content of graphics windows to an embosser of some kind. This
@@ -31,13 +32,15 @@ Depends:
 Imports:
     devtools,
     extrafont,
+    ggplot2,
     grid,
     gridGraphics,
     gridSVG,
+    magrittr,
     moments,
     nortest,
     pander,
-     rmarkdown,
+    rmarkdown,
     utils,
     xtable
 SystemRequirements: Python 2.7 and wxPython 2.8

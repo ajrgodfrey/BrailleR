@@ -1,3 +1,9 @@
+# v0.25.0
+- added experimental VI.ggplot() thanks to starter from Tony Hurst
+- added vignette for testing VI.ggplot() via ggplot2::qplot() calls. (This is far from complete.)
+- added use of magrittr package for the benefit of the pipe operator
+
+
 # v0.24.2
 - CRAN check uncovered need to have dependency of R >= 3.2.0. 
 
