@@ -1,5 +1,5 @@
 # v0.25.0
-- added experimental VI.ggplot() thanks to starter from Tony Hurst
+- added experimental VI.ggplot() thanks to starter from Tony Hirst
 - added vignette for testing VI.ggplot() via ggplot2::qplot() calls. (This is far from complete.)
 - added use of magrittr package for the benefit of the pipe operator
 

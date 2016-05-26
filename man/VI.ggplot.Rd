@@ -25,6 +25,6 @@ g
 }
 }
 \author{
-A. Jonathan R. Godfrey and Tony Hurst
+A. Jonathan R. Godfrey and Tony Hirst
 }
 
