@@ -28,7 +28,7 @@ It is a good idea to install RStudio, even if you can't actually use it as a bli
 
 ### One programming language --- Python
 
-WriteR is a simple text editor written in wxPython that needs Python27 and wxPython. Unfortunately, they are two separate downloads at present. You do not need this editor so do not install Python unless you are really keen.
+WriteR is a simple text editor written in wxPython that needs Python27 and wxPython. Unfortunately, they are two separate downloads at present. You do not need this editor so do not install Python unless you are really keen. Windows users can obtain an executable file by issuing `GetWriteR()` once the BrailleR package has been successfully installed.
 
 
 
@@ -48,7 +48,7 @@ chooseCRANmirror(ind=1)
 update.packages(ask=FALSE)
 ```
 
-Once you've got the package installed, you still need to get it running in your current R session by issuing one last command. When you issue the first of hte following lines, the package start messages will also appear.
+Once you've got the package installed, you still need to get it running in your current R session by issuing one last command. When you issue the first of the following lines, the package start messages will also appear.
 ```{r start, eval=FALSE}
 library(BrailleR)
 ```
