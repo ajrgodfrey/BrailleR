@@ -1,5 +1,6 @@
 # v0.25.0
-- added GetWriteR() to download executable version for Windows users. This currently comes from http://R-Resources.massey.ac.nz
+- updated WriteR.pyw and WriteROptions files. to v0.160530.0
+- added GetWriteR() to download executable version for Windows users. This currently comes from GitHub, but was originally tested on http://R-Resources.massey.ac.nz
 - added experimental VI.ggplot() thanks to starter from Tony Hirst
 - added vignette for testing VI.ggplot() via ggplot2::qplot() calls. (This is far from complete.)
 - added use of magrittr package to gain  the benefits of the pipe operator

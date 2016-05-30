@@ -4,7 +4,8 @@ GetWriteR= function(){
 if(interactive()){
 if(.Platform$OS.type=="windows"){
 if(require(BrailleR)){
-download.file("http://R-Resources.massey.ac.nz/WriteR/WriteR.zip", "WriteR.zip")
+#download.file("http://R-Resources.massey.ac.nz/WriteR/WriteR.zip", "WriteR.zip")
+download.file("https://raw.github.com/ajrgodfrey/WriteR/master/Python/WriteR.zip", "WriteR.zip")
 unzip("WriteR.zip")
 file.remove("WriteR.zip")
 file.rename("WriteR.exe", paste0(getOption("BrailleR.Folder"), "WriteR.exe"))

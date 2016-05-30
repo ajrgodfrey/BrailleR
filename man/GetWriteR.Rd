@@ -4,7 +4,7 @@
 \usage{
 GetWriteR()
 }
-\details{ This function downloads a zip file which gets unpacked in your current working directory. The zip file is removed and the executable file is moved to your chosen MyBrailleR folder.}
+\details{ This function assumes you have a current internet connection because it downloads a zip file which gets unpacked in your current working directory. The zip file is removed and the executable file is moved to your chosen MyBrailleR folder.}
 \value{
 NULL. The downloaded file is saved in the user's MyBrailleR folder.
 }
