@@ -1,4 +1,6 @@
 # v0.25.0
+- added LURN() to open the Let's Use R Now manual in a browser.
+- updated vignettes
 - updated WriteR.pyw and WriteROptions files. to v0.160530.0
 - added GetWriteR() to download executable version for Windows users. This currently comes from GitHub, but was originally tested on http://R-Resources.massey.ac.nz
 - added experimental VI.ggplot() thanks to starter from Tony Hirst
