@@ -1,5 +1,5 @@
 # v0.25.0
-- added LURN() to open the Let's Use R Now manual in a browser.
+- added LURN() to open the Let's Use R Now manual in a browser. It will open the version for blind users by default.
 - updated vignettes
 - updated WriteR.pyw and WriteROptions files. to v0.160530.0
 - added GetWriteR() to download executable version for Windows users. This currently comes from GitHub by default, but was originally tested on http://R-Resources.massey.ac.nz; this can be used again if the user sets the argument UseGitHub=FALSE but the zip file downloaded must be moved to the right folder and manually unzipped.
