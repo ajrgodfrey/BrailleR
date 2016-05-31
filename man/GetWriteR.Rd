@@ -2,7 +2,10 @@
 \alias{GetWriteR}
 \title{Download an executable for Windows users}
 \usage{
-GetWriteR()
+GetWriteR(UseGitHub = TRUE)
+}
+\arguments{
+\item{UseGitHub}{Use the latest version found via GitHub or an older version found on the R-Resources.massey.ac.nz webpage.}
 }
 \details{ This function assumes you have a current internet connection because it downloads a zip file which gets unpacked in your current working directory. The zip file is removed and the executable file is moved to your chosen MyBrailleR folder.}
 \value{
