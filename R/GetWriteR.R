@@ -8,7 +8,7 @@ if(UseGitHub){
 download.file("https://raw.github.com/ajrgodfrey/WriteR/master/Python/WriteR.zip", "WriteR.zip")
 unzip("WriteR.zip")
 file.remove("WriteR.zip")
-file.copy("WriteR.exe", paste0(getOption("BrailleR.Folder"), "WriteR.exe"))
+file.rename("WriteR.exe", paste0(getOption("BrailleR.Folder"), "WriteR.exe"))
 message("The WriteR application has been added to your MyBrailleR folder.")
 }
 else{
