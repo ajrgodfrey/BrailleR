@@ -1,4 +1,5 @@
 # v0.25.0
+- altered MakeBatch() to accept both upper and lower case R in file extensions.
 - added ThankYou() to create an email message from a very short template.
 - added LURN() to open the Let's Use R Now manual in a browser. It will open the version for blind users by default.
 - updated vignettes

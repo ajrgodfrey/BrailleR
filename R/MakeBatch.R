@@ -38,12 +38,13 @@ message("Consult the help page for guidance on using these files in Windows Expl
 else{
 if(!file.exists(file)) warning(paste0('The specified file "', file, '" does not currently exist.\n'))
 FullFile=unlist(strsplit(file, split=".", fixed=TRUE))
-if(FullFile[2]=="R"){
+if(endsWith(file, ".R") | endsWith(file, ".r")){
 # write a batch file for processing the R script
 cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet ", FullFile[1], ".R\n"), file=paste0(FullFile[1], ".bat"))
 message(FullFile[1], ".bat created successfully.")
 }
-if(FullFile[2]=="Rmd"){
+if(endsWith(file, ".Rmd") | endsWith(file, ".rmd")){
+
 # write a batch file for processing the R markdown file
 cat(paste0(RHome, "\\bin\\RScript.exe -e \"knitr::knit2html('", FullFile[1], ".Rmd')\"\n"), file=paste0(FullFile[1], ".bat"))
 message(FullFile[1], ".bat created successfully.")
