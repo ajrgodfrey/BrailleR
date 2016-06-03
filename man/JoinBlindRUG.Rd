@@ -1,5 +1,6 @@
 \name{JoinBlindRUG}
 \alias{JoinBlindRUG}
+\alias{ThankYou}
 \title{Send an email based on a template}
 
 \usage{
