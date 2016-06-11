@@ -62,7 +62,7 @@ Blind users will want to use the BrailleR package while they are novice R users,
 ### BrailleR improves the accessibility of graphical information 
 
 BrailleR converts standard graphs created by standard R commands into a textual form that can
-be interpretted by blind students who cannot access the graphs without
+be interpreted by blind students who cannot access the graphs without
 printing the image to a tactile embosser, or who need the extra text to
 support any tactile images they do create.
 

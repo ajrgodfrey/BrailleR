@@ -1,3 +1,8 @@
+# v0.25.1
+- added SpellCheckFiles() which is a wrapper for spell checking a file or files in a folder; this returns a list classed as "wordlist" which has an associated print method.
+- added package hunspell to the growing list of dependencies
+- fixed spelling in vignettes using SpellCheckFIles()
+
 # v0.25.0
 - did some overdue spell checking
 - fixed wrong filename in PrepareWriteR() and its help page.
