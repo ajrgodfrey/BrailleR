@@ -16,7 +16,7 @@ DataViewer(x, Update = FALSE, New = NULL, Filename = NULL)
 
 There are a few quirks with respect to variables that could be interpreted as factors. The process of updating is to write a csv file using code \link{write.csv}() and then read it back using code \link{read.csv}() after it has been edited. Users must be aware that factors may not register as such, or that character vectors may be interpreted as factors.
 }
-\value{If code Update=TRUE and code New=NULL, the original data object is overwritten. To create a new object the user mustspecify  code New.}
+\value{If code Update=TRUE and code New=NULL, the original data object is overwritten. To create a new object the user must specify  code New.}
 \author{A. Jonathan R. Godfrey \email{a.j.godfrey@massey.ac.nz}}
 \examples{
 data(airquality)

@@ -9,13 +9,10 @@ MyHome = gsub("/", "\\\\\\\\", gsub("\\\\", "/", Sys.getenv("HOME")))
 
 cat(paste0('{
     "RDirectory": "', RHome, '\\\\bin\\\\', version$arch, '\\\\Rscript.exe",
-    "buildcommand": "rmarkdown::render(\"{}\")",
-    "dirname": "', MyHome, '",
     "filename": "untitled.Rmd",
     "newText": "# \\n## by ', Author, ' on \\n\\n",
-    "repo": "http://cran.stat.auckland.ac.nz/"
 }
-'), file='WriteR.init')
+'), file='WriteROptions')
 
 message("The settings file for WriteR has been created.")
 

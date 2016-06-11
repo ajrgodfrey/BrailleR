@@ -11,7 +11,7 @@ MakeSlideShow(Folder, Style = getOption("BrailleR.SlideStyle"), ContentsSlide = 
 \arguments{
   \item{Folder}{name of the folder in the current working directory that contains the set of Rmd files.}
   \item{Style}{Choose the cascading style sheet file to be applied. The file is looked for in three places: Your MyBrailleR folder, the current working directory, and finally the folder with the Rmd files. The last one found is the one that gets used if multiple copies exist.}
-\item{file}{The filename ot use for the Rmd and HTML files. These files will be overwritten if they already exist.}
+\item{file}{The filename to use for the Rmd and HTML files. These files will be overwritten if they already exist.}
   \item{ContentsSlide}{Do you want links for the extra slide that has links to all slides? The file will be called 00_Contents.html}
 }
 \details{

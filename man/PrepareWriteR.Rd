@@ -15,7 +15,7 @@ PrepareWriteR(Author = getOption("BrailleR.Author"))
 }
 \details{WriteR needs python 2.7 and wxPython 2.8 to run. Error handling for users without these packages installed is not yet incorporated in the functions.
 
-The \code{PrepareWriteR()}  function writes the settings file (called WriteR.init) for WriteR and copies the files that were part of the BrailleR installation into the current working directory. You will be able to run the WriteR application from there, or move to a folder of your choosing.}
+The \code{PrepareWriteR()}  function writes the settings file (called WriteROptions) for WriteR and copies the files that were part of the BrailleR installation into the current working directory. You will be able to run the WriteR application from there, or move to a folder of your choosing.}
 \value{NULL. This function is for your convenience and not for doing any work inside an R session.}
 \author{A. Jonathan R. Godfrey}
 \note{You must have Python 2.7 and the associated wxPython installation on your system to use the WriteR application.}

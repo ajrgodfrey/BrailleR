@@ -6,7 +6,7 @@
 MakeBatch(file=NULL)
 }
 \arguments{
-  \item{file}{A character string for the file to be processed. The file need not yet exist. The extensionn must be either R or Rmd and is case sensitive.}
+  \item{file}{A character string for the file to be processed. The file need not yet exist. The extension must be either R or Rmd and is case sensitive.}
 }
 \details{
 These batch files are not for use in an interactive R session. They need to be created in an interactive session, so that users can process R scripts and Rmarkdown files without needing to open an R session later. 
@@ -17,7 +17,7 @@ If no file is specified, the function creates various files in the current worki
 
 Files starting with the word test are for testing the batch files. An R script and an Rmarkdown file were created as well as the batch files that will process them into a Rout file and  an HTML document respectively. Pressing <enter> on these test*.bat files will process the test files appropriately.
 
-The other two batch files (ending in .bat) need to be moved to a folder on the user's path so that they can be called from anywhere. They could also be manually edited ot suit the user's needs.
+The other two batch files (ending in .bat) need to be moved to a folder on the user's path so that they can be called from anywhere. They could also be manually edited to suit the user's needs.
 
 The path.txt file shows the user what folders are already on the path list. The user can review this list and decide to alter the system variable if they so choose. The path.txt file has no value otherwise.}
 \author{A. Jonathan R. Godfrey}

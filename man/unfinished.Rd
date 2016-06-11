@@ -21,7 +21,7 @@ The method includes representations of summary methods that are more suitable fo
 This is the help page for the VI() functions that are not fully functional or below par in some way.
 }
 \value{
-This will vary according to the needs of vision impaired useRs and the specific objects that need to be interpretted.
+This will vary according to the needs of vision impaired useRs and the specific objects that need to be interpreted.
 
 In general, the output is a series of text strings printed in the console/terminal window in addition to the embedded command's normal functionality.
 

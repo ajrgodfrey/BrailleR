@@ -82,12 +82,12 @@ Users wishing to have the additional functionality that the "etxt" and "wdtxt" f
 
 The txtOut function is a short cut for the txtStart command that uses the current date and time in the filenames for the transcript and command files. This function is not part of the \pkg{TeachingDemos} package.
 
-	 The R parser strips comments and does some reformating so the
+	 The R parser strips comments and does some reformatting so the
 	 transcript file may not match exactly with the terminal
 	 output.  Use the \code{txtComment} functions to add a comment.  This will show up as a line offset
 	 by whitespace in the transcript file.
 	 If \code{cmdtxt} is specified then that line
-	 will be inserted into \code{cmdfile} preceeded by a \# so it
+	 will be inserted into \code{cmdfile} preceded by a \# so it
 	 will be skipped if sourced or copied.
 
 	 The \code{txtSkip}  function will run the

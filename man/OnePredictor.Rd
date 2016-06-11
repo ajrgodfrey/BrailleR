@@ -2,7 +2,7 @@
 \alias{OnePredictor}
 \title{Exploration of the relationship between a response and a single predictor}
 \description{
-A conveience function for generating exploratory graphs and numeric summaries, regression analysis output, and the residual analysis of the simple linear model.}
+A convenience function for generating exploratory graphs and numeric summaries, regression analysis output, and the residual analysis of the simple linear model.}
 \usage{
 OnePredictor(Response, Predictor, Data = NULL, 
     Filename = NULL, Folder = NULL, 

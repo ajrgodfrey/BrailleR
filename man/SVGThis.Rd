@@ -6,7 +6,7 @@
 \alias{addInfo}
 
 \title{Save commonly used graphs as structured SVG files.}
-\description{Converts a graph object (as long as it has a class assigned) or the current graph window to an SVG file that can be viewed using the  Tiger Player software availabel from ViewPlus Inc. At present, the SVG needs manual editing using the Tiger Transformer software before viewing.}
+\description{Converts a graph object (as long as it has a class assigned) or the current graph window to an SVG file that can be viewed using the  Tiger Player software available from ViewPlus Inc. At present, the SVG needs manual editing using the Tiger Transformer software before viewing.}
 \usage{
 SVGThis(x, file = "test.svg")
 }

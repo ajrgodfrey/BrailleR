@@ -17,7 +17,7 @@ WhereXY(x, y = NULL, grid = c(4, 4), xDist = "uniform",
   \item{addmargins}{logical: should sums be added to both rows and columns.}
 }
 \value{
-A text descriptionof the number of points in each subregion of the scatter plot. The table of counts can then be compared to the expected number of points in each subregion.
+A text description of the number of points in each subregion of the scatter plot. The table of counts can then be compared to the expected number of points in each subregion.
 }
 \author{
 A. Jonathan R. Godfrey

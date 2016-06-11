@@ -28,7 +28,7 @@ NULL. The downloaded file is saved in the user's MyBrailleR folder.
 }
 \note{Use of this function assumes you are happy for a file to be downloaded and saved on your hard drive. You can go to your MyBrailleR folder and delete the executable at any time.}
 \description{
-Anyone wishing to make use of the WriteR application must have pandoc instaled.
+Anyone wishing to make use of the WriteR application must have pandoc installed.
 
 Users that do not have Python 2.7 and wxPython installed cannot use the WriteR application file as provided by the BrailleR package. An executable for Windows is available for separate download. 
 

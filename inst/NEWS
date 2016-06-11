@@ -1,4 +1,6 @@
 # v0.25.0
+- did some overdue spell checking
+- fixed wrong filename in PrepareWriteR() and its help page.
 - added more Get*() commands to download and install several useful tools; based on functions from the installr package with the downloaded files going into the user's MyBrailleR folder. Python 2.7 and the associated wxPython version are hard wired at present until the dynamic links can be established.
 - altered MakeBatch() to accept both upper and lower case R in file extensions.
 - added ThankYou() to create an email message from a very short template.

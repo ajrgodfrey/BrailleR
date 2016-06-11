@@ -12,7 +12,7 @@ MakeAllFormats(RmdFile, BibFile = "")
 \item{BibFile}{Name of the bibtex database file to include.}
 }
 \value{
-Nothing in the R console/terminal. THe function is used for its side effects in the working directory.
+Nothing in the R console/terminal. The function is used for its side effects in the working directory.
 }
 \description{
 Make a pandoc options file for use with a named R markdown file.

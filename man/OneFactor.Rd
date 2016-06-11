@@ -2,7 +2,7 @@
 \alias{OneFactor}
 \title{Analysis for a continuous response for one group factor}
 \description{
-A convenience funcion that creates an analysis for a continuous response variable with one grouping factor. The function creates a number of graphs and tables relevant for the analysis.}
+A convenience function that creates an analysis for a continuous response variable with one grouping factor. The function creates a number of graphs and tables relevant for the analysis.}
 \usage{
 OneFactor(Response, Factor, Data = NULL, HSD = TRUE, AlphaE = 0.05, 
 Filename = NULL, Folder = NULL, 

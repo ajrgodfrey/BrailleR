@@ -22,7 +22,7 @@ An object of class boxplot.
 }
 \references{
 The problem of not including class attributes for graphs was identified in: 
-Godfrey, A.J.R. (2013) \sQuote{Statistical Software from a Blind Person's Perspective: R is the Best, but we can make it better}, The R Journal 5(1), pp73-80.
+Godfrey, A.J.R. (2013) \sQuote{Statistical Software from a Blind Person's Perspective: R is the Best, but we can make it better}, The R Journal 5(1), pp73-79.
 }
 \author{
 A. Jonathan R. Godfrey
