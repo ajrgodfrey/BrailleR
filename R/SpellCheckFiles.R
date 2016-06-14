@@ -1,13 +1,26 @@
 
-SpellCheckFiles= function(file = ".", ignore = character()) 
+SpellCheckFiles= function(file = ".", ignore = character(), local.ignore=TRUE, global.ignore=TRUE) 
 {
     ignore <- c(hunspell::en_stats, ignore)
+if(global.ignore){
+globalIgnoreFile = paste0(getOption("BrailleR.Folder"), "words.ignore.txt")
+if(file.exists(globalIgnoreFile)){
+ignore = c(ignore, read.table(globalIgnoreFile, colClasses="character")[,1])
+}
+}
 if(dir.exists(file)){
 filenames = list.files(file)
     checkFiles <- normalizePath(paste0(file, "/", filenames))
+if(file.exists(as.character(local.ignore))){
+ignore = c(ignore, read.table(local.ignore, colClasses="character")[,1])
+}
 }
 else{
 filenames= checkFiles <- file
+localIgnoreFile= paste0(filenames, ".ignore.txt")
+if(file.exists(localIgnoreFile)){
+ignore = c(ignore, read.table(localIgnoreFile, colClasses="character")[,1])
+}
 }
     checkLines=list()
     checkLines <- lapply(checkFiles, devtools:::spell_check_file, ignore = ignore)
