@@ -25,7 +25,7 @@ ignore = c(ignore, read.table(localIgnoreFile, colClasses="character")[,1])
     checkLines=list()
     checkLines <- lapply(checkFiles, devtools:::spell_check_file, ignore = ignore)
 names(checkLines)=filenames
-class(checkLines) = "wordlist"
+class(checkLines) = c("wordlist", "data.frame")
 return(    checkLines )
 }
 
