@@ -3,7 +3,8 @@
 \alias{print.wordlist}
 \title{Spell checking a file or all files within a specified folder}
 \usage{
-SpellCheckFiles(file = ".", ignore = character(), local.ignore = TRUE, global.ignore = TRUE) 
+SpellCheckFiles(file = ".", ignore = character(), 
+    local.ignore = TRUE, global.ignore = TRUE) 
 
 \method{print}{wordlist}(x, ...)
 }

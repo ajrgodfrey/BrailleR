@@ -24,7 +24,7 @@ cat("\n", file=svgfile, append=TRUE) # otherwise warnings returned on readLines(
 temp <- readLines(con=svgfile)
 writeLines(gsub("ISO8859-1", "ASCII", temp), con=svgfile)
 }
-else{ warning("The specified SVG does not exist.\n")}
+else{ warning("The specified file does not exist.\n")}
 return(invisible(NULL))
 }
 
