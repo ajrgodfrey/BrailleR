@@ -1,4 +1,5 @@
 # v0.25.1
+- added CleanCSV() for removing white space in (csv) files
 - moved files from Inst to Inst/MyBrailleR for cleaner package installation. updated installation functions as needed.
 - added AutoSpellCheck() for fixing all my irritating typos. 
 - added AutoSpellList.csv for my list of typos to fix. Users can update this for themselves.
