@@ -1,4 +1,5 @@
 # v0.25.1
+- added SpellCheck() which is an interface to spell check a set of files, allowing ignore this time, always for all files, always for this file, replacement, and reading the word in context.
 - added CleanCSV() for removing white space in (csv) files
 - moved files from Inst to Inst/MyBrailleR for cleaner package installation. updated installation functions as needed.
 - added AutoSpellCheck() for fixing all my irritating typos. 
