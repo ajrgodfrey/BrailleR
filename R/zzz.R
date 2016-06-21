@@ -15,7 +15,7 @@ Folder =     SetupBrailleR()
 if(file.exists("BrailleROptions")){OpSet=read.dcf("BrailleROptions", all=TRUE)}
 else { # first time package is used in this directory
 if(is.null(Folder)){
-OpSet = read.dcf(system.file("BrailleROptions", package="BrailleR"), all=TRUE)
+OpSet = read.dcf(system.file("MyBrailleR/BrailleROptions", package="BrailleR"), all=TRUE)
 }
 else {
 OpSet = read.dcf(file.path(Folder, "/BrailleROptions"), all=TRUE)

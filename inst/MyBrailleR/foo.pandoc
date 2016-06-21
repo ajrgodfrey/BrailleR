@@ -1,0 +1,20 @@
+s: 
+number-sections: 
+bibliography: foo.bib
+toc:
+
+t: html5
+mathjax:
+o: foo_MathJax.html
+
+t: html
+webtex: 
+o: foo_WebTeX.html
+
+t: latex
+no-tex-ligatures:
+o: foo.pdf
+
+t: docx
+mathml:
+o: foo.docx

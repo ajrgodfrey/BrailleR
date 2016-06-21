@@ -1,0 +1,15 @@
+BrailleR.Author: BrailleR
+BrailleR.VI: TRUE
+BrailleR.Latex: TRUE
+BrailleR.Style: BrailleR.css
+BrailleR.SlideStyle: JGSlides.css
+BrailleR.SigLevel: 0.05
+BrailleR.PValDigits: 4
+BrailleR.DotplotBins: 6
+BrailleR.BRLFont: 
+BrailleR.BRLPointSize: 29
+BrailleR.BRLFontInstalled: FALSE
+BrailleR.Embosser: none
+BrailleR.PaperWidth: 10
+BrailleR.PaperHeight: 10
+BrailleR.MakeUpper: TRUE

@@ -1,0 +1,66 @@
+body,p{background-color: black;
+color: white;
+   font-size: 18pt;
+  line-height: 24pt;
+  padding: 10pt;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid orange;
+}
+
+h1,h2{font-weight: bold; margin-bottom: 15pt; text-align: center;}
+
+h1{color: yellow;    font-size: 28pt;}
+h2{color: lightblue;font-size: 24pt;}
+
+table {
+   max-width: 95%;
+  margin-top: 10pt;
+  margin-bottom: 15pt;
+   border: 2pt solid blue;
+}
+
+td, th {
+  border: none;
+  padding: 5pt;
+}
+
+th{
+font-weight: bold; 
+}
+
+#left {
+    width:45%;
+     float:left;
+     padding:5px; 
+}
+#right {
+    width:45%;
+     float:right;
+     padding:5px; 
+}
+
+a{background-color: black;
+color: black;
+   font-size: 2pt;
+}

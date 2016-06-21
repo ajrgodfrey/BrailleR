@@ -32,14 +32,16 @@ return(invisible(Folder))
 Folder <- normalizePath(Folder, mustWork=FALSE)
 
 # move various options and settings files here, use overwrite=FALSE
-    BrailleRSettings = system.file("BrailleROptions", package="BrailleR")
+    BrailleRSettings = system.file("MyBrailleR/BrailleROptions", package="BrailleR")
 file.copy(BrailleRSettings, Folder, overwrite=FALSE)
-    WriteRSettings = system.file("WriteROptions", package="BrailleR")
+    WriteRSettings = system.file("MyBrailleR/WriteROptions", package="BrailleR")
 file.copy(WriteRSettings, file.path(Folder, "WriteROptions"), overwrite=FALSE)
 if(!dir.exists(file.path(Folder, "css"))){dir.create(file.path(Folder, "css"))}
-CSSFolder = file.path(system.file(package="BrailleR"), "css")
+CSSFolder = file.path(system.file(package="BrailleR"), "MyBrailleR/css")
 CSSFiles=list.files(path=CSSFolder, pattern="css")
 file.copy(file.path(CSSFolder, CSSFiles), file.path(Folder, "css", CSSFiles), overwrite=FALSE)
+AutoSpell = system.file("MyBrailleR/AutoSpellList.csv", package="BrailleR")
+file.copy(AutoSpell, file.path(Folder, "AutoSpellList.csv"), overwrite=FALSE)
 
 return(    invisible(NULL))
 }
