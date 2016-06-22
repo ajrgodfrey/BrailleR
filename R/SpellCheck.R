@@ -18,7 +18,7 @@ UserPref = menu(list(
 "add this word to the global list of words to ignore",
 "add this word to the list of words to ignore when checking this file",
 "change it to...",
-"read the word in context"), title = paste0("\n", i, " appears to be misspelled on ", ifelse(length(LineNos)>1, "lines", "line"),  Lines))
+paste0("read the word '", i, "' in context")), title = paste0("\n", i, " appears to be misspelled on ", ifelse(length(LineNos)>1, "lines", "line"),  Lines))
 if(UserPref=="5"){
 cat(paste0(OldText[LineNos], "\n"))
 }
