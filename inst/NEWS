@@ -1,3 +1,13 @@
+# v0.25.3
+- WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR().
+- fixed URL for CRAN repository of package in CITATION file
+- then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.
+
+
+# v0.25.2
+- fixed formatting of the R functions so it is easier to read. Request from Henrik Bengtsson resolved using the rfmt package seen at UseR!2016
+
+
 # v0.25.1
 - added SpellCheck() which is an interface to spell check a set of files, allowing ignore this time, always for all files, always for this file, replacement, and reading the word in context.
 - added CleanCSV() for removing white space in (csv) files

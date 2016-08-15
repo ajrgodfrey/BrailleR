@@ -10,17 +10,22 @@
  #' @param find The text to remove.
  #' @param replace The text to insert.
 
-FindReplace= function(file, find, replace){
-if(file.exists(file)){
-cat("\n", file=file, append=TRUE) # otherwise warnings returned on readLines() below
-OldText <- readLines(con=file)
-NoLines = length(OldText)
-if(NoLines>2){
-if(all(OldText[c(NoLines-1, NoLines)] == "\n")){ NoLines = NoLines-1}
-}
-writeLines(gsub(find, replace, OldText)[1:NoLines], con=file)
-}
-else{warning("The specified file does not exist.\nNo action has been taken.\n")
-}
-return(invisible(NULL))
-}
+FindReplace =
+    function(file, find, replace) {
+      if (file.exists(file)) {
+        cat("\n", file = file, append = TRUE)  # otherwise warnings returned on
+                                               # readLines() below
+        OldText <- readLines(con = file)
+        NoLines = length(OldText)
+        if (NoLines > 2) {
+          if (all(OldText[c(NoLines - 1, NoLines)] == "\n")) {
+            NoLines = NoLines - 1
+          }
+        }
+        writeLines(gsub(find, replace, OldText)[1:NoLines], con = file)
+      } else {
+        warning(
+            "The specified file does not exist.\nNo action has been taken.\n")
+      }
+      return(invisible(NULL))
+    }

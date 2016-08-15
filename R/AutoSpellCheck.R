@@ -8,15 +8,18 @@
 
 #' @param file A vector of files to be checked
 
-AutoSpellCheck= function(file){
-if(interactive()){
-if(require(BrailleR)){
-ChangeList = read.csv(paste0(getOption("BrailleR.Folder"), "AutoSpellList.csv"))
-for(i in 1:length(ChangeList$OldString)){
-FindReplace(file, ChangeList$OldString[i], ChangeList$NewString[i])
-}
-}
-}
-else{warning("This function is meant for use in interactive mode only.\n")}
-return(invisible(NULL))
-}
+AutoSpellCheck =
+    function(file) {
+      if (interactive()) {
+        if (require(BrailleR)) {
+          ChangeList = read.csv(paste0(getOption("BrailleR.Folder"),
+                                       "AutoSpellList.csv"))
+          for (i in 1:length(ChangeList$OldString)) {
+            FindReplace(file, ChangeList$OldString[i], ChangeList$NewString[i])
+          }
+        }
+      } else {
+        warning("This function is meant for use in interactive mode only.\n")
+      }
+      return(invisible(NULL))
+    }

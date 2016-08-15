@@ -1,5 +1,4 @@
 
-
 #' @rdname MakeAllFormats
 #' @title Prepare the options for conversion of an R markdown file.
 #' @aliases MakeAllFormats
@@ -11,15 +10,15 @@
 #' @export MakeAllFormats
 #' @param RmdFile The name of the R markdown file to be converted.
 #' @param BibFile Name of the bibtex database file to include.
-MakeAllFormats = function(RmdFile, BibFile="")
-{
-Settings=readLines(system.file("Foo.pandoc", package="BrailleR"))
+MakeAllFormats =
+    function(RmdFile, BibFile = "") {
+      Settings = readLines(system.file("Foo.pandoc", package = "BrailleR"))
 
-FullFile=unlist(strsplit(RmdFile, split=".", fixed=TRUE))[1]
-# switch foo.bib to BibFile
-Settings=gsub("foo.bib", BibFile, Settings)
+      FullFile = unlist(strsplit(RmdFile, split = ".", fixed = TRUE))[1]
+      # switch foo.bib to BibFile
+      Settings = gsub("foo.bib", BibFile, Settings)
 
-# switch all Foo to RmdFile stem
-Settings=gsub("foo", FullFile, Settings)
-writeLines(Settings, con = paste0(FullFile, ".pandoc"))
-}
+      # switch all Foo to RmdFile stem
+      Settings = gsub("foo", FullFile, Settings)
+      writeLines(Settings, con = paste0(FullFile, ".pandoc"))
+    }

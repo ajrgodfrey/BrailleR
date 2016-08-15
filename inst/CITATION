@@ -7,7 +7,7 @@ vers <- paste("R package version", meta$Version)
 citEntry(entry="Manual",
   title = "BrailleR: Improved access for blind users",
 author = personList(as.person("A. Jonathan R. Godfrey")), year = year,
-organization="Massey University",   note = vers, url = "http://CRAN.R-project.org/package=BrailleR",
+organization="Massey University",   note = vers, url = "https://cran.r-project.org/package=BrailleR",
 
   textVersion =
   paste("A. Jonathan R. Godfrey
