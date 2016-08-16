@@ -11,8 +11,8 @@ WriteR =
                 cat("Starting new file\n", file = file)
               }
             }
-            shell(paste(file.path(system.file(
-                            "Python/WriteR/WriteR.pyw", package = "BrailleR")),
+            shell(paste0('"', file.path(system.file(
+                            "Python/WriteR/WriteR.pyw", package = "BrailleR")), '" ',
                         ifelse(is.null(file), "", file)))
           } else {
             warning(
