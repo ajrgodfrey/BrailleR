@@ -2,6 +2,8 @@
 - WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.
 - fixed URL for CRAN repository of package in CITATION file
 - then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.
+- added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), ONePredictor() etc type; it will also include hte code chunks that are reused frequently in other functions.
+ 
 
 
 # v0.25.2
