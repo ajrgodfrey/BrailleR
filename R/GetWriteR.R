@@ -1,10 +1,10 @@
-# look out for two version of GetWriteR() second one is while the exe file is borken.
+# look out for two versions of GetWriteR() second one is while the exe file is broken.
 
 GetWriteR =
     function(UseGitHub = TRUE) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (require(BrailleR)) {
+          if (requireNamespace("BrailleR")) {
             if (UseGitHub) {
               download.file(
                   "https://raw.github.com/ajrgodfrey/WriteR/master/Python/WriteR.zip",
@@ -41,16 +41,18 @@ GetPandoc =
     function() {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (require(BrailleR)) {
-            message(
+          if (requireNamespace("BrailleR")) {
+            if (requireNamespace("installr")) {
+              message(
                 "This command will download a file and save it to your hard drive.\n")
-            installr::install.pandoc(
+              installr::install.pandoc(
                 to_restart = FALSE, download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
-            message(
+              message(
                 "The installer file has been added to your MyBrailleR folder.")
-            message(
+              message(
                 "You can delete it at any time, but that will not uninstall the application.")
+            }
           }
         } else {
           warning(
@@ -66,15 +68,17 @@ Get7zip =
     function() {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (require(BrailleR)) {
-            message(
+          if (requireNamespace("BrailleR")) {
+            if (requireNamespace("installr")) {
+              message(
                 "This command will download a file and save it to your hard drive.")
-            installr::install.7zip(download_dir = getOption("BrailleR.Folder"),
+              installr::install.7zip(download_dir = getOption("BrailleR.Folder"),
                                    keep_install_file = TRUE)
-            message(
+              message(
                 "The installer file has been added to your MyBrailleR folder.")
-            message(
+              message(
                 "You can delete it at any time, but that will not uninstall the application.")
+            }
           }
         } else {
           warning(
@@ -90,19 +94,21 @@ GetPython27 =
     function() {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (require(BrailleR)) {
-            message(
+          if (requireNamespace("BrailleR")) {
+            if (requireNamespace("installr")) {
+              message(
                 "This command will download a file and save it to your hard drive.")
-            installr::install.URL(
+              installr::install.URL(
                 "https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi",
                 download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
-            # when the CRAN version of installr has the following function then the above line will be removed.
-            #install.python(version_number = 2, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
+              # when the CRAN version of installr has the following function then the above line will be removed.
+            #installr::install.python(version_number = 2, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
             message(
                 "The installer file has been added to your MyBrailleR folder.")
-            message(
+              message(
                 "You can delete it at any time, but that will not uninstall the application.")
+            }
           }
         } else {
           warning(
@@ -119,17 +125,19 @@ GetWxPython27 =
     function() {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (require(BrailleR)) {
-            message(
+          if (requireNamespace("BrailleR")) {
+            if (requireNamespace("installr")) {
+              message(
                 "This command will download a file and save it to your hard drive.")
-            installr::install.URL(
+              installr::install.URL(
                 "http://downloads.sourceforge.net/wxpython/wxPython3.0-win32-3.0.2.0-py27.exe",
                 download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
-            message(
+              message(
                 "The installer file has been added to your MyBrailleR folder.")
-            message(
+              message(
                 "You can delete it at any time, but that will not uninstall the application.")
+            }
           }
         } else {
           warning(

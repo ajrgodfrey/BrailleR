@@ -37,7 +37,6 @@ Imports:
     gridGraphics,
     gridSVG,
     hunspell,
-    installr,
     magrittr,
     moments,
     nortest,
@@ -45,6 +44,8 @@ Imports:
     rmarkdown,
     utils,
     xtable
+Suggests:
+    installr
 SystemRequirements: Python 2.7 and wxPython 2.8
 VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR

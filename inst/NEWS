@@ -3,8 +3,8 @@
 - fixed URL for CRAN repository of package in CITATION file
 - then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.
 - added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), ONePredictor() etc type; it will also include hte code chunks that are reused frequently in other functions.
- 
-
+- Moved installr package from Imports to Suggests so that installation from GitHub works for OS!=Windows.
+- removed use of require(<pkg>) and used requireNamespace("<pkg>") instead, and then used pkg::blah()
 
 # v0.25.2
 - fixed formatting of the R functions so it is easier to read. Request from Henrik Bengtsson resolved using the rfmt package seen at UseR!2016
@@ -32,7 +32,7 @@
 - added vignette on getting started with WriteR.
 - updated vignettes
 - updated WriteR.pyw and WriteROptions files. to v0.160530.0
-- added GetWriteR() to download executable version for Windows users. This currently comes from GitHub by default, but was originally tested on http://R-Resources.massey.ac.nz; this can be used again if the user sets the argument UseGitHub=FALSE but the zip file downloaded must be moved to the right folder and manually unzipped. The function is currently unavilable due to problems with the executable file itself.
+- added GetWriteR() to download executable version for Windows users. This currently comes from GitHub by default, but was originally tested on http://R-Resources.massey.ac.nz; this can be used again if the user sets the argument UseGitHub=FALSE but the zip file downloaded must be moved to the right folder and manually unzipped. The function is currently unavailable due to problems with the executable file itself.
 - added experimental VI.ggplot() thanks to starter from Tony Hirst
 - added vignette for testing VI.ggplot() via ggplot2::qplot() calls. (This is far from complete.)
 - added use of magrittr package to gain  the benefits of the pipe operator
