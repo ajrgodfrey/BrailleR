@@ -1,0 +1,6 @@
+DataName.maov <- manova(ResponseMatrix ~ FactorNames, data=DataName)
+summary(DataName.maov, test="Wilks")
+summary(DataName.maov, test="Roy")
+summary(DataName.maov, test="Hotelling-Lawley")
+summary(DataName.maov, test="Pillai")
+summary.aov(DataName.maov)

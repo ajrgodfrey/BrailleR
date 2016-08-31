@@ -1,4 +1,4 @@
-## Last Edited: 28/08/16
+## Last Edited: 30/08/16
 
 ThreeFactors =
     function(Response, Factor1, Factor2, Factor3, Data = NULL,
@@ -101,17 +101,9 @@ opts_chunk$set(echo=FALSE, comment="", fig.path="',
 
 ## Group summaries
 
-
-```{r AttachData, warning=FALSE}
-attach(',
-              DataName, ')
-```
-
-```{r NewFunction}
-nNonMissing <- function(x){
-    length(na.omit(x)) # length() includes NAs
-}
-```
+```{r NewFunction}', 
+paste(readLines(system.file("Templates/nNonMissing.R", package="BrailleR")), collapse="\n"), 
+'\n```
 
 ```{r All3GroupSummary}
 Data.Mean <- aggregate(', ResponseName, ', list(',
@@ -277,12 +269,6 @@ The ratio of the largest group standard deviation to the smallest is `r round(ma
 
 ```{r PrintSummary_', Factor2Name, '_', Factor3Name,', results="asis", purl=FALSE}
 kable(as.matrix(DataSummary), row.names=FALSE)
-```
-
-```{r DetachData}
-detach(',
-              DataName,
-              ')
 ```  \n\n'),
           file = Filename, append = TRUE)
 
@@ -338,13 +324,10 @@ print(xtable(MyANOVA, caption=TabCapt, label="',
             file = Filename, append = TRUE)
       }
 
-
-
       # stop writing markdown and process the written file into html and an R script
-      knit2html(Filename, quiet = TRUE,
+      knit2html(Filename, quiet = TRUE, envir=globalenv(),
                 stylesheet = FindCSSFile(getOption("BrailleR.Style")))
       file.remove(sub(".Rmd", ".md", Filename))
       purl(Filename, quiet = TRUE, documentation = 0)
       if (View) browseURL(sub(".Rmd", ".html", Filename))
     }  # end of ThreeFactors function
-

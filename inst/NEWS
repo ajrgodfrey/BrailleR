@@ -2,7 +2,9 @@
 - WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.
 - fixed URL for CRAN repository of package in CITATION file
 - then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.
-- added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), ONePredictor() etc type; it will also include hte code chunks that are reused frequently in other functions.
+- added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), OnePredictor() etc 
+type; it will also include the code chunks that are reused frequently in other functions.
+- added UseTemplate() to make use of the template files faster. Not intended for wide use at this stage.
 - Moved installr package from Imports to Suggests so that installation from GitHub works for OS!=Windows.
 - removed use of require(<pkg>) and used requireNamespace("<pkg>") instead, and then used pkg::blah()
 

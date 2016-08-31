@@ -16,7 +16,7 @@ GetWriteR =
               message(
                   "The WriteR application has been added to your MyBrailleR folder.")
             } else {
-              browseURL("http://R-Resources.massey.ac.nz/WriteR/WriteR.zip")
+              browseURL("https://R-Resources.massey.ac.nz/WriteR/WriteR.zip")
               message(
                   "The WriteR application has been downloaded but you need to unzip it.")
               message("Move it to your MyBrailleR folder and unzip before use.")
