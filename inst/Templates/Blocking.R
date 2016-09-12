@@ -5,7 +5,3 @@ plot(DataName.aov)
 
 model.tables(DataName.aov)
 model.tables(DataName.aov, type="means")
-
-DataName.hsd = TukeyHSD(DataName.aov, "FactorName")
-DataName.hsd
-plot(DataName.hsd)

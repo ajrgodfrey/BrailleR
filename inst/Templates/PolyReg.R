@@ -1,4 +1,4 @@
-plot(ResponseName ~ PredictorName, data = DataName, xlab = "Year", ylab = "Speed")
+plot(ResponseName ~ PredictorName, data = DataName, xlab = "XLabel", ylab = "YLabel")
 DataName.poly1  <- lm(ResponseName ~ PredictorName, data = DataName)
 DataName.poly2 <- lm(ResponseName ~ poly(PredictorName, 2, raw=TRUE), data = DataName)
 DataName.poly3 <- lm(ResponseName ~ poly(PredictorName, 3, raw=TRUE), data = DataName)

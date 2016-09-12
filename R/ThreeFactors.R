@@ -101,7 +101,7 @@ opts_chunk$set(echo=FALSE, comment="", fig.path="',
 
 ## Group summaries
 
-```{r NewFunction}', 
+```{r NewFunction}  \n', 
 paste(readLines(system.file("Templates/nNonMissing.R", package="BrailleR")), collapse="\n"), 
 '\n```
 
@@ -148,6 +148,17 @@ print(xtable(DataSummary, caption=TabCapt, label="',
     ```  \n\n'),
             file = Filename, append = TRUE)
       }
+
+# additional testing
+cat('```{r DTMeans, message=FALSE}\n', file=Filename, append=TRUE)
+cat(UseTemplate("DTGroupSummary.R", 
+c("DataName", "ResponseName", "FactorSet"), 
+c(DataName, ResponseName, paste0("list(", Factor1Name, ",", Factor2Name, ",", Factor3Name, ")") )), file=Filename, append=TRUE)
+cat('```
+
+```{r kableDTMeans, perl=FALSE}
+kable(DataSummary)
+```\n\n', file=Filename, append=TRUE)
 
       # start writing to the R markdown file for pairs F1&F2
       cat(paste0('### Group summaries, averaging over ', Factor3Name,'
