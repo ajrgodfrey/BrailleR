@@ -6,7 +6,11 @@
 type; it will also include the code chunks that are reused frequently in other functions.
 - added UseTemplate() to make use of the template files faster. Not intended for wide use at this stage.
 - Moved installr package from Imports to Suggests so that installation from GitHub works for OS!=Windows.
-- removed use of require(<pkg>) and used requireNamespace("<pkg>") instead, and then used pkg::blah()
+- removed use of require(<p kg>) and used requireNamespace("<pkg>") instead, and then used pkg::blah()
+- added initial version of ThreeFactors()
+- updated FindReplace() to avoid using pattern matching
+- added Rnw2Rmd() to get a head start on the convrsion from *.Rnw to *.Rmd 
+
 
 # v0.25.2
 - fixed formatting of the R functions so it is easier to read. Request from Henrik Bengtsson resolved using the rfmt package seen at UseR!2016

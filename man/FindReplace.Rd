@@ -1,9 +1,12 @@
 \name{FindReplace}
 \alias{FindReplace}
+\alias{Rnw2Rmd}
 \alias{UseTemplate}
 \title{Find/Replace text in a file}
 \usage{
 FindReplace(file, find, replace)
+
+Rnw2Rmd(file)
 
 UseTemplate(file, find=NULL, replace=NULL)
 }
@@ -23,7 +26,9 @@ Simple wrapper functions to make it easier to replace the text in a file, possib
 \details{
 The FindReplace function is purely intended for use on an external file whereas UseTemplate is intended to take a template file from within the BrailleR package and return the updated text to the calling environment.
 
-Obviously the file must exist for this function to work.
+Rnw2Rmd tries to replace Standard LaTeX commands and Sweave chunk headers with R markdown ones. It is NOT comprehensive, but it does get a long way towards a useful markdown file.
+
+Obviously the specified file must exist for these functions to work.
 }
 \author{
 A. Jonathan R. Godfrey
