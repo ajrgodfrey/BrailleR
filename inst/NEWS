@@ -10,6 +10,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - added initial version of ThreeFactors()
 - updated FindReplace() to avoid using pattern matching
 - added Rnw2Rmd() to get a head start on the convrsion from *.Rnw to *.Rmd 
+- updated the BrailleR History vignette.
 
 
 # v0.25.2

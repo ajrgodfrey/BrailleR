@@ -1,7 +1,7 @@
 ---
 title: "History of the BrailleR package"
 author: "A. Jonathan R. Godfrey"
-date: "11 April 2015"
+date: "14 September 2016"
 bibliography: BrailleRPublications.bib
 vignette: >
   %\VignetteIndexEntry{History}
@@ -20,21 +20,21 @@ My adult life has been centred around Massey University, initially as an extramu
 
 While I don't find it important, I do get asked about the condition that caused my blindness. It is Retinitis Pigmentosa. I do have some light perception, and can make use of it in familiar surroundings for orientation but it has no value to me for reading anything at all. I chose to work with screen reading software when I started university and obtained my first computer because my residual vision at the time was limiting my reading speed. I have therefore operated a computer as a totally blind user throughout my adult life.
 
-I did not learn braille until after I completed my PhD. This might seem strange, but there was very little material in a suitable digital format for me to read throughout my student life. Things have changed and I now spend a lot more time reading material and doing programming. Braille has now become a very important part of my working life and I have a braille display connected to my computer most of the time.
+I did not learn braille until after I completed my PhD. This might seem strange, but there was very little material in a suitable digital format for me to read throughout my student life. Things have changed and I now spend a lot more time reading material and doing programming where the accuracy of braille is absolutely necessary. Braille has now become a very important part of my working life and I have a braille display connected to my computer most of the time.
 
 
 ## getting started
 
 
-I used to keep my research interests separate from my blindness, but  I was regularly called upon to discuss how a blind person could study and teach Statistics by many people within New Zealand and occasionally from overseas.  In 2009, I attended the Workshop on E-Inclusion in Mathematics and Science (WEIMS09) where I met other people interested in improving the success rates of blind students in the mathematical sciences. My paper was about accessibility of statistics courses, but I did point out the usefulness of R in preference to other tools I had used to that point in time [@Godfrey2009AccessibleOral; @Godfrey2009AccessiblePaper].
+I used to keep my research interests separate from my blindness, but  I was regularly called upon to discuss how a blind person could study and teach Statistics by many people within New Zealand and occasionally from overseas.  In 2009, I attended the Workshop on E-Inclusion in Mathematics and Science (WEIMS09) where I met other people interested in improving the success rates of blind students in the mathematical sciences. My paper was about accessibility of statistics courses, but I did point out the usefulness of R in preference to other tools I had used to that point in time [@Godfrey2009AccessiblePaper].
 
-I discovered that there is room for me to take a leading role in the development of ideas that can help other blind people learn about statistical concepts.  I have been invited to all six Summer University events run by the organizers of the International Conference on Computers Helping People (ICCHP), but have been unable to attend twice due to the high cost of transporting me to Europe. I have delivered an introductory workshop on using R at three of these events [@Godfrey2011SU-R; @Godfrey2013SU-R; and @Godfrey2014SU-R].
+I discovered that there is room for me to take a leading role in the development of ideas that can help other blind people learn about statistical concepts.  I have been invited to all six Summer University events run by the organizers of the International Conference on Computers Helping People (ICCHP), but have been unable to attend twice due to the high cost of transporting me to Europe. I have delivered an introductory workshop on using R at four of these events [@Godfrey2011SU-R; @Godfrey2013SU-R; @Godfrey2014SU-R, and @Godfrey2016SU-R].
 
-Having observed the attendees at the 2011 Summer University as they came to grips with R, I knew there was more I could do to help them and other blind students. I started work on the BrailleR package [@BrailleRPackage] in the second half of 2011 and first proposed it could work for blind users at the Digitisation and E-Inclusion in Mathematics and Science (DEIMS12) workshop held in Tokyo during February 2012 [@Godfrey2012BrailleROral; @Godfrey2012BrailleRPaper].
+Having observed the attendees at the 2011 Summer University as they came to grips with R, I knew there was more I could do to help them and other blind students. I started work on the BrailleR package [@BrailleRPackage] in the second half of 2011 and first proposed it could work for blind users at the Digitisation and E-Inclusion in Mathematics and Science (DEIMS12) workshop held in Tokyo during February 2012 [@Godfrey2012BrailleRPaper].
 
 
 I wasn't to know the value of another talk I gave at DEIMS12 for another two years;  this second talk and associated conference paper focused on how I was using Sweave to create accessible statistical reports for me and more beautifully formatted ones for my statistical consulting clients.
-[@Godfrey2012PuttingOral; @Godfrey2012PuttingPaper]. I now know that the groundwork I had done contributed to my desire to present my workflow as a workshop at the 5^th^ Summer University in 2014 [@Godfrey2014SU-Sweave]. It also stood me in good stead for the work that followed in the way the package developed in late 2014 and early 2015.
+[@Godfrey2012PuttingPaper]. I now know that the groundwork I had done contributed to my desire to present my workflow as a workshop at the 5^th^ Summer University in 2014 [@Godfrey2014SU-Sweave]. It also stood me in good stead for the work that followed in the way the package developed in late 2014 and early 2015.
 
 ## The starting point example 
 
@@ -55,18 +55,25 @@ This first example showed me what was possible if only I could get a few things 
 
 It was obvious to me that getting the word out to the masses about the usefulness of R for blind students and professionals was crucial. I started to compile my notes built up from various posts made to email groups and individuals over the years, as well as the lessons I learned from attendance at the 2^nd^ Summer University event. This led to the eventual publication of my findings in [@GodfreyRJournal]. I know that this was a worthwhile task because it was read by teachers of blind students who were already using R for their courses. One such person tested R and a screen reader and managed to find a solution to a problem posed in   @GodfreyRJournal which led to an addendum [@GodfreyErhardtRJournalAddendum]. 
 
-I presented some of my work via a poster [@Godfrey2013BlindnessPoster] at the NZ Statistical Association conference in Hamilton during November 2013. This 'poster' presentation was developed as a multimedia presentation so that the audience could observe video footage, handle tactile images and be able to talk with me about the BrailleR Project. The plan to get talking with people instead of talking at them worked and I started a really useful collaboration with Paul Murrell from the University of Auckland. His major contributions didn't feature in the BrailleR package for some time, but we're making some really nice progress. Paul is an expert in graphics, especially their creation and manipulation in R. Our discussions about graphics has yielded a few titbits for my own work that have been tested for the package.
+I presented some of my work via a poster [@Godfrey2013BlindnessPoster] at the NZ Statistical Association conference in Hamilton during November 2013. This 'poster' presentation was developed as a multimedia presentation so that the audience could observe video footage, handle tactile images and be able to talk with me about the BrailleR Project. The plan to get talking with people instead of talking at them worked and I started a really useful collaboration with Paul Murrell from the University of Auckland. His major contributions didn't feature in the BrailleR package for some time, but we're making some really nice progress. Paul is an expert in graphics, especially their creation and manipulation in R. Our discussions about graphics has yielded a few titbits for my own work that have been tested for the package. We've been working on how to make scalable vector graphics that can be augmented to offer blind users greater interactivity and therefore hopefully greater understanding [see @GodfreyMurrell2016TactileGraphsPaper].
 
-I have been asked about the use of R in preference to other statistical software by many blind students, their support staff, and  their teachers. Eventually I joined forces with the only other blind lecturer of statistics (Theodor Loots, University of Pretoria) to compare the most commonly used statistical software for its accessibility [@GodfreyLoots2014JSS]. I summarised this paper at the 5^th^ Summer University event [@Godfrey2014SU-StatsSoft]. 
 
-On my way to the 5^th^ Summer University event, I managed to attend the principal conference for R users (UseR!2015) in Los Angeles where I presented my findings [@Godfrey2014BlindUseROral]. Perhaps the most valuable outcome of this conference was the ability to attend a tutorial on use of the knitr package and then talk to its author, Yihui Xie. I'd already seen the knitr package before attending UseR!2014 and implemented it for some of my teaching material by updating the Sweave documents already in use.  The real value came in realising what I could probably do if I used R markdown to do a few things I had found very hard using the Sweave way of working. More specifically, generating an R markdown file (Rmd) from an R script was much easier than generating a Sweave file (Rnw). Writing the convenience functions for the package started to look very achievable at this point, and so work began. I dug out some old work that wasn't fit for sharing and converted it to the markdown way of working. There has been sufficient progress in the BrailleR Project that I presented it at UseR!2015 [@Godfrey2015BaseRWeepsOral]. 
+## Review of statistical software
+
+I have been asked about the use of R in preference to other statistical software by many blind students, their support staff, and  their teachers. Eventually I joined forces with the only other blind lecturer of statistics (Theodor Loots, University of Pretoria) to compare the most commonly used statistical software for its accessibility [@GodfreyLoots2014JSS]. I summarised this paper at the 5^th^ Summer University event [@Godfrey2014SU-StatsSoft], and offered a similar presentation at the 6^th^ Summer University event [@Godfrey2016SU-StatsSoft] with a few updates. 
+
+
+
+## Attendance at UseR conferences
+
+On my way to the 5^th^ Summer University event, I managed to attend the principal conference for R users (UseR!2014) in Los Angeles where I presented my findings [@Godfrey2014BlindUseROral]. Perhaps the most valuable outcome of this conference was the ability to attend a tutorial on use of the knitr package and then talk to its author, Yihui Xie. I'd already seen the knitr package before attending UseR!2014 and implemented it for some of my teaching material by updating the Sweave documents already in use.  The real value came in realising what I could probably do if I used R markdown to do a few things I had found very hard using the Sweave way of working. More specifically, generating an R markdown file (Rmd) from an R script was much easier than generating a Sweave file (Rnw). Writing the convenience functions for the package started to look very achievable at this point, and so work began. I dug out some old work that wasn't fit for sharing and converted it to the markdown way of working. There has been sufficient progress in the BrailleR Project that I presented it at UseR!2015 [@Godfrey2015BaseRWeepsOral]. In 2016, I presented the associated work on writing R markdown documents for blind users could be done, and how blind authors might also therefore write their own documents [@GodfreyBilton2016UseROral].
 
 
 ## The ongoing work
 
-The introduction of R markdown to the BrailleR package has made a huge difference. I've been able to write enough example code that once I found a friendly postgraduate student (Timothy Bilton) to put some time into it, we've managed to add more convenience functionality. Timothy has improved some of my earlier work and tried a few things of his own. This has left me with the time to add increased functionality for helping blind users get into  markdown for themselves.
+The introduction of R markdown to the BrailleR package made a huge difference. I've been able to write enough example code that once I found a friendly postgraduate student (Timothy Bilton) to put some time into it, we've managed to add more convenience functionality. Timothy has improved some of my earlier work and tried a few things of his own. This has left me with the time to add increased functionality for helping blind users get into  markdown for themselves.
 
-One of my irritations of working with markdown is that everyone else seems to write markdown and check their findings using RStudio, which remains inaccessible for me and other screen reader users. I took an old experiment where I wrote an accessible text editor in wxPython, and with the help of a postgraduate student from Computer Science (James Curtis) we've modified it to process Rmd files. This is now beyond experimental but there is still more to do on making this application truly useful.
+One of my irritations of working with markdown is that everyone else seems to write markdown and check their findings using RStudio, which remains inaccessible for me and other screen reader users. I took an old experiment where I wrote an accessible text editor in wxPython, and with the help of a postgraduate student from Computer Science (James Curtis) we've modified it to process Rmd files. This is now beyond experimental but there is still more to do on making this application truly useful [@GodfreyCurtis2016WriteRPaper].
 
 ## Acknowledgements
 
@@ -83,5 +90,11 @@ The Lions clubs of Karlsruhe supported my attendance at the 3^rd^ Summer
 University event in 2013. This gave me the first opportunity to
 put the package in front of an audience that I hope will gain from the
 package's existence. 
+
+I've already mentioned the following contributors above:Paul Murrell, Yihui Xie, Timothy Bilton, and James Curtis.
+
+I also need to acknowledge the value of attending the Summer University events.  I gain so much from my interactions with the students who attend, the other workshop leaders twho give me feedback, and the other professionals who assist blind students in their own countries.
+ 
+
 
 ## References
