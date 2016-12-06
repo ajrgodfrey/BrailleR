@@ -25,7 +25,7 @@ SpellCheckFiles =
                      read.table(localIgnoreFile, colClasses = "character")[, 1])
         }
       }
-      # a little hack until Hadley exports spell_check_file  fromt he devtools package
+      # a little hack because Hadley doesn't want to export spell_check_file  from the devtools package
       NS = getNamespace("devtools")
       spell_check_file = get("spell_check_file", NS)
       checkLines = list()
