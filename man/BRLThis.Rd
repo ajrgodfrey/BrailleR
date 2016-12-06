@@ -23,6 +23,6 @@ with(airquality,
 BRLThis(hist(Ozone), "Ozone-hist.pdf"))
 }
 \author{
-A. Jonathan R. Godfrey.
+A. Jonathan R. Godfrey. with contributions from JooYoung Seo and TK Lee.
 }
 
