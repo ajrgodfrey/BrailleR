@@ -1,4 +1,4 @@
-# file contains MakeAllInOneSlide() and MakeSlideShow()
+# file contains MakeAllInOneSlide(), MakeSlidy(),  and MakeSlideShow()
 
 MakeAllInOneSlide =
     function(Folder, Style = getOption("BrailleR.SlideStyle"), file = NULL) {
@@ -42,6 +42,37 @@ MakeAllInOneSlide =
       }
       return(invisible(NULL))
     }
+
+
+
+MakeSlidy =
+    function(Folder, file = NULL) {
+
+      if (dir.exists(Folder)) {  # only continue if the folder specified exists
+
+          # get lists of master slides and output slide
+          MasterSlideSet =
+              list.files(path = Folder, pattern = "Rmd", full.names = TRUE)
+
+          OutRMD = paste0(file, ".Rmd")
+          OutMD = paste0(file, ".md")
+
+          cat("<!---
+Slidy presentation
+--->\n\n",
+              file = OutRMD)
+
+          file.append(OutRMD, MasterSlideSet)
+          cat("\n\n", file = OutRMD, append = TRUE)
+
+          rmarkdown::render(OutRMD, output_format=slidy_presentation())
+      }  # end folder existence condition
+          else {
+        warning("Specified folder does not exist. No action taken.")
+      }
+      return(invisible(NULL))
+    }
+
 
 MakeSlideShow =
     function(Folder, Style = getOption("BrailleR.SlideStyle"),

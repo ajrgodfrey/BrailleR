@@ -1,5 +1,7 @@
 # v0.25.4
 - updated WriteR.pyw
+- fixed small typos
+- added MakeSLidy() which takesa folder of Rmd files and turns them into a slidy presentation
 
 # v0.25.3
 - WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.
@@ -12,7 +14,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - removed use of require(<p kg>) and used requireNamespace("<pkg>") instead, and then used pkg::blah()
 - added initial version of ThreeFactors()
 - updated FindReplace() to avoid using pattern matching
-- added Rnw2Rmd() to get a head start on the convrsion from *.Rnw to *.Rmd 
+- added Rnw2Rmd() to get a head start on the conversion from *.Rnw to *.Rmd 
 - updated the BrailleR History vignette.
 
 

@@ -54,7 +54,7 @@ SVGThis.default =
       }  # end interactive condition
           else {  # not interactive session
         warning(
-            "The default SVGThis() method only works for objects of specific classes.\nThe object supplied does not yet have a a method written for it.\n")
+            "The default SVGThis() method only works for objects of specific classes.\nThe object supplied does not yet have a method written for it.\n")
       }
       return(invisible(NULL))
     }

@@ -1,4 +1,4 @@
-# WriteR Version 0.160927.0
+# WriteR Version 0.1612.0
 # development of this Python version left solely to Jonathan Godfrey from 8 March 2016 onwards
 # a C++ version has been proposed for development in parallel, (led by James Curtis).
 # cleaning taking place: any line starting with #- suggests a block of redundant code was removed.
@@ -7,6 +7,11 @@
 
 import wx 
 import sys
+# import FileMenuEvents # problems with this one
+import EditMenuEvents
+import HelpMenuEvents
+import MathInserts
+import RMarkdownEvents
 from wx.py.shell import Shell
 from wx.aui import AuiManager, AuiPaneInfo
 from threading import Thread, Event
@@ -25,10 +30,14 @@ ID_SETTINGS = wx.NewId()
 
 ID_FINDONLY = wx.NewId()
 ID_FINDREPLACE = wx.NewId()
+ID_GOTO  = wx.NewId()
+ID_WORDCOUNT = wx.NewId()
 
 
 # symbols menu for mathematical symbols
 ID_SYMBOL_INFINITY = wx.NewId() 
+ID_SYMBOL_MINUSPLUS = wx.NewId() 
+ID_SYMBOL_PLUSMINUS = wx.NewId() 
 ID_SYMBOL_TIMES = wx.NewId() 
 ID_SYMBOL_PARTIAL = wx.NewId() 
 ID_SYMBOL_LEFTPAREN = wx.NewId() 
@@ -37,6 +46,9 @@ ID_SYMBOL_LEFTSQUARE = wx.NewId()
 ID_SYMBOL_RIGHTSQUARE = wx.NewId() 
 ID_SYMBOL_LEFTCURLY = wx.NewId() 
 ID_SYMBOL_RIGHTCURLY = wx.NewId()
+ID_SYMBOL_GRTREQL = wx.NewId() 
+ID_SYMBOL_LESSEQL = wx.NewId() 
+ID_SYMBOL_NOTEQL = wx.NewId() 
 
 ID_RCOMMAND = wx.NewId()
 ID_RCHUNK = wx.NewId()
@@ -46,6 +58,8 @@ ID_RLASSIGN = wx.NewId()
 ID_RRASSIGN = wx.NewId()
 
 ID_SQUAREROOT = wx.NewId() 
+ID_MATHBAR = wx.NewId() 
+ID_ABSVAL = wx.NewId() 
 ID_FRACTION = wx.NewId() 
 ID_SUMMATION = wx.NewId() 
 ID_INTEGRAL = wx.NewId() 
@@ -90,6 +104,9 @@ ID_CODE = wx.NewId()
 ID_RNDBRK = wx.NewId()
 ID_SQBRK = wx.NewId()
 ID_CRLBRK = wx.NewId()
+ID_BRNDBRK = wx.NewId()
+ID_BSQBRK = wx.NewId()
+ID_BCRLBRK = wx.NewId()
 
 # IDs for headings
 ID_H1 = wx.NewId() 
@@ -186,15 +203,6 @@ class MainWindow(wx.Frame):
         self._mgr.SetManagedWindow(self)
         self.ChosenFontSize = 14
         self.font = wx.Font(self.ChosenFontSize, wx.MODERN, wx.NORMAL, wx.NORMAL, False, u'Consolas')
-        self.hardsettings = {'repo': "http://cran.stat.auckland.ac.nz/",
-                             'rendercommand': '''rmarkdown::render("{}")''',
-                             'renderallcommand': '''rmarkdown::render("{}", output_format="all")''',
-                             'renderpdfcommand': '''rmarkdown::render("{}", output_format="pdf_document")''',
-                             'renderwordcommand': '''rmarkdown::render("{}", output_format="word_document")''',
-                             'renderhtmlcommand': '''rmarkdown::render("{}", output_format="html_document")''',
-                             'knit2mdcommand': '''knitr::knit("{}")''',
-                             'knit2htmlcommand': '''knitr::knit2html("{}")''',
-                             'knit2pdfcommand': '''knitr::knit2pdf("{}")'''}
         self.settingsFile = "WriteROptions"
         self.settings = {#'dirname': 'none',
 #                         'templates': 'none',
@@ -281,9 +289,11 @@ class MainWindow(wx.Frame):
                  (wx.ID_PASTE, "&Paste\tCtrl+V", "Paste text from clipboard", self.OnPaste),
                  (wx.ID_SELECTALL, "Select all\tCtrl+A", "Highlight entire text", self.OnSelectAll),
                  (wx.ID_DELETE, "&Delete", "Delete highlighted text", self.OnDelete),
+                 (ID_WORDCOUNT, "Word count (broken)\tCtrl+w", "get a word count of the entire text", self.OnWordCount),
                  (None,) * 4,
                  (ID_FINDONLY, "Find\tCtrl+F", "Open a standard find dialog box", self.OnShowFindToFix),
-                 (ID_FINDREPLACE, "Find/replace\tCtrl+H", "Open a find /replace dialog box", self.OnShowFindReplaceToFix),
+                 (ID_GOTO, "Go to line (broken)\tCtrl+g", "Open a dialog box to choose a line number", self.OnGoToLine),
+                 (ID_FINDREPLACE, "Find/replace\tCtrl+H", "Open a find/replace dialog box", self.OnShowFindReplaceToFix),
                  (None,) * 4,
                  (ID_SETTINGS, 'Settings', "Setup the editor to your liking", self.OnSettings)]:
             if id == None:
@@ -307,7 +317,7 @@ class MainWindow(wx.Frame):
         menuBar.Append(viewMenu, "View")  # Add the view Menu to the MenuBar
 
         buildMenu = wx.Menu()
-        self.Render = buildMenu.Append(wx.ID_ANY, "Render the document\tF6", "Use the rmarkdown package to render the document into the chosen format")
+        self.Render = buildMenu.Append(wx.ID_ANY, "Render the document\tF5", "Use the rmarkdown package to render the document into the chosen format")
         self.Bind(wx.EVT_MENU, self.OnRenderNull, self.Render)
         # Create render menu
         renderMenu = wx.Menu()
@@ -317,6 +327,8 @@ class MainWindow(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnSelectRenderHtml, self.ChooseRenderHtml) 
         self.ChooseRenderWord = renderMenu.Append(wx.ID_ANY, "Render into Microsoft Word only", "Use the rmarkdown package and render function to create Microsoft Word", wx.ITEM_RADIO)
         self.Bind(wx.EVT_MENU, self.OnSelectRenderWord, self.ChooseRenderWord) 
+        self.ChooseRenderSlidy = renderMenu.Append(wx.ID_ANY, "Render into slidy only", "Use the rmarkdown package and render function to create a slidy presentation", wx.ITEM_RADIO)
+        self.Bind(wx.EVT_MENU, self.OnSelectRenderSlidy, self.ChooseRenderSlidy) 
         self.ChooseRenderPdf = renderMenu.Append(wx.ID_ANY, "Render into pdf only", "Use the rmarkdown package and render function to create pdf", wx.ITEM_RADIO)
         self.Bind(wx.EVT_MENU, self.OnSelectRenderPdf, self.ChooseRenderPdf) 
         self.ChooseRenderAll = renderMenu.Append(wx.ID_ANY, "Render into all specified formats", "Use the rmarkdown package and render function to create multiple output documents", wx.ITEM_RADIO)
@@ -324,8 +336,7 @@ class MainWindow(wx.Frame):
         buildMenu.AppendMenu(-1, "Set render process to...", renderMenu) # Add the render Menu as a submenu to the build menu
         for id, label, helpText, handler in \
                 [
-                 (ID_BUILD, "Build\tF5", "Build the script", self.OnBuild),
-                 (ID_KNIT2HTML, "Knit to html\tF7", "Knit the script to HTML", self.OnKnit2html),
+                 (ID_KNIT2HTML, "Knit to html\tF6", "Knit the script to HTML", self.OnKnit2html),
                  (ID_KNIT2PDF, "Knit to pdf\tShift+F6", "Knit the script to a pdf file using LaTeX", self.OnKnit2pdf)]:
             if id == None:
                 buildMenu.AppendSeparator()
@@ -336,14 +347,16 @@ class MainWindow(wx.Frame):
         menuBar.Append(buildMenu, "Build")  # Add the Build Menu to the MenuBar
 
         insertMenu = wx.Menu()
-        AddHeadBlock = insertMenu.Append(-1, "preamble")
+        AddHeadBlock = insertMenu.Append(-1, "header/preamble\tCtrl+Shift+H")
         self.Bind(wx.EVT_MENU, self.OnAddHeadBlock, AddHeadBlock)
-        AddURL = insertMenu.Append(-1, "URL")
+        AddURL = insertMenu.Append(-1, "URL\tCtrl+Shift+U")
         self.Bind(wx.EVT_MENU, self.OnAddURL, AddURL)
-        AddEMail = insertMenu.Append(-1, "e-mail")
+        AddEMail = insertMenu.Append(-1, "e-mail\tCtrl+Shift+E")
         self.Bind(wx.EVT_MENU, self.OnAddEMail, AddEMail)
-        AddFigure = insertMenu.Append(-1, "Figure")
+        AddFigure = insertMenu.Append(-1, "Figure\tCtrl+Shift+F")
         self.Bind(wx.EVT_MENU, self.OnAddFigure, AddFigure)
+        AddReference = insertMenu.Append(-1, "Reference\tCtrl+Shift+R")
+        self.Bind(wx.EVT_MENU, self.OnAddReference, AddReference)
         headingsMenu = wx.Menu()
         for id, label, helpText, handler in \
                 [
@@ -367,10 +380,13 @@ class MainWindow(wx.Frame):
                  (ID_BOLD, "Bold\tCtrl+B", "move to bold face font", self.OnBold),
                  (ID_ITALIC, "Italic\tCtrl+I", "move to italic face font", self.OnItalic),
                  (ID_CODE, "Code\tCtrl+`", "present using a typewriter font commonly seen when showing code", self.OnCode),
-                 (ID_MATH, "Maths mode\tCtrl+Shift+$", "move text to maths mode", self.OnMath),
-                 (ID_RNDBRK, "Round brackets\tCtrl+Shift+(", "Wrap text in round () brackets", self.OnRoundBrack),
+                 (ID_MATH, "Maths mode\tCtrl+4", "move text to maths mode", self.OnMath),
+                 (ID_RNDBRK, "Round brackets\tAlt+Shift+(", "Wrap text in round () brackets", self.OnRoundBrack),
                  (ID_SQBRK, "Square brackets\tAlt+[", "Wrap text in square brackets", self.OnSquareBrack),
-                 (ID_CRLBRK, "Curly brackets\tAlt+Shift+{", "Wrap text in curly brackets", self.OnCurlyBrack)]:
+                 (ID_CRLBRK, "Curly brackets\tAlt+Shift+{", "Wrap text in curly brackets", self.OnCurlyBrack),
+                 (ID_BRNDBRK, "Round brackets (math)\tAlt+Shift+)", "Wrap math in round () brackets", self.OnMathRoundBrack),
+                 (ID_BSQBRK, "Square brackets (math)\tAlt+]", "Wrap math in square brackets", self.OnMathSquareBrack),
+                 (ID_BCRLBRK, "Curly brackets (math)\tAlt+Shift+}", "Wrap math in curly brackets", self.OnMathCurlyBrack)]:
             if id == None:
                 formatMenu.AppendSeparator()
             else:
@@ -384,14 +400,19 @@ class MainWindow(wx.Frame):
         for id, label, helpText, handler in \
                 [
                  (ID_SYMBOL_INFINITY, "infinity\tCtrl+Shift+I", "insert infinity", self.OnSymbol_infinity), 
-                 (ID_SYMBOL_TIMES, "times\tCtrl+8", "insert times", self.OnSymbol_times), 
-                 (ID_SYMBOL_PARTIAL, "partial\tCtrl+Shift+D", "insert partial", self.OnSymbol_partial), 
-                 (ID_SYMBOL_LEFTPAREN, "LeftParen\tCtrl+9", "insert left parenthesis", self.OnSymbol_LeftParen), 
-                 (ID_SYMBOL_RIGHTPAREN, "RightParen\tCtrl+0", "insert right parenthesis", self.OnSymbol_RightParen), 
-                 (ID_SYMBOL_LEFTSQUARE, "LeftSquare\tCtrl+[", "insert left square bracket", self.OnSymbol_LeftSquare), 
-                 (ID_SYMBOL_RIGHTSQUARE, "RightSquare\tCtrl+]", "insert right square bracket", self.OnSymbol_RightSquare), 
-                 (ID_SYMBOL_LEFTCURLY, "LeftCurly\tCtrl+Shift+{", "insert left curly bracket", self.OnSymbol_LeftCurly), 
-                 (ID_SYMBOL_RIGHTCURLY, "RightCurly\tCtrl+Shift+}", "insert right curly bracket", self.OnSymbol_RightCurly)]:
+                 (ID_SYMBOL_TIMES, "times\tCtrl+Shift+*", "insert times", self.OnSymbol_times), 
+                 (ID_SYMBOL_PARTIAL, "partial derivative\tCtrl+Shift+D", "insert partial", self.OnSymbol_partial), 
+                 (ID_SYMBOL_PLUSMINUS, "plus or minus\tCtrl+Shift+=", "insert plus or minus sign", self.OnSymbol_plusminus), 
+                 (ID_SYMBOL_MINUSPLUS, "minus or plus\tCtrl+Shift+-", "insert minus or plus sign", self.OnSymbol_minusplus), 
+                 (ID_SYMBOL_LESSEQL, "less than or equal\tCtrl+Shift+<", "insert less than or equal sign", self.OnSymbol_leq), 
+                 (ID_SYMBOL_GRTREQL, "greater than or equal \tCtrl+Shift+>", "insert greater than or equal sign", self.OnSymbol_geq), 
+                 (ID_SYMBOL_NOTEQL, "not equal\tCtrl+Shift+!", "insert not equal sign", self.OnSymbol_neq), 
+                 (ID_SYMBOL_LEFTPAREN, "Left Parenthesis\tCtrl+9", "insert variable size left parenthesis", self.OnSymbol_LeftParen), 
+                 (ID_SYMBOL_RIGHTPAREN, "Right Parenthesis\tCtrl+0", "insert variable size right parenthesis", self.OnSymbol_RightParen), 
+                 (ID_SYMBOL_LEFTSQUARE, "Left Square bracket\tCtrl+[", "insert variable size left square bracket", self.OnSymbol_LeftSquare), 
+                 (ID_SYMBOL_RIGHTSQUARE, "Right Square bracket\tCtrl+]", "insert variable size right square bracket", self.OnSymbol_RightSquare), 
+                 (ID_SYMBOL_LEFTCURLY, "Left Curly bracket\tCtrl+Shift+{", "insert variable size left curly bracket", self.OnSymbol_LeftCurly), 
+                 (ID_SYMBOL_RIGHTCURLY, "Right Curly bracket\tCtrl+Shift+}", "insert variable size right curly bracket", self.OnSymbol_RightCurly)]:
             if id == None:
                 symbolsMenu.AppendSeparator()
             else:
@@ -402,6 +423,8 @@ class MainWindow(wx.Frame):
         for id, label, helpText, handler in \
                 [
                  (ID_SQUAREROOT, "Square root\tAlt+Ctrl+Shift+R", "insert a square root", self.OnSquareRoot), 
+                 (ID_MATHBAR, "bar \tCtrl+Shift+B", "insert a bar operator", self.OnMathBar), 
+                 (ID_ABSVAL, "Absolute values\tCtrl+Shift+A", "insert left and right absolute value delimiters", self.OnAbsVal), 
                  (ID_FRACTION, "Fraction\tCtrl+Shift+/", "insert a fraction", self.OnFraction), 
                  (ID_SUMMATION, "Summation\tAlt+Ctrl+Shift+S", "insert a summation", self.OnSummation), 
                  (ID_INTEGRAL, "Integral\tAlt+Ctrl+Shift+I", "insert an integral", self.Onintegral), 
@@ -460,7 +483,7 @@ class MainWindow(wx.Frame):
                  (ID_RGRAPH, "Insert R code chunk for a graph\tAlt+G", "insert R code chunk for a graph", self.OnRGraph),
                  (ID_RLASSIGN, "Insert a left assignment\tCtrl+<", "insert R code for the left assignment <-", self.OnRLAssign),
                  (ID_RRASSIGN, "Insert a right assignment\tCtrl+>", "insert R code for the right assignment ->", self.OnRRAssign),
-                 (ID_RPIPE, "Insert a pipe operator\tCtrl+Shift+>", "insert R code for the pipe operator %>%", self.OnRPipe)]:
+                 (ID_RPIPE, "Insert a pipe operator\tCtrl+Shift+P", "insert R code for the pipe operator %>%", self.OnRPipe)]:
             if id == None:
                 statsMenu.AppendSeparator()
             else:
@@ -515,28 +538,7 @@ class MainWindow(wx.Frame):
         return userProvidedFilename
 
 # Event handlers:
-# help menu events
-    def OnAbout(self, event):
-        dialog = wx.MessageDialog(self, "WriteR is a  first attempt  at developing an R Markdown editor\n"
-                                        "using wxPython. Development started by Jonathan Godfrey\n"
-                                        "and James Curtis in 2015.\nContinued development assisted by Timothy Bilton in 2016.\nSend all feedback to Jonathan Godfrey at a.j.godfrey@massey.ac.nz\nVersion: 0.160530.0 (or later)",
-                                  "About this R Markdown Editor", wx.OK)
-        dialog.ShowModal()
-        dialog.Destroy()
-
-# file menu events
-    def OnSafeExit(self, event):
-        self.OnSave(event)
-        self.OnExit(event)
-
-    def OnExit(self, event):
-        self.Close()  # Close the main window.
-
-    def OnSave(self, event):
-        textfile = open(join(self.dirname, self.filename), "w")
-        textfile.write(self.editor.GetValue())
-        textfile.close()
-
+    # file menu events
     def OnOpen(self, event):
         if self.askUserForFilename(style=wx.OPEN, **self.defaultFileDialogOptions()):
             self.fileOpen(self.dirname, self.filename)
@@ -559,19 +561,31 @@ class MainWindow(wx.Frame):
         if self.askUserForFilename(defaultFile=self.filename, style=wx.SAVE, **self.defaultFileDialogOptions()):
             self.OnSave(event)
 
-# edit menu events
-    def OnCut(self, event):
-        self.editor.Cut()
-    def OnCopy(self, event):
-        self.editor.Copy()
-    def OnPaste(self, event):
-        self.editor.Paste()
-    def OnDelete(self, event):
-        frm, to = self.editor.GetSelection()
-        self.editor.Remove(frm, to)
-    def OnSelectAll(self, event):
-        self.editor.SelectAll()
+    def OnSave(self, event):
+        textfile = open(join(self.dirname, self.filename), "w")
+        textfile.write(self.editor.GetValue())
+        textfile.close()
 
+
+    def OnExit(self, event):
+        self.Close()  # Close the main window.
+
+    def OnSafeExit(self, event):
+        self.OnSave(event)
+        self.OnExit(event)
+
+
+    # help menu events
+    OnAbout = HelpMenuEvents.OnAbout
+
+    # edit menu events
+    OnSelectAll = EditMenuEvents.OnSelectAll
+    OnDelete = EditMenuEvents.OnDelete
+    OnPaste = EditMenuEvents.OnPaste
+    OnCopy = EditMenuEvents.OnCopy
+    OnCut = EditMenuEvents.OnCut
+    OnGoToLine = EditMenuEvents.OnGoToLine
+    OnWordCount = EditMenuEvents.OnWordCount
 
 # view menu events
     def StatusBar(self):
@@ -633,227 +647,86 @@ class MainWindow(wx.Frame):
         self.comp_thread = BashProcessThread(self.sub_flag, input_object, self.console.WriteText)
         self.comp_thread.start()
 
-    def OnRenderNull(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('rmarkdown', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('rmarkdown', repos="{0}")}};require(rmarkdown);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['rendercommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
+    # Build Menu events
+    OnRenderNull = RMarkdownEvents.OnRenderNull
+    OnBuild = OnRenderNull # sets default build 
+    OnRenderHtml = RMarkdownEvents.OnRenderHtml
+    OnRenderSlidy = RMarkdownEvents.OnRenderSlidy
+    OnRenderAll = RMarkdownEvents.OnRenderAll
+    OnRenderWord = RMarkdownEvents.OnRenderWord
+    OnRenderPdf = RMarkdownEvents.OnRenderPdf
+    OnSelectRenderNull = RMarkdownEvents.OnSelectRenderNull
+    OnSelectRenderHtml = RMarkdownEvents.OnSelectRenderHtml
+    OnSelectRenderSlidy = RMarkdownEvents.OnSelectRenderSlidy
+    OnSelectRenderAll = RMarkdownEvents.OnSelectRenderAll
+    OnSelectRenderWord = RMarkdownEvents.OnSelectRenderWord
+    OnSelectRenderPdf = RMarkdownEvents.OnSelectRenderPdf
+    OnKnit2html = RMarkdownEvents.OnKnit2html
+    OnKnit2pdf = RMarkdownEvents.OnKnit2pdf
 
-    # set default build 
-    OnBuild = OnRenderNull
+    # R and RMarkdown events
+    OnRCommand = RMarkdownEvents.OnRCommand
+    OnRChunk = RMarkdownEvents.OnRChunk
+    OnRGraph = RMarkdownEvents.OnRGraph
+    OnRPipe = RMarkdownEvents.OnRPipe
+    OnRLAssign = RMarkdownEvents.OnRLAssign
+    OnRRAssign = RMarkdownEvents.OnRRAssign
 
-    def OnRenderHtml(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('rmarkdown', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('rmarkdown', repos="{0}")}};require(rmarkdown);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['renderhtmlcommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
-    def OnRenderAll(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('rmarkdown', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('rmarkdown', repos="{0}")}};require(rmarkdown);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['renderallcommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
-    def OnRenderWord(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('rmarkdown', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('rmarkdown', repos="{0}")}};require(rmarkdown);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['renderwordcommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
-    def OnRenderPdf(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('rmarkdown', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('rmarkdown', repos="{0}")}};require(rmarkdown);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['renderpdfcommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
+    # MathInserts are all LaTeX input for math mode
+    OnSymbol_infinity = MathInserts.OnSymbol_infinity
+    OnSymbol_plusminus = MathInserts.OnSymbol_plusminus
+    OnSymbol_minusplus = MathInserts.OnSymbol_minusplus
+    OnSymbol_geq = MathInserts.OnSymbol_geq
+    OnSymbol_leq = MathInserts.OnSymbol_leq
+    OnSymbol_neq = MathInserts.OnSymbol_neq
+    OnSymbol_times = MathInserts.OnSymbol_times
+    OnSymbol_partial = MathInserts.OnSymbol_partial
+    OnSymbol_LeftParen = MathInserts.OnSymbol_LeftParen
+    OnSymbol_RightParen = MathInserts.OnSymbol_RightParen
+    OnSymbol_LeftSquare = MathInserts.OnSymbol_LeftSquare
+    OnSymbol_RightSquare = MathInserts.OnSymbol_RightSquare
+    OnSymbol_LeftCurly = MathInserts.OnSymbol_LeftCurly
+    OnSymbol_RightCurly = MathInserts.OnSymbol_RightCurly
+    OnAbsVal = MathInserts.OnAbsVal
+    OnMathBar = MathInserts.OnMathBar
+    OnSquareRoot = MathInserts.OnSquareRoot
+    OnFraction = MathInserts.OnFraction
+    OnSummation = MathInserts.OnSummation
+    Onintegral = MathInserts.Onintegral
+    OnProduct = MathInserts.OnProduct
+    OnLimit = MathInserts.OnLimit
+    OnDoubleSummation = MathInserts.OnDoubleSummation
+    OnDoubleIntegral = MathInserts.OnDoubleIntegral
+    OnGreek_alpha = MathInserts.OnGreek_alpha
+    OnGreek_beta = MathInserts.OnGreek_beta
+    OnGreek_gamma = MathInserts.OnGreek_gamma
+    OnGreek_delta = MathInserts.OnGreek_delta
+    OnGreek_epsilon = MathInserts.OnGreek_epsilon
+    OnGreek_varepsilon = MathInserts.OnGreek_varepsilon
+    OnGreek_zeta = MathInserts.OnGreek_zeta
+    OnGreek_eta = MathInserts.OnGreek_eta
+    OnGreek_theta = MathInserts.OnGreek_theta
+    OnGreek_vartheta = MathInserts.OnGreek_vartheta
+    OnGreek_iota = MathInserts.OnGreek_iota
+    OnGreek_kappa = MathInserts.OnGreek_kappa
+    OnGreek_lambda = MathInserts.OnGreek_lambda
+    OnGreek_mu = MathInserts.OnGreek_mu
+    OnGreek_nu = MathInserts.OnGreek_nu
+    OnGreek_xi = MathInserts.OnGreek_xi
+    OnGreek_omicron = MathInserts.OnGreek_omicron
+    OnGreek_pi = MathInserts.OnGreek_pi
+    OnGreek_rho = MathInserts.OnGreek_rho
+    OnGreek_sigma = MathInserts.OnGreek_sigma
+    OnGreek_tau = MathInserts.OnGreek_tau
+    OnGreek_upsilon = MathInserts.OnGreek_upsilon
+    OnGreek_phi = MathInserts.OnGreek_phi
+    OnGreek_chi = MathInserts.OnGreek_chi
+    OnGreek_psi = MathInserts.OnGreek_psi
+    OnGreek_omega = MathInserts.OnGreek_omega
 
-
-    def OnSelectRenderNull(self, event):
-        self.Bind(wx.EVT_MENU, self.OnRenderNull, self.Render)
-    def OnSelectRenderHtml(self, event):
-        self.Bind(wx.EVT_MENU, self.OnRenderHtml, self.Render)
-    def OnSelectRenderAll(self, event):
-        self.Bind(wx.EVT_MENU, self.OnRenderAll, self.Render)
-    def OnSelectRenderWord(self, event):
-        self.Bind(wx.EVT_MENU, self.OnRenderWord, self.Render)
-    def OnSelectRenderPdf(self, event):
-        self.Bind(wx.EVT_MENU, self.OnRenderPdf, self.Render)
-
-
-    def OnKnit2html(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('knitr', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('knitr', repos="{0}")}};require(knitr);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['knit2htmlcommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
-
-    def OnKnit2pdf(self, event):
-        self._mgr.GetPane("console").Show().Bottom().Layer(0).Row(0).Position(0)
-        self._mgr.Update()
-        # This allows the file to be up to date for the build
-        self.OnSave(event)
-        self.StartThread([self.settings['RDirectory'], "-e",
-                          '''if (!is.element('knitr', installed.packages()[,1])){{'''.format() +
-                          '''install.packages('knitr', repos="{0}")}};require(knitr);'''.format(
-                              self.hardsettings['repo']) +
-                          self.hardsettings['knit2pdfcommand'].format(
-                              join(self.dirname, self.filename).replace('\\', '\\\\'))])
-
-
-    def OnRCommand(self, event):
-        frm, to = self.editor.GetSelection()
-        self.editor.SetInsertionPoint(to)
-        self.editor.WriteText("`")
-        self.editor.SetInsertionPoint(frm)
-        self.editor.WriteText("`r ")
-        self.editor.SetInsertionPoint(frm + 3)
-
-
-    def OnRChunk(self, event):
-        frm, to = self.editor.GetSelection()
-        self.editor.SetInsertionPoint(to)
-        self.editor.WriteText("\n```\n\n")
-        self.editor.SetInsertionPoint(frm)
-        self.editor.WriteText("\n```{r }\n")
-        self.editor.SetInsertionPoint(frm + 8)
-
-    def OnRGraph(self, event):
-        frm, to = self.editor.GetSelection()
-        self.editor.SetInsertionPoint(to)
-        self.editor.WriteText("\n```\n\n")
-        self.editor.SetInsertionPoint(frm)
-        self.editor.WriteText("\n```{r , fig.height=5, fig.width=5, fig.cap=\"\"}\n")
-        self.editor.SetInsertionPoint(frm + 8)
-
-    def OnRPipe(self, event):
-        self.editor.WriteText(" %>% ") 
-    def OnRLAssign(self, event):
-        self.editor.WriteText(" <- ") 
-    def OnRRAssign(self, event):
-        self.editor.WriteText(" -> ") 
-
-
-    def OnSymbol_infinity(self, event):
-        self.editor.WriteText("\\infty{}") 
-    def OnSymbol_times(self, event):
-        self.editor.WriteText("\\times{}") 
-    def OnSymbol_partial(self, event):
-        self.editor.WriteText("\\partial{}") 
-    def OnSymbol_LeftParen(self, event):
-        self.editor.WriteText("\\left(") 
-    def OnSymbol_RightParen(self, event):
-        self.editor.WriteText("\\right) ") 
-    def OnSymbol_LeftSquare(self, event):
-        self.editor.WriteText("\\left[") 
-    def OnSymbol_RightSquare(self, event):
-        self.editor.WriteText("\\right] ") 
-    def OnSymbol_LeftCurly(self, event):
-        self.editor.WriteText("\\left\\{") 
-    def OnSymbol_RightCurly(self, event):
-        self.editor.WriteText("\\right\\} ")
-
-
-
-    def OnSquareRoot(self, event):
-        self.editor.WriteText("\\sqrt{}") 
-    def OnFraction(self, event):
-        self.editor.WriteText("\\frac{ num }{ den }") 
-    def OnSummation(self, event):
-        self.editor.WriteText("\\sum_{ lower }^{ upper }{ what }") 
-    def Onintegral(self, event):
-        self.editor.WriteText("\\int_{ lower }^{ upper }{ what }") 
-    def OnProduct(self, event):
-        self.editor.WriteText("\\prod_{ lower }^{ upper }{ what }") 
-    def OnLimit(self, event):
-        self.editor.WriteText("\\lim_{ what \\to where }{is}") 
-    def OnDoubleSummation(self, event):
-        self.editor.WriteText("\\sum_{ lower }^{ upper }{\\sum_{ lower }^{ upper }{ what }}") 
-    def OnDoubleIntegral(self, event):
-        self.editor.WriteText("\\int_{ lower }^{ upper }{\\int_{ lower }^{ upper }{ what }}") 
-
-    def OnGreek_alpha(self, event):
-        self.editor.WriteText("\\alpha{}") 
-    def OnGreek_beta(self, event):
-        self.editor.WriteText("\\beta{}") 
-    def OnGreek_gamma(self, event):
-        self.editor.WriteText("\\gamma{}") 
-    def OnGreek_delta(self, event):
-        self.editor.WriteText("\\delta{}") 
-    def OnGreek_epsilon(self, event):
-        self.editor.WriteText("\\epsilon{}") 
-    def OnGreek_varepsilon(self, event):
-        self.editor.WriteText("\\varepsilon{}") 
-    def OnGreek_zeta(self, event):
-        self.editor.WriteText("\\zeta{}") 
-    def OnGreek_eta(self, event):
-        self.editor.WriteText("\\eta{}") 
-    def OnGreek_theta(self, event):
-        self.editor.WriteText("\\theta{}") 
-    def OnGreek_vartheta(self, event):
-        self.editor.WriteText("\\vartheta{}") 
-    def OnGreek_iota(self, event):
-        self.editor.WriteText("\\iota{}") 
-    def OnGreek_kappa(self, event):
-        self.editor.WriteText("\\kappa{}") 
-    def OnGreek_lambda(self, event):
-        self.editor.WriteText("\\lambda{}") 
-    def OnGreek_mu(self, event):
-        self.editor.WriteText("\\mu{}") 
-    def OnGreek_nu(self, event):
-        self.editor.WriteText("\\nu{}") 
-    def OnGreek_xi(self, event):
-        self.editor.WriteText("\\xi{}") 
-    def OnGreek_omicron(self, event):
-        self.editor.WriteText("\\omicron{}") 
-    def OnGreek_pi(self, event):
-        self.editor.WriteText("\\pi{}") 
-    def OnGreek_rho(self, event):
-        self.editor.WriteText("\\rho{}") 
-    def OnGreek_sigma(self, event):
-        self.editor.WriteText("\\sigma{}") 
-    def OnGreek_tau(self, event):
-        self.editor.WriteText("\\tau{}") 
-    def OnGreek_upsilon(self, event):
-        self.editor.WriteText("\\upsilon{}") 
-    def OnGreek_phi(self, event):
-        self.editor.WriteText("\\phi{}") 
-    def OnGreek_chi(self, event):
-        self.editor.WriteText("\\chi{}") 
-    def OnGreek_psi(self, event):
-        self.editor.WriteText("\\psi{}") 
-    def OnGreek_omega(self, event):
-        self.editor.WriteText("\\omega{}")
+    OnMathRoundBrack = MathInserts.OnMathRoundBrack
+    OnMathCurlyBrack = MathInserts.OnMathCurlyBrack
+    OnMathSquareBrack = MathInserts.OnMathSquareBrack
 
     # format menu events
     def OnSquareBrack(self, event):
@@ -917,8 +790,12 @@ class MainWindow(wx.Frame):
 
     def OnAddHeadBlock(self, event):
         self.editor.SetInsertionPoint(0)
-        self.editor.WriteText('---\ntitle: ""\nauthor: ""\noutput: html_document\n---\n') 
+        self.editor.WriteText('---\ntitle: ""\nauthor: ""\ndate: ""\noutput: html_document\n---\n') 
         self.editor.SetInsertionPoint(13)
+
+    def OnAddReference(self, event):
+        self.editor.WriteText(" [@ref] ") 
+
     def OnAddURL(self, event):
         self.editor.WriteText(" [alt text](http://) ") 
     def OnAddEMail(self, event):
@@ -1073,7 +950,8 @@ class MainWindow(wx.Frame):
 
     def OnFindClose(self, event):
         event.GetDialog().Destroy()
- # mandatory lines to get program running.
+
+# mandatory lines to get program running.
 if __name__ == "__main__":
     app = wx.App()
     frame = MainWindow()

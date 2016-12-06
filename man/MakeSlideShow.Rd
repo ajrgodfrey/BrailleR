@@ -1,11 +1,13 @@
 \name{MakeSlideShow}
 \alias{MakeSlideShow}
+\alias{MakeSlidy}
 \alias{MakeAllInOneSlide}
 \title{Turn a set of Rmd files into an HTML slide show}
 \description{
-Takes a set of Rmd files in alphabetical order and makes them a set of linked HTML files suitable for a presentation., or a single file suitable for distribution}
+Takes a set of Rmd files in alphabetical order and makes them a set of linked HTML files or a single slidy presentation suitable for delivering a presentation., or a single plain HTML file suitable for distribution}
 \usage{
 MakeAllInOneSlide(Folder, Style = getOption("BrailleR.SlideStyle"), file=NULL)
+MakeSlidy(Folder, file = NULL)
 MakeSlideShow(Folder, Style = getOption("BrailleR.SlideStyle"), ContentsSlide = TRUE)
 }
 \arguments{
@@ -17,7 +19,10 @@ MakeSlideShow(Folder, Style = getOption("BrailleR.SlideStyle"), ContentsSlide = 
 \details{
 For MakeSlideShow: The files are temporarily moved up to the current working directory where the links for the back, next and optionally the contents slides are added, before these new files are knitted to HTML. The user then opens the first file in the set and has a series of next links to work with that gets them through the slide show. All temporary files are then deleted.
 
-For MakeAllInOneSlide: The process is similar but the links are not added and only one HTML file is created.}
+
+For MakeAllInOneSlide: The process is similar but the links are not added and only one HTML file is created.
+
+Ultimately, the user should move to using the slidy presentation.}
 \value{
 A printout of the slides made in the order they will appear. The HTML files are in the current working directory.
 }
