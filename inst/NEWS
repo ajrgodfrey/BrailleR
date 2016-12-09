@@ -1,4 +1,10 @@
+# v0.25.5
+- Added experimental work on making accessible graphs for mounting on the web
+- added Volker Sorge and Donal Fitzpatrick to the package contributors list
+
+
 # v0.25.4
+- added JooYoung Seo and TK Lee to the package contributors list
 - updated WriteR.pyw
 - fixed small typos
 - added MakeSLidy() which takesa folder of Rmd files and turns them into a slidy presentation
