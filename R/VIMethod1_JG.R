@@ -5,8 +5,8 @@ VI = function(x) {
 
 VI.default =
     function(x) {
-      cat("There is no specific method written for  this type of object.\n")
-      cat("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
+      message("There is no specific method written for  this type of object.\n")
+      message("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
       print(x)
     }
 

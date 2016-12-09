@@ -1,6 +1,7 @@
 # v0.25.5
 - Added experimental work on making accessible graphs for mounting on the web
 - added Volker Sorge and Donal Fitzpatrick to the package contributors list
+- added MakeAccessibleSVG() and AddXML() as well as a bunch of internal functions to do the hard work.
 
 
 # v0.25.4
