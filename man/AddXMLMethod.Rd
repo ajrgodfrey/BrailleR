@@ -6,7 +6,7 @@
 \title{Create XML files to sit alongside SVG files in order to make an accessible graph experience.}
 \description{Creates the necessary XML file for a graph object (as long as it has a class assigned) or the current graph window.}
 \usage{
-AddXML(x, file = "test")
+AddXML(x, file)
 }
 \arguments{
   \item{x}{a graph object for which a method exists, or the current graphics device if set to NULL.}
