@@ -14,19 +14,9 @@ VI.default =
 
 VI.boxplot =
     function(x) {
-      NBox = length(x$n)
-      VarGroup = ifelse(NBox > 1, 'group', 'variable')
-      VarGroupUpp = ifelse(NBox > 1, 'Group', 'This variable')
-      IsAre = ifelse(NBox > 1, 'are', 'is')
-      Boxplots = ifelse(NBox > 1, paste(NBox, 'boxplots'), 'a boxplot')
-      VertHorz = ifelse(x$horizontal, 'horizontally', 'vertically')
-      if (NBox > 1) {
-        x$names = paste0('"', x$names, '"')
-      } else {
-        x$names = NULL
-      }
+x=Augment(x)
       cat(paste0(
-              'This graph has ', Boxplots, ' printed ', VertHorz,
+              'This graph has ', x$Boxplots, ' printed ', x$VertHorz,
               '\n', ifelse(length(x$main) > 0, 'with the title: ',
                            'but has no title'), x$main, '\n',
               ifelse(length(x$xlab) > 0, InQuotes(x$xlab), 'No label'),
@@ -38,12 +28,12 @@ VI.boxplot =
       } else {
         cat("Tick marks for the y-axis are at:", GetAxisTicks(x$yaxp), "\n")
       }
-      for (i in 1:NBox) {
-        cat(VarGroupUpp, x$names[i], 'has', x$n[i], 'values.\n')
+      for (i in 1:x$NBox) {
+        cat(x$VarGroupUpp, x$names[i], 'has', x$n[i], 'values.\n')
         if (any(x$group == i)) {
           cat('An outlier is marked at:', x$out[which(x$group == i)], '\n')
         } else {
-          cat('There are no outliers marked for this', VarGroup, '\n')
+          cat('There are no outliers marked for this', x$VarGroup, '\n')
         }
         cat('The whiskers extend to', x$stats[1, i], 'and', x$stats[5, i],
             'from the ends of the box, \nwhich are at', x$stats[2, i], 'and',

@@ -12,7 +12,7 @@ Augment.boxplot = function(x) {
       x$VarGroup = ifelse(x$NBox > 1, 'group', 'variable')
       x$VarGroupUpp = ifelse(x$NBox > 1, 'Group', 'This variable')
       x$IsAre = ifelse(x$NBox > 1, 'are', 'is')
-      x$Boxplots = ifelse(x$NBox > 1, paste(NBox, 'boxplots'), 'a boxplot')
+      x$Boxplots = ifelse(x$NBox > 1, paste(x$NBox, 'boxplots'), 'a boxplot')
       x$VertHorz = ifelse(x$horizontal, 'horizontally', 'vertically')
       if (x$NBox > 1) {
         x$names = paste0('"', x$names, '"')
