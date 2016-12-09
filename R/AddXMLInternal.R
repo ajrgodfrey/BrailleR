@@ -1,7 +1,12 @@
 
-.AddXMLaddXaxis = function(root, values=NULL, label="", groupPosition=2) {
+.AddXMLaddXAxis = function(root, values=NULL, label="", groupPosition=2) {
     position = 1
     .AddXMLaddLabel(root, label=label, position=position, id="xlab", axis="xaxis")
+}
+
+.AddXMLaddYAxis = function(root, values=NULL, label="", groupPosition=3) {
+    position = 1
+    .AddXMLaddLabel(root, label=label, position=position, id="ylab", axis="yaxis")
 }
 
 
