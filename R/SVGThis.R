@@ -1,3 +1,4 @@
+
 # this file is only for the SVGThis method and associated utility functions.
 # SVGThis.default() needs interactive session but specific methods need not be
 
@@ -59,32 +60,63 @@ SVGThis.default =
       return(invisible(NULL))
     }
 
+SVGThis.boxplot =
+    function(x, file = "test.svg") {
+      # really should check that the boxplot wasn't plotted already before...
+      # but simpler to just do the plotting ourselves and close the device later
+      x  # ensure we create a boxplot on a new graphics device
+      gridGraphics::grid.echo()  # hist() currently uses graphics package
+.SVGThisBase(x)
+      # add class-specific content to svg file from here onwards
+      # short descriptions should be automatic, such as axis labels or marks
+      # long descriptions need to be constructed, such as describe all axis marks together
+      # find some way to embed the object from which the graph was created
+      gridSVG::grid.export(name = file)
+      dev.off()  # remove our graph window
+      MakeTigerReady(svgfile = file)
+      return(invisible(NULL))
+    }
+
+SVGThis.dotplot =
+    function(x, file = "test.svg") {
+      # really should check that the dotplot wasn't plotted already before...
+      # but simpler to just do the plotting ourselves and close the device later
+      x  # ensure we create a dotplot on a new graphics device
+      gridGraphics::grid.echo()  # hist() currently uses graphics package
+.SVGThisBase(x)
+      # add class-specific content to svg file from here onwards
+      # short descriptions should be automatic, such as axis labels or marks
+      # long descriptions need to be constructed, such as describe all axis marks together
+      # find some way to embed the object from which the graph was created
+      gridSVG::grid.export(name = file)
+      dev.off()  # remove our graph window
+      MakeTigerReady(svgfile = file)
+      return(invisible(NULL))
+    }
+
+
+
 SVGThis.histogram =
     function(x, file = "test.svg") {
       # really should check that the histogram wasn't plotted already before...
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a histogram on a new graphics device
       gridGraphics::grid.echo()  # hist() currently uses graphics package
-      # use gridSVG ideas in here
-      gridSVG::grid.garnish(
-          "graphics-plot-1-bottom-axis-line-1", title = "the x axis")
-      gridSVG::grid.garnish(
-          "graphics-plot-1-left-axis-line-1", title = "the y axis")
-      # these titles are included in the <g> tag not a <title> tag
-      # checking back with the maps example, Paul used...
-      addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
-              desc = "need something much smarter in here")
-      addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
-              desc = "need something much smarter in here")
-      # but these push the plotting line down a peg in the svg file so what was 1.1 is now 1.2
-      # is that important?
-
-      gridSVG::grid.export(name = file)
-      dev.off()  # remove our graph window
-      MakeTigerReady(svgfile = file)
+.SVGThisBase(x)
       # add class-specific content to svg file from here onwards
       # short descriptions should be automatic, such as axis labels or marks
       # long descriptions need to be constructed, such as describe all axis marks together
       # find some way to embed the object from which the graph was created
+      gridSVG::grid.export(name = file)
+      dev.off()  # remove our graph window
+      MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
+
+.SVGThisBase = function(x){
+      # these titles are included in the <g> tag not a <title> tag
+      addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
+              desc = "need something much smarter in here")
+      addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
+              desc = "need something much smarter in here")
+}

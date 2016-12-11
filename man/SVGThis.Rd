@@ -1,6 +1,8 @@
 \name{SVGThis}
 \alias{SVGThis}
 \alias{SVGThis.default}
+\alias{SVGThis.boxplot}
+\alias{SVGThis.dotplot}
 \alias{SVGThis.histogram}
 \alias{MakeTigerReady}
 \alias{addInfo}
