@@ -25,8 +25,6 @@ dotplot.default =
       if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab)
       if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
       Out$call = MC
-      Out$xaxp = par()$xaxp
-      Out$yaxp = par()$yaxp
       class(Out) = "dotplot"
       Out=Augment(Out)
       return(invisible(Out))
@@ -59,8 +57,6 @@ dotplot.formula =
       if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab)
       if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
       Out$call = MC
-      Out$xaxp = par()$xaxp
-      Out$yaxp = par()$yaxp
       class(Out) = "dotplot"
       Out=Augment(Out)
       return(invisible(Out))

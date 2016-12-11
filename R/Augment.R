@@ -29,9 +29,21 @@ Augment.boxplot = function(x) {
       return(invisible(x))
 }
 
+Augment.dotplot = function(x) {
+      x=.AugmentBase(x)
+      x$NPlot = length(x$vals)
+      x$VarGroup = ifelse(x$NPlot > 1, 'group', 'variable')
+      x$VarGroupUpp = ifelse(x$NPlot > 1, 'Group', 'This variable')
+      x$IsAre = ifelse(x$NPlot > 1, 'are', 'is')
+      x$dotplots = ifelse(x$NPlot > 1, paste(x$NPlot, 'dotplots'), 'a dotplot')
+      x$VertHorz = ifelse(x$vertical, 'vertically', 'horizontally')
+return(invisible(x))
+}
+
 Augment.ggplot = function(x) {
 return(invisible(x))
 }
+
 
 Augment.histogram = function(x) {
 x=.AugmentBase(x)
@@ -50,6 +62,6 @@ return(invisible(x))
 .AugmentedGrid = function(x){
 # x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
 # x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
-class(x)=c("Augmented", class(x))
+# class(x)=c("Augmented", class(x))
 return(invisible(x))
 }

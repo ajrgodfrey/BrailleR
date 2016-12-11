@@ -70,12 +70,6 @@ VI.data.frame =
 
 VI.dotplot =
     function(x) {
-      NPlot = length(x$vals)
-      VarGroup = ifelse(NPlot > 1, 'group', 'variable')
-      VarGroupUpp = ifelse(NPlot > 1, 'Group', 'This variable')
-      IsAre = ifelse(NPlot > 1, 'are', 'is')
-      dotplots = ifelse(NPlot > 1, paste(NPlot, 'dotplots'), 'a dotplot')
-      VertHorz = ifelse(x$vertical, 'vertically', 'horizontally')
       MinVal = min(unlist(x$vals))
       MaxVal = max(unlist(x$vals))
       Bins = getOption("BrailleR.DotplotBins")
