@@ -75,7 +75,7 @@ VI.dotplot =
       Bins = getOption("BrailleR.DotplotBins")
       Cuts = seq(MinVal, MaxVal, (MaxVal - MinVal) / Bins)
       # now do the description bit
-      cat(paste0('This graph has ', dotplots, ' printed ', VertHorz, '\n',
+      cat(paste0('This graph has ', x$dotplots, ' printed ', x$VertHorz, '\n',
                  ifelse(length(x$main) > 0, 'with the title: ',
                         'but has no title'), x$main, '\n'))
       if (!is.null(x$dlab) | !is.null(x$glab)) {
@@ -94,7 +94,7 @@ VI.dotplot =
       }
       cat(paste("the data that range from", MinVal, "to", MaxVal,
                 "has been broken into", Bins, "bins.\nThe counts are:\n"))
-      for (i in 1:NPlot) {
+      for (i in 1:x$NPlot) {
         cat(paste0(names(x$vals)[i], ": "))
         cat(graphics::hist(x$vals[[i]], breaks = Cuts, plot = FALSE)$counts,
             "\n")
