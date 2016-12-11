@@ -1,6 +1,8 @@
 \name{AddXMLMethod}
 \alias{AddXML}
 \alias{AddXML.default}
+\alias{AddXML.boxplot}
+\alias{AddXML.ggplot}
 \alias{AddXML.histogram}
 
 \title{Create XML files to sit alongside SVG files in order to make an accessible graph experience.}

@@ -10,6 +10,11 @@ x$yaxp = par()$yaxp
 return(invisible(x))
 }
 
+Augment.Augmented =
+    function(x) {
+return(invisible(x))
+}
+
 Augment.boxplot = function(x) {
       x$NBox = length(x$n)
       x$VarGroup = ifelse(x$NBox > 1, 'group', 'variable')
@@ -31,12 +36,20 @@ return(invisible(x))
 }
 
 Augment.histogram = function(x) {
+x=.Augment(x)
 return(invisible(x))
 }
 
 .Augment=function(x){
 x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
 x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
+class(x)=c("Augmented", class(x))
+return(invisible(x))
+}
+
+.AugmentedGrid = function(x)
+# x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
+# x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
 class(x)=c("Augmented", class(x))
 return(invisible(x))
 }

@@ -7,10 +7,25 @@ AddXML.default =
 return(invisible("nothing done"))
 }
 
+AddXML.boxplot = function(x, file) {
+    doc = .AddXMLdocument("boxplot")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLaddNode(root, "annotations")
+    .AddXMLaddXAxis(annotations, label=x$xlab)
+    .AddXMLaddYAxis(annotations, label=x$ylab)
+    XML::saveXML(doc=doc, file=file)
+}
+
+AddXML.ggplot = function(x, file) {
+    doc = .AddXMLdocument("ggplot")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLaddNode(root, "annotations")
+    .AddXMLaddXAxis(annotations, label=x$xlab)
+    .AddXMLaddYAxis(annotations, label=x$ylab)
+    XML::saveXML(doc=doc, file=file)
+}
+
 AddXML.histogram = function(x, file) {
-    .AddXMLActive = NULL
-    .AddXMLPassive = NULL
-    .AddXMLGrouped = NULL
     doc = .AddXMLdocument("histogram")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLaddNode(root, "annotations")

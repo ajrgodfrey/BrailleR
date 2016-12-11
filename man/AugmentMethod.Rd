@@ -1,9 +1,12 @@
 \name{AugmentMethod}
 \alias{Augment}
 \alias{Augment.default}
+\alias{Augment.Augmented}
 \alias{Augment.boxplot}
 \alias{Augment.ggplot}
 \alias{Augment.histogram}
+\alias{.Augment}
+\alias{.AugmentGrid}
 
 \title{add additional detail to the stored object for a graph}
 \description{Creates the necessary details that feed into the text descriptions in the VI() function and into the descriptions used in the accessible online versions of the graphs.}
