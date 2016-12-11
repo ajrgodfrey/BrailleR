@@ -16,6 +16,15 @@ AddXML.boxplot = function(x, file) {
     XML::saveXML(doc=doc, file=file)
 }
 
+AddXML.dotplot = function(x, file) {
+    doc = .AddXMLdocument("dotplot")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLaddNode(root, "annotations")
+    .AddXMLaddXAxis(annotations, label=x$xlab)
+    .AddXMLaddYAxis(annotations, label=x$ylab)
+    XML::saveXML(doc=doc, file=file)
+}
+
 AddXML.ggplot = function(x, file) {
     doc = .AddXMLdocument("ggplot")
     root = XML::xmlRoot(doc)

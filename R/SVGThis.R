@@ -65,12 +65,7 @@ SVGThis.boxplot =
       # really should check that the boxplot wasn't plotted already before...
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a boxplot on a new graphics device
-      gridGraphics::grid.echo()  # hist() currently uses graphics package
-.SVGThisBase(x)
-      # add class-specific content to svg file from here onwards
-      # short descriptions should be automatic, such as axis labels or marks
-      # long descriptions need to be constructed, such as describe all axis marks together
-      # find some way to embed the object from which the graph was created
+      gridGraphics::grid.echo()  # boxplot() currently uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
       MakeTigerReady(svgfile = file)
@@ -82,12 +77,7 @@ SVGThis.dotplot =
       # really should check that the dotplot wasn't plotted already before...
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a dotplot on a new graphics device
-      gridGraphics::grid.echo()  # hist() currently uses graphics package
-.SVGThisBase(x)
-      # add class-specific content to svg file from here onwards
-      # short descriptions should be automatic, such as axis labels or marks
-      # long descriptions need to be constructed, such as describe all axis marks together
-      # find some way to embed the object from which the graph was created
+      gridGraphics::grid.echo()  # dotplot() currently uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
       MakeTigerReady(svgfile = file)
@@ -102,7 +92,17 @@ SVGThis.histogram =
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a histogram on a new graphics device
       gridGraphics::grid.echo()  # hist() currently uses graphics package
-.SVGThisBase(x)
+      # use gridSVG ideas in here
+      gridSVG::grid.garnish(
+          "graphics-plot-1-bottom-axis-line-1", title = "the x axis")
+      gridSVG::grid.garnish(
+          "graphics-plot-1-left-axis-line-1", title = "the y axis")
+      # these titles are included in the <g> tag not a <title> tag
+      addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
+              desc = "need something much smarter in here")
+      addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
+              desc = "need something much smarter in here")
+#.SVGThisBase(x)
       # add class-specific content to svg file from here onwards
       # short descriptions should be automatic, such as axis labels or marks
       # long descriptions need to be constructed, such as describe all axis marks together
@@ -114,6 +114,11 @@ SVGThis.histogram =
     }
 
 .SVGThisBase = function(x){
+      # use gridSVG ideas in here
+      gridSVG::grid.garnish(
+          "graphics-plot-1-bottom-axis-line-1", title = "the x axis")
+      gridSVG::grid.garnish(
+          "graphics-plot-1-left-axis-line-1", title = "the y axis")
       # these titles are included in the <g> tag not a <title> tag
       addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
               desc = "need something much smarter in here")

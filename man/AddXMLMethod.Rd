@@ -2,6 +2,7 @@
 \alias{AddXML}
 \alias{AddXML.default}
 \alias{AddXML.boxplot}
+\alias{AddXML.dotplot}
 \alias{AddXML.ggplot}
 \alias{AddXML.histogram}
 
