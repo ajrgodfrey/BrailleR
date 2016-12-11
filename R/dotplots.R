@@ -28,6 +28,7 @@ dotplot.default =
       Out$xaxp = par()$xaxp
       Out$yaxp = par()$yaxp
       class(Out) = "dotplot"
+      Out=Augment(Out)
       return(invisible(Out))
     }
 
@@ -61,6 +62,7 @@ dotplot.formula =
       Out$xaxp = par()$xaxp
       Out$yaxp = par()$yaxp
       class(Out) = "dotplot"
+      Out=Augment(Out)
       return(invisible(Out))
     }
 

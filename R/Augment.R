@@ -47,7 +47,7 @@ class(x)=c("Augmented", class(x))
 return(invisible(x))
 }
 
-.AugmentedGrid = function(x)
+.AugmentedGrid = function(x){
 # x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
 # x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
 class(x)=c("Augmented", class(x))

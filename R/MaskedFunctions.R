@@ -17,6 +17,7 @@ boxplot =
       Out$xaxp = par()$xaxp
       Out$yaxp = par()$yaxp
       class(Out) = "boxplot"
+      Out=Augment(Out)
       return(invisible(Out))
     }
 
@@ -30,5 +31,6 @@ hist = function(x, ...) {
          if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
          Out$xaxp = par()$xaxp
          Out$yaxp = par()$yaxp
+         Out=Augment(Out)
          return(invisible(Out))
        }
