@@ -25,6 +25,14 @@ AddXML.dotplot = function(x, file) {
     XML::saveXML(doc=doc, file=file)
 }
 
+
+AddXML.eulerr = function(x, file) {
+    doc = .AddXMLdocument("eulerr")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLaddNode(root, "annotations")
+    XML::saveXML(doc=doc, file=file)
+}
+
 AddXML.ggplot = function(x, file) {
     doc = .AddXMLdocument("ggplot")
     root = XML::xmlRoot(doc)

@@ -3,6 +3,7 @@
 \alias{SVGThis.default}
 \alias{SVGThis.boxplot}
 \alias{SVGThis.dotplot}
+\alias{SVGThis.eulerr}
 \alias{SVGThis.histogram}
 \alias{MakeTigerReady}
 \alias{addInfo}

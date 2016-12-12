@@ -86,6 +86,20 @@ SVGThis.dotplot =
 
 
 
+
+SVGThis.eulerr =
+    function(x, file = "test.svg") {
+      # really should check that the plot wasn't plotted already before...
+      # but simpler to just do the plotting ourselves and close the device later
+      x  # ensure we create a dotplot on a new graphics device
+      gridGraphics::grid.echo()  # dotplot() currently uses graphics package
+      gridSVG::grid.export(name = file)
+      dev.off()  # remove our graph window
+      MakeTigerReady(svgfile = file)
+      return(invisible(NULL))
+    }
+
+
 SVGThis.histogram =
     function(x, file = "test.svg") {
       # really should check that the histogram wasn't plotted already before...

@@ -3,6 +3,7 @@
 \alias{AddXML.default}
 \alias{AddXML.boxplot}
 \alias{AddXML.dotplot}
+\alias{AddXML.eulerr}
 \alias{AddXML.ggplot}
 \alias{AddXML.histogram}
 
