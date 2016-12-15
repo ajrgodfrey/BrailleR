@@ -7,8 +7,8 @@
     root = XML::xmlRoot(doc)
     annotations = .AddXMLaddNode(root, "annotations")
 
-    ## title = AddXMLaddTitle()
-
+    title = .AddXMLaddTitle(annotations, title=diag$title)
+    
     xlab <- if (is.null(diag$xlab)) {diag$xname} else {diag$xlab}
     ylab <- if (is.null(diag$ylab)) {"Frequency"} else {diag$ylab}
     xaxis = .AddXMLaddXAxis(annotations, label=xlab, values=diag$xTicks)
@@ -17,11 +17,16 @@
     ## That's probably the only one that is diagram dependent.
     center = .AddXMLaddHistogramCenter(
         annotations, mids=diag$mids, counts=diag$counts, density=diag$density, breaks=diag$breaks)
-    .AddXMLaddChart(annotations, type="Histogram", children=list(xaxis, yaxis, center))
+    .AddXMLaddChart(annotations, type="Histogram", children=list(title, xaxis, yaxis, center))
     doc
 }
 
 ## Annotating title elements
+.AddXMLaddTitle = function(root, title="") {
+    annotation = .AddXMLaddAnnotation(root, position=1, .AddXMLmakeId("main", "1.1"), kind="active")
+    XML::addAttributes(annotation$root, speech=paste("Title", title), type="Title")
+    annotation
+}
 
 ## Annotating axes
 ##
@@ -216,7 +221,6 @@
 .AddXMLaddChart = function(root, children=NULL, speech="", speech2="", type="") {
     annotation = .AddXMLaddAnnotation(root, id="chart", kind="grouped")
     XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type=type)
-    print(.AddXMLcomponents)
     .AddXMLaddComponents(annotation, .AddXMLcomponents)
     .AddXMLaddChildren(annotation, children)
     .AddXMLaddParents(annotation, children)
