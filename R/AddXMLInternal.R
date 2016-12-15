@@ -7,17 +7,26 @@
     root = XML::xmlRoot(doc)
     annotations = .AddXMLaddNode(root, "annotations")
 
-    title = .AddXMLaddTitle(annotations, title=diag$title)
+    main <- if (is.null(diag$main)) {paste("Histogram of", diag$xname)} else {diag$main}
+    xvalues <- diag$xTicks
+    yvalues <- diag$yTicks
+    title = .AddXMLaddTitle(annotations, title=main)
     
     xlab <- if (is.null(diag$xlab)) {diag$xname} else {diag$xlab}
     ylab <- if (is.null(diag$ylab)) {"Frequency"} else {diag$ylab}
-    xaxis = .AddXMLaddXAxis(annotations, label=xlab, values=diag$xTicks)
-    yaxis = .AddXMLaddYAxis(annotations, label=ylab, values=diag$yTicks)
+    xaxis = .AddXMLaddXAxis(annotations, label=xlab, values=xvalues)
+    yaxis = .AddXMLaddYAxis(annotations, label=ylab, values=yvalues)
     
-    ## That's probably the only one that is diagram dependent.
+    ## That's probably the part that is diagram dependent.
     center = .AddXMLaddHistogramCenter(
         annotations, mids=diag$mids, counts=diag$counts, density=diag$density, breaks=diag$breaks)
-    .AddXMLaddChart(annotations, type="Histogram", children=list(title, xaxis, yaxis, center))
+    values = 
+    .AddXMLaddChart(annotations, type="Histogram",
+                    speech=paste("Histogram of", xlab),
+                    speech2=paste("Histogram of", xlab, "with values from", xvalues[1],  "to",
+                                  xvalues[length(xvalues)], "and", ylab, "from", yvalues[1],  "to",
+                                  yvalues[length(xvalues)]),
+                    children=list(title, xaxis, yaxis, center))
     doc
 }
 
@@ -80,7 +89,7 @@
 ## Axis line
 .AddXMLaxisLine = function(root, position=1, id="", axis="") {
     annotation = .AddXMLaddAnnotation(root, position=position,
-                                      id=.AddXMLmakeId(id, "line", "1.1"), kind="passive")
+                                      id=.AddXMLmakeId(id, "axis", "line", "1.1"), kind="passive")
     XML::addAttributes(annotation$root, type="Line")
     annotation
 }
