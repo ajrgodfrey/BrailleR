@@ -1,12 +1,6 @@
 ## Annotating axes
-.AddXMLaddXAxis = function(root, values=NULL, label="", groupPosition=2) {
-    .AddXMLaddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
-}
-
-.AddXMLaddYAxis = function(root, values=NULL, label="", groupPosition=3) {
-    .AddXMLaddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left")
-}
-
+##
+## Generic axis annotation function.
 .AddXMLaddAxis = function(root, values, label, groupPosition, name, groupId, labelId, lineId) {
     position = 0
     labelNode = .AddXMLaxisLabel(root, label=label, position=position <- position + 1,
@@ -17,6 +11,16 @@
     annotations = c(list(labelNode, lineNode), tickNodes)
     .AddXMLaxisGroup(root, groupId, name, values=values, label=label,
                      annotations=annotations, position=groupPosition)
+}
+
+## Parameterisation for x-axis
+.AddXMLaddXAxis = function(root, values=NULL, label="", groupPosition=2) {
+    .AddXMLaddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
+}
+
+## Parameterisation for x-axis
+.AddXMLaddYAxis = function(root, values=NULL, label="", groupPosition=3) {
+    .AddXMLaddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left")
 }
 
 
@@ -32,7 +36,10 @@
     annotation
 }
 
+
 ## Aux methods for axes annotation.
+##
+## Axis labelling
 .AddXMLaxisLabel = function(root, label="", position=1, id="", axis="") {
     annotation = .AddXMLaddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "1.1"), type="active")
@@ -43,6 +50,7 @@
     annotation
 }
 
+## Axis line
 .AddXMLaxisLine = function(root, position=1, id="", axis="") {
     annotation = .AddXMLaddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "line", "1.1"), type="passive")
@@ -53,6 +61,7 @@
     annotation
 }
 
+## Axis values and ticks
 .AddXMLaxisValues = function(root, values=NULL, position=1, id="", axis="") {
     annotations <- list()
     for (i in 1:length(values)) {
@@ -79,10 +88,14 @@
 }
 
 
+## Auxiliary methods for annotations
+##
+## Construct a gridSVG id.
 .AddXMLmakeId = function(...) {
     paste("graphics-plot-1", ..., sep="-")
 }
 
+## Construct an SRE annotation element.
 .AddXMLaddAnnotation = function(root, position=1, id="", type="active") {
     annotation = .AddXMLaddNode(root, "annotation")
     element = .AddXMLaddNode(annotation, type, id)
@@ -96,7 +109,7 @@
          neighbours = .AddXMLaddNode(annotation, "neighbours"))
 }
 
-
+## Construct the basic XML annotation document.
 .AddXMLdocument = function(tag = "histogram") {
     doc = XML::newXMLDoc()
     top = XML::newXMLNode(tag, doc = doc)
@@ -104,12 +117,13 @@
     doc
 }
 
-.AddXMLaddNode = function(node, tag, content="") {
-    newNode = XML::newXMLNode(paste("sre:", tag, sep=""), parent = node)
+## Add a new node with tag name and optionally text content to the given root.
+.AddXMLaddNode = function(root, tag, content="") {
+    node = XML::newXMLNode(paste("sre:", tag, sep=""), parent = root)
     if (content != "") {
-        XML::newXMLTextNode(content, parent=newNode)
+        XML::newXMLTextNode(content, parent=node)
     }
-    newNode
+    node
 }
 
 # A shallow clone function for leaf nodes only. Avoids problems with duplicating
