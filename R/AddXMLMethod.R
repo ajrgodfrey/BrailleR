@@ -43,13 +43,7 @@ AddXML.ggplot = function(x, file) {
 }
 
 AddXML.histogram = function(diag, file) {
-    doc = .AddXMLdocument("histogram")
-    root = XML::xmlRoot(doc)
-    annotations = .AddXMLaddNode(root, "annotations")
-    xlab <- if (is.null(diag$xlab)) {diag$xname} else {diag$xlab}
-    ylab <- if (is.null(diag$ylab)) {"Frequency"} else {diag$ylab}
-    .AddXMLaddXAxis(annotations, label=xlab, values=diag$xTicks)
-    .AddXMLaddYAxis(annotations, label=ylab, values=diag$yTicks)
+    doc = .AddXMLhistogram(diag)
     XML::saveXML(doc=doc, file=file)
 }
 

@@ -1,3 +1,25 @@
+## Annotating different types of diagrams.
+##
+## Histogram annotation.
+.AddXMLhistogram = function(diag) {
+    .AddXMLcomponents <<- list()
+    doc = .AddXMLdocument("histogram")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLaddNode(root, "annotations")
+
+    ## title = AddXMLaddTitle()
+
+    xlab <- if (is.null(diag$xlab)) {diag$xname} else {diag$xlab}
+    ylab <- if (is.null(diag$ylab)) {"Frequency"} else {diag$ylab}
+    xaxis = .AddXMLaddXAxis(annotations, label=xlab, values=diag$xTicks)
+    yaxis = .AddXMLaddYAxis(annotations, label=ylab, values=diag$yTicks)
+    
+    ## That's probably the only one that is diagram dependent.
+    ## center = AddXMLaddCenter()
+    .AddXMLaddChart(annotations, type="Histogram", children=list(xaxis, yaxis))
+    doc
+}
+
 ## Annotating axes
 ##
 ## Generic axis annotation function.
@@ -26,10 +48,9 @@
 
 ## Aux method for axis group
 .AddXMLaxisGroup = function(root, id, name, values=NULL, label="", annotations=NULL, position=1) {
-    annotation = .AddXMLaddAnnotation(root, position=position, id=id, type="grouped")
-    clone <- function(x) .AddXMLclone(annotation$component, x$element)
-    lapply(annotations, clone)
-    print(label)
+    annotation = .AddXMLaddAnnotation(root, position=position, id=id, kind="grouped")
+    .AddXMLaddComponents(annotation, annotations)
+    .AddXMLaddChildren(annotation, annotations)
     XML::addAttributes(annotation$root, speech=paste(name, label),
                        speech2=paste(name, label, "with values from", values[1], "to", values[length(values)]),
                        type="Axis")
@@ -42,7 +63,7 @@
 ## Axis labelling
 .AddXMLaxisLabel = function(root, label="", position=1, id="", axis="") {
     annotation = .AddXMLaddAnnotation(root, position=position,
-                                      id=.AddXMLmakeId(id, "1.1"), type="active")
+                                      id=.AddXMLmakeId(id, "1.1"), kind="active")
     XML::addAttributes(annotation$root, speech=paste("Label", label), type="Label")
     if (axis != "") {
         .AddXMLaddNode(annotation$parents, "grouped", axis)
@@ -53,7 +74,7 @@
 ## Axis line
 .AddXMLaxisLine = function(root, position=1, id="", axis="") {
     annotation = .AddXMLaddAnnotation(root, position=position,
-                                      id=.AddXMLmakeId(id, "line", "1.1"), type="passive")
+                                      id=.AddXMLmakeId(id, "line", "1.1"), kind="passive")
     XML::addAttributes(annotation$root, type="Line")
     if (axis != "") {
         .AddXMLaddNode(annotation$parents, "grouped", axis)
@@ -67,11 +88,11 @@
     for (i in 1:length(values)) {
         valueId = .AddXMLmakeId(id, "axis", "labels", paste("1.1", i, sep="."))
         value = .AddXMLaddAnnotation(root, position=position + i - 1,
-                                     id=valueId, type="active")
+                                     id=valueId, kind="active")
         XML::addAttributes(value$root, speech=paste("Value", values[i]), type="Value")
         
         tickId = .AddXMLmakeId(id, "axis", "ticks", paste("1.1", i, sep="."))
-        tick = .AddXMLaddAnnotation(root, id=tickId, type="passive")
+        tick = .AddXMLaddAnnotation(root, id=tickId, kind="passive")
         XML::addAttributes(tick$root, type="Tick")
 
         .AddXMLaddNode(value$component, "passive", tickId)
@@ -96,17 +117,19 @@
 }
 
 ## Construct an SRE annotation element.
-.AddXMLaddAnnotation = function(root, position=1, id="", type="active") {
+.AddXMLaddAnnotation = function(root, position=1, id="", kind="active") {
     annotation = .AddXMLaddNode(root, "annotation")
-    element = .AddXMLaddNode(annotation, type, id)
+    element = .AddXMLaddNode(annotation, kind, id)
     ## This should be changed!
-    .AddXMLStoreComponent(id, type)
-    list(root = annotation,
-         element = element,
-         position = .AddXMLaddNode(annotation, "position", content=position),
-         parents = .AddXMLaddNode(annotation, "parents"),
-         component = .AddXMLaddNode(annotation, "component"),
-         neighbours = .AddXMLaddNode(annotation, "neighbours"))
+    node = list(root = annotation,
+                element = element,
+                position = .AddXMLaddNode(annotation, "position", content=position),
+                parents = .AddXMLaddNode(annotation, "parents"),
+                children = .AddXMLaddNode(annotation, "children"),
+                component = .AddXMLaddNode(annotation, "component"),
+                neighbours = .AddXMLaddNode(annotation, "neighbours"))
+    .AddXMLstoreComponent(id, node)
+    node
 }
 
 ## Construct the basic XML annotation document.
@@ -134,15 +157,35 @@
     newNode
 }
 
-## Store components for top level Element
-.AddXMLActive = NULL
-.AddXMLPassive = NULL
-.AddXMLGrouped = NULL
+## Add components to an annotation
+.AddXMLaddComponents = function(annotation, nodes) {
+    clone <- function(x) if (XML::xmlName(x$element) != "grouped") {
+                             .AddXMLclone(annotation$component, x$element)   
+                         }
+    lapply(nodes, clone)
+}
 
-.AddXMLStoreComponent = function(id, type) {
-    set = switch(type,
-                  active = .AddXMLActive,
-                  passive = .AddXMLPassive,
-                  grouped = .AddXMLGrouped)
-    c(set, id)
+## Add children to an annotation
+.AddXMLaddChildren = function(annotation, nodes) {
+    clone <- function(x) if (XML::xmlName(x$element) != "passive") {
+                             .AddXMLclone(annotation$children, x$element)   
+                         }
+    lapply(nodes, clone)
+}
+
+
+## Store components for top level Element
+.AddXMLcomponents = list()
+
+.AddXMLstoreComponent = function(id, element) {
+    .AddXMLcomponents[[id]] <<- element
+}
+
+.AddXMLaddChart = function(root, children=NULL, speech="", speech2="", type="") {
+    annotation = .AddXMLaddAnnotation(root, id="chart", kind="grouped")
+    XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type=type)
+    print(.AddXMLcomponents)
+    .AddXMLaddComponents(annotation, .AddXMLcomponents)
+    .AddXMLaddChildren(annotation, children)
+    annotation
 }
