@@ -15,10 +15,13 @@
     yaxis = .AddXMLaddYAxis(annotations, label=ylab, values=diag$yTicks)
     
     ## That's probably the only one that is diagram dependent.
-    ## center = AddXMLaddCenter()
-    .AddXMLaddChart(annotations, type="Histogram", children=list(xaxis, yaxis))
+    center = .AddXMLaddHistogramCenter(
+        annotations, mids=diag$mids, counts=diag$counts, density=diag$density, breaks=diag$breaks)
+    .AddXMLaddChart(annotations, type="Histogram", children=list(xaxis, yaxis, center))
     doc
 }
+
+## Annotating title elements
 
 ## Annotating axes
 ##
@@ -51,6 +54,7 @@
     annotation = .AddXMLaddAnnotation(root, position=position, id=id, kind="grouped")
     .AddXMLaddComponents(annotation, annotations)
     .AddXMLaddChildren(annotation, annotations)
+    .AddXMLaddParents(annotation, annotations)
     XML::addAttributes(annotation$root, speech=paste(name, label),
                        speech2=paste(name, label, "with values from", values[1], "to", values[length(values)]),
                        type="Axis")
@@ -65,9 +69,6 @@
     annotation = .AddXMLaddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "1.1"), kind="active")
     XML::addAttributes(annotation$root, speech=paste("Label", label), type="Label")
-    if (axis != "") {
-        .AddXMLaddNode(annotation$parents, "grouped", axis)
-    }
     annotation
 }
 
@@ -76,9 +77,6 @@
     annotation = .AddXMLaddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "line", "1.1"), kind="passive")
     XML::addAttributes(annotation$root, type="Line")
-    if (axis != "") {
-        .AddXMLaddNode(annotation$parents, "grouped", axis)
-    }
     annotation
 }
 
@@ -98,14 +96,19 @@
         .AddXMLaddNode(value$component, "passive", tickId)
         .AddXMLaddNode(tick$component, "active", valueId)
 
-        if (axis != "") {
-            .AddXMLaddNode(value$parents, "grouped", axis)
-            .AddXMLaddNode(tick$parents, "grouped", axis)
-        }
         annotations[[2 * i - 1]] = value
         annotations[[2 * i]] = tick
     }
     annotations
+}
+
+
+.AddXMLaddHistogramCenter = function(root, mids=NULL, counts=NULL, density=NULL, breaks=NULL) {
+    annotation = .AddXMLaddAnnotation(root, position=4, id="center", kind="grouped")
+    XML::addAttributes(annotation$root, speech="Histogram bars",
+                       speech2=paste("Histogram with", length(mids), "bars"),
+                       type="Center")
+    annotation
 }
 
 
@@ -174,6 +177,13 @@
 }
 
 
+## Add parent to an annotations
+.AddXMLaddParents = function(parent, nodes) {
+    clone <- function(x) .AddXMLclone(x$parents, parent$element)
+    lapply(nodes, clone)
+}
+
+
 ## Store components for top level Element
 .AddXMLcomponents = list()
 
@@ -187,5 +197,6 @@
     print(.AddXMLcomponents)
     .AddXMLaddComponents(annotation, .AddXMLcomponents)
     .AddXMLaddChildren(annotation, children)
+    .AddXMLaddParents(annotation, children)
     annotation
 }
