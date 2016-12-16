@@ -42,12 +42,8 @@ AddXML.ggplot = function(x, file) {
     XML::saveXML(doc=doc, file=file)
 }
 
-AddXML.histogram = function(x, file) {
-    doc = .AddXMLdocument("histogram")
-    root = XML::xmlRoot(doc)
-    annotations = .AddXMLaddNode(root, "annotations")
-    .AddXMLaddXAxis(annotations, label=x$xlab)
-    .AddXMLaddYAxis(annotations, label=x$ylab)
+AddXML.histogram = function(diag, file) {
+    doc = .AddXMLhistogram(diag)
     XML::saveXML(doc=doc, file=file)
 }
 
