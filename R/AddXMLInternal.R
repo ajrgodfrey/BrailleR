@@ -201,7 +201,7 @@
 # not allowed.
 
 .AddXMLStoreComponent = function(CompSet, id, element) {
-    CompSet[[id]]" = , element
+    CompSet[[id]] = element
     return(invisible(CompSet))
 }
 
