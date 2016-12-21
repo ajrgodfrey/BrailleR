@@ -45,7 +45,11 @@ AddXML.ggplot = function(x, file) {
 AddXML.histogram = function(x, file) {
 
 # first line might be unnecessary
-    .AddXMLcomponents <- list() # was <<- which is frowned on
+#    .AddXMLcomponents <<- list()
+ # was <<- which is frowned on
+#jg assign(".AddXMLcomponents",list(), envir=BrailleR)
+ComponentSet = list()
+
 
     doc = .AddXMLDocument("histogram")
     root = XML::xmlRoot(doc)
@@ -64,8 +68,8 @@ AddXML.histogram = function(x, file) {
     values = 
     .AddXMLAddChart(annotations, type="Histogram",
                     speech=paste("Histogram of", x$xlab),
-                    speech2=paste("Histogram of", x$xlab, "with values from", xValues[1],  "to",
-                                  xValues[length(xValues)], "and", x$ylab, "from", yValues[1],  "to",
+                    speech2=paste("Histogram of", x$xlab, "with values from", min(x$breaks),  "to",
+                                  max(x$breaks), "and", x$ylab, "from 0 to",
                                   yValues[length(yValues)]),
                     children=list(title, xAxis, yAxis, center))
 

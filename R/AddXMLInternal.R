@@ -142,7 +142,7 @@
                 children = .AddXMLAddNode(annotation, "children"),
                 component = .AddXMLAddNode(annotation, "component"),
                 neighbours = .AddXMLAddNode(annotation, "neighbours"))
-    .AddXMLstoreComponent(id, node)
+#jg    .AddXMLstoreComponent(id, node)
     return(invisible(node))
 }
 
@@ -188,7 +188,7 @@
 }
 
 
-## Add parent to an annotations
+## Add parent to annotations
 .AddXMLAddParents = function(parent, nodes) {
     clone <- function(x) .AddXMLclone(x$parents, parent$element)
     lapply(nodes, clone)
@@ -196,16 +196,25 @@
 
 
 ## Store components for top level Element
-.AddXMLcomponents = list()
+# moved into the XML.histogram()
+#  assign(".AddXMLcomponents",list(), envir=BrailleR)
+# not allowed.
 
-.AddXMLstoreComponent = function(id, element) {
-    .AddXMLcomponents[[id]] <<- element
+.AddXMLStoreComponent = function(CompSet, id, element) {
+    CompSet[[id]]" = , element
+    return(invisible(CompSet))
 }
+
+
+
+#jg .AddXMLstoreComponent = function(id, element) {
+#jg     assign(".AddXMLcomponents[[id]]", element, envir = BrailleR)
+#jg }
 
 .AddXMLAddChart = function(root, children=NULL, speech="", speech2="", type="") {
     annotation = .AddXMLAddAnnotation(root, id="chart", kind="grouped")
     XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type=type)
-    .AddXMLAddComponents(annotation, .AddXMLcomponents)
+#jg     .AddXMLAddComponents(annotation, get(.AddXMLcomponents, envir=BrailleR))
     .AddXMLAddChildren(annotation, children)
     .AddXMLAddParents(annotation, children)
     return(invisible(annotation))
