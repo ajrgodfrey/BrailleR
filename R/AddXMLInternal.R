@@ -1,3 +1,5 @@
+### This file is for internal functions that may be re-used by a variety of graph types.
+
 ## Annotating different types of diagrams.
 ##
 ## Histogram annotation.
@@ -9,7 +11,7 @@
 .AddXMLAddTitle = function(root, title="") {
     annotation = .AddXMLAddAnnotation(root, position=1, .AddXMLmakeId("main", "1.1"), kind="active")
     XML::addAttributes(annotation$root, speech=paste("Title", title), type="Title")
-    annotation
+    return(invisible(annotation))
 }
 
 ## Annotating axes
@@ -32,7 +34,7 @@
     .AddXMLAddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
 }
 
-## Parameterisation for x-axis
+## Parameterisation for y-axis
 .AddXMLAddYAxis = function(root, values=NULL, label="", groupPosition=3) {
     .AddXMLAddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left")
 }
@@ -47,7 +49,7 @@
     XML::addAttributes(annotation$root, speech=paste(name, label),
                        speech2=paste(name, label, "with values from", values[1], "to", values[length(values)]),
                        type="Axis")
-    annotation
+    return(invisible(annotation))
 }
 
 
@@ -58,7 +60,7 @@
     annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "1.1"), kind="active")
     XML::addAttributes(annotation$root, speech=paste("Label", label), type="Label")
-    annotation
+    return(invisible(annotation))
 }
 
 ## Axis line
@@ -77,18 +79,16 @@
         value = .AddXMLAddAnnotation(root, position=position + i - 1,
                                      id=valueId, kind="active")
         XML::addAttributes(value$root, speech=paste("Value", values[i]), type="Value")
-        
+       
         tickId = .AddXMLmakeId(id, "axis", "ticks", paste("1.1", i, sep="."))
         tick = .AddXMLAddAnnotation(root, id=tickId, kind="passive")
         XML::addAttributes(tick$root, type="Tick")
-
         .AddXMLAddNode(value$component, "passive", tickId)
         .AddXMLAddNode(tick$component, "active", valueId)
-
         annotations[[2 * i - 1]] = value
         annotations[[2 * i]] = tick
     }
-    annotations
+    return(invisible(annotations))
 }
 
 ## Constructs the center of the histogram 
@@ -106,7 +106,7 @@
     .AddXMLAddComponents(annotation, annotations)
     .AddXMLAddChildren(annotation, annotations)
     .AddXMLAddParents(annotation, annotations)
-    annotation
+    return(invisible(annotation))
 }
 
 
@@ -119,7 +119,7 @@
                        speech2=paste("Bar", position, "between x values", start,
                                      "and", end, " with y value", count, "and density", density),
                        type="Bar")
-    annotation
+    return(invisible(annotation))
 }
 
 
@@ -143,7 +143,7 @@
                 component = .AddXMLAddNode(annotation, "component"),
                 neighbours = .AddXMLAddNode(annotation, "neighbours"))
     .AddXMLstoreComponent(id, node)
-    node
+    return(invisible(node))
 }
 
 ## Construct the basic XML annotation document.
@@ -151,7 +151,7 @@
     doc = XML::newXMLDoc()
     top = XML::newXMLNode(tag, doc = doc)
     XML::ensureNamespace(top, c(sre = "http://www.chemaccess.org/sre-schema"))
-    doc
+    return(invisible(doc))
 }
 
 ## Add a new node with tag name and optionally text content to the given root.
@@ -160,7 +160,7 @@
     if (content != "") {
         XML::newXMLTextNode(content, parent=node)
     }
-    node
+    return(invisible(node))
 }
 
 # A shallow clone function for leaf nodes only. Avoids problems with duplicating
@@ -168,7 +168,7 @@
 .AddXMLclone = function(root, node) {
     newNode = XML::newXMLNode(XML::xmlName(node, full=TRUE), parent = root)
     XML::newXMLTextNode(XML::xmlValue(node), parent=newNode)
-    newNode
+    return(invisible(newNode))
 }
 
 ## Add components to an annotation
@@ -208,5 +208,5 @@
     .AddXMLAddComponents(annotation, .AddXMLcomponents)
     .AddXMLAddChildren(annotation, children)
     .AddXMLAddParents(annotation, children)
-    annotation
+    return(invisible(annotation))
 }
