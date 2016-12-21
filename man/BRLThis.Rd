@@ -18,10 +18,6 @@ The first argument to this function must be a call to create a graph, such as a 
 \details{
 The user's chosen braille font must be installed. This might include the default font shipped as part of the package.
 }
-\examples{
-with(airquality,
-BRLThis(hist(Ozone), "Ozone-hist.pdf"))
-}
 \author{
 A. Jonathan R. Godfrey. with contributions from JooYoung Seo and TK Lee.
 }

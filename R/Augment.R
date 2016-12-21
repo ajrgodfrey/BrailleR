@@ -46,6 +46,9 @@ return(invisible(x))
 
 
 Augment.histogram = function(x) {
+    x$main <- if (is.null(x$main)) {paste("Histogram of", x$xname)} else {x$main}
+    x$xlab <- if (is.null(x$xlab)) {x$xname} else {x$xlab}
+    x$ylab <- if (is.null(x$ylab)) {"Frequency"} else {x$ylab}
 x=.AugmentBase(x)
 return(invisible(x))
 }

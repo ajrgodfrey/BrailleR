@@ -1,38 +1,13 @@
 ## Annotating different types of diagrams.
 ##
 ## Histogram annotation.
-.AddXMLhistogram = function(diag) {
-    .AddXMLcomponents <<- list()
-    doc = .AddXMLdocument("histogram")
-    root = XML::xmlRoot(doc)
-    annotations = .AddXMLaddNode(root, "annotations")
-
-    main <- if (is.null(diag$main)) {paste("Histogram of", diag$xname)} else {diag$main}
-    xvalues <- diag$xTicks
-    yvalues <- diag$yTicks
-    title = .AddXMLaddTitle(annotations, title=main)
-    
-    xlab <- if (is.null(diag$xlab)) {diag$xname} else {diag$xlab}
-    ylab <- if (is.null(diag$ylab)) {"Frequency"} else {diag$ylab}
-    xaxis = .AddXMLaddXAxis(annotations, label=xlab, values=xvalues)
-    yaxis = .AddXMLaddYAxis(annotations, label=ylab, values=yvalues)
-    
-    ## That's probably the part that is diagram dependent.
-    center = .AddXMLaddHistogramCenter(
-        annotations, mids=diag$mids, counts=diag$counts, density=diag$density, breaks=diag$breaks)
-    values = 
-    .AddXMLaddChart(annotations, type="Histogram",
-                    speech=paste("Histogram of", xlab),
-                    speech2=paste("Histogram of", xlab, "with values from", xvalues[1],  "to",
-                                  xvalues[length(xvalues)], "and", ylab, "from", yvalues[1],  "to",
-                                  yvalues[length(xvalues)]),
-                    children=list(title, xaxis, yaxis, center))
-    doc
-}
+# removed .AddXMLhistogram = function(diag) {
+#        doc
+#}
 
 ## Annotating title elements
-.AddXMLaddTitle = function(root, title="") {
-    annotation = .AddXMLaddAnnotation(root, position=1, .AddXMLmakeId("main", "1.1"), kind="active")
+.AddXMLAddTitle = function(root, title="") {
+    annotation = .AddXMLAddAnnotation(root, position=1, .AddXMLmakeId("main", "1.1"), kind="active")
     XML::addAttributes(annotation$root, speech=paste("Title", title), type="Title")
     annotation
 }
@@ -40,35 +15,35 @@
 ## Annotating axes
 ##
 ## Generic axis annotation function.
-.AddXMLaddAxis = function(root, values, label, groupPosition, name, groupId, labelId, lineId) {
+.AddXMLAddAxis = function(root, values, label, groupPosition, name, groupId, labelId, lineId) {
     position = 0
-    labelNode = .AddXMLaxisLabel(root, label=label, position=position <- position + 1,
+    labelNode = .AddXMLAxisLabel(root, label=label, position=position <- position + 1,
                      id=labelId, axis=groupId)
-    lineNode = .AddXMLaxisLine(root, id=lineId, axis=groupId)
-    tickNodes = .AddXMLaxisValues(root, values=values,
+    lineNode = .AddXMLAxisLine(root, id=lineId, axis=groupId)
+    tickNodes = .AddXMLAxisValues(root, values=values,
                               position=position <- position + 1, id=lineId, axis=groupId)
     annotations = c(list(labelNode, lineNode), tickNodes)
-    .AddXMLaxisGroup(root, groupId, name, values=values, label=label,
+    .AddXMLAxisGroup(root, groupId, name, values=values, label=label,
                      annotations=annotations, position=groupPosition)
 }
 
 ## Parameterisation for x-axis
-.AddXMLaddXAxis = function(root, values=NULL, label="", groupPosition=2) {
-    .AddXMLaddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
+.AddXMLAddXAxis = function(root, values=NULL, label="", groupPosition=2) {
+    .AddXMLAddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
 }
 
 ## Parameterisation for x-axis
-.AddXMLaddYAxis = function(root, values=NULL, label="", groupPosition=3) {
-    .AddXMLaddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left")
+.AddXMLAddYAxis = function(root, values=NULL, label="", groupPosition=3) {
+    .AddXMLAddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left")
 }
 
 
 ## Aux method for axis group
-.AddXMLaxisGroup = function(root, id, name, values=NULL, label="", annotations=NULL, position=1) {
-    annotation = .AddXMLaddAnnotation(root, position=position, id=id, kind="grouped")
-    .AddXMLaddComponents(annotation, annotations)
-    .AddXMLaddChildren(annotation, annotations)
-    .AddXMLaddParents(annotation, annotations)
+.AddXMLAxisGroup = function(root, id, name, values=NULL, label="", annotations=NULL, position=1) {
+    annotation = .AddXMLAddAnnotation(root, position=position, id=id, kind="grouped")
+    .AddXMLAddComponents(annotation, annotations)
+    .AddXMLAddChildren(annotation, annotations)
+    .AddXMLAddParents(annotation, annotations)
     XML::addAttributes(annotation$root, speech=paste(name, label),
                        speech2=paste(name, label, "with values from", values[1], "to", values[length(values)]),
                        type="Axis")
@@ -79,36 +54,36 @@
 ## Aux methods for axes annotation.
 ##
 ## Axis labelling
-.AddXMLaxisLabel = function(root, label="", position=1, id="", axis="") {
-    annotation = .AddXMLaddAnnotation(root, position=position,
+.AddXMLAxisLabel = function(root, label="", position=1, id="", axis="") {
+    annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "1.1"), kind="active")
     XML::addAttributes(annotation$root, speech=paste("Label", label), type="Label")
     annotation
 }
 
 ## Axis line
-.AddXMLaxisLine = function(root, position=1, id="", axis="") {
-    annotation = .AddXMLaddAnnotation(root, position=position,
+.AddXMLAxisLine = function(root, position=1, id="", axis="") {
+    annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=.AddXMLmakeId(id, "axis", "line", "1.1"), kind="passive")
     XML::addAttributes(annotation$root, type="Line")
     annotation
 }
 
 ## Axis values and ticks
-.AddXMLaxisValues = function(root, values=NULL, position=1, id="", axis="") {
+.AddXMLAxisValues = function(root, values=NULL, position=1, id="", axis="") {
     annotations <- list()
     for (i in 1:length(values)) {
         valueId = .AddXMLmakeId(id, "axis", "labels", paste("1.1", i, sep="."))
-        value = .AddXMLaddAnnotation(root, position=position + i - 1,
+        value = .AddXMLAddAnnotation(root, position=position + i - 1,
                                      id=valueId, kind="active")
         XML::addAttributes(value$root, speech=paste("Value", values[i]), type="Value")
         
         tickId = .AddXMLmakeId(id, "axis", "ticks", paste("1.1", i, sep="."))
-        tick = .AddXMLaddAnnotation(root, id=tickId, kind="passive")
+        tick = .AddXMLAddAnnotation(root, id=tickId, kind="passive")
         XML::addAttributes(tick$root, type="Tick")
 
-        .AddXMLaddNode(value$component, "passive", tickId)
-        .AddXMLaddNode(tick$component, "active", valueId)
+        .AddXMLAddNode(value$component, "passive", tickId)
+        .AddXMLAddNode(tick$component, "active", valueId)
 
         annotations[[2 * i - 1]] = value
         annotations[[2 * i]] = tick
@@ -117,8 +92,8 @@
 }
 
 ## Constructs the center of the histogram 
-.AddXMLaddHistogramCenter = function(root, mids=NULL, counts=NULL, density=NULL, breaks=NULL) {
-    annotation = .AddXMLaddAnnotation(root, position=4, id="center", kind="grouped")
+.AddXMLAddHistogramCenter = function(root, mids=NULL, counts=NULL, density=NULL, breaks=NULL) {
+    annotation = .AddXMLAddAnnotation(root, position=4, id="center", kind="grouped")
     XML::addAttributes(annotation$root, speech="Histogram bars",
                        speech2=paste("Histogram with", length(mids), "bars"),
                        type="Center")
@@ -128,15 +103,15 @@
                                             count=counts[i], density=density[i],
                                             start=breaks[i], end=breaks[i + 1])
     }
-    .AddXMLaddComponents(annotation, annotations)
-    .AddXMLaddChildren(annotation, annotations)
-    .AddXMLaddParents(annotation, annotations)
+    .AddXMLAddComponents(annotation, annotations)
+    .AddXMLAddChildren(annotation, annotations)
+    .AddXMLAddParents(annotation, annotations)
     annotation
 }
 
 
 .AddXMLcenterBar = function(root, position=1, mid=NULL, count=NULL, density=NULL, start=NULL, end=NULL) {
-    annotation = .AddXMLaddAnnotation(root, position=position,
+    annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=.AddXMLmakeId("rect", paste("1.1", position, sep=".")),
                                       kind="active")
     XML::addAttributes(annotation$root,
@@ -156,23 +131,23 @@
 }
 
 ## Construct an SRE annotation element.
-.AddXMLaddAnnotation = function(root, position=1, id="", kind="active") {
-    annotation = .AddXMLaddNode(root, "annotation")
-    element = .AddXMLaddNode(annotation, kind, id)
+.AddXMLAddAnnotation = function(root, position=1, id="", kind="active") {
+    annotation = .AddXMLAddNode(root, "annotation")
+    element = .AddXMLAddNode(annotation, kind, id)
     ## This should be changed!
     node = list(root = annotation,
                 element = element,
-                position = .AddXMLaddNode(annotation, "position", content=position),
-                parents = .AddXMLaddNode(annotation, "parents"),
-                children = .AddXMLaddNode(annotation, "children"),
-                component = .AddXMLaddNode(annotation, "component"),
-                neighbours = .AddXMLaddNode(annotation, "neighbours"))
+                position = .AddXMLAddNode(annotation, "position", content=position),
+                parents = .AddXMLAddNode(annotation, "parents"),
+                children = .AddXMLAddNode(annotation, "children"),
+                component = .AddXMLAddNode(annotation, "component"),
+                neighbours = .AddXMLAddNode(annotation, "neighbours"))
     .AddXMLstoreComponent(id, node)
     node
 }
 
 ## Construct the basic XML annotation document.
-.AddXMLdocument = function(tag = "histogram") {
+.AddXMLDocument = function(tag = "histogram") {
     doc = XML::newXMLDoc()
     top = XML::newXMLNode(tag, doc = doc)
     XML::ensureNamespace(top, c(sre = "http://www.chemaccess.org/sre-schema"))
@@ -180,7 +155,7 @@
 }
 
 ## Add a new node with tag name and optionally text content to the given root.
-.AddXMLaddNode = function(root, tag, content="") {
+.AddXMLAddNode = function(root, tag, content="") {
     node = XML::newXMLNode(paste("sre:", tag, sep=""), parent = root)
     if (content != "") {
         XML::newXMLTextNode(content, parent=node)
@@ -197,7 +172,7 @@
 }
 
 ## Add components to an annotation
-.AddXMLaddComponents = function(annotation, nodes) {
+.AddXMLAddComponents = function(annotation, nodes) {
     clone <- function(x) if (XML::xmlName(x$element) != "grouped") {
                              .AddXMLclone(annotation$component, x$element)   
                          }
@@ -205,7 +180,7 @@
 }
 
 ## Add children to an annotation
-.AddXMLaddChildren = function(annotation, nodes) {
+.AddXMLAddChildren = function(annotation, nodes) {
     clone <- function(x) if (XML::xmlName(x$element) != "passive") {
                              .AddXMLclone(annotation$children, x$element)   
                          }
@@ -214,7 +189,7 @@
 
 
 ## Add parent to an annotations
-.AddXMLaddParents = function(parent, nodes) {
+.AddXMLAddParents = function(parent, nodes) {
     clone <- function(x) .AddXMLclone(x$parents, parent$element)
     lapply(nodes, clone)
 }
@@ -227,11 +202,11 @@
     .AddXMLcomponents[[id]] <<- element
 }
 
-.AddXMLaddChart = function(root, children=NULL, speech="", speech2="", type="") {
-    annotation = .AddXMLaddAnnotation(root, id="chart", kind="grouped")
+.AddXMLAddChart = function(root, children=NULL, speech="", speech2="", type="") {
+    annotation = .AddXMLAddAnnotation(root, id="chart", kind="grouped")
     XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type=type)
-    .AddXMLaddComponents(annotation, .AddXMLcomponents)
-    .AddXMLaddChildren(annotation, children)
-    .AddXMLaddParents(annotation, children)
+    .AddXMLAddComponents(annotation, .AddXMLcomponents)
+    .AddXMLAddChildren(annotation, children)
+    .AddXMLAddParents(annotation, children)
     annotation
 }

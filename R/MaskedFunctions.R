@@ -25,6 +25,7 @@ hist = function(x, ...) {
          MC[[1L]] <- quote(graphics::hist)
          Out <- eval(MC, parent.frame())
          if (length(MC$main) > 0) Out$main = as.character(MC$main)
+         if (length(MC$sub) > 0) Out$sub = as.character(MC$sub)
          if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab)
          if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
          Out=Augment(Out)
