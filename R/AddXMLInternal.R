@@ -72,7 +72,7 @@
 }
 
 ## Axis values and ticks
-.AddXMLAxisValues = function(root, values=NULL, position=1, id="", axis="") {
+.AddXMLAxisValues = function(root, values=NULL, detailedValues=values, position=1, id="", axis="") {
     annotations <- list()
     for (i in 1:length(values)) {
         valueId = .AddXMLmakeId(id, "axis", "labels", paste("1.1", i, sep="."))
@@ -117,7 +117,7 @@
     XML::addAttributes(annotation$root,
                        speech=paste("Bar", position, "at", mid, "with value", count),
                        speech2=paste("Bar", position, "between x values", start,
-                                     "and", end, " with y value", count, "and density", density),
+                                     "and", end, " with y value", count, "and density", round(density,3)),
                        type="Bar")
     return(invisible(annotation))
 }
