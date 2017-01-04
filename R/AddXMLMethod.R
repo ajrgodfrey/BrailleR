@@ -66,7 +66,7 @@ AboveY[i] = length(x$counts[x$counts > x$yTicks[i] ])
 }
     yValues <- x$yTicks
     DetYValues <- paste(x$yTicks, ":", AboveY, "of the", x$NBars, "bars exceed this point")
-    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues)
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues, speechShort="hoping and praying", speechLong="testing 1 2 3")
 
     ## That's probably the part that is diagram dependent.
     center = .AddXMLAddHistogramCenter(

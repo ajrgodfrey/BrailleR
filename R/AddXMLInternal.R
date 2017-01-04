@@ -17,7 +17,7 @@
 ## Annotating axes
 ##
 ## Generic axis annotation function.
-.AddXMLAddAxis = function(root, values, detailedValues, leafValues=values, detailedLeafValues=detailedValues, label, groupPosition, name, groupId, labelId, lineId) {
+.AddXMLAddAxis = function(root, values, detailedValues, leafValues=values, detailedLeafValues=detailedValues, label, groupPosition, name, groupId, labelId, lineId, ...) {
     position = 0
     labelNode = .AddXMLAxisLabel(root, label=label, position=position <- position + 1,
                      id=labelId, axis=groupId)
@@ -30,24 +30,24 @@
 }
 
 ## Parameterisation for x-axis
-.AddXMLAddXAxis = function(root, values=NULL, detailedValues=values, leafValues=values, detailedLeafValues=detailedValues, label="", groupPosition=2) {
-    .AddXMLAddAxis(root, values, detailedValues, leafValues, detailedLeafValues, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
+.AddXMLAddXAxis = function(root, values=NULL, detailedValues=values, leafValues=values, detailedLeafValues=detailedValues, label="", groupPosition=2, ...) {
+    .AddXMLAddAxis(root, values, detailedValues, leafValues, detailedLeafValues, label, groupPosition, "x axis", "xaxis", "xlab", "bottom", ...)
 }
 
 ## Parameterisation for y-axis
-.AddXMLAddYAxis = function(root, values=NULL, detailedValues=values, leafValues=values, detailedLeafValues=detailedValues, label="", groupPosition=3) {
-    .AddXMLAddAxis(root, values, detailedValues, leafValues, detailedLeafValues, label, groupPosition, "y axis", "yaxis", "ylab", "left")
+.AddXMLAddYAxis = function(root, values=NULL, detailedValues=values, leafValues=values, detailedLeafValues=detailedValues, label="", groupPosition=3, ...) {
+    .AddXMLAddAxis(root, values, detailedValues, leafValues, detailedLeafValues, label, groupPosition, "y axis", "yaxis", "ylab", "left", ...)
 }
 
 
 ## Aux method for axis group
-.AddXMLAxisGroup = function(root, id, name, values=NULL, label="", annotations=NULL, position=1) {
+.AddXMLAxisGroup = function(root, id, name, values=NULL, label="", annotations=NULL, position=1, speechShort=paste(name, label), speechLong=paste(name, label, "with values from", values[1], "to", values[length(values)]), ...) {
     annotation = .AddXMLAddAnnotation(root, position=position, id=id, kind="grouped")
     .AddXMLAddComponents(annotation, annotations)
     .AddXMLAddChildren(annotation, annotations)
     .AddXMLAddParents(annotation, annotations)
-    XML::addAttributes(annotation$root, speech=paste(name, label),
-                       speech2=paste(name, label, "with values from", values[1], "to", values[length(values)]),
+    XML::addAttributes(annotation$root, speech=speechShort,
+                       speech2=speechLong,
                        type="Axis")
     return(invisible(annotation))
 }
