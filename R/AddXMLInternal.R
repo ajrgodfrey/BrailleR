@@ -17,7 +17,7 @@
 ## Annotating axes
 ##
 ## Generic axis annotation function.
-.AddXMLAddAxis = function(root, values, label, groupPosition, name, groupId, labelId, lineId) {
+.AddXMLAddAxis = function(root, values, detailedValues, leafValues=values, detailedLeafValues=detailedValues, label, groupPosition, name, groupId, labelId, lineId) {
     position = 0
     labelNode = .AddXMLAxisLabel(root, label=label, position=position <- position + 1,
                      id=labelId, axis=groupId)
@@ -30,13 +30,13 @@
 }
 
 ## Parameterisation for x-axis
-.AddXMLAddXAxis = function(root, values=NULL, label="", groupPosition=2) {
-    .AddXMLAddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
+.AddXMLAddXAxis = function(root, values=NULL, detailedValues=values, leafValues=values, detailedLeafValues=detailedValues, label="", groupPosition=2) {
+    .AddXMLAddAxis(root, values, detailedValues, leafValues, detailedLeafValues, label, groupPosition, "x axis", "xaxis", "xlab", "bottom")
 }
 
 ## Parameterisation for y-axis
-.AddXMLAddYAxis = function(root, values=NULL, label="", groupPosition=3) {
-    .AddXMLAddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left")
+.AddXMLAddYAxis = function(root, values=NULL, detailedValues=values, leafValues=values, detailedLeafValues=detailedValues, label="", groupPosition=3) {
+    .AddXMLAddAxis(root, values, detailedValues, leafValues, detailedLeafValues, label, groupPosition, "y axis", "yaxis", "ylab", "left")
 }
 
 

@@ -64,8 +64,9 @@ AddXML.histogram = function(x, file) {
 for(i in 1:length(x$yTicks)){
 AboveY[i] = length(x$counts[x$counts > x$yTicks[i] ])
 }
-    yValues <- paste(x$yTicks, ":", AboveY, "of the", x$NBars, "bars exceed this point")
-    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues)
+    yValues <- x$yTicks
+    DetYValues <- paste(x$yTicks, ":", AboveY, "of the", x$NBars, "bars exceed this point")
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues)
 
     ## That's probably the part that is diagram dependent.
     center = .AddXMLAddHistogramCenter(
