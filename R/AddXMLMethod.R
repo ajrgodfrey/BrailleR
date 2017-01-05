@@ -58,19 +58,20 @@ AddXML.histogram = function(x, file) {
     title = .AddXMLAddTitle(annotations, title=x$main)
 
     xValues <- x$xTicks
-    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=xValues)
+    XMax = max(x$breaks, x$xTicks)
+    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=xValues, speechLong=paste("x axis", x$xlab, "ranges from 0 to", XMax))
 
     AboveY = x$yTicks
-for(i in 1:length(x$yTicks)){
-AboveY[i] = length(x$counts[x$counts > x$yTicks[i] ])
-}
+    for(i in 1:length(x$yTicks)){
+        AboveY[i] = length(x$counts[x$counts > x$yTicks[i] ])
+    }
     yValues <- x$yTicks
     DetYValues <- paste(x$yTicks, ":", AboveY, "of the", x$NBars, "bars exceed this point")
-    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues, speechShort="hoping and praying", speechLong="testing 1 2 3")
+    YMax = max(x$counts, x$yTicks)
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues, speechLong=paste("y axis", x$ylab, "ranges from 0 to", YMax))
 
     ## That's probably the part that is diagram dependent.
-    center = .AddXMLAddHistogramCenter(
-        annotations, mids=x$mids, counts=x$counts, density=x$density, breaks=x$breaks)
+    center = .AddXMLAddHistogramCenter(annotations,hist=x)
     values = 
     .AddXMLAddChart(annotations, type="Histogram",
                     speech=paste("Histogram of", x$xlab),

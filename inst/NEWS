@@ -4,6 +4,7 @@
 - added MakeAccessibleSVG() and AddXML() as well as a bunch of internal functions to do the hard work.
 - added Augment() method to take the functionality out of VI() that adds the content that feeds into the text descriptions because it will get used in other processes from here on.
 - changes from VS merged via GitHub
+- version number updated once Jonathan's example of an accessible histogram was finished.
 
 
 # v0.25.4
