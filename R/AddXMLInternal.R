@@ -8,9 +8,9 @@
 #}
 
 ## Annotating title elements
-.AddXMLAddTitle = function(root, title="", longTitle = title) {
+.AddXMLAddTitle = function(root, title="", longTitle = paste("Title:", title)) {
     annotation = .AddXMLAddAnnotation(root, position=1, .AddXMLmakeId("main", "1.1"), kind="active")
-    XML::addAttributes(annotation$root, speech=paste("Title", title), speech2=longTitle, type="Title")
+    XML::addAttributes(annotation$root, speech=paste("Title:", title), speech2=longTitle, type="Title")
     return(invisible(annotation))
 }
 
@@ -31,12 +31,12 @@
 
 ## Parameterisation for x-axis
 .AddXMLAddXAxis = function(root, values=NULL, label="", groupPosition=2, ...) {
-    .AddXMLAddAxis(root, values, label, groupPosition, "x axis", "xaxis", "xlab", "bottom", ...)
+    .AddXMLAddAxis(root, values, label, groupPosition, "x axis:", "xaxis", "xlab", "bottom", ...)
 }
 
 ## Parameterisation for y-axis
 .AddXMLAddYAxis = function(root, values=NULL, label="", groupPosition=3, ...) {
-    .AddXMLAddAxis(root, values, label, groupPosition, "y axis", "yaxis", "ylab", "left", ...)
+    .AddXMLAddAxis(root, values, label, groupPosition, "y axis:", "yaxis", "ylab", "left", ...)
 }
 
 

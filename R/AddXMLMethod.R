@@ -55,6 +55,7 @@ AddXML.histogram = function(x, file) {
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
 
+# still need to allow for main and sub titles
     title = .AddXMLAddTitle(annotations, title=x$main)
 
     xValues <- x$xTicks
@@ -66,21 +67,20 @@ AddXML.histogram = function(x, file) {
         AboveY[i] = length(x$counts[x$counts > x$yTicks[i] ])
     }
     yValues <- x$yTicks
-    DetYValues <- paste(x$yTicks, ":", AboveY, "of the", x$NBars, "bars exceed this point")
+    DetYValues <- paste(AboveY, "of the", x$NBars, "bars exceed the", x$ylab, x$yTicks)
     YMax = max(x$counts, x$yTicks)
     yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues, speechLong=paste("y axis", x$ylab, "ranges from 0 to", YMax))
 
     ## That's probably the part that is diagram dependent.
     center = .AddXMLAddHistogramCenter(annotations,hist=x)
-    values = 
+
+#    values = 
     .AddXMLAddChart(annotations, type="Histogram",
                     speech=paste("Histogram of", x$xlab),
-                    speech2=paste("Histogram of", x$xlab, "with values from", min(x$breaks),  "to",
-                                  max(x$breaks), "and", x$ylab, "from 0 to",
-                                  x$yTicks[length(x$yTicks)]),
+                    speech2=paste("Histogram showing ", x$NBars, "bars for ", x$xlab, "over the range", min(x$breaks),  "to",
+                            max(x$breaks), "and", x$ylab, "from 0 to", max(x$counts)), # must allow for density
                     children=list(title, xAxis, yAxis, center))
 
-#    doc = .AddXMLhistogram(x)
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
 }
