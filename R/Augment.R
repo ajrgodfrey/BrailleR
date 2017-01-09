@@ -4,7 +4,7 @@ Augment = function(x) {
 
 Augment.default =
     function(x) {
-    message("Nothing done.")
+    message("Nothing done to augment this graph object.")
     return(invisible(x))
 }
 
@@ -47,10 +47,15 @@ return(invisible(x))
 
 Augment.histogram = function(x) {
     x$main <- if (is.null(x$main)) {paste("Histogram of", x$xname)} else {x$main}
-    x$sub <- if (is.null(x$sub)) {""} else {x$sub}
     x$xlab <- if (is.null(x$xlab)) {x$xname} else {x$xlab}
     x$ylab <- if (is.null(x$ylab)) {"Frequency"} else {x$ylab}
     x$NBars = length(x$counts)
+    x=.AugmentBase(x)
+return(invisible(x))
+}
+
+Augment.tsplot = function(x) {
+    x$xlab <- if (is.null(x$xlab)) {"Time"} else {x$xlab}
     x=.AugmentBase(x)
 return(invisible(x))
 }
@@ -60,6 +65,10 @@ return(invisible(x))
       x$yaxp = par()$yaxp
       x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
       x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
+    x$main <- if (is.null(x$main)) {""} else {x$main}
+    x$sub <- if (is.null(x$sub)) {""} else {x$sub}
+    x$xlab <- if (is.null(x$xlab)) {""} else {x$xlab}
+    x$ylab <- if (is.null(x$ylab)) {""} else {x$ylab}
       class(x)=c("Augmented", class(x))
       return(invisible(x))
       }

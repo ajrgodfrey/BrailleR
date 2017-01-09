@@ -5,6 +5,7 @@
 \alias{SVGThis.dotplot}
 \alias{SVGThis.eulerr}
 \alias{SVGThis.histogram}
+\alias{SVGThis.tsplot}
 \alias{MakeTigerReady}
 \alias{addInfo}
 

@@ -6,6 +6,7 @@
 \alias{AddXML.eulerr}
 \alias{AddXML.ggplot}
 \alias{AddXML.histogram}
+\alias{AddXML.tsplot}
 
 \title{Create XML files to sit alongside SVG files in order to make an accessible graph experience.}
 \description{Creates the necessary XML file for a graph object (as long as it has a class assigned) or the current graph window.}

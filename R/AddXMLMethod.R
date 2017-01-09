@@ -85,3 +85,33 @@ AddXML.histogram = function(x, file) {
     return(invisible(NULL))
 }
 
+AddXML.tsplot= function(x, file) {
+    doc = .AddXMLDocument("timeseriesplot")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLAddNode(root, "annotations")
+
+# still need to allow for main and sub titles
+    title = .AddXMLAddTitle(annotations, title=x$main)
+
+    xValues <- x$xTicks
+    XMin = min(x$xTicks)
+    XMax = max(x$xTicks)
+    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=xValues, speechLong=paste("x axis", x$xlab, "ranges from", XMin, "to", XMax))
+
+   yValues <- x$yTicks
+    YMin = min(x$yTicks)
+    YMax = max(x$yTicks)
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
+
+    ## now to add the other content related bits
+
+    .AddXMLAddChart(annotations, type="Histogram",
+                    speech=paste("Time series plot of", x$ylab),
+                    speech2=paste("Time series plot showing ", x$ylab, "over the time", XMin,  "to",
+                            XMax, "and", x$ylab, "from 0 to", max(x$counts)), 
+                    children=list(title, xAxis, yAxis)) # until center defined..., center))
+
+    XML::saveXML(doc=doc, file=file)
+    return(invisible(NULL))
+}
+

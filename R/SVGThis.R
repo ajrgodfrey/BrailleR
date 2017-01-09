@@ -139,3 +139,13 @@ SVGThis.histogram =
       addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
               desc = "need something much smarter in here")
 }
+
+SVGThis.tsplot = function(x, file = "test.svg") {
+      x  # ensure we create a plot on a new graphics device
+      gridGraphics::grid.echo()  # plot() uses graphics package
+      gridSVG::grid.export(name = file)
+      dev.off()  # remove our graph window
+      MakeTigerReady(svgfile = file)
+      message("SVG file created.\n")
+      return(invisible(NULL))
+}

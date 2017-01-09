@@ -6,6 +6,7 @@
 \alias{Augment.dotplot}
 \alias{Augment.ggplot}
 \alias{Augment.histogram}
+\alias{Augment.tsplot}
 \alias{.Augment}
 \alias{.AugmentGrid}
 
