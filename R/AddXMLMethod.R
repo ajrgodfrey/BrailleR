@@ -43,14 +43,6 @@ AddXML.ggplot = function(x, file) {
 }
 
 AddXML.histogram = function(x, file) {
-
-# first line might be unnecessary
-#    .AddXMLcomponents <<- list()
- # was <<- which is frowned on
-#jg assign(".AddXMLcomponents",list(), envir=BrailleR)
-# ComponentSet = list()
-
-
     doc = .AddXMLDocument("histogram")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
@@ -71,14 +63,12 @@ AddXML.histogram = function(x, file) {
     YMax = max(x$counts, x$yTicks)
     yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, detailedValues=DetYValues, speechLong=paste("y axis", x$ylab, "ranges from 0 to", YMax))
 
-    ## That's probably the part that is diagram dependent.
     center = .AddXMLAddHistogramCenter(annotations,hist=x)
 
-#    values = 
     .AddXMLAddChart(annotations, type="Histogram",
                     speech=paste("Histogram of", x$xlab),
-                    speech2=paste("Histogram showing ", x$NBars, "bars for ", x$xlab, "over the range", min(x$breaks),  "to",
-                            max(x$breaks), "and", x$ylab, "from 0 to", max(x$counts)), # must allow for density
+                    speech2=paste("Histogram showing ", x$NBars, "bars for ", x$xlab, "over the range", min(x$breaks),  
+                            "to",max(x$breaks), "and", x$ylab, "from 0 to", max(x$counts)), # must allow for density
                     children=list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
@@ -105,10 +95,10 @@ AddXML.tsplot= function(x, file) {
 
     ## now to add the other content related bits
 
-    .AddXMLAddChart(annotations, type="Histogram",
+    .AddXMLAddChart(annotations, type="TimeSeriesPlot",
                     speech=paste("Time series plot of", x$ylab),
-                    speech2=paste("Time series plot showing ", x$ylab, "over the time", XMin,  "to",
-                            XMax, "and", x$ylab, "from 0 to", max(x$counts)), 
+                    speech2=paste("Time series plot showing ", x$ylab, "over the range", YMin,  "to", YMax,  "for", x$ylab,
+                        "which ranges from", XMin,  "to", XMax), 
                     children=list(title, xAxis, yAxis)) # until center defined..., center))
 
     XML::saveXML(doc=doc, file=file)
