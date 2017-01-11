@@ -3,7 +3,12 @@
 TimeSeriesPlot = function(x, ...){
     Out = list(x=as.ts(x))
     MC <- match.call(expand.dots = TRUE)
-    Out$graph = eval(plot(Out$x, ...), parent.frame())
+MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$x), MC$ylab)
+         MC[[1L]] <- quote(graphics::plot)
+         MC$x <- Out$x
+
+             Out$graph <- eval(MC, envir=parent.frame())
+
 Out$par = par()
     class(Out) = "tsplot"
     if (length(MC$main) > 0) Out$main = as.character(MC$main) else {Out$main = ""}
