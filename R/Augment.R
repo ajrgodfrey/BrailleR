@@ -57,6 +57,20 @@ return(invisible(x))
 Augment.tsplot = function(x) {
     x$xlab <- if (is.null(x$xlab)) {"Time"} else {x$xlab}
     x=.AugmentBase(x)
+TheSeries = x[[1]]
+NBreaks= 10 #specified as something from 6 to 10 depending on how many obs there are.
+VLength = length(TheSeries)
+Breaks = round(seq(0, VLength, length.out= NBreaks+1),0)
+BinEnds =Breaks[-1]
+BinStarts = Breaks[-(NBreaks+1)] + 1 # not overlapping
+POI = list(Mean=0, SD=0, N=0) # and whatever else we like
+for(i in 1:NBreaks){
+POI$Mean[i] = mean(TheSeries[BinStarts[i]:BinEnds[i]], na.rm=T)
+POI$SD[i] = sd(TheSeries[BinStarts[i]:BinEnds[i]], na.rm=T)
+POI$N[i] = sum(!is.na(TheSeries[BinStarts[i]:BinEnds[i]]))
+}
+
+x$GroupSummaries = POI
 return(invisible(x))
 }
 
