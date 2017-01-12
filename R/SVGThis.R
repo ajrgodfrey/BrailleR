@@ -86,14 +86,17 @@ SVGThis.dotplot =
 
 SVGThis.eulerr = 
     function(x, file = "test.svg") {
+      x=Augment(x)
       X = stats::coef(x)[, 1L]
       Y = stats::coef(x)[, 2L]
       R = stats::coef(x)[, 3L]
       Labels = rownames(x$coefficients)
+      TextX = x$TextPositions$x
+      TextY = x$TextPositions$y
 
       pushViewport(dataViewport(c(X-R, X+R), c(Y-R, Y+R))) 
       grid.circle(X, Y, R, default.units="native", name="VennCircles") 
-      grid.text(Labels, X, Y, default.units="native",           name="VennLabels")
+      grid.text(Labels, TextX, TextY, default.units="native",           name="VennLabels")
 
       gridSVG::grid.export(name = file)
       dev.off()
@@ -104,8 +107,8 @@ SVGThis.eulerr =
 
 SVGThis.ggplot =
     function(x, file = "test.svg") {
+      x=Augment(x)
       x
-
       gridSVG::grid.export(name = file)
       dev.off()
       MakeTigerReady(svgfile = file)
