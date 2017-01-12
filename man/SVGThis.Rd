@@ -4,6 +4,7 @@
 \alias{SVGThis.boxplot}
 \alias{SVGThis.dotplot}
 \alias{SVGThis.eulerr}
+\alias{SVGThis.ggplot}
 \alias{SVGThis.histogram}
 \alias{SVGThis.tsplot}
 \alias{MakeTigerReady}
