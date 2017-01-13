@@ -2,10 +2,11 @@
 \alias{VI.ggplot}
 \title{VI for graphs created using ggplot2}
 \usage{
-\method{VI}{ggplot}(x)
+\method{VI}{ggplot}(x, ...)
 }
 \arguments{
 \item{x}{an object created by ggplot() or qplot() from the ggplot2 package which therefore has class gg or ggplot.}
+\item{...}{other arguments, currently ignored}
 }
 \value{
 A text description is printed out as a side effect. The function returns NULL invisibly.

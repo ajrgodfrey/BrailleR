@@ -1,5 +1,5 @@
 VI.ggplot =
-    function(x) {
+    function(x, ...) {
       txt =
           paste0(
               'The chart titled ', BrailleR::InQuotes(x$labels$title), ';\n',

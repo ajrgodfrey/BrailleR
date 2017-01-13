@@ -1,10 +1,10 @@
 
-VI = function(x) {
+VI = function(x, ...) {
        UseMethod("VI")
      }
 
 VI.default =
-    function(x) {
+    function(x, ...) {
       message("There is no specific method written for  this type of object.\n")
       message("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
       print(x)
@@ -13,7 +13,7 @@ VI.default =
 
 
 VI.boxplot =
-    function(x) {
+    function(x, ...) {
 x=Augment(x)
       cat(paste0(
               'This graph has ', x$Boxplots, ' printed ', x$VertHorz,
@@ -69,7 +69,7 @@ VI.data.frame =
     }
 
 VI.dotplot =
-    function(x) {
+    function(x, ...) {
       MinVal = min(unlist(x$vals))
       MaxVal = max(unlist(x$vals))
       Bins = getOption("BrailleR.DotplotBins")
@@ -104,7 +104,7 @@ VI.dotplot =
 
 
 VI.histogram =
-    function(x) {
+    function(x, ...) {
       cat(paste0('This is a histogram, with the title: ',
           ifelse(length(x$main) > 0, x$main, paste("Histogram of", x$xname)),
           '\n', ifelse(length(x$xlab) > 0, InQuotes(x$xlab), InQuotes(x$xname)),
@@ -132,14 +132,14 @@ VI.histogram =
 
 
 VI.list =
-    function(x) {
+    function(x, ...) {
       cat("No VI method has yet been written for this type of object so it has been printed for you in its entirety.\n")
       print(x)
     }
 
 
 VI.lm =
-    function(x) {
+    function(x, ...) {
       ModelName <- match.call(expand.dots = FALSE)$x
       FolderName = paste0(ModelName, ".Validity")
       RmdName = paste0(FolderName, ".Rmd")
