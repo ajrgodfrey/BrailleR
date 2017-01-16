@@ -2,6 +2,8 @@
 - working on accessible Venn diagrams and time series plots
 - working on accessibility for scatter plots
 - fixed VI() method to handle additional arguments, although they are currently ignored.
+- created function to choose long and short text for a boxplot; previously embedded in VI.boxplot()
+
 
 # v0.25.5
 - Added experimental work on making accessible graphs for mounting on the web
