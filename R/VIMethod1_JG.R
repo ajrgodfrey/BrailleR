@@ -24,9 +24,9 @@ x=Augment(x)
               ifelse(length(x$ylab) > 0, paste0('"', x$ylab, '"'), 'No label'),
               ' appears on the y-axis.\n'))
       if (x$horizontal) {
-        cat("Tick marks for the x-axis are at:", GetAxisTicks(x$xaxp), "\n")
+        cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$xaxp), "\n")
       } else {
-        cat("Tick marks for the y-axis are at:", GetAxisTicks(x$yaxp), "\n")
+        cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$yaxp), "\n")
       }
       for (i in 1:x$NBox) {
         cat(x$VarGroupUpp, x$names[i], 'has', x$n[i], 'values.\n')
@@ -88,9 +88,9 @@ VI.dotplot =
                           'No label'), ' appears on the y-axis.\n'))
       }
       if (x$vertical) {
-        cat("Tick marks for the y-axis are at:", GetAxisTicks(x$yaxp), "\n")
+        cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$yaxp), "\n")
       } else {
-        cat("Tick marks for the x-axis are at:", GetAxisTicks(x$xaxp), "\n")
+        cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$xaxp), "\n")
       }
       cat(paste("the data that range from", MinVal, "to", MaxVal,
                 "has been broken into", Bins, "bins.\nThe counts are:\n"))
@@ -109,10 +109,10 @@ VI.histogram =
           ifelse(length(x$main) > 0, x$main, paste("Histogram of", x$xname)),
           '\n', ifelse(length(x$xlab) > 0, InQuotes(x$xlab), InQuotes(x$xname)),
           ' is marked on the x-axis.\n'))
-      cat("Tick marks for the x-axis are at:", GetAxisTicks(x$xaxp), "\n")
+      cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$xaxp), "\n")
       cat('There are a total of', sum(x$counts),
           'elements for this variable.\n')
-      cat("Tick marks for the y-axis are at:", GetAxisTicks(x$yaxp), "\n")
+      cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$yaxp), "\n")
       NoBins = length(x$breaks) - 1
       if (x$equidist) {
         cat('It has', NoBins, 'bins with equal widths, starting at',

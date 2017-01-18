@@ -25,5 +25,23 @@ Text1 = Text2 = Text3 = Text4 = Text5 = Text6 = ""
             'whisker.\n')
 
  LongText = paste(Text1, Text2, Text3, Text4) 
-return(invisible(c(ShortText,LongText)))
+return(invisible(list(Short=ShortText, Long=LongText)))
 }
+
+.GetAxisTicks =
+    function(x) {
+      A = x[1]
+      B = x[2]
+      Ticks = x[3]
+      paste(paste0(seq(A, B - Ticks, (B - A) / Ticks), ",", collapse = " "),
+            "and", B, collapse = " ")
+    }
+
+
+.ScatterPlotText = function(x, MedianX=x$GroupSummaries$MedianX, MedianY=x$GroupSummaries$MedianY, MeanX=x$GroupSummaries$MeanX, MeanY=x$GroupSummaries$MeanY, MinX=x$GroupSummaries$MinX, MinY=x$GroupSummaries$MinY, MaxX=x$GroupSummaries$MaxX, MaxY=x$GroupSummaries$MaxY, SDX=x$GroupSummaries$SDX, SDY=x$GroupSummaries$SDY, CorXY=x$GroupSummaries$CorXY, N=x$GroupSummaries$N){
+
+ShortText = paste("Around X=", MedianX, "there are", N, "y values with median =", MedianY, "over the range", MinY, "to", MaxY)
+LongText = paste("X=", MedianX, "has y values with median =", MedianY, "over the range", MinY, "to", MaxY, "; the values have a correlation of", CorXY)
+return(invisible(list(Short=ShortText, Long=LongText)))
+}
+

@@ -75,7 +75,7 @@ NBreaks= 6 #specified as something from 6 to 10 depending on how many obs there 
       Breaks = round(seq(0, VLength, length.out= NBreaks+1),0)
       BinEnds =Breaks[-1]
       BinStarts = Breaks[-(NBreaks+1)] + 1 # not overlapping
-      POI = list(MeanX=0, MedianX=0, MinX=0, MaxX=0, SDX=0, MeanY=0, MedianY=0, MinY=0, MaxY=0, SDY=0, N=0) # and whatever else we like
+      POI = list(MeanX=0, MedianX=0, MinX=0, MaxX=0, SDX=0, MeanY=0, MedianY=0, MinY=0, MaxY=0, SDY=0, CorXY=0, N=0) # and whatever else we like
       for(i in 1:NBreaks){
         POI$MeanX[i] = mean(x$data[BinStarts[i]:BinEnds[i], "x"])
         POI$MeanY[i] = mean(x$data[BinStarts[i]:BinEnds[i], "y"])
@@ -88,6 +88,7 @@ NBreaks= 6 #specified as something from 6 to 10 depending on how many obs there 
         POI$SDX[i] = sd(x$data[BinStarts[i]:BinEnds[i], "x"])
         POI$SDY[i] = sd(x$data[BinStarts[i]:BinEnds[i], "y"])
         POI$N[i] = nrow(x$data[BinStarts[i]:BinEnds[i], ])
+        POI$CorXY[i] = cor(x$data[BinStarts[i]:BinEnds[i], "x"], x$data[BinStarts[i]:BinEnds[i], "y"])
       }
       x$GroupSummaries = POI
       return(invisible(x))

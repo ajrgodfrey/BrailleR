@@ -11,8 +11,15 @@ AddXML.boxplot = function(x, file) {
     doc = .AddXMLDocument("boxplot")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
+if(x$horizontal){
     .AddXMLAddXAxis(annotations, label=x$xlab)
+}
+else {
     .AddXMLAddYAxis(annotations, label=x$ylab)
+}
+# in here we put the added text for each boxplot which is the short/long text returned by looping over each boxplot and passing hte fivenum and outliers to
+# .BoxplotText(fivenum, outliers, horizontal=x$horizontal)
+
     XML::saveXML(doc=doc, file=file)
 }
 
