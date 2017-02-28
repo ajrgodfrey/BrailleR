@@ -117,7 +117,7 @@
     XML::addAttributes(annotation$root,
                        speech=paste("Bar", position, "at", mid, "with value", count),
                        speech2=paste("Bar", position, "between x values", start,
-                                     "and", end, " with y value", count, "and density", round(density,3)),
+                                     "and", end, " with y value", count, "and density", signif(density,3)),
                        type="Bar")
     return(invisible(annotation))
 }
