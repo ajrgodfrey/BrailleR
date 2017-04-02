@@ -11,6 +11,7 @@
 \alias{VI.lm}
 \alias{VI.matrix}
 \alias{VI.summary.lm}
+\alias{VI.tsplot}
 \alias{VI.TukeyHSD}
 \title{
 Methods to help vision impaired users

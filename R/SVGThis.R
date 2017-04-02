@@ -157,7 +157,7 @@ SVGThis.histogram =
 }
 
 SVGThis.tsplot = function(x, file = "test.svg") {
-      x  # ensure we create a plot on a new graphics device
+      suppressWarnings(do.call(plot, x))  # ensure we create a plot on a new graphics device
       gridGraphics::grid.echo()  # plot() uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window

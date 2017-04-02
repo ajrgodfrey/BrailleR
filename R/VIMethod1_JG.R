@@ -230,3 +230,7 @@ VI.matrix = function(x, ...) {
               VI(as.data.frame.matrix(x), ...)
             }
 
+VI.tsplot =
+    function(x, ...) {
+      x
+    }

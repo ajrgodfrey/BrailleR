@@ -2,6 +2,7 @@
 \alias{MakeAccessibleSVG}
 \alias{MakeAccessibleSVG.default}
 \alias{MakeAccessibleSVG.histogram}
+\alias{MakeAccessibleSVG.tsplot}
 
 \title{Create matched pairs of SVG and XML files to make an accessible graph experience.}
 \description{Creates the necessary SVG and XML files for a graph object (as long as it has a class assigned) or the current graph window.}

@@ -18,3 +18,11 @@ MakeAccessibleSVG.histogram =
       message("SVG and XML files created successfully")
       return(invisible(NULL))
 }
+
+MakeAccessibleSVG.tsplot =
+    function(x, file = "test") {
+      svgfile = SVGThis(x, paste0(file, ".svg"))
+      xmlfile = AddXML(x, paste0(file, ".xml"))
+      message("SVG and XML files created successfully")
+      return(invisible(NULL))
+}

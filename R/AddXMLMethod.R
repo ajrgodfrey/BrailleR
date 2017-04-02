@@ -82,7 +82,7 @@ AddXML.histogram = function(x, file) {
     return(invisible(NULL))
 }
 
-AddXML.tsplot= function(x, file) {
+AddXML.tsplot = function(x, file) {
     doc = .AddXMLDocument("timeseriesplot")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
