@@ -19,3 +19,7 @@ Out$par = par()
     return(invisible(Out))
 }
 
+plot.tsplot = function(x, ...){
+suppressWarnings(do.call(plot, x))
+return(invisible(NULL))
+}
