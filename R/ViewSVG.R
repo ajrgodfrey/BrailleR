@@ -1,13 +1,14 @@
-# note that the only directory tis is currently implemented for is the current working directory.
+# note that the only directory this is currently implemented for is the current working directory.
 
 ViewSVG = function(dir="."){
-
-.AddIndexHead()
-.AddSVGLinks()
-.AddIndexTail()
+.AddIndexHead(file="index.md", dir=dir)
+.AddSVGLinks(file="index.md", dir=dir)
+.AddIndexTail(file="index.md", dir=dir)
 rmarkdown::render("index.md")
-.CopyVSFiles()
-browseURL("index.html") 
+.CopyVSFiles(dir=dir)
+if(interactive()){
+    browseURL("index.html") 
+    }
 return(invisible(NULL))
 }
 
@@ -50,6 +51,7 @@ return(invisible(NULL))
 }
 
 .CopyVSFiles =function(dir="."){
+file.copy(paste0(system.file(package = "BrailleR"), "/Web/", c("cacc.js", "generic.html")), dir)
 return(invisible(NULL))
 }
 
