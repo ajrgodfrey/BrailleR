@@ -31,8 +31,7 @@ Description: Blind users do not have access to the graphical output from R
 Repository: CRAN
 License: GPL-2
 Depends:
-    R (>= 3.2.0),
-    knitr
+    R (>= 3.2.0)
 Imports:
     devtools,
     extrafont,
@@ -41,6 +40,7 @@ Imports:
     gridGraphics,
     gridSVG,
     hunspell,
+    knitr,
     magrittr,
     moments,
     nortest,

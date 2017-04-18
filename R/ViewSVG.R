@@ -51,7 +51,9 @@ return(invisible(NULL))
 }
 
 .CopyVSFiles =function(dir="."){
-file.copy(paste0(system.file(package = "BrailleR"), "/Web/", c("cacc.js", "generic.html")), dir)
+if(!file.exists(file.path(dir, "generic.html"))){
+    file.copy(file.path(system.file(package = "BrailleR"), "Web", c("cacc.js", "generic.html")), dir)
+    }
 return(invisible(NULL))
 }
 
