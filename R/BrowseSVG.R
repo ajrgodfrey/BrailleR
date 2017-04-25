@@ -1,8 +1,5 @@
 
-BrowseSVG = function(file="test", dir=".", key=TRUE) {
-  if (!interactive()) {
-    return(invisible(NULL))    
-  }
+BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
   xmlString <- .CleanXml(file=file, dir=dir)
   svgFile <- paste0(file, ".svg")
   svgString <- readChar(svgFile, file.info(svgFile)$size)
@@ -13,7 +10,9 @@ BrowseSVG = function(file="test", dir=".", key=TRUE) {
     .AddKey(file=htmlFile, dir=dir)
   }
   .AddFooter(file=htmlFile, dir=dir)
-  browseURL(htmlFile) 
+  if (view) {
+    browseURL(htmlFile) 
+  }
   return(invisible(NULL))
 }
 
