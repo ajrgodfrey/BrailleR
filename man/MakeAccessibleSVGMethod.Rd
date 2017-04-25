@@ -12,6 +12,7 @@ MakeAccessibleSVG(x, file = "test")
 \arguments{
   \item{x}{a graph object for which a method exists, or the current graphics device if set to NULL.}
   \item{file}{The shared name for the SVG and XML files to be created.}
+  \item{view}{launch in browser; this is the default when in interactive session}
 }
 \details{
 This is experimental work. At present, the proof of concept is based ona fairly standard histogram from the \pkg{graphics} package.
