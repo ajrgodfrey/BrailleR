@@ -2,7 +2,7 @@
 \alias{ViewSVG}
 
 \title{Create the necessary files to allow interactive viewing of SVG}
-\description{Copy files from the pacakge folders to the current working directory and write a markdown file that contains the links to all accessible SVG files in the current directory.}
+\description{Copy files from the package folders to the current working directory and write a markdown file that contains the links to all accessible SVG files in the current directory.}
 \usage{
 ViewSVG(dir=".")
 }
