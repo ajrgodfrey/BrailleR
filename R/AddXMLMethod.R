@@ -17,10 +17,11 @@ if(x$horizontal){
 else {
     .AddXMLAddYAxis(annotations, label=x$ylab)
 }
-# in here we put the added text for each boxplot which is the short/long text returned by looping over each boxplot and passing hte fivenum and outliers to
+# in here we put the added text for each boxplot which is the short/long text returned by looping over each boxplot and passing the fivenum and outliers to
 # .BoxplotText(fivenum, outliers, horizontal=x$horizontal)
 
     XML::saveXML(doc=doc, file=file)
+    return(invisible(NULL))
 }
 
 AddXML.dotplot = function(x, file) {
@@ -30,6 +31,7 @@ AddXML.dotplot = function(x, file) {
     .AddXMLAddXAxis(annotations, label=x$xlab)
     .AddXMLAddYAxis(annotations, label=x$ylab)
     XML::saveXML(doc=doc, file=file)
+    return(invisible(NULL))
 }
 
 
@@ -38,6 +40,7 @@ AddXML.eulerr = function(x, file) {
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
     XML::saveXML(doc=doc, file=file)
+    return(invisible(NULL))
 }
 
 AddXML.ggplot = function(x, file) {
@@ -46,7 +49,9 @@ AddXML.ggplot = function(x, file) {
     annotations = .AddXMLAddNode(root, "annotations")
     .AddXMLAddXAxis(annotations, label=x$xlab)
     .AddXMLAddYAxis(annotations, label=x$ylab)
+
     XML::saveXML(doc=doc, file=file)
+    return(invisible(NULL))
 }
 
 AddXML.histogram = function(x, file) {

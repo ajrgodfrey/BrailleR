@@ -18,6 +18,5 @@ CleanCSV =
           else {
         warning("This function is meant for use in interactive mode only.\n")
       }
-
       return(invisible(NULL))
     }

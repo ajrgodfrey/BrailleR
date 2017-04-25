@@ -8,7 +8,9 @@ Text1 = Text2 = Text3 = Text4 = Text5 = Text6 = ""
 
         if (Outs>0) {
           Text1 = paste(ifelse(Outs==1, "An outlier is", "Outliers are"), 'marked at:', outliers)
-}
+        } else{
+          Text1 = "no outliers"
+        }
         Text2 = paste('The whiskers extend to', fivenum[1], 'and', fivenum[5],
             'from the ends of the box, \nwhich are at', fivenum[2], 'and',
             fivenum[4], '\n')
@@ -24,7 +26,7 @@ Text1 = Text2 = Text3 = Text4 = Text5 = Text6 = ""
             'times the length of the', ifelse(horizontal, 'left', 'lower'),
             'whisker.\n')
 
- LongText = paste(Text1, Text2, Text3, Text4) 
+ LongText = c(Text1, Text2, Text3, Text4) 
 return(invisible(list(Short=ShortText, Long=LongText)))
 }
 
