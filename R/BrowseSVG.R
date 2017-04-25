@@ -1,4 +1,3 @@
-# note that the only directory this is currently implemented for is the current working directory.
 
 BrowseSVG = function(file="test", dir=".", key=TRUE) {
   if (!interactive()) {
@@ -9,7 +8,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE) {
   svgString <- readChar(svgFile, file.info(svgFile)$size)
   htmlFile <- paste0(file, ".html")
   .AddHeader(file=htmlFile, dir=dir)
-  .WriteContainer(svgString, xmlString, file=htmlFile, dir=dir)
+  .AddContainer(svgString, xmlString, file=htmlFile, dir=dir)
   if (key) {
     .AddKey(file=htmlFile, dir=dir)
   }
@@ -27,14 +26,14 @@ BrowseSVG = function(file="test", dir=".", key=TRUE) {
 }
 
 
-.WriteContainer = function(svg, xml, file="test.html", dir=".") {
+.AddContainer = function(svg, xml, file="test.html", dir=".") {
   cat('
     <div class="container">
       <div class="content">
         <div class="ChemAccess-element" id="mole1" tabindex="0" role="application">',
     file=file, append=TRUE)
-  .WriteSVG(svg, file=file, dir=dir)
-  .WriteXML(xml, file=file, dir=dir)
+  .AddSVG(svg, file=file, dir=dir)
+  .AddXML(xml, file=file, dir=dir)
   cat('
         </div>
       </div>
@@ -43,19 +42,17 @@ BrowseSVG = function(file="test", dir=".", key=TRUE) {
 }
 
 
-.WriteSVG = function(svg, file="test.html", dir=".") {
+.AddSVG = function(svg, file="test.html", dir=".") {
   cat('          <div class="svg">\n', file=file, append=TRUE)
   cat(svg, file=file, append=TRUE)
-  ## writeLines(svg, con=file)
   cat('          </div>\n', file=file, append=TRUE)
 }
 
 
 ##vs Adapt class in both cacc and here.
-.WriteXML = function(xml, file="test.html", dir=".") {
+.AddXML = function(xml, file="test.html", dir=".") {
   cat('          <div class="cml">\n', file=file, append=TRUE)
   cat(xml, file=file, append=TRUE)
-  ## writeLines(xml, con=file)
   cat('          </div>\n', file=file, append=TRUE)
 }
 
