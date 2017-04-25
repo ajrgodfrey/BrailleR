@@ -13,6 +13,9 @@ BrowseSVG(file="test", dir=".")
     basename of an existing SVG and its XML annotations}
   \item{dir}{the in which HTML file is written and where R tries to
     locate the SVG and XML files}
+  \item{key}{include key for explorer's keyboard commands in webpage}
+  \item{view}{launch in browser; this is the default when in interactive
+  session}
 }
 \details{
   An HTML file is written in the given directory and the Javascript library
