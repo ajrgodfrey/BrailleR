@@ -211,6 +211,7 @@
 #jg     assign(".AddXMLcomponents[[id]]", element, envir = BrailleR)
 #jg }
 
+#vs We need to get the components into the topmost element.
 .AddXMLAddChart = function(root, children=NULL, speech="", speech2="", type="") {
     annotation = .AddXMLAddAnnotation(root, id="chart", kind="grouped")
     XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type=type)
@@ -219,3 +220,53 @@
     .AddXMLAddParents(annotation, children)
     return(invisible(annotation))
 }
+
+
+## Constructs the center of the timeseries
+.AddXMLAddTimeseriesCenter = function(root, ts=NULL) {
+  annotation = .AddXMLAddAnnotation(root, position=4, id="center", kind="grouped")
+  gs = ts$GroupSummaries
+  len = length(gs$N)
+  if (ts$Continuous) {
+    print("Need to rewrite SVG")
+    XML::addAttributes(
+           annotation$root, speech="Timeseries graph",
+           speech2=paste("Continuous timeseries graph divided into",
+                         len, "sub intervals of equal length"),
+           type="Center")
+  } else {
+    XML::addAttributes(
+           annotation$root, speech="Timeseries graph",
+           speech2=paste("Timeseries graph with", len, "discrete segments"),
+           type="Center")
+  }
+  annotations <- list()
+  for (i in 1:len) {
+    annotations[[i]] = .AddXMLtimeseriesSegment(
+      root, position=i, mean=gs$Mean[i], median=gs$Median[i], sd=gs$SD[i], n=gs$N[i])
+  }
+  annotations[[i + 1]] = .AddXMLAddAnnotation(
+    root, position=0, id=.AddXMLmakeId("box", "1.1.1"), kind="passive")
+  .AddXMLAddComponents(annotation, annotations)
+  .AddXMLAddChildren(annotation, annotations)
+  .AddXMLAddParents(annotation, annotations)
+  return(invisible(annotation))
+}
+
+
+.AddXMLtimeseriesSegment =
+  function(root, position=1, mean=NULL, median=NULL, sd=NULL, n=NULL) {
+    annotation = .AddXMLAddAnnotation(
+      root, position=position,
+      id=.AddXMLmakeId("lines", paste("1.1.1", intToUtf8(utf8ToInt('a') + (position - 1)) , sep="")),
+      kind="active")
+    speech2 = paste("Segment", position, "with", n, "data points, mean", signif(mean, 3),
+                    "and median", signif(median, 3))
+    if (!is.na(sd)) {
+      speech2 = paste(speech2, "and standard deviation", signif(sd, 3))
+    }
+    XML::addAttributes(annotation$root,
+                       speech=paste("Segment", position, "with mean", signif(mean, 3)),
+                       speech2=speech2, type="Segment")
+    return(invisible(annotation))
+  }
