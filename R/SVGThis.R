@@ -17,7 +17,7 @@ addInfo <- function(name, title, desc) {
 # next is partly from Paul via maps example, with additions from Jonathan
 MakeTigerReady =
     function(svgfile) {  # for alterations needed on all SVG files
-        if (file.exists(svgfile)) {
+      if (file.exists(svgfile)) {
         cat("\n", file = svgfile, append = TRUE)  # otherwise warnings returned
                                                   # on readLines() below
         temp <- readLines(con = svgfile)

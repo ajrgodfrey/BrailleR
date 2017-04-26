@@ -103,11 +103,9 @@ Augment.tsplot =
     if (is.na(match(NA, series))) {
       x$GroupSummaries <- .TsSplitEqual(series, breaks=10)
       x$Continuous <- TRUE
-      print("EQUAL")
     } else {
       x$GroupSummaries <- .TsSplitDiscont(series)
       x$Continuous <- FALSE
-      print("NOT EQUAL!")
     }
     return(invisible(x))
   }
