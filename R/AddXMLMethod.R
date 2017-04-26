@@ -106,12 +106,15 @@ AddXML.tsplot = function(x, file) {
     yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
 
     ## now to add the other content related bits
+    print(x)
+    
+    center = .AddXMLAddTimeseriesCenter(annotations,ts=x)
 
     .AddXMLAddChart(annotations, type="TimeSeriesPlot",
                     speech=paste("Time series plot of", x$ylab),
                     speech2=paste("Time series plot showing ", x$ylab, "over the range", YMin,  "to", YMax,  "for", x$ylab,
                         "which ranges from", XMin,  "to", XMax), 
-                    children=list(title, xAxis, yAxis)) # until center defined..., center))
+                    children=list(title, xAxis, yAxis, center)) # until center defined..., center))
 
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))

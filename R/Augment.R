@@ -94,26 +94,60 @@ NBreaks= 6 #specified as something from 6 to 10 depending on how many obs there 
       return(invisible(x))
     }
 
+
 Augment.tsplot = 
-    function(x) {
-      x$xlab <- if (is.null(x$xlab)) {"Time"} else {x$xlab}
-      x=.AugmentBase(x)
-      TheSeries = x[[1]]
-NBreaks= 10 #specified as something from 6 to 10 depending on how many obs there are.
-      VLength = length(TheSeries)
-      Breaks = round(seq(0, VLength, length.out= NBreaks+1),0)
-      BinEnds =Breaks[-1]
-      BinStarts = Breaks[-(NBreaks+1)] + 1 # not overlapping
-      POI = list(Mean=0, Median= 0, SD=0, N=0) # and whatever else we like
-      for(i in 1:NBreaks){
-        POI$Mean[i] = mean(TheSeries[BinStarts[i]:BinEnds[i]], na.rm=T)
-        POI$Median[i] = median(TheSeries[BinStarts[i]:BinEnds[i]], na.rm=T)
-        POI$SD[i] = sd(TheSeries[BinStarts[i]:BinEnds[i]], na.rm=T)
-        POI$N[i] = sum(!is.na(TheSeries[BinStarts[i]:BinEnds[i]]))
-      }
-      x$GroupSummaries = POI
-      return(invisible(x))
+  function(x) {
+    x$xlab <- if (is.null(x$xlab)) {"Time"} else {x$xlab}
+    x=.AugmentBase(x)
+    series =x [[1]]
+    if (is.na(match(NA, series))) {
+      x$GroupSummaries <- .TsSplitEqual(series, breaks=10)
+      x$Continuous <- TRUE
+    } else {
+      x$GroupSummaries <- .TsSplitDiscont(series)
+      x$Continuous <- FALSE
     }
+    return(invisible(x))
+  }
+
+.TsSplitDiscont = function(series) {
+  POI = list(Mean=vector(), Median=vector(), SD=vector(), N=vector())
+  current <- vector()
+  for(i in 1:length(series)) {
+    if (!is.na(series[i])) {
+      current <- append(current, series[i])
+      next
+    }
+    if (length(current) > 0) {
+      POI <- .TsSumSegment(POI, current)
+      current <- vector()
+    }
+  }
+  if (length(current) > 0) {
+    POI <- .TsSumSegment(POI, current)
+  }
+}
+
+.TsSumSegment = function(poi, segment, position=length(poi$N)+1) {
+  poi$Mean[position] = mean(segment, na.rm=T)
+  poi$Median[position] = median(segment, na.rm=T)
+  poi$SD[position] = sd(segment, na.rm=T)
+  poi$N[position] = sum(!is.na(segment))
+  return(invisible(poi))
+}
+
+.TsSplitEqual = function(series, breaks=10) {
+  NBreaks= 10 #specified as something from 6 to 10 depending on how many obs there are.
+  VLength = length(series)
+  Breaks = round(seq(0, VLength, length.out= NBreaks+1),0)
+  BinEnds =Breaks[-1]
+  BinStarts = Breaks[-(NBreaks+1)] + 1 # not overlapping
+  POI = list(Mean=0, Median= 0, SD=0, N=0) # and whatever else we like
+  for(i in 1:NBreaks){
+    POI <- .TsSumSegment(POI, series[BinStarts[i]:BinEnds[i]], i)
+  }
+  return(invisible(POI))
+}
 
 
 .AugmentBase = function(x){
