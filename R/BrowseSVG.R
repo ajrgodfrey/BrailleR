@@ -2,14 +2,14 @@
 BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
   xmlString <- .CleanXml(file=file, dir=dir)
   svgFile <- paste0(file, ".svg")
-  svgString <- readChar(svgFile, file.info(svgFile)$size)
+  svgString <- readLines(svgFile)  # was readChar(svgFile, file.info(svgFile)$size)
   htmlFile <- paste0(file, ".html")
-  .AddHeader(file=htmlFile, dir=dir)
-  .AddContainer(svgString, xmlString, file=htmlFile, dir=dir)
+  .AddHeader2HTML(file=htmlFile, dir=dir)
+  .AddContainer2HTML(svgString, xmlString, file=htmlFile, dir=dir)
   if (key) {
-    .AddKey(file=htmlFile, dir=dir)
+    .AddKey2HTML(file=htmlFile, dir=dir)
   }
-  .AddFooter(file=htmlFile, dir=dir)
+  .AddFooter2HTML(file=htmlFile, dir=dir)
   if (view) {
     browseURL(htmlFile) 
   }
@@ -19,20 +19,20 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 
 .CleanXml = function(file="test", dir=".") {
   fileName <- paste0(file, ".xml")
-  xmlString <- readChar(fileName, file.info(fileName)$size)
+  xmlString <- readLines(fileName) # was readChar(fileName, file.info(fileName)$size)
   xmlString <- gsub("sre:", "", xmlString)
   gsub(" *<[a-zA-Z]+/>\n", "", xmlString)
 }
 
 
-.AddContainer = function(svg, xml, file="test.html", dir=".") {
+.AddContainer2HTML = function(svg, xml, file="test.html", dir=".") {
   cat('
     <div class="container">
       <div class="content">
         <div class="ChemAccess-element" id="mole1" tabindex="0" role="application">',
     file=file, append=TRUE)
-  .AddSVG(svg, file=file, dir=dir)
-  .AddXML(xml, file=file, dir=dir)
+  .AddSVG2HTML(svg, file=file, dir=dir)
+  .AddXML2HTML(xml, file=file, dir=dir)
   cat('
         </div>
       </div>
@@ -41,7 +41,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 }
 
 
-.AddSVG = function(svg, file="test.html", dir=".") {
+.AddSVG2HTML = function(svg, file="test.html", dir=".") {
   cat('          <div class="svg">\n', file=file, append=TRUE)
   cat(svg, file=file, append=TRUE)
   cat('          </div>\n', file=file, append=TRUE)
@@ -49,7 +49,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 
 
 ##vs Adapt class in both cacc and here.
-.AddXML = function(xml, file="test.html", dir=".") {
+.AddXML2HTML = function(xml, file="test.html", dir=".") {
   cat('          <div class="cml">\n', file=file, append=TRUE)
   cat(xml, file=file, append=TRUE)
   cat('          </div>\n', file=file, append=TRUE)
@@ -57,7 +57,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 
 
 ##vs Currently minimalistic!
-.AddHeader = function(file="test.html", dir=".") {
+.AddHeader2HTML = function(file="test.html", dir=".") {
   cat('<html>
   <head><title>Accessible Statistics</title></head>
     <meta charset="utf-8" />
@@ -75,7 +75,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 }
 
 
-.AddKey = function(file="test.html", dir=".") {
+.AddKey2HTML = function(file="test.html", dir=".") {
   cat('        <p>Tab to or mouseclick on the diagram and use the following keys for
         interactive exploration:</p>
         <table>
@@ -101,7 +101,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 }
 
 
-.AddFooter = function(file="test.html", dir=".") {
+.AddFooter2HTML = function(file="test.html", dir=".") {
   cat('        <div class="footer">
         <p style="text-align: center; font-size: 10px;">&copy; Progressive Accessibility Solutions 2017</p>
       </div>
