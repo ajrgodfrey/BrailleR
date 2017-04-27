@@ -24,7 +24,7 @@ Augment(x)
 Ought to be treated as an internal function and not used interactively.
 }
 \value{The input object is returned with additions to the object. This does not break the S3 class.}
-\author{A. Jonathan R. Godfrey}
+\author{A. Jonathan R. Godfrey and Volker Sorge}
 \examples{
 x=rnorm(1000)
 MyHist=Augment(hist(x))
