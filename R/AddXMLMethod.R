@@ -106,8 +106,6 @@ AddXML.tsplot = function(x, file) {
     yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
 
     ## now to add the other content related bits
-    print(x)
-    
     center = .AddXMLAddTimeseriesCenter(annotations,ts=x)
 
     .AddXMLAddChart(annotations, type="TimeSeriesPlot",

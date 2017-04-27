@@ -228,7 +228,6 @@
   gs = ts$GroupSummaries
   len = length(gs$N)
   if (ts$Continuous) {
-    print("Need to rewrite SVG")
     XML::addAttributes(
            annotation$root, speech="Timeseries graph",
            speech2=paste("Continuous timeseries graph divided into",
