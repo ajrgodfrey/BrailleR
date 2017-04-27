@@ -1,5 +1,5 @@
 
-The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
+## The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
 
 
 ### Blind people's use of R
@@ -13,9 +13,31 @@ R is perhaps the most blind-friendly statistical software option because all scr
 
 1. Make accessing output simpler.
 2. Gain access to the content depicted in a graph.
-3. Help get inot R markdown easier.
+3. Help get into R markdown easier.
 5. Replace the tasks other users can do quickly using the RStudio IDE.
 
 ### You can help
 
-Any assistance in helping fill in the numerous gaps in the what BrailleR delivers will be most gratefully received.
+Any assistance to fill in the numerous gaps in what BrailleR delivers will be most gratefully received. As the primary developer of this package is himself blind, attempts to find out if the tools being created actually do replace visual elements or tasks requires a sighted person to sit alongside to offer commentary.
+
+
+### Wish list
+
+Some issues to resolve:
+
+1. get VI.ggplot() doing more; see vignette
+2. get more graphics ready for making into SVG for use on Tiger products; mostly in SVGThis() method
+3. Get more Graph types orking with the additional XML to mke them interactive.
+1. fix background of all code chunks in slides being made. This is probably an issue in the css file.
+2. get graph files named properly by TwoFactors(); including  boxplots etc vs each factor not both.
+3. In OneFactor() and TwoFactors(): ensure that boxplots are created for each factor unless a level is short of reps.
+4. WTF() doesn't pick up multiple outliers in boxplot() as more than one point
+6. fix VI.lm to cater for the weighted lm case.
+4. check the css is working for VI.lm()
+5. work out how to change colours in R console for low vision users
+6. create function to re-create vignettes from Rnw source into HTML
+5. Multiple language support was started but is in serious need of some love.
+7. Functions for the VI method to be completed include: VI.prcomp(), VI.factanal(), VI.glm(), VI.htest()?
+
+
+
