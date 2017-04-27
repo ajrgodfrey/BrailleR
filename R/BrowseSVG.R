@@ -2,7 +2,7 @@
 BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
   xmlString <- .CleanXml(file=file, dir=dir)
   svgFile <- paste0(file, ".svg")
-  svgString <- readLines(svgFile)  # was readChar(svgFile, file.info(svgFile)$size)
+  svgString <- readLines(svgFile)
   htmlFile <- paste0(file, ".html")
   .AddHeader2HTML(file=htmlFile, dir=dir)
   .AddContainer2HTML(svgString, xmlString, file=htmlFile, dir=dir)
@@ -11,6 +11,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
   }
   .AddFooter2HTML(file=htmlFile, dir=dir)
   if (view) {
+    .CopyLibrary(dir=dir)
     browseURL(htmlFile) 
   }
   return(invisible(NULL))
@@ -19,9 +20,9 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
 
 .CleanXml = function(file="test", dir=".") {
   fileName <- paste0(file, ".xml")
-  xmlString <- readLines(fileName) # was readChar(fileName, file.info(fileName)$size)
+  xmlString <- readLines(fileName)
   xmlString <- gsub("sre:", "", xmlString)
-  gsub(" *<[a-zA-Z]+/>\n", "", xmlString)
+  gsub(" *<[a-zA-Z]+/>", "", xmlString)
 }
 
 
@@ -111,3 +112,9 @@ file=file, append=TRUE)
 }
 
 
+.CopyLibrary = function(dir="."){
+  if(!file.exists(file.path(dir, "cacc.js"))){
+    file.copy(file.path(system.file(package = "BrailleR"), "Web", c("cacc.js")), dir)
+  }
+  return(invisible(NULL))
+}
