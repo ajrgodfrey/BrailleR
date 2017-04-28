@@ -74,6 +74,7 @@
 ## Axis values and ticks
 .AddXMLAxisValues = function(root, values=NULL, detailedValues=values, position=1, id="", axis="", ...) {
     annotations <- list()
+    if (length(values) <= 0) return(invisible(annotations))
     for (i in 1:length(values)) {
         valueId = .AddXMLmakeId(id, "axis", "labels", paste("1.1", i, sep="."))
         value = .AddXMLAddAnnotation(root, position=position + i - 1,
@@ -85,6 +86,8 @@
         XML::addAttributes(tick$root, type="Tick")
         .AddXMLAddNode(value$component, "passive", tickId)
         .AddXMLAddNode(tick$component, "active", valueId)
+        print(i)
+        print(2*i)
         annotations[[2 * i - 1]] = value
         annotations[[2 * i]] = tick
     }
@@ -268,5 +271,87 @@
     XML::addAttributes(annotation$root,
                        speech=paste("Segment", position, "with mean", signif(mean, 3)),
                        speech2=speech2, type="Segment")
+    return(invisible(annotation))
+  }
+
+
+## Constructs the center of the histogram 
+.AddXMLAddBoxplotCenter = function(root, boxplot=NULL) {
+  annotation = .AddXMLAddAnnotation(root, position=4, id="center", kind="grouped")
+  ##vs sort out grammar:
+  ##    singular vs plural with $IsAre,
+  ##    sequence with commata and "and"
+  XML::addAttributes(annotation$root, speech=boxplot$Boxplots,
+                     speech2=paste(boxplot$Boxplots, paste(boxplot$names, collapse=", ")),
+                     type="Center")
+  annotations <- list()
+  lastPos <- 8
+  i <- 0
+  for (i in 1:boxplot$NBox) {
+    quartiles <- boxplot$stats[, c(i)]
+    outliers <- boxplot$out[boxplot$group == i]
+    annotations[[i]] = .AddXMLAddSingleBoxplot(root, position=i, counter=lastPos,
+                                               quartiles=quartiles, outliers=outliers,
+                                               datapoints=boxplot$n[i],
+                                               name=boxplot$names[i])
+    lastPos <- ifelse(length(outliers) == 0, lastPos + 6, lastPos + 8)
+  }
+  annotations[[i + 1]] = .AddXMLAddAnnotation(
+    root, position=0, id=.AddXMLmakeId("box", "1.1.1"), kind="passive")
+  .AddXMLAddComponents(annotation, annotations)
+  .AddXMLAddChildren(annotation, annotations)
+  .AddXMLAddParents(annotation, annotations)
+  return(invisible(annotation))
+}
+
+
+
+.AddXMLAddSingleBoxplot =
+  function(root, position=1, counter=8, quartiles=NULL, outliers=NULL, datapoints=0, name="") {
+    ## Position counting:
+    ## We go via the root element.
+    ##
+    ## We start at 8, always. Then count up 6 or 8 elements, depending on whether
+    ## outliers a present.
+    ##
+    ## 1. Middle bar (median)
+    ## 2. omitted
+    ## 3. dashed bar 
+    ## 4. end bars
+    ## 5. inner box
+    ## 6. omitted
+    ## 7. outliers (if present)
+    ## 8. omitted  (if 7 present)
+    annotation = .AddXMLAddAnnotation(root, position=position,
+                                      id=paste0("boxplot", position),
+                                      kind="active")
+    ## return(invisible(annotation))
+    annotations <- list()
+    annotations[[1]] <- .AddXMLAddAnnotation(root, position=3, id=paste0("graphics-root.", counter), kind="passive")
+    annotations[[2]] <- .AddXMLAddAnnotation(root, position=1,  id=paste0("graphics-root.", counter + 2), kind="passive")
+    annotations[[3]] <- .AddXMLAddAnnotation(root, position=2, id=paste0("graphics-root.", counter + 3), kind="passive")
+    annotations[[4]] <- .AddXMLAddAnnotation(root, position=4, id=paste0("graphics-root.", counter + 4), kind="passive")
+    speech <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
+                    "and quartiles in", paste(quartiles, collapse=", "))
+    speech2 <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
+                     "for", datapoints, "datapoints.",
+                     "Quartile one from", quartiles[1], "to", quartiles[2], ".",
+                     "Quartile two from", quartiles[2], "to", quartiles[3], ".",
+                     "Quartile three from", quartiles[3], "to", quartiles[4], ".",
+                     "Quartile four from", quartiles[4], "to", quartiles[5], "."
+                     )
+    if (length(outliers) > 0) {
+      ## Add outliers
+      annotations[[5]] <- .AddXMLAddAnnotation(root, position=5, id=paste0("graphics-root.", counter + 6), kind="passive")
+      speech <- paste(speech, "and", length(outliers), "outliers")
+      speech2 <- paste(speech2, length(outliers), "outliers at", paste(outliers, collapse=", "))
+    } else {
+      speech2 <- paste(speech2, "No outliers")
+    }
+    XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type="boxplot")
+    
+    .AddXMLAddComponents(annotation, annotations)
+    .AddXMLAddChildren(annotation, annotations)
+    .AddXMLAddParents(annotation, annotations)
     return(invisible(annotation))
   }

@@ -22,11 +22,13 @@ Augment.boxplot = function(x) {
       x$IsAre = ifelse(x$NBox > 1, 'are', 'is')
       x$Boxplots = ifelse(x$NBox > 1, paste(x$NBox, 'boxplots'), 'a boxplot')
       x$VertHorz = ifelse(x$horizontal, 'horizontally', 'vertically')
-      if (x$NBox > 1) {
-        x$names = paste0('"', x$names, '"')
-      } else {
-        x$names = NULL
-      }
+      ##vs This should be done when one actually wants to use the names
+      ##
+      ## if (x$NBox > 1) {
+      ##     x$names = paste0('"', x$names, '"')
+      ## } else {
+      ##   x$names = NULL
+      ## }
       return(invisible(x))
 }
 
@@ -151,10 +153,10 @@ Augment.tsplot =
 
 
 .AugmentBase = function(x){
-      x$xaxp = par()$xaxp
-      x$yaxp = par()$yaxp
-      x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
-      x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
+    x$xaxp = par()$xaxp
+    x$yaxp = par()$yaxp
+    x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
+    x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
     x$main <- if (is.null(x$main)) {""} else {x$main}
     x$sub <- if (is.null(x$sub)) {""} else {x$sub}
     x$xlab <- if (is.null(x$xlab)) {""} else {x$xlab}

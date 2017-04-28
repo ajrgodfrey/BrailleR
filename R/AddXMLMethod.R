@@ -8,20 +8,44 @@ return(invisible("nothing done"))
 }
 
 AddXML.boxplot = function(x, file) {
+    print(x)
     doc = .AddXMLDocument("boxplot")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
-if(x$horizontal){
-    .AddXMLAddXAxis(annotations, label=x$xlab)
-}
-else {
-    .AddXMLAddYAxis(annotations, label=x$ylab)
-}
-# in here we put the added text for each boxplot which is the short/long text returned by looping over each boxplot and passing the fivenum and outliers to
-# .BoxplotText(fivenum, outliers, horizontal=x$horizontal)
+
+# still need to allow for main and sub titles
+    title = .AddXMLAddTitle(annotations, title=x$main)
+
+    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=x$names,
+                            speechLong=paste("x axis with values", paste(x$names, collapse=", ")))
+
+    yValues <- x$yTicks
+    YMin = min(x$yTicks)
+    YMax = max(x$yTicks)
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
+
+    center = .AddXMLAddBoxplotCenter(annotations,boxplot=x)
+
+    .AddXMLAddChart(annotations, type="BoxPlot",
+                    speech=paste(x$Boxplots),
+                    speech2=paste(x$Boxplots, "for", paste(x$names, collapse=", ")),
+                    children=list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
+##     root = XML::xmlRoot(doc)
+##     annotations = .AddXMLAddNode(root, "annotations")
+## if(x$horizontal){
+##     .AddXMLAddXAxis(annotations, label=x$xlab)
+## }
+## else {
+##     .AddXMLAddYAxis(annotations, label=x$ylab)
+## }
+## # in here we put the added text for each boxplot which is the short/long text returned by looping over each boxplot and passing the fivenum and outliers to
+## # .BoxplotText(fivenum, outliers, horizontal=x$horizontal)
+
+##     XML::saveXML(doc=doc, file=file)
+##     return(invisible(NULL))
 }
 
 AddXML.dotplot = function(x, file) {
