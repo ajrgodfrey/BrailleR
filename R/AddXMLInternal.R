@@ -282,7 +282,7 @@
   ##    singular vs plural with $IsAre,
   ##    sequence with commata and "and"
   XML::addAttributes(annotation$root, speech=boxplot$Boxplots,
-                     speech2=paste(boxplot$Boxplots, paste(boxplot$names, collapse=", ")),
+                     speech2=paste(boxplot$Boxplots, "for", paste(boxplot$names, collapse=", ")),
                      type="Center")
   annotations <- list()
   lastPos <- 8

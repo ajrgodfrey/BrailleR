@@ -27,8 +27,8 @@ AddXML.boxplot = function(x, file) {
     center = .AddXMLAddBoxplotCenter(annotations,boxplot=x)
 
     .AddXMLAddChart(annotations, type="BoxPlot",
-                    speech=paste(x$Boxplots),
-                    speech2=paste(x$Boxplots, "for", paste(x$names, collapse=", ")),
+                    speech=paste(x$Boxplots, "for", x$main),
+                    speech2=paste(x$Boxplots, "for", x$xlab, paste(x$names, collapse=", ")),
                     children=list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
