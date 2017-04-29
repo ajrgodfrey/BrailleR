@@ -86,8 +86,6 @@
         XML::addAttributes(tick$root, type="Tick")
         .AddXMLAddNode(value$component, "passive", tickId)
         .AddXMLAddNode(tick$component, "active", valueId)
-        print(i)
-        print(2*i)
         annotations[[2 * i - 1]] = value
         annotations[[2 * i]] = tick
     }
@@ -231,7 +229,6 @@
   gs = ts$GroupSummaries
   len = length(gs$N)
   if (ts$Continuous) {
-    print("Need to rewrite SVG")
     XML::addAttributes(
            annotation$root, speech="Timeseries graph",
            speech2=paste("Continuous timeseries graph divided into",
@@ -325,12 +322,15 @@
     annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=paste0("boxplot", position),
                                       kind="active")
-    ## return(invisible(annotation))
     annotations <- list()
-    annotations[[1]] <- .AddXMLAddAnnotation(root, position=3, id=paste0("graphics-root.", counter), kind="passive")
-    annotations[[2]] <- .AddXMLAddAnnotation(root, position=1,  id=paste0("graphics-root.", counter + 2), kind="passive")
-    annotations[[3]] <- .AddXMLAddAnnotation(root, position=2, id=paste0("graphics-root.", counter + 3), kind="passive")
-    annotations[[4]] <- .AddXMLAddAnnotation(root, position=4, id=paste0("graphics-root.", counter + 4), kind="passive")
+    annotations[[1]] <- .AddXMLAddAnnotation(
+      root, position=3, id=paste0("graphics-root.", counter), kind="passive")
+    annotations[[2]] <- .AddXMLAddAnnotation(
+      root, position=1,  id=paste0("graphics-root.", counter + 2), kind="passive")
+    annotations[[3]] <- .AddXMLAddAnnotation(
+      root, position=2, id=paste0("graphics-root.", counter + 3), kind="passive")
+    annotations[[4]] <- .AddXMLAddAnnotation(
+      root, position=4, id=paste0("graphics-root.", counter + 4), kind="passive")
     speech <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
                     "and quartiles in", paste(quartiles, collapse=", "))
     speech2 <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
@@ -342,14 +342,14 @@
                      )
     if (length(outliers) > 0) {
       ## Add outliers
-      annotations[[5]] <- .AddXMLAddAnnotation(root, position=5, id=paste0("graphics-root.", counter + 6), kind="passive")
+      annotations[[5]] <- .AddXMLAddAnnotation(
+        root, position=5, id=paste0("graphics-root.", counter + 6), kind="passive")
       speech <- paste(speech, "and", length(outliers), "outliers")
       speech2 <- paste(speech2, length(outliers), "outliers at", paste(outliers, collapse=", "))
     } else {
       speech2 <- paste(speech2, "No outliers")
     }
     XML::addAttributes(annotation$root, speech=speech, speech2=speech2, type="boxplot")
-    
     .AddXMLAddComponents(annotation, annotations)
     .AddXMLAddChildren(annotation, annotations)
     .AddXMLAddParents(annotation, annotations)
