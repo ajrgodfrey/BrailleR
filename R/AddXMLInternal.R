@@ -321,16 +321,23 @@
     ## 8. omitted  (if 7 present)
     annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=paste0("boxplot", position),
-                                      kind="active")
+                                      kind="grouped")
     annotations <- list()
     annotations[[1]] <- .AddXMLAddAnnotation(
-      root, position=3, id=paste0("graphics-root.", counter), kind="passive")
+      root, position=1, id=paste0("graphics-root.", counter), kind="active")
+    XML::addAttributes(annotations[[1]]$root, speech=paste("Median", quartiles[3]), type="component")
     annotations[[2]] <- .AddXMLAddAnnotation(
-      root, position=1,  id=paste0("graphics-root.", counter + 2), kind="passive")
+      root, position=2,  id=paste0("graphics-root.", counter + 2), kind="passive")
     annotations[[3]] <- .AddXMLAddAnnotation(
-      root, position=2, id=paste0("graphics-root.", counter + 3), kind="passive")
+      root, position=3, id=paste0("graphics-root.", counter + 4), kind="active")
+    XML::addAttributes(annotations[[3]]$root, speech=paste("Lower Quartile", quartiles[2],
+                                                           "and Upper Quartile", quartiles[4]),
+                       type="component")
     annotations[[4]] <- .AddXMLAddAnnotation(
-      root, position=4, id=paste0("graphics-root.", counter + 4), kind="passive")
+      root, position=4, id=paste0("graphics-root.", counter + 3), kind="active")
+    XML::addAttributes(annotations[[4]]$root, speech=paste("Minimum", quartiles[1],
+                                                           "and Maximum", quartiles[5]),
+                       type="component")
     speech <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
                     "and quartiles in", paste(quartiles, collapse=", "))
     speech2 <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
@@ -343,9 +350,11 @@
     if (length(outliers) > 0) {
       ## Add outliers
       annotations[[5]] <- .AddXMLAddAnnotation(
-        root, position=5, id=paste0("graphics-root.", counter + 6), kind="passive")
+        root, position=5, id=paste0("graphics-root.", counter + 6), kind="active")
       speech <- paste(speech, "and", length(outliers), "outliers")
-      speech2 <- paste(speech2, length(outliers), "outliers at", paste(outliers, collapse=", "))
+      descr <- paste(length(outliers), "outliers at", paste(outliers, collapse=", "))
+      speech2 <- paste(speech2, descr)
+      XML::addAttributes(annotations[[5]]$root, speech=descr, type="component")
     } else {
       speech2 <- paste(speech2, "No outliers")
     }
@@ -355,3 +364,9 @@
     .AddXMLAddParents(annotation, annotations)
     return(invisible(annotation))
   }
+
+
+## .AddXMLAddBoxplotComponent =
+##   function(root, position=1, counter=8, quartiles=NULL, outliers=NULL, datapoints=0, name="") {
+    
+##   }
