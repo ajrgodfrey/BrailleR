@@ -14,12 +14,16 @@ AddXML.boxplot = function(x, file) {
 
     title = .AddXMLAddTitle(annotations, title=x$main)
 
-    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=x$names,
-                            speechLong=paste("x axis with values", paste(x$names, collapse=", ")))
+    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=x$xTicks,
+                            speechLong=paste("x axis with values", paste(x$xTicks, collapse=", ")))
 
-    yValues <- x$yTicks
-    YMin = min(x$yTicks)
-    YMax = max(x$yTicks)
+    if (x$horizontal) {
+        yValues <- x$names
+    } else {
+        yValues <- x$yTicks      
+    }
+    YMin = min(yValues)
+    YMax = max(yValues)
     yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues,
                             speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
 
