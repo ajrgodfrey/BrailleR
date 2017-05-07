@@ -44,16 +44,7 @@ AddXML.boxplot = function(x, file) {
                     speech=paste(x$Boxplots, "for", x$main),
                     speech2=paste(x$Boxplots, "for", x$xlab, paste(x$names, collapse=", ")),
                     children=list(title, xAxis, yAxis, center))
-    print('title')
-    print(title$element)
-    print('first axis')
-    print(xmlChildren(xAxis$component)[[1]])
-    print(append(list(title$element),
-                 xmlChildren(xAxis$component)))
-    .AddXMLAddBaseComponents(chart, list(title$element))
-    .AddXMLAddBaseComponents(chart, xmlChildren(xAxis$component))
-    .AddXMLAddBaseComponents(chart, xmlChildren(yAxis$component))
-    .AddXMLAddBaseComponents(chart, xmlChildren(center$component))
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
 }
@@ -115,13 +106,14 @@ AddXML.histogram = function(x, file) {
 
     center = .AddXMLAddHistogramCenter(annotations,hist=x)
 
-    .AddXMLAddChart(annotations, type="Histogram",
+    chart <- .AddXMLAddChart(annotations, type="Histogram",
                     speech=paste("Histogram of", x$xlab),
                     speech2=paste("Histogram showing ", x$NBars, "bars for ",
                                   x$xlab, "over the range", min(x$breaks),  
                                   "to",max(x$breaks), "and", x$ylab,
                                   "from 0 to", max(x$counts)), # must allow for density
                     children=list(title, xAxis, yAxis, center))
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
@@ -152,13 +144,14 @@ AddXML.tsplot = function(x, file) {
     ## now to add the other content related bits
     center = .AddXMLAddTimeseriesCenter(annotations,ts=x)
 
-    .AddXMLAddChart(annotations, type="TimeSeriesPlot",
+    chart <- .AddXMLAddChart(annotations, type="TimeSeriesPlot",
                     speech=paste("Time series plot of", x$ylab),
                     speech2=paste("Time series plot showing ",
                                   x$ylab, "over the range", YMin,
                                   "to", YMax,  "for", x$ylab,
                                   "which ranges from", XMin,  "to", XMax), 
                     children=list(title, xAxis, yAxis, center))
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))

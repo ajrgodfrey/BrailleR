@@ -177,14 +177,14 @@
     clone <- function(x) if (XML::xmlName(x$element) != "grouped") {
                            .AddXMLclone(annotation$component, x$element)   
                          } else {
-                           .AddXMLAddBaseComponents(annotation, xmlChildren(x$component))
+                           .AddXMLAddBaseComponents(annotation, x)
                          }
     lapply(nodes, clone)
 }
 
-.AddXMLAddBaseComponents = function(annotation, nodes) {
+.AddXMLAddBaseComponents = function(annotation, node) {
     clone <- function(x) .AddXMLclone(annotation$component, x)
-    lapply(nodes, clone)
+    lapply(xmlChildren(node$component), clone)
 }
 
 ## Add children to an annotation
