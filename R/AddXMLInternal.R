@@ -306,6 +306,25 @@
 
 .AddXMLAddSingleBoxplot =
   function(root, position=1, counter=8, quartiles=NULL, outliers=NULL, datapoints=0, name="") {
+    ## Speech computations
+    ## q1: Minimum or lower whisker
+    ## q2: Lower Quartile
+    ## q3: Median
+    ## q4: Upper Quartile
+    ## q5: Maximum or upper whisker
+    ##
+    ## References: 
+    ## http://www.bbc.co.uk/schools/gcsebitesize/maths/statistics/representingdata3hirev6.shtml
+    ## https://www.khanacademy.org/math/probability/data-distributions-a1/box--whisker-plots-a1/v/reading-box-and-whisker-plots
+    q1 <- ifelse(min(outliers) < quartiles[1],
+                 paste("Lower whisker", quartiles[1]),
+                 paste("Minimum", quartiles[1]))
+    q2 <- paste("Lower quartile", quartiles[2])
+    q3 <- paste("Median", quartiles[3])
+    q4 <- paste("Upper quartile", quartiles[4])
+    q5 <- ifelse(max(outliers) > quartiles[5],
+                 paste("Upper whisker", quartiles[5]),
+                 paste("Maximum", quartiles[5]))
     ## Position counting:
     ## We go via the root element.
     ##
@@ -326,28 +345,21 @@
     annotations <- list()
     annotations[[1]] <- .AddXMLAddAnnotation(
       root, position=1, id=paste0("graphics-root.", counter), kind="active")
-    XML::addAttributes(annotations[[1]]$root, speech=paste("Median", quartiles[3]), type="component")
+    XML::addAttributes(annotations[[1]]$root, speech=q3, type="component")
     annotations[[2]] <- .AddXMLAddAnnotation(
       root, position=2,  id=paste0("graphics-root.", counter + 2), kind="passive")
     annotations[[3]] <- .AddXMLAddAnnotation(
       root, position=3, id=paste0("graphics-root.", counter + 4), kind="active")
-    XML::addAttributes(annotations[[3]]$root, speech=paste("Lower Quartile", quartiles[2],
-                                                           "and Upper Quartile", quartiles[4]),
+    XML::addAttributes(annotations[[3]]$root, speech=paste(q2, "and", q4),
                        type="component")
     annotations[[4]] <- .AddXMLAddAnnotation(
       root, position=4, id=paste0("graphics-root.", counter + 3), kind="active")
-    XML::addAttributes(annotations[[4]]$root, speech=paste("Minimum", quartiles[1],
-                                                           "and Maximum", quartiles[5]),
+    XML::addAttributes(annotations[[4]]$root, speech=paste(q1, "and", q5),
                        type="component")
     speech <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
                     "and quartiles in", paste(quartiles, collapse=", "))
     speech2 <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
-                     "for", datapoints, "datapoints.",
-                     "Quartile one from", quartiles[1], "to", quartiles[2], ".",
-                     "Quartile two from", quartiles[2], "to", quartiles[3], ".",
-                     "Quartile three from", quartiles[3], "to", quartiles[4], ".",
-                     "Quartile four from", quartiles[4], "to", quartiles[5], "."
-                     )
+                     "for", datapoints, "datapoints.", q1, q2, q3, q4, q5)
     if (length(outliers) > 0) {
       ## Add outliers
       annotations[[5]] <- .AddXMLAddAnnotation(
