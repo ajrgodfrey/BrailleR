@@ -1,15 +1,7 @@
-RewriteSVG = function(x, file) {
-  UseMethod("RewriteSVG")
-}
-
-RewriteSVG.default = function(x, file) {
-  return(invisible("nothing done"))
-}
 
 
-RewriteSVG.tsplot = function(x, file) {
-    return(invisible(NULL))
-    svgDoc <- XML::xmlParseDoc(file) ## "Temperature.svg"
+.RewriteSVG.tsplot = function(x, file) {
+  svgDoc <- XML::xmlParseDoc(file) ## "Temperature.svg"
   nodes <- XML::getNodeSet(svgDoc,
                       '//*[@id="graphics-plot-1-lines-1.1"]')
   if (length(nodes) == 0) {
