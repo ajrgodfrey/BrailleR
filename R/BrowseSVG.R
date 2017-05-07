@@ -10,8 +10,8 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, view=interactive()) {
     .AddKey2HTML(file=htmlFile, dir=dir)
   }
   .AddFooter2HTML(file=htmlFile, dir=dir)
-  if (view) {
     .CopyLibrary(dir=dir)
+  if (view) {
     browseURL(htmlFile) 
   }
   return(invisible(NULL))
