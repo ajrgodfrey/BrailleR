@@ -14,18 +14,29 @@ AddXML.boxplot = function(x, file) {
 
     title = .AddXMLAddTitle(annotations, title=x$main)
 
-    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=x$xTicks,
-                            speechLong=paste("x axis with values", paste(x$xTicks, collapse=", ")))
-
     if (x$horizontal) {
-        yValues <- x$names
+      xValues <- x$xTicks
+      yValues <- x$names
+      YMin = min(xValues)
+      YMax = max(xValues)
     } else {
-        yValues <- x$yTicks      
+      xValues <- x$names
+      yValues <- x$yTicks
+      YMin = min(yValues)
+      YMax = max(yValues)
     }
-    YMin = min(yValues)
-    YMax = max(yValues)
-    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues,
-                            speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
+    if (x$horizontal) {
+      xSpeech <- paste("x axis", x$ylab, "ranges from", YMin, "to", YMax)
+      ySpeech <- paste("y axis with values", paste(yValues, collapse=", "))
+    } else {
+      xSpeech <- paste("x axis with values", paste(xValues, collapse=", "))
+      ySpeech <- paste("y axis", x$ylab, "ranges from", YMin, "to", YMax)
+    }
+
+
+    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=xValues, speechLong=xSpeech)
+
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, speechLong=ySpeech)
 
     center = .AddXMLAddBoxplotCenter(annotations,boxplot=x)
 
