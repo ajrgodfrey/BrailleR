@@ -316,13 +316,13 @@
     ## References: 
     ## http://www.bbc.co.uk/schools/gcsebitesize/maths/statistics/representingdata3hirev6.shtml
     ## https://www.khanacademy.org/math/probability/data-distributions-a1/box--whisker-plots-a1/v/reading-box-and-whisker-plots
-    q1 <- ifelse(min(outliers) < quartiles[1],
+    q1 <- ifelse(suppressWarnings(min(outliers)) < quartiles[1],
                  paste("Lower whisker", quartiles[1]),
                  paste("Minimum", quartiles[1]))
     q2 <- paste("Lower quartile", quartiles[2])
     q3 <- paste("Median", quartiles[3])
     q4 <- paste("Upper quartile", quartiles[4])
-    q5 <- ifelse(max(outliers) > quartiles[5],
+    q5 <- ifelse(suppressWarnings(max(outliers)) > quartiles[5],
                  paste("Upper whisker", quartiles[5]),
                  paste("Maximum", quartiles[5]))
     ## Position counting:
@@ -350,22 +350,30 @@
       root, position=2,  id=paste0("graphics-root.", counter + 2), kind="passive")
     annotations[[3]] <- .AddXMLAddAnnotation(
       root, position=3, id=paste0("graphics-root.", counter + 4), kind="active")
-    XML::addAttributes(annotations[[3]]$root, speech=paste(q2, "and", q4),
+    XML::addAttributes(annotations[[3]]$root, speech=paste0(paste(q2, "and", q4), "."),
                        type="component")
     annotations[[4]] <- .AddXMLAddAnnotation(
       root, position=4, id=paste0("graphics-root.", counter + 3), kind="active")
-    XML::addAttributes(annotations[[4]]$root, speech=paste(q1, "and", q5),
+    XML::addAttributes(annotations[[4]]$root, speech=paste0(paste(q1, "and", q5), "."),
                        type="component")
     speech <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
                     "and quartiles in", paste(quartiles, collapse=", "))
     speech2 <- paste("Boxplot", ifelse(name == "", "", paste("for", name)),
-                     "for", datapoints, "datapoints.", q1, q2, q3, q4, q5)
+                     "for", datapoints, "datapoints.",
+                     paste0(paste(q1, q2, q3, q4, q5, sep=", "), "."))
     if (length(outliers) > 0) {
       ## Add outliers
-      annotations[[5]] <- .AddXMLAddAnnotation(
-        root, position=5, id=paste0("graphics-root.", counter + 6), kind="active")
-      speech <- paste(speech, "and", length(outliers), "outliers")
-      descr <- paste(length(outliers), "outliers at", paste(outliers, collapse=", "))
+      if (length(outliers) > 1) {
+        annotations[[5]] <- .AddXMLAddAnnotation(
+          root, position=5, id=paste0("graphics-root.", counter + 6), kind="active")
+        name <- "outliers"
+      } else {
+        annotations[[5]] <- .AddXMLAddAnnotation(
+          root, position=5, id=paste0("graphics-root.", counter + 6), kind="active")
+        name <- "outlier"
+      }
+      speech <- paste(speech, "and", length(outliers), name)
+      descr <- paste(length(outliers), name, "at", paste(outliers, collapse=", "))
       speech2 <- paste(speech2, descr)
       XML::addAttributes(annotations[[5]]$root, speech=descr, type="component")
     } else {
