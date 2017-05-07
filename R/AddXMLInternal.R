@@ -175,8 +175,15 @@
 ## Add components to an annotation
 .AddXMLAddComponents = function(annotation, nodes) {
     clone <- function(x) if (XML::xmlName(x$element) != "grouped") {
-                             .AddXMLclone(annotation$component, x$element)   
+                           .AddXMLclone(annotation$component, x$element)   
+                         } else {
+                           .AddXMLAddBaseComponents(annotation, xmlChildren(x$component))
                          }
+    lapply(nodes, clone)
+}
+
+.AddXMLAddBaseComponents = function(annotation, nodes) {
+    clone <- function(x) .AddXMLclone(annotation$component, x)
     lapply(nodes, clone)
 }
 
@@ -285,14 +292,16 @@
   annotations <- list()
   lastPos <- 8
   i <- 0
+  outCount <- 1
   for (i in 1:boxplot$NBox) {
     quartiles <- boxplot$stats[, c(i)]
     outliers <- boxplot$out[boxplot$group == i]
     annotations[[i]] = .AddXMLAddSingleBoxplot(root, position=i, counter=lastPos,
                                                quartiles=quartiles, outliers=outliers,
-                                               datapoints=boxplot$n[i],
+                                               datapoints=boxplot$n[i], outCount=outCount,
                                                name=boxplot$names[i])
     lastPos <- ifelse(length(outliers) == 0, lastPos + 6, lastPos + 8)
+    outCount <- outCount + ifelse(length(outliers) > 0, 2, 1)
   }
   annotations[[i + 1]] = .AddXMLAddAnnotation(
     root, position=0, id=.AddXMLmakeId("box", "1.1.1"), kind="passive")
@@ -305,7 +314,7 @@
 
 
 .AddXMLAddSingleBoxplot =
-  function(root, position=1, counter=8, quartiles=NULL, outliers=NULL, datapoints=0, name="") {
+  function(root, position=1, counter=8, quartiles=NULL, outliers=NULL, datapoints=0, name="", outCount=1) {
     ## Speech computations
     ## q1: Minimum or lower whisker
     ## q2: Lower Quartile
@@ -364,8 +373,10 @@
     if (length(outliers) > 0) {
       ## Add outliers
       if (length(outliers) > 1) {
-        annotations[[5]] <- .AddXMLAddAnnotation(
-          root, position=5, id=paste0("graphics-root.", counter + 6), kind="active")
+        annotations[[5]] <- .AddXMLAddAnnotation(root, position=5,
+                                                id=paste0("outliers", position),
+                                                kind="grouped")
+        .AddXMLOutliers(root, annotations[[5]], outliers, position=1, outCount=outCount + 1)
         name <- "outliers"
       } else {
         annotations[[5]] <- .AddXMLAddAnnotation(
@@ -387,7 +398,20 @@
   }
 
 
-## .AddXMLAddBoxplotComponent =
-##   function(root, position=1, counter=8, quartiles=NULL, outliers=NULL, datapoints=0, name="") {
-    
-##   }
+.AddXMLOutliers =  function(root, parent, outliers, position=1, id="", outCount=1) {
+  annotations <- list()
+  sortOut <- sort(outliers)
+  for (v in sortOut) {
+    annotation <- .AddXMLAddAnnotation(
+      root, position=position ,
+      id=.AddXMLmakeId("points", paste(outCount, "1", match(v, outliers), sep=".")),
+      kind="active")
+    XML::addAttributes(annotation$root, speech=v,
+                       speech2=paste("Outlier", v), type="point")
+    annotations <- append(annotations, list(annotation))
+    }
+    .AddXMLAddComponents(parent, annotations)
+    .AddXMLAddChildren(parent, annotations)
+    .AddXMLAddParents(parent, annotations)
+    return(invisible(annotations))
+  }

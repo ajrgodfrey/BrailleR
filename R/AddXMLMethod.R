@@ -40,14 +40,24 @@ AddXML.boxplot = function(x, file) {
 
     center = .AddXMLAddBoxplotCenter(annotations,boxplot=x)
 
-    .AddXMLAddChart(annotations, type="BoxPlot",
+    chart <- .AddXMLAddChart(annotations, type="BoxPlot",
                     speech=paste(x$Boxplots, "for", x$main),
                     speech2=paste(x$Boxplots, "for", x$xlab, paste(x$names, collapse=", ")),
                     children=list(title, xAxis, yAxis, center))
-
+    print('title')
+    print(title$element)
+    print('first axis')
+    print(xmlChildren(xAxis$component)[[1]])
+    print(append(list(title$element),
+                 xmlChildren(xAxis$component)))
+    .AddXMLAddBaseComponents(chart, list(title$element))
+    .AddXMLAddBaseComponents(chart, xmlChildren(xAxis$component))
+    .AddXMLAddBaseComponents(chart, xmlChildren(yAxis$component))
+    .AddXMLAddBaseComponents(chart, xmlChildren(center$component))
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
 }
+
 
 AddXML.dotplot = function(x, file) {
     doc = .AddXMLDocument("dotplot")
