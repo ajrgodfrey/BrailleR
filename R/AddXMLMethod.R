@@ -26,7 +26,7 @@ AddXML.boxplot = function(x, file) {
       YMax = max(yValues)
     }
     if (x$horizontal) {
-      xSpeech <- paste("x axis", x$ylab, "ranges from", YMin, "to", YMax)
+      xSpeech <- paste("x axis", x$xlab, "ranges from", YMin, "to", YMax)
       ySpeech <- paste("y axis with values", paste(yValues, collapse=", "))
     } else {
       xSpeech <- paste("x axis with values", paste(xValues, collapse=", "))
