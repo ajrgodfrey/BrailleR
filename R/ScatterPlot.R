@@ -10,16 +10,48 @@ ScatterPlot = function(x, y, ...){
     MC[[1L]] <- quote(graphics::plot)
     MC$x <- Out$data$x
     MC$y <- Out$data$y
-
     Out$graph <- eval(MC, envir=parent.frame())
-
     Out$par = par()
     class(Out) = "scatterplot"
-    if (length(MC$main) > 0) Out$main = as.character(MC$main) else {Out$main = ""}
-    if (length(MC$sub) > 0) Out$sub = as.character(MC$sub)
-    if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab)
-    if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
+    Out = .checkTextLabels(MC, Out)
     Out=Augment(Out)
     return(invisible(Out))
 }
 
+
+FittedLinePlot = function(x, y, ...){
+    MC <- match.call(expand.dots = TRUE)
+    Out = list()
+    Ord = order(x,y)
+    Out$data = na.omit(data.frame(x=x[Ord], y=y[Ord]))
+    MC$xlab= ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
+    MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
+    MC[[1L]] <- quote(graphics::plot)
+    MC$x <- Out$data$x
+    MC$y <- Out$data$y
+    Out$graph <- eval(MC, envir=parent.frame())
+    Out$par = par()
+    class(Out) = c("fittedlineplot", "scatterplot")
+    Out = .checkTextLabels(MC, Out)
+    Out=Augment(Out)
+    return(invisible(Out))
+}
+
+.checkTextLabels = function(MC, Out){
+    if (length(MC$main) > 0) Out$main = as.character(MC$main) else {Out$main = ""}
+    if (length(MC$sub) > 0) Out$sub = as.character(MC$sub)
+    if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab)
+    if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
+    return(invisible(Out))
+}
+
+plot.scatterplot = function(x, ...){
+suppressWarnings(do.call(plot, x))
+return(invisible(NULL))
+}
+\
+
+plot.fittedlineplot = function(x, ...){
+suppressWarnings(do.call(plot, x))
+return(invisible(NULL))
+}
