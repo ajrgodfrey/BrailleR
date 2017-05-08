@@ -3,8 +3,7 @@
 ScatterPlot = function(x, y, ...){
     MC <- match.call(expand.dots = TRUE)
     Out = list()
-    Ord = order(x,y)
-    Out$data = na.omit(data.frame(x=x[Ord], y=y[Ord]))
+    Out$data = .CleanData4TwoWayPlot(x, y)
     MC$xlab= ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
     MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
     MC[[1L]] <- quote(graphics::plot)
@@ -22,8 +21,7 @@ ScatterPlot = function(x, y, ...){
 FittedLinePlot = function(x, y, ...){
     MC <- match.call(expand.dots = TRUE)
     Out = list()
-    Ord = order(x,y)
-    Out$data = na.omit(data.frame(x=x[Ord], y=y[Ord]))
+    Out$data = .CleanData4TwoWayPlot(x, y)
     MC$xlab= ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
     MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
     MC[[1L]] <- quote(graphics::plot)
@@ -34,8 +32,17 @@ FittedLinePlot = function(x, y, ...){
     class(Out) = c("fittedlineplot", "scatterplot")
     Out = .checkTextLabels(MC, Out)
     Out=Augment(Out)
+    Out$fittedline$coef = coef(lm(y~x, data=Out$data))
+    abline(Out$fittedline$coef)
     return(invisible(Out))
 }
+
+
+.CleanData4TwoWayPlot = function(x, y){
+    Ord = order(x,y)
+return(invisible(na.omit(data.frame(x=x[Ord], y=y[Ord]))))
+}
+
 
 .checkTextLabels = function(MC, Out){
     if (length(MC$main) > 0) Out$main = as.character(MC$main) else {Out$main = ""}
@@ -52,6 +59,10 @@ return(invisible(NULL))
 
 
 plot.fittedlineplot = function(x, ...){
-suppressWarnings(do.call(plot, x))
+suppressWarnings(do.call(plot, x$data))
+    abline(x$fittedline$coef)
 return(invisible(NULL))
 }
+
+print.fittedlineplot = plot.fittedlineplot
+print.scatterplot = plot.scatterplot

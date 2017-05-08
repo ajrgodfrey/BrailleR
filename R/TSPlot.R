@@ -23,3 +23,5 @@ plot.tsplot = function(x, ...){
 suppressWarnings(do.call(plot, x))
 return(invisible(NULL))
 }
+
+print.tsplot = plot.tsplot

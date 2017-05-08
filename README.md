@@ -27,7 +27,7 @@ Some issues to resolve:
 
 1. get VI.ggplot() doing more; see vignette
 2. get more graphics ready for making into SVG for use on Tiger products; mostly in SVGThis() method
-3. Get more Graph types orking with the additional XML to mke them interactive.
+3. Get more Graph types working with the additional XML to make them interactive.
 1. fix background of all code chunks in slides being made. This is probably an issue in the css file.
 2. get graph files named properly by TwoFactors(); including  boxplots etc vs each factor not both.
 3. In OneFactor() and TwoFactors(): ensure that boxplots are created for each factor unless a level is short of reps.

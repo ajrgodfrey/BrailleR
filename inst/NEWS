@@ -1,9 +1,10 @@
 # v0.25.7
 - VS offered BrowseSVG() and replacement cacc.js for improved interactive experience; JG fixed for CRAN checks.
+- changes from VS merged via GitHub (not to be reported again)
 - moved knitr package to imports. This means some of the Rmd files need more explicit mention of the package to get chunk options working properly.
 - JG implemented the ViewSVG() so that anyone can use the interactive graph viewing system; required various internal functions to move and write necessary files 
-- added FittedLinePlot() which adds a fitted line to the ScatterPlot() already implmented
-
+- added FittedLinePlot() which adds a fitted line to the ScatterPlot() implmented through ScatterPlot()
+- added plot and print methods for various graph types. The print method refers to the plot function so acts just like the ggplot and lattice packages.
 
 # v0.25.6
 - working on accessible Venn diagrams and time series plots
