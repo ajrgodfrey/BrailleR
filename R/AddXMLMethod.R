@@ -14,25 +14,41 @@ AddXML.boxplot = function(x, file) {
 
     title = .AddXMLAddTitle(annotations, title=x$main)
 
-    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=x$names,
-                            speechLong=paste("x axis with values", paste(x$names, collapse=", ")))
+    if (x$horizontal) {
+      xValues <- x$xTicks
+      yValues <- x$names
+      YMin = min(xValues)
+      YMax = max(xValues)
+    } else {
+      xValues <- x$names
+      yValues <- x$yTicks
+      YMin = min(yValues)
+      YMax = max(yValues)
+    }
+    if (x$horizontal) {
+      xSpeech <- paste("x axis", x$xlab, "ranges from", YMin, "to", YMax)
+      ySpeech <- paste("y axis with values", paste(yValues, collapse=", "))
+    } else {
+      xSpeech <- paste("x axis with values", paste(xValues, collapse=", "))
+      ySpeech <- paste("y axis", x$ylab, "ranges from", YMin, "to", YMax)
+    }
 
-    yValues <- x$yTicks
-    YMin = min(x$yTicks)
-    YMax = max(x$yTicks)
-    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues,
-                            speechLong=paste("y axis", x$ylab, "ranges from", YMin, "to", YMax))
+
+    xAxis = .AddXMLAddXAxis(annotations, label=x$xlab, values=xValues, speechLong=xSpeech)
+
+    yAxis = .AddXMLAddYAxis(annotations, label=x$ylab, values=yValues, speechLong=ySpeech)
 
     center = .AddXMLAddBoxplotCenter(annotations,boxplot=x)
 
-    .AddXMLAddChart(annotations, type="BoxPlot",
+    chart <- .AddXMLAddChart(annotations, type="BoxPlot",
                     speech=paste(x$Boxplots, "for", x$main),
                     speech2=paste(x$Boxplots, "for", x$xlab, paste(x$names, collapse=", ")),
                     children=list(title, xAxis, yAxis, center))
-
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
 }
+
 
 AddXML.dotplot = function(x, file) {
     doc = .AddXMLDocument("dotplot")
@@ -90,13 +106,14 @@ AddXML.histogram = function(x, file) {
 
     center = .AddXMLAddHistogramCenter(annotations,hist=x)
 
-    .AddXMLAddChart(annotations, type="Histogram",
+    chart <- .AddXMLAddChart(annotations, type="Histogram",
                     speech=paste("Histogram of", x$xlab),
                     speech2=paste("Histogram showing ", x$NBars, "bars for ",
                                   x$xlab, "over the range", min(x$breaks),  
                                   "to",max(x$breaks), "and", x$ylab,
                                   "from 0 to", max(x$counts)), # must allow for density
                     children=list(title, xAxis, yAxis, center))
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
@@ -127,13 +144,14 @@ AddXML.tsplot = function(x, file) {
     ## now to add the other content related bits
     center = .AddXMLAddTimeseriesCenter(annotations,ts=x)
 
-    .AddXMLAddChart(annotations, type="TimeSeriesPlot",
+    chart <- .AddXMLAddChart(annotations, type="TimeSeriesPlot",
                     speech=paste("Time series plot of", x$ylab),
                     speech2=paste("Time series plot showing ",
                                   x$ylab, "over the range", YMin,
                                   "to", YMax,  "for", x$ylab,
                                   "which ranges from", XMin,  "to", XMax), 
                     children=list(title, xAxis, yAxis, center))
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
 
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
