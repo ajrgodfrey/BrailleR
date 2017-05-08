@@ -1,6 +1,7 @@
 \name{TSPlot}
 \alias{TimeSeriesPlot}
 \alias{plot.tsplot}
+\alias{print.tsplot}
 
 \title{Create a standard time series plot with a few extra elements added to the output object}
 \description{This function is a wrapper to the standard \code{plott()} function in the \pkg{graphics} package. It is tailored to generating a time series plot, and adds detail to the stored object so that a better text description can be formulated using the \code{VI()} method in the \pkg{BrailleR} package.}
