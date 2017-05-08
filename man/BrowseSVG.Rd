@@ -6,7 +6,7 @@
   its XML annotations. Then launches a browser tab to allow viewing and
   interactive exploration of the SVG diagram.}
 \usage{
-BrowseSVG(file="test", dir=".", key=TRUE, view=interactive()) 
+BrowseSVG(file="test", dir=".", key=TRUE, footer = TRUE, view=interactive()) 
 }
 \arguments{
   \item{file}{the filename for the HTML file; this should correspond to
@@ -14,6 +14,7 @@ BrowseSVG(file="test", dir=".", key=TRUE, view=interactive())
   \item{dir}{the folder into which the HTML file is written and where R tries to
     locate the SVG and XML files}
   \item{key}{include key for explorer's keyboard commands in webpage}
+  \item{footer}{Volker, explain please.}
   \item{view}{launch in browser; this is the default when running in an interactive
   session}
 }
