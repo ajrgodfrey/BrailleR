@@ -49,7 +49,7 @@ plot.scatterplot = function(x, ...){
 suppressWarnings(do.call(plot, x))
 return(invisible(NULL))
 }
-\
+
 
 plot.fittedlineplot = function(x, ...){
 suppressWarnings(do.call(plot, x))

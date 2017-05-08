@@ -2,6 +2,8 @@
 - VS offered BrowseSVG() and replacement cacc.js for improved interactive experience; JG fixed for CRAN checks.
 - moved knitr package to imports. This means some of the Rmd files need more explicit mention of the package to get chunk options working properly.
 - JG implemented the ViewSVG() so that anyone can use the interactive graph viewing system; required various internal functions to move and write necessary files 
+- added FittedLinePlot() which adds a fitted line to the ScatterPlot() already implmented
+
 
 # v0.25.6
 - working on accessible Venn diagrams and time series plots
