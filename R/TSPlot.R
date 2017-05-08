@@ -20,6 +20,7 @@ Out$par = par()
 }
 
 plot.tsplot = function(x, ...){
+x = .RemoveExtraGraphPars(x) # see ScatterPlot.R for this function
 suppressWarnings(do.call(plot, x))
 return(invisible(NULL))
 }

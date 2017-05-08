@@ -33,7 +33,7 @@ FittedLinePlot = function(x, y, ...){
     Out = .checkTextLabels(MC, Out)
     Out=Augment(Out)
     Out$fittedline$coef = coef(lm(y~x, data=Out$data))
-    abline(Out$fittedline$coef)
+    abline(Out$fittedline$coef, col=2)
     return(invisible(Out))
 }
 
@@ -53,16 +53,33 @@ return(invisible(na.omit(data.frame(x=x[Ord], y=y[Ord]))))
 }
 
 plot.scatterplot = function(x, ...){
+x$x= x$data$x
+x$y = x$data$y
+x = .RemoveExtraGraphPars(x)
 suppressWarnings(do.call(plot, x))
 return(invisible(NULL))
 }
 
 
 plot.fittedlineplot = function(x, ...){
-suppressWarnings(do.call(plot, x$data))
-    abline(x$fittedline$coef)
+x$x= x$data$x
+x$y = x$data$y
+Pars=x$par
+fitline = x$fittedline
+x = .RemoveExtraGraphPars(x)
+suppressWarnings(do.call(plot, c(x,Pars)))
+    abline(fitline$coef, col=2)
 return(invisible(NULL))
 }
 
 print.fittedlineplot = plot.fittedlineplot
 print.scatterplot = plot.scatterplot
+
+.RemoveExtraGraphPars = function(x){
+ToRemoveBrailleRBits = c("xTicks", "yTicks", "par", "GroupSummaries", "Continuous", "coef", "data", "fittedline")
+ToRemoveBasePar = c("cin", "cra", "csi", "cxy", "din", "page")
+ToRemove = c(ToRemoveBasePar, ToRemoveBrailleRBits)
+x2 = x[setdiff(names(x), ToRemove)]
+class(x2) = class(x)
+return(invisible(x2))
+}
