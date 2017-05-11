@@ -153,10 +153,10 @@ Augment.tsplot =
 
 
 .AugmentBase = function(x){
-    x$xaxp = par()$xaxp
-    x$yaxp = par()$yaxp
-    x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
-    x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
+    x$par$xaxp = par()$xaxp
+    x$par$yaxp = par()$yaxp
+    x$xTicks = seq(x$par$xaxp[1], x$par$xaxp[2], length.out=x$par$xaxp[3]+1)
+    x$yTicks = seq(x$par$yaxp[1], x$par$yaxp[2], length.out=x$par$yaxp[3]+1)
     x$ExtraArgs$main <- if (is.null(x$ExtraArgs$main)) {""} else {x$ExtraArgs$main}
     x$ExtraArgs$sub <- if (is.null(x$ExtraArgs$sub)) {""} else {x$ExtraArgs$sub}
     x$ExtraArgs$xlab <- if (is.null(x$ExtraArgs$xlab)) {""} else {x$ExtraArgs$xlab}

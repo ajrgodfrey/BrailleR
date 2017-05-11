@@ -91,9 +91,9 @@ University event in 2013. This gave me the first opportunity to
 put the package in front of an audience that I hope will gain from the
 package's existence. 
 
-I've already mentioned the following contributors above:Paul Murrell, Yihui Xie, Timothy Bilton, and James Curtis.
+I've already mentioned the following contributors above:Paul Murrell, Yihui Xie, Timothy Bilton, and James Curtis. In December 2016, I was visiting Donal Fitzpatrick at Dublin City University and we were joined by Volker Sorge for a few days. Volker's work in creating an accessible tool for explorationof chemical molecules is being broadened into statistical graphs.
 
-I also need to acknowledge the value of attending the Summer University events.  I gain so much from my interactions with the students who attend, the other workshop leaders twho give me feedback, and the other professionals who assist blind students in their own countries.
+I also need to acknowledge the value of attending the Summer University events.  I gain so much from my interactions with the students who attend, the other workshop leaders who gave me feedback, and the other professionals who assist blind students in their own countries.
  
 
 
