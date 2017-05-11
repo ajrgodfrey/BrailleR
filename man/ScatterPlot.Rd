@@ -25,4 +25,15 @@ An object of class scatterplot of fittedlineplot, with the addition of any calls
 \references{Godfrey, A.J.R. (2013) \sQuote{Statistical Software from a Blind Person's Perspective: R is the Best, but we can make it better}, The R Journal 5(1), pp73-79.}
 \author{A. Jonathan R. Godfrey}
 
+\examples{
+attach(airquality)
+op = par(mfcol=c(2,2))
+plot(Wind, Ozone, pch=4)
+ScatterPlot(Wind, Ozone, pch=4)
+plot(Wind, Ozone)
+abline(coef(lm(Ozone~Wind)), col=4)
+FittedLinePlot(Wind, Ozone, line.col=4)
+par(op)
+detach(airquality)
+}
 
