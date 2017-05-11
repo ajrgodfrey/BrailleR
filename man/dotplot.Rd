@@ -24,5 +24,3 @@ This function is dependent on the \code{\link[graphics]{stripchart}} function fr
 \examples{
 VI(with(airquality, dotplot(Ozone~Month)))
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

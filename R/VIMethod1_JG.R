@@ -17,16 +17,16 @@ VI.boxplot =
 x=Augment(x)
       cat(paste0(
               'This graph has ', x$Boxplots, ' printed ', x$VertHorz,
-              '\n', ifelse(length(x$main) > 0, 'with the title: ',
-                           'but has no title'), x$main, '\n',
-              ifelse(length(x$xlab) > 0, InQuotes(x$xlab), 'No label'),
+              '\n', ifelse(length(x$ExtraArgs$main) > 0, 'with the title: ',
+                           'but has no title'), x$ExtraArgs$main, '\n',
+              ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), 'No label'),
               ' appears on the x-axis.\n',
-              ifelse(length(x$ylab) > 0, paste0('"', x$ylab, '"'), 'No label'),
+              ifelse(length(x$ExtraArgs$ylab) > 0, paste0('"', x$ExtraArgs$ylab, '"'), 'No label'),
               ' appears on the y-axis.\n'))
       if (x$horizontal) {
-        cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$xaxp), "\n")
+        cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$par$xaxp), "\n")
       } else {
-        cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$yaxp), "\n")
+        cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$par$yaxp), "\n")
       }
       for (i in 1:x$NBox) {
         cat(x$VarGroupUpp, x$names[i], 'has', x$n[i], 'values.\n')
@@ -76,21 +76,21 @@ VI.dotplot =
       Cuts = seq(MinVal, MaxVal, (MaxVal - MinVal) / Bins)
       # now do the description bit
       cat(paste0('This graph has ', x$dotplots, ' printed ', x$VertHorz, '\n',
-                 ifelse(length(x$main) > 0, 'with the title: ',
-                        'but has no title'), x$main, '\n'))
-      if (!is.null(x$dlab) | !is.null(x$glab)) {
+                 ifelse(length(x$ExtraArgs$main) > 0, 'with the title: ',
+                        'but has no title'), x$ExtraArgs$main, '\n'))
+      if (!is.null(x$ExtraArgs$dlab) | !is.null(x$ExtraArgs$glab)) {
         warning(
             "Use of dlab or glab arguments is not advised. Use xlab and ylab instead.")
       } else {
-        cat(paste0(ifelse(length(x$xlab) > 0, InQuotes(x$xlab), 'No label'),
+        cat(paste0(ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), 'No label'),
                    ' appears on the x-axis.\n',
-                   ifelse(length(x$ylab) > 0, paste0('"', x$ylab, '"'),
+                   ifelse(length(x$ExtraArgs$ylab) > 0, paste0('"', x$ExtraArgs$ylab, '"'),
                           'No label'), ' appears on the y-axis.\n'))
       }
       if (x$vertical) {
-        cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$yaxp), "\n")
+        cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$par$yaxp), "\n")
       } else {
-        cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$xaxp), "\n")
+        cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$par$xaxp), "\n")
       }
       cat(paste("the data that range from", MinVal, "to", MaxVal,
                 "has been broken into", Bins, "bins.\nThe counts are:\n"))
@@ -106,13 +106,13 @@ VI.dotplot =
 VI.histogram =
     function(x, ...) {
       cat(paste0('This is a histogram, with the title: ',
-          ifelse(length(x$main) > 0, x$main, paste("Histogram of", x$xname)),
-          '\n', ifelse(length(x$xlab) > 0, InQuotes(x$xlab), InQuotes(x$xname)),
+          ifelse(length(x$ExtraArgs$main) > 0, x$ExtraArgs$main, paste("Histogram of", x$xname)),
+          '\n', ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), InQuotes(x$xname)),
           ' is marked on the x-axis.\n'))
-      cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$xaxp), "\n")
+      cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$par$xaxp), "\n")
       cat('There are a total of', sum(x$counts),
           'elements for this variable.\n')
-      cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$yaxp), "\n")
+      cat("Tick marks for the y-axis are at:", .GetAxisTicks(x$par$yaxp), "\n")
       NoBins = length(x$breaks) - 1
       if (x$equidist) {
         cat('It has', NoBins, 'bins with equal widths, starting at',

@@ -60,9 +60,9 @@ return(invisible(x))
 
 
 Augment.histogram = function(x) {
-    x$main <- if (is.null(x$main)) {paste("Histogram of", x$xname)} else {x$main}
-    x$xlab <- if (is.null(x$xlab)) {x$xname} else {x$xlab}
-    x$ylab <- if (is.null(x$ylab)) {"Frequency"} else {x$ylab}
+    x$ExtraArgs$main <- if (is.null(x$ExtraArgs$main)) {paste("Histogram of", x$xname)} else {x$ExtraArgs$main}
+    x$ExtraArgs$xlab <- if (is.null(x$ExtraArgs$xlab)) {x$xname} else {x$ExtraArgs$xlab}
+    x$ExtraArgs$ylab <- if (is.null(x$ExtraArgs$ylab)) {"Frequency"} else {x$ExtraArgs$ylab}
     x$NBars = length(x$counts)
     x=.AugmentBase(x)
 return(invisible(x))
@@ -99,7 +99,7 @@ NBreaks= 6 #specified as something from 6 to 10 depending on how many obs there 
 
 Augment.tsplot = 
   function(x) {
-    x$xlab <- if (is.null(x$xlab)) {"Time"} else {x$xlab}
+    x$ExtraArgs$xlab <- if (is.null(x$ExtraArgs$xlab)) {"Time"} else {x$ExtraArgs$xlab}
     x=.AugmentBase(x)
     series =x [[1]]
     if (is.na(match(NA, series))) {
@@ -157,10 +157,10 @@ Augment.tsplot =
     x$yaxp = par()$yaxp
     x$xTicks = seq(x$xaxp[1], x$xaxp[2], length.out=x$xaxp[3]+1)
     x$yTicks = seq(x$yaxp[1], x$yaxp[2], length.out=x$yaxp[3]+1)
-    x$main <- if (is.null(x$main)) {""} else {x$main}
-    x$sub <- if (is.null(x$sub)) {""} else {x$sub}
-    x$xlab <- if (is.null(x$xlab)) {""} else {x$xlab}
-    x$ylab <- if (is.null(x$ylab)) {""} else {x$ylab}
+    x$ExtraArgs$main <- if (is.null(x$ExtraArgs$main)) {""} else {x$ExtraArgs$main}
+    x$ExtraArgs$sub <- if (is.null(x$ExtraArgs$sub)) {""} else {x$ExtraArgs$sub}
+    x$ExtraArgs$xlab <- if (is.null(x$ExtraArgs$xlab)) {""} else {x$ExtraArgs$xlab}
+    x$ExtraArgs$ylab <- if (is.null(x$ExtraArgs$ylab)) {""} else {x$ExtraArgs$ylab}
       class(x)=c("Augmented", class(x))
       return(invisible(x))
       }

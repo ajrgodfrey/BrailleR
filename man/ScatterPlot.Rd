@@ -27,13 +27,16 @@ An object of class scatterplot of fittedlineplot, with the addition of any calls
 
 \examples{
 attach(airquality)
-op = par(mfcol=c(2,2))
+op = par(mfcol=c(3,2))
 plot(Wind, Ozone, pch=4)
-ScatterPlot(Wind, Ozone, pch=4)
+test1 = ScatterPlot(Wind, Ozone, pch=4)
+test1 #does the plot method work?
 plot(Wind, Ozone)
 abline(coef(lm(Ozone~Wind)), col=4)
-FittedLinePlot(Wind, Ozone, line.col=4)
+test2 = FittedLinePlot(Wind, Ozone, line.col=4)
+test2 #does the plot method work?
 par(op)
 detach(airquality)
+rm(test1); rm(test2); rm(op)
 }
 

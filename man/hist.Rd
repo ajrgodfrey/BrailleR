@@ -40,5 +40,3 @@ MyHist
 # The VI() method then uses the extra information stored
 VI(MyHist)
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

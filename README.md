@@ -25,7 +25,8 @@ Any assistance to fill in the numerous gaps in what BrailleR delivers will be mo
 
 Some issues to resolve:
 
-1. storing the graphical parameters in ScatterPlot() etc. does not get the right ones slected. Need to replace this by somehow keeping the ... arguments supplie by the user. Tested using col and pch in FittedLinePlot()
+1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones slected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot()
+2. Get extra bits of information for WTF() coming through, such as other shapes, lines etc.
 1. get VI.ggplot() doing more; see vignette
 2. get more graphics ready for making into SVG for use on Tiger products; mostly in SVGThis() method
 3. Get more Graph types working with the additional XML to make them interactive.
