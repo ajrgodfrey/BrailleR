@@ -7,6 +7,7 @@
 - added plot and print methods for various graph types. The print method refers to the plot function so acts just like the ggplot and lattice packages.
 - restructured the storage of graph parameters and arguments for a variety of the masked functions. The intention is to make cleaning things up easier.
 - adding examples to the graph making help pages to show that the BrailleR functions replicate base graphics functions
+- added xlab(), ylab(), and main() for getting or setting these three parameters quickly. They only work for graphs that are created using BrailleR functions at this time.
 
 
 # v0.25.6
