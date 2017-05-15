@@ -8,6 +8,9 @@
 - restructured the storage of graph parameters and arguments for a variety of the masked functions. The intention is to make cleaning things up easier.
 - adding examples to the graph making help pages to show that the BrailleR functions replicate base graphics functions
 - added xlab(), ylab(), and main() for getting or setting these three parameters quickly. They only work for graphs that are created using BrailleR functions at this time.
+- updated VI.gg() which add functions to create text elements so that accessible versions can be made; various internal functions added to get labels commonly found on ggplot() graphs.
+
+
 
 
 # v0.25.6
