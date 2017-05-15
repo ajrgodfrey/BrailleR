@@ -37,7 +37,7 @@ test1 %>% main("titles are important") # nice that the pipe works!
 test2 = TimeSeriesPlot(Ozone)
 # using the update method
 update(test2, main="important title", sub="subtitles aren't always present", ylab="Ozone (ppb)") 
-# finally, change the appearance of the content in a graph using different plotting characters/line types
+# finally, change the graph to use different plotting characters/line types
 update(test2) # to fix
 par(op)
 detach(airquality)
