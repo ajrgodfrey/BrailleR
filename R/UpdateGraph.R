@@ -3,6 +3,7 @@
 main = xlab = ylab = function(graph, label=NULL){
 arg = as.character(match.call()[[1]])
 Obj = as.character(match.call()[["graph"]])
+## need to insert condition on ggplot in here. and change the next if() to else if.
 if(any(class(graph)=="Augmented")){
 if(is.null(label)){
 Out = .GetGraphText(graph, arg)
