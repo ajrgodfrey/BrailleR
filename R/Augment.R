@@ -59,7 +59,7 @@ Augment.gg = Augment.ggplot = function(x) {
       x$ExtraArgs$sub <- ifelse(is.null(x$labels$subtitle), "", x$labels$subtitle)
       x$ExtraArgs$xlab <- ifelse(is.null(x$labels$x), "", x$labels$x)
       x$ExtraArgs$ylab <- ifelse(is.null(x$labels$y), "", x$labels$y)
-      class(x)=c("Augmented", class(x))
+      class(x)=c(class(x), "Augmented") # order change here means updates are possible using functions in UpdateGraphs.R
       return(invisible(x))
 }
 
