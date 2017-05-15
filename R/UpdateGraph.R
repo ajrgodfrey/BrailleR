@@ -17,11 +17,11 @@ main = xlab = ylab = function(graph, label=NULL){
 }
 
 
-update.scatterplot = update.tsplot = update.fittedlineplot = UpdateGraph = function(graph, ...){
+update.scatterplot = update.tsplot = update.fittedlineplot = UpdateGraph = function(object, ...){
       MC <- match.call(expand.dots = TRUE)
       ParSet = as.list(MC[-c(1,2)])
-      Obj = as.character(match.call()[["graph"]])
-      Out = graph
+      Obj = as.character(match.call()[["object"]])
+      Out = object
 # now sift ExtraArgs from ParSet and update them
 # now sift pars from ParSet and update them
       assign(Obj, Out, parent.frame())
