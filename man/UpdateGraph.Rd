@@ -1,10 +1,16 @@
 \name{UpdateGraph}
+\alias{UpdateGraph}
 \alias{main}
+\alias{update.fittedlineplot}
+\alias{update.scatterplot}
+\alias{update.tsplot}
 \alias{xlab}
 \alias{ylab}
 \title{extract or alter graph parameters}
 \description{Either grabs the specified label or sets it to a newly specified value. In this case the graph is re-drawn and the graph object is updated.}
 \usage{
+UpdateGraph(graph, ...)
+
 main(graph, label = NULL)
 
 xlab(graph, label = NULL)

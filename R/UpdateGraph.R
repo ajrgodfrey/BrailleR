@@ -11,10 +11,23 @@ main = xlab = ylab = function(graph, label=NULL){
         } else {
             Out = .UpdateGraph(graph, label, arg)
             assign(Obj, Out, parent.frame())
-            return(invisible(TRUE))
+            return(invisible(Out))
         }
     }
 }
+
+
+update.scatterplot = update.tsplot = update.fittedlineplot = UpdateGraph = function(graph, ...){
+      MC <- match.call(expand.dots = TRUE)
+      ParSet = as.list(MC[-c(1,2)])
+      Obj = as.character(match.call()[["graph"]])
+      Out = graph
+# now sift ExtraArgs from ParSet and update them
+# now sift pars from ParSet and update them
+      assign(Obj, Out, parent.frame())
+      return(invisible(Out))
+}
+
 
 .UpdateGraph = function(graph, label, arg){
     graph$"ExtraArgs"[[arg]] = label
