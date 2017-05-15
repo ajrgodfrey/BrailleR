@@ -54,8 +54,13 @@ x$TextPositions=list(x=X, y=Y)
     }
 
 
-Augment.ggplot = function(x) {
-return(invisible(x))
+Augment.gg = Augment.ggplot = function(x) {
+      x$ExtraArgs$main <- ifelse(is.null(x$labels$title), "", x$labels$title)
+      x$ExtraArgs$sub <- ifelse(is.null(x$labels$subtitle), "", x$labels$subtitle)
+      x$ExtraArgs$xlab <- ifelse(is.null(x$labels$x), "", x$labels$x)
+      x$ExtraArgs$ylab <- ifelse(is.null(x$labels$y), "", x$labels$y)
+      class(x)=c("Augmented", class(x))
+      return(invisible(x))
 }
 
 

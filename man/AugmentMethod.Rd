@@ -5,6 +5,7 @@
 \alias{Augment.boxplot}
 \alias{Augment.dotplot}
 \alias{Augment.eulerr}
+\alias{Augment.gg}
 \alias{Augment.ggplot}
 \alias{Augment.histogram}
 \alias{Augment.scatterplot}
