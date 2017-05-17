@@ -1,10 +1,10 @@
 
-VI = function(x, ...) {
+VI = function(x, Describe=FALSE, ...) {
        UseMethod("VI")
      }
 
 VI.default =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       message("There is no specific method written for  this type of object.\n")
       message("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
       print(x)
@@ -13,7 +13,7 @@ VI.default =
 
 
 VI.boxplot =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
 x=Augment(x)
       cat(paste0(
               'This graph has ', x$Boxplots, ' printed ', x$VertHorz,
@@ -54,7 +54,7 @@ x=Augment(x)
     }
 
 VI.data.frame =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       ThisDF = x
       cat("\nThe summary of each variable is\n")
       with(ThisDF, {
@@ -69,7 +69,7 @@ VI.data.frame =
     }
 
 VI.dotplot =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       MinVal = min(unlist(x$vals))
       MaxVal = max(unlist(x$vals))
       Bins = getOption("BrailleR.DotplotBins")
@@ -104,7 +104,7 @@ VI.dotplot =
 
 
 VI.histogram =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       cat(paste0('This is a histogram, with the title: ',
           ifelse(length(x$ExtraArgs$main) > 0, x$ExtraArgs$main, paste("Histogram of", x$xname)),
           '\n', ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), InQuotes(x$xname)),
@@ -132,14 +132,14 @@ VI.histogram =
 
 
 VI.list =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       cat("No VI method has yet been written for this type of object so it has been printed for you in its entirety.\n")
       print(x)
     }
 
 
 VI.lm =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       ModelName <- match.call(expand.dots = FALSE)$x
       FolderName = paste0(ModelName, ".Validity")
       RmdName = paste0(FolderName, ".Rmd")
@@ -226,11 +226,11 @@ kable(InflObs)
       return(invisible(TRUE))
     }
 
-VI.matrix = function(x, ...) {
+VI.matrix = function(x, Describe=FALSE, ...) {
               VI(as.data.frame.matrix(x), ...)
             }
 
 VI.tsplot =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       x
     }

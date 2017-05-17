@@ -14,7 +14,7 @@ VI.aov <- function(x, ...)  # Last Edited: 18/02/15
   return(invisible(NULL))
 }
 
-VI.summary.lm <- function(x, ...) {
+VI.summary.lm <- function(x, Describe=FALSE, ...) {
   CoeTable <- x$coe  # Gives us the table
 
   # Check if intercept has been fitted

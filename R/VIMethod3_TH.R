@@ -1,5 +1,5 @@
 VI.ggplot =
-    function(x, ...) {
+    function(x, Describe=FALSE, ...) {
       TitleText = ifelse(is.null(x$labels$title), "This untitled chart;\n",
               paste0('This chart titled ', .getTextGGTitle(x), ';\n'))
       SubtitleText = ifelse(is.null(x$labels$subtitle), "has no subtitle;\n",
