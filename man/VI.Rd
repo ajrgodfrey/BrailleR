@@ -10,6 +10,7 @@
 \alias{Describe.summary.lm}
 \alias{Describe.tsplot}
 \alias{Describe.TukeyHSD}
+\alias{print.description}
 \alias{VI}
 \alias{VI.default}
 \alias{VI.aov}
@@ -43,6 +44,7 @@ VI(x, Describe=FALSE, ...)
 }
 \arguments{
   \item{x}{any \R object}
+\item{Describe,VI}{Should the other function be called at the same time}
 \item{...}{other arguments, currently ignored}
 }
 \details{

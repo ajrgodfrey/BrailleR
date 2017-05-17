@@ -1,4 +1,4 @@
-VI.aov <- function(x, ...)  # Last Edited: 18/02/15
+VI.aov <- function(x, Describe=FALSE, ...)  # Last Edited: 18/02/15
     {
   GroupL <- interaction(x$model[, -1], sep = ":")
   FNames = attr(x$terms, 'term.labels')
@@ -71,7 +71,7 @@ VI.summary.lm <- function(x, Describe=FALSE, ...) {
 
 
 
-VI.TukeyHSD <- function(x, ...)  # Last Edited: 25/02/15
+VI.TukeyHSD <- function(x, Describe=FALSE, ...)  # Last Edited: 25/02/15
     {
   CI <- attr(x, 'conf.level')
   for (Comparison in 1:length(x)) {

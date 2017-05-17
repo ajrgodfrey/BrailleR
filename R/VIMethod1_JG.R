@@ -227,7 +227,7 @@ kable(InflObs)
     }
 
 VI.matrix = function(x, Describe=FALSE, ...) {
-              VI(as.data.frame.matrix(x), ...)
+              VI(as.data.frame.matrix(x), Describe=Describe, ...)
             }
 
 VI.tsplot =
