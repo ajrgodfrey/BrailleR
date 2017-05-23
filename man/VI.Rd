@@ -34,9 +34,11 @@ A set of methods that extract the most relevant information from a graphical obj
 The method includes representations of summary methods that are more suitable for blind users. For example, the method for a data.frame uses a single line for each variable instead of the normal column layout used by the \code{summary} method.
 }
 \usage{
+Describe(x, VI=FALSE, ...)
 VI(x, Describe=FALSE, ...)
 
 \method{VI}{histogram}(x, Describe=FALSE, ...)
+\method{Describe}{histogram}(x, VI=FALSE, ...)
 
 \method{VI}{aov}(x, Describe=FALSE, ...)
 
