@@ -10,6 +10,8 @@ Describe =
 
 .CommonTickMarkText = "Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted."
 
+.CommonAspectRatioText = "R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents."
+
 print.description = 
     function(x, ...){
         cat(paste0(x$title, "\n", "General description: ", x$general, "\n", "R hints: ", x$RHints, "\n"))

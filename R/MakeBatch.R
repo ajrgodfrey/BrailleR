@@ -57,7 +57,7 @@ mean(MySample)  \n",
             if (endsWith(file, ".Rmd") | endsWith(file, ".rmd")) {
 
               # write a batch file for processing the R markdown file
-              cat(paste0(RHome, "\\bin\\RScript.exe -e \"knitr::knit2html('",
+              cat(paste0(RHome, "\\bin\\RScript.exe -e \"rmarkdown::render('",
                          FullFile[1], ".Rmd')\"\n"),
                   file = paste0(FullFile[1], ".bat"))
               message(FullFile[1], ".bat created successfully.")

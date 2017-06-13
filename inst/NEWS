@@ -1,4 +1,5 @@
 # v0.25.7
+- MakeBatch() changed to use rmarkdown::render() instead of knitr::knit2html()
 - VS offered BrowseSVG() and replacement cacc.js for improved interactive experience; JG fixed for CRAN checks.
 - changes from VS merged via GitHub (not to be reported again)
 - moved knitr package to imports. This means some of the Rmd files need more explicit mention of the package to get chunk options working properly.
