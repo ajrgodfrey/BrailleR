@@ -42,6 +42,7 @@ Some issues to resolve:
 6. create function to re-create vignettes from Rnw source into HTML
 5. Multiple language support was started but is in serious need of some love.
 7. Functions for the VI method to be completed include: VI.prcomp(), VI.factanal(), VI.glm(), VI.htest()?
-4. add functionality to compile all Rmd files in the current directory. Request from JYS
+4. add functionality to compile all Rmd files in the current directory. Request from JYS; initial implementation done in June 2017.
+
 
 
