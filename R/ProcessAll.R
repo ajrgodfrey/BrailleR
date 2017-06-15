@@ -1,6 +1,6 @@
 ProcessAllRmd = function(dir =".", method = "render"){
       if (dir.exists(dir)) {
-        RmdFiles = list.files(dir, pattern=".Rmd", full.names=TRUE) 
+        RmdFiles = list.files(dir, pattern="\\.Rmd$", full.names=TRUE) 
         }
         else stop("Specified folder does not exist.\n")
       if(method=="render"){
