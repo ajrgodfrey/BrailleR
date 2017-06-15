@@ -1,5 +1,7 @@
 # v0.25.7
-- MakeBatch() changed to use rmarkdown::render() instead of knitr::knit2html()
+- ProcessAllRmd() function added: this processes all Rmd files in the specified folder using either rmarkdown::render() or knitr::knit2html()
+- MakeBatch() changed to force Rmd file specific batch file to use rmarkdown::render() instead of knitr::knit2html()
+- MakeBatch(file=NULL) now creates ProcessAllRmd.bat file in working directory so that users can process all Rmd files from Windows Explorer or the  DOS command prompt.
 - VS offered BrowseSVG() and replacement cacc.js for improved interactive experience; JG fixed for CRAN checks.
 - changes from VS merged via GitHub (not to be reported again)
 - moved knitr package to imports. This means some of the Rmd files need more explicit mention of the package to get chunk options working properly.
@@ -11,8 +13,6 @@
 - added xlab(), ylab(), and main() for getting or setting these three parameters quickly. They only work for graphs that are created using BrailleR functions at this time.
 - updated VI.gg() which add functions to create text elements so that accessible versions can be made; various internal functions added to get labels commonly found on ggplot() graphs.
 - added Describe() so that a blind user can have the general appearance of a particular graph object explained to them. Text elements of the resulting description object cna be pulled into the other accessibility tools under development.
-
-
 
 
 # v0.25.6
