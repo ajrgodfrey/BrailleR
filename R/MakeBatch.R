@@ -17,7 +17,7 @@ MakeBatch =
                 file = "RmdBatch.bat")
             message("RmdBatch.bat created successfully.")
             # write a batch file for processing all Rmd files
-            cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet -e "BrailleR::ProcessAllRmd()"\n"),
+            cat(paste0(RHome, '\\bin\\R.exe CMD BATCH --vanilla --quiet -e "BrailleR::ProcessAllRmd()"\n'),
                 file = "ProcessAllRmd.bat")
             message("ProcessAllRmd.bat created successfully.")
             message(
