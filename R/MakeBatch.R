@@ -13,7 +13,7 @@ MakeBatch =
             message("RBatch.bat created successfully.")
             # write a batch file for processing R markdown files
             cat(paste0(RHome,
-                       "\\bin\\RScript.exe -e \"rmarkdown::render('%1')\"\n"),
+                       "\\bin\\RScript.exe --vanilla -e \"rmarkdown::render('%1')\"\n"),
                 file = "RmdBatch.bat")
             message("RmdBatch.bat created successfully.")
             # write a batch file for processing all Rmd files
