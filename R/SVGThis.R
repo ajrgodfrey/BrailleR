@@ -156,7 +156,7 @@ SVGThis.histogram =
               desc = "need something much smarter in here")
 }
 
-SVGThis.tsplot = function(x, file = "test.svg") {
+SVGThis.scatterplot = SVGThis.tsplot = function(x, file = "test.svg") {
       suppressWarnings(do.call(plot, x))  # ensure we create a plot on a new graphics device
       gridGraphics::grid.echo()  # plot() uses graphics package
       gridSVG::grid.export(name = file)

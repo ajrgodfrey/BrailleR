@@ -6,6 +6,7 @@
 \alias{AddXML.eulerr}
 \alias{AddXML.ggplot}
 \alias{AddXML.histogram}
+\alias{AddXML.scatterplot}
 \alias{AddXML.tsplot}
 
 \title{Create XML files to sit alongside SVG files in order to make an accessible graph experience.}

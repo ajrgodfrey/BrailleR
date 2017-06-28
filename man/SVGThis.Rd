@@ -6,6 +6,7 @@
 \alias{SVGThis.eulerr}
 \alias{SVGThis.ggplot}
 \alias{SVGThis.histogram}
+\alias{SVGThis.scatterplot}
 \alias{SVGThis.tsplot}
 \alias{MakeTigerReady}
 \alias{addInfo}
