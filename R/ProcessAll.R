@@ -5,7 +5,7 @@ ProcessAllRmd = function(dir =".", method = "render"){
         else stop("Specified folder does not exist.\n")
       if(method=="render"){
         for(i in RmdFiles){
-          rmarkdown::render(i)
+          rmarkdown::render(i, output_format = "all")
           }
         }
       else if(method=="knit2html"){
