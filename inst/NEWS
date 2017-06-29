@@ -12,12 +12,12 @@
 - adding examples to the graph making help pages to show that the BrailleR functions replicate base graphics functions
 - added xlab(), ylab(), and main() for getting or setting these three parameters quickly. They only work for graphs that are created using BrailleR functions at this time.
 - updated VI.gg() which add functions to create text elements so that accessible versions can be made; various internal functions added to get labels commonly found on ggplot() graphs.
-- added Describe() so that a blind user can have the general appearance of a particular graph object explained to them. Text elements of the resulting description object cna be pulled into the other accessibility tools under development.
+- added Describe() so that a blind user can have the general appearance of a particular graph object explained to them. Text elements of the resulting description object can be pulled into the other accessibility tools under development.
+- working on accessibility for scatter plots
 
 
 # v0.25.6
 - working on accessible Venn diagrams and time series plots
-- working on accessibility for scatter plots
 - fixed VI() method to handle additional arguments, although they are currently ignored.
 - created function to choose long and short text for a boxplot; previously embedded in VI.boxplot()
 

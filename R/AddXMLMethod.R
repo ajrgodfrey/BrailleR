@@ -119,7 +119,45 @@ AddXML.histogram = function(x, file) {
     return(invisible(NULL))
 }
 
-AddXML.scatterplot = AddXML.tsplot = function(x, file) {
+AddXML.scatterplot = function(x, file) {
+    doc = .AddXMLDocument("scatterplot")
+    root = XML::xmlRoot(doc)
+    annotations = .AddXMLAddNode(root, "annotations")
+
+# still need to allow for main and sub titles
+    title = .AddXMLAddTitle(annotations, title=x$ExtraArgs$main)
+
+    xValues <- x$xTicks
+    XMin = min(x$xTicks)
+    XMax = max(x$xTicks)
+    xAxis = .AddXMLAddXAxis(
+        annotations, label=x$ExtraArgs$xlab, values=xValues,
+        speechLong=paste("x axis", x$ExtraArgs$xlab, "ranges from", XMin, "to", XMax))
+
+   yValues <- x$yTicks
+    YMin = min(x$yTicks)
+    YMax = max(x$yTicks)
+    yAxis = .AddXMLAddYAxis(
+        annotations, label=x$ExtraArgs$ylab, values=yValues,
+        speechLong=paste("y axis", x$ExtraArgs$ylab, "ranges from", YMin, "to", YMax))
+
+    ## now to add the other content related bits
+    center = .AddXMLAddScatterCenter(annotations, sp=x)
+
+    chart <- .AddXMLAddChart(annotations, type="ScatterPlot",
+                    speech=paste("Scatter plot of", x$ExtraArgs$ylab),
+                    speech2=paste("Scatter plot showing ",
+                                  x$ExtraArgs$ylab, "over the range", YMin,
+                                  "to", YMax,  "for", x$ExtraArgs$ylab,
+                                  "which ranges from", XMin,  "to", XMax), 
+                    children=list(title, xAxis, yAxis, center))
+    .AddXMLAddComponents(chart, list(title, xAxis, yAxis, center))
+
+    XML::saveXML(doc=doc, file=file)
+    return(invisible(NULL))
+}
+
+AddXML.tsplot = function(x, file) {
     doc = .AddXMLDocument("timeseriesplot")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
