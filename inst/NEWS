@@ -1,3 +1,6 @@
+# v0.26.0 for Annabelle
+Pushed to CRAN on 6 July 2017
+
 # v0.25.7
 - ProcessAllRmd() function added: this processes all Rmd files in the specified folder using either rmarkdown::render() or knitr::knit2html()
 - MakeBatch() changed to force Rmd file specific batch file to use rmarkdown::render() instead of knitr::knit2html()

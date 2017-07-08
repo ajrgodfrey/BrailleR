@@ -43,6 +43,7 @@ Some issues to resolve:
 5. Multiple language support was started but is in serious need of some love.
 7. Functions for the VI method to be completed include: VI.prcomp(), VI.factanal(), VI.glm(), VI.htest()?
 4. added functionality to compile all Rmd files in the current directory. Request from JYS; initial implementation done in June 2017. Includes batch file for use in Windows explorer and DOS prompt. Needs testing.
+- VI.scatterplot() needs creating
 
 
 
