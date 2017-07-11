@@ -1,7 +1,7 @@
 Package: BrailleR
 Type: Package
 Title: Improved Access for Blind Users
-Version: 0.26.0
+Version: 0.27.0
 Date: 2017-06-29
 Author: A. Jonathan R. Godfrey [aut, cre], Donal Fitzpatrick [ctb], Duncan Murdoch [ctb], Greg Snow
     [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], JooYoung Seo [ctb], Paul Murrell [ctb], Timothy Bilton [aut], Tony Hirst [ctb], Tsan-Kuang Lee [ctb], Volker Sorge [aut], Yihui Xie

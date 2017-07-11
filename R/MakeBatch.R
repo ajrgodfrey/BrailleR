@@ -11,15 +11,19 @@ MakeBatch =
             cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet %1\n"),
                 file = "RBatch.bat")
             message("RBatch.bat created successfully.")
-            # write a batch file for processing R markdown files
+            # write a batch file for processing a specific R markdown file
             cat(paste0(RHome,
                        "\\bin\\RScript.exe --vanilla -e \"rmarkdown::render('%1')\"\n"),
                 file = "RmdBatch.bat")
             message("RmdBatch.bat created successfully.")
-            # write a batch file for processing all Rmd files
+            # write a batch file for processing all R markdown files
             cat(paste0(RHome, '\\bin\\Rscript.exe --vanilla -e "BrailleR::ProcessAllRmd()"\n'),
                 file = "ProcessAllRmd.bat")
             message("ProcessAllRmd.bat created successfully.")
+            # write a batch file for processing all markdown files
+            cat(paste0(RHome, '\\bin\\Rscript.exe --vanilla -e "BrailleR::ProcessAllMd()"\n'),
+                file = "ProcessAllMd.bat")
+            message("ProcessAllMd.bat created successfully.")
             message(
                 "These files need to be moved to a folder that is on your system path.")
             # write a file to show the system path settings

@@ -1,5 +1,6 @@
 \name{MakeRmdFiles}
 \alias{History2Rmd}
+\alias{ProcessAllMd}
 \alias{ProcessAllRmd}
 \alias{R2Rmd}
 \title{Work flow convenience functions}
@@ -9,6 +10,7 @@ History2Rmd(file = "History.Rmd")
 
 R2Rmd(ScriptFile)
 
+ProcessAllMd(dir =".")
 ProcessAllRmd(dir =".", method = "render")
 }
 \arguments{
@@ -22,7 +24,7 @@ ProcessAllRmd(dir =".", method = "render")
 
 The R2Rmd() function does try to limit the number of blank lines copied from the R script into the Rmarkdown file. The Rmd file may need some editing.
 
-Once all Rmd files have been edited, the user can have all the Rmd files in a folder processed using ProcessAllRmd().
+Once all Rmd files have been edited, the user can have all the Rmd files in a folder processed using ProcessAllRmd(). A similar function ProcessAllMd() exists to process any plain markdown files which do not need knitting.
 }
 \value{NULL. These functions are for creating files in the current working directory.}
 \author{A. Jonathan R. Godfrey}
