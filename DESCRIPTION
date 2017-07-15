@@ -5,7 +5,7 @@ Version: 0.27.0
 Date: 2017-06-29
 Author: A. Jonathan R. Godfrey [aut, cre], Donal Fitzpatrick [ctb], Duncan Murdoch [ctb], Greg Snow
     [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], JooYoung Seo [ctb], Paul Murrell [ctb], Timothy Bilton [aut], Tony Hirst [ctb], Tsan-Kuang Lee [ctb], Volker Sorge [aut], Yihui Xie
-    [ctb]
+    [ctb], Debra Waren [ctb]
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
 Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.j.godfrey@massey.ac.nz"),
     person("Donal", "Fitzpatrick", email = "donal.fitzpatrick@dcu.ie", role = "ctb"),
@@ -19,7 +19,8 @@ Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.
     person("Tony", "Hirst", email = "tony.hirst@open.ac.uk", role = "ctb"),
     person("Tsan-Kuang", "Lee", email = "developer@tklee.com", role = "ctb"),
     person("Volker", "Sorge", email = "v.sorge@mathjax.org", role = "aut"),
-    person("Yihui", "Xie", email = "xie@yihui.name", role = "ctb"))
+    person("Yihui", "Xie", email = "xie@yihui.name", role = "ctb"),
+    person("Debra", "Warren", email = "dwar068@aucklanduni.ac.nz", role = "ctb"))
 Description: Blind users do not have access to the graphical output from R
     without printing the content of graphics windows to an embosser of some kind. This
     is not as immediate as is required for efficient access to statistical output.

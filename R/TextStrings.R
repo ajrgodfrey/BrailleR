@@ -35,7 +35,7 @@ return(invisible(list(Short=ShortText, Long=LongText)))
       A = x[1]
       B = x[2]
       Ticks = x[3]
-      paste(paste0(seq(A, B - Ticks, (B - A) / Ticks), ",", collapse = " "),
+      paste(paste0(seq(A, B - (B - A)/Ticks, (B - A) / Ticks), ",", collapse = " "),
             "and", B, collapse = " ")
     }
 
