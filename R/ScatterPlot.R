@@ -68,7 +68,7 @@ return(invisible(x2))
 
 .GrabExtraArgs = function(x){
     ToRemove = c("", "x", "y", "main", "xlab", "ylab", "sub", "line.col")
-    ExtraArgs = as.list(x[setdiff(names(x), ToRemove)])
+    ExtraArgs = (as.list(x))[setdiff(names(x), ToRemove)]
     return(invisible(ExtraArgs))
 }
 
