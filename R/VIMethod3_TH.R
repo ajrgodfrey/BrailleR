@@ -46,6 +46,20 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
     }
     
   }
+  facetRows=.getGGFacetRows(x);
+  facetCols=.getGGFacetCols(x);
+  if (!is.null(facetRows) | !is.null(facetCols)) {
+    facetTxt = "The chart is faceted "
+    if (!is.null(facetRows)) 
+      facetTxt = paste0(facetTxt," with ", paste0(paste(names(facetRows),collapse=", ")," as the rows"))
+    if (!is.null(facetRows) & !is.null(facetCols))
+      facetTxt = paste0(facetTxt," and")
+    if (!is.null(facetCols))
+      facetTxt = paste0(facetTxt," with ", paste0(paste(names(facetCols),collapse=", ")," as the columns"))
+    facetTxt = paste0(facetTxt,"\n")
+    VItext["facets"] = facetTxt;
+  }
+
   layerCount=.getGGLayerCount(x);
   if (layerCount==1) {
     VItext["layer.count"] = "There is one layer\n"
@@ -138,39 +152,51 @@ print.VItext = function(x, ...) {
 }
            
 .getTextGGXTicks = function(x){
-  text=ggplot_build(x)$layout$panel_ranges[[1]]$x.labels
+  text=suppressMessages(ggplot_build(x))$layout$panel_ranges[[1]]$x.labels
 }
 
 .getTextGGYTicks = function(x){
-  text=ggplot_build(x)$layout$panel_ranges[[1]]$y.labels
+  text=suppressMessages(ggplot_build(x))$layout$panel_ranges[[1]]$y.labels
 }
 
 .getGGLayerCount = function(x){
-  count=length(ggplot_build(x)$plot$layers)
+  count=length(suppressMessages(ggplot_build(x))$plot$layers)
 }
 
 .getTextGGLayerType = function(x,n){
-  plotClass = class(ggplot_build(x)$plot$layers[[n]]$geom)[1]
+  plotClass = class(suppressMessages(ggplot_build(x))$plot$layers[[n]]$geom)[1]
 }
 
 .getGGLayerYIntercept = function(x,n){
-  yIntercept = ggplot_build(x)$plot$layers[[n]]$mapping$yintercept
+  yIntercept = suppressMessages(ggplot_build(x))$plot$layers[[n]]$mapping$yintercept
 }
 
 .getGGLayerDataCount = function(x,n){
-  points = nrow(ggplot_build(x)$data[[n]])
+  points = nrow(suppressMessages(ggplot_build(x))$data[[n]])
 }
 .getGGLayerMapping = function(x,n){
-  mapping = ggplot_build(x)$plot$layers[[n]]$mapping
+  mapping = suppressMessages(ggplot_build(x))$plot$layers[[n]]$mapping
   if (length(mapping)>0)
     return(paste0("Layer ",n," maps ",paste0(names(mapping)," to ",mapping,collapse=", "),"\n")) 
   else
     return(NULL)
 }
 .getGGLayerAes = function(x,n){
-  aes = ggplot_build(x)$plot$layers[[n]]$aes_params
+  aes = suppressMessages(ggplot_build(x))$plot$layers[[n]]$aes_params
   if (length(aes)>0)
     return(paste0("Layer ",n," sets aesthetic ",paste0(names(aes)," to ",aes,collapse=", "),"\n")) 
+  else
+    return(NULL)
+}
+.getGGFacetRows = function(x){
+  if (length(x$facet$params$rows)>0)
+    return(x$facet$params$rows)
+  else
+    return(NULL)
+}
+.getGGFacetCols = function(x){
+  if (length(x$facet$params$cols)>0)
+    return(x$facet$params$cols)
   else
     return(NULL)
 }
