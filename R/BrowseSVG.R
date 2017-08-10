@@ -5,6 +5,7 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, footer=TRUE, view=interacti
   svgString <- readLines(svgFile)
   htmlFile <- paste0(file, ".html")
   .AddHeader2HTML(file=htmlFile, dir=dir)
+  .AddStyleFix2HTML(file=htmlFile, dir=dir)
   .AddContainer2HTML(svgString, xmlString, file=htmlFile, dir=dir)
   if (key) {
     .AddKey2HTML(file=htmlFile, dir=dir)
@@ -19,7 +20,16 @@ BrowseSVG = function(file="test", dir=".", key=TRUE, footer=TRUE, view=interacti
   return(invisible(NULL))
 }
 
+# DW - This fix needed for ggplot, as its bars otherwise have only a fill and no border and hence
+#      don't display correctly in MakeAccessibleSVG
+#      Should consider whether to only run this for MakeAccessibleSVG.ggplot
+#      Tried to make the selection as narrow as possible to avoid unwanted side-effects
+.AddStyleFix2HTML = function(svg, file="test.html", dir=".") {
+  cat('          <style>svg g[id^=geom_rect] rect {stroke-opacity: 1;}</style>\n', file=file, append=TRUE)
+}
 
+
+  
 .CleanXml = function(file="test", dir=".") {
   fileName <- paste0(file, ".xml")
   xmlString <- readLines(fileName)

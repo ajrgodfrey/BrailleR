@@ -200,3 +200,6 @@ print.VItext = function(x, ...) {
   else
     return(NULL)
 }
+.getGGPlotData = function(x,n) {
+  return(ggplot_build(x)$data[[n]])
+}

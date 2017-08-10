@@ -38,3 +38,14 @@ MakeAccessibleSVG.tsplot =
       message("SVG and XML files created successfully")
       return(invisible(NULL))
 }
+
+MakeAccessibleSVG.ggplot =
+    function(x, file = "test", view=interactive(), ...) {
+      svgfile = SVGThis(x, paste0(file, ".svg"))
+      xmlfile = AddXML(x, paste0(file, ".xml"))
+      if (view) {
+        BrowseSVG(file=file, view=view, ...)
+      }
+      message("SVG and XML files created successfully")
+      return(invisible(NULL))
+}

@@ -70,12 +70,36 @@ AddXML.eulerr = function(x, file) {
 }
 
 AddXML.ggplot = function(x, file) {
+    grid.force()
     doc = .AddXMLDocument("ggplot")
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
-    .AddXMLAddXAxis(annotations, label=x$ExtraArgs$xlab)
-    .AddXMLAddYAxis(annotations, label=x$ExtraArgs$ylab)
-
+    components=list()
+    titleGrob = grid.grep(gPath("title","text"),grep=TRUE)
+    if (length(titleGrob)>0) {
+      titleId = paste0(titleGrob$name,".1")
+      title = .AddXMLAddTitle(annotations, title=.getTextGGTitle(x), id=titleId)
+      components[[length(components)+1]]=title
+    }
+    xAxis = .AddXMLAddXAxis(annotations, label=.getTextGGXLab(x))
+    components[[length(components)+1]] = xAxis
+    yAxis = .AddXMLAddYAxis(annotations, label=.getTextGGYLab(x))
+    components[[length(components)+1]] = yAxis
+    layer = .AddXMLAddGGPlotLayer(annotations,x)
+    components[[length(components)+1]] = layer
+    
+    chart <- .AddXMLAddChart(annotations, type="Chart",
+                             speech=paste(ifelse(is.null(.getTextGGTitle(x)),"Chart",
+                                                 paste("Chart with title ",.getTextGGTitle(x))),
+                                          " with x-axis ", .getTextGGXLab(x),
+                                          " and y-axis ",.getTextGGYLab(x)),
+                             speech2=paste("Histogram showing ", x$NBars, "bars for ",
+                                           x$ExtraArgs$xlab, "over the range", min(x$breaks),  
+                                           "to",max(x$breaks), "and", x$ExtraArgs$ylab,
+                                           "from 0 to", max(x$counts)), # must allow for density
+                             children=components)
+    .AddXMLAddComponents(chart, components)
+    
     XML::saveXML(doc=doc, file=file)
     return(invisible(NULL))
 }

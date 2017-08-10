@@ -8,8 +8,9 @@
 #}
 
 ## Annotating title elements
-.AddXMLAddTitle = function(root, title="", longTitle = paste("Title:", title)) {
-    annotation = .AddXMLAddAnnotation(root, position=1, .AddXMLmakeId("main", "1.1"), kind="active")
+.AddXMLAddTitle = function(root, title="", longTitle = paste("Title:", title), id=NULL) {
+    titleId = ifelse(is.null(id), .AddXMLmakeId("main", "1.1"), id)
+    annotation = .AddXMLAddAnnotation(root, position=1, titleId, kind="active")
     XML::addAttributes(annotation$root, speech=paste("Title:", title), speech2=longTitle, type="Title")
     return(invisible(annotation))
 }
@@ -110,10 +111,39 @@
     return(invisible(annotation))
 }
 
+## Constructs a ggplot layer
+## Currently assumes histogram (and probably plenty of other assumptions)
+.AddXMLAddGGPlotLayer = function(root, x=NULL) {
+  annotation = .AddXMLAddAnnotation(root, position=4, id="center", kind="grouped")
+  barCount=.getGGLayerDataCount(x,1)
+  barGrob = grid.grep(gPath("geom_rect"),grep=TRUE)
+  XML::addAttributes(annotation$root, speech="Histogram bars",
+                     speech2=paste("Histogram with", barCount, "bars"),
+                     type="Center")
+  annotations <- list()
+  chartData = .getGGPlotData(x,1)  # assumes layer 1 for now
+  for (i in 1:barCount) {
+    barId = paste(barGrob$name,"1",i,sep=".")
+    annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
+                                        count=chartData$count[i], density=signif(chartData$density[i],4),
+                                        start=signif(chartData$xmin[i],4), 
+                                        end=signif(chartData$xmax[i],4),id=barId)
+#     annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=0,
+#                                        count=0, density=0,
+#                                        start=0, end=0,id=barId)
+  }
+  
+  .AddXMLAddComponents(annotation, annotations)
+  .AddXMLAddChildren(annotation, annotations)
+  .AddXMLAddParents(annotation, annotations)
+  return(invisible(annotation))
+}
 
-.AddXMLcenterBar = function(root, position=1, mid=NULL, count=NULL, density=NULL, start=NULL, end=NULL) {
+.AddXMLcenterBar = function(root, position=1, mid=NULL, count=NULL, density=NULL, start=NULL, end=NULL,
+                            id=NULL) {
+    rectId = ifelse(is.null(id),.AddXMLmakeId("rect", paste("1.1", position, sep=".")),id)
     annotation = .AddXMLAddAnnotation(root, position=position,
-                                      id=.AddXMLmakeId("rect", paste("1.1", position, sep=".")),
+                                      id=rectId,
                                       kind="active")
     XML::addAttributes(annotation$root,
                        speech=paste("Bar", position, "at", mid, "with value", count),
