@@ -201,5 +201,5 @@ print.VItext = function(x, ...) {
     return(NULL)
 }
 .getGGPlotData = function(x,n) {
-  return(ggplot_build(x)$data[[n]])
+  return(suppressMessages(ggplot_build(x))$data[[n]])
 }

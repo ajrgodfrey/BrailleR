@@ -21,7 +21,8 @@
 .AddXMLAddAxis = function(root, values, label, groupPosition, name, groupId, labelId, lineId, ...) {
     position = 0
     labelNode = .AddXMLAxisLabel(root, label=label, position=position <- position + 1,
-                     id=labelId, axis=groupId)
+                     id=labelId, axis=groupId, ...)
+    # Shouldn't try to add lineNode if this is a ggplot
     lineNode = .AddXMLAxisLine(root, id=lineId, axis=groupId)
     tickNodes = .AddXMLAxisValues(root, values=values,
                               position=position <- position + 1, id=lineId, axis=groupId, ...)
@@ -32,7 +33,7 @@
 
 ## Parameterisation for x-axis
 .AddXMLAddXAxis = function(root, values=NULL, label="", groupPosition=2, ...) {
-    .AddXMLAddAxis(root, values, label, groupPosition, "x axis:", "xaxis", "xlab", "bottom", ...)
+  .AddXMLAddAxis(root, values, label, groupPosition, "x axis:", "xaxis", "xlab", "bottom", ...)
 }
 
 ## Parameterisation for y-axis
@@ -57,9 +58,10 @@
 ## Aux methods for axes annotation.
 ##
 ## Axis labelling
-.AddXMLAxisLabel = function(root, label="", position=1, id="", axis="", speechShort=paste("Label", label), speechLong=speechShort) {
-    annotation = .AddXMLAddAnnotation(root, position=position,
-                                      id=.AddXMLmakeId(id, "1.1"), kind="active")
+.AddXMLAxisLabel = function(root, label="", position=1, id="", axis="", speechShort=paste("Label", label), 
+                            speechLong=speechShort, fullLabelId=NULL,...) {
+    labelId=ifelse(is.null(fullLabelId),.AddXMLmakeId(id, "1.1"),fullLabelId)
+    annotation = .AddXMLAddAnnotation(root, position=position,id=labelId, kind="active")
     XML::addAttributes(annotation$root, speech=speechShort, speech2=speechLong, type="Label")
     return(invisible(annotation))
 }
@@ -73,11 +75,14 @@
 }
 
 ## Axis values and ticks
-.AddXMLAxisValues = function(root, values=NULL, detailedValues=values, position=1, id="", axis="", ...) {
+.AddXMLAxisValues = function(root, values=NULL, detailedValues=values, position=1, id="", axis="", 
+                             fullTickLabelId=NULL, ...) {
     annotations <- list()
     if (length(values) <= 0) return(invisible(annotations))
     for (i in 1:length(values)) {
-        valueId = .AddXMLmakeId(id, "axis", "labels", paste("1.1", i, sep="."))
+        valueId = ifelse(is.null(fullTickLabelId),
+                         .AddXMLmakeId(id, "axis", "labels", paste("1.1", i, sep=".")),
+                         paste(fullTickLabelId,i,sep="."))
         value = .AddXMLAddAnnotation(root, position=position + i - 1,
                                      id=valueId, kind="active")
         XML::addAttributes(value$root, speech=paste("Tick mark", values[i]), speech2=detailedValues[i], type="Value")
@@ -113,7 +118,9 @@
 
 ## Constructs a ggplot layer
 ## Currently assumes histogram (and probably plenty of other assumptions)
-.AddXMLAddGGPlotLayer = function(root, x=NULL) {
+.AddXMLAddGGPlotLayer = function(root, x=NULL, layerType=NULL) {
+  if (layerType != "GeomBar")  # For now only hangle bar charts
+    return()
   annotation = .AddXMLAddAnnotation(root, position=4, id="center", kind="grouped")
   barCount=.getGGLayerDataCount(x,1)
   barGrob = grid.grep(gPath("geom_rect"),grep=TRUE)
@@ -128,9 +135,6 @@
                                         count=chartData$count[i], density=signif(chartData$density[i],4),
                                         start=signif(chartData$xmin[i],4), 
                                         end=signif(chartData$xmax[i],4),id=barId)
-#     annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=0,
-#                                        count=0, density=0,
-#                                        start=0, end=0,id=barId)
   }
   
   .AddXMLAddComponents(annotation, annotations)

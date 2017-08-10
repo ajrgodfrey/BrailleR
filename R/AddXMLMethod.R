@@ -75,28 +75,36 @@ AddXML.ggplot = function(x, file) {
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
     components=list()
+    backgroundGrob = grid.grep(gPath("panel.background..rect"),grep=TRUE)
     titleGrob = grid.grep(gPath("title","text"),grep=TRUE)
     if (length(titleGrob)>0) {
       titleId = paste0(titleGrob$name,".1")
       title = .AddXMLAddTitle(annotations, title=.getTextGGTitle(x), id=titleId)
       components[[length(components)+1]]=title
     }
-    xAxis = .AddXMLAddXAxis(annotations, label=.getTextGGXLab(x))
+    xAxisLabelGrob = paste0(grid.grep(gPath("xlab-b","text"),grep=TRUE)$name,".1")
+    xAxisTickLabelGrob = paste0(grid.grep(gPath("axis-b", "axis","axis","text"), grep = TRUE)$name,".1")
+    xAxis = .AddXMLAddXAxis(annotations, label=.getTextGGXLab(x),values=.getTextGGXTicks(x),
+                            fullLabelId=xAxisLabelGrob,fullTickLabelId=xAxisTickLabelGrob)
     components[[length(components)+1]] = xAxis
-    yAxis = .AddXMLAddYAxis(annotations, label=.getTextGGYLab(x))
+    yAxisLabelGrob = paste0(grid.grep(gPath("ylab-l","text"),grep=TRUE)$name,".1")
+    yAxisTickLabelGrob = paste0(grid.grep(gPath("axis-l", "axis","axis","text"), grep = TRUE)$name,".1")
+    yAxis = .AddXMLAddYAxis(annotations, label=.getTextGGYLab(x),values=.getTextGGYTicks(x),
+                            fullLabelId=yAxisLabelGrob,fullTickLabelId=yAxisTickLabelGrob)
     components[[length(components)+1]] = yAxis
-    layer = .AddXMLAddGGPlotLayer(annotations,x)
+    layer = .AddXMLAddGGPlotLayer(annotations,x,.getTextGGLayerType(x,1))    # Only layer 1 for now
     components[[length(components)+1]] = layer
-    
+    chartData=.getGGPlotData(x,1)          # currently assumes layer=1
     chart <- .AddXMLAddChart(annotations, type="Chart",
                              speech=paste(ifelse(is.null(.getTextGGTitle(x)),"Chart",
                                                  paste("Chart with title ",.getTextGGTitle(x))),
                                           " with x-axis ", .getTextGGXLab(x),
                                           " and y-axis ",.getTextGGYLab(x)),
-                             speech2=paste("Histogram showing ", x$NBars, "bars for ",
-                                           x$ExtraArgs$xlab, "over the range", min(x$breaks),  
-                                           "to",max(x$breaks), "and", x$ExtraArgs$ylab,
-                                           "from 0 to", max(x$counts)), # must allow for density
+                             # Currently speech2 is same as speech
+                             speech2=paste(ifelse(is.null(.getTextGGTitle(x)),"Chart",
+                                                 paste("Chart with title ",.getTextGGTitle(x))),
+                                          " with x-axis ", .getTextGGXLab(x),
+                                          " and y-axis ",.getTextGGYLab(x)),  
                              children=components)
     .AddXMLAddComponents(chart, components)
     

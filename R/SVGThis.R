@@ -107,9 +107,9 @@ SVGThis.eulerr =
 
 SVGThis.ggplot =
     function(x, file = "test.svg") {
-      x=Augment(x)
+#      x=Augment(x)
       grid.force()
-      x
+      print(x)
       gridSVG::grid.export(name = file)
 #      dev.off()
       MakeTigerReady(svgfile = file)
