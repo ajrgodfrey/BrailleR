@@ -92,9 +92,11 @@ AddXML.ggplot = function(x, file) {
     yAxis = .AddXMLAddYAxis(annotations, label=.getTextGGYLab(x),values=.getTextGGYTicks(x),
                             fullLabelId=yAxisLabelGrob,fullTickLabelId=yAxisTickLabelGrob)
     components[[length(components)+1]] = yAxis
-    layer = .AddXMLAddGGPlotLayer(annotations,x,.getTextGGLayerType(x,1))    # Only layer 1 for now
-    components[[length(components)+1]] = layer
-    chartData=.getGGPlotData(x,1)          # currently assumes layer=1
+    for (layerNum in 1:.getGGLayerCount(x)) {
+      layer = .AddXMLAddGGPlotLayer(annotations,x,.getTextGGLayerType(x,layerNum),layerNum)    # Only layer 1 for now
+      components[[length(components)+1]] = layer
+      print(paste0("Added layer ",layerNum))
+    }
     chart <- .AddXMLAddChart(annotations, type="Chart",
                              speech=paste(ifelse(is.null(.getTextGGTitle(x)),"Chart",
                                                  paste("Chart with title ",.getTextGGTitle(x))),

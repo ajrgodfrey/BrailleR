@@ -117,26 +117,52 @@
 }
 
 ## Constructs a ggplot layer
-## Currently assumes histogram (and probably plenty of other assumptions)
-.AddXMLAddGGPlotLayer = function(root, x=NULL, layerType=NULL) {
-  if (layerType != "GeomBar")  # For now only hangle bar charts
-    return()
-  annotation = .AddXMLAddAnnotation(root, position=4, id="center", kind="grouped")
-  barCount=.getGGLayerDataCount(x,1)
-  barGrob = grid.grep(gPath("geom_rect"),grep=TRUE)
-  XML::addAttributes(annotation$root, speech="Histogram bars",
+## TODO:  Currently assumes histogram or line (and probably plenty of other assumptions)
+.AddXMLAddGGPlotLayer = function(root, x=NULL, layerType=NULL,layer=1) {
+  annotation = .AddXMLAddAnnotation(root, position=4, id=paste0("center-",layer), kind="grouped")
+  # TODO:  For all layer types:  need heuristic to avoid trying to describe
+  # individual data points if there are thousands of them
+  if (layerType == "GeomBar") {   
+    barCount=.getGGLayerDataCount(x,layer)
+    barGrob = grid.grep(gPath("geom_rect"),grep=TRUE,)
+    XML::addAttributes(annotation$root, speech="Histogram bars",
                      speech2=paste("Histogram with", barCount, "bars"),
                      type="Center")
-  annotations <- list()
-  chartData = .getGGPlotData(x,1)  # assumes layer 1 for now
-  for (i in 1:barCount) {
-    barId = paste(barGrob$name,"1",i,sep=".")
-    annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
+    annotations <- list()
+    chartData = .getGGPlotData(x,layer)  
+    for (i in 1:barCount) {
+      barId = paste(barGrob$name,"1",i,sep=".")
+      annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
                                         count=chartData$count[i], density=signif(chartData$density[i],4),
                                         start=signif(chartData$xmin[i],4), 
                                         end=signif(chartData$xmax[i],4),id=barId)
+    }
+  } else if (layerType == "GeomLine") {
+    segmentCount=.getGGLayerDataCount(x,layer)-1
+    # For now, assume that all layers are this layer type
+    # TODO:  Fix this
+    lineGrobs = grid.grep(gPath("GRID.polyline"),grep=TRUE,global=TRUE)
+    lineGrob = lineGrobs[[layer]]
+    print(paste("Found layer ",layer," as ",lineGrob$name))
+    XML::addAttributes(annotation$root, speech="Line graph",
+                       speech2=paste("Line graph with", segmentCount, "segments"),
+                       # Better to report #lines or #segs?  
+                       # Line can be discontiguous (comprised of polylines 1a, 1b, ...)
+                       type="Center")
+    annotations <- list()
+    data=.getGGPlotData(x,layer)  
+    for (i in 1:segmentCount) {
+      lineId = paste(lineGrob$name,"1",sep=".") # ID of the polyline
+      annotations[[i]] = .AddXMLcenterLine(root, position=i,id=lineId,
+                                           data$x[i],data$y[i],
+                                           data$x[i+1],data$y[i+1])
+      # TODO:  Not correctly handling NA or out-of-range data values, nor dates
+      # Should check for dates with inherit(,"Date") -- but looks like I
+      # need to do that on the main data not the layer data
+    }
+  } else {            # TODO:  warn about layer types we don't recognize
+    return(NULL)
   }
-  
   .AddXMLAddComponents(annotation, annotations)
   .AddXMLAddChildren(annotation, annotations)
   .AddXMLAddParents(annotation, annotations)
@@ -155,6 +181,32 @@
                                      "and", end, " with y value", count, "and density", signif(density,3)),
                        type="Bar")
     return(invisible(annotation))
+}
+# Polyline is problematic as we can't highlight each segment visually, but still want
+# to describle them separately
+# Current fudge for this -- define each segment with a dummy name that doesn't actually
+# exist in the SVG.  Then give it a passive child which is the whole
+# polyline.  This keeps the whole line visible while individual segments are described
+.AddXMLcenterLine = function(root, position=1, startx, starty, endx, endy,
+                            id=NULL) {
+  fakeSegmentId = paste(id,position,sep=".") # Pretend there are separate segments
+  
+  annotation = .AddXMLAddAnnotation(root, position=position,
+                                    id=fakeSegmentId,
+                                    kind="active")
+  dummyAnnotation = list(.AddXMLAddAnnotation(root, position=position,
+                                    id=id,
+                                    kind="passive"))
+  speech=paste0("Line ", position," from (",startx,",",starty,
+                ") to (",endx,",",endy,")")
+  XML::addAttributes(annotation$root,
+                     speech=speech,
+                     speech2=speech
+                    )
+  .AddXMLAddComponents(annotation, dummyAnnotation)
+  .AddXMLAddChildren(annotation, dummyAnnotation)
+  .AddXMLAddParents(annotation, dummyAnnotation)
+  return(invisible(annotation))
 }
 
 
