@@ -132,6 +132,9 @@
     chartData = .getGGPlotData(x,layer)  
     for (i in 1:barCount) {
       barId = paste(barGrob$name,"1",i,sep=".")
+      # TODO: histogram bars have density but other geom_bar objects won't
+      # Need to not fail if density not present
+      # Generally, need to deal with missing values better
       annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
                                         count=chartData$count[i], density=signif(chartData$density[i],4),
                                         start=signif(chartData$xmin[i],4), 

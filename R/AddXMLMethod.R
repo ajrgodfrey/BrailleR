@@ -95,7 +95,6 @@ AddXML.ggplot = function(x, file) {
     for (layerNum in 1:.getGGLayerCount(x)) {
       layer = .AddXMLAddGGPlotLayer(annotations,x,.getTextGGLayerType(x,layerNum),layerNum)    # Only layer 1 for now
       components[[length(components)+1]] = layer
-      print(paste0("Added layer ",layerNum))
     }
     chart <- .AddXMLAddChart(annotations, type="Chart",
                              speech=paste(ifelse(is.null(.getTextGGTitle(x)),"Chart",
