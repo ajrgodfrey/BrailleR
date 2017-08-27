@@ -1,4 +1,84 @@
-VI.ggplot = function(x, Describe=FALSE, ...) {
+textify.VIgg = function(x) {
+  VItemplate = "
+{{^annotations}}
+This is an untitled chart.
+{{/annotations}}
+{{#annotations}}
+{{#title}}This chart titled '{{title}}' {{/title}}
+{{^title}}This untitled chart {{/title}}
+{{#subtitle}}has the subtitle {{subtitle}}.{{/subtitle}}
+{{^subtitle}}has no subtitle.{{/subtitle}}<br>
+{{#caption}}It has caption {{caption}}.<br>{{/caption}}
+{{/annotations}}
+{{^xaxis}}It has no x-axis.<br>{{/xaxis}}
+{{#xaxis}}It has x-axis {{xlabel}} with labels {{xticklabels}}<br>{{/xaxis}}
+{{#colour}}Colour is used to represent {{colourlabel}}
+{{#colourisfactor}}, a factor with levels: {{colourfactor}}{{/colourisfactor}}.<br>
+{{/colour}}
+{{#fillcolour}}Fill colour is used to represent {{fillcolourlabel}}
+{{#fillcolourfactor}}, a factor with levels: {{/fillcolourfactor}}{{fillcolourfactor}}.<br>
+{{/fillcolour}}
+{{#nlayers}}It has {{nlayers}} layers.<br>{{/nlayers}}
+{{#layers}}
+{{>layerTemplate}}
+{{/layers}}
+"
+  layerTemplate = "
+{{#layernum}}Layer {{layernum}} is {{/layernum}}
+{{^layernum}}The chart is {{/layernum}}
+{{#lineflag}}
+a line chart with {{segments}} segments.<br>
+{{/lineflag}}
+{{#hlineflag}}
+a horizontal line at position {{yval}}.<br>
+  {{/hlineflag}}
+"
+  template=gsub("\n","",VItemplate)
+  layerTemplate=gsub("\n","",layerTemplate)
+  return(gsub("<br>","\n",
+              whisker.render(template,x,partials=list(layerTemplate=layerTemplate))))
+}
+
+print.VIgg = function(x, ...) {
+  cat(textify.VIgg(x))
+}
+
+.VIlist = function(...) {
+  l = list(...)
+  l[lapply(l,length)>0] 
+}
+
+VI.ggplot = function(x) {
+  title = .getTextGGTitle(x)
+  subtitle = .getTextGGSubtitle(x)
+  caption = .getTextGGCaption(x)
+  annotations = .VIlist(title=title,subtitle=subtitle,caption=caption)
+  xlabel = .getTextGGXLab(x)
+  xticklabels = .getTextGGXTicks(x)
+  xaxis = .VIlist(xlabel=xlabel,xticklabels=xticklabels)
+  ylabel = .getTextGGYLab(x)
+  yticklabels = .getTextGGYTicks(x)
+  yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
+  colourlabel = .getTextGGColourLab(x)
+  colourfactor = .getTextGGColourFactors(x)
+  if (is.null(colourfactor)) {
+    colourisfactor = NULL
+  } else {
+    colourisfactor = TRUE
+  }
+  colour = .VIlist(colourlabel=colourlabel,colourisfactor=colourisfactor,
+                   colourfactor=colourfactor)
+  fillcolourlabel = .getTextGGFillLab(x)
+  fillcolourfactor = .getTextGGFillLab(x)
+  fillcolour = .VIlist(fillcolourlabel=fillcolourlabel,fillcolourfactor=fillcolourfactor)
+  layers = list()
+  VIgg = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
+              colour=colour,fillcolour=fillcolour,layers=layers)
+  class(VIgg) = "VIgg"
+  return(VIgg)
+}
+
+oldVI.ggplot = function(x, Describe=FALSE, ...) {
   VItext=list()
   class(VItext)=c("VItext",class(VItext))
   
@@ -94,7 +174,8 @@ print.VItext = function(x, ...) {
   if(is.null(x$labels$title)){
     text = NULL
   } else {
-    text =  BrailleR::InQuotes(x$labels$title)
+#    text =  BrailleR::InQuotes(x$labels$title)
+     text =  x$labels$title
   }
   return(invisible(text))
 }
@@ -103,7 +184,8 @@ print.VItext = function(x, ...) {
   if(is.null(x$labels$subtitle)){
     text = NULL
   } else {
-    text =  BrailleR::InQuotes(x$labels$subtitle)
+#    text =  BrailleR::InQuotes(x$labels$subtitle)
+    text =  x$labels$subtitle
   }
   return(invisible(text))
 }
@@ -112,34 +194,39 @@ print.VItext = function(x, ...) {
   if(is.null(x$labels$caption)){
     text = NULL
   } else {
-    text =  BrailleR::InQuotes(x$labels$caption)
+#    text =  BrailleR::InQuotes(x$labels$caption)
+    text =  x$labels$caption
   }
   return(invisible(text))
 }
 
 .getTextGGXLab = function(x){
-  labels = BrailleR::InQuotes(x$labels$x)
+#  labels = BrailleR::InQuotes(x$labels$x)
+  labels = x$labels$x
 }
 
 .getTextGGYLab = function(x){
-  labels = BrailleR::InQuotes(x$labels$y)
+#  labels = BrailleR::InQuotes(x$labels$y)
+  labels = x$labels$y
 }
 
 .getTextGGColourLab = function(x){
   if ('colour' %in% names(x$labels))
-    text = BrailleR::InQuotes(x$labels$colour)
+#    text = BrailleR::InQuotes(x$labels$colour)
+    text = x$labels$colour
   else
     text = NULL
 }
 .getTextGGFillLab = function(x){
   if ('fill' %in% names(x$labels))
     text = BrailleR::InQuotes(x$labels$fill)
+#    text = x$labels$fill
   else
     text = NULL
 }
 
 .getTextGGColourFactors = function(x){
-  if ('factor' %in% class(x$data[[x$labels$colour]])) 
+  if (!is.null(x$labels$colour) && 'factor' %in% class(x$data[[x$labels$colour]])) 
     labels = levels(x$data[[x$labels$colour]])
   else
     labels = NULL
