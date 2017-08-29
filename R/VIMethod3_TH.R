@@ -12,8 +12,10 @@ This is an untitled chart.
 {{/annotations}}
 {{^xaxis}}It has no x-axis.<br>{{/xaxis}}
 {{#xaxis}}It has x-axis {{xlabel}} with labels {{xticklabels}}<br>{{/xaxis}}
+{{^yaxis}}It has no y-axis.<br>{{/yaxis}}
+{{#yaxis}}It has y-axis {{ylabel}} with labels {{yticklabels}}<br>{{/yaxis}}
 {{#colour}}Colour is used to represent {{colourlabel}}
-{{#colourisfactor}}, a factor with levels: {{colourfactor}}{{/colourisfactor}}.<br>
+{{#colourfactor}}, a factor with levels: {{factorlevels}}{{/colourfactor}}.<br>
 {{/colour}}
 {{#fillcolour}}Fill colour is used to represent {{fillcolourlabel}}
 {{#fillcolourfactor}}, a factor with levels: {{/fillcolourfactor}}{{fillcolourfactor}}.<br>
@@ -48,7 +50,7 @@ print.VIgg = function(x, ...) {
   l[lapply(l,length)>0] 
 }
 
-VI.ggplot = function(x) {
+VI.ggplot = function(x, Describe=FALSE, ...) {
   title = .getTextGGTitle(x)
   subtitle = .getTextGGSubtitle(x)
   caption = .getTextGGCaption(x)
@@ -60,17 +62,14 @@ VI.ggplot = function(x) {
   yticklabels = .getTextGGYTicks(x)
   yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
   colourlabel = .getTextGGColourLab(x)
-  colourfactor = .getTextGGColourFactors(x)
-  if (is.null(colourfactor)) {
-    colourisfactor = NULL
-  } else {
-    colourisfactor = TRUE
-  }
-  colour = .VIlist(colourlabel=colourlabel,colourisfactor=colourisfactor,
-                   colourfactor=colourfactor)
+  factorlevels = .getTextGGColourFactors(x)
+  colourfactor = .VIlist(factorlevels = factorlevels)
+  colour = .VIlist(colourlabel=colourlabel,colourfactor=colourfactor)
   fillcolourlabel = .getTextGGFillLab(x)
-  fillcolourfactor = .getTextGGFillLab(x)
-  fillcolour = .VIlist(fillcolourlabel=fillcolourlabel,fillcolourfactor=fillcolourfactor)
+  factorlevels = .getTextGGFillFactors(x)
+  fillcolourfactor = .VIlist(factorlevels = factorlevels)
+  fillcolour = .VIlist(fillcolourlabel=fillcolourlabel,
+                       fillcolourfactor=fillcolourfactor)
   layers = list()
   VIgg = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
               colour=colour,fillcolour=fillcolour,layers=layers)
@@ -78,7 +77,8 @@ VI.ggplot = function(x) {
   return(VIgg)
 }
 
-oldVI.ggplot = function(x, Describe=FALSE, ...) {
+# Just saving this here until I've fully replicated it above
+.oldVI.ggplot = function(x, Describe=FALSE, ...) {
   VItext=list()
   class(VItext)=c("VItext",class(VItext))
   
@@ -219,8 +219,8 @@ print.VItext = function(x, ...) {
 }
 .getTextGGFillLab = function(x){
   if ('fill' %in% names(x$labels))
-    text = BrailleR::InQuotes(x$labels$fill)
-#    text = x$labels$fill
+#    text = BrailleR::InQuotes(x$labels$fill)
+    text = x$labels$fill
   else
     text = NULL
 }
@@ -232,7 +232,7 @@ print.VItext = function(x, ...) {
     labels = NULL
 }
 .getTextGGFillFactors = function(x){
-  if ('factor' %in% class(x$data[[x$labels$fill]])) 
+  if (!is.null(x$labels$fill) && 'factor' %in% class(x$data[[x$labels$fill]])) 
     labels = levels(x$data[[x$labels$fill]])
   else
     labels = NULL
