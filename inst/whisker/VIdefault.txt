@@ -1,0 +1,42 @@
+VIgg,"
+{{^annotations}}
+This is an untitled chart with no subtitle or caption.<br>
+{{/annotations}}
+{{#annotations}}
+{{#title}}This chart has title '{{title}}'.<br>{{/title}}
+{{^title}}This chart is untitled.<br>{{/title}}
+{{#subtitle}}It has the subtitle {{subtitle}}.<br>{{/subtitle}}
+{{#caption}}It has caption {{caption}}.<br>{{/caption}}
+{{/annotations}}
+{{#facet}}The chart is faceted.<br>
+{{#facetrows}}The facet rows are {{facetrows}}.<br>{{/facetrows}}
+{{#facetcolsflag}}The facet columns are {{facetcols}}.<br>{{/facetcolsflag}}
+{{/facet}}
+{{^xaxis}}There is no x-axis.<br>{{/xaxis}}
+{{#xaxis}}{{#facet}}Each sub-chart has{{/facet}}{{^facet}}It has{{/facet}} x-axis '{{xlabel}}' with labels {{xticklabels}}<br>{{/xaxis}}
+{{^yaxis}}It has no y-axis.<br>{{/yaxis}}
+{{#yaxis}}It has y-axis '{{ylabel}}' with labels {{yticklabels}}<br>{{/yaxis}}
+{{#colour}}Colour is used to represent {{colourlabel}}
+{{#colourfactor}}, a factor with levels: {{factorlevels}}{{/colourfactor}}.<br>
+{{/colour}}
+{{#fillcolour}}Fill colour is used to represent {{fillcolourlabel}}
+{{#fillcolourfactor}}, a factor with levels: {{/fillcolourfactor}}{{fillcolourfactor}}.<br>
+{{/fillcolour}}
+{{#nlayers}}It has {{nlayers}} layers.<br>{{/nlayers}}
+{{#layers}}
+{{>ggLayerTemplate}}
+{{/layers}}
+"
+ggLayerTemplate,"
+{{#layernum}}Layer {{layernum}} is {{/layernum}}
+{{^layernum}}The chart is {{/layernum}}
+{{#hlineflag}}
+a horizontal line at position {{ypos}}.<br>
+{{/hlineflag}}
+{{#barflag}}
+a bar chart containing {{nbars}} bars.<br>
+{{/barflag}}
+{{#pointflag}}
+a set of {{npoints}} points.<br>
+{{/pointflag}}
+"

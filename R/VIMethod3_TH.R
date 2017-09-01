@@ -1,53 +1,28 @@
-textify.VIgg = function(x) {
-  VItemplate = "
-{{^annotations}}
-This is an untitled chart.
-{{/annotations}}
-{{#annotations}}
-{{#title}}This chart titled '{{title}}' {{/title}}
-{{^title}}This untitled chart {{/title}}
-{{#subtitle}}has the subtitle {{subtitle}}.{{/subtitle}}
-{{^subtitle}}has no subtitle.{{/subtitle}}<br>
-{{#caption}}It has caption {{caption}}.<br>{{/caption}}
-{{/annotations}}
-{{^xaxis}}It has no x-axis.<br>{{/xaxis}}
-{{#xaxis}}It has x-axis {{xlabel}} with labels {{xticklabels}}<br>{{/xaxis}}
-{{^yaxis}}It has no y-axis.<br>{{/yaxis}}
-{{#yaxis}}It has y-axis {{ylabel}} with labels {{yticklabels}}<br>{{/yaxis}}
-{{#colour}}Colour is used to represent {{colourlabel}}
-{{#colourfactor}}, a factor with levels: {{factorlevels}}{{/colourfactor}}.<br>
-{{/colour}}
-{{#fillcolour}}Fill colour is used to represent {{fillcolourlabel}}
-{{#fillcolourfactor}}, a factor with levels: {{/fillcolourfactor}}{{fillcolourfactor}}.<br>
-{{/fillcolour}}
-{{#nlayers}}It has {{nlayers}} layers.<br>{{/nlayers}}
-{{#layers}}
-{{>layerTemplate}}
-{{/layers}}
-"
-  layerTemplate = "
-{{#layernum}}Layer {{layernum}} is {{/layernum}}
-{{^layernum}}The chart is {{/layernum}}
-{{#lineflag}}
-a line chart with {{segments}} segments.<br>
-{{/lineflag}}
-{{#hlineflag}}
-a horizontal line at position {{yval}}.<br>
-  {{/hlineflag}}
-"
-  template=gsub("\n","",VItemplate)
-  layerTemplate=gsub("\n","",layerTemplate)
-  return(gsub("<br>","\n",
-              whisker.render(template,x,partials=list(layerTemplate=layerTemplate))))
+textify.VIgg = function(x, template=
+                          system.file("whisker/VIdefault.txt",
+                                      package="BrailleR")) {
+  #f=file(template)
+  #temp = scan(f,what=character(),sep="=")
+  temp = read.csv(template,header=FALSE,as.is=TRUE)
+  #close(f)
+  #if (length(temp)%%2 != 0)
+  #  warning("Invalid template")
+  #dim(temp) = c(ceiling(length(temp)/2),2)
+  templates=as.list(gsub("\n","",temp[,2]))
+  names(templates) = temp[,1]
+  mainTemplate = templates["VIgg"]
+  partials = templates[which(names(templates)!="VIgg")]
+  render = whisker::whisker.render(mainTemplate,x,partials=partials)
+  return(as.vector(strsplit(render,"<br>",fixed=TRUE)[[1]]))
 }
 
 print.VIgg = function(x, ...) {
-  cat(textify.VIgg(x))
+  cat(textify.VIgg(x),sep="\n")
 }
 
 .VIlist = function(...) {
   l = list(...)
-  l[lapply(l,length)>0] 
+  l[(lapply(l,length)>0)] 
 }
 
 VI.ggplot = function(x, Describe=FALSE, ...) {
@@ -70,75 +45,45 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
   fillcolourfactor = .VIlist(factorlevels = factorlevels)
   fillcolour = .VIlist(fillcolourlabel=fillcolourlabel,
                        fillcolourfactor=fillcolourfactor)
+  facetrows = as.list(.getGGFacetRows(x))
+  facetrowsflag = if (length(facetrows)>0) TRUE   # TRUE or NULL
+  facetcols = as.list(.getGGFacetCols(x))
+  facetcolsflag = if (length(facetcols)>0) TRUE   # TRUE or NULL
+  facet = .VIlist(facetrowsflag=facetrowsflag,facetrows=facetrows,
+                  facetcolsflag=facetcolsflag,facetcols=facetcols)
+  ## STILL NEED TO CAPTURE AND REPORT ON VALUES OF THE FACET VARS
   layers = list()
+  layerCount=.getGGLayerCount(x);
+  for (i in 1:layerCount) {
+    layer = list(layernum=i)
+    layerClass = .getTextGGLayerType(x,i)
+    if (layerClass == "GeomHline") {
+      layer[["hlineflag"]] = TRUE
+      # This is only working correctly if there's just one hline
+      # and it's specified like geom_hline(aes(yintercept=200)).
+      # Doesn't currently work for geom_hline(yintercept=200)
+      # or for multiple hlines
+      layer[["ypos"]] = .getGGLayerYIntercept(x,i)
+    } else if (layerClass == "GeomPoint") {
+      layer[["pointflag"]] = TRUE
+      layer[["npoints"]] = .getGGLayerDataCount(x,i)
+    } else if (layerClass == "GeomBar") {
+      layer[["barflag"]] = TRUE      
+      layer[["nbars"]] = .getGGLayerDataCount(x,i)
+    } else
+       layer[["unknownflag"]] = TRUE
+#      txt = paste0(" is of type ",layerClass)
+    layers[[i]] = layer  
+  }
   VIgg = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
-              colour=colour,fillcolour=fillcolour,layers=layers)
+              colour=colour,fillcolour=fillcolour,facet=facet,
+              nlayers=layerCount,layers=layers)
   class(VIgg) = "VIgg"
   return(VIgg)
 }
 
 # Just saving this here until I've fully replicated it above
 .oldVI.ggplot = function(x, Describe=FALSE, ...) {
-  VItext=list()
-  class(VItext)=c("VItext",class(VItext))
-  
-  TitleText = ifelse(is.null(.getTextGGTitle(x)), "This untitled chart;\n",
-              paste0('This chart titled ', .getTextGGTitle(x), ';\n'))
-  VItext["title"]=TitleText
-  SubtitleText = ifelse(is.null(.getTextGGSubtitle(x)), "has no subtitle;\n",
-              paste0('has the subtitle: ', .getTextGGSubtitle(x), ';\n'))
-  VItext["subtitle"]=SubtitleText
-  CaptionText = ifelse(is.null(.getTextGGCaption(x)), "and no caption.\n",
-              paste0('and the caption: ', .getTextGGCaption(x), '.\n'))
-  VItext["caption"]=CaptionText
-  
-  xTicks = .getTextGGXTicks(x)
-  if (length(xTicks)==1) 
-    xTickText = xTicks[1] 
-  else
-    xTickText = paste0(paste(head(xTicks,-1),collapse=", ")," and ",tail(xTicks,1))
-  yTicks = .getTextGGYTicks(x)
-  if (length(yTicks)==1)
-    yTickText = yTicks[1]
-  else
-    yTickText = paste0(paste(head(yTicks,-1),collapse=", ")," and ",tail(yTicks,1))
-      
-  VItext["xaxis"]=paste0('with x-axis ', .getTextGGXLab(x), ' with labels ',xTickText)
-  VItext["yaxis"]=paste0(' and y-axis ', .getTextGGYLab(x), ' with labels ',yTickText,';\n')
-  
-  if (!is.null(.getTextGGColourLab(x))) {
-    VItext["color"] = paste0('Colour is used to represent ',.getTextGGColourLab(x))
-
-    if (!is.null(.getTextGGColourFactors(x))) {
-      VItext["color"]=paste0(VItext["color"],', a factor with levels: ',paste(.getTextGGColourFactors(x), collapse = ', '),
-                             '.\n')
-    } else {
-      VItext["color"] = paste0(VItext["color"],".\n")
-    }
-  }
-  if (!is.null(.getTextGGFillLab(x))) {
-    VItext["fill"] = paste0('Fill colour is used to represent ',.getTextGGFillLab(x))
-    if (!is.null(.getTextGGFillFactors(x))) {
-      VItext["fill"]=paste0(VItext["fill"],', a factor with levels: ',paste(.getTextGGFillFactors(x), collapse = ', '),
-                             '.\n')
-    } else {
-      VItext["fill"] = paste0(VItext["fill"],".\n")
-    }
-    
-  }
-  facetRows=.getGGFacetRows(x);
-  facetCols=.getGGFacetCols(x);
-  if (!is.null(facetRows) | !is.null(facetCols)) {
-    facetTxt = "The chart is faceted "
-    if (!is.null(facetRows)) 
-      facetTxt = paste0(facetTxt," with ", paste0(paste(names(facetRows),collapse=", ")," as the rows"))
-    if (!is.null(facetRows) & !is.null(facetCols))
-      facetTxt = paste0(facetTxt," and")
-    if (!is.null(facetCols))
-      facetTxt = paste0(facetTxt," with ", paste0(paste(names(facetCols),collapse=", ")," as the columns"))
-    facetTxt = paste0(facetTxt,"\n")
-    VItext["facets"] = facetTxt;
-  }
 
   layerCount=.getGGLayerCount(x);
   if (layerCount==1) {
@@ -277,13 +222,13 @@ print.VItext = function(x, ...) {
 }
 .getGGFacetRows = function(x){
   if (length(x$facet$params$rows)>0)
-    return(x$facet$params$rows)
+    return(names(x$facet$params$rows))
   else
     return(NULL)
 }
 .getGGFacetCols = function(x){
   if (length(x$facet$params$cols)>0)
-    return(x$facet$params$cols)
+    return(names(x$facet$params$cols))
   else
     return(NULL)
 }
