@@ -118,18 +118,18 @@
 
 ## Constructs a ggplot layer
 ## TODO:  Currently assumes histogram or line (and probably plenty of other assumptions)
-.AddXMLAddGGPlotLayer = function(root, x=NULL, layerType=NULL,layer=1) {
-  annotation = .AddXMLAddAnnotation(root, position=4, id=paste0("center-",layer), kind="grouped")
+.AddXMLAddGGPlotLayer = function(root, x=NULL) {
+  annotation = .AddXMLAddAnnotation(root, position=4, id=paste0("center-",x$layernum), kind="grouped")
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
-  if (layerType == "GeomBar") {   
-    barCount=.getGGLayerDataCount(x,layer)
+  if (!is.null(x$bartype)) {    # Bar chart
+    barCount=x$nbars
     barGrob = grid.grep(gPath("geom_rect"),grep=TRUE,)
     XML::addAttributes(annotation$root, speech="Histogram bars",
                      speech2=paste("Histogram with", barCount, "bars"),
                      type="Center")
     annotations <- list()
-    chartData = .getGGPlotData(x,layer)  
+    chartData = x$data  
     for (i in 1:barCount) {
       barId = paste(barGrob$name,"1",i,sep=".")
       # TODO: histogram bars have density but other geom_bar objects won't
@@ -140,20 +140,20 @@
                                         start=signif(chartData$xmin[i],4), 
                                         end=signif(chartData$xmax[i],4),id=barId)
     }
-  } else if (layerType == "GeomLine") {
-    segmentCount=.getGGLayerDataCount(x,layer)-1
+  } else if (!is.null(x$linetype)) { # Line chart
+    segmentCount=x$nsegments
     # For now, assume that all layers are this layer type
     # TODO:  Fix this
     lineGrobs = grid.grep(gPath("GRID.polyline"),grep=TRUE,global=TRUE)
-    lineGrob = lineGrobs[[layer]]
-    print(paste("Found layer ",layer," as ",lineGrob$name))
+    lineGrob = lineGrobs[[x$layernum]]
+    print(paste("Found layer ",x$layernum," as ",lineGrob$name))
     XML::addAttributes(annotation$root, speech="Line graph",
                        speech2=paste("Line graph with", segmentCount, "segments"),
                        # Better to report #lines or #segs?  
                        # Line can be discontiguous (comprised of polylines 1a, 1b, ...)
                        type="Center")
     annotations <- list()
-    data=.getGGPlotData(x,layer)  
+    data=x$data 
     for (i in 1:segmentCount) {
       lineId = paste(lineGrob$name,"1",sep=".") # ID of the polyline
       annotations[[i]] = .AddXMLcenterLine(root, position=i,id=lineId,

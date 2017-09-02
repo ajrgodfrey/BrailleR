@@ -1,23 +1,27 @@
-textify.VIgg = function(x, template=
+## Textify performs whisker rendering
+## First parameter is a list of objects.  
+## Second parameter is the name of a template file.
+## #ach object is rendered using the template of the same name 
+## found within the template file.  Partial templates can also
+## be present in the template file and will be used if needed.
+.VItextify = function(x, template=
                           system.file("whisker/VIdefault.txt",
                                       package="BrailleR")) {
-  #f=file(template)
-  #temp = scan(f,what=character(),sep="=")
   temp = read.csv(template,header=FALSE,as.is=TRUE)
-  #close(f)
-  #if (length(temp)%%2 != 0)
-  #  warning("Invalid template")
-  #dim(temp) = c(ceiling(length(temp)/2),2)
   templates=as.list(gsub("\n","",temp[,2]))
   names(templates) = temp[,1]
-  mainTemplate = templates["VIgg"]
-  partials = templates[which(names(templates)!="VIgg")]
-  render = whisker::whisker.render(mainTemplate,x,partials=partials)
-  return(as.vector(strsplit(render,"<br>",fixed=TRUE)[[1]]))
+  result = list()
+  for (i in 1:length(x)) {
+    render = whisker::whisker.render(templates[names(x[i])],x[[i]],
+                                     partials=templates)
+    result[[i]] = as.vector(strsplit(render,"<br>",fixed=TRUE)[[1]])
+  }
+  names(result) = names(x)
+  return(result)
 }
 
-print.VIgg = function(x, ...) {
-  cat(textify.VIgg(x),sep="\n")
+print.VIgraph = function(x, ...) {
+  cat(x$text,sep="\n")
 }
 
 .VIlist = function(...) {
@@ -26,96 +30,103 @@ print.VIgg = function(x, ...) {
 }
 
 VI.ggplot = function(x, Describe=FALSE, ...) {
-  title = .getTextGGTitle(x)
-  subtitle = .getTextGGSubtitle(x)
-  caption = .getTextGGCaption(x)
+  VIstruct = .VIstruct.ggplot(x)
+  text = .VItextify(list(VIgg=VIstruct))[[1]]
+  VIgraph=list(VIgg=VIstruct, text=text)
+  class(VIgraph) = "VIgraph"
+  return(VIgraph)
+}
+
+.VIstruct.ggplot = function(x) {
+  xbuild = suppressMessages(ggplot_build(x))
+  title = .getTextGGTitle(x,xbuild)
+  subtitle = .getTextGGSubtitle(x,xbuild)
+  caption = .getTextGGCaption(x,xbuild)
   annotations = .VIlist(title=title,subtitle=subtitle,caption=caption)
-  xlabel = .getTextGGXLab(x)
-  xticklabels = .getTextGGXTicks(x)
+  xlabel = .getTextGGXLab(x,xbuild)
+  xticklabels = .getTextGGXTicks(x,xbuild)
   xaxis = .VIlist(xlabel=xlabel,xticklabels=xticklabels)
-  ylabel = .getTextGGYLab(x)
-  yticklabels = .getTextGGYTicks(x)
+  ylabel = .getTextGGYLab(x,xbuild)
+  yticklabels = .getTextGGYTicks(x,xbuild)
   yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
-  colourlabel = .getTextGGColourLab(x)
-  factorlevels = .getTextGGColourFactors(x)
+  colourlabel = .getTextGGColourLab(x,xbuild)
+  factorlevels = .getTextGGColourFactors(x,xbuild)
   colourfactor = .VIlist(factorlevels = factorlevels)
   colour = .VIlist(colourlabel=colourlabel,colourfactor=colourfactor)
-  fillcolourlabel = .getTextGGFillLab(x)
-  factorlevels = .getTextGGFillFactors(x)
+  fillcolourlabel = .getTextGGFillLab(x,xbuild)
+  factorlevels = .getTextGGFillFactors(x,xbuild)
   fillcolourfactor = .VIlist(factorlevels = factorlevels)
   fillcolour = .VIlist(fillcolourlabel=fillcolourlabel,
                        fillcolourfactor=fillcolourfactor)
-  facetrows = as.list(.getGGFacetRows(x))
+  facetrows = as.list(.getGGFacetRows(x,xbuild))
   facetrowsflag = if (length(facetrows)>0) TRUE   # TRUE or NULL
-  facetcols = as.list(.getGGFacetCols(x))
+  facetcols = as.list(.getGGFacetCols(x,xbuild))
   facetcolsflag = if (length(facetcols)>0) TRUE   # TRUE or NULL
+  faceted = (length(facetrows)>0 || length(facetcols)>0)
+  # Need to compute npanels
   facet = .VIlist(facetrowsflag=facetrowsflag,facetrows=facetrows,
                   facetcolsflag=facetcolsflag,facetcols=facetcols)
   ## STILL NEED TO CAPTURE AND REPORT ON VALUES OF THE FACET VARS
   layers = list()
-  layerCount=.getGGLayerCount(x);
+  layerCount = .getGGLayerCount(x,xbuild);
+  singlelayer = if (layerCount==1) TRUE
   for (i in 1:layerCount) {
     layer = list(layernum=i)
-    layerClass = .getTextGGLayerType(x,i)
+    layerClass = .getTextGGLayerType(x,xbuild,i)
     if (layerClass == "GeomHline") {
-      layer[["hlineflag"]] = TRUE
+      layer[["hlinetype"]] = TRUE
       # This is only working correctly if there's just one hline
       # and it's specified like geom_hline(aes(yintercept=200)).
       # Doesn't currently work for geom_hline(yintercept=200)
       # or for multiple hlines
-      layer[["ypos"]] = .getGGLayerYIntercept(x,i)
+      layer[["ypos"]] = .getGGLayerYIntercept(x,xbuild,i)
     } else if (layerClass == "GeomPoint") {
-      layer[["pointflag"]] = TRUE
-      layer[["npoints"]] = .getGGLayerDataCount(x,i)
+      layer[["pointtype"]] = TRUE
+      if (faceted) {
+        facetpoints = integer()
+        #for (f in 1:npanels)
+        #  facetpoints[f] = .getGGFacetDataCount(x,i,f)
+        layer[["facetpoints"]] = facetpoints
+      } else {
+        layer[["npoints"]] = .getGGLayerDataCount(x,xbuild,i)
+      }
+      # Returns wrong count for faceted charts
     } else if (layerClass == "GeomBar") {
-      layer[["barflag"]] = TRUE      
-      layer[["nbars"]] = .getGGLayerDataCount(x,i)
+      layer[["bartype"]] = TRUE      
+      if (faceted) {
+        facetbars = integer()
+        #for (f in 1:npanels)
+        #  facetbars[f] = .getGGFacetDataCount(x,i,f)
+        layer[["facetbars"]] = facetbars
+      } else {
+        layer[["nbars"]] = .getGGLayerDataCount(x,xbuild,i)
+        layer[["data"]] = .getGGPlotData(x,xbuild,i)
+      }
+      # Returns wrong count for faceted charts
+    } else if (layerClass == "GeomLine") {
+        layer[["linetype"]] = TRUE
+        if (faceted) {
+          facetsegments = integer()
+          #for (f in 1:npanels)
+          #  facetsegments[f] = .getGGFacetDataCount(x,i,f) - 1
+          layer[["facetsegments"]] = facetsegments 
+        } else {
+          layer[["nsegments"]] = .getGGLayerDataCount(x,xbuild,i) - 1
+          layer[["data"]] = .getGGPlotData(x,xbuild,i)
+        }
     } else
-       layer[["unknownflag"]] = TRUE
-#      txt = paste0(" is of type ",layerClass)
+       layer[["unknowntype"]] = TRUE
     layers[[i]] = layer  
   }
-  VIgg = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
+  VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
               colour=colour,fillcolour=fillcolour,facet=facet,
-              nlayers=layerCount,layers=layers)
-  class(VIgg) = "VIgg"
-  return(VIgg)
+              nlayers=layerCount,singlelayer=singlelayer,
+              layers=layers,type="ggplot")
+  class(VIstruct) = "VIstruct"
+  return(VIstruct)
 }
 
-# Just saving this here until I've fully replicated it above
-.oldVI.ggplot = function(x, Describe=FALSE, ...) {
-
-  layerCount=.getGGLayerCount(x);
-  if (layerCount==1) {
-    VItext["layer.count"] = "There is one layer\n"
-  } else {
-    VItext["layer.count"]=paste0("There are ",layerCount," layers\n")
-  }
-  for (layer in 1:layerCount) {
-    layerClass = .getTextGGLayerType(x,layer)
-    if (layerClass == "GeomHline") {
-      txt = paste0(" is a horizontal line at position ",.getGGLayerYIntercept(x,layer))
-    } else if (layerClass == "GeomPoint") {
-      txt = paste0(" is a scatterplot containing ",.getGGLayerDataCount(x,layer)," points")    
-    } else if (layerClass == "GeomBar") {
-      txt = paste0(" is a bar chart containing ",.getGGLayerDataCount(x,layer)," bars")
-    } else
-      txt = paste0(" is of type ",layerClass)
-    VItext[paste0("layer",layer)]=paste0("Layer ",layer,txt,"\n")
-    if (!is.null(.getGGLayerMapping(x,layer)))
-       VItext[paste0("layer",layer,"mapping")]=.getGGLayerMapping(x,layer)
-    if (!is.null(.getGGLayerAes(x,layer)))
-      VItext[paste0("layer",layer,"aes")]=.getGGLayerAes(x,layer)
-  }
-
-  return(VItext)
-}
-
-print.VItext = function(x, ...) {
-  cat(paste(x))
-}
-
-.getTextGGTitle = function(x){
+.getTextGGTitle = function(x,xbuild){
   if(is.null(x$labels$title)){
     text = NULL
   } else {
@@ -125,7 +136,7 @@ print.VItext = function(x, ...) {
   return(invisible(text))
 }
 
-.getTextGGSubtitle = function(x){
+.getTextGGSubtitle = function(x,xbuild){
   if(is.null(x$labels$subtitle)){
     text = NULL
   } else {
@@ -135,7 +146,7 @@ print.VItext = function(x, ...) {
   return(invisible(text))
 }
 
-.getTextGGCaption = function(x){
+.getTextGGCaption = function(x,xbuild){
   if(is.null(x$labels$caption)){
     text = NULL
   } else {
@@ -145,24 +156,24 @@ print.VItext = function(x, ...) {
   return(invisible(text))
 }
 
-.getTextGGXLab = function(x){
+.getTextGGXLab = function(x,xbuild){
 #  labels = BrailleR::InQuotes(x$labels$x)
   labels = x$labels$x
 }
 
-.getTextGGYLab = function(x){
+.getTextGGYLab = function(x,xbuild){
 #  labels = BrailleR::InQuotes(x$labels$y)
   labels = x$labels$y
 }
 
-.getTextGGColourLab = function(x){
+.getTextGGColourLab = function(x,xbuild){
   if ('colour' %in% names(x$labels))
 #    text = BrailleR::InQuotes(x$labels$colour)
     text = x$labels$colour
   else
     text = NULL
 }
-.getTextGGFillLab = function(x){
+.getTextGGFillLab = function(x,xbuild){
   if ('fill' %in% names(x$labels))
 #    text = BrailleR::InQuotes(x$labels$fill)
     text = x$labels$fill
@@ -170,68 +181,75 @@ print.VItext = function(x, ...) {
     text = NULL
 }
 
-.getTextGGColourFactors = function(x){
+.getTextGGColourFactors = function(x,xbuild){
   if (!is.null(x$labels$colour) && 'factor' %in% class(x$data[[x$labels$colour]])) 
     labels = levels(x$data[[x$labels$colour]])
   else
     labels = NULL
 }
-.getTextGGFillFactors = function(x){
+.getTextGGFillFactors = function(x,xbuild){
   if (!is.null(x$labels$fill) && 'factor' %in% class(x$data[[x$labels$fill]])) 
     labels = levels(x$data[[x$labels$fill]])
   else
     labels = NULL
 }
            
-.getTextGGXTicks = function(x){
-  text=suppressMessages(ggplot_build(x))$layout$panel_ranges[[1]]$x.labels
+.getTextGGXTicks = function(x,xbuild){
+  text=xbuild$layout$panel_ranges[[1]]$x.labels
 }
 
-.getTextGGYTicks = function(x){
-  text=suppressMessages(ggplot_build(x))$layout$panel_ranges[[1]]$y.labels
+.getTextGGYTicks = function(x,xbuild){
+  text=xbuild$layout$panel_ranges[[1]]$y.labels
 }
 
-.getGGLayerCount = function(x){
-  count=length(suppressMessages(ggplot_build(x))$plot$layers)
+.getGGLayerCount = function(x,xbuild){
+  count=length(xbuild$plot$layers)
 }
 
-.getTextGGLayerType = function(x,n){
-  plotClass = class(suppressMessages(ggplot_build(x))$plot$layers[[n]]$geom)[1]
+.getTextGGLayerType = function(x,xbuild,layer){
+  plotClass = class(xbuild$plot$layers[[layer]]$geom)[1]
 }
 
-.getGGLayerYIntercept = function(x,n){
-  yIntercept = suppressMessages(ggplot_build(x))$plot$layers[[n]]$mapping$yintercept
+.getGGLayerYIntercept = function(x,xbuild,layer){
+  yIntercept = xbuild$plot$layers[[layer]]$mapping$yintercept
 }
 
-.getGGLayerDataCount = function(x,n){
-  points = nrow(suppressMessages(ggplot_build(x))$data[[n]])
+.getGGLayerDataCount = function(x,xbuild,layer){
+  points = nrow(xbuild$data[[layer]])
 }
-.getGGLayerMapping = function(x,n){
-  mapping = suppressMessages(ggplot_build(x))$plot$layers[[n]]$mapping
-  if (length(mapping)>0)
-    return(paste0("Layer ",n," maps ",paste0(names(mapping)," to ",mapping,collapse=", "),"\n")) 
-  else
-    return(NULL)
+.getGGFacetDataCount = function(x,xbuild,layer,facet){
+  data=xbuild$data[[layer]]
+  points = nrow(data[data$PANEL==facet,])
 }
-.getGGLayerAes = function(x,n){
-  aes = suppressMessages(ggplot_build(x))$plot$layers[[n]]$aes_params
-  if (length(aes)>0)
-    return(paste0("Layer ",n," sets aesthetic ",paste0(names(aes)," to ",aes,collapse=", "),"\n")) 
-  else
-    return(NULL)
-}
-.getGGFacetRows = function(x){
+## THESE NOT CURRENTLY USED 
+#.getGGLayerMapping = function(x,xbuild,layer){
+#  mapping = xbuild$plot$layers[[layer]]$mapping
+#  if (length(mapping)>0)
+#    return(paste0("Layer ",layer," maps ",paste0(names(mapping)," to ",mapping,collapse=", "),"\n")) 
+#  else
+#    return(NULL)
+#}
+#.getGGLayerAes = function(x,xbuild,layer){
+#  aes = xbuild$plot$layers[[layer]]$aes_params
+#  if (length(aes)>0)
+#    return(paste0("Layer ",n," sets aesthetic ",paste0(names(aes)," to ",aes,collapse=", "),"\n")) 
+#  else
+#    return(NULL)
+#}
+.getGGFacetRows = function(x,xbuild){
   if (length(x$facet$params$rows)>0)
     return(names(x$facet$params$rows))
   else
     return(NULL)
 }
-.getGGFacetCols = function(x){
+.getGGFacetCols = function(x,xbuild){
   if (length(x$facet$params$cols)>0)
     return(names(x$facet$params$cols))
   else
     return(NULL)
 }
-.getGGPlotData = function(x,n) {
-  return(suppressMessages(ggplot_build(x))$data[[n]])
+.getGGPlotData = function(x,xbuild,layer) {
+  # This returns a data frame -- useable by MakeAccessible, but will need to change
+  # if it's going to be used by VI via the whisker template
+  return(xbuild$data[[layer]])
 }

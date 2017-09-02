@@ -22,21 +22,21 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#fillcolour}}Fill colour is used to represent {{fillcolourlabel}}
 {{#fillcolourfactor}}, a factor with levels: {{/fillcolourfactor}}{{fillcolourfactor}}.<br>
 {{/fillcolour}}
-{{#nlayers}}It has {{nlayers}} layers.<br>{{/nlayers}}
+{{^singlelayer}}It has {{nlayers}} layers.<br>{{/singlelayer}}
 {{#layers}}
 {{>ggLayerTemplate}}
 {{/layers}}
 "
 ggLayerTemplate,"
-{{#layernum}}Layer {{layernum}} is {{/layernum}}
-{{^layernum}}The chart is {{/layernum}}
-{{#hlineflag}}
+{{^singlelayer}}{{#layernum}}Layer {{layernum}} is {{/layernum}}{{/singlelayer}}
+{{#singlelayer}}The chart is {{/singlelayer}}
+{{#hlinetype}}
 a horizontal line at position {{ypos}}.<br>
-{{/hlineflag}}
-{{#barflag}}
+{{/hlinetype}}
+{{#bartype}}
 a bar chart containing {{nbars}} bars.<br>
-{{/barflag}}
-{{#pointflag}}
+{{/bartype}}
+{{#pointtype}}
 a set of {{npoints}} points.<br>
-{{/pointflag}}
+{{/pointtype}}
 "

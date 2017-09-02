@@ -1,6 +1,6 @@
 \name{VI.ggplot}
 \alias{VI.ggplot}
-\alias{print.VItext}
+\alias{print.VIgraph}
 \title{VI for graphs created using ggplot2}
 \usage{
 \method{VI}{ggplot}(x, Describe, ...)
