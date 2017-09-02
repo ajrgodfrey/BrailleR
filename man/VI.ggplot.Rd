@@ -3,11 +3,12 @@
 \alias{print.VIgraph}
 \title{VI for graphs created using ggplot2}
 \usage{
-\method{VI}{ggplot}(x, Describe, ...)
+\method{VI}{ggplot}(x, Describe=FALSE, threshold=10, ...)
 }
 \arguments{
 \item{x}{an object created by ggplot() or qplot() from the ggplot2 package which therefore has class gg or ggplot.}
-\item{Describe}{Should the Describe function be called at the same time}
+\item{Describe}{Should the Describe function be called at the same time. Not currently implemented for ggplot objects.}
+\item{threshold}{Maximum number of data items that should be individually listed in the output.}
 \item{...}{other arguments, currently ignored}
 }
 \value{

@@ -29,15 +29,24 @@ print.VIgraph = function(x, ...) {
   l[(lapply(l,length)>0)] 
 }
 
-VI.ggplot = function(x, Describe=FALSE, ...) {
-  VIstruct = .VIstruct.ggplot(x)
+
+# threshold specifies how many points, lines, etc will be explicitly listed.
+# Greater numbers will be summarised (e.g. "is a set of 32 horizontal lines" vs
+# "is a set of 3 horizontal lines at 5, 7.5, 10")
+VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
+  VIstruct = .VIstruct.ggplot(x,threshold)
   text = .VItextify(list(VIgg=VIstruct))[[1]]
   VIgraph=list(VIgg=VIstruct, text=text)
   class(VIgraph) = "VIgraph"
   return(VIgraph)
 }
+# Add additional fields to the structure that are only needed because
+# of the limitations of the mustache templating system
+.VIstruct.preprocess = function(x) {
+  
+}
 
-.VIstruct.ggplot = function(x) {
+.VIstruct.ggplot = function(x,threshold) {
   xbuild = suppressMessages(ggplot_build(x))
   title = .getTextGGTitle(x,xbuild)
   subtitle = .getTextGGSubtitle(x,xbuild)
@@ -49,15 +58,7 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
   ylabel = .getTextGGYLab(x,xbuild)
   yticklabels = .getTextGGYTicks(x,xbuild)
   yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
-  colourlabel = .getTextGGColourLab(x,xbuild)
-  factorlevels = .getTextGGColourFactors(x,xbuild)
-  colourfactor = .VIlist(factorlevels = factorlevels)
-  colour = .VIlist(colourlabel=colourlabel,colourfactor=colourfactor)
-  fillcolourlabel = .getTextGGFillLab(x,xbuild)
-  factorlevels = .getTextGGFillFactors(x,xbuild)
-  fillcolourfactor = .VIlist(factorlevels = factorlevels)
-  fillcolour = .VIlist(fillcolourlabel=fillcolourlabel,
-                       fillcolourfactor=fillcolourfactor)
+  legends = .getGGLegends(x,xbuild)
   facetrows = as.list(.getGGFacetRows(x,xbuild))
   facetrowsflag = if (length(facetrows)>0) TRUE   # TRUE or NULL
   facetcols = as.list(.getGGFacetCols(x,xbuild))
@@ -67,9 +68,19 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
   facet = .VIlist(facetrowsflag=facetrowsflag,facetrows=facetrows,
                   facetcolsflag=facetcolsflag,facetcols=facetcols)
   ## STILL NEED TO CAPTURE AND REPORT ON VALUES OF THE FACET VARS
-  layers = list()
   layerCount = .getGGLayerCount(x,xbuild);
   singlelayer = if (layerCount==1) TRUE
+  layers = .getGGLayers(x,xbuild,layerCount,faceted,threshold)
+  VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
+              legends=legends,facet=facet,
+              nlayers=layerCount,singlelayer=singlelayer,
+              layers=layers,type="ggplot")
+  class(VIstruct) = "VIstruct"
+  return(VIstruct)
+}
+
+.getGGLayers = function(x,xbuild,layerCount,faceted,threshold) {
+  layers = list()
   for (i in 1:layerCount) {
     layer = list(layernum=i)
     layerClass = .getTextGGLayerType(x,xbuild,i)
@@ -79,7 +90,11 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
       # and it's specified like geom_hline(aes(yintercept=200)).
       # Doesn't currently work for geom_hline(yintercept=200)
       # or for multiple hlines
-      layer[["ypos"]] = .getGGLayerYIntercept(x,xbuild,i)
+      yint = .getGGLayerYIntercept(x,xbuild,i)
+      layer[["data"]] = yint
+      layer[["n"]] = length(yint)
+      layer[["s"]] = if (length(yint)>1) TRUE
+      layer[["largecount"]] = if (length(yint)>threshold) TRUE
     } else if (layerClass == "GeomPoint") {
       layer[["pointtype"]] = TRUE
       if (faceted) {
@@ -87,8 +102,12 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
         #for (f in 1:npanels)
         #  facetpoints[f] = .getGGFacetDataCount(x,i,f)
         layer[["facetpoints"]] = facetpoints
+        layer[["largecount"]] = if (length(facetpoints)>threshold) TRUE
       } else {
-        layer[["npoints"]] = .getGGLayerDataCount(x,xbuild,i)
+        # layer[["data"]] = ??   Should be getting the data details here
+        npoints = .getGGLayerDataCount(x,xbuild,i)
+        layer[["n"]] = npoints
+        layer[["largecount"]] = if (npoints>threshold) TRUE
       }
       # Returns wrong count for faceted charts
     } else if (layerClass == "GeomBar") {
@@ -99,38 +118,65 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
         #  facetbars[f] = .getGGFacetDataCount(x,i,f)
         layer[["facetbars"]] = facetbars
       } else {
-        layer[["nbars"]] = .getGGLayerDataCount(x,xbuild,i)
+        nbars = .getGGLayerDataCount(x,xbuild,i)
+        layer[["n"]] = nbars
+        layer[["largecount"]] = if (nbars>threshold) TRUE
         layer[["data"]] = .getGGPlotData(x,xbuild,i)
       }
       # Returns wrong count for faceted charts
     } else if (layerClass == "GeomLine") {
-        layer[["linetype"]] = TRUE
-        if (faceted) {
-          facetsegments = integer()
-          #for (f in 1:npanels)
-          #  facetsegments[f] = .getGGFacetDataCount(x,i,f) - 1
-          layer[["facetsegments"]] = facetsegments 
-        } else {
-          layer[["nsegments"]] = .getGGLayerDataCount(x,xbuild,i) - 1
-          layer[["data"]] = .getGGPlotData(x,xbuild,i)
-        }
+      layer[["linetype"]] = TRUE
+      if (faceted) {
+        facetsegments = integer()
+        #for (f in 1:npanels)
+        #  facetsegments[f] = .getGGFacetDataCount(x,i,f) - 1
+        layer[["facetsegments"]] = facetsegments 
+      } else {
+        nsegments = .getGGLayerDataCount(x,xbuild,i) - 1
+        layer[["n"]] = nsegments
+        layer[["largecount"]] = if (nsegments>threshold) TRUE
+        layer[["data"]] = .getGGPlotData(x,xbuild,i)
+      }
     } else
-       layer[["unknowntype"]] = TRUE
+      layer[["unknowntype"]] = TRUE
     layers[[i]] = layer  
   }
-  VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
-              colour=colour,fillcolour=fillcolour,facet=facet,
-              nlayers=layerCount,singlelayer=singlelayer,
-              layers=layers,type="ggplot")
-  class(VIstruct) = "VIstruct"
-  return(VIstruct)
+  return(layers)
+}
+
+.getGGLegends = function(x,xbuild) {
+  legends = list()
+  labels = .getGGLegend(x,xbuild)
+  labels = labels[which(!names(labels) %in% c("x","y","title","subtitle","caption"))]
+  names = names(labels)
+  for (i in seq_along(labels)) {
+    name = names[i]
+    mapping = labels[[i]]
+    levels = .getGGFactorLevels(x,xbuild,mapping)
+    isfactor = if (!is.null(levels)) TRUE
+    legend = .VIlist(aes=name,mapping=unname(mapping),
+                     isfactor=isfactor,levels=levels)
+    legends[[i]] = legend
+  }
+  return(legends)
+}
+
+.getGGLegend = function(x,xbuild) {
+  return(x$labels)
+}
+
+# If var is a factor variable, return the levels, otherwise null
+.getGGFactorLevels = function(x,xbuild,var) {
+  if (var %in% colnames(x$data) && 'factor' %in% class(x$data[[var]])) 
+    levels(x$data[[var]])
+  else
+    NULL
 }
 
 .getTextGGTitle = function(x,xbuild){
   if(is.null(x$labels$title)){
     text = NULL
   } else {
-#    text =  BrailleR::InQuotes(x$labels$title)
      text =  x$labels$title
   }
   return(invisible(text))
@@ -140,7 +186,6 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
   if(is.null(x$labels$subtitle)){
     text = NULL
   } else {
-#    text =  BrailleR::InQuotes(x$labels$subtitle)
     text =  x$labels$subtitle
   }
   return(invisible(text))
@@ -150,50 +195,19 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
   if(is.null(x$labels$caption)){
     text = NULL
   } else {
-#    text =  BrailleR::InQuotes(x$labels$caption)
     text =  x$labels$caption
   }
   return(invisible(text))
 }
 
 .getTextGGXLab = function(x,xbuild){
-#  labels = BrailleR::InQuotes(x$labels$x)
   labels = x$labels$x
 }
 
 .getTextGGYLab = function(x,xbuild){
-#  labels = BrailleR::InQuotes(x$labels$y)
   labels = x$labels$y
 }
 
-.getTextGGColourLab = function(x,xbuild){
-  if ('colour' %in% names(x$labels))
-#    text = BrailleR::InQuotes(x$labels$colour)
-    text = x$labels$colour
-  else
-    text = NULL
-}
-.getTextGGFillLab = function(x,xbuild){
-  if ('fill' %in% names(x$labels))
-#    text = BrailleR::InQuotes(x$labels$fill)
-    text = x$labels$fill
-  else
-    text = NULL
-}
-
-.getTextGGColourFactors = function(x,xbuild){
-  if (!is.null(x$labels$colour) && 'factor' %in% class(x$data[[x$labels$colour]])) 
-    labels = levels(x$data[[x$labels$colour]])
-  else
-    labels = NULL
-}
-.getTextGGFillFactors = function(x,xbuild){
-  if (!is.null(x$labels$fill) && 'factor' %in% class(x$data[[x$labels$fill]])) 
-    labels = levels(x$data[[x$labels$fill]])
-  else
-    labels = NULL
-}
-           
 .getTextGGXTicks = function(x,xbuild){
   text=xbuild$layout$panel_ranges[[1]]$x.labels
 }
@@ -210,13 +224,16 @@ VI.ggplot = function(x, Describe=FALSE, ...) {
   plotClass = class(xbuild$plot$layers[[layer]]$geom)[1]
 }
 
+# This potentially returns a vector of length > 1
+# It will likely need to be teased apart into a list
 .getGGLayerYIntercept = function(x,xbuild,layer){
-  yIntercept = xbuild$plot$layers[[layer]]$mapping$yintercept
+  yIntercept = xbuild$data[[layer]]$yintercept
 }
 
 .getGGLayerDataCount = function(x,xbuild,layer){
   points = nrow(xbuild$data[[layer]])
 }
+
 .getGGFacetDataCount = function(x,xbuild,layer,facet){
   data=xbuild$data[[layer]]
   points = nrow(data[data$PANEL==facet,])

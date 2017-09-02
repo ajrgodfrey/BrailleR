@@ -13,15 +13,13 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#facetcolsflag}}The facet columns are {{facetcols}}.<br>{{/facetcolsflag}}
 {{/facet}}
 {{^xaxis}}There is no x-axis.<br>{{/xaxis}}
-{{#xaxis}}{{#facet}}Each sub-chart has{{/facet}}{{^facet}}It has{{/facet}} x-axis '{{xlabel}}' with labels {{xticklabels}}<br>{{/xaxis}}
-{{^yaxis}}It has no y-axis.<br>{{/yaxis}}
-{{#yaxis}}It has y-axis '{{ylabel}}' with labels {{yticklabels}}<br>{{/yaxis}}
-{{#colour}}Colour is used to represent {{colourlabel}}
-{{#colourfactor}}, a factor with levels: {{factorlevels}}{{/colourfactor}}.<br>
-{{/colour}}
-{{#fillcolour}}Fill colour is used to represent {{fillcolourlabel}}
-{{#fillcolourfactor}}, a factor with levels: {{/fillcolourfactor}}{{fillcolourfactor}}.<br>
-{{/fillcolour}}
+{{#xaxis}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has x-axis '{{xlabel}}' with labels {{xticklabels}}.<br>{{/xaxis}}
+{{^yaxis}}There is no y-axis.<br>{{/yaxis}}
+{{#yaxis}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has y-axis '{{ylabel}}' with labels {{yticklabels}}.<br>{{/yaxis}}
+{{#legends}}
+There is a legend indicating that {{aes}} is used to represent {{mapping}}
+{{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}.<br>
+{{/legends}}
 {{^singlelayer}}It has {{nlayers}} layers.<br>{{/singlelayer}}
 {{#layers}}
 {{>ggLayerTemplate}}
@@ -31,12 +29,18 @@ ggLayerTemplate,"
 {{^singlelayer}}{{#layernum}}Layer {{layernum}} is {{/layernum}}{{/singlelayer}}
 {{#singlelayer}}The chart is {{/singlelayer}}
 {{#hlinetype}}
-a horizontal line at position {{ypos}}.<br>
+{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{data}}{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
-a bar chart containing {{nbars}} bars.<br>
+a bar chart containing {{n}} bars.<br>
 {{/bartype}}
 {{#pointtype}}
-a set of {{npoints}} points.<br>
+a set of {{n}} points.<br>
 {{/pointtype}}
+{{#linetype}}
+a line comprised of {{n}} segments.<br>
+{{/linetype}}
+{{#unknowntype}}
+a layer type that VI isn't able to process.<br>
+{{/unknowntype}}
 "
