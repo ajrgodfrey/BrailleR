@@ -29,7 +29,6 @@ print.VIgraph = function(x, ...) {
   l[(lapply(l,length)>0)] 
 }
 
-
 # threshold specifies how many points, lines, etc will be explicitly listed.
 # Greater numbers will be summarised (e.g. "is a set of 32 horizontal lines" vs
 # "is a set of 3 horizontal lines at 5, 7.5, 10")
@@ -40,13 +39,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   class(VIgraph) = "VIgraph"
   return(VIgraph)
 }
-# Add additional fields to the structure that are only needed because
-# of the limitations of the mustache templating system
-.VIstruct.preprocess = function(x) {
-  
-}
 
-.VIstruct.ggplot = function(x,threshold) {
+.VIstruct.ggplot = function(x,threshold=10) {
   xbuild = suppressMessages(ggplot_build(x))
   title = .getTextGGTitle(x,xbuild)
   subtitle = .getTextGGSubtitle(x,xbuild)
@@ -63,14 +57,14 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   facetrowsflag = if (length(facetrows)>0) TRUE   # TRUE or NULL
   facetcols = as.list(.getGGFacetCols(x,xbuild))
   facetcolsflag = if (length(facetcols)>0) TRUE   # TRUE or NULL
-  faceted = (length(facetrows)>0 || length(facetcols)>0)
-  # Need to compute npanels
+  facetpanels = ifelse(is.null(facetrows),1,length(facetrows)) * 
+                ifelse(is.null(facetcols),1,length(facetcols))
   facet = .VIlist(facetrowsflag=facetrowsflag,facetrows=facetrows,
                   facetcolsflag=facetcolsflag,facetcols=facetcols)
   ## STILL NEED TO CAPTURE AND REPORT ON VALUES OF THE FACET VARS
   layerCount = .getGGLayerCount(x,xbuild);
   singlelayer = if (layerCount==1) TRUE
-  layers = .getGGLayers(x,xbuild,layerCount,faceted,threshold)
+  layers = .getGGLayers(x,xbuild,layerCount,facetpanels,threshold)
   VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
               legends=legends,facet=facet,
               nlayers=layerCount,singlelayer=singlelayer,
@@ -79,67 +73,44 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   return(VIstruct)
 }
 
-.getGGLayers = function(x,xbuild,layerCount,faceted,threshold) {
+.getGGLayers = function(x,xbuild,layerCount,facetpanels,threshold) {
   layers = list()
-  for (i in 1:layerCount) {
-    layer = list(layernum=i)
-    layerClass = .getTextGGLayerType(x,xbuild,i)
+  for (layeri in 1:layerCount) {
+    layer = list(layernum=layeri)
+    data =.getGGPlotData(x,xbuild,layeri)
+    layer[["data"]] = data
+    n = nrow(data)
+    if (facetpanels>1) {
+      facetdata = tabulate(data$PANEL,nbins=facetpanels)
+      layer[["facetn"]] = sapply(facetdata,nrow)
+    }
+    faceted = (!is.null(facetpanels) && facetpanels>1)
+    layer[["n"]] = n
+    layer[["s"]] = if (n>1) TRUE  # For templating
+    layer[["largecount"]] = if (n>threshold) TRUE
+    layerClass = .getTextGGLayerType(x,xbuild,layeri)
     if (layerClass == "GeomHline") {
       layer[["hlinetype"]] = TRUE
-      # This is only working correctly if there's just one hline
-      # and it's specified like geom_hline(aes(yintercept=200)).
-      # Doesn't currently work for geom_hline(yintercept=200)
-      # or for multiple hlines
-      yint = .getGGLayerYIntercept(x,xbuild,i)
-      layer[["data"]] = yint
-      layer[["n"]] = length(yint)
-      layer[["s"]] = if (length(yint)>1) TRUE
-      layer[["largecount"]] = if (length(yint)>threshold) TRUE
+      layer[["yintercept"]] = data$yintercept
     } else if (layerClass == "GeomPoint") {
       layer[["pointtype"]] = TRUE
-      if (faceted) {
-        facetpoints = integer()
-        #for (f in 1:npanels)
-        #  facetpoints[f] = .getGGFacetDataCount(x,i,f)
-        layer[["facetpoints"]] = facetpoints
-        layer[["largecount"]] = if (length(facetpoints)>threshold) TRUE
-      } else {
-        # layer[["data"]] = ??   Should be getting the data details here
-        npoints = .getGGLayerDataCount(x,xbuild,i)
-        layer[["n"]] = npoints
-        layer[["largecount"]] = if (npoints>threshold) TRUE
-      }
-      # Returns wrong count for faceted charts
+      # need to capture points as x-y pairs from the data
     } else if (layerClass == "GeomBar") {
       layer[["bartype"]] = TRUE      
-      if (faceted) {
-        facetbars = integer()
-        #for (f in 1:npanels)
-        #  facetbars[f] = .getGGFacetDataCount(x,i,f)
-        layer[["facetbars"]] = facetbars
-      } else {
-        nbars = .getGGLayerDataCount(x,xbuild,i)
-        layer[["n"]] = nbars
-        layer[["largecount"]] = if (nbars>threshold) TRUE
-        layer[["data"]] = .getGGPlotData(x,xbuild,i)
-      }
-      # Returns wrong count for faceted charts
+      # need to capture heights of bars
     } else if (layerClass == "GeomLine") {
       layer[["linetype"]] = TRUE
-      if (faceted) {
-        facetsegments = integer()
-        #for (f in 1:npanels)
-        #  facetsegments[f] = .getGGFacetDataCount(x,i,f) - 1
-        layer[["facetsegments"]] = facetsegments 
-      } else {
-        nsegments = .getGGLayerDataCount(x,xbuild,i) - 1
-        layer[["n"]] = nsegments
-        layer[["largecount"]] = if (nsegments>threshold) TRUE
-        layer[["data"]] = .getGGPlotData(x,xbuild,i)
-      }
+      # need to capture info on segments - starting & ending x-y?
+    } else if (layerClass == "GeomBoxplot") {
+      layer[["boxtype"]] = TRUE
+      # need to capture info related to boxes
+    } else if (layerClass == "GeomSmooth") {
+      layer[["smoothtype"]] = TRUE
+      layer[["method"]] = .getGGSmoothMethod(x,xbuild,layeri)
+      layer[["ci"]] = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
     } else
       layer[["unknowntype"]] = TRUE
-    layers[[i]] = layer  
+    layers[[layeri]] = layer  
   }
   return(layers)
 }
@@ -224,16 +195,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   plotClass = class(xbuild$plot$layers[[layer]]$geom)[1]
 }
 
-# This potentially returns a vector of length > 1
-# It will likely need to be teased apart into a list
-.getGGLayerYIntercept = function(x,xbuild,layer){
-  yIntercept = xbuild$data[[layer]]$yintercept
-}
-
-.getGGLayerDataCount = function(x,xbuild,layer){
-  points = nrow(xbuild$data[[layer]])
-}
-
 .getGGFacetDataCount = function(x,xbuild,layer,facet){
   data=xbuild$data[[layer]]
   points = nrow(data[data$PANEL==facet,])
@@ -269,4 +230,12 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   # This returns a data frame -- useable by MakeAccessible, but will need to change
   # if it's going to be used by VI via the whisker template
   return(xbuild$data[[layer]])
+}
+
+.getGGSmoothMethod = function(x,xbuild,layer) {
+  return(xbuild$plot$layers[[layer]]$stat_params$method)
+}
+
+.getGGSmoothSEflag = function(x,xbuild,layer) {
+  return(xbuild$plot$layers[[layer]]$stat_params$se)
 }

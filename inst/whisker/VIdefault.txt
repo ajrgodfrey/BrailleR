@@ -8,9 +8,9 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#subtitle}}It has the subtitle {{subtitle}}.<br>{{/subtitle}}
 {{#caption}}It has caption {{caption}}.<br>{{/caption}}
 {{/annotations}}
-{{#facet}}The chart is faceted.<br>
-{{#facetrows}}The facet rows are {{facetrows}}.<br>{{/facetrows}}
-{{#facetcolsflag}}The facet columns are {{facetcols}}.<br>{{/facetcolsflag}}
+{{#facet}}The chart is comprised of multiple panels containing sub-charts.<br>
+{{#facetrows}}The panel rows represent {{facetrows}}.<br>{{/facetrows}}
+{{#facetcolsflag}}The panel columns represent {{facetcols}}.<br>{{/facetcolsflag}}
 {{/facet}}
 {{^xaxis}}There is no x-axis.<br>{{/xaxis}}
 {{#xaxis}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has x-axis '{{xlabel}}' with labels {{xticklabels}}.<br>{{/xaxis}}
@@ -20,7 +20,7 @@ This is an untitled chart with no subtitle or caption.<br>
 There is a legend indicating that {{aes}} is used to represent {{mapping}}
 {{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}.<br>
 {{/legends}}
-{{^singlelayer}}It has {{nlayers}} layers.<br>{{/singlelayer}}
+{{^singlelayer}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has {{nlayers}} layers.<br>{{/singlelayer}}
 {{#layers}}
 {{>ggLayerTemplate}}
 {{/layers}}
@@ -29,18 +29,24 @@ ggLayerTemplate,"
 {{^singlelayer}}{{#layernum}}Layer {{layernum}} is {{/layernum}}{{/singlelayer}}
 {{#singlelayer}}The chart is {{/singlelayer}}
 {{#hlinetype}}
-{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{data}}{{/largecount}}.<br>
+{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{yintercept}}{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
-a bar chart containing {{n}} bars.<br>
+a bar chart containing {{n}} bar{{#s}}s{{/s}}.<br>
 {{/bartype}}
 {{#pointtype}}
-a set of {{n}} points.<br>
+a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{/pointtype}}
 {{#linetype}}
-a line comprised of {{n}} segments.<br>
+a line comprised of {{n}} segment{{#s}}s{{/s}}.<br>
 {{/linetype}}
+{{#boxtype}}
+a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
+{{/boxtype}}
+{{#smoothtype}}
+a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci}}.<br>
+{{/smoothtype}}
 {{#unknowntype}}
-a layer type that VI isn't able to process.<br>
+a type that VI isn't able to process.<br>
 {{/unknowntype}}
 "

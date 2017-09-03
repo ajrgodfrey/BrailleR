@@ -123,7 +123,7 @@
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
   if (!is.null(x$bartype)) {    # Bar chart
-    barCount=x$nbars
+    barCount=x$n
     barGrob = grid.grep(gPath("geom_rect"),grep=TRUE,)
     XML::addAttributes(annotation$root, speech="Histogram bars",
                      speech2=paste("Histogram with", barCount, "bars"),
@@ -141,12 +141,11 @@
                                         end=signif(chartData$xmax[i],4),id=barId)
     }
   } else if (!is.null(x$linetype)) { # Line chart
-    segmentCount=x$nsegments
+    segmentCount=x$n
     # For now, assume that all layers are this layer type
     # TODO:  Fix this
     lineGrobs = grid.grep(gPath("GRID.polyline"),grep=TRUE,global=TRUE)
     lineGrob = lineGrobs[[x$layernum]]
-    print(paste("Found layer ",x$layernum," as ",lineGrob$name))
     XML::addAttributes(annotation$root, speech="Line graph",
                        speech2=paste("Line graph with", segmentCount, "segments"),
                        # Better to report #lines or #segs?  
