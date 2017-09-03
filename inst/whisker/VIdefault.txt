@@ -17,8 +17,12 @@ This is an untitled chart with no subtitle or caption.<br>
 {{^yaxis}}There is no y-axis.<br>{{/yaxis}}
 {{#yaxis}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has y-axis '{{ylabel}}' with labels {{yticklabels}}.<br>{{/yaxis}}
 {{#legends}}
-There is a legend indicating that {{aes}} is used to represent {{mapping}}
+{{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
 {{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}.<br>
+{{/hidden}}
+{{#hidden}}In this chart {{aes}} is used to represent {{mapping}}
+{{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}. The legend that would normally indicate this has been hidden.<br>
+{{/hidden}}
 {{/legends}}
 {{^singlelayer}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has {{nlayers}} layers.<br>{{/singlelayer}}
 {{#layers}}

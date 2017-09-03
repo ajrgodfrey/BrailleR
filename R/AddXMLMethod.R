@@ -94,7 +94,7 @@ AddXML.ggplot = function(x, file) {
                             fullLabelId=yAxisLabelGrob,fullTickLabelId=yAxisTickLabelGrob)
     components[[length(components)+1]] = yAxis
     for (layerNum in 1:xs$nlayers) {
-      layer = .AddXMLAddGGPlotLayer(annotations,xs$layer[[layerNum]])    # Only layer 1 for now
+      layer = .AddXMLAddGGPlotLayer(annotations,xs$layers[[layerNum]])    # Only layer 1 for now
       components[[length(components)+1]] = layer
     }
     chart <- .AddXMLAddChart(annotations, type="Chart",

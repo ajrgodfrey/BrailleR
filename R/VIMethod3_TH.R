@@ -116,36 +116,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   return(layers)
 }
 
-.getGGLegends = function(x,xbuild) {
-  legends = list()
-  labels = .getGGLegend(x,xbuild)
-  labels = labels[which(names(labels) %in% 
-                          c("colour","fill","size","shape","alpha","radius",
-                            "linetype"))]
-  names = names(labels)
-  for (i in seq_along(labels)) {
-    name = names[i]
-    mapping = labels[[i]]
-    levels = .getGGFactorLevels(x,xbuild,mapping)
-    isfactor = if (!is.null(levels)) TRUE
-    legend = .VIlist(aes=name,mapping=unname(mapping),
-                     isfactor=isfactor,levels=levels)
-    legends[[i]] = legend
-  }
-  return(legends)
-}
-
-.getGGLegend = function(x,xbuild) {
-  return(x$labels)
-}
-
-# If var is a factor variable, return the levels, otherwise null
-.getGGFactorLevels = function(x,xbuild,var) {
-  if (var %in% colnames(x$data) && 'factor' %in% class(x$data[[var]])) 
-    levels(x$data[[var]])
-  else
-    NULL
-}
 
 .getTextGGTitle = function(x,xbuild){
   if(is.null(x$labels$title)){
@@ -230,6 +200,44 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   else
     return(NULL)
 }
+
+.getGGLegends = function(x,xbuild) {
+  legends = list()
+  labels = .getGGLegend(x,xbuild)
+  labels = labels[which(names(labels) %in% 
+                          c("colour","fill","size","shape","alpha","radius",
+                            "linetype"))]
+  names = names(labels)
+  guides = .getGGGuides(x,xbuild)
+  for (i in seq_along(labels)) {
+    name = names[i]
+    mapping = labels[[i]]
+    levels = .getGGFactorLevels(x,xbuild,mapping)
+    isfactor = if (!is.null(levels)) TRUE
+    hidden = if (!is.null(guides[[name]]) && guides[[name]]=="none") TRUE
+    legend = .VIlist(aes=name,mapping=unname(mapping),
+                     isfactor=isfactor,levels=levels,hidden=hidden)
+    legends[[i]] = legend
+  }
+  return(legends)
+}
+
+.getGGLegend = function(x,xbuild) {
+  return(x$labels)
+}
+
+.getGGGuides = function(x,xbuild) {
+  return(xbuild$plot$guides)
+}
+
+# If var is a factor variable, return the levels, otherwise null
+.getGGFactorLevels = function(x,xbuild,var) {
+  if (var %in% colnames(x$data) && 'factor' %in% class(x$data[[var]])) 
+    levels(x$data[[var]])
+  else
+    NULL
+}
+
 .getGGPlotData = function(x,xbuild,layer) {
   # This returns a data frame -- useable by MakeAccessible, but will need to change
   # if it's going to be used by VI via the whisker template
