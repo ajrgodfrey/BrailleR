@@ -26,7 +26,7 @@ There is a legend indicating that {{aes}} is used to represent {{mapping}}
 {{/layers}}
 "
 ggLayerTemplate,"
-{{^singlelayer}}{{#layernum}}Layer {{layernum}} is {{/layernum}}{{/singlelayer}}
+{{^singlelayer}}Layer {{layernum}} is {{/singlelayer}}
 {{#singlelayer}}The chart is {{/singlelayer}}
 {{#hlinetype}}
 {{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{yintercept}}{{/largecount}}.<br>
@@ -49,4 +49,8 @@ a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci
 {{#unknowntype}}
 a type that VI isn't able to process.<br>
 {{/unknowntype}}
+{{#layeraes}}
+{{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}
+has {{aes}} set to {{mapping}}.<br>
+{{/layeraes}}
 "

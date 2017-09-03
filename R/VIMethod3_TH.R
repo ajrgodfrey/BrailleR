@@ -76,7 +76,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
 .getGGLayers = function(x,xbuild,layerCount,facetpanels,threshold) {
   layers = list()
   for (layeri in 1:layerCount) {
-    layer = list(layernum=layeri)
+    layeraes = .getGGLayerAes(x,xbuild,layeri)
+    layer = .VIlist(layernum=layeri,layeraes=layeraes)
     data =.getGGPlotData(x,xbuild,layeri)
     layer[["data"]] = data
     n = nrow(data)
@@ -118,7 +119,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
 .getGGLegends = function(x,xbuild) {
   legends = list()
   labels = .getGGLegend(x,xbuild)
-  labels = labels[which(!names(labels) %in% c("x","y","title","subtitle","caption"))]
+  labels = labels[which(names(labels) %in% 
+                          c("colour","fill","size","shape","alpha","radius",
+                            "linetype"))]
   names = names(labels)
   for (i in seq_along(labels)) {
     name = names[i]
@@ -199,7 +202,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   data=xbuild$data[[layer]]
   points = nrow(data[data$PANEL==facet,])
 }
-## THESE NOT CURRENTLY USED 
+## NOT CURRENTLY USED 
 #.getGGLayerMapping = function(x,xbuild,layer){
 #  mapping = xbuild$plot$layers[[layer]]$mapping
 #  if (length(mapping)>0)
@@ -207,13 +210,14 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
 #  else
 #    return(NULL)
 #}
-#.getGGLayerAes = function(x,xbuild,layer){
-#  aes = xbuild$plot$layers[[layer]]$aes_params
-#  if (length(aes)>0)
-#    return(paste0("Layer ",n," sets aesthetic ",paste0(names(aes)," to ",aes,collapse=", "),"\n")) 
-#  else
-#    return(NULL)
-#}
+.getGGLayerAes = function(x,xbuild,layer){
+  layeraes = list()
+  params = xbuild$plot$layers[[layer]]$aes_params
+  for (i in seq_along(params))
+    layeraes[[i]] = list(aes=names(params)[i],mapping=params[[i]])
+  return(layeraes)
+}
+
 .getGGFacetRows = function(x,xbuild){
   if (length(x$facet$params$rows)>0)
     return(names(x$facet$params$rows))
