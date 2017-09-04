@@ -93,10 +93,13 @@ AddXML.ggplot = function(x, file) {
     yAxis = .AddXMLAddYAxis(annotations, label=xs$yaxis$ylabel,values=xs$yaxis$yticklabels,
                             fullLabelId=yAxisLabelGrob,fullTickLabelId=yAxisTickLabelGrob)
     components[[length(components)+1]] = yAxis
-    for (layerNum in 1:xs$nlayers) {
-      layer = .AddXMLAddGGPlotLayer(annotations,xs$layers[[layerNum]])    # Only layer 1 for now
-      components[[length(components)+1]] = layer
-    }
+    if (xs$npanels==1) {
+          for (layerNum in 1:xs$nlayers) {
+            layer = .AddXMLAddGGPlotLayer(annotations,xs$panels[[1]]$panellayers[[layerNum]])    
+            components[[length(components)+1]] = layer
+          }
+    } 
+    # Else, should warn about not handling faceted charts -- or else handle them!
     chart <- .AddXMLAddChart(annotations, type="Chart",
                              speech=paste(ifelse(is.null(xs$title),"Chart",
                                                  paste("Chart with title ",xs$title)),

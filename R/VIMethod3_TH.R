@@ -1,7 +1,7 @@
 ## Textify performs whisker rendering
 ## First parameter is a list of objects.  
 ## Second parameter is the name of a template file.
-## #ach object is rendered using the template of the same name 
+## Each object is rendered using the template of the same name 
 ## found within the template file.  Partial templates can also
 ## be present in the template file and will be used if needed.
 .VItextify = function(x, template=
@@ -20,8 +20,30 @@
   return(result)
 }
 
+# This function adds flags to the VIstruct object that are only 
+# required because of the limitations of mustache templating, as well
+# as implementing the threshold for printing by setting "largecount" flags.
+# Mustache can't check a field's value, only whether it's present or not.
+# So flags are either set to true or not included at all
+.VIpreprocess = function(x,threshold=10) {
+  if (x$npanels==1) x$singlepanel = TRUE
+  if (x$nlayers==1) x$singlelayer = TRUE
+  if (length(x$panelrows)==0) x$singlerow = TRUE   
+  if (length(x$panelcols)==0) x$singlecol = TRUE
+  if (length(x$panelrows)>0 && length(x$panelcols)>0) x$panelgrid = TRUE
+  for (paneli in 1:x$npanels)
+    for (layeri in 1:x$nlayers) {
+      typeflag = paste0(x$panels[[paneli]]$panellayers[[layeri]]$type,"type")
+      x$panels[[paneli]]$panellayers[[layeri]][[typeflag]] = TRUE
+      n = x$panels[[paneli]]$panellayers[[layeri]]$n
+      if (n>1) x$panels[[paneli]]$panellayers[[layeri]]$s = TRUE
+      if (n>threshold) x$panels[[paneli]]$panellayers[[layeri]]$largecount = TRUE
+    }  
+  return(x)
+}
 print.VIgraph = function(x, ...) {
   cat(x$text,sep="\n")
+  invisible(x)
 }
 
 .VIlist = function(...) {
@@ -32,15 +54,16 @@ print.VIgraph = function(x, ...) {
 # threshold specifies how many points, lines, etc will be explicitly listed.
 # Greater numbers will be summarised (e.g. "is a set of 32 horizontal lines" vs
 # "is a set of 3 horizontal lines at 5, 7.5, 10")
-VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
-  VIstruct = .VIstruct.ggplot(x,threshold)
-  text = .VItextify(list(VIgg=VIstruct))[[1]]
+VI.ggplot = function(x, Describe=FALSE, threshold=10, 
+                     template=system.file("whisker/VIdefault.txt",package="BrailleR"), ...) {
+  VIstruct = .VIstruct.ggplot(x)
+  text = .VItextify(list(VIgg=.VIpreprocess(VIstruct,threshold)),template)[[1]]
   VIgraph=list(VIgg=VIstruct, text=text)
   class(VIgraph) = "VIgraph"
-  return(VIgraph)
+  print(VIgraph)
 }
 
-.VIstruct.ggplot = function(x,threshold=10) {
+.VIstruct.ggplot = function(x) {
   xbuild = suppressMessages(ggplot_build(x))
   title = .getTextGGTitle(x,xbuild)
   subtitle = .getTextGGSubtitle(x,xbuild)
@@ -53,30 +76,20 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   yticklabels = .getTextGGYTicks(x,xbuild)
   yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
   legends = .getGGLegends(x,xbuild)
-  panels = .getGGPanelList(x,xbuild,threshold)
-  npanels = length(panels)
-  singlepanel = if (length(panels)==1) TRUE  # TRUE OR NULL
+  panels = .getGGPanelList(x,xbuild)
   panelrows = as.list(.getGGFacetRows(x,xbuild))
-  singlerow = if (length(panelrows)==0) TRUE   # TRUE or NULL
   panelcols = as.list(.getGGFacetCols(x,xbuild))
-  singlecol = if (length(panelcols)==0) TRUE   # TRUE or NULL
   layerCount = .getGGLayerCount(x,xbuild);
-  singlelayer = if (layerCount==1) TRUE
-  panelgrid = if (length(panelrows)>0 && length(panelcols)>0) TRUE
-  # Eventually won't need the next line
-  # layers = .getGGLayers(x,xbuild,1,threshold)
   VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
               legends=legends,panels=panels,
-              npanels=npanels,nlayers=layerCount,
+              npanels=length(panels),nlayers=layerCount,
               panelrows=panelrows,panelcols=panelcols,
-              singlepanel=singlepanel,singlelayer=singlelayer,
-              singlerow=singlerow,singlecol=singlecol,
-              panelgrid=panelgrid,type="ggplot")
+              type="ggplot")
   class(VIstruct) = "VIstruct"
   return(VIstruct)
 }
 
-.getGGLayers = function(x,xbuild,panel,threshold) {
+.getGGLayers = function(x,xbuild,panel) {
   layerCount = .getGGLayerCount(x,xbuild)
   layers = list()
   for (layeri in 1:layerCount) {
@@ -86,30 +99,30 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
     layer[["data"]] = data
     n = nrow(data)
     layer[["n"]] = n
-    layer[["s"]] = if (n>1) TRUE  # For templating
-    layer[["largecount"]] = if (n>threshold) TRUE
     layerClass = .getTextGGLayerType(x,xbuild,layeri)
     if (layerClass == "GeomHline") {
+      layer$type = "hline"
       layer[["hlinetype"]] = TRUE
       layer[["yintercept"]] = data$yintercept
     } else if (layerClass == "GeomPoint") {
-      layer[["pointtype"]] = TRUE
+      layer$type = "point"
       # need to capture points as x-y pairs from the data
     } else if (layerClass == "GeomBar") {
-      layer[["bartype"]] = TRUE      
+      layer$type = "bar"
       # need to capture heights of bars
     } else if (layerClass == "GeomLine") {
-      layer[["linetype"]] = TRUE
+      layer$type = "line"
       # need to capture info on segments - starting & ending x-y?
     } else if (layerClass == "GeomBoxplot") {
-      layer[["boxtype"]] = TRUE
+      layer$type = "box"
       # need to capture info related to boxes
     } else if (layerClass == "GeomSmooth") {
-      layer[["smoothtype"]] = TRUE
+      layer$type = "smooth"
       layer[["method"]] = .getGGSmoothMethod(x,xbuild,layeri)
       layer[["ci"]] = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
-    } else
-      layer[["unknowntype"]] = TRUE
+    } else {
+      layer$type = "unknown"
+    }
     layers[[layeri]] = layer  
   }
   return(layers)
@@ -251,7 +264,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   return(xbuild$plot$layers[[layer]]$stat_params$se)
 }
 
-.getGGPanelList = function(x,xbuild,threshold) {
+.getGGPanelList = function(x,xbuild) {
   f = .getGGFacetLayout(x,xbuild)
   panels = list()
   names = colnames(f)
@@ -267,7 +280,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
                          value=as.character(f[[i,panelvars[j]]]))
       }
     panel[["vars"]] = vars
-    panel[["panellayers"]] = .getGGLayers(x,xbuild,i,threshold)
+    panel[["panellayers"]] = .getGGLayers(x,xbuild,i)
     panels[[i]] = panel
   }
   return(panels)  

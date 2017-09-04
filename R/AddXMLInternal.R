@@ -118,8 +118,8 @@
 
 ## Constructs a ggplot layer
 ## TODO:  Currently assumes histogram or line (and probably plenty of other assumptions)
-.AddXMLAddGGPlotLayer = function(root, x=NULL) {
-  annotation = .AddXMLAddAnnotation(root, position=4, id=paste0("center-",x$layernum), kind="grouped")
+.AddXMLAddGGPlotLayer = function(root, x=NULL, panel=1) {
+  annotation = .AddXMLAddAnnotation(root, position=4, id=paste("center",panel,x$layernum,sep="-"), kind="grouped")
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
   if (!is.null(x$bartype)) {    # Bar chart
