@@ -8,14 +8,19 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#subtitle}}It has the subtitle {{subtitle}}.<br>{{/subtitle}}
 {{#caption}}It has caption {{caption}}.<br>{{/caption}}
 {{/annotations}}
-{{#facet}}The chart is comprised of multiple panels containing sub-charts.<br>
-{{#facetrows}}The panel rows represent {{facetrows}}.<br>{{/facetrows}}
-{{#facetcolsflag}}The panel columns represent {{facetcols}}.<br>{{/facetcolsflag}}
-{{/facet}}
+{{#^singlepanel}}The chart is comprised of multiple panels containing sub-charts,
+{{#singlerow}} arranged horizontally.<br>{{/singlerow}}
+{{#singlecol}} arranged vertically.<br>{{/singlecol}}
+{{#panelgrid}} arranged in a grid.<br>{{/panelgrid}}
+{{^singlerow}}The {{#singlecol}}panels{{/singlecol}}{{^singlecol}}panel rows{{/singlecol}}
+ represent different values of {{panelrows}}.<br>{{/singlerow}}
+{{^singlecol}}The {{#singlerow}}panels{{/singlerow}}{{^singlerow}}panel columns{{/singlerow}}
+ represent different values of {{panelcols}}.<br>{{/singlecol}}
+{{/singlepanel}}
 {{^xaxis}}There is no x-axis.<br>{{/xaxis}}
-{{#xaxis}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has x-axis '{{xlabel}}' with labels {{xticklabels}}.<br>{{/xaxis}}
+{{#xaxis}}{{#^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has x-axis '{{xlabel}}' with labels {{xticklabels}}.<br>{{/xaxis}}
 {{^yaxis}}There is no y-axis.<br>{{/yaxis}}
-{{#yaxis}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has y-axis '{{ylabel}}' with labels {{yticklabels}}.<br>{{/yaxis}}
+{{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}' with labels {{yticklabels}}.<br>{{/yaxis}}
 {{#legends}}
 {{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
 {{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}.<br>
@@ -24,14 +29,28 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}. The legend that would normally indicate this has been hidden.<br>
 {{/hidden}}
 {{/legends}}
-{{^singlelayer}}{{#facet}}Each sub-chart{{/facet}}{{^facet}}It{{/facet}} has {{nlayers}} layers.<br>{{/singlelayer}}
-{{#layers}}
+{{^singlelayer}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has {{nlayers}} layers.<br>{{/singlelayer}}
+{{#panels}}
+{{>ggPanelTemplate}}
+{{/panels}}
+"
+ggPanelTemplate,"
+{{^singlepanel}}
+Panel {{panelnum}}
+{{#panelgrid}} is in row {{row}} and col {{col}} and{{/panelgrid}}
+ represents data for{{#vars}} {{varname}} = {{value}}{{/vars}}.<br>
+{{/singlepanel}}
+{{#panellayers}}
 {{>ggLayerTemplate}}
-{{/layers}}
+{{/panellayers}}
 "
 ggLayerTemplate,"
-{{^singlelayer}}Layer {{layernum}} is {{/singlelayer}}
-{{#singlelayer}}The chart is {{/singlelayer}}
+{{^singlelayer}}Layer {{layernum}}
+{{^singlepanel}} of panel {{panelnum}}{{/singlepanel}} is {{/singlelayer}}
+{{#singlelayer}}
+{{^singlepanel}}Panel {{panelnum}} is {{/singlepanel}}
+{{#singlepanel}}The chart is {{/singlepanel}}
+{{/singlelayer}}
 {{#hlinetype}}
 {{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{yintercept}}{{/largecount}}.<br>
 {{/hlinetype}}
@@ -42,7 +61,7 @@ a bar chart containing {{n}} bar{{#s}}s{{/s}}.<br>
 a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{/pointtype}}
 {{#linetype}}
-a line comprised of {{n}} segment{{#s}}s{{/s}}.<br>
+a line connecting {{n}} point{{#s}}s{{/s}}.<br>
 {{/linetype}}
 {{#boxtype}}
 a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
@@ -58,3 +77,4 @@ a type that VI isn't able to process.<br>
 has {{aes}} set to {{mapping}}.<br>
 {{/layeraes}}
 "
+

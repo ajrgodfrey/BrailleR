@@ -53,39 +53,38 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   yticklabels = .getTextGGYTicks(x,xbuild)
   yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
   legends = .getGGLegends(x,xbuild)
-  facetrows = as.list(.getGGFacetRows(x,xbuild))
-  facetrowsflag = if (length(facetrows)>0) TRUE   # TRUE or NULL
-  facetcols = as.list(.getGGFacetCols(x,xbuild))
-  facetcolsflag = if (length(facetcols)>0) TRUE   # TRUE or NULL
-  facetpanels = ifelse(is.null(facetrows),1,length(facetrows)) * 
-                ifelse(is.null(facetcols),1,length(facetcols))
-  facet = .VIlist(facetrowsflag=facetrowsflag,facetrows=facetrows,
-                  facetcolsflag=facetcolsflag,facetcols=facetcols)
-  ## STILL NEED TO CAPTURE AND REPORT ON VALUES OF THE FACET VARS
+  panels = .getGGPanelList(x,xbuild,threshold)
+  npanels = length(panels)
+  singlepanel = if (length(panels)==1) TRUE  # TRUE OR NULL
+  panelrows = as.list(.getGGFacetRows(x,xbuild))
+  singlerow = if (length(panelrows)==0) TRUE   # TRUE or NULL
+  panelcols = as.list(.getGGFacetCols(x,xbuild))
+  singlecol = if (length(panelcols)==0) TRUE   # TRUE or NULL
   layerCount = .getGGLayerCount(x,xbuild);
   singlelayer = if (layerCount==1) TRUE
-  layers = .getGGLayers(x,xbuild,layerCount,facetpanels,threshold)
+  panelgrid = if (length(panelrows)>0 && length(panelcols)>0) TRUE
+  # Eventually won't need the next line
+  # layers = .getGGLayers(x,xbuild,1,threshold)
   VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
-              legends=legends,facet=facet,
-              nlayers=layerCount,singlelayer=singlelayer,
-              layers=layers,type="ggplot")
+              legends=legends,panels=panels,
+              npanels=npanels,nlayers=layerCount,
+              panelrows=panelrows,panelcols=panelcols,
+              singlepanel=singlepanel,singlelayer=singlelayer,
+              singlerow=singlerow,singlecol=singlecol,
+              panelgrid=panelgrid,type="ggplot")
   class(VIstruct) = "VIstruct"
   return(VIstruct)
 }
 
-.getGGLayers = function(x,xbuild,layerCount,facetpanels,threshold) {
+.getGGLayers = function(x,xbuild,panel,threshold) {
+  layerCount = .getGGLayerCount(x,xbuild)
   layers = list()
   for (layeri in 1:layerCount) {
     layeraes = .getGGLayerAes(x,xbuild,layeri)
     layer = .VIlist(layernum=layeri,layeraes=layeraes)
-    data =.getGGPlotData(x,xbuild,layeri)
+    data =.getGGPlotData(x,xbuild,layeri,panel)
     layer[["data"]] = data
     n = nrow(data)
-    if (facetpanels>1) {
-      facetdata = tabulate(data$PANEL,nbins=facetpanels)
-      layer[["facetn"]] = sapply(facetdata,nrow)
-    }
-    faceted = (!is.null(facetpanels) && facetpanels>1)
     layer[["n"]] = n
     layer[["s"]] = if (n>1) TRUE  # For templating
     layer[["largecount"]] = if (n>threshold) TRUE
@@ -168,10 +167,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   plotClass = class(xbuild$plot$layers[[layer]]$geom)[1]
 }
 
-.getGGFacetDataCount = function(x,xbuild,layer,facet){
-  data=xbuild$data[[layer]]
-  points = nrow(data[data$PANEL==facet,])
-}
+
 ## NOT CURRENTLY USED 
 #.getGGLayerMapping = function(x,xbuild,layer){
 #  mapping = xbuild$plot$layers[[layer]]$mapping
@@ -188,6 +184,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
   return(layeraes)
 }
 
+# Getting facet row and col names from a different place than the 
+# rest of the panel info. Does it matter?
 .getGGFacetRows = function(x,xbuild){
   if (length(x$facet$params$rows)>0)
     return(names(x$facet$params$rows))
@@ -238,10 +236,11 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
     NULL
 }
 
-.getGGPlotData = function(x,xbuild,layer) {
+.getGGPlotData = function(x,xbuild,layer,panel) {
   # This returns a data frame -- useable by MakeAccessible, but will need to change
   # if it's going to be used by VI via the whisker template
-  return(xbuild$data[[layer]])
+  fulldata = xbuild$data[[layer]]
+  return(fulldata[fulldata$PANEL==panel,])
 }
 
 .getGGSmoothMethod = function(x,xbuild,layer) {
@@ -250,4 +249,33 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, ...) {
 
 .getGGSmoothSEflag = function(x,xbuild,layer) {
   return(xbuild$plot$layers[[layer]]$stat_params$se)
+}
+
+.getGGPanelList = function(x,xbuild,threshold) {
+  f = .getGGFacetLayout(x,xbuild)
+  panels = list()
+  names = colnames(f)
+  panelvars = names[which(!names %in% c("PANEL","ROW","COL","SCALE_X","SCALE_Y"))]
+  for (i in seq_along(f$PANEL)) {
+    panel = list()
+    panel[["panelnum"]] = as.character(f$PANEL[i])
+    panel[["row"]] = f$ROW[i]
+    panel[["col"]] = f$COL[i]
+    vars = list()
+      for (j in seq_along(panelvars)) {
+        vars[[j]] = list(varname=as.character(panelvars[j]),
+                         value=as.character(f[[i,panelvars[j]]]))
+      }
+    panel[["vars"]] = vars
+    panel[["panellayers"]] = .getGGLayers(x,xbuild,i,threshold)
+    panels[[i]] = panel
+  }
+  return(panels)  
+}
+# This returns a data frame with fields PANEL, ROW, COL, one column
+# for each faceted variable, SCALE_X, and SCALE_Y
+# e.g. for facets=cut~color the data frame contains:
+#    PANEL, ROW, COL, cut, color, SCALE_X, SCALE_Y
+.getGGFacetLayout = function(x,xbuild) {
+  return(xbuild$layout$panel_layout)
 }
