@@ -26,6 +26,7 @@
 # Mustache can't check a field's value, only whether it's present or not.
 # So flags are either set to true or not included at all
 .VIpreprocess = function(x,threshold=10) {
+  print(threshold)
   if (x$npanels==1) x$singlepanel = TRUE
   if (x$nlayers==1) x$singlelayer = TRUE
   if (length(x$panelrows)==0) x$singlerow = TRUE   
@@ -96,16 +97,19 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     layeraes = .getGGLayerAes(x,xbuild,layeri)
     layer = .VIlist(layernum=layeri,layeraes=layeraes)
     data =.getGGPlotData(x,xbuild,layeri,panel)
-    layer[["data"]] = data
+    layer$data = data
     n = nrow(data)
-    layer[["n"]] = n
+    layer$n = n
     layerClass = .getTextGGLayerType(x,xbuild,layeri)
     if (layerClass == "GeomHline") {
       layer$type = "hline"
-      layer[["hlinetype"]] = TRUE
-      layer[["yintercept"]] = data$yintercept
+      layer$hlinetype = TRUE
+      layer$yintercept = data$yintercept
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
+      points = unname(as.list(data.frame(t(cbind(data$x,data$y)))))
+      points = lapply(points,function(x) {names(x)=c("x","y"); x})
+      layer$points = points
       # need to capture points as x-y pairs from the data
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
@@ -118,8 +122,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # need to capture info related to boxes
     } else if (layerClass == "GeomSmooth") {
       layer$type = "smooth"
-      layer[["method"]] = .getGGSmoothMethod(x,xbuild,layeri)
-      layer[["ci"]] = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
+      layer$method = .getGGSmoothMethod(x,xbuild,layeri)
+      layer$ci = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
     } else {
       layer$type = "unknown"
     }
@@ -166,7 +170,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 
 # The location of this item is changing in an upcoming ggplot version
 .getTextGGXTicks = function(x,xbuild){
-  if ("panel_names" %in% names(xbuild$layout))
+  if ("panel_ranges" %in% names(xbuild$layout))
     xbuild$layout$panel_ranges[[1]]$x.labels   # ggplot 2.2.1
   else
     xbuild$layout$panel_params[[1]]$x.labels   # dev version as at 5 Sept 2017
@@ -174,7 +178,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 
 # The location of this item is changing in an upcoming ggplot version
 .getTextGGYTicks = function(x,xbuild){
-  if ("panel_names" %in% names(xbuild$layout))
+  if ("panel_ranges" %in% names(xbuild$layout))
     xbuild$layout$panel_ranges[[1]]$y.labels   # ggplot 2.2.1
   else
     xbuild$layout$panel_params[[1]]$y.labels   # dev version as at 5 Sept 2017
