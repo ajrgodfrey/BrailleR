@@ -164,12 +164,20 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   labels = x$labels$y
 }
 
+# The location of this item is changing in an upcoming ggplot version
 .getTextGGXTicks = function(x,xbuild){
-  text=xbuild$layout$panel_ranges[[1]]$x.labels
+  if ("panel_names" %in% names(xbuild$layout))
+    xbuild$layout$panel_ranges[[1]]$x.labels   # ggplot 2.2.1
+  else
+    xbuild$layout$panel_params[[1]]$x.labels   # dev version as at 5 Sept 2017
 }
 
+# The location of this item is changing in an upcoming ggplot version
 .getTextGGYTicks = function(x,xbuild){
-  text=xbuild$layout$panel_ranges[[1]]$y.labels
+  if ("panel_names" %in% names(xbuild$layout))
+    xbuild$layout$panel_ranges[[1]]$y.labels   # ggplot 2.2.1
+  else
+    xbuild$layout$panel_params[[1]]$y.labels   # dev version as at 5 Sept 2017
 }
 
 .getGGLayerCount = function(x,xbuild){
@@ -289,6 +297,11 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 # for each faceted variable, SCALE_X, and SCALE_Y
 # e.g. for facets=cut~color the data frame contains:
 #    PANEL, ROW, COL, cut, color, SCALE_X, SCALE_Y
+# The name of this item is panel_layout in ggplot 2.2.1 but looks like
+# it's going to be just layout in the next ggplot version
 .getGGFacetLayout = function(x,xbuild) {
-  return(xbuild$layout$panel_layout)
+  if ("panel_layout" %in% names(xbuild$layout))
+    return(xbuild$layout$panel_layout)
+  else
+    return(xbuild$layout$layout)
 }
