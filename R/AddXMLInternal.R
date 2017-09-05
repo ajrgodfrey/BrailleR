@@ -122,7 +122,7 @@
   annotation = .AddXMLAddAnnotation(root, position=4, id=paste("center",panel,x$layernum,sep="-"), kind="grouped")
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
-  if (!is.null(x$bartype)) {    # Bar chart
+  if (x$type=="bar") {    # Bar chart
     barCount=x$n
     barGrob = grid.grep(gPath("geom_rect"),grep=TRUE,)
     XML::addAttributes(annotation$root, speech="Histogram bars",
@@ -140,8 +140,8 @@
                                         start=signif(chartData$xmin[i],4), 
                                         end=signif(chartData$xmax[i],4),id=barId)
     }
-  } else if (!is.null(x$linetype)) { # Line chart
-    segmentCount=x$n
+  } else if (x$type=="line") { # Line chart
+    segmentCount=x$n-1    # n is number of points
     # For now, assume that all layers are this layer type
     # TODO:  Fix this
     lineGrobs = grid.grep(gPath("GRID.polyline"),grep=TRUE,global=TRUE)
