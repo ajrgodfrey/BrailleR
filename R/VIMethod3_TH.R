@@ -26,7 +26,6 @@
 # Mustache can't check a field's value, only whether it's present or not.
 # So flags are either set to true or not included at all
 .VIpreprocess = function(x,threshold=10) {
-  print(threshold)
   if (x$npanels==1) x$singlepanel = TRUE
   if (x$nlayers==1) x$singlelayer = TRUE
   if (length(x$panelrows)==0) x$singlerow = TRUE   
@@ -107,19 +106,34 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$yintercept = data$yintercept
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
-      points = unname(as.list(data.frame(t(cbind(data$x,data$y)))))
-      points = lapply(points,function(x) {names(x)=c("x","y"); x})
+      points = unname(as.list(data.frame(t(cbind(1:nrow(data),cbind(data$x,data$y))))))
+      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
       layer$points = points
-      # need to capture points as x-y pairs from the data
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
-      # need to capture heights of bars
+      bars = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
+      bars = lapply(bars,function(x) {names(x)=c("barnum","x","y"); x})
+      layer$bars = bars
     } else if (layerClass == "GeomLine") {
       layer$type = "line"
-      # need to capture info on segments - starting & ending x-y?
+      points = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
+      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
+      layer$points = points
     } else if (layerClass == "GeomBoxplot") {
       layer$type = "box"
-      # need to capture info related to boxes
+      nOutliers = sapply(data$outliers,length)
+      # Might want to report high and low outliers separately?
+      boxes = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$ymin,
+                                        data$lower,data$middle,data$upper,
+                                        data$ymax,unname(nOutliers))))))
+      boxes = lapply(boxes,function(x) {names(x)=c("boxnum","x","ymin","lower",
+                                                   "middle","upper","ymax",
+                                                   "noutliers"); x})
+      layer$boxes = boxes
+      # Would like to include outlier detail as well.
+      # Boxes is currently a list of vectors.  If we wanted to include outliers
+      # within each boxes object for reporting, then boxes would need to become
+      # a list of lists.
     } else if (layerClass == "GeomSmooth") {
       layer$type = "smooth"
       layer$method = .getGGSmoothMethod(x,xbuild,layeri)
@@ -191,7 +205,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 .getTextGGLayerType = function(x,xbuild,layer){
   plotClass = class(xbuild$plot$layers[[layer]]$geom)[1]
 }
-
 
 ## NOT CURRENTLY USED 
 #.getGGLayerMapping = function(x,xbuild,layer){

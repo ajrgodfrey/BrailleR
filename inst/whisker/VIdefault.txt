@@ -56,18 +56,29 @@ ggLayerTemplate,"
 {{/hlinetype}}
 {{#bartype}}
 a bar chart containing {{n}} bar{{#s}}s{{/s}}.<br>
+{{^largecount}}
+{{#bars}}Bar {{barnum}} is centered at {{x}} and has height {{y}}.<br>{{/bars}}
+{{/largecount}}
 {{/bartype}}
 {{#pointtype}}
 a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
-The points are at{{#points}} ({{x}},{{y}}){{/points}}<.br>
+The points are at{{#points}} ({{x}},{{y}}){{/points}}.<br>
 {{/largecount}}
 {{/pointtype}}
 {{#linetype}}
 a line connecting {{n}} point{{#s}}s{{/s}}.<br>
+{{^largecount}}
+The points are at{{#points}} ({{x}},{{y}}){{/points}}.<br>
+{{/largecount}}
 {{/linetype}}
 {{#boxtype}}
 a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
+{{#boxes}}
+The group at x={{x}} has median {{middle}}.
+ The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.
+ There are {{noutliers}} outliers for this box.<br>
+{{/boxes}}
 {{/boxtype}}
 {{#smoothtype}}
 a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci}}.<br>
