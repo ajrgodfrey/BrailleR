@@ -98,6 +98,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     data =.getGGPlotData(x,xbuild,layeri,panel)
     layer$data = data
     n = nrow(data)
+    # ngroups is not in use yet.  
+    if (length(data$group)>0 && max(data$group)>0)  # ungrouped data have group = -1 
+      layer$ngroups = length(unique(data$group))
     layer$n = n
     layerClass = .getTextGGLayerType(x,xbuild,layeri)
     if (layerClass == "GeomHline") {
@@ -106,7 +109,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$yintercept = data$yintercept
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
-      points = unname(as.list(data.frame(t(cbind(1:nrow(data),cbind(data$x,data$y))))))
+      points = unname(as.list(data.frame(t(cbind(1:nrow(data),
+                .mapDataValues(x,xbuild,"x",data$x),
+                .mapDataValues(x,xbuild,"y",data$y))),stringsAsFactors=FALSE)))
       points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
       layer$points = points
     } else if (layerClass == "GeomBar") {
@@ -198,6 +203,20 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     xbuild$layout$panel_params[[1]]$y.labels   # dev version as at 5 Sept 2017
 }
 
+.mapDataValues = function(x,xbuild,var,value) {
+  # If faceted and scales="free" then 1 below should be replaced with panel number
+  scale = xbuild$layout$panel_scales[[var]][[1]]
+  if (is.null(scale) || !("ScaleDiscrete" %in% class(scale)))
+    return(value)
+  map = scale$range$range
+  if (is.null(map))
+    return(value)
+  mapping = as.character(map[value])
+  if (length(mapping) != length(value))  # Can happen with jittered data
+    return(value)     # Something's gone wrong - bail
+  else
+    return(mapping)
+}
 .getGGLayerCount = function(x,xbuild){
   count=length(xbuild$plot$layers)
 }
@@ -239,7 +258,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 
 .getGGLegends = function(x,xbuild) {
   legends = list()
-  labels = .getGGLegend(x,xbuild)
+  labels = .getGGLabels(x,xbuild)
   labels = labels[which(names(labels) %in% 
                           c("colour","fill","size","shape","alpha","radius",
                             "linetype"))]
@@ -258,7 +277,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(legends)
 }
 
-.getGGLegend = function(x,xbuild) {
+.getGGLabels = function(x,xbuild) {
   return(x$labels)
 }
 
