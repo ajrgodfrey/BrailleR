@@ -46,6 +46,7 @@ print.VIgraph = function(x, ...) {
   invisible(x)
 }
 
+# Small helper function - builds list excluding items that are null or length 0
 .VIlist = function(...) {
   l = list(...)
   l[(lapply(l,length)>0)] 
@@ -60,7 +61,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   text = .VItextify(list(VIgg=.VIpreprocess(VIstruct,threshold)),template)[[1]]
   VIgraph=list(VIgg=VIstruct, text=text)
   class(VIgraph) = "VIgraph"
-  print(VIgraph)
+  return(VIgraph)
 }
 
 .VIstruct.ggplot = function(x) {

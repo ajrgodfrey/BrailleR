@@ -12,7 +12,8 @@ output: knitr:::html_vignette
 N.B.  the commands here are either exact copies of the commands presented in Wickham (2009) or some minor alterations to them.    Notably, some code given in the book no longer works. This is given a `#!`    
 
 
-The `ggplot2` package has  a `summary` method that often but not always offers something to show that things have changed from one plot to another. I've kept the use of this command in as it shows where we need to look for more information and from where we ought to look for it.
+The `ggplot2` package has  a `summary` method that often but not always offers something to show that things have changed from one plot to another. Summary 
+commands are included below but commented out.
 
 ```{r GetLibraries}     
 library(BrailleR)   
@@ -23,14 +24,14 @@ dsmall = diamonds[1:100,]
 
 ```{r g1}     
 g1 = qplot(carat, price, data = diamonds)   
-summary(g1)   
+# summary(g1)   
 g1  
 VI(g1)  
 ```  
 
 ```{r g2}          
 g2 = qplot(carat, price, data = dsmall, colour = color)    
-summary(g2)   
+# summary(g2)   
 g2
 g2 %>% VI()   
 # to get the content of the graph to be printed we need:   
@@ -39,7 +40,7 @@ g2 %>% VI()
 
 ```{r g3}     
 g3 = qplot(carat, price, data = dsmall, shape = cut)    
-summary(g3)   
+# summary(g3)   
 g3
 VI(g3)   
 #class(g3)="list"; g3   
@@ -48,7 +49,7 @@ VI(g3)
 ```{r g4}     
 # to get semi-transparent points   
 g4 = qplot(carat, price, data = diamonds, alpha = I(1/100))    
-summary(g4)   
+# summary(g4)   
 g4
 VI(g4)   
 ```  
@@ -56,7 +57,7 @@ VI(g4)
 ```{r g5}     
 # to add a smoother (default is loess for n<1000)   
 g5 = qplot(carat, price, data = dsmall, geom = c("point", "smooth"))    
-summary(g5)   
+# summary(g5)   
 g5
 VI(g5)   
 #! g5a = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), span = 1)    
@@ -68,11 +69,11 @@ library(splines)
 ```{r g6}     
 # continuous v categorical   
 g6 = qplot(color, price / carat, data = diamonds, geom = "jitter", alpha = I(1 / 50))    
-summary(g6)   
+# summary(g6)   
 g6
 VI(g6)   
 g6a = qplot(color, price / carat, data = diamonds, geom = "boxplot")    
-summary(g6a)   
+# summary(g6a)   
 g6a
 VI(g6a)   
 ```  
@@ -80,20 +81,24 @@ VI(g6a)
 ```{r g7}     
 # univariate plots   
 g7a = qplot(carat, data = diamonds, geom = "histogram")    
-summary(g7a)   
+# summary(g7a)   
 g7a
 VI(g7a)   
 g7b = qplot(carat, data = diamonds, geom = "histogram", binwidth = 1, xlim = c(0,3))    
-g7c = qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.1, xlim = c(0,3))    
+g7b
+VI(g7b)   
+g7c = qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.1, xlim = c(0,3))
+g7c
+VI(g7c)   
 g7d = qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.01, xlim = c(0,3))    
-summary(g7d)   
+# summary(g7d)   
 g7d
 VI(g7d)   
 ```  
 
 ```{r g8}     
 g8 = qplot(carat, data = diamonds, geom = "density")    
-summary(g8)   
+# summary(g8)   
 g8
 VI(g8)   
 ```  
@@ -101,11 +106,11 @@ VI(g8)
 ```{r g9}     
 # data is separated by implication using the following...   
 g9 = qplot(carat, data = diamonds, geom = "density", colour = color)    
-summary(g9)   
+# summary(g9)   
 g9
 VI(g9)   
 g10 = qplot(carat, data = diamonds, geom = "histogram", fill = color)    
-summary(g10)   
+# summary(g10)   
 g10
 VI(g10)   
 ```  
@@ -113,19 +118,19 @@ VI(g10)
 ```{r g11}     
 # bar charts for categorical variable   
 g11a = qplot(color, data = diamonds)    
-summary(g11a)   
+# summary(g11a)   
 g11a
 VI(g11a)   
 g11b = qplot(color, data = diamonds, geom = "bar")    
-summary(g11b)   
+# summary(g11b)   
 g11b
 VI(g11b)   
 g12a = qplot(color, data = diamonds, geom = "bar", weight = carat)   
-summary(g12a)   
+# summary(g12a)   
 g12a
 VI(g12a)   
 g12b = qplot(color, data = diamonds, geom = "bar", weight = carat) + scale_y_continuous("carat")    
-summary(g12b)   
+# summary(g12b)   
 g12b
 VI(g12b)   
 ```  
@@ -133,11 +138,11 @@ VI(g12b)
 ```{r g13}     
 # time series plots   
 g13a = qplot(date, unemploy / pop, data = economics, geom = "line")    
-summary(g13a)   
+# summary(g13a)   
 g13a
 VI(g13a)   
 g13b = qplot(date, uempmed, data = economics, geom = "line")    
-summary(g13b)   
+# summary(g13b)   
 g13b
 VI(g13b)   
 ```  
@@ -146,7 +151,7 @@ VI(g13b)
 # path plots   
 year <- function(x) as.POSIXlt(x)$year + 1900    
 g14a = qplot(unemploy / pop, uempmed, data = economics, geom = c("point", "path"))    
-summary(g14a)   
+# summary(g14a)   
 g14a
 VI(g14a)   
 #g14b = qplot(unemploy / pop, uempmed, data = economics, geom = "path", colour = year(date)) + scale_area()    
@@ -157,11 +162,11 @@ VI(g14a)
 ```{r g15}     
 # facets is the ggplot term for trellis' panels   
 g15a = qplot(carat, data = diamonds, facets = color ~ ., geom = "histogram", binwidth = 0.1, xlim = c(0, 3))    
-summary(g15a)   
+# summary(g15a)   
 g15a
 VI(g15a)   
 g15b = qplot(carat, ..density.., data = diamonds, facets = color ~ ., geom = "histogram", binwidth = 0.1, xlim = c(0, 3))   
-summary(g15b)   
+# summary(g15b)   
 g15b
 VI(g15b)   
 ```  
@@ -169,14 +174,15 @@ VI(g15b)
 ```{r g16}     
 # rescaling of the axes   
 g16 = qplot(carat, price, data = dsmall, log = "xy")   
-summary(g16)   
+# summary(g16)   
 g16
 VI(g16)   
 ```  
 
 ```{r g17}     
+# Facets syntax without a "." before the "~" causes grief
 g17 = qplot(displ, hwy, data=mpg, facets =~ year) + geom_smooth()    
-summary(g17)   
+# summary(g17)   
 g17
 VI(g17)   
 ```  
