@@ -7,14 +7,19 @@
 .VItextify = function(x, template=
                           system.file("whisker/VIdefault.txt",
                                       package="BrailleR")) {
+
   temp = read.csv(template,header=FALSE,as.is=TRUE)
   templates=as.list(gsub("\n","",temp[,2]))
   names(templates) = temp[,1]
   result = list()
   for (i in 1:length(x)) {
+    if (is.null(x[[i]])) {
+      result[[i]] = character(0)
+    } else {
     render = whisker::whisker.render(templates[names(x[i])],x[[i]],
                                      partials=templates)
     result[[i]] = as.vector(strsplit(render,"<br>",fixed=TRUE)[[1]])
+    }
   }
   names(result) = names(x)
   return(result)
@@ -26,6 +31,8 @@
 # Mustache can't check a field's value, only whether it's present or not.
 # So flags are either set to true or not included at all
 .VIpreprocess = function(x,threshold=10) {
+  if (is.null(x))
+    return(NULL)
   if (x$npanels==1) x$singlepanel = TRUE
   if (x$nlayers==1) x$singlelayer = TRUE
   if (length(x$panelrows)==0) x$singlerow = TRUE   
@@ -80,6 +87,11 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 
 .VIstruct.ggplot = function(x) {
   xbuild = suppressMessages(ggplot_build(x))
+  # If this is a plot we really can't deal with, say so now
+  if (!(.getGGCoord(x,xbuild) %in% c("CoordCartesian","CoordFixed"))) {
+    message("VI cannot process ggplot objects with flipped or non-Cartesian coordinates")
+    return(NULL)
+  }
   title = .getTextGGTitle(x,xbuild)
   subtitle = .getTextGGSubtitle(x,xbuild)
   caption = .getTextGGCaption(x,xbuild)
@@ -355,4 +367,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     return(xbuild$layout$panel_layout)
   else
     return(xbuild$layout$layout)
+}
+
+.getGGCoord = function(x,xbuild) {
+  return(class(x$coordinates)[1])
 }
