@@ -52,6 +52,20 @@ print.VIgraph = function(x, ...) {
   l[(lapply(l,length)>0)] 
 }
 
+# Returns the VIgraph object with the text trimmed down to only those rows
+# containing the specified pattern.  Passes extra parameters on to grepl.
+# Note that only the text portion of the VIgraph is modified; the complete
+# VIgg structure is still included
+VIgrep = function(pattern,x,...) {
+  if (class(x) != "VIgraph") {
+    message(paste("VIgrep doesn't know how to process this object.",
+                  "Only the output from running VI on a ggplot object can be processed by VIgrep."))
+    return(NULL)
+  }
+  x$text = x$text[grepl(pattern,x$text,...)]
+  x
+}
+
 # threshold specifies how many points, lines, etc will be explicitly listed.
 # Greater numbers will be summarised (e.g. "is a set of 32 horizontal lines" vs
 # "is a set of 3 horizontal lines at 5, 7.5, 10")

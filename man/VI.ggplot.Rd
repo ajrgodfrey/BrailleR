@@ -15,13 +15,17 @@
 \item{...}{other arguments, currently ignored}
 }
 \value{
-A text description is printed out as a side effect. Returns a structure containing a hierarchical representation of the graph as well as the text description as a character vector.
+Returns a structure containing a hierarchical representation of the graph as well as the text description as a character vector.  When run interactively, the text
+description is printed.
 }
 \description{
-The popular ggplot2 package creates graphs using many default settings and it is unlikely that all ramifications of using this package will be understood by reading the code alone. Text descriptions of these graphs may still be less complete than those created using base graphics.
+Prints a textual description of a graph produced by ggplot or qplot.
 }
-\details{
-Still lots to do with this functionality. The theme of the graph may prove important to blind users although less interesting to the creation of purely text alternatives of the graphs.
+\note{
+This function is experimental.  The ggplot2 package produces many different types
+of graphs and offers many options for modifying the graph appearance. Not all
+options have been fully catered for, so text descriptions of these graphs may still be less complete than those created using base graphics, or may be 
+misleading in some circumstances.
 }
 \examples{
 if(require(ggplot2)){
