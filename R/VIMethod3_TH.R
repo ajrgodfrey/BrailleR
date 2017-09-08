@@ -431,7 +431,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   if (!is.null(m) & !is.null(m[[var]]))
     return(m[[var]])
   ## Variable mappings shouldn't be in aes_params, but can end up there
-  m=xbuild$plot$layers[layer]$aes_params[[var]]
+  m=xbuild$plot$layers[[layer]]$aes_params[[var]]
   if (!is.null(m))
     return(m)
   else
@@ -442,7 +442,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 # Rounding should probably really be done in the preprocessing step, not here
 .getGGRawValues = function(x,xbuild,layer,var) {
   map = .getGGMapping(x,xbuild,layer,var)
-  return(.cleanPrint(eval(map,x$data)))
+  if (class(x$layers[[layer]]$data) == "waiver")
+    return(.cleanPrint(eval(map,x$data)))
+  else
+    return(.cleanPrint(eval(map,x$layers[[layer]]$data)))
 }
 
 # For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does
