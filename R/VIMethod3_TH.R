@@ -136,9 +136,16 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$yintercept = data$yintercept
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
+      if (!is.null(.getGGMapping(x,xbuild,layeri,"x")))
+        xvals = .getGGValues(x,xbuild,layeri,"x") 
+      else
+        xvals = data$x
+      if (!is.null(.getGGMapping(x,xbuild,layeri,"y")))
+        yvals = .getGGValues(x,xbuild,layeri,"y") 
+      else
+        yvals = data$y
       points = unname(as.list(data.frame(t(cbind(1:nrow(data),
-                .mapDataValues(x,xbuild,"x",data$x),
-                .mapDataValues(x,xbuild,"y",data$y))),stringsAsFactors=FALSE)))
+                xvals,yvals)),stringsAsFactors=FALSE)))
       points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
       layer$points = points
     } else if (layerClass == "GeomBar") {
@@ -230,6 +237,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     xbuild$layout$panel_params[[1]]$y.labels   # dev version as at 5 Sept 2017
 }
 
+# Probably going to get rid of this function and instead get the 
+# original data values to report using .getGGValues
 .mapDataValues = function(x,xbuild,var,value) {
   # If faceted and scales="free" then 1 below should be replaced with panel number
   scale = xbuild$layout$panel_scales[[var]][[1]]
@@ -260,9 +269,12 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 #  else
 #    return(NULL)
 #}
+
+# Report on non-default aesthetics set on this layer 
 .getGGLayerAes = function(x,xbuild,layer){
   layeraes = list()
   params = xbuild$plot$layers[[layer]]$aes_params
+  params = params[which(!(names(params) %in% c("x","y")))]  # Exclude x, y
   for (i in seq_along(params))
     layeraes[[i]] = list(aes=names(params)[i],mapping=params[[i]])
   return(layeraes)
@@ -294,11 +306,22 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   for (i in seq_along(labels)) {
     name = names[i]
     mapping = labels[[i]]
-    levels = .getGGFactorLevels(x,xbuild,mapping)
-    isfactor = if (!is.null(levels)) TRUE
-    hidden = if (!is.null(guides[[name]]) && guides[[name]]=="none") TRUE
+    scaleinfo = .getGGScale(x,xbuild,name)
+    scalediscrete = scaleinfo$scalediscrete
+    if (!is.null(scalediscrete)) {
+      scalelevels = scaleinfo$range
+      scalefrom = NULL
+      scaleto = NULL
+    } else {
+      scalelevels = NULL
+      scalefrom = scaleinfo$range[1]
+      scaleto = scaleinfo$range[2]
+    }
+    hidden = if (!is.null(guides[[name]]) && (guides[[name]]=="none" || guides[[name]]==FALSE)) TRUE
     legend = .VIlist(aes=name,mapping=unname(mapping),
-                     isfactor=isfactor,levels=levels,hidden=hidden)
+                     scalediscrete=scalediscrete,scalelevels=scalelevels,
+                     scalefrom=scalefrom,scaleto=scaleto,
+                     hidden=hidden)
     legends[[i]] = legend
   }
   return(legends)
@@ -312,12 +335,12 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(xbuild$plot$guides)
 }
 
-# If var is a factor variable, return the levels, otherwise null
-.getGGFactorLevels = function(x,xbuild,var) {
-  if (var %in% colnames(x$data) && 'factor' %in% class(x$data[[var]])) 
-    levels(x$data[[var]])
-  else
-    NULL
+.getGGScale = function(x,xbuild,var) {
+  scalelist = xbuild$plot$scales$scales
+  scale = which(sapply(scalelist, function(x) var %in% x$aesthetics))
+  scalediscrete = if ("ScaleDiscrete" %in% class(scalelist[[scale]])) TRUE
+  return(list(scalediscrete=scalediscrete,
+              range=scalelist[[scale]]$range$range))
 }
 
 .getGGPlotData = function(x,xbuild,layer,panel) {
@@ -371,4 +394,25 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 
 .getGGCoord = function(x,xbuild) {
   return(class(x$coordinates)[1])
+}
+
+# Layer-specific mapping overrides the higher level one
+# Mapping is an expression to be evaluated in the x$data environment
+# Will return null if there is no mapping (e.g. for y with stat_bin)
+.getGGMapping = function(x,xbuild,layer,var) {
+  m = xbuild$plot$layers[[layer]]$mapping
+  if (!is.null(m) & !is.null(m[[var]]))
+    return(m[[var]])
+  ## Variable mappings shouldn't be in aes_params, but can end up there
+  m=xbuild$plot$layers[layer]$aes_params[[var]]
+  if (!is.null(m))
+    return(m)
+  else
+    return(xbuild$plot$mapping[[var]])
+}
+
+# Get the raw data values for variable var in the given layer
+.getGGValues = function(x,xbuild,layer,var) {
+  map = .getGGmapping(x,xbuild,layer,var)
+  return(eval(map,x$data))
 }

@@ -23,7 +23,9 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}' with labels {{yticklabels}}.<br>{{/yaxis}}
 {{#legends}}
 {{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
-{{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}.<br>
+{{#scalediscrete}}, with levels: {{scalelevels}}{{/scalediscrete}}
+{{^scalediscrete}}, ranging from {{scalefrom}} to {{scaleto}}{{/scalediscrete}}
+.<br>
 {{/hidden}}
 {{#hidden}}In this chart {{aes}} is used to represent {{mapping}}
 {{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}. The legend that would normally indicate this has been hidden.<br>
