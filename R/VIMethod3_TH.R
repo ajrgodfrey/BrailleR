@@ -97,11 +97,18 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   caption = .getTextGGCaption(x,xbuild)
   annotations = .VIlist(title=title,subtitle=subtitle,caption=caption)
   xlabel = .getTextGGXLab(x,xbuild)
-  xticklabels = .getTextGGXTicks(x,xbuild)
-  xaxis = .VIlist(xlabel=xlabel,xticklabels=xticklabels)
   ylabel = .getTextGGYLab(x,xbuild)
-  yticklabels = .getTextGGYTicks(x,xbuild)
-  yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels)
+  if (!.getGGScaleFree(x,xbuild)) {    # Can talk about axis ticks at top level unless scale_free
+    samescale = TRUE
+    xticklabels = .getTextGGXTicks(x,xbuild,1)
+    yticklabels = .getTextGGYTicks(x,xbuild,1)
+  } else {
+    samescale = NULL
+    xticklabels = NULL
+    yticklabels = NULL
+  }
+  xaxis = .VIlist(xlabel=xlabel,xticklabels=xticklabels,samescale=samescale)
+  yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels,samescale=samescale)
   legends = .getGGLegends(x,xbuild)
   panels = .getGGPanelList(x,xbuild)
   panelrows = as.list(.getGGFacetRows(x,xbuild))
@@ -136,14 +143,18 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$yintercept = data$yintercept
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
-      if (!is.null(.getGGMapping(x,xbuild,layeri,"x")))
-        xvals = .getGGValues(x,xbuild,layeri,"x") 
-      else
+      if (!is.null(.getGGMapping(x,xbuild,layeri,"x"))) {
+        xvals = .getGGRawValues(x,xbuild,layeri,"x")
+        xvals = xvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
+      } else {
         xvals = data$x
-      if (!is.null(.getGGMapping(x,xbuild,layeri,"y")))
-        yvals = .getGGValues(x,xbuild,layeri,"y") 
-      else
+      }
+      if (!is.null(.getGGMapping(x,xbuild,layeri,"y"))) {
+        yvals = .getGGRawValues(x,xbuild,layeri,"y") 
+        yvals = yvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
+      } else {
         yvals = data$y
+      }
       points = unname(as.list(data.frame(t(cbind(1:nrow(data),
                 xvals,yvals)),stringsAsFactors=FALSE)))
       points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
@@ -221,24 +232,32 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   labels = x$labels$y
 }
 
-# The location of this item is changing in an upcoming ggplot version
-.getTextGGXTicks = function(x,xbuild){
-  if ("panel_ranges" %in% names(xbuild$layout))
-    xbuild$layout$panel_ranges[[1]]$x.labels   # ggplot 2.2.1
+.getGGScaleFree = function(x,xbuild) {
+  free = x$facet$params$free
+  if (is.null(free))
+    return(FALSE)
   else
-    xbuild$layout$panel_params[[1]]$x.labels   # dev version as at 5 Sept 2017
+    return (free$x | free$y)
 }
 
 # The location of this item is changing in an upcoming ggplot version
-.getTextGGYTicks = function(x,xbuild){
+.getTextGGXTicks = function(x,xbuild,layer){
   if ("panel_ranges" %in% names(xbuild$layout))
-    xbuild$layout$panel_ranges[[1]]$y.labels   # ggplot 2.2.1
+    xbuild$layout$panel_ranges[[layer]]$x.labels   # ggplot 2.2.1
   else
-    xbuild$layout$panel_params[[1]]$y.labels   # dev version as at 5 Sept 2017
+    xbuild$layout$panel_params[[layer]]$x.labels   # dev version as at 5 Sept 2017
+}
+
+# The location of this item is changing in an upcoming ggplot version
+.getTextGGYTicks = function(x,xbuild,layer){
+  if ("panel_ranges" %in% names(xbuild$layout))
+    xbuild$layout$panel_ranges[[layer]]$y.labels   # ggplot 2.2.1
+  else
+    xbuild$layout$panel_params[[layer]]$y.labels   # dev version as at 5 Sept 2017
 }
 
 # Probably going to get rid of this function and instead get the 
-# original data values to report using .getGGValues
+# original data values to report using .getGGRawValues
 .mapDataValues = function(x,xbuild,var,value) {
   # If faceted and scales="free" then 1 below should be replaced with panel number
   scale = xbuild$layout$panel_scales[[var]][[1]]
@@ -298,9 +317,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 .getGGLegends = function(x,xbuild) {
   legends = list()
   labels = .getGGLabels(x,xbuild)
+  # Note: checking against char string "NA" is correct - label is set that way.
   labels = labels[which(names(labels) %in% 
                           c("colour","fill","size","shape","alpha","radius",
-                            "linetype"))]
+                            "linetype") & labels!="NA")]
   names = names(labels)
   guides = .getGGGuides(x,xbuild)
   for (i in seq_along(labels)) {
@@ -368,6 +388,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     panel[["panelnum"]] = as.character(f$PANEL[i])
     panel[["row"]] = f$ROW[i]
     panel[["col"]] = f$COL[i]
+    if (.getGGScaleFree(x,xbuild)) { 
+      panel[["xticklabels"]] = .getTextGGXTicks(x,xbuild,i)
+      panel[["yticklabels"]] = .getTextGGYTicks(x,xbuild,i)
+      panel[["xlabel"]] = .getTextGGXLab(x,xbuild) # Won't actually change over the panels
+      panel[["ylabel"]] = .getTextGGYLab(x,xbuild) # But we still want to mention them
+      
+    }
     vars = list()
       for (j in seq_along(panelvars)) {
         vars[[j]] = list(varname=as.character(panelvars[j]),
@@ -412,7 +439,17 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 }
 
 # Get the raw data values for variable var in the given layer
-.getGGValues = function(x,xbuild,layer,var) {
-  map = .getGGmapping(x,xbuild,layer,var)
-  return(eval(map,x$data))
+# Rounding should probably really be done in the preprocessing step, not here
+.getGGRawValues = function(x,xbuild,layer,var) {
+  map = .getGGMapping(x,xbuild,layer,var)
+  return(.cleanPrint(eval(map,x$data)))
+}
+
+# For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does
+# ggplot itself do?
+.cleanPrint = function(x) {
+  if (is.numeric(x))
+    return(round(x,2))
+  else
+    return(x)
 }

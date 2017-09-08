@@ -18,9 +18,13 @@ This is an untitled chart with no subtitle or caption.<br>
  represent different values of {{panelcols}}.<br>{{/singlecol}}
 {{/singlepanel}}
 {{^xaxis}}There is no x-axis.<br>{{/xaxis}}
-{{#xaxis}}{{#^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has x-axis '{{xlabel}}' with labels {{xticklabels}}.<br>{{/xaxis}}
+{{#xaxis}}{{#^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has x-axis '{{xlabel}}'
+{{#samescale}} with labels {{xticklabels}}{{/samescale}}
+.<br>{{/xaxis}}
 {{^yaxis}}There is no y-axis.<br>{{/yaxis}}
-{{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}' with labels {{yticklabels}}.<br>{{/yaxis}}
+{{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}'
+{{#samescale}} with labels {{yticklabels}}{{/samescale}}
+.<br>{{/yaxis}}
 {{#legends}}
 {{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
 {{#scalediscrete}}, with levels: {{scalelevels}}{{/scalediscrete}}
@@ -41,6 +45,10 @@ ggPanelTemplate,"
 Panel {{panelnum}}
 {{#panelgrid}} is in row {{row}} and col {{col}} and{{/panelgrid}}
  represents data for{{#vars}} {{varname}} = {{value}}{{/vars}}.<br>
+{{^samescale}}
+In this panel, x-axis '{{xlabel}}' has labels {{xticklabels}}.<br>
+In this panel, x-axis '{{ylabel}}' has labels {{yticklabels}}.<br>
+{{/samescale}}
 {{/singlepanel}}
 {{#panellayers}}
 {{>ggLayerTemplate}}
