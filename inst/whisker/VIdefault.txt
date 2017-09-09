@@ -77,7 +77,7 @@ The points are at{{#points}} ({{x}},{{y}}){{/points}}.<br>
 {{/largecount}}
 {{/pointtype}}
 {{#linetype}}
-a line connecting {{n}} point{{#s}}s{{/s}}.<br>
+a set of {{n}} line{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at{{#points}} ({{x}},{{y}}){{/points}}.<br>
 {{/largecount}}

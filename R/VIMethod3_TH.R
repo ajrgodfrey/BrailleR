@@ -43,11 +43,16 @@
       typeflag = paste0(x$panels[[paneli]]$panellayers[[layeri]]$type,"type")
       x$panels[[paneli]]$panellayers[[layeri]][[typeflag]] = TRUE
       n = x$panels[[paneli]]$panellayers[[layeri]]$n
-      if (n>1) x$panels[[paneli]]$panellayers[[layeri]]$s = TRUE
-      if (n>threshold) x$panels[[paneli]]$panellayers[[layeri]]$largecount = TRUE
+      if (!is.null(n)) {
+        if (n>1) x$panels[[paneli]]$panellayers[[layeri]]$s = TRUE
+        if (n>threshold) x$panels[[paneli]]$panellayers[[layeri]]$largecount = TRUE
+      }
     }  
   return(x)
 }
+
+### Print function for the object created by VI.ggplot
+### Prints the text component of the object
 print.VIgraph = function(x, ...) {
   cat(x$text,sep="\n")
   invisible(x)
@@ -85,6 +90,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(VIgraph)
 }
 
+# Builds the VIgg structure describing the graph
 .VIstruct.ggplot = function(x) {
   xbuild = suppressMessages(ggplot_build(x))
   # If this is a plot we really can't deal with, say so now
@@ -92,25 +98,27 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     message("VI cannot process ggplot objects with flipped or non-Cartesian coordinates")
     return(NULL)
   }
-  title = .getTextGGTitle(x,xbuild)
-  subtitle = .getTextGGSubtitle(x,xbuild)
-  caption = .getTextGGCaption(x,xbuild)
+  title = .getGGTitle(x,xbuild)
+  subtitle = .getGGSubtitle(x,xbuild)
+  caption = .getGGCaption(x,xbuild)
   annotations = .VIlist(title=title,subtitle=subtitle,caption=caption)
-  xlabel = .getTextGGXLab(x,xbuild)
-  ylabel = .getTextGGYLab(x,xbuild)
+  xlabel = .getGGXLab(x,xbuild)
+  ylabel = .getGGYLab(x,xbuild)
   if (!.getGGScaleFree(x,xbuild)) {    # Can talk about axis ticks at top level unless scale_free
     samescale = TRUE
-    xticklabels = .getTextGGXTicks(x,xbuild,1)
-    yticklabels = .getTextGGYTicks(x,xbuild,1)
+    print("setting samescale to true")
+    xticklabels = .getGGXTicks(x,xbuild,1)
+    yticklabels = .getGGYTicks(x,xbuild,1)
   } else {
+    print("setting samescale to null")
     samescale = NULL
     xticklabels = NULL
     yticklabels = NULL
   }
   xaxis = .VIlist(xlabel=xlabel,xticklabels=xticklabels,samescale=samescale)
   yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels,samescale=samescale)
-  legends = .getGGLegends(x,xbuild)
-  panels = .getGGPanelList(x,xbuild)
+  legends = .buildLegends(x,xbuild)
+  panels = .buildPanels(x,xbuild)
   panelrows = as.list(.getGGFacetRows(x,xbuild))
   panelcols = as.list(.getGGFacetCols(x,xbuild))
   layerCount = .getGGLayerCount(x,xbuild);
@@ -123,204 +131,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(VIstruct)
 }
 
-.getGGLayers = function(x,xbuild,panel) {
-  layerCount = .getGGLayerCount(x,xbuild)
-  layers = list()
-  for (layeri in 1:layerCount) {
-    layeraes = .getGGLayerAes(x,xbuild,layeri)
-    layer = .VIlist(layernum=layeri,layeraes=layeraes)
-    data =.getGGPlotData(x,xbuild,layeri,panel)
-    layer$data = data
-    n = nrow(data)
-    # ngroups is not in use yet.  
-    if (length(data$group)>0 && max(data$group)>0)  # ungrouped data have group = -1 
-      layer$ngroups = length(unique(data$group))
-    layer$n = n
-    layerClass = .getTextGGLayerType(x,xbuild,layeri)
-    if (layerClass == "GeomHline") {
-      layer$type = "hline"
-      layer$hlinetype = TRUE
-      layer$yintercept = data$yintercept
-    } else if (layerClass == "GeomPoint") {
-      layer$type = "point"
-      if (!is.null(.getGGMapping(x,xbuild,layeri,"x"))) {
-        xvals = .getGGRawValues(x,xbuild,layeri,"x")
-        xvals = xvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
-      } else {
-        xvals = data$x
-      }
-      if (!is.null(.getGGMapping(x,xbuild,layeri,"y"))) {
-        yvals = .getGGRawValues(x,xbuild,layeri,"y") 
-        yvals = yvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
-      } else {
-        yvals = data$y
-      }
-      points = unname(as.list(data.frame(t(cbind(1:nrow(data),
-                xvals,yvals)),stringsAsFactors=FALSE)))
-      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
-      layer$points = points
-    } else if (layerClass == "GeomBar") {
-      layer$type = "bar"
-      bars = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
-      bars = lapply(bars,function(x) {names(x)=c("barnum","x","y"); x})
-      layer$bars = bars
-    } else if (layerClass == "GeomLine") {
-      layer$type = "line"
-      points = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
-      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
-      layer$points = points
-    } else if (layerClass == "GeomBoxplot") {
-      layer$type = "box"
-      nOutliers = sapply(data$outliers,length)
-      # Might want to report high and low outliers separately?
-      boxes = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$ymin,
-                                        data$lower,data$middle,data$upper,
-                                        data$ymax,unname(nOutliers))))))
-      boxes = lapply(boxes,function(x) {names(x)=c("boxnum","x","ymin","lower",
-                                                   "middle","upper","ymax",
-                                                   "noutliers"); x})
-      layer$boxes = boxes
-      # Would like to include outlier detail as well.
-      # Boxes is currently a list of vectors.  If we wanted to include outliers
-      # within each boxes object for reporting, then boxes would need to become
-      # a list of lists.
-    } else if (layerClass == "GeomSmooth") {
-      layer$type = "smooth"
-      layer$method = .getGGSmoothMethod(x,xbuild,layeri)
-      layer$ci = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
-    } else {
-      layer$type = "unknown"
-    }
-    layers[[layeri]] = layer  
-  }
-  return(layers)
-}
-
-
-.getTextGGTitle = function(x,xbuild){
-  if(is.null(x$labels$title)){
-    text = NULL
-  } else {
-     text =  x$labels$title
-  }
-  return(invisible(text))
-}
-
-.getTextGGSubtitle = function(x,xbuild){
-  if(is.null(x$labels$subtitle)){
-    text = NULL
-  } else {
-    text =  x$labels$subtitle
-  }
-  return(invisible(text))
-}
-
-.getTextGGCaption = function(x,xbuild){
-  if(is.null(x$labels$caption)){
-    text = NULL
-  } else {
-    text =  x$labels$caption
-  }
-  return(invisible(text))
-}
-
-.getTextGGXLab = function(x,xbuild){
-  labels = x$labels$x
-}
-
-.getTextGGYLab = function(x,xbuild){
-  labels = x$labels$y
-}
-
-.getGGScaleFree = function(x,xbuild) {
-  free = x$facet$params$free
-  if (is.null(free))
-    return(FALSE)
-  else
-    return (free$x | free$y)
-}
-
-# The location of this item is changing in an upcoming ggplot version
-.getTextGGXTicks = function(x,xbuild,layer){
-  if ("panel_ranges" %in% names(xbuild$layout))
-    xbuild$layout$panel_ranges[[layer]]$x.labels   # ggplot 2.2.1
-  else
-    xbuild$layout$panel_params[[layer]]$x.labels   # dev version as at 5 Sept 2017
-}
-
-# The location of this item is changing in an upcoming ggplot version
-.getTextGGYTicks = function(x,xbuild,layer){
-  if ("panel_ranges" %in% names(xbuild$layout))
-    xbuild$layout$panel_ranges[[layer]]$y.labels   # ggplot 2.2.1
-  else
-    xbuild$layout$panel_params[[layer]]$y.labels   # dev version as at 5 Sept 2017
-}
-
-# Probably going to get rid of this function and instead get the 
-# original data values to report using .getGGRawValues
-.mapDataValues = function(x,xbuild,var,value) {
-  # If faceted and scales="free" then 1 below should be replaced with panel number
-  scale = xbuild$layout$panel_scales[[var]][[1]]
-  if (is.null(scale) || !("ScaleDiscrete" %in% class(scale)))
-    return(value)
-  map = scale$range$range
-  if (is.null(map))
-    return(value)
-  mapping = as.character(map[value])
-  if (length(mapping) != length(value))  # Can happen with jittered data
-    return(value)     # Something's gone wrong - bail
-  else
-    return(mapping)
-}
-.getGGLayerCount = function(x,xbuild){
-  count=length(xbuild$plot$layers)
-}
-
-.getTextGGLayerType = function(x,xbuild,layer){
-  plotClass = class(xbuild$plot$layers[[layer]]$geom)[1]
-}
-
-## NOT CURRENTLY USED 
-#.getGGLayerMapping = function(x,xbuild,layer){
-#  mapping = xbuild$plot$layers[[layer]]$mapping
-#  if (length(mapping)>0)
-#    return(paste0("Layer ",layer," maps ",paste0(names(mapping)," to ",mapping,collapse=", "),"\n")) 
-#  else
-#    return(NULL)
-#}
-
-# Report on non-default aesthetics set on this layer 
-.getGGLayerAes = function(x,xbuild,layer){
-  layeraes = list()
-  params = xbuild$plot$layers[[layer]]$aes_params
-  params = params[which(!(names(params) %in% c("x","y")))]  # Exclude x, y
-  for (i in seq_along(params))
-    layeraes[[i]] = list(aes=names(params)[i],mapping=params[[i]])
-  return(layeraes)
-}
-
-# Getting facet row and col names from a different place than the 
-# rest of the panel info. Does it matter?
-.getGGFacetRows = function(x,xbuild){
-  if (length(x$facet$params$rows)>0)
-    return(names(x$facet$params$rows))
-  else
-    return(NULL)
-}
-.getGGFacetCols = function(x,xbuild){
-  if (length(x$facet$params$cols)>0)
-    return(names(x$facet$params$cols))
-  else
-    return(NULL)
-}
-
-.getGGLegends = function(x,xbuild) {
+.buildLegends = function(x,xbuild) {
   legends = list()
-  labels = .getGGLabels(x,xbuild)
-  # Note: checking against char string "NA" is correct - label is set that way.
-  labels = labels[which(names(labels) %in% 
-                          c("colour","fill","size","shape","alpha","radius",
-                            "linetype") & labels!="NA")]
+  labels = .getGGGuideLabels(x,xbuild)
   names = names(labels)
   guides = .getGGGuides(x,xbuild)
   for (i in seq_along(labels)) {
@@ -347,38 +160,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(legends)
 }
 
-.getGGLabels = function(x,xbuild) {
-  return(x$labels)
-}
-
-.getGGGuides = function(x,xbuild) {
-  return(xbuild$plot$guides)
-}
-
-.getGGScale = function(x,xbuild,var) {
-  scalelist = xbuild$plot$scales$scales
-  scale = which(sapply(scalelist, function(x) var %in% x$aesthetics))
-  scalediscrete = if ("ScaleDiscrete" %in% class(scalelist[[scale]])) TRUE
-  return(list(scalediscrete=scalediscrete,
-              range=scalelist[[scale]]$range$range))
-}
-
-.getGGPlotData = function(x,xbuild,layer,panel) {
-  # This returns a data frame -- useable by MakeAccessible, but will need to change
-  # if it's going to be used by VI via the whisker template
-  fulldata = xbuild$data[[layer]]
-  return(fulldata[fulldata$PANEL==panel,])
-}
-
-.getGGSmoothMethod = function(x,xbuild,layer) {
-  return(xbuild$plot$layers[[layer]]$stat_params$method)
-}
-
-.getGGSmoothSEflag = function(x,xbuild,layer) {
-  return(xbuild$plot$layers[[layer]]$stat_params$se)
-}
-
-.getGGPanelList = function(x,xbuild) {
+.buildPanels = function(x,xbuild) {
   f = .getGGFacetLayout(x,xbuild)
   panels = list()
   names = colnames(f)
@@ -388,11 +170,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     panel[["panelnum"]] = as.character(f$PANEL[i])
     panel[["row"]] = f$ROW[i]
     panel[["col"]] = f$COL[i]
-    if (.getGGScaleFree(x,xbuild)) { 
-      panel[["xticklabels"]] = .getTextGGXTicks(x,xbuild,i)
-      panel[["yticklabels"]] = .getTextGGYTicks(x,xbuild,i)
-      panel[["xlabel"]] = .getTextGGXLab(x,xbuild) # Won't actually change over the panels
-      panel[["ylabel"]] = .getTextGGYLab(x,xbuild) # But we still want to mention them
+    scalefree = .getGGScaleFree(x,xbuild)
+    panel[["samescale"]] = if (!scalefree) TRUE
+    if (scalefree) { 
+      panel[["xticklabels"]] = .getGGXTicks(x,xbuild,i)
+      panel[["yticklabels"]] = .getGGYTicks(x,xbuild,i)
+      panel[["xlabel"]] = .getGGXLab(x,xbuild) # Won't actually change over the panels
+      panel[["ylabel"]] = .getGGYLab(x,xbuild) # But we still want to mention them
       
     }
     vars = list()
@@ -401,51 +185,111 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
                          value=as.character(f[[i,panelvars[j]]]))
       }
     panel[["vars"]] = vars
-    panel[["panellayers"]] = .getGGLayers(x,xbuild,i)
+    panel[["panellayers"]] = .buildLayers(x,xbuild,i)
     panels[[i]] = panel
   }
   return(panels)  
 }
-# This returns a data frame with fields PANEL, ROW, COL, one column
-# for each faceted variable, SCALE_X, and SCALE_Y
-# e.g. for facets=cut~color the data frame contains:
-#    PANEL, ROW, COL, cut, color, SCALE_X, SCALE_Y
-# The name of this item is panel_layout in ggplot 2.2.1 but looks like
-# it's going to be just layout in the next ggplot version
-.getGGFacetLayout = function(x,xbuild) {
-  if ("panel_layout" %in% names(xbuild$layout))
-    return(xbuild$layout$panel_layout)
-  else
-    return(xbuild$layout$layout)
+
+.buildLayers = function(x,xbuild,panel) {
+  layerCount = .getGGLayerCount(x,xbuild)
+  layers = list()
+  for (layeri in 1:layerCount) {
+    layeraes = .getGGLayerAes(x,xbuild,layeri)
+    layer = .VIlist(layernum=layeri,layeraes=layeraes)
+    data =.getGGPlotData(x,xbuild,layeri,panel)
+    layer$data = data
+    n = nrow(data)
+    # ngroups is not in use yet.  
+    if (length(data$group)>0 && max(data$group)>0)  # ungrouped data have group = -1 
+      ngroups = length(unique(data$group))
+    else
+      ngroups = 1
+    layerClass = .getGGLayerType(x,xbuild,layeri)
+    if (layerClass == "GeomHline") {
+      layer$type = "hline"
+      layer$n = n
+      layer$hlinetype = TRUE
+      layer$yintercept = data$yintercept
+    } else if (layerClass == "GeomPoint") {
+      layer$type = "point"
+      layer$n = n
+      if (!is.null(.getGGMapping(x,xbuild,layeri,"x"))) {
+        xvals = .getGGRawValues(x,xbuild,layeri,"x")
+        xvals = xvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
+      } else {
+        xvals = data$x
+      }
+      if (!is.null(.getGGMapping(x,xbuild,layeri,"y"))) {
+        yvals = .getGGRawValues(x,xbuild,layeri,"y") 
+        yvals = yvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
+      } else {
+        yvals = data$y
+      }
+      points = unname(as.list(data.frame(t(cbind(1:nrow(data),
+                                                 xvals,yvals)),stringsAsFactors=FALSE)))
+      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
+      layer$points = points
+    } else if (layerClass == "GeomBar") {
+      layer$type = "bar"
+      layer$n = n
+      bars = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
+      bars = lapply(bars,function(x) {names(x)=c("barnum","x","y"); x})
+      layer$bars = bars
+    } else if (layerClass == "GeomLine") {
+      layer$type = "line"
+      # Lines are funny - each item in the data is a point
+      # The number of actual lines depends on the group parameter
+      layer$n = ngroups  
+      points = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
+      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
+      layer$points = points
+    } else if (layerClass == "GeomBoxplot") {
+      layer$type = "box"
+      layer$n = n
+      nOutliers = sapply(data$outliers,length)
+      # Might want to report high and low outliers separately?
+      boxes = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$ymin,
+                                                data$lower,data$middle,data$upper,
+                                                data$ymax,unname(nOutliers))))))
+      boxes = lapply(boxes,function(x) {names(x)=c("boxnum","x","ymin","lower",
+                                                   "middle","upper","ymax",
+                                                   "noutliers"); x})
+      layer$boxes = boxes
+      # Would like to include outlier detail as well.
+      # Boxes is currently a list of vectors.  If we wanted to include outliers
+      # within each boxes object for reporting, then boxes would need to become
+      # a list of lists.
+    } else if (layerClass == "GeomSmooth") {
+      layer$type = "smooth"
+      layer$method = .getGGSmoothMethod(x,xbuild,layeri)
+      layer$ci = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
+    } else {
+      layer$type = "unknown"
+    }
+    layers[[layeri]] = layer  
+  }
+  return(layers)
 }
 
-.getGGCoord = function(x,xbuild) {
-  return(class(x$coordinates)[1])
-}
-
-# Layer-specific mapping overrides the higher level one
-# Mapping is an expression to be evaluated in the x$data environment
-# Will return null if there is no mapping (e.g. for y with stat_bin)
-.getGGMapping = function(x,xbuild,layer,var) {
-  m = xbuild$plot$layers[[layer]]$mapping
-  if (!is.null(m) & !is.null(m[[var]]))
-    return(m[[var]])
-  ## Variable mappings shouldn't be in aes_params, but can end up there
-  m=xbuild$plot$layers[[layer]]$aes_params[[var]]
-  if (!is.null(m))
-    return(m)
-  else
-    return(xbuild$plot$mapping[[var]])
-}
-
-# Get the raw data values for variable var in the given layer
-# Rounding should probably really be done in the preprocessing step, not here
-.getGGRawValues = function(x,xbuild,layer,var) {
-  map = .getGGMapping(x,xbuild,layer,var)
-  if (class(x$layers[[layer]]$data) == "waiver")
-    return(.cleanPrint(eval(map,x$data)))
-  else
-    return(.cleanPrint(eval(map,x$layers[[layer]]$data)))
+# Probably going to get rid of this function and instead get the 
+# original data values to report using .getGGRawValues
+.mapDataValues = function(x,xbuild,var,panel,value) {
+  # If faceted and scales="free" then 1 below should be replaced with panel number
+  if (.getGGScaleFree(x,xbuild))
+      scale = .getGGPanelScale(x,xbuild,var,panel)
+      else
+        scale = .getGGPanelScale(x,xbuild,var,1)
+      if (is.null(scale) || !("ScaleDiscrete" %in% class(scale)))
+        return(value)
+      map = scale$range$range
+      if (is.null(map))
+        return(value)
+      mapping = as.character(map[value])
+      if (length(mapping) != length(value))  # Can happen with jittered data
+        return(value)     # Something's gone wrong - bail
+      else
+        return(mapping)
 }
 
 # For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does
