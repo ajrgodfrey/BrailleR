@@ -106,11 +106,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   ylabel = .getGGYLab(x,xbuild)
   if (!.getGGScaleFree(x,xbuild)) {    # Can talk about axis ticks at top level unless scale_free
     samescale = TRUE
-    print("setting samescale to true")
     xticklabels = .getGGXTicks(x,xbuild,1)
     yticklabels = .getGGYTicks(x,xbuild,1)
   } else {
-    print("setting samescale to null")
     samescale = NULL
     xticklabels = NULL
     yticklabels = NULL

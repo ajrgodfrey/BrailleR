@@ -108,6 +108,8 @@
 .getGGFacetCols = function(x,xbuild){
   if (length(x$facet$params$cols)>0)
     return(names(x$facet$params$cols))
+  else if (length(x$facet$params$facets)>0) # If nothing on left side of tilde
+    return(names(x$facet$params$facets))   # then it's stored like this (??)
   else
     return(NULL)
 }
