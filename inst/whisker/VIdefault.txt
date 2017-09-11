@@ -47,7 +47,7 @@ Panel {{panelnum}}
  represents data for{{#vars}} {{varname}} = {{value}}{{/vars}}.<br>
 {{^samescale}}
 In this panel, x-axis '{{xlabel}}' has labels {{xticklabels}}.<br>
-In this panel, x-axis '{{ylabel}}' has labels {{yticklabels}}.<br>
+In this panel, y-axis '{{ylabel}}' has labels {{yticklabels}}.<br>
 {{/samescale}}
 {{/singlepanel}}
 {{#panellayers}}
@@ -61,6 +61,10 @@ ggLayerTemplate,"
 {{^singlepanel}}Panel {{panelnum}} is {{/singlepanel}}
 {{#singlepanel}}The chart is {{/singlepanel}}
 {{/singlelayer}}
+{{#badtransform}}
+Data is transformed with tranformation {{transform}} which doesn't seem to have an inverse. 
+Data values may be reported incorrectly.
+{{/badtransform}}
 {{#hlinetype}}
 {{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{yintercept}}{{/largecount}}.<br>
 {{/hlinetype}}

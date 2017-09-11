@@ -198,7 +198,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     data =.getGGPlotData(x,xbuild,layeri,panel)
     layer$data = data
     n = nrow(data)
-    # ngroups is not in use yet.  
     if (length(data$group)>0 && max(data$group)>0)  # ungrouped data have group = -1 
       ngroups = length(unique(data$group))
     else
@@ -208,48 +207,72 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$type = "hline"
       layer$n = n
       layer$hlinetype = TRUE
-      layer$yintercept = data$yintercept
+      map = .mapDataValues(x,xbuild,list("yintercept"),panel,list(yintercept=data$yintercept))
+      if (!is.null(map$badTransform)) {
+        layer$badtransform = TRUE
+        layer$ransform = map$badTransform
+      } 
+      layer$yintercept = map$value$yintercept
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
       layer$n = n
-      if (!is.null(.getGGMapping(x,xbuild,layeri,"x"))) {
-        xvals = .getGGRawValues(x,xbuild,layeri,"x")
-        xvals = xvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
-      } else {
-        xvals = data$x
-      }
-      if (!is.null(.getGGMapping(x,xbuild,layeri,"y"))) {
-        yvals = .getGGRawValues(x,xbuild,layeri,"y") 
-        yvals = yvals[as.integer(rownames(data))]  # Rownames of data map back to orig data source
-      } else {
-        yvals = data$y
-      }
-      points = unname(as.list(data.frame(t(cbind(1:nrow(data),
+      map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
+      if (!is.null(map$badTransform)) {
+        layer$badtransform = TRUE
+        layer$ransform = map$badTransform
+      } 
+      xvals = map$value$x
+      yvals = map$value$y
+      points = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),
                                                  xvals,yvals)),stringsAsFactors=FALSE)))
       points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
       layer$points = points
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
       layer$n = n
-      bars = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
+      map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
+      if (!is.null(map$badTransform)) {
+        layer$badtransform = TRUE
+        layer$ransform = map$badTransform
+      } 
+      xvals = map$value$x
+      yvals = map$value$y
+      bars = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),xvals,yvals)),stringsAsFactors=FALSE)))
       bars = lapply(bars,function(x) {names(x)=c("barnum","x","y"); x})
       layer$bars = bars
     } else if (layerClass == "GeomLine") {
       layer$type = "line"
       # Lines are funny - each item in the data is a point
       # The number of actual lines depends on the group parameter
-      layer$n = ngroups  
-      points = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$y)))))
+      layer$n = ngroups
+      map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
+      if (!is.null(map$badTransform)) {
+        layer$badtransform = TRUE
+        layer$ransform = map$badTransform
+      } 
+      xvals = map$value$x
+      yvals = map$value$y
+      points = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),xvals,yvals)),stringsAsFactors=FALSE)))
       points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
       layer$points = points
     } else if (layerClass == "GeomBoxplot") {
+      ##  ***** NEED TO TRANSFORM ALL THE VALUES (except NOUTLIERS) -- NOT YET DONE *****
       layer$type = "box"
       layer$n = n
       nOutliers = sapply(data$outliers,length)
+      map = .mapDataValues(x,xbuild,list("x","ymin","lower","middle","upper","ymax"),panel,
+                                    list(x=data$x,ymin=data$ymin,lower=data$lower,middle=data$middle,
+                                         upper=data$upper,ymax=data$ymax))
+      if (!is.null(map$badTransform)) {
+        layer$badtransform = TRUE
+        layer$ransform = map$badTransform
+      } 
+      x = map$value$x
       # Might want to report high and low outliers separately?
-      boxes = unname(as.list(data.frame(t(cbind(1:nrow(data),data$x,data$ymin,
-                                                data$lower,data$middle,data$upper,
-                                                data$ymax,unname(nOutliers))))))
+      boxes = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),map$value$x,
+                                                map$value$ymin,map$value$lower,map$value$middle,
+                                                map$value$upper,map$value$ymax,
+                                                unname(nOutliers))),stringsAsFactors=FALSE)))
       boxes = lapply(boxes,function(x) {names(x)=c("boxnum","x","ymin","lower",
                                                    "middle","upper","ymax",
                                                    "noutliers"); x})
@@ -270,24 +293,42 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(layers)
 }
 
-# Probably going to get rid of this function and instead get the 
-# original data values to report using .getGGRawValues
-.mapDataValues = function(x,xbuild,var,panel,value) {
-  # If faceted and scales="free" then 1 below should be replaced with panel number
-  if (.getGGScaleFree(x,xbuild))
-      scale = .getGGPanelScale(x,xbuild,var,panel)
-      else
-        scale = .getGGPanelScale(x,xbuild,var,1)
-      if (is.null(scale) || !("ScaleDiscrete" %in% class(scale)))
-        return(value)
+
+# Converts data values back to their original scales -- converting factor
+# variables back to their levels, and undoing transforms
+.mapDataValues = function(x,xbuild,varlist,panel,valuelist) {
+  badTransform = NULL
+  transformed = list()
+  for (var in varlist) {
+    value = valuelist[[var]]
+    scale = .getGGPanelScale(x,xbuild,var,panel)
+
+    if (is.null(scale))   # No scale - just return the stored value
+      r = value
+    else if (("ScaleDiscrete" %in% class(scale))) { # Try to map back to levels
       map = scale$range$range
       if (is.null(map))
-        return(value)
-      mapping = as.character(map[value])
-      if (length(mapping) != length(value))  # Can happen with jittered data
-        return(value)     # Something's gone wrong - bail
-      else
-        return(mapping)
+        r = value
+      else {
+        mapping = as.character(map[value])
+        if (length(mapping) != length(value))  # Can happen with jittered data
+          r = value     # Something's gone wrong - bail
+        else
+          r = mapping
+      }
+    } else {  # Continuous scale - try to undo any transform
+      if (is.null(scale$trans)) {   # No transform
+        r = value
+      } else if (is.null(scale$trans$inverse)) {
+        badTransform = scale$trans$name
+        r = value
+      } else {
+        r = scale$trans$inverse(value)
+      }
+    }
+    transformed[[var]] = r
+  }
+  return(list(value=transformed,badTransform=badTransform))
 }
 
 # For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does

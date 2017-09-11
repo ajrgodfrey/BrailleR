@@ -91,8 +91,33 @@
               range=scalelist[[scale]]$range$range))
 }
 
+.getGGTransInverse = function(x,xbuild,var) {
+  scalelist = x$scales$scales
+  scale = which(sapply(scalelist, function(x) var %in% x$aesthetics))
+  if (is.null(scale) || is.null(scale$trans))
+      return(NULL)
+  else
+    return(scale$trans$inverse)
+}
+
+# Small helper function for .getGGPanelScale
+.findScale = function(x,var,panel) {
+  panelIndex = min(panel,length(x))
+  var %in% x[[panelIndex]]$aesthetics
+}
+
 .getGGPanelScale = function(x,xbuild,var,panel) {
-  xbuild$layout$panel_scales[[var]][[panel]]
+  # Need to find the scale that matches the var we're translating
+  # Depending on scalefree and layout, we might have separate scales
+  # for each panel or just one
+  scales = xbuild$layout$panel_scales
+  findscale = which(sapply(scales, .findScale, var, panel))
+  if (length(findscale)==1) {
+    panelIndex = min(panel,length(scales[findscale]))
+    return(xbuild$layout$panel_scales[[findscale]][[panelIndex]])
+  } else {
+    return(NULL) # Something went wrong -- no matching scale, or more than one
+  }
 }
 
 ## Facets
