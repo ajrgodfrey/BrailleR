@@ -66,33 +66,33 @@ Data is transformed with tranformation {{transform}} which doesn't seem to have 
 Data values may be reported incorrectly.
 {{/badtransform}}
 {{#hlinetype}}
-{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at position {{yintercept}}{{/largecount}}.<br>
+{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at positions{{#items}} {{yintercept}}{{/items}}{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
 a bar chart containing {{n}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
-{{#bars}}Bar {{barnum}} is centered at {{x}} and has height {{y}}.<br>{{/bars}}
+{{#items}}Bar {{barnum}} is centered at {{x}} and has height {{y}}.<br>{{/items}}
 {{/largecount}}
 {{/bartype}}
 {{#pointtype}}
 a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
-The points are at{{#points}} ({{x}},{{y}}){{/points}}.<br>
+The points are at{{#items}} ({{x}},{{y}}){{/items}}.<br>
 {{/largecount}}
 {{/pointtype}}
 {{#linetype}}
 a set of {{n}} line{{#s}}s{{/s}}.<br>
 {{^largecount}}
-The points are at{{#points}} ({{x}},{{y}}){{/points}}.<br>
+The points are at{{#items}} ({{x}},{{y}}){{/items}}.<br>
 {{/largecount}}
 {{/linetype}}
 {{#boxtype}}
 a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
-{{#boxes}}
+{{#items}}
 The group at x={{x}} has median {{middle}}.
  The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.
  There are {{noutliers}} outliers for this box.<br>
-{{/boxes}}
+{{/items}}
 {{/boxtype}}
 {{#smoothtype}}
 a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci}}.<br>

@@ -40,15 +40,39 @@
   if (length(x$panelrows)>0 && length(x$panelcols)>0) x$panelgrid = TRUE
   for (paneli in 1:x$npanels)
     for (layeri in 1:x$nlayers) {
-      typeflag = paste0(x$panels[[paneli]]$panellayers[[layeri]]$type,"type")
-      x$panels[[paneli]]$panellayers[[layeri]][[typeflag]] = TRUE
-      n = x$panels[[paneli]]$panellayers[[layeri]]$n
+      layer = x$panels[[paneli]]$panellayers[[layeri]]
+      typeflag = paste0(layer$type,"type")
+      layer[[typeflag]] = TRUE
+      n = layer$n
       if (!is.null(n)) {
-        if (n>1) x$panels[[paneli]]$panellayers[[layeri]]$s = TRUE
-        if (n>threshold) x$panels[[paneli]]$panellayers[[layeri]]$largecount = TRUE
+        if (n>1) layer$s = TRUE
+        if (n>threshold) {
+          layer$largecount = TRUE
+        } else {
+          layer$items = .listifyVars(layer$scaledata,threshold)
+        }
       }
+      x$panels[[paneli]]$panellayers[[layeri]] = layer
     }  
   return(x)
+}
+
+# This function will convert plot object details into lists for mustache
+# Result is a list of objects, each of which contains the needed vars for the plot type
+# E.g. for point charts, we end up with a list of objects each containing x, y
+# This code isn't efficient, but hopefully we aren't printing a huge number of points
+.listifyVars = function(varlist,threshold=10) {
+  itemlist = list()
+  for (i in 1:min(threshold,length(varlist[[1]]))) {
+    item = list()
+    for (j in 1:length(varlist)) {
+      var = varlist[[j]]
+      name = names(varlist)[j]
+      item[[name]] = .cleanPrint(var[i])
+    }
+    itemlist[[i]] = item
+  }
+  return(itemlist)
 }
 
 ### Print function for the object created by VI.ggplot
@@ -212,7 +236,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      layer$yintercept = map$value$yintercept
+      layer$scaledata = map$value
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
       layer$n = n
@@ -221,12 +245,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      xvals = map$value$x
-      yvals = map$value$y
-      points = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),
-                                                 xvals,yvals)),stringsAsFactors=FALSE)))
-      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
-      layer$points = points
+      layer$scaledata = map$value
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
       layer$n = n
@@ -235,11 +254,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      xvals = map$value$x
-      yvals = map$value$y
-      bars = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),xvals,yvals)),stringsAsFactors=FALSE)))
-      bars = lapply(bars,function(x) {names(x)=c("barnum","x","y"); x})
-      layer$bars = bars
+      layer$scaledata = map$value
     } else if (layerClass == "GeomLine") {
       layer$type = "line"
       # Lines are funny - each item in the data is a point
@@ -250,11 +265,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      xvals = map$value$x
-      yvals = map$value$y
-      points = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),xvals,yvals)),stringsAsFactors=FALSE)))
-      points = lapply(points,function(x) {names(x)=c("pointnum","x","y"); x})
-      layer$points = points
+      # THIS ISN"T REALLY RIGHT FOR LINES - NEED TO CORRECT
+      layer$scaledata = map$value
     } else if (layerClass == "GeomBoxplot") {
       ##  ***** NEED TO TRANSFORM ALL THE VALUES (except NOUTLIERS) -- NOT YET DONE *****
       layer$type = "box"
@@ -267,18 +279,11 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      x = map$value$x
+      layer$scaledata = map$value
+      layer$scaledata[["noutliers"]] = nOutliers
       # Might want to report high and low outliers separately?
-      boxes = unname(as.list(data.frame(t(cbind(as.character(1:nrow(data)),map$value$x,
-                                                map$value$ymin,map$value$lower,map$value$middle,
-                                                map$value$upper,map$value$ymax,
-                                                unname(nOutliers))),stringsAsFactors=FALSE)))
-      boxes = lapply(boxes,function(x) {names(x)=c("boxnum","x","ymin","lower",
-                                                   "middle","upper","ymax",
-                                                   "noutliers"); x})
-      layer$boxes = boxes
       # Would like to include outlier detail as well.
-      # Boxes is currently a list of vectors.  If we wanted to include outliers
+      # scaledata is currently a list of vectors.  If we wanted to include outliers
       # within each boxes object for reporting, then boxes would need to become
       # a list of lists.
     } else if (layerClass == "GeomSmooth") {
