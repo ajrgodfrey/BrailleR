@@ -195,15 +195,15 @@
   return(fulldata[fulldata$PANEL==panel,])
 }
 
-# Not sure whether I'm going to use this or
-# Get the raw data values for variable var in the given layer
-# Rounding should probably really be done in the preprocessing step, not here
+# Get the original data values for variable var in the given layer
+# NOT CURRENTLY IN USE
+# Dangerous since the original data may have changed or no longer be present in the env
 .getGGRawValues = function(x,xbuild,layer,var) {
   map = .getGGMapping(x,xbuild,layer,var)
   if (class(x$layers[[layer]]$data) == "waiver")
-    return(.cleanPrint(eval(map,x$data)))
+    return(eval(map,x$data))
   else
-    return(.cleanPrint(eval(map,x$layers[[layer]]$data)))
+    return(eval(map,x$layers[[layer]]$data))
 }
 
 

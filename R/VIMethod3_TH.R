@@ -49,7 +49,22 @@
         if (n>threshold) {
           layer$largecount = TRUE
         } else {
-          layer$items = .listifyVars(layer$scaledata,threshold)
+          if (layer$type == "line") {  # Lines are special, items are within groups
+            layer$lines = list()
+            for (i in 1:length(layer$scaledata)) {
+              layer$lines[[i]] = list()
+              layer$lines[[i]]$linenum = i
+              npoints = length(layer$scaledata[[i]]$x)
+              layer$lines[[i]]$npoints = npoints
+              if (npoints>threshold)
+                layer$lines[[i]]$largecount = TRUE
+              else
+                layer$lines[[i]]$items = .listifyVars(layer$scaledata[[i]])
+            }
+          }
+          else {
+            layer$items = .listifyVars(layer$scaledata)
+          }
         }
       }
       x$panels[[paneli]]$panellayers[[layeri]] = layer
@@ -61,11 +76,12 @@
 # Result is a list of objects, each of which contains the needed vars for the plot type
 # E.g. for point charts, we end up with a list of objects each containing x, y
 # This code isn't efficient, but hopefully we aren't printing a huge number of points
-.listifyVars = function(varlist,threshold=10) {
+.listifyVars = function(varlist) {
   itemlist = list()
-  for (i in 1:min(threshold,length(varlist[[1]]))) {
+  for (i in seq_along(varlist[[1]])) {
     item = list()
-    for (j in 1:length(varlist)) {
+    for (j in seq_along(varlist)) {
+      item$itemnum = j
       var = varlist[[j]]
       name = names(varlist)[j]
       item[[name]] = .cleanPrint(var[i])
@@ -260,15 +276,19 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # Lines are funny - each item in the data is a point
       # The number of actual lines depends on the group parameter
       layer$n = ngroups
-      map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
-      if (!is.null(map$badTransform)) {
-        layer$badtransform = TRUE
-        layer$ransform = map$badTransform
-      } 
-      # THIS ISN"T REALLY RIGHT FOR LINES - NEED TO CORRECT
-      layer$scaledata = map$value
+      layer$scaledata=list()
+      for (groupi in unique(data$group)) {
+        groupx = data[data$group==groupi,]$x
+        groupy = data[data$group==groupi,]$y
+        map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=groupx,y=groupy))
+        if (!is.null(map$badTransform)) {
+          layer$badtransform = TRUE
+          layer$ransform = map$badTransform
+        } 
+        # Lines have a separate scaledata for each group
+        layer$scaledata[[length(layer$scaledata)+1]] = map$value
+      }
     } else if (layerClass == "GeomBoxplot") {
-      ##  ***** NEED TO TRANSFORM ALL THE VALUES (except NOUTLIERS) -- NOT YET DONE *****
       layer$type = "box"
       layer$n = n
       nOutliers = sapply(data$outliers,length)

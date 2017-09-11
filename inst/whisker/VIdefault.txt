@@ -71,7 +71,7 @@ Data values may be reported incorrectly.
 {{#bartype}}
 a bar chart containing {{n}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
-{{#items}}Bar {{barnum}} is centered at {{x}} and has height {{y}}.<br>{{/items}}
+{{#items}}Bar {{itemnum}} is centered at {{x}} and has height {{y}}.<br>{{/items}}
 {{/largecount}}
 {{/bartype}}
 {{#pointtype}}
@@ -83,7 +83,9 @@ The points are at{{#items}} ({{x}},{{y}}){{/items}}.<br>
 {{#linetype}}
 a set of {{n}} line{{#s}}s{{/s}}.<br>
 {{^largecount}}
-The points are at{{#items}} ({{x}},{{y}}){{/items}}.<br>
+{{#lines}}
+Line {{linenum}} connects {{npoints}} points{{^largecount}}, at{{#items}} ({{x}},{{y}}){{/items}}{{/largecount}}.<br>
+{{/lines}}
 {{/largecount}}
 {{/linetype}}
 {{#boxtype}}
