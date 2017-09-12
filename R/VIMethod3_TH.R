@@ -81,7 +81,7 @@
   for (i in seq_along(varlist[[1]])) {
     item = list()
     for (j in seq_along(varlist)) {
-      item$itemnum = j
+      item$itemnum = i
       var = varlist[[j]]
       name = names(varlist)[j]
       item[[name]] = .cleanPrint(var[i])
@@ -265,7 +265,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
       layer$n = n
-      map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
+      map = .mapDataValues(x,xbuild,list("x","ymin","ymax"),panel,
+                           list(x=data$x,ymin=data$ymin,ymax=data$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$ransform = map$badTransform

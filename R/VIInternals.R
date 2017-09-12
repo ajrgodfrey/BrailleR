@@ -171,6 +171,20 @@
   return(layeraes)
 }
 
+# Layer position
+.getGGLayerPosition = function(x,xbuild,layer) {
+  pos = switch (class(x$layers[[layer]]$position)[1],
+    PositionDodge = "dodge",
+    PositionFill = "fill",
+    PositionIdentity = "identity",
+    PositionJitter = "jitter",
+    PositionJitterdodge = "jitterdodge",
+    PositionNudge = "nudge",
+    PositionStack = "stack",
+    class(x$layers[[layer]]$position)[1]
+    )
+  return(pos)
+}
 
 # Plot data
 # Layer-specific mapping overrides the higher level one

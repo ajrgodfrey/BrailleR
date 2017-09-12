@@ -69,9 +69,9 @@ Data values may be reported incorrectly.
 {{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at positions{{#items}} {{yintercept}}{{/items}}{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
-a bar chart containing {{n}} bar{{#s}}s{{/s}}.<br>
+a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
-{{#items}}Bar {{itemnum}} is centered at {{x}} and has height {{y}}.<br>{{/items}}
+{{#items}}Bar {{itemnum}} is centered at {{x}} and spans from {{ymin}} to {{ymax}}.<br>{{/items}}
 {{/largecount}}
 {{/bartype}}
 {{#pointtype}}
