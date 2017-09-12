@@ -243,6 +243,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     else
       ngroups = 1
     layerClass = .getGGLayerType(x,xbuild,layeri)
+    
+    # HLINE
     if (layerClass == "GeomHline") {
       layer$type = "hline"
       layer$n = n
@@ -253,6 +255,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$ransform = map$badTransform
       } 
       layer$scaledata = map$value
+      
+    # POINT
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
       layer$n = n
@@ -261,7 +265,12 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      layer$scaledata = map$value
+      # Also report on any aesthetic variables that vary across the layer
+      aesvars = .findVaryingAesthetics(x,xbuild,layeri)
+      aesvals = .convertAes(data[aesvars])
+      layer$scaledata = cbind(map$value, aesvals)
+      
+    # BAR
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
       layer$n = n
@@ -271,7 +280,12 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      layer$scaledata = map$value
+      # Also report on any aesthetic variables that vary across the layer
+      aesvars = .findVaryingAesthetics(x,xbuild,layeri)
+      aesvals = .convertAes(data[aesvars])
+      layer$scaledata = cbind(map$value, aesvals)
+      
+    # LINE
     } else if (layerClass == "GeomLine") {
       layer$type = "line"
       # Lines are funny - each item in the data is a point
@@ -289,6 +303,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         # Lines have a separate scaledata for each group
         layer$scaledata[[length(layer$scaledata)+1]] = map$value
       }
+      
+    #BOXPLOT
     } else if (layerClass == "GeomBoxplot") {
       layer$type = "box"
       layer$n = n
@@ -307,10 +323,14 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # scaledata is currently a list of vectors.  If we wanted to include outliers
       # within each boxes object for reporting, then boxes would need to become
       # a list of lists.
+      
+    # SMOOTH
     } else if (layerClass == "GeomSmooth") {
       layer$type = "smooth"
       layer$method = .getGGSmoothMethod(x,xbuild,layeri)
       layer$ci = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
+      
+    #U UNKNOWN
     } else {
       layer$type = "unknown"
     }
@@ -355,6 +375,35 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     transformed[[var]] = r
   }
   return(list(value=transformed,badTransform=badTransform))
+}
+
+# Find those aesthetics that are varying within this layer 
+# (e.g not all points in a scatterplot have the same colour)
+.findVaryingAesthetics = function(x,xbuild,layer) {
+  aeslist = c("colour","fill","linetype","alpha","size","weight","shape")
+  data = xbuild$data[[layer]]
+  names = names(data)
+  data = data[names[names %in% aeslist]]
+  data = data[sapply(data, function(col) { length(unique(col)) > 1 })]
+  return(names(data))
+}
+
+# Convert aesthetic values to something more friendly for the user
+# Takes a dataframe and converts all of its columns if possible
+# *** ONLY HANDLING LINETYPES SO FAR - and not defaults 42, 22, ...
+# SHOULD DO SHAPES, COLOURS (How?)
+.convertAes = function(values) {
+  linetypes = c("0"="blank","1"="solid","2"="dashed",
+                "3"="dotted","4"="dotdash","5"="longdash","6"="twodash")
+  c = values
+  for (col in seq_along(values)) {
+    if (names(values)[col]=="linetype") {
+      c[,col] = ifelse(values[,col] %in% names(linetypes),
+                       linetypes[as.character(values[,col])],
+                       c[,col])  # If not found just return what we got
+    }
+  }
+  return(c)  
 }
 
 # For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does

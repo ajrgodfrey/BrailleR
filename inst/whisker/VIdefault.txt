@@ -71,13 +71,24 @@ Data values may be reported incorrectly.
 {{#bartype}}
 a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
-{{#items}}Bar {{itemnum}} is centered at {{x}} and spans from {{ymin}} to {{ymax}}.<br>{{/items}}
+{{#items}}Bar {{itemnum}} is centered at {{x}} and spans from {{ymin}} to {{ymax}}
+{{#fill}}, with fill colour {{fill}}{{/fill}}
+{{#colour}}, with border colour {{colour}}{{/colour}}
+{{#linetype}}, with border line type {{linetype}}{{/linetype}}
+{{#size}}, with border line width {{size}}{{/size}}
+.<br>{{/items}}
 {{/largecount}}
 {{/bartype}}
 {{#pointtype}}
 a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
-The points are at{{#items}} ({{x}},{{y}}){{/items}}.<br>
+The points are at:<br>
+{{#items}}({{x}},{{y}})
+{{#size}}, size {{size}}{{/size}}
+{{#shape}}, shape {{shape}}{{/shape}}
+{{#colour}}, colour {{colour}}{{/colour}}
+{{#fill}}, fill {{fill}}{{/fill}}
+<br>{{/items}}.<br>
 {{/largecount}}
 {{/pointtype}}
 {{#linetype}}
