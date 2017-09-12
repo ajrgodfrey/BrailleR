@@ -273,7 +273,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     # BAR
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
-      layer$n = n
+      # Discard zero-height bars
+      layer$data = data = data[(data$ymax - data$ymin) > 0,]
+      # Discard bars that go outside the bounds of the plot,
+      # as they won't be displayed
+      layer$data = data = data[!is.na(data$xmin) & !is.na(data$xmax),]
+      # Recount rows
+      layer$n = n = nrow(data)
       map = .mapDataValues(x,xbuild,list("x","ymin","ymax"),panel,
                            list(x=data$x,ymin=data$ymin,ymax=data$ymax))
       if (!is.null(map$badTransform)) {
