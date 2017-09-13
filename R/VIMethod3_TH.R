@@ -4,21 +4,17 @@
 ## Each object is rendered using the template of the same name 
 ## found within the template file.  Partial templates can also
 ## be present in the template file and will be used if needed.
-.VItextify = function(x, template=
-                          system.file("whisker/VIdefault.txt",
-                                      package="BrailleR")) {
-
-  temp = read.csv(template,header=FALSE,as.is=TRUE)
-  templates=as.list(gsub("\n","",temp[,2]))
+.VItextify = function(x, template=system.file("whisker/VIdefault.txt", package="BrailleR")) {
+  temp = read.csv(template,header=FALSE, as.is=TRUE)
+  templates = as.list(gsub("\n", "", temp[,2]))
   names(templates) = temp[,1]
   result = list()
   for (i in 1:length(x)) {
     if (is.null(x[[i]])) {
       result[[i]] = character(0)
     } else {
-    render = whisker::whisker.render(templates[names(x[i])],x[[i]],
-                                     partials=templates)
-    result[[i]] = as.vector(strsplit(render,"<br>",fixed=TRUE)[[1]])
+      render = whisker::whisker.render(templates[names(x[i])], x[[i]], partials=templates)
+    result[[i]] = as.vector(strsplit(render, "<br>", fixed=TRUE)[[1]])
     }
   }
   names(result) = names(x)
@@ -30,23 +26,29 @@
 # as implementing the threshold for printing by setting "largecount" flags.
 # Mustache can't check a field's value, only whether it's present or not.
 # So flags are either set to true or not included at all
-.VIpreprocess = function(x,threshold=10) {
+.VIpreprocess = function(x, threshold=10) {
   if (is.null(x))
     return(NULL)
-  if (x$npanels==1) x$singlepanel = TRUE
-  if (x$nlayers==1) x$singlelayer = TRUE
-  if (length(x$panelrows)==0) x$singlerow = TRUE   
-  if (length(x$panelcols)==0) x$singlecol = TRUE
-  if (length(x$panelrows)>0 && length(x$panelcols)>0) x$panelgrid = TRUE
+  if (x$npanels == 1) 
+    x$singlepanel = TRUE
+  if (x$nlayers == 1) 
+    x$singlelayer = TRUE
+  if (length(x$panelrows) == 0) 
+    x$singlerow = TRUE   
+  if (length(x$panelcols) == 0) 
+    x$singlecol = TRUE
+  if (length(x$panelrows) > 0 && length(x$panelcols) > 0) 
+    x$panelgrid = TRUE
   for (paneli in 1:x$npanels)
     for (layeri in 1:x$nlayers) {
       layer = x$panels[[paneli]]$panellayers[[layeri]]
-      typeflag = paste0(layer$type,"type")
+      typeflag = paste0(layer$type, "type")
       layer[[typeflag]] = TRUE
       n = layer$n
       if (!is.null(n)) {
-        if (n>1) layer$s = TRUE
-        if (n>threshold) {
+        if (n > 1) 
+          layer$s = TRUE
+        if (n > threshold) {
           layer$largecount = TRUE
         } else {
           if (layer$type == "line") {  # Lines are special, items are within groups
@@ -56,7 +58,7 @@
               layer$lines[[i]]$linenum = i
               npoints = length(layer$scaledata[[i]]$x)
               layer$lines[[i]]$npoints = npoints
-              if (npoints>threshold)
+              if (npoints > threshold)
                 layer$lines[[i]]$largecount = TRUE
               else
                 layer$lines[[i]]$items = .listifyVars(layer$scaledata[[i]])
@@ -91,30 +93,39 @@
   return(itemlist)
 }
 
+# For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does
+# ggplot itself do?
+.cleanPrint = function(x) {
+  if (is.numeric(x))
+    return(round(x,2))
+  else
+    return(x)
+}
+
 ### Print function for the object created by VI.ggplot
 ### Prints the text component of the object
 print.VIgraph = function(x, ...) {
-  cat(x$text,sep="\n")
+  cat(x$text, sep="\n")
   invisible(x)
 }
 
 # Small helper function - builds list excluding items that are null or length 0
 .VIlist = function(...) {
   l = list(...)
-  l[(lapply(l,length)>0)] 
+  l[(lapply(l,length) > 0)] 
 }
 
 # Returns the VIgraph object with the text trimmed down to only those rows
 # containing the specified pattern.  Passes extra parameters on to grepl.
 # Note that only the text portion of the VIgraph is modified; the complete
 # VIgg structure is still included
-VIgrep = function(pattern,x,...) {
+VIgrep = function(pattern, x,...) {
   if (class(x) != "VIgraph") {
     message(paste("VIgrep doesn't know how to process this object.",
                   "Only the output from running VI on a ggplot object can be processed by VIgrep."))
     return(NULL)
-  }
-  x$text = x$text[grepl(pattern,x$text,...)]
+   }
+  x$text = x$text[grepl(pattern, x$text, ...)]
   x
 }
 
@@ -122,10 +133,10 @@ VIgrep = function(pattern,x,...) {
 # Greater numbers will be summarised (e.g. "is a set of 32 horizontal lines" vs
 # "is a set of 3 horizontal lines at 5, 7.5, 10")
 VI.ggplot = function(x, Describe=FALSE, threshold=10, 
-                     template=system.file("whisker/VIdefault.txt",package="BrailleR"), ...) {
+                     template=system.file("whisker/VIdefault.txt", package="BrailleR"), ...) {
   VIstruct = .VIstruct.ggplot(x)
-  text = .VItextify(list(VIgg=.VIpreprocess(VIstruct,threshold)),template)[[1]]
-  VIgraph=list(VIgg=VIstruct, text=text)
+  text = .VItextify(list(VIgg=.VIpreprocess(VIstruct, threshold)), template)[[1]]
+  VIgraph = list(VIgg=VIstruct, text=text)
   class(VIgraph) = "VIgraph"
   return(VIgraph)
 }
@@ -134,50 +145,47 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 .VIstruct.ggplot = function(x) {
   xbuild = suppressMessages(ggplot_build(x))
   # If this is a plot we really can't deal with, say so now
-  if (!(.getGGCoord(x,xbuild) %in% c("CoordCartesian","CoordFixed"))) {
+  if (!(.getGGCoord(x, xbuild) %in% c("CoordCartesian", "CoordFixed"))) {
     message("VI cannot process ggplot objects with flipped or non-Cartesian coordinates")
     return(NULL)
   }
-  title = .getGGTitle(x,xbuild)
-  subtitle = .getGGSubtitle(x,xbuild)
-  caption = .getGGCaption(x,xbuild)
-  annotations = .VIlist(title=title,subtitle=subtitle,caption=caption)
-  xlabel = .getGGXLab(x,xbuild)
-  ylabel = .getGGYLab(x,xbuild)
-  if (!.getGGScaleFree(x,xbuild)) {    # Can talk about axis ticks at top level unless scale_free
+  title = .getGGTitle(x, xbuild)
+  subtitle = .getGGSubtitle(x, xbuild)
+  caption = .getGGCaption(x, xbuild)
+  annotations = .VIlist(title=title, subtitle=subtitle, caption=caption)
+  xlabel = .getGGXLab(x, xbuild)
+  ylabel = .getGGYLab(x, xbuild)
+  if (!.getGGScaleFree(x, xbuild)) {    # Can talk about axis ticks at top level unless scale_free
     samescale = TRUE
-    xticklabels = .getGGXTicks(x,xbuild,1)
-    yticklabels = .getGGYTicks(x,xbuild,1)
+    xticklabels = .getGGXTicks(x, xbuild, 1)
+    yticklabels = .getGGYTicks(x, xbuild, 1)
   } else {
     samescale = NULL
     xticklabels = NULL
     yticklabels = NULL
   }
-  xaxis = .VIlist(xlabel=xlabel,xticklabels=xticklabels,samescale=samescale)
-  yaxis = .VIlist(ylabel=ylabel,yticklabels=yticklabels,samescale=samescale)
-  legends = .buildLegends(x,xbuild)
-  panels = .buildPanels(x,xbuild)
-  panelrows = as.list(.getGGFacetRows(x,xbuild))
-  panelcols = as.list(.getGGFacetCols(x,xbuild))
-  layerCount = .getGGLayerCount(x,xbuild);
-  VIstruct = .VIlist(annotations=annotations,xaxis=xaxis,yaxis=yaxis,
-              legends=legends,panels=panels,
-              npanels=length(panels),nlayers=layerCount,
-              panelrows=panelrows,panelcols=panelcols,
-              type="ggplot")
+  xaxis = .VIlist(xlabel=xlabel, xticklabels=xticklabels, samescale=samescale)
+  yaxis = .VIlist(ylabel=ylabel, yticklabels=yticklabels, samescale=samescale)
+  legends = .buildLegends(x, xbuild)
+  panels = .buildPanels(x, xbuild)
+  panelrows = as.list(.getGGFacetRows(x, xbuild))
+  panelcols = as.list(.getGGFacetCols(x, xbuild))
+  layerCount = .getGGLayerCount(x, xbuild);
+  VIstruct = .VIlist(annotations=annotations, xaxis=xaxis, yaxis=yaxis, legends=legends, panels=panels,
+              npanels=length(panels), nlayers=layerCount, panelrows=panelrows, panelcols=panelcols, type="ggplot")
   class(VIstruct) = "VIstruct"
   return(VIstruct)
 }
 
-.buildLegends = function(x,xbuild) {
+.buildLegends = function(x, xbuild) {
   legends = list()
-  labels = .getGGGuideLabels(x,xbuild)
+  labels = .getGGGuideLabels(x, xbuild)
   names = names(labels)
-  guides = .getGGGuides(x,xbuild)
+  guides = .getGGGuides(x, xbuild)
   for (i in seq_along(labels)) {
     name = names[i]
     mapping = labels[[i]]
-    scaleinfo = .getGGScale(x,xbuild,name)
+    scaleinfo = .getGGScale(x, xbuild,name)
     scalediscrete = scaleinfo$scalediscrete
     if (!is.null(scalediscrete)) {
       scalelevels = scaleinfo$range
@@ -188,61 +196,58 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       scalefrom = scaleinfo$range[1]
       scaleto = scaleinfo$range[2]
     }
-    hidden = if (!is.null(guides[[name]]) && (guides[[name]]=="none" || guides[[name]]==FALSE)) TRUE
-    legend = .VIlist(aes=name,mapping=unname(mapping),
-                     scalediscrete=scalediscrete,scalelevels=scalelevels,
-                     scalefrom=scalefrom,scaleto=scaleto,
-                     hidden=hidden)
+    hidden = if (!is.null(guides[[name]]) && (guides[[name]] == "none" || guides[[name]] == FALSE)) TRUE
+    legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, scalelevels=scalelevels,
+                     scalefrom=scalefrom, scaleto=scaleto, hidden=hidden)
     legends[[i]] = legend
   }
   return(legends)
 }
 
-.buildPanels = function(x,xbuild) {
-  f = .getGGFacetLayout(x,xbuild)
+.buildPanels = function(x, xbuild) {
+  f = .getGGFacetLayout(x, xbuild)
   panels = list()
   names = colnames(f)
-  panelvars = names[which(!names %in% c("PANEL","ROW","COL","SCALE_X","SCALE_Y"))]
+  panelvars = names[which(!names %in% c("PANEL", "ROW", "COL", "SCALE_X", "SCALE_Y"))]
   for (i in seq_along(f$PANEL)) {
     panel = list()
     panel[["panelnum"]] = as.character(f$PANEL[i])
     panel[["row"]] = f$ROW[i]
     panel[["col"]] = f$COL[i]
-    scalefree = .getGGScaleFree(x,xbuild)
-    panel[["samescale"]] = if (!scalefree) TRUE
+    scalefree = .getGGScaleFree(x, xbuild)
+    panel[["samescale"]] = if (!scalefree) TRUE      # Might want to move this into pre-processing step
     if (scalefree) { 
-      panel[["xticklabels"]] = .getGGXTicks(x,xbuild,i)
-      panel[["yticklabels"]] = .getGGYTicks(x,xbuild,i)
-      panel[["xlabel"]] = .getGGXLab(x,xbuild) # Won't actually change over the panels
-      panel[["ylabel"]] = .getGGYLab(x,xbuild) # But we still want to mention them
+      panel[["xticklabels"]] = .getGGXTicks(x, xbuild, i)
+      panel[["yticklabels"]] = .getGGYTicks(x, xbuild, i)
+      panel[["xlabel"]] = .getGGXLab(x, xbuild) # Won't actually change over the panels
+      panel[["ylabel"]] = .getGGYLab(x, xbuild) # But we still want to mention them
       
     }
     vars = list()
       for (j in seq_along(panelvars)) {
-        vars[[j]] = list(varname=as.character(panelvars[j]),
-                         value=as.character(f[[i,panelvars[j]]]))
+        vars[[j]] = list(varname=as.character(panelvars[j]), value=as.character(f[[i, panelvars[j]]]))
       }
     panel[["vars"]] = vars
-    panel[["panellayers"]] = .buildLayers(x,xbuild,i)
+    panel[["panellayers"]] = .buildLayers(x, xbuild, i)
     panels[[i]] = panel
   }
   return(panels)  
 }
 
-.buildLayers = function(x,xbuild,panel) {
-  layerCount = .getGGLayerCount(x,xbuild)
+.buildLayers = function(x, xbuild, panel) {
+  layerCount = .getGGLayerCount(x, xbuild)
   layers = list()
   for (layeri in 1:layerCount) {
-    layeraes = .getGGLayerAes(x,xbuild,layeri)
-    layer = .VIlist(layernum=layeri,layeraes=layeraes)
-    data =.getGGPlotData(x,xbuild,layeri,panel)
+    layeraes = .getGGLayerAes(x, xbuild, layeri)
+    layer = .VIlist(layernum=layeri, layeraes=layeraes)
+    data =.getGGPlotData(x, xbuild, layeri, panel)
     layer$data = data
     n = nrow(data)
-    if (length(data$group)>0 && max(data$group)>0)  # ungrouped data have group = -1 
+    if (length(data$group) > 0 && max(data$group) > 0)  # ungrouped data have group = -1 
       ngroups = length(unique(data$group))
     else
       ngroups = 1
-    layerClass = .getGGLayerType(x,xbuild,layeri)
+    layerClass = .getGGLayerType(x, xbuild, layeri)
     
     # HLINE
     if (layerClass == "GeomHline") {
@@ -252,13 +257,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$data = data = data[!is.na(data$yintercept),]
       layer$n = n = nrow(data)
       layer$hlinetype = TRUE
-      map = .mapDataValues(x,xbuild,list("yintercept"),panel,list(yintercept=data$yintercept))
+      map = .mapDataValues(x, xbuild, list("yintercept"), panel, list(yintercept=data$yintercept))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
       # Also report on any aesthetic variables that vary across the layer
-      aesvars = .findVaryingAesthetics(x,xbuild,layeri)
+      aesvars = .findVaryingAesthetics(x, xbuild, layeri)
       aesvals = .convertAes(data[aesvars])
       layer$scaledata = cbind(map$value, aesvals)
       
@@ -269,13 +274,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # as they won't be displayed
       layer$data = data = data[!is.na(data$x) & !is.na(data$y),]
       layer$n = n = nrow(data)
-      map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
+      map = .mapDataValues(x, xbuild, list("x", "y"), panel, list(x=data$x, y=data$y))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
       # Also report on any aesthetic variables that vary across the layer
-      aesvars = .findVaryingAesthetics(x,xbuild,layeri)
+      aesvars = .findVaryingAesthetics(x, xbuild, layeri)
       aesvals = .convertAes(data[aesvars])
       layer$scaledata = cbind(map$value, aesvals)
       
@@ -289,21 +294,19 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$data = data = data[!is.na(data$xmin) & !is.na(data$xmax),]
       # Recount rows
       layer$n = n = nrow(data)
-      map = .mapDataValues(x,xbuild,list("x","ymin","ymax"),panel,
-                           list(x=data$x,ymin=data$ymin,ymax=data$ymax))
+      map = .mapDataValues(x, xbuild, list("x", "ymin", "ymax"), panel, list(x=data$x, ymin=data$ymin, ymax=data$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
       # Also report on any aesthetic variables that vary across the layer
-      aesvars = .findVaryingAesthetics(x,xbuild,layeri)
+      aesvars = .findVaryingAesthetics(x, xbuild, layeri)
       aesvals = .convertAes(data[aesvars])
       layer$scaledata = cbind(map$value, aesvals)
       # If bar width varies then we should report xmin and xmax instead
       width = data$xmax - data$xmin
-      if (max(width)-min(width)>.0001)   # allow for small rounding error
-        layer$scaledata = cbind(layer$scaledata,xmin=data$xmin,xmax=data$xmax)
-        
+      if (max(width) - min(width) > .0001)   # allow for small rounding error
+        layer$scaledata = cbind(layer$scaledata, xmin=data$xmin, xmax=data$xmax)
         
     # LINE
     } else if (layerClass == "GeomLine") {
@@ -317,17 +320,17 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # X values of NA or past xlims should just not be reported on
       # as they won't be displayed but the line will still be continuous
       layer$data = data = data[!is.na(data$x),]
-      layer$scaledata=list()
+      layer$scaledata = list()
       for (groupi in unique(data$group)) {
-        groupx = data[data$group==groupi,]$x
-        groupy = data[data$group==groupi,]$y
-        map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=groupx,y=groupy))
+        groupx = data[data$group == groupi,]$x
+        groupy = data[data$group == groupi,]$y
+        map = .mapDataValues(x, xbuild, list("x","y"), panel, list(x=groupx, y=groupy))
         if (!is.null(map$badTransform)) {
           layer$badtransform = TRUE
           layer$ransform = map$badTransform
         } 
         # Lines have a separate scaledata for each group
-        layer$scaledata[[length(layer$scaledata)+1]] = map$value
+        layer$scaledata[[length(layer$scaledata) + 1]] = map$value
       }
       
     #BOXPLOT
@@ -335,9 +338,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$type = "box"
       layer$n = n
       nOutliers = sapply(data$outliers,length)
-      map = .mapDataValues(x,xbuild,list("x","ymin","lower","middle","upper","ymax"),panel,
-                                    list(x=data$x,ymin=data$ymin,lower=data$lower,middle=data$middle,
-                                         upper=data$upper,ymax=data$ymax))
+      map = .mapDataValues(x, xbuild,list("x", "ymin", "lower", "middle", "upper", "ymax"), panel,
+                          list(x=data$x, ymin=data$ymin, lower=data$lower, middle=data$middle, upper=data$upper, ymax=data$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
@@ -353,8 +355,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     # SMOOTH
     } else if (layerClass == "GeomSmooth") {
       layer$type = "smooth"
-      layer$method = .getGGSmoothMethod(x,xbuild,layeri)
-      layer$ci = if (.getGGSmoothSEflag(x,xbuild,layeri)) TRUE
+      layer$method = .getGGSmoothMethod(x, xbuild, layeri)
+      layer$ci = if (.getGGSmoothSEflag(x, xbuild, layeri)) TRUE
       
     #U UNKNOWN
     } else {
@@ -365,15 +367,14 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(layers)
 }
 
-
 # Converts data values back to their original scales -- converting factor
-# variables back to their levels, and undoing transforms
-.mapDataValues = function(x,xbuild,varlist,panel,valuelist) {
+# variables back to their levels, and undoisng transforms
+.mapDataValues = function(x, xbuild, varlist, panel, valuelist) {
   badTransform = NULL
   transformed = list()
   for (var in varlist) {
     value = valuelist[[var]]
-    scale = .getGGPanelScale(x,xbuild,var,panel)
+    scale = .getGGPanelScale(x, xbuild, var, panel)
 
     if (is.null(scale))   # No scale - just return the stored value
       r = value
@@ -400,7 +401,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     }
     transformed[[var]] = r
   }
-  return(list(value=transformed,badTransform=badTransform))
+  return(list(value=transformed, badTransform=badTransform))
 }
 
 # Convert aesthetic values to something more friendly for the user
@@ -408,24 +409,15 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 # *** ONLY HANDLING LINETYPES SO FAR - and not defaults 42, 22, ...
 # SHOULD DO SHAPES, COLOURS (How?)
 .convertAes = function(values) {
-  linetypes = c("0"="blank","1"="solid","2"="dashed",
-                "3"="dotted","4"="dotdash","5"="longdash","6"="twodash")
+  linetypes = c("0"="blank", "1"="solid", "2"="dashed",
+                "3"="dotted", "4"="dotdash", "5"="longdash", "6"="twodash")
   c = values
   for (col in seq_along(values)) {
-    if (names(values)[col]=="linetype") {
+    if (names(values)[col] == "linetype") {
       c[,col] = ifelse(values[,col] %in% names(linetypes),
                        linetypes[as.character(values[,col])],
                        c[,col])  # If not found just return what we got
     }
   }
   return(c)  
-}
-
-# For now, limit all values printed to 2 decimal places.  Should do something smarter -- what does
-# ggplot itself do?
-.cleanPrint = function(x) {
-  if (is.numeric(x))
-    return(round(x,2))
-  else
-    return(x)
 }
