@@ -171,6 +171,17 @@
   return(layeraes)
 }
 
+# Find those aesthetics that are varying within this layer 
+# (e.g not all points in a scatterplot have the same colour)
+.findVaryingAesthetics = function(x,xbuild,layer) {
+  aeslist = c("colour","fill","linetype","alpha","size","weight","shape")
+  data = xbuild$data[[layer]]
+  names = names(data)
+  data = data[names[names %in% aeslist]]
+  data = data[sapply(data, function(col) { length(unique(col)) > 1 })]
+  return(names(data))
+}
+
 # Layer position
 .getGGLayerPosition = function(x,xbuild,layer) {
   pos = switch (class(x$layers[[layer]]$position)[1],

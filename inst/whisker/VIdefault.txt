@@ -66,12 +66,20 @@ Data is transformed with tranformation {{transform}} which doesn't seem to have 
 Data values may be reported incorrectly.
 {{/badtransform}}
 {{#hlinetype}}
-{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at positions{{#items}} {{yintercept}}{{/items}}{{/largecount}}.<br>
+{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at positions
+{{#items}} {{yintercept}}
+{{#size}} with size {{size}},{{/size}}
+{{#linetype}} with line type {{linetype}},{{/linetype}}
+{{#colour}} with colour {{colour}},{{/colour}}
+{{/items}}{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
 a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
-{{#items}}Bar {{itemnum}} is centered at {{x}} and spans from {{ymin}} to {{ymax}}
+{{#items}}Bar {{itemnum}}
+{{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
+{{^xmin}} is centered horizontally at {{x}}{{/xmin}}
+, and spans vertically from {{ymin}} to {{ymax}}
 {{#fill}}, with fill colour {{fill}}{{/fill}}
 {{#colour}}, with border colour {{colour}}{{/colour}}
 {{#linetype}}, with border line type {{linetype}}{{/linetype}}
@@ -93,6 +101,7 @@ The points are at:<br>
 {{/pointtype}}
 {{#linetype}}
 a set of {{n}} line{{#s}}s{{/s}}.<br>
+{{#broken}}The lines{{#s}}s are{{/s}}{{^s}} is{{/s}} broken or missing where NA values appear or where points exceed the plot boundaries.<br>{{/broken}}
 {{^largecount}}
 {{#lines}}
 Line {{linenum}} connects {{npoints}} points{{^largecount}}, at{{#items}} ({{x}},{{y}}){{/items}}{{/largecount}}.<br>

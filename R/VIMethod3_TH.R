@@ -247,19 +247,28 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     # HLINE
     if (layerClass == "GeomHline") {
       layer$type = "hline"
-      layer$n = n
+      # Discard points that go outside the bounds of the plot,
+      # as they won't be displayed
+      layer$data = data = data[!is.na(data$yintercept),]
+      layer$n = n = nrow(data)
       layer$hlinetype = TRUE
       map = .mapDataValues(x,xbuild,list("yintercept"),panel,list(yintercept=data$yintercept))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$ransform = map$badTransform
       } 
-      layer$scaledata = map$value
+      # Also report on any aesthetic variables that vary across the layer
+      aesvars = .findVaryingAesthetics(x,xbuild,layeri)
+      aesvals = .convertAes(data[aesvars])
+      layer$scaledata = cbind(map$value, aesvals)
       
     # POINT
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
-      layer$n = n
+      # Discard points that go outside the bounds of the plot,
+      # as they won't be displayed
+      layer$data = data = data[!is.na(data$x) & !is.na(data$y),]
+      layer$n = n = nrow(data)
       map = .mapDataValues(x,xbuild,list("x","y"),panel,list(x=data$x,y=data$y))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
@@ -290,13 +299,24 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       aesvars = .findVaryingAesthetics(x,xbuild,layeri)
       aesvals = .convertAes(data[aesvars])
       layer$scaledata = cbind(map$value, aesvals)
-      
+      # If bar width varies then we should report xmin and xmax instead
+      width = data$xmax - data$xmin
+      if (max(width)-min(width)>.0001)   # allow for small rounding error
+        layer$scaledata = cbind(layer$scaledata,xmin=data$xmin,xmax=data$xmax)
+        
+        
     # LINE
     } else if (layerClass == "GeomLine") {
       layer$type = "line"
       # Lines are funny - each item in the data is a point
       # The number of actual lines depends on the group parameter
       layer$n = ngroups
+      # Y values of NA or past ylims create broken lines
+      if (any(is.na(data$y)))  
+        layer$broken = TRUE
+      # X values of NA or past xlims should just not be reported on
+      # as they won't be displayed but the line will still be continuous
+      layer$data = data = data[!is.na(data$x),]
       layer$scaledata=list()
       for (groupi in unique(data$group)) {
         groupx = data[data$group==groupi,]$x
@@ -381,17 +401,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     transformed[[var]] = r
   }
   return(list(value=transformed,badTransform=badTransform))
-}
-
-# Find those aesthetics that are varying within this layer 
-# (e.g not all points in a scatterplot have the same colour)
-.findVaryingAesthetics = function(x,xbuild,layer) {
-  aeslist = c("colour","fill","linetype","alpha","size","weight","shape")
-  data = xbuild$data[[layer]]
-  names = names(data)
-  data = data[names[names %in% aeslist]]
-  data = data[sapply(data, function(col) { length(unique(col)) > 1 })]
-  return(names(data))
 }
 
 # Convert aesthetic values to something more friendly for the user
