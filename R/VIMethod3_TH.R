@@ -39,7 +39,18 @@
     x$singlecol = TRUE
   if (length(x$panelrows) > 0 && length(x$panelcols) > 0) 
     x$panelgrid = TRUE
-  for (paneli in 1:x$npanels)
+  # If samescale then axis labels are at top level
+  if (!is.null(x$xaxis$xticklabels))
+    x$xaxis$xtickitems = .listifyVars(list(label=x$xaxis$xticklabels))
+  if (!is.null(x$yaxis$yticklabels))
+    x$yaxis$ytickitems = .listifyVars(list(label=x$yaxis$yticklabels))
+  
+  for (paneli in 1:x$npanels) {
+    # Othewise they're within the panels
+    if (!is.null(x$panels[[paneli]]$xticklabels))
+      x$panels[[paneli]]$xtickitems = .listifyVars(list(label=x$panels[[paneli]]$xticklabels))
+    if (!is.null(x$panels[[paneli]]$yticklabels))
+      x$panels[[paneli]]$ytickitems = .listifyVars(list(label=x$panels[[paneli]]$yticklabels))
     for (layeri in 1:x$nlayers) {
       layer = x$panels[[paneli]]$panellayers[[layeri]]
       typeflag = paste0(layer$type, "type")
@@ -70,17 +81,20 @@
         }
       }
       x$panels[[paneli]]$panellayers[[layeri]] = layer
-    }  
+    }
+  }
   return(x)
 }
 
-# This function will convert plot object details into lists for mustache
-# Result is a list of objects, each of which contains the needed vars for the plot type
-# E.g. for point charts, we end up with a list of objects each containing x, y
+# This function will convert vectors into lists for mustache
+# Takes a named list of vectors, result is a list of lists
+# Also adds item numbers and separator
+# e.g. converts list(x=c(1,2),y=c(3,4)) into 
+#     list(list(itemnum=1,x=1,y=3,sep=" and "),list(itemnum=2,x=2,y=4,sep=""))
 # This code isn't efficient, but hopefully we aren't printing a huge number of points
 .listifyVars = function(varlist) {
   itemlist = list()
-  for (i in seq_along(varlist[[1]])) {
+  for (i in seq_along(varlist[[1]])) {  # Assumes all varlists are the same length
     item = list()
     for (j in seq_along(varlist)) {
       item$itemnum = i
@@ -88,6 +102,14 @@
       name = names(varlist)[j]
       item[[name]] = .cleanPrint(var[i])
     }
+    len = length(varlist[[1]])
+    # Separator, to allow whisker template to create and-separated lists
+    if (i == len)
+      item[["sep"]] = ""
+    else if (i == len - 1)
+      item[["sep"]] = " and "
+    else
+      item[["sep"]] = ", "
     itemlist[[i]] = item
   }
   return(itemlist)

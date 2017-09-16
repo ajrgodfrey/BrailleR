@@ -8,7 +8,7 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#subtitle}}It has the subtitle {{subtitle}}.<br>{{/subtitle}}
 {{#caption}}It has caption {{caption}}.<br>{{/caption}}
 {{/annotations}}
-{{#^singlepanel}}The chart is comprised of multiple panels containing sub-charts,
+{{#^singlepanel}}The chart is comprised of {{npanels}} panels containing sub-charts,
 {{#singlerow}} arranged horizontally.<br>{{/singlerow}}
 {{#singlecol}} arranged vertically.<br>{{/singlecol}}
 {{#panelgrid}} arranged in a grid.<br>{{/panelgrid}}
@@ -19,11 +19,11 @@ This is an untitled chart with no subtitle or caption.<br>
 {{/singlepanel}}
 {{^xaxis}}There is no x-axis.<br>{{/xaxis}}
 {{#xaxis}}{{#^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has x-axis '{{xlabel}}'
-{{#samescale}} with labels {{xticklabels}}{{/samescale}}
+{{#samescale}} with labels {{#xtickitems}}{{label}}{{sep}}{{/xtickitems}}{{/samescale}}
 .<br>{{/xaxis}}
 {{^yaxis}}There is no y-axis.<br>{{/yaxis}}
 {{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}'
-{{#samescale}} with labels {{yticklabels}}{{/samescale}}
+{{#samescale}} with labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}{{/samescale}}
 .<br>{{/yaxis}}
 {{#legends}}
 {{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
@@ -46,8 +46,8 @@ Panel {{panelnum}}
 {{#panelgrid}} is in row {{row}} and col {{col}} and{{/panelgrid}}
  represents data for{{#vars}} {{varname}} = {{value}}{{/vars}}.<br>
 {{^samescale}}
-In this panel, x-axis '{{xlabel}}' has labels {{xticklabels}}.<br>
-In this panel, y-axis '{{ylabel}}' has labels {{yticklabels}}.<br>
+In this panel, x-axis '{{xlabel}}' has labels {{#xtickitems}}{{label}}{{sep}}{{/xtickitems}}.<br>
+In this panel, y-axis '{{ylabel}}' has labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}.<br>
 {{/samescale}}
 {{/singlepanel}}
 {{#panellayers}}
@@ -55,23 +55,23 @@ In this panel, y-axis '{{ylabel}}' has labels {{yticklabels}}.<br>
 {{/panellayers}}
 "
 ggLayerTemplate,"
+{{#badtransform}}
+Data is transformed with tranformation {{transform}} which doesn't seem to have an inverse. 
+Data values may be reported incorrectly.
+{{/badtransform}}
 {{^singlelayer}}Layer {{layernum}}
 {{^singlepanel}} of panel {{panelnum}}{{/singlepanel}} is {{/singlelayer}}
 {{#singlelayer}}
 {{^singlepanel}}Panel {{panelnum}} is {{/singlepanel}}
 {{#singlepanel}}The chart is {{/singlepanel}}
 {{/singlelayer}}
-{{#badtransform}}
-Data is transformed with tranformation {{transform}} which doesn't seem to have an inverse. 
-Data values may be reported incorrectly.
-{{/badtransform}}
 {{#hlinetype}}
 {{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at positions
 {{#items}} {{yintercept}}
 {{#size}} with size {{size}},{{/size}}
 {{#linetype}} with line type {{linetype}},{{/linetype}}
-{{#colour}} with colour {{colour}},{{/colour}}
-{{/items}}{{/largecount}}.<br>
+{{#colour}} with colour {{colour}}{{/colour}}
+{{sep}}{{/items}}{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
 a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
@@ -80,10 +80,10 @@ a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 {{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
 {{^xmin}} is centered horizontally at {{x}}{{/xmin}}
 , and spans vertically from {{ymin}} to {{ymax}}
-{{#fill}}, with fill colour {{fill}}{{/fill}}
-{{#colour}}, with border colour {{colour}}{{/colour}}
-{{#linetype}}, with border line type {{linetype}}{{/linetype}}
-{{#size}}, with border line width {{size}}{{/size}}
+{{#fill}} with fill colour {{fill}}{{/fill}}
+{{#colour}} with border colour {{colour}}{{/colour}}
+{{#linetype}} with border line type {{linetype}}{{/linetype}}
+{{#size}} with border line width {{size}}{{/size}}
 .<br>{{/items}}
 {{/largecount}}
 {{/bartype}}
@@ -96,7 +96,7 @@ The points are at:<br>
 {{#shape}}, shape {{shape}}{{/shape}}
 {{#colour}}, colour {{colour}}{{/colour}}
 {{#fill}}, fill {{fill}}{{/fill}}
-<br>{{/items}}.<br>
+{{sep}}{{/items}}.<br>
 {{/largecount}}
 {{/pointtype}}
 {{#linetype}}
@@ -104,7 +104,7 @@ a set of {{n}} line{{#s}}s{{/s}}.<br>
 {{#broken}}The lines{{#s}}s are{{/s}}{{^s}} is{{/s}} broken or missing where NA values appear or where points exceed the plot boundaries.<br>{{/broken}}
 {{^largecount}}
 {{#lines}}
-Line {{linenum}} connects {{npoints}} points{{^largecount}}, at{{#items}} ({{x}},{{y}}){{/items}}{{/largecount}}.<br>
+Line {{linenum}} connects {{npoints}} points{{^largecount}}, at {{#items}}({{x}},{{y}}){{sep}}{{/items}}{{/largecount}}.<br>
 {{/lines}}
 {{/largecount}}
 {{/linetype}}
