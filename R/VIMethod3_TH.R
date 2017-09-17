@@ -207,16 +207,16 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   for (i in seq_along(labels)) {
     name = names[i]
     mapping = labels[[i]]
-    scaleinfo = .getGGScale(x, xbuild,name)
-    scalediscrete = scaleinfo$scalediscrete
+    scale = .getGGScale(x, xbuild, name)
+    scalediscrete = if ("ScaleDiscrete" %in% class(scale)) TRUE
     if (!is.null(scalediscrete)) {
-      scalelevels = scaleinfo$range
+      scalelevels = scale$range$range
       scalefrom = NULL
       scaleto = NULL
     } else {
       scalelevels = NULL
-      scalefrom = scaleinfo$range[1]
-      scaleto = scaleinfo$range[2]
+      scalefrom = scale$range$range[1]
+      scaleto = scale$range$range[2]
     }
     hidden = if (!is.null(guides[[name]]) && (guides[[name]] == "none" || guides[[name]] == FALSE)) TRUE
     legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, scalelevels=scalelevels,
@@ -287,7 +287,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # Also report on any aesthetic variables that vary across the layer
       aesvars = .findVaryingAesthetics(x, xbuild, layeri)
       aesvals = .convertAes(data[aesvars])
-      layer$scaledata = cbind(map$value, aesvals)
+      aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, data[aesvars])
+      if (length(aesmap) == 0) {
+        layer$scaledata = cbind(map$value, aesvals)
+      } else {
+      names(aesmap) = paste0(names(aesmap),"map")
+      layer$scaledata = cbind(map$value, aesvals, aesmap)
+      }
       
     # POINT
     } else if (layerClass == "GeomPoint") {
@@ -304,9 +310,15 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # Also report on any aesthetic variables that vary across the layer
       aesvars = .findVaryingAesthetics(x, xbuild, layeri)
       aesvals = .convertAes(data[aesvars])
-      layer$scaledata = cbind(map$value, aesvals)
-      
-    # BAR
+      aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, data[aesvars])
+      if (length(aesmap) == 0) {
+        layer$scaledata = cbind(map$value, aesvals)
+      } else {
+        names(aesmap) = paste0(names(aesmap),"map")
+        layer$scaledata = cbind(map$value, aesvals, aesmap)
+      }
+
+      # BAR
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
       # Discard zero-height bars
@@ -389,7 +401,27 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(layers)
 }
 
-# Converts data values back to their original scales -- converting factor
+.mapAesDataValues = function(x, xbuild, layer, varlist, valuelist) {
+  transformed = list()
+  for (var in varlist) {
+    value = valuelist[[var]]
+    scale = .getGGScale(x, xbuild, var)
+    
+    if (is.null(scale))   # No scale found
+      next
+    else if (("ScaleDiscrete" %in% class(scale))) { # Try to map back to levels
+      match = match(value, scale$palette.cache)
+      transformed[[var]] = scale$range$range[match]
+    } else {  # Continuous scale - Go back to orig data for value
+      next
+      # .getGGRawValues should be passed the panel -- or else the row labels
+      # transformed[[var]] = .getGGRawValues(x,xbuild,layer,var)
+    }
+  }
+  return(transformed)
+}
+
+# Converts positional data values back to their original scales -- converting factor
 # variables back to their levels, and undoisng transforms
 .mapDataValues = function(x, xbuild, varlist, panel, valuelist) {
   badTransform = NULL
@@ -423,7 +455,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     }
     transformed[[var]] = r
   }
-  return(list(value=transformed, badTransform=badTransform))
+  return(list(value=as.data.frame(transformed), badTransform=badTransform))
 }
 
 # Convert aesthetic values to something more friendly for the user

@@ -66,12 +66,13 @@ Data values may be reported incorrectly.
 {{#singlepanel}}The chart is {{/singlepanel}}
 {{/singlelayer}}
 {{#hlinetype}}
-{{n}} horizontal line{{#s}}s{{/s}}{{^largecount}} at positions
-{{#items}} {{yintercept}}
-{{#size}} with size {{size}},{{/size}}
-{{#linetype}} with line type {{linetype}},{{/linetype}}
-{{#colour}} with colour {{colour}}{{/colour}}
-{{sep}}{{/items}}{{/largecount}}.<br>
+{{n}} horizontal line{{#s}}s{{/s}}
+{{^largecount}} at positions {{#items}}{{yintercept}}
+{{#size}} with size {{size}}{{#sizemap}} which maps to {{sizemap}}{{/sizemap}},{{/size}}
+{{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypemap}}{{/linetypemap}},{{/linetype}}
+{{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourmap}}{{/colourmap}}{{/colour}}
+{{sep}}{{/items}}
+{{/largecount}}.<br>
 {{/hlinetype}}
 {{#bartype}}
 a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
@@ -92,10 +93,10 @@ a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
 {{#items}}({{x}},{{y}})
-{{#size}}, size {{size}}{{/size}}
-{{#shape}}, shape {{shape}}{{/shape}}
-{{#colour}}, colour {{colour}}{{/colour}}
-{{#fill}}, fill {{fill}}{{/fill}}
+{{#size}} size {{size}}{{/size}}
+{{#shape}} shape {{shape}}{{#shapemap}} which maps to {{shapemap}}{{/shapemap}}{{/shape}}
+{{#colour}} colour {{colour}}{{#colourmap}} which maps to {{colourmap}}{{/colourmap}}{{/colour}}
+{{#fill}} fill {{fill}}{{#fillmap}} which maps to {{fillmap}}{{/fillmap}}{{/fill}}
 {{sep}}{{/items}}.<br>
 {{/largecount}}
 {{/pointtype}}
@@ -113,7 +114,7 @@ a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
 {{#items}}
 The group at x={{x}} has median {{middle}}.
  The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.
- There are {{noutliers}} outliers for this box.<br>
+ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/boxtype}}
 {{#smoothtype}}

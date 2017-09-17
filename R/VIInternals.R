@@ -90,8 +90,7 @@
 .getGGScale = function(x, xbuild, var) {
   scalelist = xbuild$plot$scales$scales
   scale = which(sapply(scalelist, function(x) var %in% x$aesthetics))
-  scalediscrete = if ("ScaleDiscrete" %in% class(scalelist[[scale]])) TRUE
-  return(list(scalediscrete=scalediscrete, range=scalelist[[scale]]$range$range))
+  return(scalelist[[scale]])
 }
 
 .getGGTransInverse = function(x, xbuild, var) {
@@ -116,7 +115,7 @@
   scales = xbuild$layout$panel_scales
   findscale = which(sapply(scales, .findScale, var, panel))
   if (length(findscale) == 1) {
-    panelIndex = min(panel, length(scales[findscale]))
+    panelIndex = min(panel, length(scales[[findscale]]))
     return(xbuild$layout$panel_scales[[findscale]][[panelIndex]])
   } else {
     return(NULL) # Something went wrong -- no matching scale, or more than one
