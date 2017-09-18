@@ -45,6 +45,10 @@
   if (!is.null(x$yaxis$yticklabels))
     x$yaxis$ytickitems = .listifyVars(list(label=x$yaxis$yticklabels))
   
+  for (legendi in 1:length(x$legends)) {
+    if (!is.null(x$legends[[legendi]]$scalelevels))
+      x$legends[[legendi]]$scalelevelitems = .listifyVars(list(level=x$legends[[legendi]]$scalelevels))
+  }
   for (paneli in 1:x$npanels) {
     # Othewise they're within the panels
     if (!is.null(x$panels[[paneli]]$xticklabels))
@@ -218,7 +222,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       scalefrom = scale$range$range[1]
       scaleto = scale$range$range[2]
     }
-    hidden = if (!is.null(guides[[name]]) && (guides[[name]] == "none" || guides[[name]] == FALSE)) TRUE
+    hidden = if (.isGuideHidden(x, xbuild, layeri, name)) TRUE
     legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, scalelevels=scalelevels,
                      scalefrom=scalefrom, scaleto=scaleto, hidden=hidden)
     legends[[i]] = legend

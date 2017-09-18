@@ -87,10 +87,13 @@
     return (free$x | free$y)
 }
 
-.getGGScale = function(x, xbuild, var) {
+.getGGScale = function(x, xbuild, aes) {
   scalelist = xbuild$plot$scales$scales
-  scale = which(sapply(scalelist, function(x) var %in% x$aesthetics))
-  return(scalelist[[scale]])
+  scale = which(sapply(scalelist, function(x) aes %in% x$aesthetics))
+  if (any(scale))
+    return(scalelist[[scale]])
+  else
+    return(NULL)
 }
 
 .getGGTransInverse = function(x, xbuild, var) {
@@ -242,4 +245,19 @@
   return(xbuild$plot$layers[[layer]]$stat_params$se)
 }
 
-
+.isGuideHidden = function(x, xbuild, layer, aes) {
+  show.legend = xbuild$plot$layers[[layer]]$show.legend
+  if (!is.na(show.legend) && show.legend == FALSE)
+    return(TRUE)
+  scale = .getGGScale(x, xbuild, aes)
+  if (!is.null(scale) && !is.null(scale$guide) && scale$guide %in% c("none",FALSE))
+    return(TRUE)
+  guides = xbuild$plot$guides
+  if (!is.null(guides) && !is.null(guides[[aes]]) && guides[[aes]] %in% c("none",FALSE))
+    return(TRUE)
+  legend.position = xbuild$plot$theme$legend.position
+  if (!is.null(legend.position) && legend.position == "none")
+    return(TRUE)
+  return(FALSE)
+}
+  

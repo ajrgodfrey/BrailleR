@@ -27,7 +27,7 @@ This is an untitled chart with no subtitle or caption.<br>
 .<br>{{/yaxis}}
 {{#legends}}
 {{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
-{{#scalediscrete}}, with levels: {{scalelevels}}{{/scalediscrete}}
+{{#scalediscrete}}, with levels: {{#scalelevelitems}}{{level}}{{sep}}{{/scalelevelitems}}{{/scalediscrete}}
 {{^scalediscrete}}, ranging from {{scalefrom}} to {{scaleto}}{{/scalediscrete}}
 .<br>
 {{/hidden}}
