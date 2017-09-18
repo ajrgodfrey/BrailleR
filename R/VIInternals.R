@@ -210,12 +210,13 @@
   m = xbuild$plot$layers[[layer]]$mapping
   if (!is.null(m) & !is.null(m[[var]]))
     return(m[[var]])
-  ## Variable mappings shouldn't be in aes_params, but can end up there
   m=xbuild$plot$layers[[layer]]$aes_params[[var]]
   if (!is.null(m))
     return(m)
-  else
+  if (xbuild$plot$layers[[layer]]$inherit.aes)
     return(xbuild$plot$mapping[[var]])
+  else
+    return(NULL)
 }
 
 .getGGPlotData = function(x, xbuild, layer, panel) {
@@ -245,9 +246,18 @@
   return(xbuild$plot$layers[[layer]]$stat_params$se)
 }
 
-.isGuideHidden = function(x, xbuild, layer, aes) {
-  show.legend = xbuild$plot$layers[[layer]]$show.legend
-  if (!is.na(show.legend) && show.legend == FALSE)
+.isGuideHidden = function(x, xbuild, aes) {
+#  Need to look through all layers to figure out whether this aesthetic is involved, and
+#  if so, has show.legend been specified?
+  someLayerShows = FALSE
+  for (layer in xbuild$plot$layers) {
+    mapped = aes %in% names(layer$mapping) ||
+                (layer$inherit.aes && aes %in% names(xbuild$plot$mapping))
+    if (mapped && (is.na(layer$show.legend) || layer$show.legend)) {
+       someLayerShows = TRUE
+     }
+  }
+  if (!someLayerShows)
     return(TRUE)
   scale = .getGGScale(x, xbuild, aes)
   if (!is.null(scale) && !is.null(scale$guide) && scale$guide %in% c("none",FALSE))

@@ -222,7 +222,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       scalefrom = scale$range$range[1]
       scaleto = scale$range$range[2]
     }
-    hidden = if (.isGuideHidden(x, xbuild, layeri, name)) TRUE
+    hidden = if (.isGuideHidden(x, xbuild, name)) TRUE
     legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, scalelevels=scalelevels,
                      scalefrom=scalefrom, scaleto=scaleto, hidden=hidden)
     legends[[i]] = legend
