@@ -1,0 +1,83 @@
+
+R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(BrailleR)
+The BrailleR.View,  option is set to FALSE.
+
+Attaching package: 'BrailleR'
+
+The following objects are masked from 'package:graphics':
+
+    boxplot, hist
+
+The following object is masked from 'package:utils':
+
+    history
+
+> library(ggplot2)
+
+Attaching package: 'ggplot2'
+
+The following objects are masked from 'package:BrailleR':
+
+    xlab, ylab
+
+> 
+> m= within(mtcars,{am = as.factor(ifelse(am,"auto","manual")); cyl = as.factor(cyl)})
+> 
+> VI(qplot(data=m, disp,mpg, facets=.~am, margins=TRUE, 
++           geom=c("point","smooth"), main="Cars, cars, cars", xlab="displacement", 
++           ylab="Miles per gallon", log="y", xlim=c(90,450)))
+This chart has title 'Cars, cars, cars'.
+The chart is comprised of 3 panels containing sub-charts, arranged horizontally.
+The panels represent different values of am.
+Each sub-chart has x-axis 'displacement' with labels 100, 200, 300 and 400.
+Each sub-chart has y-axis 'Miles per gallon' with labels 10.
+Each sub-chart has 2 layers.
+Panel 1 represents data for am = auto.
+Layer 1 of panel 1 is a set of 9 points.
+The points are at:
+(160,21), (160,21), (108,22.8), (120.3,26), (95.1,30.4), (351,15.8), (145,19.7), (301,15) and (121,21.4).
+Layer 2 of panel 1 is a smoothed curve using method 'auto' with confidence intervals.
+Panel 2 represents data for am = manual.
+Layer 1 of panel 2 is a set of 17 points.
+Layer 2 of panel 2 is a smoothed curve using method 'auto' with confidence intervals.
+Panel 3 represents data for am = (all).
+Layer 1 of panel 3 is a set of 26 points.
+Layer 2 of panel 3 is a smoothed curve using method 'auto' with confidence intervals.
+Warning message:
+Removed 12 rows containing non-finite values (stat_smooth). 
+> 
+> VI(qplot(data=m, cyl, mpg, geom="boxplot",main="mpg by cyl"))
+This chart has title 'mpg by cyl'.
+It has x-axis 'cyl' with labels 4, 6 and 8.
+It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+The chart is a boxplot comprised of 3 boxes with whiskers.
+The group at x=4 has median 26. The box goes from 22.8 to 30.4, and the whiskers extend to 21.4 and 33.9. There are 0 outliers for this boxplot.
+The group at x=6 has median 19.7. The box goes from 18.65 to 21, and the whiskers extend to 17.8 and 21.4. There are 0 outliers for this boxplot.
+The group at x=8 has median 15.2. The box goes from 14.4 to 16.25, and the whiskers extend to 13.3 and 18.7. There are 3 outliers for this boxplot.
+> 
+> VI(qplot(data=economics[1:8,],date,unemploy,geom="line"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'date' with labels Jul, Oct and Jan.
+It has y-axis 'unemploy' with labels 2900, 2950, 3000, 3050, 3100 and 3150.
+The chart is a set of 1 line.
+Line 1 connects 8 points, at (1967-07-01,2944), (1967-08-01,2945), (1967-09-01,2958), (1967-10-01,3143), (1967-11-01,3066), (1967-12-01,3018), (1968-01-01,2878) and (1968-02-01,3001).
+> 
+> proc.time()
+   user  system elapsed 
+   2.31    0.29    2.64 

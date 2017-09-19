@@ -469,12 +469,20 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 .convertAes = function(values) {
   linetypes = c("0"="blank", "1"="solid", "2"="dashed",
                 "3"="dotted", "4"="dotdash", "5"="longdash", "6"="twodash")
+  shapes = c("open square", "open circle", "open triangle", "plus", "X", "open diamond", "downward triangle",
+             "boxed X", "star", "crossed diamond", "circled plus", "six-pointed star", "boxed plus",
+             "crossed circle", "boxed triangle", "solid square", "solid circle", "solid triangle",
+             "solid diamond", "big solid circle", "small solid circle", "fillable circle", 
+             "fillable square", "fillable diamond", "fillable triangle", "fillable downward triangle") 
   c = values
   for (col in seq_along(values)) {
-    if (names(values)[col] == "linetype") {
+    aes = names(values)[col]
+    if (aes == "linetype") {
       c[,col] = ifelse(values[,col] %in% names(linetypes),
                        linetypes[as.character(values[,col])],
                        c[,col])  # If not found just return what we got
+    } else if (aes == "shape") {
+      c[,col] = ifelse(values[,col] %in% 1:25, shapes[values[,col]+1], c[,col])
     }
   }
   return(c)  

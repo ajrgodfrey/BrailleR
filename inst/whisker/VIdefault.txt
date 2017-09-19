@@ -93,11 +93,11 @@ a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
 {{#items}}({{x}},{{y}})
-{{#size}} size {{size}}{{/size}}
+{{#size}} size {{size}} mm{{/size}}
 {{#shape}} shape {{shape}}{{#shapemap}} which maps to {{shapemap}}{{/shapemap}}{{/shape}}
 {{#colour}} colour {{colour}}{{#colourmap}} which maps to {{colourmap}}{{/colourmap}}{{/colour}}
 {{#fill}} fill {{fill}}{{#fillmap}} which maps to {{fillmap}}{{/fillmap}}{{/fill}}
-{{sep}}{{/items}}.<br>
+{{sep}}<br>{{/items}}
 {{/largecount}}
 {{/pointtype}}
 {{#linetype}}
