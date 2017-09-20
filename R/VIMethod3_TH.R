@@ -286,18 +286,11 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       map = .mapDataValues(x, xbuild, list("yintercept"), panel, list(yintercept=data$yintercept))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
-        layer$ransform = map$badTransform
+        layer$transform = map$badTransform
       } 
+      layer$scaledata = map$value
       # Also report on any aesthetic variables that vary across the layer
-      aesvars = .findVaryingAesthetics(x, xbuild, layeri)
-      aesvals = .convertAes(data[aesvars])
-      aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, data[aesvars])
-      if (length(aesmap) == 0) {
-        layer$scaledata = cbind(map$value, aesvals)
-      } else {
-      names(aesmap) = paste0(names(aesmap),"map")
-      layer$scaledata = cbind(map$value, aesvals, aesmap)
-      }
+      layer = .addAesVars(x, xbuild, data, layeri, layer)
       
     # POINT
     } else if (layerClass == "GeomPoint") {
@@ -309,18 +302,12 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       map = .mapDataValues(x, xbuild, list("x", "y"), panel, list(x=data$x, y=data$y))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
-        layer$ransform = map$badTransform
+        layer$transform = map$badTransform
       } 
+      layer$scaledata = map$value
       # Also report on any aesthetic variables that vary across the layer
-      aesvars = .findVaryingAesthetics(x, xbuild, layeri)
-      aesvals = .convertAes(data[aesvars])
-      aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, data[aesvars])
-      if (length(aesmap) == 0) {
-        layer$scaledata = cbind(map$value, aesvals)
-      } else {
-        names(aesmap) = paste0(names(aesmap),"map")
-        layer$scaledata = cbind(map$value, aesvals, aesmap)
-      }
+      layer = .addAesVars(x, xbuild, data, layeri, layer)
+      
 
       # BAR
     } else if (layerClass == "GeomBar") {
@@ -335,17 +322,16 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       map = .mapDataValues(x, xbuild, list("x", "ymin", "ymax"), panel, list(x=data$x, ymin=data$ymin, ymax=data$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
-        layer$ransform = map$badTransform
+        layer$transform = map$badTransform
       } 
-      # Also report on any aesthetic variables that vary across the layer
-      aesvars = .findVaryingAesthetics(x, xbuild, layeri)
-      aesvals = .convertAes(data[aesvars])
-      layer$scaledata = cbind(map$value, aesvals)
+      layer$scaledata = map$value
       # If bar width varies then we should report xmin and xmax instead
       width = data$xmax - data$xmin
       if (max(width) - min(width) > .0001)   # allow for small rounding error
         layer$scaledata = cbind(layer$scaledata, xmin=data$xmin, xmax=data$xmax)
-        
+      # Also report on any aesthetic variables that vary across the layer
+      layer = .addAesVars(x, xbuild, data, layeri, layer)
+      
     # LINE
     } else if (layerClass == "GeomLine") {
       layer$type = "line"
@@ -365,7 +351,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
         map = .mapDataValues(x, xbuild, list("x","y"), panel, list(x=groupx, y=groupy))
         if (!is.null(map$badTransform)) {
           layer$badtransform = TRUE
-          layer$ransform = map$badTransform
+          layer$transform = map$badTransform
         } 
         # Lines have a separate scaledata for each group
         layer$scaledata[[length(layer$scaledata) + 1]] = map$value
@@ -380,7 +366,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
                           list(x=data$x, ymin=data$ymin, lower=data$lower, middle=data$middle, upper=data$upper, ymax=data$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
-        layer$ransform = map$badTransform
+        layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
       layer$scaledata[["noutliers"]] = nOutliers
@@ -389,6 +375,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # scaledata is currently a list of vectors.  If we wanted to include outliers
       # within each boxes object for reporting, then boxes would need to become
       # a list of lists.
+      
+      # Also report on any aesthetic variables that vary across the layer
+      layer = .addAesVars(x, xbuild, data, layeri, layer)
       
     # SMOOTH
     } else if (layerClass == "GeomSmooth") {
@@ -486,4 +475,23 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     }
   }
   return(c)  
+}
+
+.addAesVars = function(x, xbuild, data, layeri, layer) {
+  aesvars = .findVaryingAesthetics(x, xbuild, layeri)
+  aesvals = .convertAes(data[aesvars])
+  aeslabel = .getGGGuideLabels(x,xbuild)[aesvars]
+  if (length(aeslabel)>0) {
+    names(aeslabel) = paste0(names(aeslabel),"label")
+    layer = append(layer,aeslabel)
+  }
+  aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, data[aesvars])
+  layer$scaledata = append(layer$scaledata, aesvals)
+  if (length(aesmap) == 0) {
+    layer$scaledata = cbind(layer$scaledata, aesvals)
+  } else {
+    names(aesmap) = paste0(names(aesmap),"map")
+    layer$scaledata = cbind(layer$scaledata, aesvals, aesmap)
+  }
+  return(layer)
 }

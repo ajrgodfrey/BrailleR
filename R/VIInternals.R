@@ -171,8 +171,9 @@
   layeraes = list()
   params = xbuild$plot$layers[[layer]]$aes_params
   params = params[which(!(names(params) %in% c("x", "y")))]  # Exclude x, y
+  values = .convertAes(as.data.frame(params))
   for (i in seq_along(params))
-    layeraes[[i]] = list(aes=names(params)[i], mapping=params[[i]])
+    layeraes[[i]] = list(aes=names(params)[i], mapping=values[,i])
   return(layeraes)
 }
 
@@ -206,15 +207,15 @@
 # Layer-specific mapping overrides the higher level one
 # Mapping is an expression to be evaluated in the x$data environment
 # Will return null if there is no mapping (e.g. for y with stat_bin)
-.getGGMapping = function(x, xbuild, layer, var) {
+.getGGMapping = function(x, xbuild, layer, aes) {
   m = xbuild$plot$layers[[layer]]$mapping
-  if (!is.null(m) & !is.null(m[[var]]))
-    return(m[[var]])
-  m=xbuild$plot$layers[[layer]]$aes_params[[var]]
+  if (!is.null(m) & !is.null(m[[aes]]))
+    return(m[[aes]])
+  m=xbuild$plot$layers[[layer]]$aes_params[[aes]]
   if (!is.null(m))
     return(m)
   if (xbuild$plot$layers[[layer]]$inherit.aes)
-    return(xbuild$plot$mapping[[var]])
+    return(xbuild$plot$mapping[[aes]])
   else
     return(NULL)
 }
