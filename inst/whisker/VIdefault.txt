@@ -92,7 +92,7 @@ a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
-{{#items}}({{x}},{{y}})
+{{#items}}({{x}}, {{y}})
 {{#size}} size {{size}} mm{{/size}}
 {{#shape}} shape {{shape}}{{#shapemap}} which maps to {{shapelabel}} = {{shapemap}}{{/shapemap}}{{/shape}}
 {{#colour}} colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
@@ -105,7 +105,7 @@ a set of {{n}} line{{#s}}s{{/s}}.<br>
 {{#broken}}The lines{{#s}}s are{{/s}}{{^s}} is{{/s}} broken or missing where NA values appear or where points exceed the plot boundaries.<br>{{/broken}}
 {{^largecount}}
 {{#lines}}
-Line {{linenum}} connects {{npoints}} points{{^largecount}}, at {{#items}}({{x}},{{y}}){{sep}}{{/items}}{{/largecount}}.<br>
+Line {{linenum}} connects {{npoints}} points{{^largecount}}, at {{#items}}({{x}}, {{y}}){{sep}}{{/items}}{{/largecount}}.<br>
 {{/lines}}
 {{/largecount}}
 {{/linetype}}
