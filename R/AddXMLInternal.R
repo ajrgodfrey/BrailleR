@@ -123,7 +123,7 @@
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
   if (x$type=="bar") {    # Bar chart
-    barCount=x$n
+    barCount=nrow(x$data)
     barGrob = grid.grep(gPath("geom_rect"),grep=TRUE,)
     XML::addAttributes(annotation$root, speech="Histogram bars",
                      speech2=paste("Histogram with", barCount, "bars"),
@@ -135,13 +135,15 @@
       # TODO: histogram bars have density but other geom_bar objects won't
       # Need to not fail if density not present
       # Generally, need to deal with missing values better
+      
       annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
-                                        count=chartData$count[i], density=signif(chartData$density[i],4),
+                                        count=chartData$count[i], 
+                                        density=ifelse(is.null(chartData$density),NA,chartData$density[i]),
                                         start=signif(chartData$xmin[i],4), 
                                         end=signif(chartData$xmax[i],4),id=barId)
     }
   } else if (x$type=="line") { # Line chart
-    segmentCount=x$n-1    # n is number of points
+    segmentCount=nrow(x$data)-1    # One less than the number of points
     # For now, assume that all layers are this layer type
     # TODO:  Fix this
     lineGrobs = grid.grep(gPath("GRID.polyline"),grep=TRUE,global=TRUE)

@@ -18,10 +18,10 @@ VI(qplot(data=economics[1:20,], x=date, y=unemploy, geom="line") +
   geom_hline(yintercept=3000, col="blue"))
 
 # Set some constant aesthetics
-VI(qplot(data=m,disp,mpg,shape=I("x"),size=I(5),alpha=I(0.3)))
+VI(qplot(data=m, disp, mpg, shape=I("x"), size=I(5), alpha=I(0.3)))
 
 # With some variable aesthetics
-VI(qplot(data=m[1:10,],disp,mpg,mapping=aes(shape=am,size=hp)))
+VI(qplot(data=m[1:10,], disp, mpg, mapping=aes(shape=am,size=hp)))
 
 # Categorical axis with not all categories in all facets
-x=qplot(data=m,cyl,mpg)+facet_grid(.~round(disp/100),scales = "free")
+VI(qplot(data=m, cyl, mpg) + facet_grid(.~round(disp/100), scales = "free"))

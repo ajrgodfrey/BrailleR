@@ -53,15 +53,15 @@ Each sub-chart has 2 layers.
 Panel 1 represents data for am = auto.
 Layer 1 of panel 1 is a set of 9 points.
 The points are at:
-(160,21), 
-(160,21), 
-(108,22.8), 
-(120.3,26), 
-(95.1,30.4), 
-(351,15.8), 
-(145,19.7), 
-(301,15) and 
-(121,21.4)
+(160, 21), 
+(160, 21), 
+(108, 22.8), 
+(120.3, 26), 
+(95.1, 30.4), 
+(351, 15.8), 
+(145, 19.7), 
+(301, 15) and 
+(121, 21.4)
 Layer 2 of panel 1 is a smoothed curve using method 'auto' with confidence intervals.
 Panel 2 represents data for am = manual.
 Layer 1 of panel 2 is a set of 17 points.
@@ -92,7 +92,7 @@ This is an untitled chart with no subtitle or caption.
 It has x-axis 'date' with labels Jul, Oct and Jan.
 It has y-axis 'unemploy' with labels 2900, 2950, 3000, 3050, 3100 and 3150.
 The chart is a set of 1 line.
-Line 1 connects 8 points, at (1967-07-01,2944), (1967-08-01,2945), (1967-09-01,2958), (1967-10-01,3143), (1967-11-01,3066), (1967-12-01,3018), (1968-01-01,2878) and (1968-02-01,3001).
+Line 1 connects 8 points, at (1967-07-01, 2944), (1967-08-01, 2945), (1967-09-01, 2958), (1967-10-01, 3143), (1967-11-01, 3066), (1967-12-01, 3018), (1968-01-01, 2878) and (1968-02-01, 3001).
 > 
 > # Add a horizontal line
 > VI(qplot(data=economics[1:20,], x=date, y=unemploy, geom="line") + 
@@ -107,7 +107,7 @@ Layer 2 is 1 horizontal line at positions 3000.
 Layer 2 has colour set to blue.
 > 
 > # Set some constant aesthetics
-> VI(qplot(data=m,disp,mpg,shape=I("x"),size=I(5),alpha=I(0.3)))
+> VI(qplot(data=m, disp, mpg, shape=I("x"), size=I(5), alpha=I(0.3)))
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'disp' with labels 100, 200, 300 and 400.
 It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
@@ -117,7 +117,7 @@ The chart has size set to 5.
 The chart has alpha set to 0.3.
 > 
 > # With some variable aesthetics
-> VI(qplot(data=m[1:10,],disp,mpg,mapping=aes(shape=am,size=hp)))
+> VI(qplot(data=m[1:10,], disp, mpg, mapping=aes(shape=am,size=hp)))
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'disp' with labels 100, 200 and 300.
 It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
@@ -125,20 +125,69 @@ There is a legend indicating that shape is used to represent am, with levels: au
 There is a legend indicating that size is used to represent hp, ranging from 62 to 245.
 The chart is a set of 10 points.
 The points are at:
-(160,21) size 3.56 mm shape solid circle which maps to am = auto, 
-(160,21) size 3.56 mm shape solid circle which maps to am = auto, 
-(108,22.8) size 3.06 mm shape solid circle which maps to am = auto, 
-(258,21.4) size 3.56 mm shape solid triangle which maps to am = manual, 
-(360,18.7) size 4.93 mm shape solid triangle which maps to am = manual, 
-(225,18.1) size 3.42 mm shape solid triangle which maps to am = manual, 
-(360,14.3) size 6 mm shape solid triangle which maps to am = manual, 
-(146.7,24.4) size 1 mm shape solid triangle which maps to am = manual, 
-(140.8,22.8) size 3.12 mm shape solid triangle which maps to am = manual and 
-(167.6,19.2) size 3.89 mm shape solid triangle which maps to am = manual
+(160, 21) size 3.56 mm shape solid circle which maps to am = auto, 
+(160, 21) size 3.56 mm shape solid circle which maps to am = auto, 
+(108, 22.8) size 3.06 mm shape solid circle which maps to am = auto, 
+(258, 21.4) size 3.56 mm shape solid triangle which maps to am = manual, 
+(360, 18.7) size 4.93 mm shape solid triangle which maps to am = manual, 
+(225, 18.1) size 3.42 mm shape solid triangle which maps to am = manual, 
+(360, 14.3) size 6 mm shape solid triangle which maps to am = manual, 
+(146.7, 24.4) size 1 mm shape solid triangle which maps to am = manual, 
+(140.8, 22.8) size 3.12 mm shape solid triangle which maps to am = manual and 
+(167.6, 19.2) size 3.89 mm shape solid triangle which maps to am = manual
 > 
 > # Categorical axis with not all categories in all facets
-> x=qplot(data=m,cyl,mpg)+facet_grid(.~round(disp/100),scales = "free")
+> VI(qplot(data=m, cyl, mpg) + facet_grid(.~round(disp/100), scales = "free"))
+This is an untitled chart with no subtitle or caption.
+The chart is comprised of 5 panels containing sub-charts, arranged horizontally.
+The panels represent different values of round(disp/100).
+Each sub-chart has x-axis 'cyl'.
+Each sub-chart has y-axis 'mpg'.
+Panel 1 represents data for round(disp/100) = 1.
+In this panel, x-axis 'cyl' has labels 4 and 6.
+In this panel, y-axis 'mpg' has labels 10, 15, 20, 25, 30 and 35.
+Panel 1 is a set of 12 points.
+Panel 2 represents data for round(disp/100) = 2.
+In this panel, x-axis 'cyl' has labels 6.
+In this panel, y-axis 'mpg' has labels 10, 15, 20, 25, 30 and 35.
+Panel 2 is a set of 5 points.
+The points are at:
+(6, 21), 
+(6, 21), 
+(6, 18.1), 
+(6, 19.2) and 
+(6, 17.8)
+Panel 3 represents data for round(disp/100) = 3.
+In this panel, x-axis 'cyl' has labels 6 and 8.
+In this panel, y-axis 'mpg' has labels 10, 15, 20, 25, 30 and 35.
+Panel 3 is a set of 7 points.
+The points are at:
+(6, 21.4), 
+(8, 16.4), 
+(8, 17.3), 
+(8, 15.2), 
+(8, 15.5), 
+(8, 15.2) and 
+(8, 15)
+Panel 4 represents data for round(disp/100) = 4.
+In this panel, x-axis 'cyl' has labels 8.
+In this panel, y-axis 'mpg' has labels 10, 15, 20, 25, 30 and 35.
+Panel 4 is a set of 6 points.
+The points are at:
+(8, 18.7), 
+(8, 14.3), 
+(8, 14.7), 
+(8, 13.3), 
+(8, 19.2) and 
+(8, 15.8)
+Panel 5 represents data for round(disp/100) = 5.
+In this panel, x-axis 'cyl' has labels 8.
+In this panel, y-axis 'mpg' has labels 10, 15, 20, 25, 30 and 35.
+Panel 5 is a set of 2 points.
+The points are at:
+(8, 10.4) and 
+(8, 10.4)
 > 
 > proc.time()
    user  system elapsed 
-   3.18    0.34    3.56 
+   2.42    0.25    2.75 

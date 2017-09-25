@@ -141,6 +141,33 @@ print.VIgraph = function(x, ...) {
   l[(lapply(l,length) > 0)] 
 }
 
+VIsort = function(x, sortby="x", decreasing = FALSE) {
+  if (!sortby %in% c("x", "y")) {
+    message('Valid sortby parameters are "x" or "y".')
+    return(x)    # Return unchanged
+  }
+  VIgg = x$VIgg
+  for (i in 1:VIgg$npanels) {
+    for (j in 1:VIgg$nlayers) {
+      if (VIgg$panels[[i]]$panellayers[[j]]$type != "point") {
+        message("Sorting is only supported on plots of type 'point'")
+        return(x) # Return unchanged
+      }
+      df = VIgg$panel[[i]]$panellayers[[j]]$scaledata
+      VIgg$panels[[i]]$panellayers[[j]] = within(VIgg$panels[[i]]$panellayers[[j]],
+      {
+        sortorder = order(if (sortby=="x") scaledata$x else scaledata$y, decreasing=decreasing)
+        scaledata = scaledata[sortorder,]
+      })
+    }
+  }
+  text = .VItextify(list(VIgg=.VIpreprocess(VIgg, x$threshold)), x$template)[[1]]
+  VIgraph = list(VIgg=VIgg, text=text, threshold=x$threshold, template=x$template)
+  class(VIgraph) = "VIgraph"
+  return(VIgraph)
+}
+
+
 # Returns the VIgraph object with the text trimmed down to only those rows
 # containing the specified pattern.  Passes extra parameters on to grepl.
 # Note that only the text portion of the VIgraph is modified; the complete
@@ -162,7 +189,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
                      template=system.file("whisker/VIdefault.txt", package="BrailleR"), ...) {
   VIstruct = .VIstruct.ggplot(x)
   text = .VItextify(list(VIgg=.VIpreprocess(VIstruct, threshold)), template)[[1]]
-  VIgraph = list(VIgg=VIstruct, text=text)
+  VIgraph = list(VIgg=VIstruct, text=text, threshold=threshold, template=template)
   class(VIgraph) = "VIgraph"
   return(VIgraph)
 }
@@ -266,11 +293,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   for (layeri in 1:layerCount) {
     layeraes = .getGGLayerAes(x, xbuild, layeri)
     layer = .VIlist(layernum=layeri, layeraes=layeraes)
-    data =.getGGPlotData(x, xbuild, layeri, panel)
-    layer$data = data
-    n = nrow(data)
-    if (length(data$group) > 0 && max(data$group) > 0)  # ungrouped data have group = -1 
-      ngroups = length(unique(data$group))
+    layer$data =.getGGPlotData(x, xbuild, layeri, panel)
+    if (length(layer$data$group) > 0 && max(layer$data$group) > 0)  # ungrouped data have group = -1 
+      ngroups = length(unique(layer$data$group))
     else
       ngroups = 1
     layerClass = .getGGLayerType(x, xbuild, layeri)
@@ -280,57 +305,59 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       layer$type = "hline"
       # Discard points that go outside the bounds of the plot,
       # as they won't be displayed
-      layer$data = data = data[!is.na(data$yintercept),]
-      layer$n = n = nrow(data)
+      cleandata = layer$data[!is.na(layer$data$yintercept),]
+      layer$n = nrow(cleandata)
       layer$hlinetype = TRUE
-      map = .mapDataValues(x, xbuild, list("yintercept"), panel, list(yintercept=data$yintercept))
+      map = .mapDataValues(x, xbuild, list("yintercept"), panel, list(yintercept=cleandata$yintercept))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, data, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
       
     # POINT
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
       # Discard points that go outside the bounds of the plot,
       # as they won't be displayed
-      layer$data = data = data[!is.na(data$x) & !is.na(data$y),]
-      layer$n = n = nrow(data)
-      map = .mapDataValues(x, xbuild, list("x", "y"), panel, list(x=data$x, y=data$y))
+      cleandata = layer$data[!is.na(layer$data$x) & !is.na(layer$data$y),]
+      layer$n = nrow(cleandata)
+      map = .mapDataValues(x, xbuild, list("x", "y"), panel, 
+                           list(x=cleandata$x, y=cleandata$y))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, data, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
       
 
       # BAR
     } else if (layerClass == "GeomBar") {
       layer$type = "bar"
       # Discard zero-height bars
-      layer$data = data = data[(data$ymax - data$ymin) > 0,]
+      cleandata = layer$data[(layer$data$ymax - layer$data$ymin) > 0,]
       # Discard bars that go outside the bounds of the plot,
       # as they won't be displayed
-      layer$data = data = data[!is.na(data$xmin) & !is.na(data$xmax),]
+      cleandata = cleandata[!is.na(cleandata$xmin) & !is.na(cleandata$xmax),]
       # Recount rows
-      layer$n = n = nrow(data)
-      map = .mapDataValues(x, xbuild, list("x", "ymin", "ymax"), panel, list(x=data$x, ymin=data$ymin, ymax=data$ymax))
+      layer$n = nrow(cleandata)
+      map = .mapDataValues(x, xbuild, list("x", "ymin", "ymax"), panel, 
+                           list(x=cleandata$x, ymin=cleandata$ymin, ymax=cleandata$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
       # If bar width varies then we should report xmin and xmax instead
-      width = data$xmax - data$xmin
+      width = cleandata$xmax - cleandata$xmin
       if (max(width) - min(width) > .0001)   # allow for small rounding error
-        layer$scaledata = cbind(layer$scaledata, xmin=data$xmin, xmax=data$xmax)
+        layer$scaledata = cbind(layer$scaledata, xmin=cleandata$xmin, xmax=cleandata$xmax)
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, data, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
       
     # LINE
     } else if (layerClass == "GeomLine") {
@@ -339,15 +366,15 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # The number of actual lines depends on the group parameter
       layer$n = ngroups
       # Y values of NA or past ylims create broken lines
-      if (any(is.na(data$y)))  
+      if (any(is.na(layer$data$y)))  
         layer$broken = TRUE
       # X values of NA or past xlims should just not be reported on
       # as they won't be displayed but the line will still be continuous
-      layer$data = data = data[!is.na(data$x),]
+      cleandata = layer$data[!is.na(layer$data$x),]
       layer$scaledata = list()
-      for (groupi in unique(data$group)) {
-        groupx = data[data$group == groupi,]$x
-        groupy = data[data$group == groupi,]$y
+      for (groupi in unique(cleandata$group)) {
+        groupx = cleandata[cleandata$group == groupi,]$x
+        groupy = cleandata[cleandata$group == groupi,]$y
         map = .mapDataValues(x, xbuild, list("x","y"), panel, list(x=groupx, y=groupy))
         if (!is.null(map$badTransform)) {
           layer$badtransform = TRUE
@@ -360,10 +387,13 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     #BOXPLOT
     } else if (layerClass == "GeomBoxplot") {
       layer$type = "box"
-      layer$n = n
-      nOutliers = sapply(data$outliers,length)
+      cleandata = layer$data   # No need for cleaning since this data is already aggregated
+      layer$n = nrow(layer$data)
+      nOutliers = sapply(cleandata$outliers,length)
       map = .mapDataValues(x, xbuild,list("x", "ymin", "lower", "middle", "upper", "ymax"), panel,
-                          list(x=data$x, ymin=data$ymin, lower=data$lower, middle=data$middle, upper=data$upper, ymax=data$ymax))
+                          list(x=cleandata$x, ymin=cleandata$ymin, lower=cleandata$lower, 
+                               middle=cleandata$middle, upper=cleandata$upper, 
+                               ymax=cleandata$ymax))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$transform = map$badTransform
@@ -377,7 +407,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # a list of lists.
       
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, data, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
       
     # SMOOTH
     } else if (layerClass == "GeomSmooth") {
