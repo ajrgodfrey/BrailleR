@@ -136,8 +136,16 @@
       # Need to not fail if density not present
       # Generally, need to deal with missing values better
       
-      annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
-                                        count=chartData$count[i], 
+      # If no density values then assume it's a categorical x-axis
+      if (is.null(chartData$density))  
+        annotations[[i]] = .AddXMLcategoricalBar(root, position=i, 
+                                            x=signif(chartData$x[i],4),
+                                            count=chartData$ymax[i]-chartData$ymin[i], 
+                                            id=barId)
+      
+      else
+        annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
+                                        count=chartData$ymax[i]-chartData$ymin[i], 
                                         density=ifelse(is.null(chartData$density),NA,chartData$density[i]),
                                         start=signif(chartData$xmin[i],4), 
                                         end=signif(chartData$xmax[i],4),id=barId)
@@ -185,6 +193,17 @@
                                      "and", end, " with y value", count, "and density", signif(density,3)),
                        type="Bar")
     return(invisible(annotation))
+}
+.AddXMLcategoricalBar = function(root, position=1, x=NULL, count=NULL, id=NULL) {
+  rectId = ifelse(is.null(id),.AddXMLmakeId("rect", paste("1.1", position, sep=".")),id)
+  annotation = .AddXMLAddAnnotation(root, position=position,
+                                    id=rectId,
+                                    kind="active")
+  XML::addAttributes(annotation$root,
+                     speech=paste("Bar", position, "at", x, "with value", count),
+                     speech2=paste("Bar", position, "at x value", x, " with y value", count),
+                     type="Bar")
+  return(invisible(annotation))
 }
 # Polyline is problematic as we can't highlight each segment visually, but still want
 # to describle them separately
