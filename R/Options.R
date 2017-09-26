@@ -185,6 +185,36 @@ SetBRLPointSize =
     }
 
 
+SetLanguage =
+    function(
+        Language = "en_us", Permanent = interactive(), Local = interactive()) {
+      if (is.character(Language)) {
+        options(BrailleR.Language = Language)
+        message(
+            "The BrailleR.Language option has been updated to ", Language, ".")
+        if (Permanent) {
+          Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
+          OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
+          OpSet$BrailleR.Language = Language
+          write.dcf(OpSet, file = Prefs)
+          message("and has overwritten the setting for all folders.")
+        }
+        if (Local) {
+          Prefs = "BrailleROptions"
+          if (file.exists(Prefs)) {
+            OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
+          }
+          OpSet$BrailleR.Language = Language
+          write.dcf(OpSet, file = Prefs)
+          message(
+              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+        }
+      } else {
+        warning("A text string was expected. No action taken.\n")
+      }
+      return(invisible(NULL))
+    }
+
 
 SetMakeUpper =
     function(Upper, Permanent = interactive(), Local = interactive()) {

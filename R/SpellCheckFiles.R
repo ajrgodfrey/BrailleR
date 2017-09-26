@@ -30,7 +30,7 @@ SpellCheckFiles =
       spell_check_file = get("spell_check_file", NS)
       checkLines = list()
       checkLines <- lapply(
-          checkFiles, spell_check_file, ignore = ignore)
+          checkFiles, spell_check_file, ignore = ignore, dict="en_us")
       names(checkLines) = filenames
       class(checkLines) = c("wordlist", "data.frame")
       return(checkLines)

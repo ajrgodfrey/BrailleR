@@ -171,14 +171,13 @@ QList=c("Minimum", "Lower Quartile", "Median", "Upper Quartile", "Maximum")
 Results=data.frame(Quantile=QList, Value=Quantiles[1:5])
 ```
 
-```{r panderSettings, purl=FALSE}
-library(pander)
-panderOptions("table.style", "rmarkdown")
-panderOptions("table.alignment.default", "left")
-panderOptions("table.alignment.rownames", "left")
+```{r QuantilesPrint, eval=FALSE}
+Results
 ```
 
-`r pander(Results)`
+```{r QuantilesKable, results="asis", purl=FALSE}
+kable(Results, digits=4)
+```
 
 ### Measures of spread
 
