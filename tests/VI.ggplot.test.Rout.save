@@ -41,6 +41,7 @@ The following objects are masked from 'package:BrailleR':
 > m= within(mtcars,{am = as.factor(ifelse(am,"auto","manual")); cyl = as.factor(cyl)})
 > 
 > # qplot - exercise the various qplot parameters and geoms
+> # points, smoothing, log-transform, xlim
 > VI(qplot(data=m, disp,mpg, facets=.~am, margins=TRUE, 
 +           geom=c("point","smooth"), main="Cars, cars, cars", xlab="displacement", 
 +           ylab="Miles per gallon", log="y", xlim=c(90,450)))
@@ -72,8 +73,12 @@ Layer 2 of panel 3 is a smoothed curve using method 'auto' with confidence inter
 Warning message:
 Removed 12 rows containing non-finite values (stat_smooth). 
 > 
-> VI(qplot(data=m, cyl, mpg, geom="boxplot",main="mpg by cyl"))
-This chart has title 'mpg by cyl'.
+> # boxplot, title, subtitle & caption
+> VI(qplot(data=m, cyl, mpg, geom="boxplot") + 
++      labs(title = "MPG by cyl",subtitle="for mtcars dataset",caption="some caption here"))
+This chart has title 'MPG by cyl'.
+It has the subtitle 'for mtcars dataset'.
+It has caption 'some caption here'.
 It has x-axis 'cyl' with labels 4, 6 and 8.
 It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
 The chart is a boxplot comprised of 3 boxes with whiskers.
@@ -87,6 +92,7 @@ There is a box at x=8.
 It has median 15.2. The box goes from 14.4 to 16.25, and the whiskers extend to 13.3 and 18.7.
 There are 3 outliers for this boxplot.
 > 
+> # line, no annotation
 > VI(qplot(data=economics[1:8,], date, unemploy, geom="line"))
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'date' with labels Jul, Oct and Jan.
@@ -103,7 +109,8 @@ It has y-axis 'unemploy' with labels 2700, 2800, 2900, 3000 and 3100.
 It has 2 layers.
 Layer 1 is a set of 1 line.
 Line 1 connects 20 points.
-Layer 2 is 1 horizontal line at positions 3000.
+Layer 2 is 1 horizontal line as follows:
+Line at y position 3000.
 Layer 2 has colour set to blue.
 > 
 > # Set some constant aesthetics
@@ -188,6 +195,172 @@ The points are at:
 (8, 10.4) and 
 (8, 10.4)
 > 
+> # Faceted histogram
+> VI(qplot(data=m, mpg, facets=.~cyl))
+This is an untitled chart with no subtitle or caption.
+The chart is comprised of 3 panels containing sub-charts, arranged horizontally.
+The panels represent different values of cyl.
+Each sub-chart has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+Each sub-chart has y-axis 'count' with labels 0, 1, 2, 3, 4 and 5.
+Panel 1 represents data for cyl = 4.
+Panel 1 is a bar chart containing 30 vertical bars.
+Panel 2 represents data for cyl = 6.
+Panel 2 is a bar chart containing 30 vertical bars.
+Panel 3 represents data for cyl = 8.
+Panel 3 is a bar chart containing 30 vertical bars.
+> 
+> # Test all aesthetics for all supported plot types
+> # Note: These charts don't necessarily make sense, and some look disgusting.
+> # They're just to test printing all the aesthetic information
+> ### Points
+> VI(qplot(data=m[1:10,], mpg, disp, alpha=cyl, colour=mpg, fill=mpg, shape=I(20), size=disp))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
+It has y-axis 'disp' with labels 100, 200 and 300.
+There is a legend indicating that alpha is used to represent cyl, with levels: 4, 6 and 8.
+There is a legend indicating that colour is used to represent mpg, ranging from 14.3 to 24.4.
+There is a legend indicating that fill is used to represent mpg, ranging from 14.3 to 24.4.
+There is a legend indicating that size is used to represent disp, ranging from 108 to 360.
+The chart is a set of 10 points.
+The points are at:
+(21, 160) size 3.27 mm colour #3E81B6 fill #3E81B6 alpha 0.55 which maps to cyl = 6, 
+(21, 160) size 3.27 mm colour #3E81B6 fill #3E81B6 alpha 0.55 which maps to cyl = 6, 
+(22.8, 108) size 1 mm colour #4B9AD8 fill #4B9AD8 alpha 0.1 which maps to cyl = 4, 
+(21.4, 258) size 4.86 mm colour #4186BD fill #4186BD alpha 0.55 which maps to cyl = 6, 
+(18.7, 360) size 6 mm colour #2E628C fill #2E628C alpha 1 which maps to cyl = 8, 
+(18.1, 225) size 4.41 mm colour #2B5A82 fill #2B5A82 alpha 0.55 which maps to cyl = 6, 
+(14.3, 360) size 6 mm colour #132B43 fill #132B43 alpha 1 which maps to cyl = 8, 
+(24.4, 146.7) size 2.96 mm colour #56B1F7 fill #56B1F7 alpha 0.1 which maps to cyl = 4, 
+(22.8, 140.8) size 2.8 mm colour #4B9AD8 fill #4B9AD8 alpha 0.1 which maps to cyl = 4 and 
+(19.2, 167.6) size 3.43 mm colour #326895 fill #326895 alpha 0.55 which maps to cyl = 6
+The chart has shape set to small solid circle.
+> ### Histogram
+> VI(qplot(data=m[1:10,], mpg, geom="histogram", bins=5, alpha=am, colour=am, fill=am,
++          linetype=am, size=am))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'mpg' with labels 16, 20 and 24.
+It has y-axis 'count' with labels 0, 1, 2, 3 and 4.
+There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
+There is a legend indicating that colour is used to represent am, with levels: auto and manual.
+There is a legend indicating that fill is used to represent am, with levels: auto and manual.
+There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
+There is a legend indicating that size is used to represent am, with levels: auto and manual.
+The chart is a bar chart containing 10 vertical bars.
+Bar 1 is centered horizontally at 15.15, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 2 is centered horizontally at 15.15, and spans vertically from 1 to 1 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 3 is centered horizontally at 17.67, and spans vertically from 0 to 2 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 4 is centered horizontally at 17.67, and spans vertically from 2 to 2 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 5 is centered horizontally at 20.2, and spans vertically from 0 to 2 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 6 is centered horizontally at 20.2, and spans vertically from 2 to 4 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 7 is centered horizontally at 22.72, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 8 is centered horizontally at 22.72, and spans vertically from 1 to 2 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 9 is centered horizontally at 25.25, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 10 is centered horizontally at 25.25, and spans vertically from 1 to 1 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Warning message:
+Using size for a discrete variable is not advised. 
+> ### Boxplots
+> VI(qplot(data=m, cyl, mpg, geom="boxplot", alpha=am, colour=am, fill=am, linetype=am, size=am))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'cyl' with labels 4, 6 and 8.
+It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
+There is a legend indicating that colour is used to represent am, with levels: auto and manual.
+There is a legend indicating that fill is used to represent am, with levels: auto and manual.
+There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
+There is a legend indicating that size is used to represent am, with levels: auto and manual.
+The chart is a boxplot comprised of 6 boxes with whiskers.
+There is a box at x=1.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
+It has median 22.8. The box goes from 22.15 to 23.6, and the whiskers extend to 21.5 and 24.4.
+There are 0 outliers for this boxplot.
+There is a box at x=0.81 with alpha 0.1 which maps to am = auto with colour #F8766D which maps to am = auto with fill #F8766D which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
+It has median 28.85. The box goes from 25.2 to 30.9, and the whiskers extend to 21.4 and 33.9.
+There are 0 outliers for this boxplot.
+There is a box at x=2.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
+It has median 18.65. The box goes from 18.03 to 19.75, and the whiskers extend to 17.8 and 21.4.
+There are 0 outliers for this boxplot.
+There is a box at x=1.81 with alpha 0.1 which maps to am = auto with colour #F8766D which maps to am = auto with fill #F8766D which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
+It has median 21. The box goes from 20.35 to 21, and the whiskers extend to 19.7 and 21.
+There are 0 outliers for this boxplot.
+There is a box at x=3.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
+It has median 15.2. The box goes from 14.05 to 16.62, and the whiskers extend to 10.4 and 19.2.
+There are 0 outliers for this boxplot.
+There is a box at x=2.81 with alpha 0.1 which maps to am = auto with colour #F8766D which maps to am = auto with fill #F8766D which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
+It has median 15.4. The box goes from 15.2 to 15.6, and the whiskers extend to 15 and 15.8.
+There are 0 outliers for this boxplot.
+Warning message:
+Using size for a discrete variable is not advised. 
+> ### Hline
+> VI(qplot(data=m[1:10,], geom="hline", mapping=aes(yintercept=mpg, alpha=am, colour=am,
++          linetype=am, size=am)))
+This is an untitled chart with no subtitle or caption.
+It has x-axis '' with labels .
+It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
+There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
+There is a legend indicating that colour is used to represent am, with levels: auto and manual.
+There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
+There is a legend indicating that size is used to represent am, with levels: auto and manual.
+The chart is 10 horizontal lines as follows:
+Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
+Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
+Line at y position 22.8 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
+Line at y position 21.4 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
+Line at y position 18.7 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
+Line at y position 18.1 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
+Line at y position 14.3 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
+Line at y position 24.4 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
+Line at y position 22.8 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual and 
+Line at y position 19.2 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual.
+Warning message:
+Using size for a discrete variable is not advised. 
+> ### Line
+> VI(qplot(data=m[1:10,], geom="line", disp, mpg, alpha=am, colour=am, linetype=am, size=am))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'disp' with labels 100, 200 and 300.
+It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
+There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
+There is a legend indicating that colour is used to represent am, with levels: auto and manual.
+There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
+There is a legend indicating that size is used to represent am, with levels: auto and manual.
+The chart is a set of 2 lines.
+Line 1 connects 3 points, at (108, 22.8), (160, 21) and (160, 21).
+Line 2 connects 7 points, at (140.8, 22.8), (146.7, 24.4), (167.6, 19.2), (225, 18.1), (258, 21.4), (360, 18.7) and (360, 14.3).
+Warning message:
+Using size for a discrete variable is not advised. 
+> 
+> # Test all graph types when number of items exceeds threshold, so no detail printed
+> VI(qplot(data=m, mpg, disp, geom="point"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+It has y-axis 'disp' with labels 100, 200, 300 and 400.
+The chart is a set of 32 points.
+> VI(qplot(data=m, mpg, disp, geom="line"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+It has y-axis 'disp' with labels 100, 200, 300 and 400.
+The chart is a set of 1 line.
+Line 1 connects 32 points.
+> VI(qplot(data=m, as.factor(mpg), disp, geom="boxplot"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'as.factor(mpg)' with labels 10.4, 13.3, 14.3, 14.7, 15, 15.2, 15.5, 15.8, 16.4, 17.3, 17.8, 18.1, 18.7, 19.2, 19.7, 21, 21.4, 21.5, 22.8, 24.4, 26, 27.3, 30.4, 32.4 and 33.9.
+It has y-axis 'disp' with labels 100, 200, 300 and 400.
+The chart is a boxplot comprised of 25 boxes with whiskers.
+> VI(qplot(data=m, mpg, geom="histogram"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+It has y-axis 'count' with labels 0, 1, 2, 3, 4 and 5.
+The chart is a bar chart containing 30 vertical bars.
+> VI(qplot(data=m, mapping=aes(yintercept=mpg), geom="hline"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis '' with labels .
+It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+The chart is 32 horizontal lines.
+> VI(qplot(data=m, mpg, disp, geom="smooth"))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+It has y-axis 'disp' with labels 0, 200 and 400.
+The chart is a smoothed curve using method 'auto' with confidence intervals.
+> 
+> 
 > proc.time()
    user  system elapsed 
-   2.42    0.25    2.75 
+   3.51    0.21    3.75 

@@ -5,8 +5,8 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#annotations}}
 {{#title}}This chart has title '{{title}}'.<br>{{/title}}
 {{^title}}This chart is untitled.<br>{{/title}}
-{{#subtitle}}It has the subtitle {{subtitle}}.<br>{{/subtitle}}
-{{#caption}}It has caption {{caption}}.<br>{{/caption}}
+{{#subtitle}}It has the subtitle '{{subtitle}}'.<br>{{/subtitle}}
+{{#caption}}It has caption '{{caption}}'.<br>{{/caption}}
 {{/annotations}}
 {{#^singlepanel}}The chart is comprised of {{npanels}} panels containing sub-charts,
 {{#singlerow}} arranged horizontally.<br>{{/singlerow}}
@@ -67,7 +67,7 @@ Data values may be reported incorrectly.
 {{/singlelayer}}
 {{#hlinetype}}
 {{n}} horizontal line{{#s}}s{{/s}}
-{{^largecount}} at positions {{#items}}{{yintercept}}
+{{^largecount}} as follows:{{#items}}<br>Line at y position {{yintercept}}
 {{#size}} with size {{size}}{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}},{{/size}}
 {{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}},{{/linetype}}
 {{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
@@ -93,10 +93,11 @@ a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
 {{#items}}({{x}}, {{y}})
-{{#size}} size {{size}} mm{{/size}}
+{{#size}} size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
 {{#shape}} shape {{shape}}{{#shapemap}} which maps to {{shapelabel}} = {{shapemap}}{{/shapemap}}{{/shape}}
 {{#colour}} colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
 {{#fill}} fill {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
+{{#alpha}} alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}{{/alpha}}
 {{sep}}<br>{{/items}}
 {{/largecount}}
 {{/pointtype}}
@@ -116,6 +117,8 @@ There is a box at x={{x}}
 {{#alpha}} with alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}{{/alpha}}
 {{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
 {{#fill}} with fill {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
+{{#size}} with line size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
+{{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}{{/linetype}}
 .<br>It has median {{middle}}.
  The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.<br>
 There are {{noutliers}} outliers for this boxplot.<br>
