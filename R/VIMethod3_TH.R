@@ -47,7 +47,9 @@
   
   for (legendi in 1:length(x$legends)) {
     if (!is.null(x$legends[[legendi]]$scalelevels))
-      x$legends[[legendi]]$scalelevelitems = .listifyVars(list(level=x$legends[[legendi]]$scalelevels))
+      x$legends[[legendi]]$scalelevelitems = 
+        .listifyVars(list(level = x$legends[[legendi]]$scalelevels,
+                          map = x$legends[[legendi]]$scalemaps))
   }
   for (paneli in 1:x$npanels) {
     # Othewise they're within the panels
@@ -240,18 +242,23 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     mapping = labels[[i]]
     scale = .getGGScale(x, xbuild, name)
     scalediscrete = if ("ScaleDiscrete" %in% class(scale)) TRUE
+    hidden = if (.isGuideHidden(x, xbuild, name)) TRUE
     if (!is.null(scalediscrete)) {
+      scalenlevels = length(scale$range$range)
       scalelevels = scale$range$range
-      scalefrom = NULL
-      scaleto = NULL
+      scalemaps = scale$map(scale$range$range)
+      legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, 
+                       scalenlevels=scalenlevels, scalelevels=scalelevels, 
+                       scalemaps=scalemaps, hidden=hidden)
     } else {
-      scalelevels = NULL
       scalefrom = scale$range$range[1]
       scaleto = scale$range$range[2]
+      scalemapfrom = scale$map(scale$range$range[1])
+      scalemapto = scale$map(scale$range$range[2])
+      legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, 
+                       scalefrom=scalefrom, scaleto=scaleto, 
+                       scalemapfrom=scalemapfrom, scalemapto=scalemapto, hidden=hidden)
     }
-    hidden = if (.isGuideHidden(x, xbuild, name)) TRUE
-    legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, scalelevels=scalelevels,
-                     scalefrom=scalefrom, scaleto=scaleto, hidden=hidden)
     legends[[i]] = legend
   }
   return(legends)
@@ -315,7 +322,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       } 
       layer$scaledata = map$value
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
       
     # POINT
     } else if (layerClass == "GeomPoint") {
@@ -332,7 +339,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       } 
       layer$scaledata = map$value
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
       
 
       # BAR
@@ -355,7 +362,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       if (max(width) - min(width) > .0001)   # allow for small rounding error
         layer$scaledata = cbind(layer$scaledata, xmin=cleandata$xmin, xmax=cleandata$xmax)
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
       
     # LINE
     } else if (layerClass == "GeomLine") {
@@ -405,7 +412,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # a list of lists.
       
       # Also report on any aesthetic variables that vary across the layer
-      layer = .addAesVars(x, xbuild, cleandata, layeri, layer)
+      layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
       
     # SMOOTH
     } else if (layerClass == "GeomSmooth") {
@@ -433,10 +440,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     else if (("ScaleDiscrete" %in% class(scale))) { # Try to map back to levels
       match = match(value, scale$palette.cache)
       transformed[[var]] = scale$range$range[match]
-    } else {  # Continuous scale - Go back to orig data for value
+    } else {  # Continuous scale - We can't currently map these
       next
-      # .getGGRawValues should be passed the panel -- or else the row labels
-      # transformed[[var]] = .getGGRawValues(x,xbuild,layer,var)
     }
   }
   return(transformed)
@@ -505,7 +510,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(c)  
 }
 
-.addAesVars = function(x, xbuild, data, layeri, layer) {
+
+.addAesVars = function(x, xbuild, data, layeri, layer, panel) {
+  # panel is not currently used in this function
   aesvars = .findVaryingAesthetics(x, xbuild, layeri)
   aesvals = .convertAes(data[aesvars])
   aeslabel = .getGGGuideLabels(x,xbuild)[aesvars]

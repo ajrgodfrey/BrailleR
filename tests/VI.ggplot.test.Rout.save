@@ -128,8 +128,10 @@ The chart has alpha set to 0.3.
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'disp' with labels 100, 200 and 300.
 It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
-There is a legend indicating that shape is used to represent am, with levels: auto and manual.
-There is a legend indicating that size is used to represent hp, ranging from 62 to 245.
+There is a legend indicating that shape is used to represent am, with 2 levels:
+auto represented by shape 16 and 
+manual represented by shape 17.
+There is a legend indicating that size is used to represent hp, ranging from 62 represented by size 1 to 245 represented by size 6.
 The chart is a set of 10 points.
 The points are at:
 (160, 21) size 3.56 mm shape solid circle which maps to am = auto, 
@@ -217,10 +219,13 @@ Panel 3 is a bar chart containing 30 vertical bars.
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
 It has y-axis 'disp' with labels 100, 200 and 300.
-There is a legend indicating that alpha is used to represent cyl, with levels: 4, 6 and 8.
-There is a legend indicating that colour is used to represent mpg, ranging from 14.3 to 24.4.
-There is a legend indicating that fill is used to represent mpg, ranging from 14.3 to 24.4.
-There is a legend indicating that size is used to represent disp, ranging from 108 to 360.
+There is a legend indicating that alpha is used to represent cyl, with 3 levels:
+4 represented by alpha 0.1, 
+6 represented by alpha 0.55 and 
+8 represented by alpha 1.
+There is a legend indicating that colour is used to represent mpg, ranging from 14.3 represented by colour #132B43 to 24.4 represented by colour #56B1F7.
+There is a legend indicating that fill is used to represent mpg, ranging from 14.3 represented by fill #132B43 to 24.4 represented by fill #56B1F7.
+There is a legend indicating that size is used to represent disp, ranging from 108 represented by size 1 to 360 represented by size 6.
 The chart is a set of 10 points.
 The points are at:
 (21, 160) size 3.27 mm colour #3E81B6 fill #3E81B6 alpha 0.55 which maps to cyl = 6, 
@@ -240,11 +245,21 @@ The chart has shape set to small solid circle.
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'mpg' with labels 16, 20 and 24.
 It has y-axis 'count' with labels 0, 1, 2, 3 and 4.
-There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
-There is a legend indicating that colour is used to represent am, with levels: auto and manual.
-There is a legend indicating that fill is used to represent am, with levels: auto and manual.
-There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
-There is a legend indicating that size is used to represent am, with levels: auto and manual.
+There is a legend indicating that alpha is used to represent am, with 2 levels:
+auto represented by alpha 0.1 and 
+manual represented by alpha 1.
+There is a legend indicating that colour is used to represent am, with 2 levels:
+auto represented by colour #F8766D and 
+manual represented by colour #00BFC4.
+There is a legend indicating that fill is used to represent am, with 2 levels:
+auto represented by fill #F8766D and 
+manual represented by fill #00BFC4.
+There is a legend indicating that linetype is used to represent am, with 2 levels:
+auto represented by linetype solid and 
+manual represented by linetype 22.
+There is a legend indicating that size is used to represent am, with 2 levels:
+auto represented by size 2 and 
+manual represented by size 6.
 The chart is a bar chart containing 10 vertical bars.
 Bar 1 is centered horizontally at 15.15, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
 Bar 2 is centered horizontally at 15.15, and spans vertically from 1 to 1 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
@@ -263,11 +278,21 @@ Using size for a discrete variable is not advised.
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'cyl' with labels 4, 6 and 8.
 It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
-There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
-There is a legend indicating that colour is used to represent am, with levels: auto and manual.
-There is a legend indicating that fill is used to represent am, with levels: auto and manual.
-There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
-There is a legend indicating that size is used to represent am, with levels: auto and manual.
+There is a legend indicating that alpha is used to represent am, with 2 levels:
+auto represented by alpha 0.1 and 
+manual represented by alpha 1.
+There is a legend indicating that colour is used to represent am, with 2 levels:
+auto represented by colour #F8766D and 
+manual represented by colour #00BFC4.
+There is a legend indicating that fill is used to represent am, with 2 levels:
+auto represented by fill #F8766D and 
+manual represented by fill #00BFC4.
+There is a legend indicating that linetype is used to represent am, with 2 levels:
+auto represented by linetype solid and 
+manual represented by linetype 22.
+There is a legend indicating that size is used to represent am, with 2 levels:
+auto represented by size 2 and 
+manual represented by size 6.
 The chart is a boxplot comprised of 6 boxes with whiskers.
 There is a box at x=1.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
 It has median 22.8. The box goes from 22.15 to 23.6, and the whiskers extend to 21.5 and 24.4.
@@ -295,10 +320,18 @@ Using size for a discrete variable is not advised.
 This is an untitled chart with no subtitle or caption.
 It has x-axis '' with labels .
 It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
-There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
-There is a legend indicating that colour is used to represent am, with levels: auto and manual.
-There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
-There is a legend indicating that size is used to represent am, with levels: auto and manual.
+There is a legend indicating that alpha is used to represent am, with 2 levels:
+auto represented by alpha 0.1 and 
+manual represented by alpha 1.
+There is a legend indicating that colour is used to represent am, with 2 levels:
+auto represented by colour #F8766D and 
+manual represented by colour #00BFC4.
+There is a legend indicating that linetype is used to represent am, with 2 levels:
+auto represented by linetype solid and 
+manual represented by linetype 22.
+There is a legend indicating that size is used to represent am, with 2 levels:
+auto represented by size 2 and 
+manual represented by size 6.
 The chart is 10 horizontal lines as follows:
 Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
 Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
@@ -317,10 +350,18 @@ Using size for a discrete variable is not advised.
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'disp' with labels 100, 200 and 300.
 It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
-There is a legend indicating that alpha is used to represent am, with levels: auto and manual.
-There is a legend indicating that colour is used to represent am, with levels: auto and manual.
-There is a legend indicating that linetype is used to represent am, with levels: auto and manual.
-There is a legend indicating that size is used to represent am, with levels: auto and manual.
+There is a legend indicating that alpha is used to represent am, with 2 levels:
+auto represented by alpha 0.1 and 
+manual represented by alpha 1.
+There is a legend indicating that colour is used to represent am, with 2 levels:
+auto represented by colour #F8766D and 
+manual represented by colour #00BFC4.
+There is a legend indicating that linetype is used to represent am, with 2 levels:
+auto represented by linetype solid and 
+manual represented by linetype 22.
+There is a legend indicating that size is used to represent am, with 2 levels:
+auto represented by size 2 and 
+manual represented by size 6.
 The chart is a set of 2 lines.
 Line 1 connects 3 points, at (108, 22.8), (160, 21) and (160, 21).
 Line 2 connects 7 points, at (140.8, 22.8), (146.7, 24.4), (167.6, 19.2), (225, 18.1), (258, 21.4), (360, 18.7) and (360, 14.3).
@@ -360,7 +401,144 @@ It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
 It has y-axis 'disp' with labels 0, 200 and 400.
 The chart is a smoothed curve using method 'auto' with confidence intervals.
 > 
+> # Test cases for different methods of providing data
+> x = 1:10
+> y = c(2,5,1,4,3,5,1,3,2,4)
+> z = as.factor(rep(c("yes","no"),5))
+> df = data.frame(x,y,z)
+> # data frame provided to data param
+> VI(qplot(data=df, x=x, y=y, facets=.~z))
+This is an untitled chart with no subtitle or caption.
+The chart is comprised of 2 panels containing sub-charts, arranged horizontally.
+The panels represent different values of z.
+Each sub-chart has x-axis 'x' with labels 2.5, 5.0, 7.5 and 10.0.
+Each sub-chart has y-axis 'y' with labels 1, 2, 3, 4 and 5.
+Panel 1 represents data for z = no.
+Panel 1 is a set of 5 points.
+The points are at:
+(2, 5), 
+(4, 4), 
+(6, 5), 
+(8, 3) and 
+(10, 4)
+Panel 2 represents data for z = yes.
+Panel 2 is a set of 5 points.
+The points are at:
+(1, 2), 
+(3, 1), 
+(5, 3), 
+(7, 1) and 
+(9, 2)
+> # data frame provided to data param, function eval
+> VI(qplot(data=df, x=x*2, y=10-y, facets=.~z))
+This is an untitled chart with no subtitle or caption.
+The chart is comprised of 2 panels containing sub-charts, arranged horizontally.
+The panels represent different values of z.
+Each sub-chart has x-axis 'x * 2' with labels 5, 10, 15 and 20.
+Each sub-chart has y-axis '10 - y' with labels 5, 6, 7, 8 and 9.
+Panel 1 represents data for z = no.
+Panel 1 is a set of 5 points.
+The points are at:
+(4, 5), 
+(8, 6), 
+(12, 5), 
+(16, 7) and 
+(20, 6)
+Panel 2 represents data for z = yes.
+Panel 2 is a set of 5 points.
+The points are at:
+(2, 8), 
+(6, 9), 
+(10, 7), 
+(14, 9) and 
+(18, 8)
+> # No data param, data frame accessed directly
+> # Doesn't seem to be possible to facet this way
+> VI(qplot(x=df$x, y=df$y))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'df$x' with labels 2.5, 5.0, 7.5 and 10.0.
+It has y-axis 'df$y' with labels 1, 2, 3, 4 and 5.
+The chart is a set of 10 points.
+The points are at:
+(1, 2), 
+(2, 5), 
+(3, 1), 
+(4, 4), 
+(5, 3), 
+(6, 5), 
+(7, 1), 
+(8, 3), 
+(9, 2) and 
+(10, 4)
+> # No data param, data frame accessed directly, function eval
+> VI(qplot(x=df$x*2, y=10-df$y))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'df$x * 2' with labels 5, 10, 15 and 20.
+It has y-axis '10 - df$y' with labels 5, 6, 7, 8 and 9.
+The chart is a set of 10 points.
+The points are at:
+(2, 8), 
+(4, 5), 
+(6, 9), 
+(8, 6), 
+(10, 7), 
+(12, 5), 
+(14, 9), 
+(16, 7), 
+(18, 8) and 
+(20, 6)
+> # Separate vectors accessed directly
+> VI(qplot(x=x, y=y))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'x' with labels 2.5, 5.0, 7.5 and 10.0.
+It has y-axis 'y' with labels 1, 2, 3, 4 and 5.
+The chart is a set of 10 points.
+The points are at:
+(1, 2), 
+(2, 5), 
+(3, 1), 
+(4, 4), 
+(5, 3), 
+(6, 5), 
+(7, 1), 
+(8, 3), 
+(9, 2) and 
+(10, 4)
+> # Separate vectors accessed directly, function eval
+> VI(qplot(x=x*2, y=10-y))
+This is an untitled chart with no subtitle or caption.
+It has x-axis 'x * 2' with labels 5, 10, 15 and 20.
+It has y-axis '10 - y' with labels 5, 6, 7, 8 and 9.
+The chart is a set of 10 points.
+The points are at:
+(2, 8), 
+(4, 5), 
+(6, 9), 
+(8, 6), 
+(10, 7), 
+(12, 5), 
+(14, 9), 
+(16, 7), 
+(18, 8) and 
+(20, 6)
+> # Constants
+> VI(qplot(1:10,c(2,5,1,4,3,5,1,3,2,4)))
+This is an untitled chart with no subtitle or caption.
+It has x-axis '1:10' with labels 2.5, 5.0, 7.5 and 10.0.
+It has y-axis 'c(2, 5, 1, 4, 3, 5, 1, 3, 2, 4)' with labels 1, 2, 3, 4 and 5.
+The chart is a set of 10 points.
+The points are at:
+(1, 2), 
+(2, 5), 
+(3, 1), 
+(4, 4), 
+(5, 3), 
+(6, 5), 
+(7, 1), 
+(8, 3), 
+(9, 2) and 
+(10, 4)
 > 
 > proc.time()
    user  system elapsed 
-   3.51    0.21    3.75 
+   4.29    0.26    4.57 

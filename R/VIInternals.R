@@ -230,6 +230,8 @@
 # Get the original data values for variable var in the given layer
 # NOT CURRENTLY IN USE
 # Dangerous since the original data may have changed or no longer be present in the env
+# Also note that the returned data won't necessarily align to the plot data -- e.g. if
+# facets are present or a stat other than identity is in play
 .getGGRawValues = function(x, xbuild, layer, var) {
   map = .getGGMapping(x, xbuild, layer, var)
   if (class(x$layers[[layer]]$data) == "waiver")

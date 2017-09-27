@@ -57,3 +57,23 @@ VI(qplot(data=m, mpg, geom="histogram"))
 VI(qplot(data=m, mapping=aes(yintercept=mpg), geom="hline"))
 VI(qplot(data=m, mpg, disp, geom="smooth"))
 
+# Test cases for different methods of providing data
+x = 1:10
+y = c(2,5,1,4,3,5,1,3,2,4)
+z = as.factor(rep(c("yes","no"),5))
+df = data.frame(x,y,z)
+# data frame provided to data param
+VI(qplot(data=df, x=x, y=y, facets=.~z))
+# data frame provided to data param, function eval
+VI(qplot(data=df, x=x*2, y=10-y, facets=.~z))
+# No data param, data frame accessed directly
+# Doesn't seem to be possible to facet this way
+VI(qplot(x=df$x, y=df$y))
+# No data param, data frame accessed directly, function eval
+VI(qplot(x=df$x*2, y=10-df$y))
+# Separate vectors accessed directly
+VI(qplot(x=x, y=y))
+# Separate vectors accessed directly, function eval
+VI(qplot(x=x*2, y=10-y))
+# Constants
+VI(qplot(1:10,c(2,5,1,4,3,5,1,3,2,4)))
