@@ -69,7 +69,7 @@ Data values may be reported incorrectly.
 {{^singlepanel}}Panel {{panelnum}} is {{/singlepanel}}
 {{#singlepanel}}The chart is {{/singlepanel}}
 {{/singlelayer}}
-{{#hlinetype}}
+{{#typehline}}
 {{n}} horizontal line{{#s}}s{{/s}}
 {{^largecount}} as follows:{{#items}}<br>Line at y position {{yintercept}}
 {{#size}} with size {{size}}{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}},{{/size}}
@@ -77,8 +77,8 @@ Data values may be reported incorrectly.
 {{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
 {{sep}}{{/items}}
 {{/largecount}}.<br>
-{{/hlinetype}}
-{{#bartype}}
+{{/typehline}}
+{{#typebar}}
 a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
@@ -91,8 +91,8 @@ a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
 {{#size}} with border line width {{size}}{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
 .<br>{{/items}}
 {{/largecount}}
-{{/bartype}}
-{{#pointtype}}
+{{/typebar}}
+{{#typepoint}}
 a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
@@ -104,17 +104,25 @@ The points are at:<br>
 {{#alpha}} alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}{{/alpha}}
 {{sep}}<br>{{/items}}
 {{/largecount}}
-{{/pointtype}}
-{{#linetype}}
+{{/typepoint}}
+{{#typeline}}
 a set of {{n}} line{{#s}}s{{/s}}.<br>
 {{#broken}}The line{{#s}}s are{{/s}}{{^s}} is{{/s}} broken or missing where NA values appear or where points exceed the plot boundaries.<br>{{/broken}}
 {{^largecount}}
 {{#lines}}
 Line {{linenum}} connects {{npoints}} points{{^largecount}}, at {{#items}}({{x}}, {{y}}){{sep}}{{/items}}{{/largecount}}.<br>
+{{#alphavarying}}The alpha value varies along the length of this line.<br>{{/alphavarying}}
+{{#alpha}}This line has alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}.<br>{{/alpha}}
+{{#colourvarying}}The colour varies along the length of this line.<br>{{/colourvarying}}
+{{#colour}}This line has colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}.<br>{{/colour}}
+{{#sizevarying}}The line size varies along the length of this line.<br>{{/sizevarying}}
+{{#size}}This line has line size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}.<br>{{/size}}
+{{#linetypevarying}}The line type varies along the length of this line.<br>{{/linetypevarying}}
+{{#linetype}}This line has line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}.<br>{{/linetype}}
 {{/lines}}
 {{/largecount}}
-{{/linetype}}
-{{#boxtype}}
+{{/typeline}}
+{{#typebox}}
 a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
 {{#items}}
 There is a box at x={{x}}
@@ -127,13 +135,13 @@ There is a box at x={{x}}
  The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.<br>
 There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
-{{/boxtype}}
-{{#smoothtype}}
+{{/typebox}}
+{{#typesmooth}}
 a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci}}.<br>
-{{/smoothtype}}
-{{#unknowntype}}
+{{/typesmooth}}
+{{#typeunknown}}
 a type that VI isn't able to process.<br>
-{{/unknowntype}}
+{{/typeunknown}}
 {{#layeraes}}
 {{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}
 has {{aes}} set to {{mapping}}.<br>

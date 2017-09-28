@@ -59,7 +59,7 @@
       x$panels[[paneli]]$ytickitems = .listifyVars(list(label=x$panels[[paneli]]$yticklabels))
     for (layeri in 1:x$nlayers) {
       layer = x$panels[[paneli]]$panellayers[[layeri]]
-      typeflag = paste0(layer$type, "type")
+      typeflag = paste0("type",layer$type)
       layer[[typeflag]] = TRUE
       n = layer$n
       if (!is.null(n)) {
@@ -69,16 +69,14 @@
           layer$largecount = TRUE
         } else {
           if (layer$type == "line") {  # Lines are special, items are within groups
-            layer$lines = list()
-            for (i in 1:length(layer$scaledata)) {
-              layer$lines[[i]] = list()
+            for (i in 1:length(layer$lines)) {
               layer$lines[[i]]$linenum = i
-              npoints = length(layer$scaledata[[i]]$x)
+              npoints = nrow(layer$lines[[i]]$scaledata)
               layer$lines[[i]]$npoints = npoints
               if (npoints > threshold)
                 layer$lines[[i]]$largecount = TRUE
-              else
-                layer$lines[[i]]$items = .listifyVars(layer$scaledata[[i]])
+              else 
+                layer$lines[[i]]$items = .listifyVars(layer$lines[[i]]$scaledata)
             }
           }
           else {
@@ -243,18 +241,22 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     scale = .getGGScale(x, xbuild, name)
     scalediscrete = if ("ScaleDiscrete" %in% class(scale)) TRUE
     hidden = if (.isGuideHidden(x, xbuild, name)) TRUE
+    maplevels = data.frame(col1=scale$map(scale$range$range), stringsAsFactors=FALSE)
+    colnames(maplevels) = name
+    maplevels = .convertAes(maplevels)
+    maplevels = maplevels[[name]]
     if (!is.null(scalediscrete)) {
       scalenlevels = length(scale$range$range)
       scalelevels = scale$range$range
-      scalemaps = scale$map(scale$range$range)
+      scalemaps = maplevels
       legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, 
                        scalenlevels=scalenlevels, scalelevels=scalelevels, 
                        scalemaps=scalemaps, hidden=hidden)
     } else {
       scalefrom = scale$range$range[1]
       scaleto = scale$range$range[2]
-      scalemapfrom = scale$map(scale$range$range[1])
-      scalemapto = scale$map(scale$range$range[2])
+      scalemapfrom = maplevels[1]
+      scalemapto = maplevels[2]
       legend = .VIlist(aes=name, mapping=unname(mapping), scalediscrete=scalediscrete, 
                        scalefrom=scalefrom, scaleto=scaleto, 
                        scalemapfrom=scalemapfrom, scalemapto=scalemapto, hidden=hidden)
@@ -310,11 +312,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     # HLINE
     if (layerClass == "GeomHline") {
       layer$type = "hline"
-      # Discard points that go outside the bounds of the plot,
+      # Discard lines that go outside the bounds of the plot,
       # as they won't be displayed
       cleandata = layer$data[!is.na(layer$data$yintercept),]
       layer$n = nrow(cleandata)
-      layer$hlinetype = TRUE
       map = .mapDataValues(x, xbuild, list("yintercept"), panel, list(yintercept=cleandata$yintercept))
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
@@ -327,7 +328,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     # POINT
     } else if (layerClass == "GeomPoint") {
       layer$type = "point"
-      # Discard points that go outside the bounds of the plot,
+      # Mark as hidden points that go outside the bounds of the plot,
       # as they won't be displayed
       cleandata = layer$data[!is.na(layer$data$x) & !is.na(layer$data$y),]
       layer$n = nrow(cleandata)
@@ -376,17 +377,23 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
       # X values of NA or past xlims should just not be reported on
       # as they won't be displayed but the line will still be continuous
       cleandata = layer$data[!is.na(layer$data$x),]
-      layer$scaledata = list()
+      layer = .addLineAesLabels(x, xbuild, layeri, layer, panel)
+      # Each group is a line which has its own information including its own scaledata
+      layer$lines = list()
       for (groupi in unique(cleandata$group)) {
-        groupx = cleandata[cleandata$group == groupi,]$x
-        groupy = cleandata[cleandata$group == groupi,]$y
+        line = list()
+        groupdata = cleandata[cleandata$group == groupi,]
+        groupx = groupdata$x
+        groupy = groupdata$y
         map = .mapDataValues(x, xbuild, list("x","y"), panel, list(x=groupx, y=groupy))
         if (!is.null(map$badTransform)) {
           layer$badtransform = TRUE
           layer$transform = map$badTransform
         } 
         # Lines have a separate scaledata for each group
-        layer$scaledata[[length(layer$scaledata) + 1]] = map$value
+        line$scaledata = map$value
+        line = .addLineAesVars(x, xbuild, line, layeri, groupdata, panel)
+        layer$lines[[length(layer$lines) + 1]] = line
       }
       
     #BOXPLOT
@@ -486,8 +493,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 
 # Convert aesthetic values to something more friendly for the user
 # Takes a dataframe and converts all of its columns if possible
-# *** ONLY HANDLING LINETYPES SO FAR - and not defaults 42, 22, ...
-# SHOULD DO SHAPES, COLOURS (How?)
+# *** ONLY HANDLING LINETYPES AND SHAPES SO FAR - and not defaults 42, 22, ...
+# SHOULD DO COLOURS BY FINDING CLOSEST
 .convertAes = function(values) {
   linetypes = c("0"="blank", "1"="solid", "2"="dashed",
                 "3"="dotted", "4"="dotdash", "5"="longdash", "6"="twodash")
@@ -500,8 +507,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   for (col in seq_along(values)) {
     aes = names(values)[col]
     if (aes == "linetype") {
-      c[,col] = ifelse(values[,col] %in% names(linetypes),
-                       linetypes[as.character(values[,col])],
+      c[,col] = ifelse(values[[col]] %in% names(linetypes),
+                       linetypes[as.character(values[[col]])],
                        c[,col])  # If not found just return what we got
     } else if (aes == "shape") {
       c[,col] = ifelse(values[,col] %in% 1:25, shapes[values[,col]+1], c[,col])
@@ -510,22 +517,49 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
   return(c)  
 }
 
+.addLineAesVars = function(x, xbuild, line, layeri, groupdata, panel) {
+  aesvars = .findVaryingAesthetics(x, xbuild, layeri)
+  linedata = groupdata[,aesvars,drop=FALSE]
+  nvals = sapply(linedata,function(x) length(unique(x)))
+  nonconstantAes = aesvars[nvals > 1]
+  for (aes in seq_along(nonconstantAes))
+    line[[paste0(nonconstantAes[aes],"varying")]] = TRUE
+  aesvars = aesvars[nvals == 1]
+  aesvals = .convertAes(groupdata[1,aesvars,drop=FALSE])
+  aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, aesvals[1,,drop=FALSE])
+  line[aesvars] = aesvals
+  if (length(aesmap) > 0) {
+    names(aesmap) = paste0(names(aesmap), "map")
+    line[names(aesmap)] = aesmap
+  }
+  return(line)
+}
+
+.addLineAesLabels = function(x, xbuild, layeri, layer, panel) {
+  aesvars = .findVaryingAesthetics(x, xbuild, layeri)
+  aeslabel = .getGGGuideLabels(x, xbuild)[aesvars]
+  if (length(aeslabel)>0) {
+    names(aeslabel) = paste0(names(aeslabel),"label")
+    layer = append(layer, aeslabel)
+  }
+  return(layer)
+}
 
 .addAesVars = function(x, xbuild, data, layeri, layer, panel) {
   # panel is not currently used in this function
   aesvars = .findVaryingAesthetics(x, xbuild, layeri)
   aesvals = .convertAes(data[aesvars])
-  aeslabel = .getGGGuideLabels(x,xbuild)[aesvars]
+  aeslabel = .getGGGuideLabels(x, xbuild)[aesvars]
   if (length(aeslabel)>0) {
     names(aeslabel) = paste0(names(aeslabel),"label")
-    layer = append(layer,aeslabel)
+    layer = append(layer, aeslabel)
   }
   aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, data[aesvars])
   layer$scaledata = append(layer$scaledata, aesvals)
   if (length(aesmap) == 0) {
     layer$scaledata = cbind(layer$scaledata, aesvals)
   } else {
-    names(aesmap) = paste0(names(aesmap),"map")
+    names(aesmap) = paste0(names(aesmap), "map")
     layer$scaledata = cbind(layer$scaledata, aesvals, aesmap)
   }
   return(layer)

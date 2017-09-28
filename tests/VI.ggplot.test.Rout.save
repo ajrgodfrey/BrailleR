@@ -129,8 +129,8 @@ This is an untitled chart with no subtitle or caption.
 It has x-axis 'disp' with labels 100, 200 and 300.
 It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
 There is a legend indicating that shape is used to represent am, with 2 levels:
-auto represented by shape 16 and 
-manual represented by shape 17.
+auto represented by shape solid circle and 
+manual represented by shape solid triangle.
 There is a legend indicating that size is used to represent hp, ranging from 62 represented by size 1 to 245 represented by size 6.
 The chart is a set of 10 points.
 The points are at:
@@ -364,7 +364,15 @@ auto represented by size 2 and
 manual represented by size 6.
 The chart is a set of 2 lines.
 Line 1 connects 3 points, at (108, 22.8), (160, 21) and (160, 21).
+This line has alpha 0.1 which maps to am = auto.
+This line has colour #F8766D which maps to am = auto.
+This line has line size 2 mm which maps to am = auto.
+This line has line type solid which maps to am = auto.
 Line 2 connects 7 points, at (140.8, 22.8), (146.7, 24.4), (167.6, 19.2), (225, 18.1), (258, 21.4), (360, 18.7) and (360, 14.3).
+This line has alpha 1 which maps to am = manual.
+This line has colour #00BFC4 which maps to am = manual.
+This line has line size 6 mm which maps to am = manual.
+This line has line type 22 which maps to am = manual.
 Warning message:
 Using size for a discrete variable is not advised. 
 > 
@@ -541,4 +549,4 @@ The points are at:
 > 
 > proc.time()
    user  system elapsed 
-   4.29    0.26    4.57 
+   4.73    0.31    5.04 
