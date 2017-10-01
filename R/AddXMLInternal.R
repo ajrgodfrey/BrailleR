@@ -119,19 +119,20 @@
 ## Constructs a ggplot layer
 ## TODO:  Currently assumes histogram or line (and probably plenty of other assumptions)
 .AddXMLAddGGPlotLayer = function(root, x=NULL, panel=1) {
-  annotation = .AddXMLAddAnnotation(root, position=4, id=paste("center",panel,x$layernum,sep="-"), kind="grouped")
+  annotation = .AddXMLAddAnnotation(root, position=4, 
+                                    id=paste("center", panel, x$layernum, sep="-"), kind="grouped")
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
-  if (x$type=="bar") {    # Bar chart
-    barCount=nrow(x$data)
-    barGrob = grid.grep(gPath("geom_rect"),grep=TRUE,)
+  if (x$type == "bar") {    # Bar chart
+    barCount = nrow(x$data)
+    barGrob = grid.grep(gPath("geom_rect"), grep=TRUE)
     XML::addAttributes(annotation$root, speech="Histogram bars",
                      speech2=paste("Histogram with", barCount, "bars"),
                      type="Center")
-    annotations <- list()
+    annotations = list()
     chartData = x$data  
     for (i in 1:barCount) {
-      barId = paste(barGrob$name,"1",i,sep=".")
+      barId = paste(barGrob$name, "1", i, sep=".")
       # TODO: histogram bars have density but other geom_bar objects won't
       # Need to not fail if density not present
       # Generally, need to deal with missing values better
@@ -139,35 +140,35 @@
       # If no density values then assume it's a categorical x-axis
       if (is.null(chartData$density))  
         annotations[[i]] = .AddXMLcategoricalBar(root, position=i, 
-                                            x=signif(chartData$x[i],4),
-                                            count=chartData$ymax[i]-chartData$ymin[i], 
+                                            x=signif(chartData$x[i], 4),
+                                            count=chartData$ymax[i] - chartData$ymin[i], 
                                             id=barId)
       
       else
         annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
-                                        count=chartData$ymax[i]-chartData$ymin[i], 
-                                        density=ifelse(is.null(chartData$density),NA,chartData$density[i]),
-                                        start=signif(chartData$xmin[i],4), 
-                                        end=signif(chartData$xmax[i],4),id=barId)
+                                        count=chartData$ymax[i] - chartData$ymin[i], 
+                                        density=ifelse(is.null(chartData$density), NA, chartData$density[i]),
+                                        start=signif(chartData$xmin[i], 4), 
+                                        end=signif(chartData$xmax[i], 4), id=barId)
     }
   } else if (x$type=="line") { # Line chart
-    segmentCount=nrow(x$data)-1    # One less than the number of points
+    segmentCount = nrow(x$data)-1    # One less than the number of points
     # For now, assume that all layers are this layer type
     # TODO:  Fix this
-    lineGrobs = grid.grep(gPath("GRID.polyline"),grep=TRUE,global=TRUE)
+    lineGrobs = grid.grep(gPath("GRID.polyline"), grep=TRUE, global=TRUE)
     lineGrob = lineGrobs[[x$layernum]]
     XML::addAttributes(annotation$root, speech="Line graph",
                        speech2=paste("Line graph with", segmentCount, "segments"),
                        # Better to report #lines or #segs?  
                        # Line can be discontiguous (comprised of polylines 1a, 1b, ...)
                        type="Center")
-    annotations <- list()
-    data=x$data 
+    annotations = list()
+    data = x$data 
     for (i in 1:segmentCount) {
-      lineId = paste(lineGrob$name,"1",sep=".") # ID of the polyline
-      annotations[[i]] = .AddXMLcenterLine(root, position=i,id=lineId,
-                                           data$x[i],data$y[i],
-                                           data$x[i+1],data$y[i+1])
+      lineId = paste(lineGrob$name, "1", sep=".") # ID of the polyline
+      annotations[[i]] = .AddXMLcenterLine(root, position=i, id=lineId,
+                                           data$x[i], data$y[i],
+                                           data$x[i+1], data$y[i+1])
       # TODO:  Not correctly handling NA or out-of-range data values, nor dates
       # Should check for dates with inherit(,"Date") -- but looks like I
       # need to do that on the main data not the layer data
@@ -183,7 +184,7 @@
 
 .AddXMLcenterBar = function(root, position=1, mid=NULL, count=NULL, density=NULL, start=NULL, end=NULL,
                             id=NULL) {
-    rectId = ifelse(is.null(id),.AddXMLmakeId("rect", paste("1.1", position, sep=".")),id)
+    rectId = ifelse(is.null(id), .AddXMLmakeId("rect", paste("1.1", position, sep=".")), id)
     annotation = .AddXMLAddAnnotation(root, position=position,
                                       id=rectId,
                                       kind="active")
@@ -195,7 +196,7 @@
     return(invisible(annotation))
 }
 .AddXMLcategoricalBar = function(root, position=1, x=NULL, count=NULL, id=NULL) {
-  rectId = ifelse(is.null(id),.AddXMLmakeId("rect", paste("1.1", position, sep=".")),id)
+  rectId = ifelse(is.null(id), .AddXMLmakeId("rect", paste("1.1", position, sep=".")), id)
   annotation = .AddXMLAddAnnotation(root, position=position,
                                     id=rectId,
                                     kind="active")
@@ -214,18 +215,10 @@
                             id=NULL) {
   fakeSegmentId = paste(id,position,sep=".") # Pretend there are separate segments
   
-  annotation = .AddXMLAddAnnotation(root, position=position,
-                                    id=fakeSegmentId,
-                                    kind="active")
-  dummyAnnotation = list(.AddXMLAddAnnotation(root, position=position,
-                                    id=id,
-                                    kind="passive"))
-  speech=paste0("Line ", position," from (",startx,",",starty,
-                ") to (",endx,",",endy,")")
-  XML::addAttributes(annotation$root,
-                     speech=speech,
-                     speech2=speech
-                    )
+  annotation = .AddXMLAddAnnotation(root, position=position, id=fakeSegmentId, kind="active")
+  dummyAnnotation = list(.AddXMLAddAnnotation(root, position=position, id=id, kind="passive"))
+  speech=paste0("Line ", position, " from (", startx, ",", starty, ") to (", endx, ",", endy, ")")
+  XML::addAttributes(annotation$root, speech=speech, speech2=speech)
   .AddXMLAddComponents(annotation, dummyAnnotation)
   .AddXMLAddChildren(annotation, dummyAnnotation)
   .AddXMLAddParents(annotation, dummyAnnotation)
