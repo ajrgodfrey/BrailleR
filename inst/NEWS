@@ -1,3 +1,8 @@
+# v0.27.1
+- altered DESCRIPTION file to raise Paul and Debra to author from contributor in preparation for pull requests for VI.ggplot() work.
+- changed R dependency sought by CRAN on 29/9/17 by email.
+ 
+
 # v0.27.0
 - added ProcessAllMd() for rendering plain markdown files.
 - removed dependency on pander package by altering UniDesc(). Reason: Nice results, but possibly over the top for introductory students.
