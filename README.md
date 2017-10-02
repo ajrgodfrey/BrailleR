@@ -27,7 +27,7 @@ Some issues to resolve:
 
 1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones slected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot()
 2. Get extra bits of information for WTF() coming through, such as other shapes, lines etc.
-1. get VI.ggplot() doing more; see vignette
+1. Add to the work done by Debra Warren and Paul Murrell on VI.ggplot()  and related functions.
 2. ascertain which shiny app widgets are useful for blind users' screen reading software.
 3. link various plot objects to sonify package.
 2. get more graphics ready for making into SVG for use on Tiger products; mostly in SVGThis() method
@@ -38,7 +38,7 @@ Some issues to resolve:
 4. WTF() doesn't pick up multiple outliers in boxplot() as more than one point
 6. fix VI.lm to cater for the weighted lm case.
 4. check the css is working for VI.lm()
-5. work out how to change colours in R console for low vision users
+5. work out how to change colours in R console for low vision users as commands and/or settings 
 6. create function to re-create vignettes from Rnw source into HTML
 5. Multiple language support was started but is in serious need of some love.
 7. Functions for the VI method to be completed include: VI.prcomp(), VI.factanal(), VI.glm(), VI.htest()?

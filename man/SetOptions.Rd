@@ -5,6 +5,7 @@
 \alias{ResetDefaults}
 \alias{SetAuthor}
 \alias{SetBRLPointSize}
+\alias{SetLanguage}
 \alias{SetMakeUpper}
 \alias{SetPaperHeight}
 \alias{SetPaperWidth}
@@ -27,6 +28,8 @@ SetBRLPointSize(pt, Permanent = FALSE, Local = interactive())
 SetPaperHeight(Inches, Permanent = FALSE, Local = interactive())
 SetPaperWidth(Inches, Permanent = FALSE, Local = interactive())
 
+SetLanguage(Language = "en_us", Permanent = interactive(), Local = interactive())
+
 SetMakeUpper(Upper, Permanent = interactive(), Local = interactive())
 
 SetPValDigits(digits, Permanent = interactive(), Local = interactive())
@@ -39,6 +42,7 @@ SetSigLevel(alpha, Permanent = interactive(), Local = interactive())
   \item{digits}{The number of decimal places to display. Must be an integer greater than one or a warning is given and the option is not changed.}
   \item{Embosser}{the name of the embosser to be used for tactile images. Not all embossers will be immediately supported by the package. The supported embossers are listed in the relevant section below. Please contact the package maintainer to introduce a new embosser to the list of supported models.}
   \item{Inches}{The size of the area to use for embossing. This should be the size of the embossed area not the actual size of the paper itself.}
+\item{Language}{The character string for the language files to be used in spell checking.}
 \item{Local}{Should the local copy of BrailleROptions be updated?}
   \item{name}{a character string to be used for author details in various file writing functions.}
   \item{Permanent}{Should the change be made permanent? Set to FALSE for a temporary change.}
