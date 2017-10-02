@@ -29,12 +29,12 @@ MakeTigerReady =
     }
 
 # method is mostly Jonathan's use of Paul/Simon's work
-SVGThis = function(x, file = "test.svg") {
+SVGThis = function(x, file = "test.svg", ...) {
             UseMethod("SVGThis")
           }
 
 SVGThis.default =
-    function(x, file = "test.svg") {
+    function(x, file = "test.svg", ...) {
       if (is.null(x)) {  # must be running interactively
         if (dev.cur() > 1) {  # there must also be an open graphics/grid device
 
@@ -61,7 +61,7 @@ SVGThis.default =
     }
 
 SVGThis.boxplot =
-    function(x, file = "test.svg") {
+    function(x, file = "test.svg", ...) {
       # really should check that the boxplot wasn't plotted already before...
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a boxplot on a new graphics device
@@ -73,7 +73,7 @@ SVGThis.boxplot =
     }
 
 SVGThis.dotplot =
-    function(x, file = "test.svg") {
+    function(x, file = "test.svg", ...) {
       # really should check that the dotplot wasn't plotted already before...
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a dotplot on a new graphics device
@@ -85,7 +85,7 @@ SVGThis.dotplot =
     }
 
 SVGThis.eulerr = 
-    function(x, file = "test.svg") {
+    function(x, file = "test.svg", ...) {
       x=Augment(x)
       X = stats::coef(x)[, 1L]
       Y = stats::coef(x)[, 2L]
@@ -105,19 +105,26 @@ SVGThis.eulerr =
       return(invisible(NULL))
     }
 
+# if createDevice is TRUE (the default) SVGThis will create its own
+# (non-displaying) graphics device and destroy it when complete
+# if FALSE it will use the currently active device
 SVGThis.ggplot =
-    function(x, file = "test.svg") {
-      x=Augment(x)
-      x
+    function(x, file = "test.svg", createDevice = TRUE, ...) {
+#      x=Augment(x)
+#      grid.force()
+      if (createDevice) 
+        pdf(NULL)
+      print(x)
       gridSVG::grid.export(name = file)
-      dev.off()
+      if (createDevice) 
+        dev.off()
       MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
 
 
 SVGThis.histogram =
-    function(x, file = "test.svg") {
+    function(x, file = "test.svg", ...) {
       # really should check that the histogram wasn't plotted already before...
       # but simpler to just do the plotting ourselves and close the device later
       x  # ensure we create a histogram on a new graphics device
@@ -156,7 +163,7 @@ SVGThis.histogram =
               desc = "need something much smarter in here")
 }
 
-SVGThis.scatterplot = function(x, file = "test.svg") {
+SVGThis.scatterplot = function(x, file = "test.svg", ...) {
 x$x= x$data$x
 x$y = x$data$y
 x$data=NULL
@@ -169,7 +176,7 @@ x$data=NULL
       return(invisible(NULL))
 }
 
-SVGThis.tsplot = function(x, file = "test.svg") {
+SVGThis.tsplot = function(x, file = "test.svg", ...) {
       suppressWarnings(do.call(plot, x))  # ensure we create a plot on a new graphics device
       gridGraphics::grid.echo()  # plot() uses graphics package
       gridSVG::grid.export(name = file)

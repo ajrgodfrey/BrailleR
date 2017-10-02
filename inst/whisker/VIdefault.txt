@@ -1,0 +1,150 @@
+VIgg,"
+{{^annotations}}
+This is an untitled chart with no subtitle or caption.<br>
+{{/annotations}}
+{{#annotations}}
+{{#title}}This chart has title '{{title}}'.<br>{{/title}}
+{{^title}}This chart is untitled.<br>{{/title}}
+{{#subtitle}}It has the subtitle '{{subtitle}}'.<br>{{/subtitle}}
+{{#caption}}It has caption '{{caption}}'.<br>{{/caption}}
+{{/annotations}}
+{{#^singlepanel}}The chart is comprised of {{npanels}} panels containing sub-charts,
+{{#singlerow}} arranged horizontally.<br>{{/singlerow}}
+{{#singlecol}} arranged vertically.<br>{{/singlecol}}
+{{#panelgrid}} arranged in a grid.<br>{{/panelgrid}}
+{{^singlerow}}The {{#singlecol}}panels{{/singlecol}}{{^singlecol}}panel rows{{/singlecol}}
+ represent different values of {{panelrows}}.<br>{{/singlerow}}
+{{^singlecol}}The {{#singlerow}}panels{{/singlerow}}{{^singlerow}}panel columns{{/singlerow}}
+ represent different values of {{panelcols}}.<br>{{/singlecol}}
+{{/singlepanel}}
+{{^xaxis}}There is no x-axis.<br>{{/xaxis}}
+{{#xaxis}}{{#^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has x-axis '{{xlabel}}'
+{{#samescale}} with labels {{#xtickitems}}{{label}}{{sep}}{{/xtickitems}}{{/samescale}}
+.<br>{{/xaxis}}
+{{^yaxis}}There is no y-axis.<br>{{/yaxis}}
+{{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}'
+{{#samescale}} with labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}{{/samescale}}
+.<br>{{/yaxis}}
+{{#legends}}
+{{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
+{{#scalediscrete}}, with {{scalenlevels}} levels:
+{{#scalelevelitems}}<br>{{level}} represented by {{aes}} {{map}}{{sep}}
+{{/scalelevelitems}}
+{{/scalediscrete}}
+{{^scalediscrete}}, ranging from {{scalefrom}} represented by {{aes}} {{scalemapfrom}}
+ to {{scaleto}} represented by {{aes}} {{scalemapto}}{{/scalediscrete}}
+.<br>
+{{/hidden}}
+{{#hidden}}In this chart {{aes}} is used to represent {{mapping}}
+{{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}. The legend that would normally indicate this has been hidden.<br>
+{{/hidden}}
+{{/legends}}
+{{^singlelayer}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has {{nlayers}} layers.<br>{{/singlelayer}}
+{{#panels}}
+{{>ggPanelTemplate}}
+{{/panels}}
+"
+ggPanelTemplate,"
+{{^singlepanel}}
+Panel {{panelnum}}
+{{#panelgrid}} is in row {{row}} and col {{col}} and{{/panelgrid}}
+ represents data for{{#vars}} {{varname}} = {{value}}{{/vars}}.<br>
+{{^samescale}}
+In this panel, x-axis '{{xlabel}}' has labels {{#xtickitems}}{{label}}{{sep}}{{/xtickitems}}.<br>
+In this panel, y-axis '{{ylabel}}' has labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}.<br>
+{{/samescale}}
+{{/singlepanel}}
+{{#panellayers}}
+{{>ggLayerTemplate}}
+{{/panellayers}}
+"
+ggLayerTemplate,"
+{{#badtransform}}
+Data is transformed with tranformation {{transform}} which doesn't seem to have an inverse. 
+Data values may be reported incorrectly.
+{{/badtransform}}
+{{^singlelayer}}Layer {{layernum}}
+{{^singlepanel}} of panel {{panelnum}}{{/singlepanel}} is {{/singlelayer}}
+{{#singlelayer}}
+{{^singlepanel}}Panel {{panelnum}} is {{/singlepanel}}
+{{#singlepanel}}The chart is {{/singlepanel}}
+{{/singlelayer}}
+{{#typehline}}
+{{n}} horizontal line{{#s}}s{{/s}}
+{{^largecount}} as follows:{{#items}}<br>Line at y position {{yintercept}}
+{{#size}} with size {{size}}{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}},{{/size}}
+{{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}},{{/linetype}}
+{{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
+{{sep}}{{/items}}
+{{/largecount}}.<br>
+{{/typehline}}
+{{#typebar}}
+a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
+{{^largecount}}
+{{#items}}Bar {{itemnum}}
+{{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
+{{^xmin}} is centered horizontally at {{x}}{{/xmin}}
+, and spans vertically from {{ymin}} to {{ymax}}
+{{#fill}} with fill colour {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
+{{#colour}} with border colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
+{{#linetype}} with border line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}{{/linetype}}
+{{#size}} with border line width {{size}}{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
+.<br>{{/items}}
+{{/largecount}}
+{{/typebar}}
+{{#typepoint}}
+a set of {{n}} point{{#s}}s{{/s}}.<br>
+{{^largecount}}
+The points are at:<br>
+{{#items}}({{x}}, {{y}})
+{{#size}} size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
+{{#shape}} shape {{shape}}{{#shapemap}} which maps to {{shapelabel}} = {{shapemap}}{{/shapemap}}{{/shape}}
+{{#colour}} colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
+{{#fill}} fill {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
+{{#alpha}} alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}{{/alpha}}
+{{sep}}<br>{{/items}}
+{{/largecount}}
+{{/typepoint}}
+{{#typeline}}
+a set of {{n}} line{{#s}}s{{/s}}.<br>
+{{#broken}}The line{{#s}}s are{{/s}}{{^s}} is{{/s}} broken or missing where NA values appear or where points exceed the plot boundaries.<br>{{/broken}}
+{{^largecount}}
+{{#lines}}
+Line {{linenum}} connects {{npoints}} points{{^largecount}}, at {{#items}}({{x}}, {{y}}){{sep}}{{/items}}{{/largecount}}.<br>
+{{#alphavarying}}The alpha value varies along the length of this line.<br>{{/alphavarying}}
+{{#alpha}}This line has alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}.<br>{{/alpha}}
+{{#colourvarying}}The colour varies along the length of this line.<br>{{/colourvarying}}
+{{#colour}}This line has colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}.<br>{{/colour}}
+{{#sizevarying}}The line size varies along the length of this line.<br>{{/sizevarying}}
+{{#size}}This line has line size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}.<br>{{/size}}
+{{#linetypevarying}}The line type varies along the length of this line.<br>{{/linetypevarying}}
+{{#linetype}}This line has line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}.<br>{{/linetype}}
+{{/lines}}
+{{/largecount}}
+{{/typeline}}
+{{#typebox}}
+a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
+{{#items}}
+There is a box at x={{x}}
+{{#alpha}} with alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}{{/alpha}}
+{{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
+{{#fill}} with fill {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
+{{#size}} with line size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
+{{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}{{/linetype}}
+.<br>It has median {{middle}}.
+ The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.<br>
+There are {{noutliers}} outliers for this boxplot.<br>
+{{/items}}
+{{/typebox}}
+{{#typesmooth}}
+a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci}}.<br>
+{{/typesmooth}}
+{{#typeunknown}}
+a type that VI isn't able to process.<br>
+{{/typeunknown}}
+{{#layeraes}}
+{{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}
+has {{aes}} set to {{mapping}}.<br>
+{{/layeraes}}
+"
+

@@ -47,6 +47,7 @@ Imports:
     nortest,
     rmarkdown,
     utils,
+    whisker,
     XML,
     xtable
 Suggests:
