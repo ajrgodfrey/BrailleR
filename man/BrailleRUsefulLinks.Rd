@@ -1,9 +1,11 @@
 \name{BrailleRUsefulLinks}
 \alias{BrailleRHome}
+\alias{BrailleRInAction}
 \alias{LURN}
-\title{Open the BrailleR Project or Let's Use R Now home page in your browser}
+\title{Open the home page for the BrailleR Project, the BrailleR in Action book, or the Let's Use R Now (LURN) book in your browser}
 \usage{
 BrailleRHome()
+BrailleRInAction()
 LURN(BlindVersion = getOption("BrailleR.VI"))
 }
 \arguments{
