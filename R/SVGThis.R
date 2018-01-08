@@ -4,7 +4,7 @@
 
 # this from Paul via maps example
 ## chekc it is not already incorporated into new version of gridSVG.
-addInfo <- function(name, title, desc) {
+.addInfo <- function(name, title, desc) {
   grid::grid.set(
       name,
       grid::gTree(
@@ -15,7 +15,7 @@ addInfo <- function(name, title, desc) {
 }
 
 # next is partly from Paul via maps example, with additions from Jonathan
-MakeTigerReady =
+.MakeTigerReady =
     function(svgfile) {  # for alterations needed on all SVG files
       if (file.exists(svgfile)) {
         cat("\n", file = svgfile, append = TRUE)  # otherwise warnings returned
@@ -46,7 +46,7 @@ SVGThis.default =
 
           # then export to SVG
           gridSVG::grid.export(name = file)
-          MakeTigerReady(svgfile = file)
+          .MakeTigerReady(svgfile = file)
           # no specific processing to be done in this function.
         }  # end open device condition
             else {  # no current device
@@ -68,7 +68,7 @@ SVGThis.boxplot =
       gridGraphics::grid.echo()  # boxplot() currently uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
 
@@ -80,7 +80,7 @@ SVGThis.dotplot =
       gridGraphics::grid.echo()  # dotplot() currently uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
 
@@ -101,7 +101,7 @@ SVGThis.eulerr =
       gridSVG::grid.export(name = file)
       dev.off()
 
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
 
@@ -118,7 +118,7 @@ SVGThis.ggplot =
       gridSVG::grid.export(name = file)
       if (createDevice) 
         dev.off()
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
 
@@ -135,9 +135,9 @@ SVGThis.histogram =
       gridSVG::grid.garnish(
           "graphics-plot-1-left-axis-line-1", title = "the y axis")
       # these titles are included in the <g> tag not a <title> tag
-      addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
+      .addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
               desc = "need something much smarter in here")
-      addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
+      .addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
               desc = "need something much smarter in here")
 #.SVGThisBase(x)
       # add class-specific content to svg file from here onwards
@@ -146,7 +146,7 @@ SVGThis.histogram =
       # find some way to embed the object from which the graph was created
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       return(invisible(NULL))
     }
 
@@ -157,9 +157,9 @@ SVGThis.histogram =
       gridSVG::grid.garnish(
           "graphics-plot-1-left-axis-line-1", title = "the y axis")
       # these titles are included in the <g> tag not a <title> tag
-      addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
+      .addInfo("graphics-plot-1-bottom-axis-line-1", title = "the x axis",
               desc = "need something much smarter in here")
-      addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
+      .addInfo("graphics-plot-1-left-axis-line-1", title = "the y axis",
               desc = "need something much smarter in here")
 }
 
@@ -171,7 +171,7 @@ x$data=NULL
       gridGraphics::grid.echo()  # plot() uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       message("SVG file created.\n")
       return(invisible(NULL))
 }
@@ -181,7 +181,7 @@ SVGThis.tsplot = function(x, file = "test.svg", ...) {
       gridGraphics::grid.echo()  # plot() uses graphics package
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
-      MakeTigerReady(svgfile = file)
+      .MakeTigerReady(svgfile = file)
       message("SVG file created.\n")
       return(invisible(NULL))
 }

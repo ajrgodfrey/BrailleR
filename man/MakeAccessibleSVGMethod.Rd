@@ -1,10 +1,10 @@
 \name{MakeAccessibleSVGMethod}
 \alias{MakeAccessibleSVG}
 \alias{MakeAccessibleSVG.default}
+\alias{MakeAccessibleSVG.ggplot}
 \alias{MakeAccessibleSVG.histogram}
 \alias{MakeAccessibleSVG.scatterplot}
 \alias{MakeAccessibleSVG.tsplot}
-\alias{MakeAccessibleSVG.ggplot}
 
 \title{Create matched pairs of SVG and XML files to make an accessible graph experience.}
 \description{Creates the necessary SVG and XML files for a graph object (as long as it has a class assigned) or the current graph window.}

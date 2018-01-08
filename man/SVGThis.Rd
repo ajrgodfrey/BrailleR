@@ -12,7 +12,7 @@
 \alias{addInfo}
 
 \title{Save commonly used graphs as structured SVG files.}
-\description{Converts a graph object (as long as it has a class assigned) or the current graph window to an SVG file that can be viewed using the  Tiger Player software available from ViewPlus Inc. At present, the SVG needs manual editing using the Tiger Transformer software before viewing.}
+\description{Converts a graph object (as long as it has a class assigned) or the current graph window to an SVG file that can be viewed using a browser (not IE) or the  Tiger Player software available from ViewPlus Inc. At present, the SVG needs manual editing using the Tiger Transformer software before viewing in the Tiger Player.}
 \usage{
 SVGThis(x, file = "test.svg", ...)}
 \arguments{
@@ -38,5 +38,3 @@ P. Dengler et al. (2011) Scalable vector graphics (SVG) 1.1, second edition. W3C
 x=rnorm(1000)
 #SVGThis(hist(x))
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
