@@ -52,7 +52,7 @@ VI(x, Describe=FALSE, ...)
 \details{
 This is the general help page for the VI() functionality. Specific help pages will be created if the ability to alter the outcome through user input warrants. See below for more detail on these.
 
-Describe() is for explaining how a given type of graph appears to the sighted world and is intended for use by blind people who do not know how that graph looks. There is room to add hints for displaying the graphs in a more visually appealing manner. In contrast, VI() is intended to extract the specific details for hte particular graph or output concerned.
+Describe() is for explaining how a given type of graph appears to the sighted world and is intended for use by blind people who do not know how that graph looks. There is room to add hints for displaying the graphs in a more visually appealing manner. In contrast, VI() is intended to extract the specific details for the particular graph or output concerned.
 
 
 Further methods can be written by users (blind or sighted). Please submit to the package maintainer for possible inclusion in subsequent releases of the package.
