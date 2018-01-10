@@ -41,5 +41,3 @@ OneFactor("Ozone", "Month", airquality2)
 # N.B. Various files and a folder were created in the working directory. 
 # Please investigate them to see how this function worked.
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -36,4 +36,6 @@ Saves an R markdown file, (and then if \code{Process=TRUE}) an R script file,  a
 Ozone=airquality$Ozone
 UniDesc(Ozone, View=FALSE)
 rm(Ozone)
+# N.B. Various files and a folder were created in the working directory. 
+# Please investigate them to see how this function worked.
 }
