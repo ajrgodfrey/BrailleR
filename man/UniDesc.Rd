@@ -37,5 +37,3 @@ Ozone=airquality$Ozone
 UniDesc(Ozone, View=FALSE)
 rm(Ozone)
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
