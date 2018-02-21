@@ -1,3 +1,8 @@
+
+# v0.27.3
+- changed VIgrep() and VIsort() to grep.VIgraph() and sort.VIgraph()
+- added gsub.VIgraph()
+
 # v0.27.2
 - introduced reference to the BrailleR in Action text
 - updated vignettes with more direct links to BrailleR in Action

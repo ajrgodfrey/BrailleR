@@ -1,7 +1,7 @@
 
-R version 3.3.3 (2017-03-06) -- "Another Canoe"
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
 Copyright (C) 2017 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -27,6 +27,10 @@ The following objects are masked from 'package:graphics':
 The following object is masked from 'package:utils':
 
     history
+
+The following objects are masked from 'package:base':
+
+    grep, gsub
 
 > library(ggplot2)
 
@@ -549,4 +553,4 @@ The points are at:
 > 
 > proc.time()
    user  system elapsed 
-   4.73    0.31    5.04 
+  9.121   0.221  12.063 

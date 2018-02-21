@@ -141,9 +141,9 @@ print.VIgraph = function(x, ...) {
   l[(lapply(l,length) > 0)] 
 }
 
-VIsort = function(x, sortby="x", decreasing = FALSE) {
-  if (!sortby %in% c("x", "y")) {
-    message('Valid sortby parameters are "x" or "y".')
+sort.VIgraph <- function(x, decreasing = FALSE, by="x", ...) {
+  if (!by %in% c("x", "y")) {
+    message('Valid by parameters are "x" or "y".')
     return(x)    # Return unchanged
   }
   VIgg = x$VIgg
@@ -156,7 +156,7 @@ VIsort = function(x, sortby="x", decreasing = FALSE) {
       df = VIgg$panel[[i]]$panellayers[[j]]$scaledata
       VIgg$panels[[i]]$panellayers[[j]] = within(VIgg$panels[[i]]$panellayers[[j]],
       {
-        sortorder = order(if (sortby=="x") scaledata$x else scaledata$y, decreasing=decreasing)
+        sortorder = order(if (by=="x") scaledata$x else scaledata$y, decreasing=decreasing)
         scaledata = scaledata[sortorder,]
       })
     }
@@ -167,19 +167,43 @@ VIsort = function(x, sortby="x", decreasing = FALSE) {
   return(VIgraph)
 }
 
+grep <- function(pattern, x, ...) {
+    ## Dispatch on 'x' rather than 'pattern' !!!
+    UseMethod("grep", x)
+}
+
+grep.default <-
+    function(pattern, x, ignore.case = FALSE, perl = FALSE, value = FALSE,
+             fixed = FALSE, useBytes = FALSE, invert = FALSE, ...) {
+        base::grep(pattern, x, ignore.case, perl, value,
+                   fixed, useBytes, invert)
+    }
 
 # Returns the VIgraph object with the text trimmed down to only those rows
 # containing the specified pattern.  Passes extra parameters on to grepl.
 # Note that only the text portion of the VIgraph is modified; the complete
 # VIgg structure is still included
-VIgrep = function(pattern, x,...) {
-  if (class(x) != "VIgraph") {
-    message(paste("VIgrep doesn't know how to process this object.",
-                  "Only the output from running VI on a ggplot object can be processed by VIgrep."))
-    return(NULL)
-   }
-  x$text = x$text[grepl(pattern, x$text, ...)]
-  x
+grep.VIgraph <- function(pattern, x, ...) {
+    x$text = grep(pattern, x$text, value=TRUE, ...)
+    x
+}
+
+gsub <- function(pattern, replacement, x, ...) {
+    ## Dispatch on 'x' rather than 'pattern' !!!
+    UseMethod("gsub", x)
+}
+  
+gsub.default <-
+    function(pattern, replacement, x,
+             ignore.case = FALSE, perl = FALSE,
+             fixed = FALSE, useBytes = FALSE, ...) {
+        base::gsub(pattern, replacement, x, ignore.case, perl, 
+                   fixed, useBytes)
+    }
+
+gsub.VIgraph <- function(pattern, replacement, x, ...) {
+    x$text = gsub(pattern, replacement, x$text, ...)
+    x
 }
 
 # threshold specifies how many points, lines, etc will be explicitly listed.
