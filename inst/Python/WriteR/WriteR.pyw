@@ -51,6 +51,7 @@ ID_SYMBOL_LESSEQL = wx.NewId()
 ID_SYMBOL_NOTEQL = wx.NewId() 
 
 ID_RCOMMAND = wx.NewId()
+ID_COMMENTOUT = wx.NewId()
 ID_RCHUNK = wx.NewId()
 ID_RGRAPH = wx.NewId()
 ID_RPIPE = wx.NewId()
@@ -478,9 +479,10 @@ class MainWindow(wx.Frame):
         statsMenu = wx.Menu()
         for id, label, helpText, handler in \
                 [
-                 (ID_RCOMMAND, "Insert inline R command", "insert an in-line R command", self.OnRCommand),
+                 (ID_RCOMMAND, "Insert inline R command\tAlt+c", "insert an in-line R command", self.OnRCommand),
                  (ID_RCHUNK, "Insert R code chunk\tAlt+R", "insert standard R code chunk", self.OnRChunk),
                  (ID_RGRAPH, "Insert R code chunk for a graph\tAlt+G", "insert R code chunk for a graph", self.OnRGraph),
+                 (ID_COMMENTOUT, "Comment out a selection\tAlt+Shift+#", "Comment out some selected text or insert the delimiters for a comment", self.OnRmdComment),
                  (ID_RLASSIGN, "Insert a left assignment\tCtrl+<", "insert R code for the left assignment <-", self.OnRLAssign),
                  (ID_RRASSIGN, "Insert a right assignment\tCtrl+>", "insert R code for the right assignment ->", self.OnRRAssign),
                  (ID_RPIPE, "Insert a pipe operator\tCtrl+Shift+P", "insert R code for the pipe operator %>%", self.OnRPipe)]:
@@ -668,6 +670,7 @@ class MainWindow(wx.Frame):
     OnRCommand = RMarkdownEvents.OnRCommand
     OnRChunk = RMarkdownEvents.OnRChunk
     OnRGraph = RMarkdownEvents.OnRGraph
+    OnRmdComment = RMarkdownEvents.OnRmdComment
     OnRPipe = RMarkdownEvents.OnRPipe
     OnRLAssign = RMarkdownEvents.OnRLAssign
     OnRRAssign = RMarkdownEvents.OnRRAssign
