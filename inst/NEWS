@@ -1,5 +1,6 @@
 
 # v0.27.3
+- added WriteR updates
 - changed VIgrep() and VIsort() to grep.VIgraph() and sort.VIgraph()
 - added gsub.VIgraph()
 
