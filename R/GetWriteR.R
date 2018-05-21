@@ -1,4 +1,5 @@
 # look out for two versions of GetWriteR() second one is while the exe file is broken.
+# look out for two versions of GetWxPython27(), the second is experimental and uses a Python shell command command to pull wxPython
 
 GetWriteR =
     function(UseGitHub = TRUE) {
@@ -153,3 +154,35 @@ GetWriteR = function(UseGitHub = TRUE) {
               message("This command is temporarily unavailable.")
             }
 
+
+.PullWxUsingPip = function(){
+    if(reticulate::py_module_available("wx")){
+        system("pip install -U wxPython")
+        }
+    else{
+        system("pip install wxPython")
+        }
+    }
+
+
+GetWxPython27 =
+    function() {
+      Success = FALSE
+      if (interactive()) {
+        if (.Platform$OS.type == "windows") {
+          if(reticulate::py_available(TRUE)){
+            if(reticulate::py_config()$version == "2.7"){
+              Success = .PullWxUsingPip()
+            } else {
+              warning("There is no installation of Python 2.7.\n")
+            }
+          }
+        } else {
+          warning(
+              "This function is for users running R under the Windows operating system.\n")
+        }
+      } else {
+        warning("This function is meant for use in interactive mode only.\n")
+      }
+      return(invisible(Success))
+    }

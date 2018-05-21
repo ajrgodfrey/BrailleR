@@ -1,3 +1,18 @@
+.IsWriteRAvailable =
+    function(){
+      Success = FALSE
+      if(reticulate::py_config()$version == "2.7" && reticulate::py_module_available("wx")){
+        Success=TRUE
+      }else{
+        if(reticulate::py_config()$version == "2.7"){
+          Success = .PullWxUsingPip
+        }else{
+          warning("This function requires installation of Python 2.7.\n")
+        }
+      }
+      return(invisible(Success))
+      }
+
 # Running the WriteR application
 # only for Windows users at present.
 
@@ -5,7 +20,7 @@ WriteR =
     function(file = NULL, math = c("webTeX", "MathJax")) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (Sys.which("python") != "") {
+          if (.IsWriteRAvailable()) {
             if (!is.null(file)) {
               if (!file.exists(file)) {
                 cat("Starting new file\n", file = file)
@@ -16,7 +31,9 @@ WriteR =
                         ifelse(is.null(file), "", file)))
           } else {
             warning(
-                "This function requires an installation of Python 2.7 and wxPython 2.8.\n")
+                "This function requires an installation of Python 2.7 and wxPython.\n")
+            message(
+                "You could use GetPython27() and GetWxPython27() to help install them.\n")
           }
         } else {
           warning(

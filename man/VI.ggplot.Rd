@@ -31,7 +31,7 @@ misleading in some circumstances.
 if(require(ggplot2)){
 g = ggplot(economics_long, aes(date, value01, colour = variable))
 g = g + geom_line() + ggtitle('dummy title')
-VI.ggplot(g)
+VI(g)
 g
 }
 }
