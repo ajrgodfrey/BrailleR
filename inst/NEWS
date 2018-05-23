@@ -9,6 +9,7 @@
 - added WriteR updates
 - changed VIgrep() and VIsort() to grep.VIgraph() and sort.VIgraph()
 - added gsub.VIgraph()
+- finally fixed GetPython27 now that installr::install_python() is available to all (Windows) users.
 
 # v0.27.2
 - introduced reference to the BrailleR in Action text

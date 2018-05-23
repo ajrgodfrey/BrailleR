@@ -99,12 +99,7 @@ GetPython27 =
             if (requireNamespace("installr")) {
               message(
                 "This command will download a file and save it to your hard drive.")
-              installr::install.URL(
-                "https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi",
-                download_dir = getOption("BrailleR.Folder"),
-                keep_install_file = TRUE)
-              # when the CRAN version of installr has the following function then the above line will be removed.
-            #installr::install.python(version_number = 2, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
+            installr::install.python(version_number = 2, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
             message(
                 "The installer file has been added to your MyBrailleR folder.")
               message(
