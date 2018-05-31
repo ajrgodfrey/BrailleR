@@ -1,3 +1,4 @@
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)
 
 ## The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
 
@@ -20,6 +21,10 @@ R is perhaps the most blind-friendly statistical software option because all scr
 
 Any assistance to fill in the numerous gaps in what BrailleR delivers will be most gratefully received. As the primary developer of this package is himself blind, attempts to find out if the tools being created actually do replace visual elements or tasks requires a sighted person to sit alongside to offer commentary.
 
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct.](CONDUCT.md)
+By participating in the BrailleR Project, you are agreeing to this code of conduct. Please check you agree with its terms before participating.
 
 ### Wish list
 
