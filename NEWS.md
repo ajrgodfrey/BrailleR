@@ -5,6 +5,7 @@
 - added internal functions for pulling the WxPython module and checking if the necessary Python and WxPython systems are in place.
 - updated GetWxPython27() so that it uses a Python pip install command in the shell instead of a convoluted download and save process. This should obviate the need to have a manual installation of wxPython which is needed for WriteR.
 - added GetPython3() because WriteR is Py3 compatible.
+- added GetCygwin(), GetRStudio() to help speed up installations. 
 - added the pdf2html() function. This is dependent on Python 2.7 at present.
 - added Marshall Flax to contributors for substantial work on WriteR
 - added a Python27 folder to the Python folder which contains copies of scripts installed in subfolders of the Python27 installation folder that may not be on the system path. First set of scripts pulled over and readme.txt created accordingly.

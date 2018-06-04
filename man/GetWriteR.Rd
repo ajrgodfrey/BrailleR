@@ -5,10 +5,13 @@
 \alias{GetRStudio}
 \alias{GetPython27}
 \alias{GetPython3}
+\alias{GetCygwin}
 \alias{GetWxPython27}
 \title{Download an executable for Windows users}
 \usage{
 Get7zip()
+
+GetCygwin(x64 = TRUE)
 
 GetPandoc()
 
@@ -23,6 +26,7 @@ GetWxPython27()
 }
 \arguments{
 \item{UseGitHub}{Use the latest version found via GitHub or an older version found on the R-Resources.massey.ac.nz webpage.}
+\item{x64}{Use the 64 bit version if appropriate.}
 }
 \details{ This function assumes you have a current internet connection because it downloads a File. For WriteR, it is a zip file which gets unpacked in your current working directory, then  The zip file is removed and the executable file is moved to your chosen MyBrailleR folder.
 
