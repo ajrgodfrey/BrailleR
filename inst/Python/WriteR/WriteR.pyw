@@ -6,6 +6,7 @@
 
 
 import wx 
+import wx.adv
 import sys
 import re
 # import FileMenuEvents # problems with this one
@@ -14,6 +15,10 @@ import HelpMenuEvents
 import MathInserts
 import MyConsole
 import RMarkdownEvents
+try:
+    import winsound
+except ImportError:
+    print("Winsound module not found\n")
 from wx.py.shell import Shell
 from wx.aui import AuiManager, AuiPaneInfo
 from threading import Thread, Event
@@ -21,10 +26,12 @@ from subprocess import Popen, PIPE, STDOUT
 from os.path import join, split, isdir, expanduser, realpath
 from os import walk
 from time import asctime, sleep
+from six import iteritems
 
 print_option = False
 display_rscript_cmd = True
-playBeep = False
+beep = 'winsound' in sys.modules
+system_tray = True
 
 # set up some ID tags
 ID_BUILD = wx.NewId()
@@ -34,6 +41,7 @@ ID_SETTINGS = wx.NewId()
 
 ID_FINDONLY = wx.NewId()
 ID_FINDNEXT = wx.NewId()
+ID_FINDPREV = wx.NewId()
 ID_FINDREPLACE = wx.NewId()
 ID_GOTO  = wx.NewId()
 ID_WORDCOUNT = wx.NewId()
@@ -132,7 +140,7 @@ SBText = "This program is for editing R Markdown files"
 
 def dcf_dumps(data, sort_keys=True):
     string = ""
-    for k, v in sorted(data.iteritems()):
+    for k, v in sorted(iteritems(data)):
         if v is None: v = 'None'
         string += "{:}: {:}\n".format(k, v.replace('\n', '\n '))
     return string
@@ -153,27 +161,33 @@ def dcf_loads(string):
 
 
 def printing(*args):
-    if print_option: print args 
+    if print_option: print (args)
 
 class BashProcessThread(Thread):
     def __init__(self, flag, input_list, writelineFunc, doneFunc):
         Thread.__init__(self)
+        busy = wx.BusyInfo("Please wait")
         self.flag = flag
         self.writelineFunc = writelineFunc
         self.setDaemon(True)
         self.input_list = input_list
         printing(input_list)
-        self.comp_thread = Popen(input_list, stdout=PIPE, stderr=STDOUT)
-
-        if display_rscript_cmd:
-           writelineFunc('\n'.join(input_list))
-           writelineFunc('\n\n')
-
-        for line in self.comp_thread.stdout:
-            writelineFunc(line)
-
-        returnCode = self.comp_thread.wait()
-        doneFunc(returnCode)
+        try: 
+            self.comp_thread = Popen(input_list, stdout=PIPE, stderr=STDOUT)
+    
+            if display_rscript_cmd:
+               writelineFunc('\n'.join(input_list))
+               writelineFunc('\n\n')
+    
+            for line in self.comp_thread.stdout:
+                writelineFunc(line)
+    
+            returnCode = self.comp_thread.wait()
+            del busy
+            doneFunc(returnCode)
+        except Exception as error:
+            del busy
+            doneFunc("\nCaught error {} for {}".format(error, input_list))
 
 ID_DIRECTORY_CHANGE = wx.NewId()
 ID_CRAN = wx.NewId()
@@ -243,19 +257,13 @@ class MainWindow(wx.Frame):
                           CenterPane().Hide())
         self._mgr.GetPane("editor").Show()
         self.editor.SetFocus()
-        self.editor.SelectAll()
-
-        self.focusConsole = False
-
-        if playBeep:
-            self.nope=wx.Sound("nope.wav")
+        self.editor.SelectAll() 
+        self.focusConsole = False 
+        self.priorMatchCol = 0
+        self.priorMatchRow = 0
         self._mgr.Update()
         # self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
 
-
-    def Nope(self):
-        if playBeep:
-           self.nope.Play(wx.SOUND_ASYNC)
 
     def CreateExteriorWindowComponents(self):
         self.CreateMenu()
@@ -287,15 +295,16 @@ class MainWindow(wx.Frame):
                  (wx.ID_PASTE, "&Paste\tCtrl+V", "Paste text from clipboard", self.OnPaste),
                  (wx.ID_SELECTALL, "Select all\tCtrl+A", "Highlight entire text", self.OnSelectAll),
                  (wx.ID_DELETE, "&Delete", "Delete highlighted text", self.OnDelete),
-                 (ID_WORDCOUNT, "Word count (broken)\tCtrl+w", "get a word count of the entire text", self.OnWordCount),
+                 (ID_WORDCOUNT, "Word count\tCtrl+w", "get a word count of the entire text", self.OnWordCount),
                  (None,) * 4,
                  (ID_FINDONLY, "Find\tCtrl+F", "Open a standard find dialog box", self.OnShowFind),
                  (ID_FINDNEXT, "FindNext\tF3", "FindNext", self.F3Next),
+                 (ID_FINDPREV, "FindPrevious\tShift+F3", "FindPrev", self.ShiftF3Previous),
                  (ID_GOTO, "Go to line\tCtrl+g", "Open a dialog box to choose a line number", self.OnGoToLine),
                  (ID_FINDREPLACE, "Find/replace\tCtrl+H", "Open a find/replace dialog box", self.OnShowFindReplace),
                  (ID_SETMARK, "Set Mark\tCtrl+SPACE", "Set Mark", self.OnSetMark),
                  (ID_SELECTTOMARK , "Select To Mark\tAlt+Ctrl+SPACE", "Select To Mark", self.OnSelectToMark),
-                 (ID_ALTERNATE_FOCUS , "Alternate Focus\tF8", "Alternate Focus", self.AlternateFocus),
+                 (ID_ALTERNATE_FOCUS , "Alternate Focus\tF4", "Alternate Focus", self.AlternateFocus),
                  (None,) * 4,
                  (ID_SETTINGS, 'Settings', "Setup the editor to your liking", self.OnSettings)]:
             if id == None:
@@ -335,7 +344,7 @@ class MainWindow(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnSelectRenderPdf, self.ChooseRenderPdf) 
         self.ChooseRenderAll = renderMenu.Append(wx.ID_ANY, "Render into all specified formats", "Use the rmarkdown package and render function to create multiple output documents", wx.ITEM_RADIO)
         self.Bind(wx.EVT_MENU, self.OnSelectRenderAll, self.ChooseRenderAll) 
-        buildMenu.AppendMenu(-1, "Set render process to...", renderMenu) # Add the render Menu as a submenu to the build menu
+        buildMenu.Append(-1, "Set render process to...", renderMenu) # Add the render Menu as a submenu to the build menu
         for id, label, helpText, handler in \
                 [
                  (ID_KNIT2HTML, "Knit to html\tF6", "Knit the script to HTML", self.OnKnit2html),
@@ -373,7 +382,7 @@ class MainWindow(wx.Frame):
             else:
                 item = headingsMenu.Append(id, label, helpText)
                 self.Bind(wx.EVT_MENU, handler, item)
-        insertMenu.AppendMenu(-1, "Heading", headingsMenu)
+        insertMenu.Append(-1, "Heading", headingsMenu)
         menuBar.Append(insertMenu, "Insert")  # Add the Insert Menu to the MenuBar
 
         formatMenu = wx.Menu()
@@ -420,7 +429,7 @@ class MainWindow(wx.Frame):
             else:
                 item = symbolsMenu.Append(id, label, helpText)
                 self.Bind(wx.EVT_MENU, handler, item)
-        mathsMenu.AppendMenu(-1, "Symbols", symbolsMenu)
+        mathsMenu.Append(-1, "Symbols", symbolsMenu)
         structuresMenu = wx.Menu()
         for id, label, helpText, handler in \
                 [
@@ -439,7 +448,7 @@ class MainWindow(wx.Frame):
             else:
                 item = structuresMenu.Append(id, label, helpText)
                 self.Bind(wx.EVT_MENU, handler, item)
-        mathsMenu.AppendMenu(-1, "Structures", structuresMenu)# Add the structures Menu as a submenu to the main menu
+        mathsMenu.Append(-1, "Structures", structuresMenu)# Add the structures Menu as a submenu to the main menu
         GreekMenu = wx.Menu()
         for id, label, helpText, handler in \
                 [
@@ -474,7 +483,7 @@ class MainWindow(wx.Frame):
             else:
                 item = GreekMenu.Append(id, label, helpText)
                 self.Bind(wx.EVT_MENU, handler, item)
-        mathsMenu.AppendMenu(-1, "Greek letters", GreekMenu)
+        mathsMenu.Append(-1, "Greek letters", GreekMenu)
         menuBar.Append(mathsMenu, "Maths")  # Add the maths Menu to the MenuBar
 
         statsMenu = wx.Menu()
@@ -540,10 +549,31 @@ class MainWindow(wx.Frame):
         if self.askUserForFilename(style=wx.FD_OPEN, **self.defaultFileDialogOptions()):
             self.fileOpen(self.dirname, self.filename)
 
+    def fatalError(self, message):
+        dialog = wx.MessageDialog(self, message, "Fatal Error", wx.OK)
+        dialog.ShowModal()
+        dialog.Destroy()
+        self.OnExit()
+
     def fileOpen(self, dirname, filename):
-        textfile = open(join(dirname, filename), "r")
-        self.editor.SetValue(textfile.read())
-        textfile.close()
+        path = join(dirname.strip(), filename)
+        try: 
+           textfile = open(path, "r")
+        except Exception as error:
+           self.fatalError("Unable to open {} because {}".format(path, error))
+           self.OnExit()
+
+        try: 
+           self.editor.SetValue(textfile.read())
+        except Exception as error:
+           self.fatalError("Unable to read {} into editor because {}".format(path, error))
+           self.OnExit()
+
+        try: 
+           textfile.close()
+        except Exception as error:
+           self.fatalError("Unable to close {} because {}".format(path, error))
+           self.OnExit()
 
     def OnNewFile(self, event):
         self.olddirname = self.dirname
@@ -555,7 +585,7 @@ class MainWindow(wx.Frame):
         self.OnSaveAs(event)
 
     def OnSaveAs(self, event):
-        if self.askUserForFilename(defaultFile=self.filename, style=wx.SAVE, **self.defaultFileDialogOptions()):
+        if self.askUserForFilename(defaultFile=self.filename, style=wx.FD_SAVE, **self.defaultFileDialogOptions()):
             self.OnSave(event)
 
     def OnSave(self, event):
@@ -563,15 +593,14 @@ class MainWindow(wx.Frame):
         textfile.write(self.editor.GetValue())
         textfile.close()
 
-
-    def OnExit(self, event):
-        self._mgr.UnInit()
+    def OnExit(self):
+        if self._mgr:
+           self._mgr.UnInit()
         self.Close()  # Close the main window.
 
     def OnSafeExit(self, event):
         self.OnSave(event)
-        self.OnExit(event)
-
+        self.OnExit()
 
     # help menu events
     OnAbout = HelpMenuEvents.OnAbout
@@ -583,7 +612,6 @@ class MainWindow(wx.Frame):
     OnCopy = EditMenuEvents.OnCopy
     OnCut = EditMenuEvents.OnCut
     OnGoToLine = EditMenuEvents.OnGoToLine
-    OnWordCount = EditMenuEvents.OnWordCount
 
 # view menu events
     def StatusBar(self):
@@ -591,8 +619,6 @@ class MainWindow(wx.Frame):
         self.statusbar.SetFieldsCount(3)
         self.statusbar.SetStatusWidths([-5, -2, -1])
         self.SetStatusText(SBText)
-
-
        
     def OnIncreaseFontSize(self, event):
         self.font.SetPointSize(self.font.GetPointSize()+1)
@@ -859,7 +885,7 @@ class MainWindow(wx.Frame):
             elif isdir("C:\\Program Files (x86)\\R"):
                 hold = "C:\\Program Files (x86)\\R"
             else:
-                print warn; return
+                print (warn); return
             options = [join(r, rscript) for r, d, f in walk(hold) if rscript in f]
             printing('options', options)
             if len(options) > 0:
@@ -877,7 +903,7 @@ class MainWindow(wx.Frame):
                             choice = op
                             version = vv
             else:
-                print warn; return
+                print (warn); return
         else:
             'something to get the information out of the settings file.'
         return choice
@@ -919,21 +945,61 @@ class MainWindow(wx.Frame):
 
     def OnSetMark(self, event):
         self.mark = self.editor.GetInsertionPoint()
+        if beep:
+           winsound.Beep(1000, 250)
+
+    def SetFocusConsole(self, toConsole):
+        if toConsole != self.focusConsole:
+           self.ActuallyAlternateFocus()
 
     def AlternateFocus(self, event):
+        self.ActuallyAlternateFocus()
+
+    def TellUser(self, text):
+        self.SetStatusText(text)
+        if system_tray:
+           try:
+              nm = wx.adv.NotificationMessage()
+              nm.SetMessage(text)
+              nm.SetParent(self)
+              nm.SetTitle("")
+              nm.SetFlags(wx.ICON_INFORMATION)
+              nm.Show(1)
+           except Exception as error:
+              print ("Problem setting notification {}".format(error))
+              pass
+
+    def OnWordCount(self, event):
+        text=self.editor.GetValue()
+        word_count=len(text.split())
+        (on, x, y) = self.editor.PositionToXY(self.editor.GetInsertionPoint())
+        line_count = len(text)
+        markdownState = RMarkdownEvents.CurrentMarkdown(self)
+        self.TellUser("{} words line {}/{} {}".format(word_count, y, line_count, markdownState))
+
+    def ActuallyAlternateFocus(self):
         if self.focusConsole:
            self.editor.SetFocus()
-           self.focusConsole = False
+           self.TellUser('editor')
+           if beep:
+              winsound.Beep(2000, 250)
         else:
            self.console.SetFocus()
-           self.focusConsole = True
+           self.TellUser('console')
+           if beep:
+              winsound.Beep(3000, 250)
+        self.focusConsole = not self.focusConsole
 
     def OnSelectToMark(self, event):
         insertionPoint = self.editor.GetInsertionPoint()
         if (self.mark < insertionPoint):
            self.editor.SetSelection(self.mark, insertionPoint)
+           if beep:
+              winsound.Beep(750, 250)
         elif (self.mark > insertionPoint):
            self.editor.SetSelection(insertionPoint, self.mark)
+           if beep:
+              winsound.Beep(1500, 250)
 
     def OnShowFindReplace(self, event):
         data = wx.FindReplaceData()
@@ -950,9 +1016,9 @@ class MainWindow(wx.Frame):
 
     def ComputeReFlags(self, event):
         if event.GetFlags() & wx.FR_MATCHCASE:
-           return re.LOCALE
+           return 0
         else:
-           return re.LOCALE | re.IGNORECASE
+           return re.IGNORECASE
 
     def ComputeReplacementString(self, event):
         return event.GetReplaceString()
@@ -960,16 +1026,19 @@ class MainWindow(wx.Frame):
     def MoveTo(self, row, col):
        self.priorMatchRow = row
        self.priorMatchCol = col
-       # self.console.write("MoveTo {},{}\n".format(row, col))
+       message = "Row {} Col {}".format(row, col)
+       self.TellUser(message)
        position = self.editor.XYToPosition(col, row)
        self.editor.SetInsertionPoint(position)
        self.editor.ShowPosition(position)
+       if beep:
+          winsound.Beep(1000, 250)
 
-
-    def FindFrom(self, currentColumn, currentRow):
+    def FindFrom(self, currentColumn, currentRow, reverseDirection):
         # Special logic for checking just part of current line
         currentLine = self.editor.GetLineText(currentRow)
-        if self.forward:
+        searchForward = self.forward != reverseDirection
+        if searchForward:
            matchObject = self.regex.search(currentLine[currentColumn+1:])
            if matchObject:
                self.MoveTo(currentRow, currentColumn + 1 + matchObject.start())
@@ -983,7 +1052,7 @@ class MainWindow(wx.Frame):
                return
 
         # General case for checking whole lines
-        if self.forward:
+        if searchForward:
            lineRange = range(currentRow+1, self.editor.GetNumberOfLines())
         else:
            lineRange = reversed(range(0, currentRow)) 
@@ -992,15 +1061,15 @@ class MainWindow(wx.Frame):
             line = self.editor.GetLineText(i)
             matchObject = self.regex.search(line)
             if matchObject:
-               if not self.forward:
+               if not searchForward:
                   for matchObject in self.regex.finditer(line):
                       pass
 
                self.MoveTo(i, matchObject.start())
                return
 
-        self.Nope()
-	# self.console.write("no match starting from row {} col {}\n".format(currentRow, currentColumn))
+        if beep:
+           winsound.Beep(500, 500)
 
     def ReplaceNext(self, event):
         return
@@ -1017,7 +1086,10 @@ class MainWindow(wx.Frame):
         self.editor.SetInsertionPoint(insertionPoint)
 
     def F3Next(self, event):
-        self.FindFrom(self.priorMatchCol, self.priorMatchRow)
+        self.FindFrom(self.priorMatchCol, self.priorMatchRow, False)
+
+    def ShiftF3Previous(self, event):
+        self.FindFrom(self.priorMatchCol, self.priorMatchRow, True)
 
     def OnFind(self, event):
         et = event.GetEventType()
@@ -1026,10 +1098,10 @@ class MainWindow(wx.Frame):
         self.forward = event.GetFlags() & wx.FR_DOWN
 
         if et == wx.wxEVT_COMMAND_FIND:
-            (col, row) = self.editor.PositionToXY(self.editor.GetInsertionPoint())
-            self.FindFrom(col, row)
+            (ok, col, row) = self.editor.PositionToXY(self.editor.GetInsertionPoint())
+            self.FindFrom(col, row, False)
         elif et == wx.wxEVT_COMMAND_FIND_NEXT:
-            self.FindFrom(self.priorMatchCol, self.priorMatchRow)
+            self.FindFrom(self.priorMatchCol, self.priorMatchRow, False)
         elif et == wx.wxEVT_COMMAND_FIND_REPLACE:
             self.ReplaceNext(event)
         elif et == wx.wxEVT_COMMAND_FIND_REPLACE_ALL:
