@@ -536,6 +536,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
                        c[,col])  # If not found just return what we got
     } else if (aes == "shape") {
       c[,col] = ifelse(values[,col] %in% 1:25, shapes[values[,col]+1], c[,col])
+    } else if (aes == "colour") {
+      c[,col] = colourName(values[,col])
     }
   }
   return(c)  
