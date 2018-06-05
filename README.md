@@ -1,6 +1,7 @@
+# The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)
 
-## The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
 
 
 ### Blind people's use of R
