@@ -28,7 +28,7 @@ WriteR =
             }
             shell(paste0('"', file.path(system.file(
                             "Python/WriteR/WriteR.pyw", package = "BrailleR")), '" ',
-                        ifelse(is.null(file), "", file)))
+                        ifelse(is.null(file), "", file)), wait=FALSE)
           } else {
             warning(
                 "This function requires an installation of Python 2.7 and wxPython.\n")

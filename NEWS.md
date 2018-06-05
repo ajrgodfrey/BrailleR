@@ -1,3 +1,8 @@
+# BrailleR 0.28.0
+
+- WriteR() slightly modified so that the terminal is not locked up while editing an Rmd file.
+- submitted to CRAN
+
 
 # BrailleR 0.27.3
 * Added a `NEWS.md` file to track changes to the package.
