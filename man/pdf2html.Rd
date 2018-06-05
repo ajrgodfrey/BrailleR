@@ -9,7 +9,7 @@ pdf2html(pdffile, htmlfile=sub(".pdf", ".html", pdffile))
 \item{htmlfile}{The filename for the resulting html; default is to change the file extension.}
 }
 \value{
-Logical: Has the conversion completed. Note that this does not mean the result is totally useful as this will depend on the quality ofhte input file.
+Logical: Has the conversion completed. Note that this does not mean the result is totally useful as this will depend on the quality of the input file.
 }
 \description{
 A blind user often has difficulty reading the content provided in pdf files. This tool is quite experimental at this stage. 

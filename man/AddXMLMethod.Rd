@@ -19,7 +19,7 @@ AddXML(x, file)
   \item{file}{The XML file to be created.}
 }
 \details{
-This is experimental work. At present, the proof of concept is based ona fairly standard histogram from the \pkg{graphics} package.
+This is experimental work. At present, the proof of concept is based on a fairly standard histogram from the \pkg{graphics} package.
 }
 \value{NULL. This function is solely for the purpose of creating XML files in the current working directory or in a path of the user's choosing.}
 \references{

@@ -20,7 +20,7 @@ Files starting with the word test are for testing the batch files. An R script a
 The other three batch files (ending in .bat) need to be moved to a folder on the user's path so that they can be called from anywhere. They could also be manually edited to suit the user's needs.
 
 The path.txt file shows the user what folders are already on the path list. The user can review this list and decide to alter the system variable if they so choose. The path.txt file has no value otherwise.}
-\author{A. Jonathan R. Godfrey with testign by JooYoung Seo}
+\author{A. Jonathan R. Godfrey with testing by JooYoung Seo}
 \section{Further instructions}{
 Once the RBatch.bat file has been moved to the desired folder that is included in the path for your system you can follow the following steps to get this function working fully.
 

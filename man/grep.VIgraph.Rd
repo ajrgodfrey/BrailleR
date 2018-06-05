@@ -6,7 +6,7 @@
 \alias{gsub.default}
 \alias{gsub.VIgraph}
 \title{
-String manipulation ofn the output produced by VI.ggplot
+String manipulation of the output produced by VI.ggplot
 }
 \description{
   Allows the output from VI.ggplot to be searched and replaced
