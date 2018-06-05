@@ -1,8 +1,11 @@
-# BrailleR 0.28.0
+# BrailleR 0.29.0
 
 - WriteR() slightly modified so that the terminal is not locked up while editing an Rmd file.
-- submitted to CRAN
+- introduced use of roloc package to define colours in human readable form.
 
+# BrailleR 0.28.0
+
+- submitted to CRAN
 
 # BrailleR 0.27.3
 * Added a `NEWS.md` file to track changes to the package.
