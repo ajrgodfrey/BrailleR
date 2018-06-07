@@ -5,10 +5,10 @@
 
 
 .AddHeadingTags =
-    function(htmlfile, outfile=htmlfile){
+    function(htmlfile, outfile=htmlfile, LowestHeadingLevel){
       InFile = readLines(htmlfile)
       TagDetails = .FindHeadingSizes(htmlfile)
-      for(i in 1:length(TagDetails$Sizes)){
+      for(i in 1:min(length(TagDetails$Sizes), LowestHeadingLevel)){
 cat("Font size", TagDetails$Sizes[i], "being turned into", TagDetails$HeadingTags[i], "\n")
         TempText = gsub(paste0('(.*)font-size:', TagDetails $Sizes[i], 'px">(.*)'), 
             paste0("\\1font-size:", TagDetails$Sizes[i], 'px"><', TagDetails$HeadingTags[i], ">\\2</",
@@ -48,10 +48,10 @@ cat("Font size", TagDetails$Sizes[i], "being turned into", TagDetails$HeadingTag
       writeLines(tempText, outfile)
     }
 
-.PageNo2H6 =
-    function(htmlfile, outfile=htmlfile){
+.PageNumbers2Headings =
+    function(htmlfile, outfile=htmlfile, HeadingTag="h6"){
       InFile = readLines(htmlfile)
-      tempText = gsub("(.*)Page ([0-9]+)</a>(.*)", "\\1<h6>Page \\2</h6></a>\\3", InFile)
+      tempText = gsub("(.*)Page ([0-9]+)</a>(.*)", paste0("\\1<", HeadingTag, ">Page \\2</", HeadingTag, "></a>\\3"), InFile)
       writeLines(tempText, outfile)
     }
 
@@ -69,7 +69,9 @@ return(LastPageNo)
 
 .RemoveLigatures =
     function(infile, outfile=infile){
-      shell(paste("latin2html.py", infile, ">", outfile))
+            shell(paste0('python "', file.path(system.file(
+                            "Python/latin2html.py", package = "BrailleR")),
+ '" "', infile, '" > "', outfile, '"'))
       return(invisible(NULL))
     }
 
@@ -102,12 +104,14 @@ return(LastPageNo)
 
 
 pdf2html =
-    function(pdffile, htmlfile=sub(".pdf", ".html", pdffile)){
+    function(pdffile, htmlfile=sub(".pdf", ".html", pdffile), HeadingLevels=4, PageTag="h6"){
       Success = FALSE
       if (.IsPDFMinerAvailable()) {
         shell(paste("pdf2txt.py -O TempDir -o tempfile.html -t html", pdffile))
         .RemoveLigatures("tempfile.html", htmlfile)
         file.remove("tempfile.html")
+.AddHeadingTags(htmlfile, LowestHeadingLevel=HeadingLevels)
+.PageNumbers2Headings(htmlfile, outfile=htmlfile, HeadingTag=PageTag)
         Success = TRUE
       } else {
         warning("There was a problem and no conversion was possible.\n")
