@@ -47,7 +47,7 @@ GetPandoc =
               message(
                 "This command will download a file and save it to your hard drive.\n")
               installr::install.pandoc(
-                to_restart = FALSE, download_dir = getOption("BrailleR.Folder"),
+                download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
               message(
                 "The installer file has been added to your MyBrailleR folder.")
@@ -76,7 +76,7 @@ GetRStudio =
               message(
                 "This command will download a file and save it to your hard drive.\n")
               installr::install.RStudio(
-                to_restart = FALSE, download_dir = getOption("BrailleR.Folder"),
+                download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
               message(
                 "The installer file has been added to your MyBrailleR folder.")
@@ -264,7 +264,7 @@ if(x64){
               if(installr::is.x64()) bit=64
               }
       installr::install.cygwin(bit=bit,
-                to_restart = FALSE, download_dir = getOption("BrailleR.Folder"),
+                download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
               message(
                 "The installer file has been added to your MyBrailleR folder.")
