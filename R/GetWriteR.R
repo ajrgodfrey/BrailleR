@@ -225,6 +225,7 @@ GetWriteR = function(UseGitHub = TRUE) {
     else{
         system("pip install wxPython")
         }
+        return(invisible(TRUE))
     }
 
 
