@@ -130,7 +130,8 @@ GetPython27 =
             if (requireNamespace("installr")) {
               message(
                 "This command will download a file and save it to your hard drive.")
-            installr::install.python(version_number = 2, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
+            #installr::
+.install.python(version_number = 2, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
             message(
                 "The installer file has been added to your MyBrailleR folder.")
               message(
@@ -168,7 +169,8 @@ GetPython3 =
             if (requireNamespace("installr")) {
               message(
                 "This command will download a file and save it to your hard drive.")
-            installr::install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
+#            installr::
+.install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
             message(
                 "The installer file has been added to your MyBrailleR folder.")
               message(
