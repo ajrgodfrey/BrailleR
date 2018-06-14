@@ -1,5 +1,5 @@
 # this file is a quick and dirty hack necessary while an update to the installr package is finalised.
-# the installr commands are circumvented by adding a . to the front of the command and putting it in the BrailleR package (temporarily).
+# the installr commands are circumvented by adding a . to the front of the commands and putting it in the BrailleR package (temporarily).
 
 # Copyright (C) Tal Galili
 #
@@ -40,7 +40,7 @@
 #' }
 .install.python = function (page_with_download_url = "https://www.python.org/downloads/windows/",
                            version_number = 3,
-                           x64 = is.x64(),
+                           x64 = .is.x64(),
                              ...)
 {
   page <- readLines(page_with_download_url, warn = FALSE)
@@ -67,3 +67,4 @@
   installr::install.URL(URL, ...) 
 }
 
+.is.x64 <- function(...) unname(Sys.info()["release"] == ">= 8 x64")
