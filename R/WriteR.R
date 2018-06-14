@@ -1,13 +1,13 @@
 .IsWriteRAvailable =
     function(){
       Success = FALSE
-      if(reticulate::py_config()$version == "2.7" && reticulate::py_module_available("wx")){
+      if(reticulate::py_config()$version > 2.6 && reticulate::py_module_available("wx")){
         Success=TRUE
       }else{
-        if(reticulate::py_config()$version == "2.7"){
+        if(reticulate::py_config()$version > 2.6){
           Success = .PullWxUsingPip
         }else{
-          warning("This function requires installation of Python 2.7.\n")
+          warning("This function requires installation of Python 2.7 or above.\n")
         }
       }
       return(invisible(Success))
