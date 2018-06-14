@@ -68,5 +68,5 @@
 }
 
 .is.x64 <- function(){
-.Platform$r_arch == "x64")
+.Platform$r_arch == "x64"
 }
