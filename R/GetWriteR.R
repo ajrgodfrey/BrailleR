@@ -284,3 +284,25 @@ if(x64){
       }
       return(invisible(NULL))
     }
+
+GetWxPython3 =
+    function() {
+      Success = FALSE
+      if (interactive()) {
+        if (.Platform$OS.type == "windows") {
+          if(reticulate::py_available(TRUE)){
+            if(reticulate::py_config()$version > 3){
+              Success = .PullWxUsingPip()
+            } else {
+              warning("There is no installation of Python 3.\n")
+            }
+          }
+        } else {
+          warning(
+              "This function is for users running R under the Windows operating system.\n")
+        }
+      } else {
+        warning("This function is meant for use in interactive mode only.\n")
+      }
+      return(invisible(Success))
+    }

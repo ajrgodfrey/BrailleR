@@ -7,6 +7,7 @@
 \alias{GetPython3}
 \alias{GetCygwin}
 \alias{GetWxPython27}
+\alias{GetWxPython3}
 \title{Download an executable for Windows users}
 \usage{
 Get7zip()
@@ -23,6 +24,7 @@ GetRStudio()
 GetWriteR(UseGitHub = TRUE)
 
 GetWxPython27()
+GetWxPython3()
 }
 \arguments{
 \item{UseGitHub}{Use the latest version found via GitHub or an older version found on the R-Resources.massey.ac.nz webpage.}
