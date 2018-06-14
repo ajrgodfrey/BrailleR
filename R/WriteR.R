@@ -5,7 +5,7 @@
         Success=TRUE
       }else{
         if(reticulate::py_config()$version > 2.6){
-          Success = .PullWxUsingPip
+          Success = .PullWxUsingPip()
         }else{
           warning("This function requires installation of Python 2.7 or above.\n")
         }
