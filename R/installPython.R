@@ -67,4 +67,6 @@
   installr::install.URL(URL, ...) 
 }
 
-.is.x64 <- function(...) unname(Sys.info()["release"] == ">= 8 x64")
+.is.x64 <- function(){
+.Platform$r_arch == "x64")
+}
