@@ -31,7 +31,7 @@ WriteR =
                         ifelse(is.null(file), "", file)), wait=FALSE)
           } else {
             warning(
-                "This function requires an installation of Python 2.7 and wxPython.\n")
+                "This function requires an installation of Python and wxPython.\n")
             message(
                 "You could use GetPython27() and GetWxPython27() to help install them.\n")
           }
