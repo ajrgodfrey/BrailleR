@@ -2,7 +2,7 @@
 \alias{GetExampleText}
 \title{extract the example text from a help page}
 \description{
-A cut back version of example() for obtaining the text used in examples on help pages without runing those examples. The function is intended to help write markdown/Sweave documents. }
+A cut back version of example() for obtaining the text used in examples on help pages without running those examples. The function is intended to help write markdown/Sweave documents. }
 \usage{
 GetExampleText(topic, package = NULL, lib.loc = NULL, character.only = FALSE, outFile="")
 }

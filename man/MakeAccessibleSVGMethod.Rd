@@ -15,7 +15,7 @@ MakeAccessibleSVG(x, file = "test", view = interactive(), ...)
   \item{x}{a graph object for which a method exists, or the current graphics device if set to NULL.}
   \item{file}{The shared name for the SVG and XML files to be created.}
   \item{view}{launch in browser; this is the default when in interactive session}
-  \item{...}{arguments passed on ot other methods/functions}
+  \item{...}{arguments passed on to other methods/functions}
 }
 \details{
 This is experimental work. Having started with the proof of concept based on a fairly standard histogram from the \pkg{graphics} package, we are now looking to the boxplots and time series plots.

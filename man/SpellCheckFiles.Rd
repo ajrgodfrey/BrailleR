@@ -30,7 +30,7 @@ Check spelling using hunspell. A new print method is also used.
 The global list of words to be ignored needs to be saved in the user's MyBrailleR folder. It can be updated as often as the user likes. It should have one word per line, and contain no space, tab or punctuation characters.
 }
 \author{
-A. Jonathan R. Godfrey wrote these functions but leant heavily on functions found in the devtools package.
+A. Jonathan R. Godfrey wrote these functions but leaned heavily on functions found in the devtools package.
 }
 \seealso{
 The hunspell package and functions therein.

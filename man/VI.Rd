@@ -58,7 +58,7 @@ Describe() is for explaining how a given type of graph appears to the sighted wo
 Further methods can be written by users (blind or sighted). Please submit to the package maintainer for possible inclusion in subsequent releases of the package.
 }
 \value{
-This will vary according to the needs of vision impaired users and the specific objects that need to be interpretted.
+This will vary according to the needs of vision impaired users and the specific objects that need to be interpreted.
 
 In general, the output from VI() is a series of text strings printed in the console/terminal window in addition to the embedded command's normal functionality. The \code{VI.lm()} method is the first to move away from this idea and use a process that builds on the \code{UniDesc()} function. In this case, the method creates an R markdown file and compiles it into HTML. The HTML document is opened if the R session is interactive.
 

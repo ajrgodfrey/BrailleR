@@ -518,7 +518,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
 # Convert aesthetic values to something more friendly for the user
 # Takes a dataframe and converts all of its columns if possible
 # *** ONLY HANDLING LINETYPES AND SHAPES SO FAR - and not defaults 42, 22, ...
-# SHOULD DO COLOURS BY FINDING CLOSEST
+# Colours defined using roloc and related packages
 .convertAes = function(values) {
   linetypes = c("0"="blank", "1"="solid", "2"="dashed",
                 "3"="dotted", "4"="dotdash", "5"="longdash", "6"="twodash")
@@ -536,6 +536,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
                        c[,col])  # If not found just return what we got
     } else if (aes == "shape") {
       c[,col] = ifelse(values[,col] %in% 1:25, shapes[values[,col]+1], c[,col])
+    } else if (aes == "colour") {
+      c[,col] = colourName(values[,col], ISCCNBScolours)
     }
   }
   return(c)  

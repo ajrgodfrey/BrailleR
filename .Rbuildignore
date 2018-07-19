@@ -1,1 +1,4 @@
+^CONDUCT\.md$
+^cran-comments\.md$
 ^\.travis\.yml$
+^readme.md$

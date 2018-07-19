@@ -1,28 +1,41 @@
+# BrailleR 0.29.0
 
-# v0.27.3
+- WriteR() slightly modified so that the terminal is not locked up while editing an Rmd file.
+- introduced use of roloc package to define colours in human readable form.
+
+# BrailleR 0.28.0
+
+- submitted to CRAN
+
+# BrailleR 0.27.3
+* Added a `NEWS.md` file to track changes to the package.
+- added a Code of Conduct to the package.
 - added internal functions for pulling the WxPython module and checking if the necessary Python and WxPython systems are in place.
 - updated GetWxPython27() so that it uses a Python pip install command in the shell instead of a convoluted download and save process. This should obviate the need to have a manual installation of wxPython which is needed for WriteR.
+- added GetPython3() because WriteR is Py3 compatible.
+- added GetCygwin(), GetRStudio() to help speed up installations. 
+- added the pdf2html() function. This is dependent on Python 2.7 at present.
 - added Marshall Flax to contributors for substantial work on WriteR
 - added a Python27 folder to the Python folder which contains copies of scripts installed in subfolders of the Python27 installation folder that may not be on the system path. First set of scripts pulled over and readme.txt created accordingly.
 - added reticulate package to imports list
-- added Require() for loading/installing pacakages.
+- added Require() for loading/installing packages.
 - added WriteR updates
 - changed VIgrep() and VIsort() to grep.VIgraph() and sort.VIgraph()
 - added gsub.VIgraph()
 - finally fixed GetPython27 now that installr::install_python() is available to all (Windows) users.
 
-# v0.27.2
+# BrailleR 0.27.2
 - introduced reference to the BrailleR in Action text
 - updated vignettes with more direct links to BrailleR in Action
 
-# v0.27.1
+# BrailleR 0.27.1
 - altered DESCRIPTION file to raise Paul and Debra to author from contributor in preparation for pull requests for VI.ggplot() work.
 - imported Debra Warren's work <smiles> via a PR on GitHub. This offers huge gains in VI.ggplot()
 - changed R dependency sought by CRAN on 29/9/17 by email.
 - internalised the R2txt.vars (should have done this ages ago!)
  
 
-# v0.27.0
+# BrailleR 0.27.0
 - added ProcessAllMd() for rendering plain markdown files.
 - removed dependency on pander package by altering UniDesc(). Reason: Nice results, but possibly over the top for introductory students.
 - added Language to the set of package options to be chosen by the user. This is necessary to then have the SpellCheckFiles() work properly.
@@ -31,10 +44,10 @@
 
 
 
-# v0.26.0 for Annabelle
+# BrailleR 0.26.0 for Annabelle
 Pushed to CRAN on 6 July 2017
 
-# v0.25.7
+# BrailleR 0.25.7
 - ProcessAllRmd() function added: this processes all Rmd files in the specified folder using either rmarkdown::render() or knitr::knit2html()
 - MakeBatch() changed to force Rmd file specific batch file to use rmarkdown::render() instead of knitr::knit2html()
 - MakeBatch(file=NULL) now creates ProcessAllRmd.bat file in working directory so that users can process all Rmd files from Windows Explorer or the  DOS command prompt.
@@ -52,25 +65,25 @@ Pushed to CRAN on 6 July 2017
 - working on accessibility for scatter plots
 
 
-# v0.25.6
+# BrailleR 0.25.6
 - working on accessible Venn diagrams and time series plots
 - fixed VI() method to handle additional arguments, although they are currently ignored.
 - created function to choose long and short text for a boxplot; previously embedded in VI.boxplot()
 
-# v0.25.5
+# BrailleR 0.25.5
 - Added experimental work on making accessible graphs for mounting on the web
 - added Volker Sorge and Donal Fitzpatrick to the package contributors list
 - added MakeAccessibleSVG() and AddXML() as well as a bunch of internal functions to do the hard work.
 - added Augment() method to take the functionality out of VI() that adds the content that feeds into the text descriptions because it will get used in other processes from here on.
 - changes from VS merged via GitHub
 
-# v0.25.4
+# BrailleR 0.25.4
 - added JooYoung Seo and TK Lee to the package contributors list
 - updated WriteR.pyw
 - fixed small typos
 - added MakeSlidy() which takes a folder of Rmd files and turns them into a slidy presentation
 
-# v0.25.3
+# BrailleR 0.25.3
 - WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.
 - fixed URL for CRAN repository of package in CITATION file
 - then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.
@@ -85,11 +98,11 @@ type; it will also include the code chunks that are reused frequently in other f
 - updated the BrailleR History vignette.
 
 
-# v0.25.2
+# BrailleR 0.25.2
 - fixed formatting of the R functions so it is easier to read. Request from Henrik Bengtsson resolved using the rfmt package seen at UseR!2016
 
 
-# v0.25.1
+# BrailleR 0.25.1
 - added SpellCheck() which is an interface to spell check a set of files, allowing ignore this time, always for all files, always for this file, replacement, and reading the word in context.
 - added CleanCSV() for removing white space in (csv) files
 - moved files from Inst to Inst/MyBrailleR for cleaner package installation. updated installation functions as needed.
@@ -101,7 +114,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - fixed spelling in vignettes using SpellCheckFiles()
 - added local and global options for lists of words to ignore during spell checking.
 
-# v0.25.0
+# BrailleR 0.25.0
 - did some overdue spell checking
 - fixed wrong filename in PrepareWriteR() and its help page.
 - added more Get*() commands to download and install several useful tools; based on functions from the installr package with the downloaded files going into the user's MyBrailleR folder. Python 2.7 and the associated wxPython version are hard wired at present until the dynamic links can be established.
@@ -117,25 +130,25 @@ type; it will also include the code chunks that are reused frequently in other f
 - added use of magrittr package to gain  the benefits of the pipe operator
 
 
-# v0.24.2
+# BrailleR 0.24.2
 - CRAN check uncovered need to have dependency of R >= 3.2.0. 
 
-# v0.24.1
+# BrailleR 0.24.1
 - fixed issue with inappropriate use of tempdir() in conjunction with paste0() instead of the more correct file.path(). Direct request from Brian Ripley on behalf of CRAN.
 - removed use of tempdir() entirely for saving BrailleROptions and WriteROptions. Users must pull the defaults from the package until such time as they accept use of a folder on their own system, or a local copy of the settings.
 - altered option setting commands to ensure no access to files if not running in an interactive session.
 - altered help files accordingly
 
-# v0.24.0
+# BrailleR 0.24.0
 - Made ready for CRAN submission
 
-# v0.23.10
+# BrailleR 0.23.10
 - added MakeReadable() which cleans up vignette source files from installed packages, by converting tabs to spaces and Linux line breaks to Windows line breaks. This currently requires Python 2.7 to be installed.
 -Added BrailleRHome() which takes the user to the BrailleR Project home page.
 - Added JoinBlindRUG() which creates the email message needed for joining the Blind R User Group email list.
 
 
-# v0.23.9
+# BrailleR 0.23.9
 - added NewFunction() for creating a template R script file for a new function including Roxygen comment lines.
 - fixed spacing problems in the output messages for MakeRmd()
 - added constraint that some version of Python must be installed for WriteR() to work.
@@ -145,7 +158,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - added MakeAllInOneSlide() function to be able to deliver slide show as a single file. Required for distributing talks given at DEIMS 2016
 
 
-# v0.23.8
+# BrailleR 0.23.8
 - Small changes to TwoFactors() so variable names get printed properly in tables.
 - added author credentials to OneFactor(), OnePredictor(), TwoFactors(), and UniDesc().
 - removed over-writing of files in example for TwoFactors(). Filenames will now indicate with or No interaction.
@@ -156,7 +169,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - made use of  .simpleCap() in UniDesc(), TwoFactors(), OneFactor(), and OnePredictor().
 - fixed error in UniDesc where label for latex table was being garbled.
 
-# v0.23.7
+# BrailleR 0.23.7
 - WriteR() goes live. Does not make use of all arguments just yet.
 - updated some of the vignette files
 - added option for BrailleR.SlideStyle in readiness for MakeSlideShow() function that will turn a series of Rmd files into a set of html slides.
@@ -167,7 +180,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - The MakeSlideShow() function is ready to go including addition of a contents slide.
 - updated DESCRIPTION file to add GitHub links.
 
-# v0.23.6
+# BrailleR 0.23.6
 - reinstated use of a local file for local settings
 - Added creation of "MyBrailleR" folder for user preferences and files. This only happens if the user agrees otherwise a temporary folder is created Thanks to Henrik Bengtsson for code suggestions and comments.
 - settings files will be copied to the user folder if needed.
@@ -179,7 +192,7 @@ type; it will also include the code chunks that are reused frequently in other f
 - New version of WriteR 0.160105.3
 - established GitHub repository at ajrgodfrey/BrailleR
 
-# v0.23.5
+# BrailleR 0.23.5
 - Implemented use of local settings stored in .BrailleROptions object (hidden)
 - There is now  a set of defaults that can be restored in addition to the currently active set of preferences in the BrailleROptions file within the package.
 - SaveMySettings() and RestoreMySettings() functions created for obvious outcomes. These are needed to protec from losing settings when the package is updated.
@@ -188,10 +201,10 @@ type; it will also include the code chunks that are reused frequently in other f
 - What's this figure? function WTF() now incorporated.
 - added necessary import of grid package
 
-# v0.23.4
+# BrailleR 0.23.4
 - changed preferences to use local options files. Removed PREFERENCES from Inst folder.
 
-# v0.23.3
+# BrailleR 0.23.3
 - added fitted line plot to OnePredictor().
 - altered tables to wide format instead of long where only one set of results given by UniDesc()
 - added new version of history() that uses the file.edit() instead of file.show(). Thanks to Duncan Murdoch.
@@ -199,20 +212,20 @@ type; it will also include the code chunks that are reused frequently in other f
 - made more use of message() and warning() for package feedback in preparation for multiple language support.
 - removed windows architecture from batch file creations scripts.
 
-# v0.23.2
+# BrailleR 0.23.2
 - introduced use of pander for tables in html
 
-# v0.23.1
+# BrailleR 0.23.1
 - fixed MakeBatch() and PrepareWriteR() so that it works for new representations of windows versions. Discovered at the SZS 8 July 2015.
 - fixed bug in OnePredictor() with use of Response when ResponseName was required. Discovered on 9 July 2015 during Skype call with SD.
 
-# v0.23.0
+# BrailleR 0.23.0
 - moved from import to importFrom in the namespace. This was required for the base packages being used so I did it for all packages.
 
-# v0.22.0
+# BrailleR 0.22.0
 Successfully uploaded to CRAN
 
-# v0.21.1
+# BrailleR 0.21.1
 - added option for braille font installation status
 - ensured BRL options are of correct type on load of BrailleR.
 - created functions to change paper size and braille font point size.- included options for paper size and embosser type
@@ -224,7 +237,7 @@ Successfully uploaded to CRAN
 - added SVGThis into package as experimental function.
 - added BRLThis into package as experimental function.
 
-# v0.21.0
+# BrailleR 0.21.0
 - fixed bug in the batch file that converted an Rmd file to html. Now uses knitr::knit2html instead of rmarkdown::render.
 - altered startup so that explicit use of the packages is initiated
 - investigated using Roxygen for package documentation. Conclusion is that it must be all or nothing. Nothing preferred at present.
@@ -232,37 +245,37 @@ Successfully uploaded to CRAN
 - added extra braille options in readiness for the experimental BRLThis() function.
 - added fonts folder to package that includes the single font file "BRAILLE1.ttf" for Windows users and its licence file.
 
-# v0.20
+# BrailleR 0.20
 - uploaded to CRAN
 
-# v0.19-5
+# BrailleR 0.19-5
 - replaced settings folder with individual files for each setting with a single devian control file called PREFERENCES
 - updated zzz.R functions so that they use the dcf format for settings
 - updated all functions for updating the package settings values to use the dcf format
 - Included the OnePredictor() convenience function, and related additions to the VI() method
 
-# v0.19-4
+# BrailleR 0.19-4
 - added analysis of tick marks for axes to existing graph types
 - introduced dotplot() as wrapper  for graphics::stripchart()
 - added VI.dotplot()
 - made adding quote marks to strings easier using in internal function InQuotes()
 - made sure the boxes in HTML documents are appropriate and that spacing is nicer.
 
-# v0.19-3
+# BrailleR 0.19-3
 - incorporated the BrailleR.css file for use in formatting HTML content from the convenience functions.
 - updated UniDesc(), OneFactor(), TwoFactors() to use the BrailleR.css
 - fixed the example for SetOptionsRd so that the author setting is not altered during package creation.
 - included the author in the HTML files for convenience functions.
 - added a choice for the css style file to use
 
-# v0.19-2
+# BrailleR 0.19-2
 - tried (unsuccessfully) to make the tables in UniDesc() more visually appealing, without altering their accessibility.
 - Added links to Getting Started vignette for RStudio and pandoc downloads.
 - cross references in vignettes sorted out.
 - found the vignettes were unacceptably large files and how to get them smaller without loss of information.
 - more tidy up of vignettes
 
-# v0.19-1
+# BrailleR 0.19-1
 - updated the primary vignette on the BrailleR package's history.
 - added a getting started vignette
 - included the previously overlooked need for the rmarkdown package.
@@ -272,15 +285,15 @@ Successfully uploaded to CRAN
 - updated UniDesc() so it generates a more complete R script when purled.
 
 
-# v0.19-0
+# BrailleR 0.19-0
 - Made some minor changes to UniDesc(), OneFactor(), TwoFactors()  so that packages are explicitly loaded when a code chunk needs them. Notably moments, xtable, and nortest
 - added GetGoing() function for setting options. Altered package startup message to mention it.
 - altered VI.boxplot() so that lower/upper terminology is only used for vertical boxplots and left/right is used for horizontal ones.
 - NEWS file established.
 
-# v0.18-1
+# BrailleR 0.18-1
 - Move gridSVG and gridGraphics to Imports. Neither is actually used in this version but will be in a subsequent release
 - Satisfactory CRAN release version
 
-# v0.18-0 
+# BrailleR 0.18-0 
 - This version was rejected by CRAN because it had too many other packages listed as depends and CRAN wants them to be imports instead.
