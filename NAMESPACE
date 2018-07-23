@@ -1,4 +1,5 @@
 importFrom("devtools", "spell_check")
+import(dplyr)
 import(extrafont)
 importFrom("ggplot2", "qplot", "ggplot_build") 
 importFrom("graphics", "abline", "par", "plot") 
