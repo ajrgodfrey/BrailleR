@@ -536,7 +536,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
                        c[,col])  # If not found just return what we got
     } else if (aes == "shape") {
       c[,col] = ifelse(values[,col] %in% 1:25, shapes[values[,col]+1], c[,col])
-    } else if (aes == "colour") {
+    } else if (aes %in% c("colour", "fill")) {
       c[,col] = colourName(values[,col], ISCCNBScolours)
     }
   }
@@ -552,7 +552,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     line[[paste0(nonconstantAes[aes],"varying")]] = TRUE
   aesvars = aesvars[nvals == 1]
   aesvals = .convertAes(groupdata[1,aesvars,drop=FALSE])
-  aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars, aesvals[1,,drop=FALSE])
+  ## Use unconverted aesthetics for reverse lookup of mappings
+  ## groupdata[1,aesvars,drop=FALSE] rather than aesvals[1,,drop=FALSE]
+  aesmap = .mapAesDataValues(x, xbuild, layeri, aesvars,
+                            groupdata[1,aesvars,drop=FALSE])
   line[aesvars] = aesvals
   if (length(aesmap) > 0) {
     names(aesmap) = paste0(names(aesmap), "map")
