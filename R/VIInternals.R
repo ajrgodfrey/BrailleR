@@ -112,17 +112,23 @@
 }
 
 .getGGPanelScale = function(x, xbuild, var, panel) {
-  # Need to find the scale that matches the var we're translating
-  # Depending on scalefree and layout, we might have separate scales
-  # for each panel or just one
-  scales = xbuild$layout$panel_scales
-  findscale = which(sapply(scales, .findScale, var, panel))
-  if (length(findscale) == 1) {
-    panelIndex = min(panel, length(scales[[findscale]]))
-    return(xbuild$layout$panel_scales[[findscale]][[panelIndex]])
-  } else {
-    return(NULL) # Something went wrong -- no matching scale, or more than one
-  }
+    ## Need to find the scale that matches the var we're translating
+    ## Depending on scalefree and layout, we might have separate scales
+    ## for each panel or just one
+    if (packageVersion("ggplot2") < "3.0.0") {
+        scales = xbuild$layout$panel_scales
+    } else {
+        scales = list(xbuild$layout$panel_scales_x,
+                      xbuild$layout$panel_scales_y)
+    }
+    findscale = which(sapply(scales, .findScale, var, panel))
+    if (length(findscale) == 1) {
+        panelIndex = min(panel, length(scales[[findscale]]))
+        return(scales[[findscale]][[panelIndex]])
+    } else {
+        ## Something went wrong -- no matching scale, or more than one
+        return(NULL) 
+    }
 }
 
 ## Facets
@@ -171,7 +177,7 @@
   layeraes = list()
   params = xbuild$plot$layers[[layer]]$aes_params
   params = params[which(!(names(params) %in% c("x", "y")))]  # Exclude x, y
-  values = .convertAes(as.data.frame(params))
+  values = .convertAes(as.data.frame(params, stringsAsFactors=FALSE))
   for (i in seq_along(params))
     layeraes[[i]] = list(aes=names(params)[i], mapping=values[,i])
   return(layeraes)

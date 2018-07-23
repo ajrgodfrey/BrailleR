@@ -48,6 +48,8 @@ Imports:
     nortest,
     reticulate,
     rmarkdown,
+    roloc,
+    rolocISCCNBS,
     utils,
     whisker,
     XML,
