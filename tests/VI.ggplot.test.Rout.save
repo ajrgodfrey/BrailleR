@@ -1,5 +1,5 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+R version 3.4.1 (2017-06-30) -- "Single Candle"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -115,7 +115,7 @@ Layer 1 is a set of 1 line.
 Line 1 connects 20 points.
 Layer 2 is 1 horizontal line as follows:
 Line at y position 3000.
-Layer 2 has colour set to blue.
+Layer 2 has colour set to vivid violet.
 > 
 > # Set some constant aesthetics
 > VI(qplot(data=m, disp, mpg, shape=I("x"), size=I(5), alpha=I(0.3)))
@@ -207,7 +207,7 @@ This is an untitled chart with no subtitle or caption.
 The chart is comprised of 3 panels containing sub-charts, arranged horizontally.
 The panels represent different values of cyl.
 Each sub-chart has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
-Each sub-chart has y-axis 'count' with labels 0, 1, 2, 3, 4 and 5.
+Each sub-chart has y-axis '' with labels 0, 1, 2, 3, 4 and 5.
 Panel 1 represents data for cyl = 4.
 Panel 1 is a bar chart containing 30 vertical bars.
 Panel 2 represents data for cyl = 6.
@@ -227,37 +227,39 @@ There is a legend indicating that alpha is used to represent cyl, with 3 levels:
 4 represented by alpha 0.1, 
 6 represented by alpha 0.55 and 
 8 represented by alpha 1.
-There is a legend indicating that colour is used to represent mpg, ranging from 14.3 represented by colour #132B43 to 24.4 represented by colour #56B1F7.
-There is a legend indicating that fill is used to represent mpg, ranging from 14.3 represented by fill #132B43 to 24.4 represented by fill #56B1F7.
+There is a legend indicating that colour is used to represent mpg, ranging from 14.3 represented by colour dark purplish blue to 24.4 represented by colour brilliant blue.
+There is a legend indicating that fill is used to represent mpg, ranging from 14.3 represented by fill dark purplish blue to 24.4 represented by fill brilliant blue.
 There is a legend indicating that size is used to represent disp, ranging from 108 represented by size 1 to 360 represented by size 6.
 The chart is a set of 10 points.
 The points are at:
-(21, 160) size 3.27 mm colour #3E81B6 fill #3E81B6 alpha 0.55 which maps to cyl = 6, 
-(21, 160) size 3.27 mm colour #3E81B6 fill #3E81B6 alpha 0.55 which maps to cyl = 6, 
-(22.8, 108) size 1 mm colour #4B9AD8 fill #4B9AD8 alpha 0.1 which maps to cyl = 4, 
-(21.4, 258) size 4.86 mm colour #4186BD fill #4186BD alpha 0.55 which maps to cyl = 6, 
-(18.7, 360) size 6 mm colour #2E628C fill #2E628C alpha 1 which maps to cyl = 8, 
-(18.1, 225) size 4.41 mm colour #2B5A82 fill #2B5A82 alpha 0.55 which maps to cyl = 6, 
-(14.3, 360) size 6 mm colour #132B43 fill #132B43 alpha 1 which maps to cyl = 8, 
-(24.4, 146.7) size 2.96 mm colour #56B1F7 fill #56B1F7 alpha 0.1 which maps to cyl = 4, 
-(22.8, 140.8) size 2.8 mm colour #4B9AD8 fill #4B9AD8 alpha 0.1 which maps to cyl = 4 and 
-(19.2, 167.6) size 3.43 mm colour #326895 fill #326895 alpha 0.55 which maps to cyl = 6
+(21, 160) size 3.27 mm colour brilliant blue fill brilliant blue alpha 0.55 which maps to cyl = 6, 
+(21, 160) size 3.27 mm colour brilliant blue fill brilliant blue alpha 0.55 which maps to cyl = 6, 
+(22.8, 108) size 1 mm colour brilliant blue fill brilliant blue alpha 0.1 which maps to cyl = 4, 
+(21.4, 258) size 4.86 mm colour brilliant blue fill brilliant blue alpha 0.55 which maps to cyl = 6, 
+(18.7, 360) size 6 mm colour moderate blue fill moderate blue alpha 1 which maps to cyl = 8, 
+(18.1, 225) size 4.41 mm colour moderate blue fill moderate blue alpha 0.55 which maps to cyl = 6, 
+(14.3, 360) size 6 mm colour dark purplish blue fill dark purplish blue alpha 1 which maps to cyl = 8, 
+(24.4, 146.7) size 2.96 mm colour brilliant blue fill brilliant blue alpha 0.1 which maps to cyl = 4, 
+(22.8, 140.8) size 2.8 mm colour brilliant blue fill brilliant blue alpha 0.1 which maps to cyl = 4 and 
+(19.2, 167.6) size 3.43 mm colour moderate blue fill moderate blue alpha 0.55 which maps to cyl = 6
 The chart has shape set to small solid circle.
+Warning message:
+Using alpha for a discrete variable is not advised. 
 > ### Histogram
 > VI(qplot(data=m[1:10,], mpg, geom="histogram", bins=5, alpha=am, colour=am, fill=am,
 +          linetype=am, size=am))
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'mpg' with labels 16, 20 and 24.
-It has y-axis 'count' with labels 0, 1, 2, 3 and 4.
+It has y-axis '' with labels 0, 1, 2, 3 and 4.
 There is a legend indicating that alpha is used to represent am, with 2 levels:
 auto represented by alpha 0.1 and 
 manual represented by alpha 1.
 There is a legend indicating that colour is used to represent am, with 2 levels:
-auto represented by colour #F8766D and 
-manual represented by colour #00BFC4.
+auto represented by colour strong reddish orange and 
+manual represented by colour brilliant bluish green.
 There is a legend indicating that fill is used to represent am, with 2 levels:
-auto represented by fill #F8766D and 
-manual represented by fill #00BFC4.
+auto represented by fill strong reddish orange and 
+manual represented by fill brilliant bluish green.
 There is a legend indicating that linetype is used to represent am, with 2 levels:
 auto represented by linetype solid and 
 manual represented by linetype 22.
@@ -265,18 +267,19 @@ There is a legend indicating that size is used to represent am, with 2 levels:
 auto represented by size 2 and 
 manual represented by size 6.
 The chart is a bar chart containing 10 vertical bars.
-Bar 1 is centered horizontally at 15.15, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
-Bar 2 is centered horizontally at 15.15, and spans vertically from 1 to 1 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
-Bar 3 is centered horizontally at 17.67, and spans vertically from 0 to 2 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
-Bar 4 is centered horizontally at 17.67, and spans vertically from 2 to 2 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
-Bar 5 is centered horizontally at 20.2, and spans vertically from 0 to 2 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
-Bar 6 is centered horizontally at 20.2, and spans vertically from 2 to 4 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
-Bar 7 is centered horizontally at 22.72, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
-Bar 8 is centered horizontally at 22.72, and spans vertically from 1 to 2 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
-Bar 9 is centered horizontally at 25.25, and spans vertically from 0 to 1 with fill colour #00BFC4 which maps to am = manual with border colour #00BFC4 which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
-Bar 10 is centered horizontally at 25.25, and spans vertically from 1 to 1 with fill colour #F8766D which maps to am = auto with border colour #F8766D which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
-Warning message:
-Using size for a discrete variable is not advised. 
+Bar 1 is centered horizontally at 15.15, and spans vertically from 0 to 1 with fill colour brilliant bluish green which maps to am = manual with border colour brilliant bluish green which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 2 is centered horizontally at 15.15, and spans vertically from 1 to 1 with fill colour strong reddish orange which maps to am = auto with border colour strong reddish orange which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 3 is centered horizontally at 17.67, and spans vertically from 0 to 2 with fill colour brilliant bluish green which maps to am = manual with border colour brilliant bluish green which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 4 is centered horizontally at 17.67, and spans vertically from 2 to 2 with fill colour strong reddish orange which maps to am = auto with border colour strong reddish orange which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 5 is centered horizontally at 20.2, and spans vertically from 0 to 2 with fill colour brilliant bluish green which maps to am = manual with border colour brilliant bluish green which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 6 is centered horizontally at 20.2, and spans vertically from 2 to 4 with fill colour strong reddish orange which maps to am = auto with border colour strong reddish orange which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 7 is centered horizontally at 22.72, and spans vertically from 0 to 1 with fill colour brilliant bluish green which maps to am = manual with border colour brilliant bluish green which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 8 is centered horizontally at 22.72, and spans vertically from 1 to 2 with fill colour strong reddish orange which maps to am = auto with border colour strong reddish orange which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Bar 9 is centered horizontally at 25.25, and spans vertically from 0 to 1 with fill colour brilliant bluish green which maps to am = manual with border colour brilliant bluish green which maps to am = manual with border line type 22 which maps to am = manual with border line width 6 which maps to am = manual.
+Bar 10 is centered horizontally at 25.25, and spans vertically from 1 to 1 with fill colour strong reddish orange which maps to am = auto with border colour strong reddish orange which maps to am = auto with border line type solid which maps to am = auto with border line width 2 which maps to am = auto.
+Warning messages:
+1: Using alpha for a discrete variable is not advised. 
+2: Using size for a discrete variable is not advised. 
 > ### Boxplots
 > VI(qplot(data=m, cyl, mpg, geom="boxplot", alpha=am, colour=am, fill=am, linetype=am, size=am))
 This is an untitled chart with no subtitle or caption.
@@ -286,11 +289,11 @@ There is a legend indicating that alpha is used to represent am, with 2 levels:
 auto represented by alpha 0.1 and 
 manual represented by alpha 1.
 There is a legend indicating that colour is used to represent am, with 2 levels:
-auto represented by colour #F8766D and 
-manual represented by colour #00BFC4.
+auto represented by colour strong reddish orange and 
+manual represented by colour brilliant bluish green.
 There is a legend indicating that fill is used to represent am, with 2 levels:
-auto represented by fill #F8766D and 
-manual represented by fill #00BFC4.
+auto represented by fill strong reddish orange and 
+manual represented by fill brilliant bluish green.
 There is a legend indicating that linetype is used to represent am, with 2 levels:
 auto represented by linetype solid and 
 manual represented by linetype 22.
@@ -298,38 +301,39 @@ There is a legend indicating that size is used to represent am, with 2 levels:
 auto represented by size 2 and 
 manual represented by size 6.
 The chart is a boxplot comprised of 6 boxes with whiskers.
-There is a box at x=1.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
-It has median 22.8. The box goes from 22.15 to 23.6, and the whiskers extend to 21.5 and 24.4.
-There are 0 outliers for this boxplot.
-There is a box at x=0.81 with alpha 0.1 which maps to am = auto with colour #F8766D which maps to am = auto with fill #F8766D which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
+There is a box at x=0.81 with alpha 0.1 which maps to am = auto with colour strong reddish orange which maps to am = auto with fill strong reddish orange which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
 It has median 28.85. The box goes from 25.2 to 30.9, and the whiskers extend to 21.4 and 33.9.
 There are 0 outliers for this boxplot.
-There is a box at x=2.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
-It has median 18.65. The box goes from 18.03 to 19.75, and the whiskers extend to 17.8 and 21.4.
+There is a box at x=1.19 with alpha 1 which maps to am = manual with colour brilliant bluish green which maps to am = manual with fill brilliant bluish green which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
+It has median 22.8. The box goes from 22.15 to 23.6, and the whiskers extend to 21.5 and 24.4.
 There are 0 outliers for this boxplot.
-There is a box at x=1.81 with alpha 0.1 which maps to am = auto with colour #F8766D which maps to am = auto with fill #F8766D which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
+There is a box at x=1.81 with alpha 0.1 which maps to am = auto with colour strong reddish orange which maps to am = auto with fill strong reddish orange which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
 It has median 21. The box goes from 20.35 to 21, and the whiskers extend to 19.7 and 21.
 There are 0 outliers for this boxplot.
-There is a box at x=3.19 with alpha 1 which maps to am = manual with colour #00BFC4 which maps to am = manual with fill #00BFC4 which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
-It has median 15.2. The box goes from 14.05 to 16.62, and the whiskers extend to 10.4 and 19.2.
+There is a box at x=2.19 with alpha 1 which maps to am = manual with colour brilliant bluish green which maps to am = manual with fill brilliant bluish green which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
+It has median 18.65. The box goes from 18.03 to 19.75, and the whiskers extend to 17.8 and 21.4.
 There are 0 outliers for this boxplot.
-There is a box at x=2.81 with alpha 0.1 which maps to am = auto with colour #F8766D which maps to am = auto with fill #F8766D which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
+There is a box at x=2.81 with alpha 0.1 which maps to am = auto with colour strong reddish orange which maps to am = auto with fill strong reddish orange which maps to am = auto with line size 2 mm which maps to am = auto with line type solid which maps to am = auto.
 It has median 15.4. The box goes from 15.2 to 15.6, and the whiskers extend to 15 and 15.8.
 There are 0 outliers for this boxplot.
-Warning message:
-Using size for a discrete variable is not advised. 
+There is a box at x=3.19 with alpha 1 which maps to am = manual with colour brilliant bluish green which maps to am = manual with fill brilliant bluish green which maps to am = manual with line size 6 mm which maps to am = manual with line type 22 which maps to am = manual.
+It has median 15.2. The box goes from 14.05 to 16.62, and the whiskers extend to 10.4 and 19.2.
+There are 0 outliers for this boxplot.
+Warning messages:
+1: Using alpha for a discrete variable is not advised. 
+2: Using size for a discrete variable is not advised. 
 > ### Hline
 > VI(qplot(data=m[1:10,], geom="hline", mapping=aes(yintercept=mpg, alpha=am, colour=am,
 +          linetype=am, size=am)))
 This is an untitled chart with no subtitle or caption.
 It has x-axis '' with labels .
-It has y-axis 'mpg' with labels 15.0, 17.5, 20.0 and 22.5.
+It has y-axis '' with labels 15.0, 17.5, 20.0 and 22.5.
 There is a legend indicating that alpha is used to represent am, with 2 levels:
 auto represented by alpha 0.1 and 
 manual represented by alpha 1.
 There is a legend indicating that colour is used to represent am, with 2 levels:
-auto represented by colour #F8766D and 
-manual represented by colour #00BFC4.
+auto represented by colour strong reddish orange and 
+manual represented by colour brilliant bluish green.
 There is a legend indicating that linetype is used to represent am, with 2 levels:
 auto represented by linetype solid and 
 manual represented by linetype 22.
@@ -337,18 +341,19 @@ There is a legend indicating that size is used to represent am, with 2 levels:
 auto represented by size 2 and 
 manual represented by size 6.
 The chart is 10 horizontal lines as follows:
-Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
-Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
-Line at y position 22.8 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour #F8766D which maps to am = auto, 
-Line at y position 21.4 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
-Line at y position 18.7 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
-Line at y position 18.1 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
-Line at y position 14.3 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
-Line at y position 24.4 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual, 
-Line at y position 22.8 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual and 
-Line at y position 19.2 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour #00BFC4 which maps to am = manual.
-Warning message:
-Using size for a discrete variable is not advised. 
+Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour strong reddish orange which maps to am = auto, 
+Line at y position 21 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour strong reddish orange which maps to am = auto, 
+Line at y position 22.8 with size 2 which maps to am = auto, with line type solid which maps to am = auto, with colour strong reddish orange which maps to am = auto, 
+Line at y position 21.4 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual, 
+Line at y position 18.7 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual, 
+Line at y position 18.1 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual, 
+Line at y position 14.3 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual, 
+Line at y position 24.4 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual, 
+Line at y position 22.8 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual and 
+Line at y position 19.2 with size 6 which maps to am = manual, with line type 22 which maps to am = manual, with colour brilliant bluish green which maps to am = manual.
+Warning messages:
+1: Using alpha for a discrete variable is not advised. 
+2: Using size for a discrete variable is not advised. 
 > ### Line
 > VI(qplot(data=m[1:10,], geom="line", disp, mpg, alpha=am, colour=am, linetype=am, size=am))
 This is an untitled chart with no subtitle or caption.
@@ -358,8 +363,8 @@ There is a legend indicating that alpha is used to represent am, with 2 levels:
 auto represented by alpha 0.1 and 
 manual represented by alpha 1.
 There is a legend indicating that colour is used to represent am, with 2 levels:
-auto represented by colour #F8766D and 
-manual represented by colour #00BFC4.
+auto represented by colour strong reddish orange and 
+manual represented by colour brilliant bluish green.
 There is a legend indicating that linetype is used to represent am, with 2 levels:
 auto represented by linetype solid and 
 manual represented by linetype 22.
@@ -369,16 +374,17 @@ manual represented by size 6.
 The chart is a set of 2 lines.
 Line 1 connects 3 points, at (108, 22.8), (160, 21) and (160, 21).
 This line has alpha 0.1 which maps to am = auto.
-This line has colour #F8766D which maps to am = auto.
+This line has colour strong reddish orange which maps to am = auto.
 This line has line size 2 mm which maps to am = auto.
 This line has line type solid which maps to am = auto.
 Line 2 connects 7 points, at (140.8, 22.8), (146.7, 24.4), (167.6, 19.2), (225, 18.1), (258, 21.4), (360, 18.7) and (360, 14.3).
 This line has alpha 1 which maps to am = manual.
-This line has colour #00BFC4 which maps to am = manual.
+This line has colour brilliant bluish green which maps to am = manual.
 This line has line size 6 mm which maps to am = manual.
 This line has line type 22 which maps to am = manual.
-Warning message:
-Using size for a discrete variable is not advised. 
+Warning messages:
+1: Using alpha for a discrete variable is not advised. 
+2: Using size for a discrete variable is not advised. 
 > 
 > # Test all graph types when number of items exceeds threshold, so no detail printed
 > VI(qplot(data=m, mpg, disp, geom="point"))
@@ -400,12 +406,12 @@ The chart is a boxplot comprised of 25 boxes with whiskers.
 > VI(qplot(data=m, mpg, geom="histogram"))
 This is an untitled chart with no subtitle or caption.
 It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
-It has y-axis 'count' with labels 0, 1, 2, 3, 4 and 5.
+It has y-axis '' with labels 0, 1, 2, 3, 4 and 5.
 The chart is a bar chart containing 30 vertical bars.
 > VI(qplot(data=m, mapping=aes(yintercept=mpg), geom="hline"))
 This is an untitled chart with no subtitle or caption.
 It has x-axis '' with labels .
-It has y-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.
+It has y-axis '' with labels 10, 15, 20, 25, 30 and 35.
 The chart is 32 horizontal lines.
 > VI(qplot(data=m, mpg, disp, geom="smooth"))
 This is an untitled chart with no subtitle or caption.
@@ -553,4 +559,4 @@ The points are at:
 > 
 > proc.time()
    user  system elapsed 
-  9.121   0.221  12.063 
+  4.456   0.064   5.024 
