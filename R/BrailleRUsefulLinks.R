@@ -30,3 +30,17 @@ LURN = function(BlindVersion = getOption("BrailleR.VI")) {
          }
          return(invisible(NULL))
        }
+
+
+
+Google =
+    function() {
+      if (interactive()) {
+        browseURL("https://www.google.com")
+      } else {
+        warning("This function is meant for use in interactive mode only.\n")
+      }
+      return(invisible(NULL))
+    }
+
+google = Google
