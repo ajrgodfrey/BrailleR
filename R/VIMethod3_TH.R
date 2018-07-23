@@ -263,6 +263,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10,
     name = names[i]
     mapping = labels[[i]]
     scale = .getGGScale(x, xbuild, name)
+    ## From ggplot2 3.0.0 can have x$labels without any corresponding
+    ## xbuild$plot$scales
+    if (is.null(scale))
+        break;
     scalediscrete = if ("ScaleDiscrete" %in% class(scale)) TRUE
     hidden = if (.isGuideHidden(x, xbuild, name)) TRUE
     maplevels = data.frame(col1=scale$map(scale$range$range), stringsAsFactors=FALSE)
