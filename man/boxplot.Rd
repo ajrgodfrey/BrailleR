@@ -36,15 +36,15 @@ The base R implementation of the \code{\link[graphics]{boxplot}} function should
 }
 \examples{
 x=rnorm(1000)
+op = par(mfcol=c(2,1))
 # the stamdard boxplot function returns
-MyBoxplot=graphics::boxplot(x, main="Example boxplot (graphics package)")
-#dev.off()
+MyBoxplot=graphics::boxplot(x, main="Example boxplot (graphics package)", horizontal=TRUE)
 MyBoxplot
 
 # while this version returns
-MyBoxplot=boxplot(x, main="Example boxplot (BrailleR package)")
-#dev.off()
+MyBoxplot=boxplot(x, main="Example boxplot (BrailleR package)", horizontal=TRUE)
 MyBoxplot
+par(op)
 
 # The VI() method then uses the extra information stored
 VI(MyBoxplot)

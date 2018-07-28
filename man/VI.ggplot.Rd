@@ -36,6 +36,6 @@ g
 }
 }
 \author{
-A. Jonathan R. Godfrey, Tony Hirst and Debra Warren
+Debra Warren, Tony Hirst and A. Jonathan R. Godfrey
 }
 
