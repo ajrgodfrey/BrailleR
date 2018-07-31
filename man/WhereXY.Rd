@@ -29,5 +29,3 @@ WhereXY(x,y)
 WhereXY(x,y, c(3,4))
 WhereXY(x,y, xDist="other")
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
