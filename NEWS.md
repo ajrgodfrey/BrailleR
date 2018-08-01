@@ -1,4 +1,5 @@
 # BrailleR 0.29.0
+- added CII best practices badge to GitHub repo.
 - pushed to CRAN (ahead of regular plan)
 - some fixes from Paul for the problems caused by changes in the ggplot2 package; done via PR on GitHub 
 - WriteR() slightly modified so that the terminal is not locked up while editing an Rmd file.
