@@ -1,2 +1,3 @@
 language: r
 cache: packages
+r_github_packages: pmur002/roloc,pmur002/rolocISCCNBS
