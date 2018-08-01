@@ -1,8 +1,7 @@
 # The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2060/badge)](https://bestpractices.coreinfrastructure.org/projects/2060)
-
-
+[![Travis-CI Build Status](https://travis-ci.org/ajrgodfrey/BrailleR.svg?branch=master)](https://travis-ci.org/ajrgodfrey/BrailleR)
 
 ### Blind people's use of R
 
