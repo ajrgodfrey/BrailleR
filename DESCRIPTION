@@ -57,6 +57,7 @@ Imports:
     xtable
 Suggests:
     installr
+Remotes: pmur002/rolocISCCNBS
 SystemRequirements: Python 2.7 and wxPython 2.8
 VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR
