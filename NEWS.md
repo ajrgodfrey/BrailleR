@@ -1,3 +1,5 @@
+# BrailleR 0.29.1
+- added travis-ci stuff
 # BrailleR 0.29.0
 - added CII best practices badge to GitHub repo.
 - pushed to CRAN (ahead of regular plan)
