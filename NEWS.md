@@ -1,8 +1,11 @@
 # BrailleR 0.29.1
+- got to successful build status on travis-ci; yippee!
+- dependent packages now on CRAN; thanks Paul.
 - added travis-ci stuff
+
 # BrailleR 0.29.0
 - added CII best practices badge to GitHub repo.
-- pushed to CRAN (ahead of regular plan)
+- pushed to CRAN (ahead of regular plan); failed due to dependent packages not on CRAN
 - some fixes from Paul for the problems caused by changes in the ggplot2 package; done via PR on GitHub 
 - WriteR() slightly modified so that the terminal is not locked up while editing an Rmd file.
 - introduced use of roloc package to define colours in human readable form.
