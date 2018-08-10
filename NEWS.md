@@ -1,4 +1,7 @@
+# BrailleR 0.29.2
+
 # BrailleR 0.29.1
+- pushed to CRAN, successfully
 - got to successful build status on travis-ci; yippee!
 - dependent packages now on CRAN; thanks Paul.
 - added travis-ci stuff
@@ -11,7 +14,6 @@
 - introduced use of roloc package to define colours in human readable form.
 
 # BrailleR 0.28.0
-
 - submitted to CRAN
 
 # BrailleR 0.27.3
