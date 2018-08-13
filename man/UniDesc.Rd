@@ -34,7 +34,7 @@ Saves an R markdown file, (and then if \code{Process=TRUE}) an R script file,  a
 \author{A. Jonathan R. Godfrey \email{a.j.godfrey@massey.ac.nz}}
 \examples{
 Ozone=airquality$Ozone
-UniDesc(Ozone, View=FALSE)
+UniDesc(Ozone)
 rm(Ozone)
 # N.B. Various files and a folder were created in the working directory. 
 # Please investigate them to see how this function worked.

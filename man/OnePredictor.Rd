@@ -26,7 +26,7 @@ OnePredictor(Response, Predictor, Data = NULL,
 }
 \examples{
 data(airquality)
-OnePredictor("Ozone", "Wind", airquality, View=FALSE)
+OnePredictor("Ozone", "Wind", airquality)
 # N.B. Various files and a folder were created in the working directory. 
 # Please investigate them to see how this function worked.
 }

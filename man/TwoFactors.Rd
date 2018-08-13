@@ -45,5 +45,3 @@ TG_Unb <- TG[-c(53:60),]
 TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE)
 rm(TG); rm(TG_Unb)
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
