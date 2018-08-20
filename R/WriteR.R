@@ -23,7 +23,8 @@ WriteR =
           if (.IsWriteRAvailable()) {
             if (!is.null(file)) {
               if (!file.exists(file)) {
-                cat("Starting new file\n", file = file)
+                #cat("Starting new file\n", file = file)
+                file.copy(system.file("Templates/simpleYAMLHeader.Rmd", package="BrailleR"), file)
               }
             }
             shell(paste0('"', file.path(system.file(

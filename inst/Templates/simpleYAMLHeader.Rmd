@@ -1,0 +1,11 @@
+---
+title: ""
+author: ""
+date: ""
+output:
+    html_document:
+        toc: false
+        number_sections: false
+        fig_height: 7
+        fig_width: 7
+---

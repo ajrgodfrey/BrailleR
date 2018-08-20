@@ -9,6 +9,7 @@ output: knitr:::html_vignette
 ---
 
 
+This vignette  contained many more plots in its initial development. The set has been cut back considerably to offer meaningful testing only, and because much of the material was moved over to a book called [BrailleR in Action.](https://R-Resources.massey.ac.nz/BrailleRInAction) Doing so also had an advantage of speeding up the package creation, testing, and installation.
 N.B.  the commands here are either exact copies of the commands presented in Wickham (2009) or some minor alterations to them.    Notably, some code given in the book no longer works. This is given a `#!`    
 
 
@@ -66,7 +67,7 @@ library(splines)
 #! g5c = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), method = "lm", formula = y ~ ns(x,5))    
 ```  
 
-```{r g6}     
+```{r g6, include=FALSE}     
 # continuous v categorical   
 g6 = qplot(color, price / carat, data = diamonds, geom = "jitter", alpha = I(1 / 50))    
 # summary(g6)   
@@ -96,14 +97,14 @@ g7d
 VI(g7d)   
 ```  
 
-```{r g8}     
+```{r g8, include=FALSE}
 g8 = qplot(carat, data = diamonds, geom = "density")    
 # summary(g8)   
 g8
 VI(g8)   
 ```  
 
-```{r g9}     
+```{r g9, include=FALSE}     
 # data is separated by implication using the following...   
 g9 = qplot(carat, data = diamonds, geom = "density", colour = color)    
 # summary(g9)   
@@ -147,7 +148,7 @@ g13b
 VI(g13b)   
 ```  
 
-```{r g14}     
+```{r g14, include=FALSE}     
 # path plots   
 year <- function(x) as.POSIXlt(x)$year + 1900    
 g14a = qplot(unemploy / pop, uempmed, data = economics, geom = c("point", "path"))    
@@ -159,7 +160,7 @@ VI(g14a)
 #VI(g14b)   
 ```  
 
-```{r g15}     
+```{r g15, include=FALSE}     
 # facets is the ggplot term for trellis' panels   
 g15a = qplot(carat, data = diamonds, facets = color ~ ., geom = "histogram", binwidth = 0.1, xlim = c(0, 3))    
 # summary(g15a)   
@@ -179,7 +180,7 @@ g16
 VI(g16)   
 ```  
 
-```{r g17}     
+```{r g17, include=FALSE}     
 # Facets syntax without a "." before the "~" causes grief
 g17 = qplot(displ, hwy, data=mpg, facets =~ year) + geom_smooth()    
 # summary(g17)   
