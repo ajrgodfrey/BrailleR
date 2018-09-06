@@ -1,4 +1,7 @@
 # BrailleR 0.29.2
+- added a starting template for the WriteR files
+- added Notepad(), notepad(), Explorer(), explorer(), CMD(), and cmd() functions to make life a little easier for Windows users
+
 
 # BrailleR 0.29.1
 - pushed to CRAN, successfully
