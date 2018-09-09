@@ -1,8 +1,8 @@
 
-Notepad = notepad= function(file=NULL){
+Notepad = notepad= function(file=""){
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-shell(paste('notepad', ifelse(is.null(file), "", file)), wait=FALSE)
+shell(paste('notepad', file), wait=FALSE)
         } else {
           warning(
               "This function is for users running R under the Windows operating system.\n")

@@ -1,7 +1,8 @@
 # BrailleR 0.29.2
 - added a starting template for the WriteR files
 - added Notepad(), notepad(), Explorer(), explorer(), CMD(), and cmd() functions to make life a little easier for Windows users
-
+- added check_it(), CheckIt(), WhatIs(), and what_is() for investigating objects in the middle of a pipe chain
+ 
 
 # BrailleR 0.29.1
 - pushed to CRAN, successfully

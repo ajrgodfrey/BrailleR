@@ -7,7 +7,7 @@
 \alias{CMD}
 \title{Open standard Windows tools quickly}
 \usage{
-Notepad(file = NULL)
+Notepad(file = "")
 }
 \arguments{
 \item{file}{A character string for the file to be opened; it will be created if it does not yet exist.}
