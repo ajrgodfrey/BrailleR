@@ -33,7 +33,7 @@ LURN = function(BlindVersion = getOption("BrailleR.VI")) {
 
 
 
-Google =
+google = Google =
     function() {
       if (interactive()) {
         browseURL("https://www.google.com")
@@ -43,4 +43,15 @@ Google =
       return(invisible(NULL))
     }
 
-google = Google
+
+R4DS = r4ds  =
+    function() {
+      if (interactive()) {
+        browseURL("http://r4ds.had.co.nz/")
+      } else {
+        warning("This function is meant for use in interactive mode only.\n")
+      }
+      return(invisible(NULL))
+    }
+
+
