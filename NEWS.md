@@ -1,5 +1,5 @@
 # BrailleR 0.29.3
-- added more Describe() methods
+- added more detail to Describe() methods
 
 
 # BrailleR 0.29.2
