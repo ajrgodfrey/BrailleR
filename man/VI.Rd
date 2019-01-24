@@ -7,6 +7,7 @@
 \alias{Describe.histogram}
 \alias{Describe.lm}
 \alias{Describe.matrix}
+\alias{Describe.scatterplot}
 \alias{Describe.summary.lm}
 \alias{Describe.tsplot}
 \alias{Describe.TukeyHSD}
