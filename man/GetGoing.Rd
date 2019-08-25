@@ -14,5 +14,3 @@ The user can also choose to perform various setup tasks using this interface.}
 \seealso{All options being set through this function have specific functions that achieve the same ends. For example, see \code{\link{GoSighted}} for the options that are binary settings, or \code{\link{SetAuthor}} for options requiring a specific character or numeric value to be chosen.
 
 The setup functionality can be reviewed at \code{\link{MakeBatch}}. }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

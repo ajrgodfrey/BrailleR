@@ -31,5 +31,3 @@ x=rnorm(1000)
 MyHist=Augment(hist(x))
 MyHist
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

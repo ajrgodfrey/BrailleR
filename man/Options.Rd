@@ -33,4 +33,3 @@ A. Jonathan R. Godfrey
 \seealso{
 See these settings applied as default arguments to \code{\link{UniDesc}}
 }
-\keyword{ ~kwd1 }

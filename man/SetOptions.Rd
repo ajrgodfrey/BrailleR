@@ -69,5 +69,3 @@ SetSigLevel(0.05, Local=FALSE) # valid alpha value
 SetAuthor(Local=FALSE)
 SetAuthor("Jonathan Godfrey", Local=FALSE)
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

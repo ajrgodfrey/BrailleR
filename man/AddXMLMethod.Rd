@@ -30,5 +30,3 @@ P. Dengler et al. (2011) Scalable vector graphics (SVG) 1.1, second edition. W3C
 x=rnorm(1000)
 #AddXML(hist(x))
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

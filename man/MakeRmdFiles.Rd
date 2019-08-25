@@ -30,5 +30,3 @@ Once all Rmd files have been edited, the user can have all the Rmd files in a fo
 \author{A. Jonathan R. Godfrey}
 \seealso{
 These functions were inspired by the \code{\link[knitr]{spin}} functionality of the \pkg{knitr} package. You may wish to move onto using it for more features.}
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

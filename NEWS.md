@@ -1,5 +1,7 @@
 # BrailleR 0.29.4
 - testing for new version of whisker package (dependency)
+- removed trash from some Rd files that spat a warning on package creation
+
 
 # BrailleR 0.29.3
 - added more detail to Describe() methods

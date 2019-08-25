@@ -19,5 +19,3 @@ The \code{PrepareWriteR()}  function writes the settings file (called WriteROpti
 \value{NULL. This function is for your convenience and not for doing any work inside an R session.}
 \author{A. Jonathan R. Godfrey}
 \note{You must have Python 2.7 and the associated wxPython installation on your system to use the WriteR application.}
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
