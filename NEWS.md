@@ -1,6 +1,8 @@
+# BrailleR 0.29.4
+- testing for new version of whisker package (dependency)
+
 # BrailleR 0.29.3
 - added more detail to Describe() methods
-
 
 # BrailleR 0.29.2
 - added a starting template for the WriteR files
