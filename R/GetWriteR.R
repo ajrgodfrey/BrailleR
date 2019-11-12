@@ -222,10 +222,10 @@ GetWriteR = function(UseGitHub = TRUE) {
 
 .PullWxUsingPip = function(){
     if(reticulate::py_module_available("wx")){
-        system("pip install -U wxPython")
+        system("pip install --user -U wxPython")
         }
     else{
-        system("pip install wxPython")
+        system("pip install --user wxPython")
         }
         return(invisible(TRUE))
     }
@@ -236,7 +236,7 @@ GetWxPython27 =
       Success = FALSE
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if(reticulate::py_available(TRUE)){
+          if(Sys.which("python") != ""){
             if(reticulate::py_config()$version == "2.7"){
               Success = .PullWxUsingPip()
             } else {
@@ -290,7 +290,7 @@ GetWxPython3 =
       Success = FALSE
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if(reticulate::py_available(TRUE)){
+          if(Sys.which("python") != ""){
             if(reticulate::py_config()$version > 3){
               Success = .PullWxUsingPip()
             } else {

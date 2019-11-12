@@ -1,3 +1,10 @@
+#
+
+# BrailleR 0.29.5
+- work to remove Python 2.7 from package files
+- GetPython27() and GetWxPython27() kept just in case someone wants them.
+- small updates to GetPython3() to guide user to use custom installation.
+
 # BrailleR 0.29.4
 - testing for new version of whisker package (dependency)
 - removed trash from some Rd files that spat a warning on package creation
