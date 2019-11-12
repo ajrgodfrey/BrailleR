@@ -13,7 +13,7 @@ Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.
     person("Greg", "Snow", email = "greg.snow@imail.org", role = "ctb"),
     person("Henrik", "Bengtsson", email = "henrikb@braju.com", role = "ctb"),
     person("James", "Curtis", email = "james@curtis.net.nz", role = "ctb"),
-    person("JooYoung", "Seo", email = "jooyoung@psu.edu", role = "ctb"),
+    person("JooYoung", "Seo", email = "jooyoung@psu.edu", role = "ctb", comment = c(ORCID = "0000-0002-4064-6012")),
     person("Marshall", "Flax", email = "marshall.flax@gmail.com", role = "ctb"),
     person("Paul", "Murrell", email = "paul@stat.auckland.ac.nz", role = "aut"),
     person("Timothy", "Bilton", email = "tbilton@gmail.com", role = "aut"),
@@ -53,7 +53,9 @@ Imports:
     utils,
     whisker,
     XML,
-    xtable
+    xtable,
+    tibble,
+    yesno
 Suggests:
     installr
 SystemRequirements: Python 3 and wxPython 4.0
