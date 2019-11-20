@@ -1,4 +1,5 @@
-#
+# BrailleR 0.30.0
+- making ready for upload to CRAN
 
 # BrailleR 0.29.5
 - work to remove Python 2.7 from package files
