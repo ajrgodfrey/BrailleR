@@ -5,7 +5,7 @@
 TestPython = function(){
 if(nchar(Sys.which("python"))>0){
 VersionString = system2("python", "--version", stdout=TRUE, stderr=TRUE)
-message("Your system is using ", VersionString)
+message("Your system is using ", VersionString, "\n")
 return(TRUE)
 }
 else{
