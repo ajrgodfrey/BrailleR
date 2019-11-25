@@ -1,17 +1,19 @@
+#! /usr/bin/env python3
 
 "Replace tabs with spaces in argument files.  Print names of changed files."
 
 import os
 import sys
 import getopt
+import tokenize
 
 def main():
-    tabsize = 2
+    tabsize = 8
     try:
         opts, args = getopt.getopt(sys.argv[1:], "t:")
         if not args:
-            raise getopt.error, "At least one file argument required"
-    except getopt.error, msg:
+            raise getopt.error("At least one file argument required")
+    except getopt.error as msg:
         print(msg)
         print("usage:", sys.argv[0], "[-t tabwidth] file ...")
         return
@@ -22,30 +24,32 @@ def main():
     for filename in args:
         process(filename, tabsize)
 
-def process(filename, tabsize):
+
+def process(filename, tabsize, verbose=True):
     try:
-        f = open(filename)
-        text = f.read()
-        f.close()
-    except IOError, msg:
+        with tokenize.open(filename) as f:
+            text = f.read()
+            encoding = f.encoding
+    except IOError as msg:
         print("%r: I/O error: %s" % (filename, msg))
         return
     newtext = text.expandtabs(tabsize)
     if newtext == text:
         return
-    backup = filename + ".bak"
+    backup = filename + "~"
     try:
         os.unlink(backup)
-    except os.error:
+    except OSError:
         pass
     try:
         os.rename(filename, backup)
-    except os.error:
+    except OSError:
         pass
-    f = open(filename, "w")
-    f.write(newtext)
-    f.close()
-    print(filename)
+    with open(filename, "w", encoding=encoding) as f:
+        f.write(newtext)
+    if verbose:
+        print(filename)
+
 
 if __name__ == '__main__':
     main()
