@@ -1,0 +1,18 @@
+# this is a heading
+
+## this is a level two heading
+
+Now it's time for some R
+```{r no1}
+x=1:10
+mean(x)
+```
+
+
+We can also ask for stuff in line such as `r mean(x)` into our sentence.
+
+```{r AHistogram, fig.cap="My first histogram"}
+hist(rnorm(1000))
+```
+
+
