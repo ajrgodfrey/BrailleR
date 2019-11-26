@@ -1,13 +1,22 @@
+.IsWxAvailable =
+    function(){
+TestWx = system('python -c "import wx"')
+return(TestWx == 0)
+}
+
+
+
 .IsWriteRAvailable =
     function(){
       Success = FALSE
-      if(reticulate::py_config()$version > 2.6 && reticulate::py_module_available("wx")){
+      PyExists = nchar(Sys.which("python"))>0
+      if(PyExists && .IsWxAvailable()){
         Success=TRUE
       }else{
-        if(reticulate::py_config()$version > 2.6){
+        if(PyExists){
           Success = .PullWxUsingPip()
         }else{
-          warning("This function requires installation of Python 2.7 or above.\n")
+          warning("This function requires installation of Python 3.0 or above.\n")
         }
       }
       return(invisible(Success))
@@ -34,7 +43,7 @@ WriteR =
             warning(
                 "This function requires an installation of Python and wxPython.\n")
             message(
-                "You could use GetPython27() and GetWxPython27() to help install them.\n")
+                "You could use GetPython3() and GetWxPython3() to help install them.\n")
           }
         } else {
           warning(

@@ -25,7 +25,7 @@ message("One of two things just happened; either\n1. a window popped up using th
               "This function is for users running R under the Windows operating system.\n")
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        ifelse(.IsWxAvailable(), message("Python can see the necessary wx module.\n"), message("Python cannot see the necessary wx module.\n"))
       }
 }
 }
