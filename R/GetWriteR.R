@@ -1,3 +1,4 @@
+
 # look out for two versions of GetWriteR() second one is while the exe file is broken.
 # look out for two versions of GetWxPython27(), the second is experimental and uses a Python shell command command to pull wxPython
 
@@ -14,21 +15,21 @@ return(FALSE)
 }
 }
 
+
 TestWX = function(){
 if(TestPython()){
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
 shell(paste("python", system.file("Python/TestWX.py", package="BrailleR")))
-message("One of two things just happened; either\n1. a window popped up using the necessary toolkit, which you should have closed, and you're ready to go with WriteR\nor,\n2. some error messages were printed as R output, in which case the WXPython toolkit needs to be installed.\n")
         } else {
           warning(
               "This function is for users running R under the Windows operating system.\n")
         }
 }
         if(.IsWxAvailable()){
- message("Python can see the necessary wx module.\n")
+ message("Python can see the necessary wx module.\nYou are ready to use WriteR.\n")
 return(invisible(TRUE))}
-else{ message("Python cannot see the necessary wx module.\n")
+else{ message("Python cannot see the necessary wx module.\nYou need to get that fixed.\n")
 return(invisible(FALSE))}
 }
 }
