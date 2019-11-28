@@ -5,23 +5,19 @@ GetPandoc =
         if (.Platform$OS.type == "windows") {
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
-              message(
-                "This command will download a file and save it to your hard drive.\n")
+              .DownloadAFile()
               installr::install.pandoc(
                 download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
-              message(
-                "The installer file has been added to your MyBrailleR folder.")
-              message(
-                "You can delete it at any time, but that will not uninstall the application.")
+              .Added2MyBrailleR()
+              .DeleteAnytime ()
             }
           }
         } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
+          .WindowsOnly()
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -34,23 +30,19 @@ GetRStudio =
         if (.Platform$OS.type == "windows") {
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
-              message(
-                "This command will download a file and save it to your hard drive.\n")
+              .DownloadAFile()
               installr::install.RStudio(
                 download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
-              message(
-                "The installer file has been added to your MyBrailleR folder.")
-              message(
-                "You can delete it at any time, but that will not uninstall the application.")
+              .Added2MyBrailleR()
+              .DeleteAnytime ()
             }
           }
         } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
+          .WindowsOnly()
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -63,22 +55,18 @@ Get7zip =
         if (.Platform$OS.type == "windows") {
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
-              message(
-                "This command will download a file and save it to your hard drive.")
+              .DownloadAFile()
               installr::install.7zip(download_dir = getOption("BrailleR.Folder"),
                                    keep_install_file = TRUE)
-              message(
-                "The installer file has been added to your MyBrailleR folder.")
-              message(
-                "You can delete it at any time, but that will not uninstall the application.")
+                .Added2MyBrailleR()
+              .DeleteAnytime ()
             }
           }
         } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
+          .WindowsOnly()
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -89,8 +77,7 @@ GetCygwin =
         if (.Platform$OS.type == "windows") {
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
-              message(
-                "This command will download a file and save it to your hard drive.\n")
+              .DownloadAFile()
 bit=32
 if(x64){
               if(installr::is.x64()) bit=64
@@ -98,18 +85,15 @@ if(x64){
       installr::install.cygwin(bit=bit,
                 download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)
-              message(
-                "The installer file has been added to your MyBrailleR folder.")
-              message(
-                "You can delete it at any time, but that will not uninstall the application.")
+                .Added2MyBrailleR()
+              .DeleteAnytime ()
             }
           }
         } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
+          .WindowsOnly()
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

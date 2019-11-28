@@ -90,7 +90,7 @@ return(LastPageNo)
 .IsPDFMinerAvailable =
     function(){
       Success = FALSE
-      ifTestPython() && shell('python -c "import pdfminer"')==0){
+      if(TestPython() && shell('python -c "import pdfminer"')==0){
         Success = TRUE
       }else{
         if(TestPython()){

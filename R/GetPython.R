@@ -1,6 +1,10 @@
-GetPython27 = .DeprocatedFunction 
-GetWxPython27 = .DeprocatedFunction 
+GetPython27 = function(...){
+.DeprocatedFunction() 
+}
 
+GetWxPython27 =  function(...){
+.DeprocatedFunction()
+}
 
 TestPython = function(){
 if(nchar(Sys.which("python"))>0){
@@ -69,11 +73,6 @@ GetPython3 =
       }
       return(invisible(NULL))
     }
-
-GetWriteR = function(UseGitHub = TRUE) {
-.TempUnavailable()
-            }
-
 
 .PullWxUsingPip = function(){
     if(.IsWxAvailable()){
