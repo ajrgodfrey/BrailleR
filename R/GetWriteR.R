@@ -24,9 +24,12 @@ message("One of two things just happened; either\n1. a window popped up using th
           warning(
               "This function is for users running R under the Windows operating system.\n")
         }
-      } else {
-        ifelse(.IsWxAvailable(), message("Python can see the necessary wx module.\n"), message("Python cannot see the necessary wx module.\n"))
-      }
+        if(.IsWxAvailable()){
+ message("Python can see the necessary wx module.\n")
+return(invisible(TRUE))}
+else{ message("Python cannot see the necessary wx module.\n")
+return(invisible(FALSE))}
+}
 }
 }
 
