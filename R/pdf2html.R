@@ -1,4 +1,4 @@
-.CheckForPython27 =
+.CheckForPython27 = # ripe for removal
     function(){
     PyPath = Sys.which("python")
     }
@@ -77,7 +77,7 @@ return(LastPageNo)
 
 .PullPDFMinerUsingPip = 
     function(){
-      if(reticulate::py_module_available("pdfminer")){
+      if(shell('python -c "import pdfminer"')==0){
         system("pip install -U pdfminer")
       } else {
         system("pip install pdfminer")
@@ -90,13 +90,14 @@ return(LastPageNo)
 .IsPDFMinerAvailable =
     function(){
       Success = FALSE
-      if(reticulate::py_config()$version == "2.7" && reticulate::py_module_available("pdfminer")){
+      ifTestPython() && shell('python -c "import pdfminer"')==0){
         Success = TRUE
       }else{
-        if(reticulate::py_config()$version == "2.7"){
+        if(TestPython()){
           Success = .PullPDFMinerUsingPip()
         }else{
-          warning("This function requires installation of Python 2.7.\n")
+          warning("This function requires installation of Python.\n")
+message("You can install Python with the GetPython3() function.\n")
         }
       }
       return(invisible(Success))

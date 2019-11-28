@@ -1,9 +1,10 @@
+
 #' @rdname MakeReadable
 #' @title Convert line breaks in vignette documentation
 #' @aliases MakeReadable
 #' @description  The Rnw files used for vignettes use Linux style line breaks that make reading vignette source files difficult for Windows users. A Python script is called which converts the line breaks and saves the vignette source in the user's MyBrailleR folder.
 
-#' @details Must have Python 2.7 installed for this function to work.
+#' @details Must have Python installed for this function to work.
 #' @return Nothing in the workspace. All files are stored in a vignettes folder within MyBrailleR.
 #' @author A. Jonathan R. Godfrey
 #' @export MakeReadable
@@ -12,7 +13,7 @@
 MakeReadable =
     function(pkg) {
       if (.Platform$OS.type == "windows") {
-        if (Sys.which("python") != "") {
+        if (TestPython()) {
           if (pkg %in% installed.packages()) {
             # convert files here
             VignetteFolder = paste0(system.file(package = pkg), "/doc")
@@ -39,7 +40,7 @@ MakeReadable =
             warning("The specified package is not installed.\n")
           }
         } else {
-          warning("This function requires an installation of Python 2.7.\n")
+          warning("This function requires an installation of Python.\n")
         }
       } else {
         warning(

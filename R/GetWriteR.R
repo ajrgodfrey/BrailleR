@@ -3,38 +3,6 @@
 # look out for two versions of GetWxPython27(), the second is experimental and uses a Python shell command command to pull wxPython
 
 
-TestPython = function(){
-if(nchar(Sys.which("python"))>0){
-VersionString = system2("python", "--version", stdout=TRUE, stderr=TRUE)
-message("Your system is using ", VersionString, "\n")
-return(TRUE)
-}
-else{
-message("Python cannot be seen on your system.\nIf it is installed, then you may need to ensure your system settings are correct.\n")
-return(FALSE)
-}
-}
-
-
-TestWX = function(){
-if(TestPython()){
-      if (interactive()) {
-        if (.Platform$OS.type == "windows") {
-shell(paste("python", system.file("Python/TestWX.py", package="BrailleR")))
-        } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
-        }
-}
-        if(.IsWxAvailable()){
- message("Python can see the necessary wx module.\nYou are ready to use WriteR.\n")
-return(invisible(TRUE))}
-else{ message("Python cannot see the necessary wx module.\nYou need to get that fixed.\n")
-return(invisible(FALSE))}
-}
-}
-
-
 GetWriteR =
     function(UseGitHub = TRUE) {
       if (interactive()) {
@@ -200,7 +168,7 @@ GetWriteR = function(UseGitHub = TRUE) {
 
 
 .PullWxUsingPip = function(){
-    if(reticulate::py_module_available("wx")){
+    if(.IsWxAvailable()){
         system("pip install --user -U wxPython")
         }
     else{
