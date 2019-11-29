@@ -47,20 +47,21 @@ return(TestWx == 0)
 
 
 GetPython3 =
-    function() {
-      .GetPython(3)
+    function(x64=TRUE) {
+      .GetPython(3, x64=x64)
       return(invisible(NULL))
     }
 
 .GetPython =
-    function(version) {
+    function(version, x64=x64) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
               .DownloadAFile()
-#            installr::
-.install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE)
+ifelse(x64, bit=64, bit=32)
+
+            installr::install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE, x64=x64)
              .Added2MyBrailleR()
              .DeleteAnytime()
              }
@@ -92,6 +93,7 @@ GetWxPython3 =
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
           if(TestPython()){
+.PullWxUsingPip()
           }
         } else {
           .WindowsOnly()

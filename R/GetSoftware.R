@@ -78,10 +78,7 @@ GetCygwin =
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
               .DownloadAFile()
-bit=32
-if(x64){
-              if(installr::is.x64()) bit=64
-              }
+ifelse(x64, bit=64, bit=32)
       installr::install.cygwin(bit=bit,
                 download_dir = getOption("BrailleR.Folder"),
                 keep_install_file = TRUE)

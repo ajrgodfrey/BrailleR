@@ -16,14 +16,14 @@ GetCygwin(x64 = TRUE)
 
 GetPandoc()
 
-GetPython27(...)
-GetPython3()
+GetPython27(...) # deprecated
+GetPython3(x64 = TRUE)
 
 GetRStudio()
 
 GetWriteR(UseGitHub = TRUE)
 
-GetWxPython27(...)
+GetWxPython27(...) # deprecated
 GetWxPython3()
 }
 \arguments{

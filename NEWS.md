@@ -2,6 +2,9 @@
 - making ready for upload to CRAN
 - attempting to remove all references to the reticulate package
 - added TestPython() and TestWX() functions which test system setup.
+- added Messages.R and Warnings.R to create text strings that get used in multiple functions. All use internal functions
+- deprocated GetPython27() and GetWxPython27(); updated help pages to show deprocation
+
 
 
 # BrailleR 0.29.5
