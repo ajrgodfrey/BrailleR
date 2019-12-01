@@ -7,6 +7,10 @@ warning("This function has been deprocated.\n")
 return(invisible(NULL))
     }
 
+.FileNotFound =     function() {
+warning("The specified file does not exist.\n")
+return(invisible(NULL))
+    }
 
 
 .InteractiveOnly =     function() {
@@ -28,7 +32,6 @@ return(invisible(NULL))
 
 
 .WindowsOnly =     function() {
-warning(
-  "This function is for users running R under the Windows operating system.\n")
+warning("This function is for users running R under the Windows operating system.\n")
 return(invisible(NULL))
     }

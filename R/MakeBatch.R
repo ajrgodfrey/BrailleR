@@ -72,11 +72,10 @@ mean(MySample)  \n",
             }
           }
         } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
+          .WindowsOnly()
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

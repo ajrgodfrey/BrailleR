@@ -12,8 +12,7 @@ History2Rmd =
         message("There is a new file in your working directory. Look for: ")
         return(file)
       } else {
-        warning(
-            "This function is intended for use in an interactive R session.\n")
+        .InteractiveOnly()
         return(invisible(NULL))
       }
     }
@@ -36,11 +35,10 @@ R2Rmd =
             file = RmdFile)
         cat(paste0("\n", Lines, "  "), file = RmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = RmdFile, append = TRUE)
-
-        message("A new file has been created in your working directory.")
+        .NewFile()
         return(RmdFile)
       } else {
-        warning("The specified file does not exist.\n")
+        .FileNotFound()
         return(invisible(NULL))
       }
     }

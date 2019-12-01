@@ -40,11 +40,10 @@ MakeReadable =
             warning("The specified package is not installed.\n")
           }
         } else {
-          warning("This function requires an installation of Python.\n")
+          .NeedsPython()
         }
       } else {
-        warning(
-            "This function is for users running R under the Windows operating system.\n")
+        .WindowsOnly()
       }
       return(invisible(NULL))
     }

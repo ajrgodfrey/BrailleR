@@ -8,7 +8,7 @@ ThankYou =
             instructions = "Hello Jonathan,\n\n",
             info = "Please let me know a little about yourself, where you are working or studying, and how you learned about BrailleR.\n")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -21,7 +21,7 @@ JoinBlindRUG =
             instructions = "end",
             info = "Just send this message without altering it in any way; wait for an automated reply from the mail server. Just press reply to that message and send it back. You will be joined to BlindRUG very soon afterwards.\n")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

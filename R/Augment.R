@@ -5,7 +5,7 @@ Augment = function(x) {
 
 Augment.default =
     function(x) {
-    message("Nothing done to augment this graph object.")
+.NothingDoneGraph()
     return(invisible(x))
 }
 
