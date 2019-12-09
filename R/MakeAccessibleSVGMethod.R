@@ -7,23 +7,12 @@ MakeAccessibleSVG.default =
     function(x, file = "test", view=interactive(), ...) {
       svgfile = SVGThis(x, paste0(file, ".svg"))
       xmlfile = AddXML(x, paste0(file, ".xml"))
-      if (view) {
           BrowseSVG(file=file, view=view, ...)
-      }
-      message("SVG and XML files created successfully")
+      .SVGAndXMLMade()
       return(invisible(NULL))
 }
 
-MakeAccessibleSVG.histogram = MakeAccessibleSVG.scatterplot =
-    function(x, file = "test", view=interactive(), ...) {
-      svgfile = SVGThis(x, paste0(file, ".svg"))
-      xmlfile = AddXML(x, paste0(file, ".xml"))
-      if (view) {
-          BrowseSVG(file=file, view=view, ...)
-      }
-      message("SVG and XML files created successfully")
-      return(invisible(NULL))
-}
+MakeAccessibleSVG.histogram = MakeAccessibleSVG.scatterplot = MakeAccessibleSVG.default
 
 MakeAccessibleSVG.tsplot =
     function(x, file = "test", view=interactive(), ...) {
@@ -32,10 +21,8 @@ MakeAccessibleSVG.tsplot =
         .RewriteSVG.tsplot(x, paste0(file, ".svg"))
       }
       xmlfile = AddXML(x, paste0(file, ".xml"))
-      if (view) {
           BrowseSVG(file=file, view=view, ...)
-      }
-      message("SVG and XML files created successfully")
+      .SVGAndXMLMade()
       return(invisible(NULL))
 }
 
@@ -46,9 +33,7 @@ MakeAccessibleSVG.ggplot =
       xmlfile = AddXML(x, paste0(file, ".xml"))  # needs device to do grid.grep()
       dev.off()  # destroy graphics device, now that we're done with it
       
-      if (view) {
         BrowseSVG(file=file, view=view, ...)
-      }
-      message("SVG and XML files created successfully")
+      .SVGAndXMLMade()
       return(invisible(NULL))
 }

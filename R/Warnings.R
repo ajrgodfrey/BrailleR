@@ -2,8 +2,8 @@
 return(invisible(NULL))
     }
 
-.DeprocatedFunction =     function() {
-warning("This function has been deprocated.\n")
+.DeprecatedFunction =     function() {
+warning("This function has been deprecated.\n")
 return(invisible(NULL))
     }
 

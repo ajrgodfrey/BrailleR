@@ -1,9 +1,9 @@
 GetPython27 = function(...){
-.DeprocatedFunction() 
+.DeprecatedFunction() 
 }
 
 GetWxPython27 =  function(...){
-.DeprocatedFunction()
+.DeprecatedFunction()
 }
 
 TestPython = function(){
@@ -59,7 +59,7 @@ GetPython3 =
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
               .DownloadAFile()
-ifelse(x64, bit=64, bit=32)
+bit = ifelse(x64, 64, 32)
 
             installr::install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE, x64=x64)
              .Added2MyBrailleR()

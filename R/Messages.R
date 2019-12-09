@@ -38,6 +38,12 @@ return(invisible(NULL))
     }
 
 
+.SVGAndXMLMade =     function() {
+message("SVG and XML files created successfully.\n")
+return(invisible(NULL))
+    }
+
+
 .TempUnavailable =     function() {
   message("This command is temporarily unavailable.\n")
 return(invisible(NULL))
