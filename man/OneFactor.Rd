@@ -31,13 +31,14 @@ View = getOption("BrailleR.View"))
 data(airquality)
 
 # the following line  returns an error:
-## OneFactor("Ozone", "Month", airquality, View=FALSE)
+## OneFactor("Ozone", "Month", airquality, Folder=tempdir(), View=FALSE)
 # so we make a copy of the data.frame, and fix that:
 
 airquality2 = airquality
 airquality2$Month = as.factor(airquality$Month)
 # and now all is good to try:
-OneFactor("Ozone", "Month", airquality2)
-# N.B. Various files and a folder were created in the working directory. 
+OneFactor("Ozone", "Month", airquality2, Folder=tempdir())
+# N.B. Various files and a folder were created in a temporary directory. 
+# Re-run this last command without the Folder specification; then, 
 # Please investigate them to see how this function worked.
 }

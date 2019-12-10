@@ -35,13 +35,16 @@ TG <- ToothGrowth
 TG$dose <- as.factor(TG$dose)
 
 # Without interaction
-TwoFactors('len','supp','dose',Data=TG, Inter=FALSE)
+TwoFactors('len','supp','dose',Data=TG, Inter=FALSE, Folder=tempdir())
 
 # With two-way interaction
-TwoFactors('len', 'supp', 'dose', Data=TG, Inter=TRUE)
+TwoFactors('len', 'supp', 'dose', Data=TG, Inter=TRUE, Folder=tempdir())
 
 # For unbalanced data
 TG_Unb <- TG[-c(53:60),]
-TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE)
+TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE, Folder=tempdir())
 rm(TG); rm(TG_Unb)
+# N.B. Various files and a folder were created in temporary directories. 
+# Re-run these commands without the Folder specifications; then, 
+# Please investigate them to see how this function worked.
 }

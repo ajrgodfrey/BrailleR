@@ -26,7 +26,8 @@ OnePredictor(Response, Predictor, Data = NULL,
 }
 \examples{
 data(airquality)
-OnePredictor("Ozone", "Wind", airquality)
+OnePredictor("Ozone", "Wind", airquality, Folder=tempdir())
 # N.B. Various files and a folder were created in the working directory. 
+# Re-run this last command without the Folder specification; then, 
 # Please investigate them to see how this function worked.
 }
