@@ -31,20 +31,22 @@ to complete}
 The \code{\link{OneFactor}} script was the basis for this function;.
 }
 \examples{
+DIR = getwd()
+setwd(tempdir())
 TG <- ToothGrowth
 TG$dose <- as.factor(TG$dose)
 
 # Without interaction
-TwoFactors('len','supp','dose',Data=TG, Inter=FALSE, Folder=tempdir())
+TwoFactors('len','supp','dose',Data=TG, Inter=FALSE)
 
 # With two-way interaction
-TwoFactors('len', 'supp', 'dose', Data=TG, Inter=TRUE, Folder=tempdir())
+TwoFactors('len', 'supp', 'dose', Data=TG, Inter=TRUE)
 
 # For unbalanced data
 TG_Unb <- TG[-c(53:60),]
-TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE, Folder=tempdir())
+TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE)
 rm(TG); rm(TG_Unb)
-# N.B. Various files and a folder were created in temporary directories. 
-# Re-run these commands without the Folder specifications; then, 
+# N.B. Various files and a folder were created in a temporary directory. 
 # Please investigate them to see how this function worked.
+setwd(DIR)
 }

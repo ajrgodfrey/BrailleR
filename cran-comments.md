@@ -8,6 +8,9 @@ Any functions relying on package 'installr' (which is for Windows only and liste
 
 Any use of the shell() command do so with OS conditioning and interactive mode protection
 
+failures on Devian (discovered on upload to CRAN via pre-testing) relate to files and folders not being cleaned out after creation in examples.
+I now explicitly change directory to a temporary folder using tempdir() and revert back to the original folder at the end of each example
+
  
 
 

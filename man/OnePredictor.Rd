@@ -25,9 +25,11 @@ OnePredictor(Response, Predictor, Data = NULL,
 \seealso{Other convenience functions can be investigated via their help pages. See \code{\link{UniDesc}}, \code{\link{OneFactor}}, and \code{\link{TwoFactors}}
 }
 \examples{
+DIR = getwd()
+setwd(tempdir())
 data(airquality)
-OnePredictor("Ozone", "Wind", airquality, Folder=tempdir())
-# N.B. Various files and a folder were created in the working directory. 
-# Re-run this last command without the Folder specification; then, 
+OnePredictor("Ozone", "Wind", airquality)
+# N.B. Various files and a folder were created in a temporary directory. 
 # Please investigate them to see how this function worked.
+setwd(DIR)
 }

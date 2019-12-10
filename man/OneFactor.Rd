@@ -28,6 +28,8 @@ View = getOption("BrailleR.View"))
 }
 
 \examples{
+DIR = getwd()
+setwd(tempdir())
 data(airquality)
 
 # the following line  returns an error:
@@ -37,8 +39,8 @@ data(airquality)
 airquality2 = airquality
 airquality2$Month = as.factor(airquality$Month)
 # and now all is good to try:
-OneFactor("Ozone", "Month", airquality2, Folder=tempdir())
+OneFactor("Ozone", "Month", airquality2)
 # N.B. Various files and a folder were created in a temporary directory. 
-# Re-run this last command without the Folder specification; then, 
 # Please investigate them to see how this function worked.
+setwd(DIR)
 }

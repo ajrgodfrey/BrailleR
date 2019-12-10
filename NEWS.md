@@ -1,3 +1,6 @@
+# BrailleR 0.30.2
+- trying to ensure examples that create files pass CRAN checks; see UniDesc() etc.
+
 # BrailleR 0.30.1
 - made sure to use tempdir() in some examples so that CRAN checks on Devian see clean folders
 
