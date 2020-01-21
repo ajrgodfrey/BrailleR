@@ -10,7 +10,7 @@
 \alias{VI.stepfun}
 \alias{VI.table}
 \title{
-Unfinished Methods to help vision impaired useRs
+Unfinished Methods to help vision impaired users
 }
 \description{
 A set of methods that will (once coded) extract the most relevant information from a graphical object (or implied set of graphical objects) and display the interpreted results in text form.

@@ -11,7 +11,7 @@ Improved Access for Blind Users}
 Package: \tab BrailleR\cr
 Type: \tab Package\cr
 Version: \tab 0.30.1 \cr
-Date: \tab 2019-12-10\cr
+Date: \tab 2020-01-22\cr
 License: \tab GPL-2\cr
 }
 }
