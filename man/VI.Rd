@@ -20,6 +20,7 @@
 \alias{VI.dotplot}
 \alias{VI.histogram}
 \alias{VI.hist}
+\alias{VI.htest}
 \alias{VI.list}
 \alias{VI.lm}
 \alias{VI.matrix}
@@ -43,11 +44,15 @@ VI(x, Describe=FALSE, ...)
 
 \method{VI}{aov}(x, Describe=FALSE, ...)
 
+\method{VI}{htest}(x, Describe=FALSE, digits = getOption("digits"),  ...) 
+
+
 \method{VI}{lm}(x, Describe=FALSE, ...)
 }
 \arguments{
   \item{x}{any \R object}
 \item{Describe,VI}{Should the other function be called at the same time}
+\item{digits }{number of decimal places to show}
 \item{...}{other arguments, currently ignored}
 }
 \details{

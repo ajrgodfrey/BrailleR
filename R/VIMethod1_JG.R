@@ -129,6 +129,34 @@ VI.histogram =
     }
 
 
+VI.htest = function (x, Describe=FALSE, digits = getOption("digits"),  ...) 
+{
+    cat("\n")
+    cat(strwrap(x$method ), sep = "\n")
+    if (!is.null(x$statistic)) 
+cat(paste("\n", names(x$statistic), "=", format(x$statistic, 
+            digits = max(1L, digits - 2L))))
+    if (!is.null(x$parameter)) 
+cat(paste("\n", names(x$parameter), "=", format(x$parameter, 
+            digits = max(1L, digits - 2L))))
+    if (!is.null(x$p.value)) {
+        fp <- format.pval(x$p.value, digits = max(1L, digits - 
+            3L))
+cat(paste("\n", "p-value", if (substr(fp, 1L, 1L) == 
+            "<") fp else paste("=", fp)))
+    }
+
+
+    if (!is.null(x$conf.int)) {
+cat("\n\n")
+        cat(format(100 * attr(x$conf.int, "conf.level")), " percent confidence interval:\n", 
+            " ", paste(format(x$conf.int[1:2], digits = digits), 
+                collapse = " "), sep = "")
+    }
+    cat("\n\n")
+    invisible(x)
+}
+
 
 
 VI.list =

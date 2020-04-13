@@ -1,3 +1,7 @@
+# BrailleR 0.31.0
+- added VI.htest()
+
+
 # BrailleR 0.30.2
 - trying to ensure examples that create files pass CRAN checks; see UniDesc() etc.
 
