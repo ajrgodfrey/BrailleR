@@ -12,6 +12,7 @@
 \alias{Describe.tsplot}
 \alias{Describe.TukeyHSD}
 \alias{print.description}
+\alias{print.VI}
 \alias{VI}
 \alias{VI.default}
 \alias{VI.aov}

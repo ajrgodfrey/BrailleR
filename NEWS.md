@@ -3,6 +3,7 @@
 - added RemoveBOM function for taking the BOM off an Rmd file
 - fixed .ProcessAll() so that it avoids the BOM problems created by use of the wrong text editor in Windows.
 - added PandocAll() to convert files of one type to another
+- added print method for objects of class VI so that the VI() functions can be enriched.
 
 
 

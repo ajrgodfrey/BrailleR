@@ -3,6 +3,12 @@ VI = function(x, Describe=FALSE, ...) {
        UseMethod("VI")
      }
 
+print.VI = function(x, ...){
+cat(x, sep="\n")
+return(invisible(x))
+}
+
+
 VI.default =
     function(x, Describe=FALSE, ...) {
       message("There is no specific method written for  this type of object.\n")
