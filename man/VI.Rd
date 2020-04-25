@@ -25,6 +25,7 @@
 \alias{VI.list}
 \alias{VI.lm}
 \alias{VI.matrix}
+\alias{VI.qcc}
 \alias{VI.summary.lm}
 \alias{VI.tsplot}
 \alias{VI.TukeyHSD}

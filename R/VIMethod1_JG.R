@@ -264,6 +264,30 @@ VI.matrix = function(x, Describe=FALSE, ...) {
               VI(as.data.frame.matrix(x), Describe=Describe, ...)
             }
 
+
+
+VI.qcc = function (x, ...) 
+{
+TypeText = paste("This control chart is a", x$type, "chart.")
+SubgroupSizesConst = diff(range(x$sizes))==0 
+PointText = paste("Data for", length(x$statistics), "subgroups of", ifelse(SubgroupSizesConst, "equal", "varying"), "size are marked.")
+CenterText = ifelse(length(x$center)==1,
+    paste0("The center line is marked at ", x$center,  "."),
+    "There is more than one center line.")
+CLText = ifelse(length(x$limits)==2,
+   paste0("The LCL is at ", x$limits[,1], " and the UCL is at ", x$limits[,2], "."),
+    "There are more than one set of control limits.")
+NoBL = length(x$violations$beyond.limits)
+BLText = paste("There",  ifelse(NoBL==1, "is", "are"), ifelse(NoBL==0, "no", NoBL), ifelse(NoBL==1, "point", "points"), "that breach the control limits.")
+NoVR = length(x$violations$violating.runs) 
+VRText = paste0("There ", ifelse(NoVR==1, "is", "are"), " ", ifelse(NoVR==0, "no", NoVR), " violating run", ifelse(NoVR==1, "", "s"), ".")
+
+Out = c(TypeText, PointText, CenterText, CLText, BLText, VRText)
+class(Out) = "VI"
+return(Out)
+}
+
+
 VI.tsplot =
     function(x, Describe=FALSE, ...) {
       x
