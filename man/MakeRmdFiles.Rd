@@ -3,6 +3,7 @@
 \alias{ProcessAllMd}
 \alias{ProcessAllRmd}
 \alias{R2Rmd}
+\alias{RemoveBOM}
 \title{Work flow convenience functions}
 \description{Time-saving functions that help create files in more useful formats for later use.}
 \usage{
@@ -12,12 +13,14 @@ R2Rmd(ScriptFile)
 
 ProcessAllMd(dir =".")
 ProcessAllRmd(dir =".", method = "render")
+
+RemoveBOM(File)
 }
 \arguments{
   \item{dir}{The directory to find files.}
-  \item{file}{the name of the file to be created.}
+  \item{file}{the name of the file to be created or modified.}
   \item{method}{The method used to process Rmd files; one of "render" or "knit2html".}
-  \item{ScriptFile}{the R script to be processed into the Rmarkdown file.}
+  \item{ScriptFile}{the R script to be processed into the R markdown file.}
 }
 
 \details{The History2Rmd() function was intended for turning a short interactive R session into an R markdown file. Lines of code are all separated into distinct code chunks in the Rmd file. the resulting file will need to be edited if commands have spanned more than one line. 

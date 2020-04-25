@@ -1,5 +1,7 @@
 # BrailleR 0.31.0
 - added VI.htest()
+- added RemoveBOM function for taking the BOM off an Rmd file
+
 
 
 # BrailleR 0.30.2
