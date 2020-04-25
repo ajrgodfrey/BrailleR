@@ -11,7 +11,8 @@ PandocAll(intype = "docx", outtype = "html")
 \details{
 This will over-write existing files. It was intended to take MS Word files and convert to HTML, but other conversions are possible. See the pandoc documentation for full details.
 }
-\value{Files will be created in the current working directory. CRAN policy says you have been informed htat this is happening. This help file is your warning.}
+\value{Files will be created in the current working directory. CRAN policy says you have been informed that this is happening. This help file is your warning.}
 \references{
+Extensive guidance on using pandoc is available
 }
 \author{A. Jonathan R. Godfrey}
