@@ -14,7 +14,7 @@ R2Rmd(ScriptFile)
 ProcessAllMd(dir =".")
 ProcessAllRmd(dir =".", method = "render")
 
-RemoveBOM(File)
+RemoveBOM(file)
 }
 \arguments{
   \item{dir}{The directory to find files.}
