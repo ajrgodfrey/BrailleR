@@ -5,6 +5,7 @@
 - added PandocAll() to convert files of one type to another
 - added print method for objects of class VI so that the VI() functions can be enriched.
 - added VI.qcc() for helping with control charts created using the qcc package
+- altered History2Rmd() and R2Rmd() to insert minimal YAML header
 
 
 

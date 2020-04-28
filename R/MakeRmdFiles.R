@@ -5,11 +5,12 @@ History2Rmd =
         savehistory(TempFile)
         Lines = readLines(TempFile)
         LineNo = 1:length(Lines)
-        cat("# History from R session on", format(Sys.Date(), "%A %d %B %Y"),
-            "\n## by", getOption("BrailleR.Author"), "\n\n", file = file)
+        cat(paste0('---\ntitle: "History from R session on', format(Sys.Date(), "%A %d %B %Y"),
+            '"\nauthor: "by', getOption("BrailleR.Author"), '"\ndate: Updated on `r 
+format(Sys.Date(), "%A %d %B %Y")`\n---\n\n'), file = file)
         cat(paste0("```{r line", LineNo, "}  \n", Lines, "\n```  \n\n"),
             file = file, append = TRUE)
-        message("There is a new file in your working directory. Look for: ")
+        .NewFile()
         return(file)
       } else {
         .InteractiveOnly()
@@ -21,7 +22,7 @@ History2Rmd =
 R2Rmd =
     function(ScriptFile) {
       if (file.exists(ScriptFile)) {
-        RmdFile = paste0(ScriptFile, "md")
+        RmdFile = gsub(".rmd", ".Rmd", paste0(ScriptFile, "md"))
         Lines = readLines(ScriptFile)
         NoLines = length(Lines)
         GoodLines = Lines > ""
@@ -31,7 +32,7 @@ R2Rmd =
         Lines[Lines == ""] = "```  \n\n```{r }  "
         Lines = Lines[ShowLines]
 
-        cat("# ", "\n## by", getOption("BrailleR.Author"), "\n\n```{r }  ",
+        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author")"', '\ndate: `r format(Sys.Date(), "%A %d %B %Y")`\n---\n\n```{r }'),
             file = RmdFile)
         cat(paste0("\n", Lines, "  "), file = RmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = RmdFile, append = TRUE)
