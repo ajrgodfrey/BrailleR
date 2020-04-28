@@ -32,7 +32,7 @@ R2Rmd =
         Lines[Lines == ""] = "```  \n\n```{r }  "
         Lines = Lines[ShowLines]
 
-        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author")"', '\ndate: `r format(Sys.Date(), "%A %d %B %Y")`\n---\n\n```{r }'),
+        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author"), '"\ndate: `r format(Sys.Date(), "%A %d %B %Y")`\n---\n\n```{r }'),
             file = RmdFile)
         cat(paste0("\n", Lines, "  "), file = RmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = RmdFile, append = TRUE)
