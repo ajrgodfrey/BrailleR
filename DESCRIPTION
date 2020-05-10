@@ -44,6 +44,7 @@ Imports:
     hunspell,
     knitr,
     magrittr,
+    mathjaxr,
     moments,
     nortest,
     reticulate,
@@ -61,3 +62,4 @@ VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR
 BugReports: https://github.com/ajrgodfrey/BrailleR/issues
 RoxygenNote: 6.0.1
+RdMacros: mathjaxr
