@@ -46,18 +46,24 @@
 
 .getGGXTicks = function(x, xbuild, layer) {
   # The location of this item is changing in an upcoming ggplot version
-  if ("panel_ranges" %in% names(xbuild$layout))
+  if ("panel_ranges" %in% names(xbuild$layout)) {
     return(xbuild$layout$panel_ranges[[layer]]$x.labels)   # ggplot 2.2.1
-  else
-    return(xbuild$layout$panel_params[[layer]]$x.labels)   # dev version as at 5 Sept 2017
+  }
+  else {
+    xlabs <- xbuild$layout$panel_params[[1]]$x$get_labels()
+    return (xlabs[!is.na(xlabs)])
+  }
 }
 
 .getGGYTicks = function(x, xbuild, layer) {
   # The location of this item is changing in an upcoming ggplot version
-  if ("panel_ranges" %in% names(xbuild$layout))
+  if ("panel_ranges" %in% names(xbuild$layout)) {
     return(xbuild$layout$panel_ranges[[layer]]$y.labels)   # ggplot 2.2.1
-  else
-    return(xbuild$layout$panel_params[[layer]]$y.labels)   # dev version as at 5 Sept 2017
+  }
+  else {
+    ylabs <- xbuild$layout$panel_params[[1]]$y$get_labels()
+    return (ylabs[!is.na(ylabs)])
+  }
 }
 
 # Guides
