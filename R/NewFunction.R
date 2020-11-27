@@ -6,7 +6,6 @@
 #' @return Nothing in the workspace. Only outcome is the template file.
 #' @seealso \code{\link{MakePkg}}
 #' @author A. Jonathan R. Godfrey.
-#' @examples \donttest{NewFunction("MyTest")}
 #' @export NewFunction
 #' @param FunctionName The name of the function and file to create.
 #' @param args a vector of argument names

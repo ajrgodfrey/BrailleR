@@ -1,7 +1,7 @@
 Package: BrailleR
 Type: Package
 Title: Improved Access for Blind Users
-Version: 0.31.0
+Version: 0.31.1
 Author: A. Jonathan R. Godfrey [aut, cre], Debra Warren [aut], Donal Fitzpatrick [ctb], Duncan Murdoch [ctb], Greg Snow
     [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], JooYoung Seo [ctb], Marshall Flax [ctb], Paul Murrell [aut], Timothy Bilton [aut], Tony Hirst [ctb], Tsan-Kuang Lee [ctb], Volker Sorge [aut], Yihui Xie
     [ctb]
@@ -61,5 +61,5 @@ SystemRequirements: Python 3 and wxPython 4.0
 VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR
 BugReports: https://github.com/ajrgodfrey/BrailleR/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 RdMacros: mathjaxr

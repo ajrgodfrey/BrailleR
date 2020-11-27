@@ -18,9 +18,6 @@ A file is saved in the current working directory that has a template for a funct
 \value{
 No objects are created  in the workspace. The only outcome is the template file and a message to let the user know the job was completed.
 }
-\examples{
-\donttest{NewFunction("MyTest")}
-}
 \author{
 A. Jonathan R. Godfrey.
 }
