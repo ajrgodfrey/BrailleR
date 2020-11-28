@@ -1,5 +1,8 @@
 # BrailleR 0.31.1
-- trying to remove the unclean check directory problem
+- removed the unclean check directory problem that would frustrate return to CRAN
+- axis labels proven to be back for ggplot() graphs
+
+
 
 # BrailleR 0.31.0
 - merged PR26 to fix ggplot() axis labels.
