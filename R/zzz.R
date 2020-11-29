@@ -1,6 +1,6 @@
 .onDetach =
     function(libpath) {
-        options("BrailleR.VI" = FALSE)
+        options("BrailleR.VI" = NULL)
     }
 
 .onAttach =
