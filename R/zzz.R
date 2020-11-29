@@ -1,3 +1,8 @@
+.onDetach =
+    function(libpath) {
+        options("BrailleR.VI" = FALSE)
+    }
+
 .onAttach =
     function(libname, pkgname) {
       if (interactive()) {

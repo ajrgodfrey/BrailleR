@@ -1,5 +1,6 @@
 # BrailleR 0.31.1
 - removed the unclean check directory problem that would frustrate return to CRAN
+- added a .onDetach() function to remove options in the (unlikely) event that a user detaches BrailleR.
 - axis labels proven to be back for ggplot() graphs
 
 
