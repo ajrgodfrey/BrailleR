@@ -2,6 +2,9 @@
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)  
 
+<!-- badges: start -->
+[![R build status](https://github.com/ajrgodfrey/BrailleR/workflows/R-CMD-check/badge.svg)](https://github.com/ajrgodfrey/BrailleR/actions)
+<!-- badges: end -->
 
 ### Blind people's use of R
 
