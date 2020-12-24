@@ -21,9 +21,9 @@ Issue the following commands at the R prompt
 
 `library(BrailleR)`
 
-`GetPython27()`
+`GetPython()`
 
-`GetWxPython27()`
+`GetWxPython()`
 
 These commands automatically download the installation files and start the installation process going. The downloaded files will be saved in your MyBrailleR folder. You will need to follow the instructions and answer questions that arise whenever you install new software. These are reputable installation files from the primary sites for Python and wxPython. Windows and any security software you might have should know that, but you can never tell! You will probably need to let Windows know it is OK to install the software in the default location. That pop-up might not appear as the window with focus so if things look like they're going slowly, look around for the pop-up window.
 

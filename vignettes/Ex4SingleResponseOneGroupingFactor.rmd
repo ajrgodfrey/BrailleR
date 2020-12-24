@@ -21,7 +21,7 @@ There are many commands needed to get the numeric and graphic summary measures t
 - the mean, standard deviation and standard error for each group,
 - boxplots and/or dotplots, 
 - the one-way analysis of variance, and
-- Tukey's Honestly Significant Difference (HSD) test on the significance of the between group differences.moments package).
+- Tukey's Honestly Significant Difference (HSD) test on the significance of the between group differences.
 
 In addition, the blind user may need any/all of the graphs in a variety of formats (png, pdf, eps, or svg), nicely formatted tables for insertion into documents (LaTeX or HTML), and access to the code that generated these graphs and tables (an R script). 
 

@@ -2,3 +2,6 @@
 ^cran-comments\.md$
 ^readme.md$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

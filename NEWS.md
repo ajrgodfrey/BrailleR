@@ -1,5 +1,8 @@
 # BrailleR 0.31.2
 - removed travis-ci package service as it will move to a fee-for-service model in 2021
+- added GitHub actions to workflow; found trivial issues to fix.
+- added spell checking
+- added use of pkgdown
 
 # BrailleR 0.31.1
 - removed the unclean check directory problem that would frustrate return to CRAN
