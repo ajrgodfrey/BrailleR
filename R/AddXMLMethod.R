@@ -85,12 +85,12 @@ AddXML.ggplot = function(x, file) {
     }
     xAxisLabelGrob = paste0(grid.grep(gPath("xlab-b", "text"), grep=TRUE)$name, ".1")
     xAxisTickLabelGrob = paste0(grid.grep(gPath("axis-b", "axis", "axis", "text"), grep = TRUE)$name, ".1")
-    xAxis = .AddXMLAddXAxis(annotations, label=xs$xaxis$xlabel$x_lab, values=xs$xaxis$xticklabels,
+    xAxis = .AddXMLAddXAxis(annotations, label=xs$xaxis$xlabel, values=xs$xaxis$xticklabels,
                             fullLabelId=xAxisLabelGrob, fullTickLabelId=xAxisTickLabelGrob)
     components[[length(components) + 1]] = xAxis
     yAxisLabelGrob = paste0(grid.grep(gPath("ylab-l", "text"), grep=TRUE)$name, ".1")
     yAxisTickLabelGrob = paste0(grid.grep(gPath("axis-l", "axis", "axis", "text"), grep = TRUE)$name, ".1")
-    yAxis = .AddXMLAddYAxis(annotations, label=xs$yaxis$ylabel$ylab, values=xs$yaxis$yticklabels,
+    yAxis = .AddXMLAddYAxis(annotations, label=xs$yaxis$ylabel, values=xs$yaxis$yticklabels,
                             fullLabelId=yAxisLabelGrob, fullTickLabelId=yAxisTickLabelGrob)
     components[[length(components)+1]] = yAxis
     if (xs$npanels == 1) {
