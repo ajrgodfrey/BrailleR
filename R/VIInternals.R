@@ -254,12 +254,17 @@
 
 # Smooth layer details
 .getGGSmoothMethod = function(x, xbuild, layer) {
-  ifelse(is.null(xbuild$plot$layers[[layer]]$stat_params$method), return("lowess"), return(xbuild$plot$layers[[layer]]$stat_params$method))
+  ifelse(is.null(xbuild$plot$layers[[layer]]$stat_params$method), 
+         return("lowess"), return(xbuild$plot$layers[[layer]]$stat_params$method))
 }
 
 .getGGSmoothSEflag = function(x, xbuild, layer) {
   return(xbuild$plot$layers[[layer]]$stat_params$se)
 }
+
+.getGGSmoothLevel = function(x, xbuild, layer) {
+ return(xbuild$plot$layers[[layer]]$stat_params$level) 
+} 
 
 .isGuideHidden = function(x, xbuild, aes) {
 #  Need to look through all layers to figure out whether this aesthetic is involved, and
