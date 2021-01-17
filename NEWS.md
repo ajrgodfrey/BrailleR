@@ -1,5 +1,7 @@
-#- getting ready for contributions from Sophie Banks
- BrailleR 0.31.3
+# BrailleR 0.31.3
+- cleaned SB's code. We now have geom_smooth() reporting method and existence of CIs.
+- renamed BrailleR functions xlab() and ylab() to use upper camel case to resolve conflict with ggplot2.
+- getting ready for contributions from Sophie Banks
 
 # BrailleR 0.31.2
 - removed travis-ci package service as it will move to a fee-for-service model in 2021

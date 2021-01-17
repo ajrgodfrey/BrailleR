@@ -11,11 +11,11 @@
 \usage{
 UpdateGraph(object, ...)
 
-main(graph, label = NULL)
+Main(graph, label = NULL)
 
-xlab(graph, label = NULL)
+XLab(graph, label = NULL)
 
-ylab(graph, label = NULL)
+YLab(graph, label = NULL)
 }
 \arguments{
   \item{graph,object}{The graph object to be updated.}

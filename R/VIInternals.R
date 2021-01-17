@@ -253,9 +253,15 @@
 }
 
 # Smooth layer details
+
+.getGGSmoothParams = function(x, xbuild, layer) {
+  return(xbuild$plot$layers[[layer]]$stat_params)
+}
+
 .getGGSmoothMethod = function(x, xbuild, layer) {
-  ifelse(is.null(xbuild$plot$layers[[layer]]$stat_params$method), 
-         return("lowess"), return(xbuild$plot$layers[[layer]]$stat_params$method))
+  Out = xbuild$plot$layers[[layer]]$stat_params$method
+  if(is.null(Out))          Out = c("lowess")
+  return(Out)
 }
 
 .getGGSmoothSEflag = function(x, xbuild, layer) {

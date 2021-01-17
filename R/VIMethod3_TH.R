@@ -449,8 +449,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     } else if (layerClass == "GeomSmooth") {
       layer$type = "smooth"
       layer$method = .getGGSmoothMethod(x, xbuild, layeri)
-      layer$ci = if (.getGGSmoothSEflag(x, xbuild, layeri)) TRUE
-      layer$level = ifelse(.getGGSmoothSEflag(x, xbuild, layeri) == FALSE, '', .getGGSmoothLevel(x, xbuild, layeri))
+      layer$ci = .getGGSmoothSEflag(x, xbuild, layeri)
+#      layer$level = ifelse(layer$ci, .getGGSmoothLevel(x, xbuild, layeri))
 
       #U UNKNOWN
     } else {
