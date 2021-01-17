@@ -1,5 +1,5 @@
 # BrailleR 0.31.3
-- cleaned SB's code. We now have geom_smooth() reporting method and existence of CIs.
+- cleaned Sophie's code. We now have geom_smooth() reporting method and existence of confidence intervals.
 - renamed BrailleR functions xlab() and ylab() to use upper camel case to resolve conflict with ggplot2.
 - getting ready for contributions from Sophie Banks; added her to contributors list
 
