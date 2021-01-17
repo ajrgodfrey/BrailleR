@@ -1,3 +1,6 @@
+#- getting ready for contributions from Sophie Banks
+ BrailleR 0.31.3
+
 # BrailleR 0.31.2
 - removed travis-ci package service as it will move to a fee-for-service model in 2021
 - added GitHub actions to workflow; found trivial issues to fix.

@@ -1,7 +1,7 @@
 Package: BrailleR
 Type: Package
 Title: Improved Access for Blind Users
-Version: 0.31.2
+Version: 0.31.3
 Author: A. Jonathan R. Godfrey [aut, cre], Debra Warren [aut], Donal Fitzpatrick [ctb], Duncan Murdoch [ctb], Greg Snow
     [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], JooYoung Seo [ctb], Marshall Flax [ctb], Paul Murrell [aut], Timothy Bilton [aut], Tony Hirst [ctb], Tsan-Kuang Lee [ctb], Volker Sorge [aut], Yihui Xie
     [ctb]
