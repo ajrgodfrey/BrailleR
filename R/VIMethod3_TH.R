@@ -450,7 +450,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       layer$type = "smooth"
       layer$method = .getGGSmoothMethod(x, xbuild, layeri)
       layer$ci = .getGGSmoothSEflag(x, xbuild, layeri)
-      layer$level = .getGGSmoothLevel(x, xbuild, layeri)
+      #adding confidence level as a percentage
+      deci = toString(.getGGSmoothLevel(x, xbuild, layeri)*100)
+      layer$level = paste(deci, "%", sep = "")
 
       #U UNKNOWN
     } else {
