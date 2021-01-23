@@ -450,7 +450,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       layer$type = "smooth"
       layer$method = .getGGSmoothMethod(x, xbuild, layeri)
       layer$ci = .getGGSmoothSEflag(x, xbuild, layeri)
-      layer$level = ifelse(layer$ci, .getGGSmoothLevel(x, xbuild, layeri))
+      layer$level = .getGGSmoothLevel(x, xbuild, layeri)
 
       #U UNKNOWN
     } else {
