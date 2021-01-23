@@ -269,7 +269,9 @@
 }
 
 .getGGSmoothLevel = function(x, xbuild, layer) {
- return(xbuild$plot$layers[[layer]]$stat_params$level) 
+ Out = xbuild$plot$layers[[layer]]$stat_params$level
+  if(is.null(Out))           Out = 0.95
+  return(Out) 
 } 
 
 .isGuideHidden = function(x, xbuild, aes) {
