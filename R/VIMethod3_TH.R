@@ -458,7 +458,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       #Name the unknown type and give it a/an accordingly
       className = tolower(gsub("^.*?Geom","",layerClass))
       layer$assign = className
-      layer$anA = ifelse(is.element(substr(s, 1,1), vowels), "an", "a")
+      layer$anA = ifelse(is.element(substr(className, 1,1), vowels), "an", "a")
     }
     layers[[layeri]] = layer  
   }
