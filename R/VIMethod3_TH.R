@@ -386,6 +386,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       width = cleandata$xmax - cleandata$xmin
       if (max(width) - min(width) > .0001)   # allow for small rounding error
         layer$scaledata = cbind(layer$scaledata, xmin=cleandata$xmin, xmax=cleandata$xmax)
+      # Whether the bar is vertical or horizontal
+      layer$orientation = .findBarOrientation(x, xbuild, layeri)
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 
