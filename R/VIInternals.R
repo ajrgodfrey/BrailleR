@@ -84,6 +84,15 @@
   return(class(x$coordinates)[1])
 }
 
+#Bar Orientation
+.findBarOrientation = function(x, xbuild, layer) {
+  flipped = xbuild$plot$layers[[layer]]$geom_params$flipped_aes
+  if (flipped == TRUE)
+    return("horizontal")
+  else
+    return("vertical")
+}
+
 ## Scales
 .getGGScaleFree = function(x, xbuild) {
   free = x$facet$params$free
