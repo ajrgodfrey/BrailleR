@@ -84,6 +84,15 @@
   return(class(x$coordinates)[1])
 }
 
+#Bar Orientation
+.findBarOrientation = function(x, xbuild, layer) {
+  flipped = xbuild$plot$layers[[layer]]$geom_params$flipped_aes
+  if (flipped == TRUE)
+    return("horizontal")
+  else
+    return("vertical")
+}
+
 ## Scales
 .getGGScaleFree = function(x, xbuild) {
   free = x$facet$params$free
@@ -269,7 +278,9 @@
 }
 
 .getGGSmoothLevel = function(x, xbuild, layer) {
- return(xbuild$plot$layers[[layer]]$stat_params$level) 
+ Out = xbuild$plot$layers[[layer]]$stat_params$level
+  if(is.null(Out))           Out = 0.95
+  return(Out) 
 } 
 
 .isGuideHidden = function(x, xbuild, aes) {

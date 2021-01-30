@@ -79,7 +79,7 @@ Data values may be reported incorrectly.
 {{/largecount}}.<br>
 {{/typehline}}
 {{#typebar}}
-a bar chart containing {{n}} vertical bar{{#s}}s{{/s}}.<br>
+a bar chart containing {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
 {{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
@@ -137,10 +137,10 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}
-a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals{{/ci}}.<br>
+a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals of {{level}}{{/ci}}.<br>
 {{/typesmooth}}
 {{#typeunknown}}
-a type that VI isn't able to process.<br>
+{{anA}} {{assign}} graph that VI isn't able to process.<br>
 {{/typeunknown}}
 {{#layeraes}}
 {{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}

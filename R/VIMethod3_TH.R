@@ -386,6 +386,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       width = cleandata$xmax - cleandata$xmin
       if (max(width) - min(width) > .0001)   # allow for small rounding error
         layer$scaledata = cbind(layer$scaledata, xmin=cleandata$xmin, xmax=cleandata$xmax)
+      # Whether the bar is vertical or horizontal
+      layer$orientation = .findBarOrientation(x, xbuild, layeri)
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 
@@ -450,11 +452,17 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       layer$type = "smooth"
       layer$method = .getGGSmoothMethod(x, xbuild, layeri)
       layer$ci = .getGGSmoothSEflag(x, xbuild, layeri)
-#      layer$level = ifelse(layer$ci, .getGGSmoothLevel(x, xbuild, layeri))
+      #adding confidence level as a percentage
+      deci = toString(.getGGSmoothLevel(x, xbuild, layeri)*100)
+      layer$level = paste(deci, "%", sep = "")
 
       #U UNKNOWN
     } else {
       layer$type = "unknown"
+      #Name the unknown type and give it a/an accordingly
+      className = tolower(gsub("^.*?Geom","",layerClass))
+      layer$assign = className
+      layer$anA = ifelse(is.element(substr(className, 1,1), vowels), "an", "a")
     }
     layers[[layeri]] = layer  
   }
