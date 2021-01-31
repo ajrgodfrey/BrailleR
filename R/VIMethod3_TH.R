@@ -460,6 +460,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     } else {
       layer$type = "unknown"
       #Name the unknown type and give it a/an accordingly
+      vowels = c("a", "e", "i", "o", "u")
       className = tolower(gsub("^.*?Geom","",layerClass))
       layer$assign = className
       layer$anA = ifelse(is.element(substr(className, 1,1), vowels), "an", "a")
