@@ -1,5 +1,5 @@
-# NB xlab() and ylab() are also functions in ggplot2; 
-# this BrailleR  implementation is inconsistent with ggplot2.
+# NB xlab() and ylab() are functions in the ggplot2 package; 
+# the original BrailleR  implementation was inconsistent with ggplot2 so the function names were chantged to camel case.
 
 Main = XLab = YLab = function(graph, label=NULL){
     arg = as.character(match.call()[[1]])
