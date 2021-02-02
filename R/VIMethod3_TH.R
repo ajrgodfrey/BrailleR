@@ -463,7 +463,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       vowels = c("a", "e", "i", "o", "u")
       className = tolower(gsub("^.*?Geom","",layerClass))
       layer$assign = className
-      layer$anA = ifelse(is.element(substr(className, 1,1), vowels), "an", "a")
+      layer$anA = .giveAnOrA(className)
     }
     layers[[layeri]] = layer  
   }
