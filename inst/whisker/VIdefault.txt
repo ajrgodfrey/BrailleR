@@ -79,7 +79,7 @@ Data values may be reported incorrectly.
 {{/largecount}}.<br>
 {{/typehline}}
 {{#typebar}}
-a bar chart containing {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
+a bar chart containing {{n}} {{orientation}} bar{{#s}}s{{/s}}
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
 {{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
@@ -93,7 +93,7 @@ a bar chart containing {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{/largecount}}
 {{/typebar}}
 {{#typepoint}}
-a set of {{n}} point{{#s}}s{{/s}}.<br>
+a set of {{n}} point{{#s}}s{{/s}}
 {{^largecount}}
 The points are at:<br>
 {{#items}}({{x}}, {{y}})
@@ -137,11 +137,14 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}
-a '{{method}}' smoothed curve {{#ci}} with {{level}} confidence intervals {{/ci}}.<br>
+a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}
 {{/typesmooth}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI isn't able to process.<br>
 {{/typeunknown}}
+{{#hasPos}}
+ which are {{position}} {{mapping2}}
+{{/hasPos}}.<br>
 {{#layeraes}}
 {{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}
 has {{aes}} set to {{mapping}}.<br>

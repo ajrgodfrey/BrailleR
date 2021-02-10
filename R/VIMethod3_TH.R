@@ -460,12 +460,40 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     } else {
       layer$type = "unknown"
       #Name the unknown type and give it a/an accordingly
-      vowels = c("a", "e", "i", "o", "u")
       className = tolower(gsub("^.*?Geom","",layerClass))
       layer$assign = className
       layer$anA = .giveAnOrA(className)
     }
-    layers[[layeri]] = layer  
+    
+    ##Positioning
+    layerPos = .getGGLayerPosition(x, xbuild, layeri)
+    if (is.null(layerPos)){
+      layer$hasPos = FALSE
+    }else{layer$hasPos = TRUE}
+    if (layerPos == "dodge"){
+      layer$position = "adjacent, as sorted by"
+    }else if (layerPos == "fill"){
+      if(layerClass == "GeomBar"){
+        layer$position = "stacked and shown as propotions of"
+      }else{layer$hasPos = FALSE}
+    }else if (layerPos == "identity"){
+      if(layerClass == "GeomBar"){
+        layer$position = "stacked, as sorted by"
+      }else{layer$hasPos = FALSE}
+    }else if (layerPos == "stack"){
+      layer$position = "stacked, as sorted by"
+    }else if (layerPos == "jitter"){
+      layer$position = "offset by added random noise, and sorted by"
+    }else if (layerPos == "jitterdodge"){
+      layer$position = "offset along the x axis to avoid overlapping points, and sorted by"
+    }else if (layerPos == "nudge"){
+      if(layerClass == "GeomText"){"adjusted text placement for tidier graph"
+      }else{layer$hasPos = FALSE}
+    }
+    layer$mapping2 = .getGGGuideLabels(x, xbuild)
+    
+    layers[[layeri]] = layer
+    
   }
   return(layers)
 }
