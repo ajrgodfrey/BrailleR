@@ -28,7 +28,7 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#legends}}
 {{^hidden}}There is a legend indicating that {{aes}} is used to show {{mapping}}
 {{#scalediscrete}}, with {{scalenlevels}} levels:
-{{#scalelevelitems}}<br>{{level}} shown as {{map}}{{sep}} {{aes}}
+{{#scalelevelitems}}<br>{{level}} shown as {{map}} {{aes}}{{sep}}
 {{/scalelevelitems}}
 {{/scalediscrete}}
 {{^scalediscrete}}, ranging from {{scalefrom}} represented by {{aes}} {{scalemapfrom}}
