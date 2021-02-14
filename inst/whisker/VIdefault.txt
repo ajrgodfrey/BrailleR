@@ -26,7 +26,7 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#samescale}} with labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}{{/samescale}}
 .<br>{{/yaxis}}
 {{#legends}}
-{{^hidden}}There is a legend indicating that {{aes}} is used to show {{mapping}}
+{{^hidden}}There is a legend indicating {{aes}} is used to show {{mapping}}
 {{#scalediscrete}}, with {{scalenlevels}} levels:
 {{#scalelevelitems}}<br>{{level}} shown as {{map}} {{aes}}{{sep}}
 {{/scalelevelitems}}
@@ -79,7 +79,7 @@ Data values may be reported incorrectly.
 {{/largecount}}.<br>
 {{/typehline}}
 {{#typebar}}
-a bar chart with {{n}} {{orientation}} bar{{#s}}s{{/s}}
+a bar chart with {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
 {{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
@@ -93,7 +93,7 @@ a bar chart with {{n}} {{orientation}} bar{{#s}}s{{/s}}
 {{/largecount}}
 {{/typebar}}
 {{#typepoint}}
-a set of {{n}} point{{#s}}s{{/s}}
+a set of {{n}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
 {{#items}}({{x}}, {{y}})
@@ -137,17 +137,16 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}
-a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}
+a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
 {{/typesmooth}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI can not process.<br>
 {{/typeunknown}}
 {{#hasPos}}
- which are {{position}} {{mapping2}}
-{{/hasPos}}.<br>
+These are {{position}} {{mapping2}}.<br>
+{{/hasPos}}
 {{#layeraes}}
-{{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}
+{{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}It {{/singlelayer}}
 has {{aes}} set to {{mapping}}.<br>
 {{/layeraes}}
 "
-
