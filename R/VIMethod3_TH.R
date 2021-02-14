@@ -332,7 +332,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     else
       ngroups = 1
     layerClass = .getGGLayerType(x, xbuild, layeri)
-
+    
     # HLINE
     if (layerClass == "GeomHline") {
       layer$type = "hline"
@@ -368,7 +368,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
 
 
       # BAR
-    } else if (layerClass == "GeomBar") {
+    } else if (layerClass == "GeomBar" | layerClass =="GeomCol") {
       layer$type = "bar"
       # Discard bars that go outside the bounds of the plot,
       # as they won't be displayed
@@ -443,7 +443,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       # scaledata is currently a list of vectors.  If we wanted to include outliers
       # within each boxes object for reporting, then boxes would need to become
       # a list of lists.
-
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 
@@ -490,6 +489,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       if(layerClass == "GeomText"){"adjusted text placement for tidier graph"
       }else{layer$hasPos = FALSE}
     }
+    # Whether layer has varying aesthetic variables, that will be notable in positioning
+    if (!is.null(.findVaryingAesthetics(x, xbuild, layeri))){layer$hasPos = FALSE}
+    else{layer$hasPos = TRUE}
+    
     layer$mapping2 = .getGGGuideLabels(x, xbuild)
     
     layers[[layeri]] = layer
