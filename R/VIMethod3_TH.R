@@ -488,10 +488,11 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     }else if (layerPos == "nudge"){
       if(layerClass == "GeomText"){"adjusted text placement for tidier graph"
       }else{layer$hasPos = FALSE}
-    }
+    
     # Whether layer has varying aesthetic variables, that will be notable in positioning
-    if (!is.null(.findVaryingAesthetics(x, xbuild, layeri))){layer$hasPos = FALSE}
+    if (is.null(.findVaryingAesthetics(x, xbuild, layeri))){layer$hasPos = FALSE}
     else{layer$hasPos = TRUE}
+    }
     
     layer$mapping2 = .getGGGuideLabels(x, xbuild)
     
