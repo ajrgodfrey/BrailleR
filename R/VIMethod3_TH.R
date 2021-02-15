@@ -468,37 +468,40 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     layerPos = .getGGLayerPosition(x, xbuild, layeri)
     if (is.null(layerPos)){
       layer$hasPos = FALSE
-    }else{layer$hasPos = TRUE}
-    if (layerPos == "dodge"){
-      layer$position = "adjacent, as sorted by"
-    }else if (layerPos == "fill"){
-      if(layerClass == "GeomBar"){
-        layer$position = "stacked and shown as propotions of"
-      }else{layer$hasPos = FALSE}
-    }else if (layerPos == "identity"){
-      if(layerClass == "GeomBar"){
+    }else{
+      if (layerPos == "dodge"){
+        layer$position = "adjacent, as sorted by"
+      }else if (layerPos == "fill"){
+        if(layerClass == "GeomBar"){
+         layer$position = "stacked and shown as propotions of"
+         layer$hasPos = TRUE
+         }
+      }else if (layerPos == "identity"){
+        if(layerClass == "GeomBar"){
+          layer$position = "stacked, as sorted by"
+          layer$hasPos = TRUE
+        }
+      }else if (layerPos == "stack"){
         layer$position = "stacked, as sorted by"
-      }else{layer$hasPos = FALSE}
-    }else if (layerPos == "stack"){
-      layer$position = "stacked, as sorted by"
-    }else if (layerPos == "jitter"){
-      layer$position = "offset by added random noise, and sorted by"
-    }else if (layerPos == "jitterdodge"){
-      layer$position = "offset along the x axis to avoid overlapping points, and sorted by"
-    }else if (layerPos == "nudge"){
-      if(layerClass == "GeomText"){"adjusted text placement for tidier graph"
-      }else{layer$hasPos = FALSE}
-    
-    # Whether layer has varying aesthetic variables, that will be notable in positioning
-    if (is.null(.findVaryingAesthetics(x, xbuild, layeri))){layer$hasPos = FALSE}
-    else{layer$hasPos = TRUE}
-    }
-    
+        layer$hasPos = TRUE
+      }else if (layerPos == "jitter"){
+        layer$position = "offset by added random noise, and sorted by"
+        layer$hasPos = TRUE
+      }else if (layerPos == "jitterdodge"){
+        layer$position = "offset along the x axis to avoid overlapping points, and sorted by"
+        layer$hasPos = TRUE
+      }else if (layerPos == "nudge"){
+        if(layerClass == "GeomText"){"adjusted text placement for tidier graph"
+          layer$hasPos = TRUE
+          }
+      }
+    }#End of Layer Position checks
     layer$mapping2 = .getGGGuideLabels(x, xbuild)
+    if(is_empty(layer$mapping2)){layer$hasPos = FALSE}
     
     layers[[layeri]] = layer
     
-  }
+  }##END OF THE LAYER FOR LOOP
   return(layers)
 }
 
