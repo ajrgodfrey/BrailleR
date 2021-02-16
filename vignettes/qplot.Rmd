@@ -35,16 +35,15 @@ g2 = qplot(carat, price, data = dsmall, colour = color)
 # summary(g2)   
 g2
 g2 %>% VI()   
-# to get the content of the graph to be printed we need:   
-#class(g2)="list"; g2   
 ```  
+
+
 
 ```{r g3}     
 g3 = qplot(carat, price, data = dsmall, shape = cut)    
 # summary(g3)   
 g3
 VI(g3)   
-#class(g3)="list"; g3   
 ```  
 
 ```{r g4}     
