@@ -83,6 +83,7 @@ panels (list)
 	+ layeraes (list) # Non-default aesthetics that were specified for this layer
 		+ aes
 		+ mapping
+		+ position
 	+ badtransform	  # A transform used in this layer has no inverse, can't report original values
 	+ transform	      # If badtransform present, the name of the tranform
 	+ data         	  # Raw plot data for this layer & panel. Used by MakeAccessibleSVG, not by VI

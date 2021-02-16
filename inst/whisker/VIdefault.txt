@@ -26,16 +26,16 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#samescale}} with labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}{{/samescale}}
 .<br>{{/yaxis}}
 {{#legends}}
-{{^hidden}}There is a legend indicating that {{aes}} is used to represent {{mapping}}
+{{^hidden}}There is a legend indicating {{aes}} is used to show {{mapping}}
 {{#scalediscrete}}, with {{scalenlevels}} levels:
-{{#scalelevelitems}}<br>{{level}} represented by {{aes}} {{map}}{{sep}}
+{{#scalelevelitems}}<br>{{level}} shown as {{map}} {{aes}}{{sep}}
 {{/scalelevelitems}}
 {{/scalediscrete}}
 {{^scalediscrete}}, ranging from {{scalefrom}} represented by {{aes}} {{scalemapfrom}}
- to {{scaleto}} represented by {{aes}} {{scalemapto}}{{/scalediscrete}}
+ to {{scaleto}} shown as {{aes}} {{scalemapto}}{{/scalediscrete}}
 .<br>
 {{/hidden}}
-{{#hidden}}In this chart {{aes}} is used to represent {{mapping}}
+{{#hidden}}In this chart {{aes}} is used to show {{mapping}}
 {{#isfactor}}, a factor with levels: {{levels}}{{/isfactor}}. The legend that would normally indicate this has been hidden.<br>
 {{/hidden}}
 {{/legends}}
@@ -79,7 +79,7 @@ Data values may be reported incorrectly.
 {{/largecount}}.<br>
 {{/typehline}}
 {{#typebar}}
-a bar chart containing {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
+a bar chart with {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
 {{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
@@ -137,14 +137,16 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}
-a smoothed curve using method '{{method}}'{{#ci}} with confidence intervals of {{level}}{{/ci}}.<br>
+a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
 {{/typesmooth}}
 {{#typeunknown}}
-{{anA}} {{assign}} graph that VI isn't able to process.<br>
+{{anA}} {{assign}} graph that VI can not process.<br>
 {{/typeunknown}}
+{{#hasPos}}
+These are {{position}} {{mapping2}}.<br>
+{{/hasPos}}
 {{#layeraes}}
-{{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}The chart {{/singlelayer}}
+{{^singlelayer}}Layer {{layernum}} {{/singlelayer}}{{#singlelayer}}It {{/singlelayer}}
 has {{aes}} set to {{mapping}}.<br>
 {{/layeraes}}
 "
-

@@ -332,7 +332,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     else
       ngroups = 1
     layerClass = .getGGLayerType(x, xbuild, layeri)
-
+    
     # HLINE
     if (layerClass == "GeomHline") {
       layer$type = "hline"
@@ -368,7 +368,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
 
 
       # BAR
-    } else if (layerClass == "GeomBar") {
+    } else if (layerClass == "GeomBar" | layerClass =="GeomCol") {
       layer$type = "bar"
       # Discard bars that go outside the bounds of the plot,
       # as they won't be displayed
@@ -443,7 +443,6 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       # scaledata is currently a list of vectors.  If we wanted to include outliers
       # within each boxes object for reporting, then boxes would need to become
       # a list of lists.
-
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 
@@ -462,10 +461,47 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       #Name the unknown type and give it a/an accordingly
       className = tolower(gsub("^.*?Geom","",layerClass))
       layer$assign = className
-      layer$anA = ifelse(is.element(substr(className, 1,1), vowels), "an", "a")
+      layer$anA = .giveAnOrA(className)
     }
-    layers[[layeri]] = layer  
-  }
+    
+    ##Positioning
+    layerPos = .getGGLayerPosition(x, xbuild, layeri)
+    if (is.null(layerPos)){
+      layer$hasPos = FALSE
+    }else{
+      if (layerPos == "dodge"){
+        layer$position = "adjacent, as sorted by"
+      }else if (layerPos == "fill"){
+        if(layerClass == "GeomBar"){
+         layer$position = "stacked and shown as propotions of"
+         layer$hasPos = TRUE
+         }
+      }else if (layerPos == "identity"){
+        if(layerClass == "GeomBar"){
+          layer$position = "stacked, as sorted by"
+          layer$hasPos = TRUE
+        }
+      }else if (layerPos == "stack"){
+        layer$position = "stacked, as sorted by"
+        layer$hasPos = TRUE
+      }else if (layerPos == "jitter"){
+        layer$position = "offset by added random noise, and sorted by"
+        layer$hasPos = TRUE
+      }else if (layerPos == "jitterdodge"){
+        layer$position = "offset along the x axis to avoid overlapping points, and sorted by"
+        layer$hasPos = TRUE
+      }else if (layerPos == "nudge"){
+        if(layerClass == "GeomText"){"adjusted text placement for tidier graph"
+          layer$hasPos = TRUE
+          }
+      }
+    }#End of Layer Position checks
+    layer$mapping2 = .getGGGuideLabels(x, xbuild)
+    if(is_empty(layer$mapping2)){layer$hasPos = FALSE}
+    
+    layers[[layeri]] = layer
+    
+  }##END OF THE LAYER FOR LOOP
   return(layers)
 }
 
