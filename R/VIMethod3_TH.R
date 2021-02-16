@@ -497,7 +497,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       }
     }#End of Layer Position checks
     layer$mapping2 = .getGGGuideLabels(x, xbuild)
-    if(is_empty(layer$mapping2)){layer$hasPos = FALSE}
+    if(length(layer$mapping2) == 0){layer$hasPos = FALSE}
     
     layers[[layeri]] = layer
     
