@@ -4,6 +4,7 @@
 \alias{ProcessAllRmd}
 \alias{R2Rmd}
 \alias{RemoveBOM}
+\alias{rnw2Rmd}
 \title{Work flow convenience functions}
 \description{Time-saving functions that help create files in more useful formats for later use.}
 \usage{

@@ -1,3 +1,7 @@
+# BrailleR 0.31.4!
+- Testing for a return to CRAN
+
+
 # BrailleR 0.31.3
 - cleaned Sophie's code. We now have geom_smooth() reporting method and existence of confidence intervals.
 - renamed BrailleR functions xlab() and ylab() to use upper camel case to resolve conflict with ggplot2.
