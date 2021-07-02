@@ -87,7 +87,7 @@
 #Bar Orientation
 .findBarOrientation = function(x, xbuild, layer) {
   flipped = xbuild$plot$layers[[layer]]$geom_params$flipped_aes
-  if (flipped == TRUE)
+  if (!is.null(flipped))
     return("horizontal")
   else
     return("vertical")
