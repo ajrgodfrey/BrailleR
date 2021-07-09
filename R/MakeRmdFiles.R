@@ -5,9 +5,10 @@ History2Rmd =
         savehistory(TempFile)
         Lines = readLines(TempFile)
         LineNo = 1:length(Lines)
-        cat(paste0('---\ntitle: "History from R session on', format(Sys.Date(), "%A %d %B %Y"),
-            '"\nauthor: "by', getOption("BrailleR.Author"), '"\ndate: Updated on `r 
-format(Sys.Date(), "%A %d %B %Y")`\n---\n\n'), file = file)
+        cat(paste0('---\ntitle: "History from R session on ', format(Sys.Date(), "%A %d %B %Y"),
+            '"\nauthor: "by ', getOption("BrailleR.Author"), '"\ndate: Updated on `r format(Sys.Date(), \'%A %d %B %Y\')`\n---\n\n```{r setup, include=FALSE}\nlibrary(knitr)
+opts_chunk$set(comment="", fig.cap="to fix")
+```\n\n'), file = file)
         cat(paste0("```{r line", LineNo, "}  \n", Lines, "\n```  \n\n"),
             file = file, append = TRUE)
         .NewFile()
@@ -32,7 +33,7 @@ R2Rmd =
         Lines[Lines == ""] = "```  \n\n```{r }  "
         Lines = Lines[ShowLines]
 
-        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author"), '"\ndate: `r format(Sys.Date(), "%A %d %B %Y")`\n---\n\n```{r }'),
+        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author"), '"\ndate: `r format(Sys.Date(), \'%A %d %B %Y\')`\n---\n\n```{r }'),
             file = RmdFile)
         cat(paste0("\n", Lines, "  "), file = RmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = RmdFile, append = TRUE)

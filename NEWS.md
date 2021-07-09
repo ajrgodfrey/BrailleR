@@ -1,5 +1,9 @@
 # BrailleR 0.31.4!
 - Testing for a return to CRAN
+- forced option to be set that is equivalent to GoBlind()
+- minor cosmetic updates for Rmd files
+- Some improved messaging.
+
 
 
 # BrailleR 0.31.3

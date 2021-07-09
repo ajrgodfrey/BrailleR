@@ -5,6 +5,7 @@
 
 .onAttach =
     function(libname, pkgname) {
+        options("BrailleR.VI" = TRUE)
       if (interactive()) {
         packageStartupMessage(
             "The BrailleR.View option has been set to TRUE. \nConsult the help page for GoSighted() to see how settings can be altered.\nYou may wish to use the GetGoing() function as a quick way of getting started.")

@@ -8,7 +8,7 @@ MakeRprofile =
         message(
             "The .Rprofile file has been updated. The BrailleR package will be automatically loaded on startup in this working directory.")
       } else {
-        warning("An .Rprofile already exists. No action has been taken.\n")
+        warning("An .Rprofile already exists. No action has been taken. Use `Overwrite=TRUE` if you want to replace existing profile.\n")
       }
       return(invisible(NULL))
     }
