@@ -1,6 +1,8 @@
 # BrailleR 0.31.4!
 - Testing for a return to CRAN
-- forced option to be set that is equivalent to GoBlind()
+- changed dates and version numbers in readiness for CRAN
+- had to remove orientation checkinig for bars in ggplot() graphs; see VI.internals. this forced introduction of rlang package dependency
+- forced option to be set that is equivalent to GoBlind() to get VI.ggplot() to be automatic
 - minor cosmetic updates for Rmd files
 - Some improved messaging.
 
