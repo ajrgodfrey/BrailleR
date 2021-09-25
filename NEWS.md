@@ -4,7 +4,7 @@
 # BrailleR 0.31.4!
 - Testing for a return to CRAN; looked right.
 - changed dates and version numbers in readiness for CRAN
-- had to remove orientation checkinig for bars in ggplot() graphs; see VI.internals. this forced introduction of rlang package dependency
+- had to remove orientation checking for bars in ggplot() graphs; see VI.internals. this forced introduction of rlang package dependency
 - forced option to be set that is equivalent to GoBlind() to get VI.ggplot() to be automatic
 - minor cosmetic updates for Rmd files
 - Some improved messaging.
@@ -142,7 +142,7 @@ Pushed to CRAN on 6 July 2017
 - changes from VS merged via GitHub (not to be reported again)
 - moved knitr package to imports. This means some of the Rmd files need more explicit mention of the package to get chunk options working properly.
 - JG implemented the ViewSVG() so that anyone can use the interactive graph viewing system; required various internal functions to move and write necessary files 
-- added FittedLinePlot() which adds a fitted line to the ScatterPlot() implmented through ScatterPlot(); these use a few internal functions, found in ScatterPlot.R
+- added FittedLinePlot() which adds a fitted line to the ScatterPlot() implemented through ScatterPlot(); these use a few internal functions, found in ScatterPlot.R
 - added plot and print methods for various graph types. The print method refers to the plot function so acts just like the ggplot and lattice packages.
 - restructured the storage of graph parameters and arguments for a variety of the masked functions. The intention is to make cleaning things up easier.
 - adding examples to the graph making help pages to show that the BrailleR functions replicate base graphics functions
@@ -282,7 +282,7 @@ type; it will also include the code chunks that are reused frequently in other f
 # BrailleR 0.23.5
 - Implemented use of local settings stored in .BrailleROptions object (hidden)
 - There is now  a set of defaults that can be restored in addition to the currently active set of preferences in the BrailleROptions file within the package.
-- SaveMySettings() and RestoreMySettings() functions created for obvious outcomes. These are needed to protec from losing settings when the package is updated.
+- SaveMySettings() and RestoreMySettings() functions created for obvious outcomes. These are needed to protect from losing settings when the package is updated.
 - A wrapper for WriteR is now included.
 - MakeAllFormats() added to create pandoc settings files based on the foo.pandoc file in the inst folder.
 - What's this figure? function WTF() now incorporated.
