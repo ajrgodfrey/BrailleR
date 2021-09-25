@@ -24,7 +24,7 @@ BrailleR requires the very useful file converter called pandoc. Get it from the
 ### The principal integrated development environment --- RStudio
 
 It is a good idea to install RStudio, even if you can't actually use it as a blind person using screen reading software. The reason is that RStudio installs a few other useful tools that we will make use of by other means. Get it from the
-[RStudio download page](https://rstudio.com/products/rstudio/download/)
+[RStudio download page](https://www.rstudio.com/products/rstudio/download/)
 
 ### One programming language --- Python
 
