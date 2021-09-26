@@ -59,6 +59,7 @@ Imports:
     xtable
 Suggests:
     installr,
+    markdown,
     spelling
 SystemRequirements: Python 3 and wxPython 4.0
 VignetteBuilder: knitr
