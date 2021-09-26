@@ -1,10 +1,6 @@
 Package: BrailleR
-Type: Package
 Title: Improved Access for Blind Users
 Version: 0.32.0
-Author: A. Jonathan R. Godfrey [aut, cre], Debra Warren [aut], Donal Fitzpatrick [ctb], Duncan Murdoch [ctb], Greg Snow
-    [ctb], Henrik Bengtsson [ctb], James Curtis [ctb], JooYoung Seo [ctb], Marshall Flax [ctb], Paul Murrell [aut], Sophie Banks [ctb], Timothy Bilton [aut], Tony Hirst [ctb], Tsan-Kuang Lee [ctb], Volker Sorge [aut], Yihui Xie
-    [ctb]
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
 Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.j.godfrey@massey.ac.nz"),
     person("Debra", "Warren", email = "dwar068@aucklanduni.ac.nz", role = "aut"),
@@ -30,7 +26,6 @@ Description: Blind users do not have access to the graphical output from R
     to replace the functionality offered in many GUI front ends, and experimental
     functionality for optimising graphical content to prepare it for embossing as
     tactile images.
-Repository: CRAN
 License: GPL-2
 Depends:
     R (>= 3.4.0)
@@ -59,6 +54,7 @@ Imports:
     xtable
 Suggests:
     installr,
+    markdown,
     spelling
 SystemRequirements: Python 3 and wxPython 4.0
 VignetteBuilder: knitr
