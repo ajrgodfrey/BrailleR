@@ -33,7 +33,7 @@ By participating in the BrailleR Project, you are agreeing to this code of condu
 
 Some issues to resolve:
 
-1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones slected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot()
+1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones selected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot()
 2. Get extra bits of information for WTF() coming through, such as other shapes, lines etc.
 1. Add to the work done by Debra Warren and Paul Murrell on VI.ggplot()  and related functions.
 2. ascertain which shiny app widgets are useful for blind users' screen reading software.

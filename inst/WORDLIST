@@ -30,6 +30,7 @@ GetPython
 GetRStudio
 GetWriteR
 GetWxPython
+GoBlind
 HB
 HSD
 ICCHP
@@ -191,6 +192,7 @@ optimising
 packageVersion
 pandoc
 pch
+pkgdown
 png
 prcomp
 pyw
@@ -203,6 +205,7 @@ repo
 requireNamespace
 reticulate
 rfmt
+rlang
 rmarkdown
 roloc
 scalable
