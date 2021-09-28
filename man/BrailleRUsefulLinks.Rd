@@ -29,8 +29,6 @@ NULL. These functions are for opening a web page and nothing will result in the 
 \description{
 Visit the BrailleR Project home page for updates, instructions on how to join the mailing list which we call BlindRUG and get the latest downloads; or the Let's Use R Now (LURN) home page to read an online manual for using R. Other commonly used websites can be accessed quickly from the R prompt using the other convenience functions.
 }
-\author{
-A. Jonathan R. Godfrey
-}
+\author{A. Jonathan R. Godfrey}
 
 \details{Google  is a key resource, and so should be the R for Data Science book.}

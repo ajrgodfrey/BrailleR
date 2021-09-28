@@ -3,6 +3,7 @@
 - removed commented code from examples in Rd files.
 - removed other aspects of examples that fail CRAN checking such as rm()
 - removed use of installed.packages()
+- had to search for specified text strings and for files lacking specified sections. The new function WhichFiles() was key in making sure this did not take forever.
 
 
 # BrailleR 0.32.0
