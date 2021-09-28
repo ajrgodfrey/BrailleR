@@ -25,7 +25,3 @@ This is experimental work. Having started with the proof of concept based on a f
 P. Dengler et al. (2011) Scalable vector graphics (SVG) 1.1, second edition. W3C recommendation, W3C. http://www.w3.org/TR/2011/REC-XML11-20110816/
 }
 \author{A. Jonathan R. Godfrey and Volker Sorge}
-\examples{
-x=rnorm(1000)
-#MakeAccessibleSVG(hist(x))
-}

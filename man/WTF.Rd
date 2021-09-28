@@ -18,4 +18,5 @@ detach(airquality)
 \author{
 A. Jonathan R. Godfrey and Paul Murrell.
 }
+\value{Text describing what BrailleR was able to detect in the graphics window.}
 

@@ -29,12 +29,10 @@ The base R implementation of the \code{\link[graphics]{hist}} function should be
 x=rnorm(1000)
 # the stamdard hist function returns
 MyHist=graphics::hist(x, xlab="random normal values", main="Example histogram (graphics package)")
-#dev.off()
 MyHist
 
 # while this version returns
 MyHist=hist(x, xlab="random normal values", main="Example histogram (BrailleR package)")
-#dev.off()
 MyHist
 
 # The VI() method then uses the extra information stored

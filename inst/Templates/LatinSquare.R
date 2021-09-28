@@ -1,4 +1,4 @@
-DataName.aov = aov(ResponseName ~ RowFactor+ColFactor+FactorName, data=DataName)
-summary(DataName.aov)
-par(mfrow=c(2,2))
-plot((DataName.aov)
+DataName.lm = lm(ResponseName ~ RowFactor+ColFactor+FactorName, data=DataName)
+anova(DataName.lm)
+library(ggfortify)
+autoplot((DataName.lm)

@@ -16,7 +16,6 @@ You will get an email prepared in your selected email client. If you're wanting 
 
 
 If you are sending in feedback, then please do tell me how you heard about BrailleR and where you are studying or working.}
-\author{
-A. Jonathan R. Godfrey
-}
+\author{A. Jonathan R. Godfrey}
+\value{NULL. These functions are intended for their side effects.}
 

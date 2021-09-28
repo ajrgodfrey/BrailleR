@@ -1,7 +1,4 @@
-DataName.aov = aov(ResponseName~BlockingName+FactorName, data = DataName)
-summary(DataName.aov)
-par(mfrow=c(2,2))
-plot(DataName.aov)
-
-model.tables(DataName.aov)
-model.tables(DataName.aov, type="means")
+DataName.lm = lm(ResponseName~BlockingName+FactorName, data = DataName)
+anova(DataName.lm)
+library(ggfortify)
+autoplot(DataName.lm)

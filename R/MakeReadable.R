@@ -14,7 +14,7 @@ MakeReadable =
     function(pkg) {
       if (.Platform$OS.type == "windows") {
         if (TestPython()) {
-          if (pkg %in% installed.packages()) {
+          if (requireNamespace(pkg, ) ) {
             # convert files here
             VignetteFolder = paste0(system.file(package = pkg), "/doc")
             RnwFiles = c(list.files(path = VignetteFolder, pattern = "Rnw"),

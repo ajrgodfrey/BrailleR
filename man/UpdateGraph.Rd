@@ -41,5 +41,4 @@ update(test2, main="important title", sub="subtitles aren't always present", yla
 update(test2) # to fix
 par(op)
 detach(airquality)
-rm(test1); rm(test2); rm(op)
 }

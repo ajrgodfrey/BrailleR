@@ -37,6 +37,5 @@ test2 = FittedLinePlot(Wind, Ozone, line.col=4)
 test2 #does the plot method work?
 par(op)
 detach(airquality)
-rm(test1); rm(test2); rm(op)
 }
 

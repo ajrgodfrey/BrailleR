@@ -1,4 +1,5 @@
 ```{r setup, purl=FALSE, include=FALSE}
-knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
-knitr::opts_chunk$set(comment="", echo=FALSE, fig.path="FolderName/FileStem", fig.width=7)
+library(knitr)
+opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
+opts_chunk$set(comment="", echo=FALSE, fig.path="FolderName/FileStem", fig.width=7)
 ```

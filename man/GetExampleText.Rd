@@ -18,7 +18,7 @@ GetExampleText(topic, package = NULL, lib.loc = NULL, character.only = FALSE, ou
 The example() code was hacked back to form this utility function. It is probably a little heavy for what is needed but it works sufficiently at the time of creation.}
 \value{
 a vector of character strings each element being one line of the examples from the corresponding help topic.}
-\author{The work of Martin Maechler and others got tampered with by Jonathan Godfrey}
+\author{The work of Martin Maechler and others got tampered with by A. Jonathan R. Godfrey}
 
 \seealso{
 You may wish to compare this with \code{\link{example}} 

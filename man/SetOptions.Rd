@@ -69,3 +69,4 @@ SetSigLevel(0.05, Local=FALSE) # valid alpha value
 SetAuthor(Local=FALSE)
 SetAuthor("Jonathan Godfrey", Local=FALSE)
 }
+\value{NULL. These functions set package options.}

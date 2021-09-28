@@ -1,5 +1,12 @@
+# BrailleR 0.32.1
+- feedback from manual CRAN inspection
+- removed commented code from examples in Rd files.
+- removed other aspects of examples that fail CRAN checking such as rm()
+- removed use of installed.packages()
+
+
 # BrailleR 0.32.0
-- return to CRAN
+- attempted return to CRAN
 
 # BrailleR 0.31.4
 - Testing for a return to CRAN; looked right.

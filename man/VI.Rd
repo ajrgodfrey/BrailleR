@@ -84,8 +84,6 @@ A. Jonathan R. Godfrey and Timothy P. Bilton
 \examples{
 RandomX=rnorm(500)
 PlottedFig=hist(RandomX)
-rm(RandomX)
 VI(PlottedFig)
 Describe(PlottedFig)
-rm(PlottedFig)
 }

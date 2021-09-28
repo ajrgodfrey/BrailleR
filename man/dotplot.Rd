@@ -24,3 +24,6 @@ This function is dependent on the \code{\link[graphics]{stripchart}} function fr
 \examples{
 VI(with(airquality, dotplot(Ozone~Month)))
 }
+\value{
+An object of class dotplot. This class is just a placeholder for the contents of the object used to create a boxplot which would otherwise not be stored in a usable format. The class is not intended for the user; it is a tool that enables the BrailleR package to deliver a readable text version of the plot.
+}

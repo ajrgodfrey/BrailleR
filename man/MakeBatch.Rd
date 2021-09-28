@@ -40,3 +40,4 @@ Once the RBatch.bat file has been moved to the desired folder that is included i
 
 8. Open test.Rout in any text editor you like. This file has the appearance of an R session window except for some processing time detail at the end. You will be able to read the commands that were originally in test.R as well as the output from these commands.
 }
+\value{The names of created files.}

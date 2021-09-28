@@ -34,5 +34,4 @@ test2 = TimeSeriesPlot(Ozone)
 test2 # does the plot method work?
 par(op)
 detach(airquality)
-rm(test1); rm(test2); rm(op)
 }

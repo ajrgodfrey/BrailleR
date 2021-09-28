@@ -19,8 +19,7 @@ ThreeFactors(Response, Factor1, Factor2, Factor3, Data = NULL, Filename = NULL,
 }
 \details{
 to complete}
-\value{
-to complete}
+\value{This function is used for creation of the files saved in the working directory and a few of its subdirectories.}
 \author{A. Jonathan R. Godfrey and Timothy P. Bilton}
 
 \seealso{

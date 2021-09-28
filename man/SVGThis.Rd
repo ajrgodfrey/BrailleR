@@ -34,7 +34,3 @@ P. Murrell (2015) \dQuote{The {\pkg{gridGraphics}} package},
 P. Dengler et al. (2011) Scalable vector graphics (SVG) 1.1, second edition. W3C recommendation, W3C. http://www.w3.org/TR/2011/REC-SVG11-20110816/
 }
 \author{A. Jonathan R. Godfrey and Paul Murrell}
-\examples{
-x=rnorm(1000)
-#SVGThis(hist(x))
-}

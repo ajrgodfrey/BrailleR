@@ -21,5 +21,4 @@ There are a few quirks with respect to variables that could be interpreted as fa
 \examples{
 data(airquality)
 DataViewer(airquality, Update=TRUE, New="NewAirQuality")
-# remove the new object using rm()
 }
