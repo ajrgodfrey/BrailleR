@@ -1,0 +1,17 @@
+```{r DataNamePlot, fig.cap="Plot of ResponseName versus Covariate with fitted lines added for each FactorName."}
+library(ggplot2)
+DataName %>% ggplot(aes(y=ResponseName, x=Covariate, group =FactorName)) + geom.point() + geom_smooth(method="lm")
+```
+
+```{r DataName.lm}
+DataName.lm1 = lm(ResponseName ~ FactorName, data=DataName)
+DataName.lm2 = lm(ResponseName ~ FactorName+Covariate, data=DataName)
+DataName.lm3 = lm(ResponseName ~ FactorName*Covariate, data=DataName)
+anova(DataName.lm1, DataName.lm2, DataName.lm3)
+```
+
+
+```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
+library(ggfortify)
+autoplot(DataName.lm3)
+```

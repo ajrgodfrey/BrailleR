@@ -1,0 +1,3 @@
+```{r getDataName}
+DataName = read.csv("FileName", , stringsAsFactors = TRUE) %>% mutate() %>% glimpse()
+```

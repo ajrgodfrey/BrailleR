@@ -1,0 +1,16 @@
+```{r DataName.lm}
+DataName.lm = lm(ResponseName~BlockingName+FactorName, data = DataName)
+anova(DataName.lm)
+```
+
+
+```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
+library(ggfortify)
+autoplot(DataName.lm)
+```
+
+
+```{GetMeans}
+library(emmeans)
+emmeans(DataName.lm, pairwise ~FactorName)
+```

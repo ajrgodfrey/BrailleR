@@ -1,5 +1,0 @@
-plot(ResponseName~Covariate, data=DataName, col=FactorName)
-DataName.lm1 = lm(ResponseName ~ FactorName, data=DataName)
-DataName.lm2 = lm(ResponseName ~ FactorName+Covariate, data=DataName)
-DataName.lm3 = lm(ResponseName ~ FactorName*Covariate, data=DataName)
-anova(DataName.lm1, DataName.lm2, DataName.lm3)
