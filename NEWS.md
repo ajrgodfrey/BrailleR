@@ -4,7 +4,7 @@
 - removed other aspects of examples that fail CRAN checking such as rm()
 - removed use of installed.packages()
 - had to search for specified text strings and for files lacking specified sections. The new function WhichFiles() was key in making sure this did not take forever.
-
+- updated a few of the templates in inst/templates; these are meant to be snippets, not completely stand alone files.
 
 # BrailleR 0.32.0
 - attempted return to CRAN

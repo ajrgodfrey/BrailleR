@@ -1,0 +1,7 @@
+
+```{r DataNamePlot, fig.cap="Plot of ResponseName versus Predictor with smoother added."}
+library(ggplot2)
+DataName %>% ggplot(aes(y=ResponseName, x=Predictor) + geom.point() + geom_smooth()
+```
+
+

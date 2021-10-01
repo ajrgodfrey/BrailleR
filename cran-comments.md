@@ -7,7 +7,7 @@ Responses to feedback from manual inspection by Gregor on behalf of CRAN:
 - GetExampleText.Rd has cat() in its example because this is how it would be implemented in practice. Not updated.
 - removed rm() from examples
 - One primary purpose of the BrailleR package is to return plain text when other R functionality does not. This is critical for access by blind users. Requesting that this practice be discontinued invalidates much of what the package delivers for blind users. For example, the WTF.Rd now has an entry \value{Text describing what BrailleR was able to detect in the graphics window.}
-- sample code in template files is not used in package examples. I understand the suggestion to save original graphical parameters, but this is not necessary in general use of R markdown where most of these samples are used because R chunks do not retain altered graphical parameters from one chunk to the next.
+- sample code in template files is not used in package examples. I understand the suggestion to save original graphical parameters, but this is not necessary in general use of R markdown where most of these samples are used because R chunks do not retain altered graphical parameters from one chunk to the next. Each of these templates is a snippet, not a stand alone file.
 
 
 nothing else to note (I hope) except:

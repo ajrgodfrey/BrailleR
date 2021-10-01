@@ -1,0 +1,5 @@
+
+```{r DataNameBartlettTest}
+bartlett.test(ResponseName ~ FactorName, data=DataName)
+```
+

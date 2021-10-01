@@ -14,7 +14,7 @@ anova(DataName.poly1, DataName.poly2, DataName.poly3, DataName.poly4)
 ```
 
 
-```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
+```{r plotDataName.lm, fig.cap="Residual analysis for DataName.poly"}
 library(ggfortify)
 autoplot(DataName.poly4)
 ```
