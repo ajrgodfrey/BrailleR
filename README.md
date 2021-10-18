@@ -10,15 +10,34 @@
 
 Blind people cannot use RStudio and depending on the combination of operating system and screen reading software we choose to use, we might have differing levels of success with the standard R GUI.
 
-R is perhaps the most blind-friendly statistical software option because all scripts are written in plain text, using the text editor a user prefers, and all output can be saved in a wide range of file formats. The advent of R markdown and other reproducible research techniques can offer the blind user a degree of efficiency that is not offered in many other statistical software options.
+R is perhaps the most blind-friendly statistical software option because all scripts can be written in plain text, using the text editor a user prefers, and all output can be saved in a wide range of file formats. The advent of R markdown and other reproducible research techniques can offer the blind user a degree of efficiency that is not offered in many other statistical software options.
 
 
 ###  Specific objectives of BrailleR
 
 1. Make accessing output simpler.
 2. Gain access to the content depicted in a graph.
-3. Help get into R markdown easier.
+3. Make it easier for blind users to create their own R markdown documents.
 5. Replace the tasks other users can do quickly using the RStudio IDE.
+
+
+### Installation of BrailleR
+
+Use the following commands if using the CRAN version of BrailleR:
+
+```
+chooseCRANmirror(ind=1)
+install.packages("BrailleR")
+```
+
+Or, if the CRAN version is not recent enough or your liking:
+
+
+```
+chooseCRANmirror(ind=1)
+install.packages("remotes")
+remotes::install_github("ajrgodfrey/BrailleR", upgrade=TRUE, quiet=TRUE)
+```
 
 ### You can help
 
