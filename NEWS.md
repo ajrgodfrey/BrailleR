@@ -1,7 +1,7 @@
-# BrailleR 0.32.2 Temporary 
+# BrailleR 0.33.0
 
-
-
+# BrailleR 0.32.2 
+(Temporary while waiting for CRAN approval)
 
 # BrailleR 0.32.1
 - feedback from manual CRAN inspection

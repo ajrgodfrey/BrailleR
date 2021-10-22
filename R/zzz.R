@@ -48,7 +48,6 @@
       options(repos = Op)
 
 
-
       options(BrailleR.View = interactive())
       BrailleR = new.env(parent = .GlobalEnv)
       if (interactive()) {

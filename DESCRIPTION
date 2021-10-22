@@ -1,6 +1,6 @@
 Package: BrailleR
 Title: Improved Access for Blind Users
-Version: 0.32.2
+Version: 0.33.0
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
 Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.j.godfrey@massey.ac.nz"),
     person("Debra", "Warren", email = "dwar068@aucklanduni.ac.nz", role = "aut"),
