@@ -1,3 +1,8 @@
+# BrailleR 0.32.2 Temporary 
+
+
+
+
 # BrailleR 0.32.1
 - feedback from manual CRAN inspection
 - removed commented code from examples in Rd files.

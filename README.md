@@ -1,6 +1,18 @@
 # The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
 
+
+The BrailleR package does have dependencies, all of which are available on CRAN. Version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. The leading zero infers that this package is under ongoing development to get to the state where it delivers the original aims of the package. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
+
+[![Dependencies](https://tinyverse.netlify.com/badge/BrailleR)](https://cran.r-project.org/package=BrailleR)  [![Github version](https://img.shields.io/badge/devel%20version-0.32.1-blue.svg)](https://github.com/ajrgodfrey/BrailleR) [![Last commit badge](https://img.shields.io/github/last-commit/ajrgodfrey/BrailleR.svg)](https://github.com/ajrgodfrey/BrailleR/commits/blue)
+
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)  
+
+
+
+[![CRAN checks](https://cranchecks.info/badges/summary/BrailleR)](https://cran.r-project.org/web/checks/check_results_BrailleR.html)  [![Downloads per month](http://cranlogs.r-pkg.org/badges/last-month/BrailleR?color=green)](https://cran.r-project.org/package=BrailleR)
+
+[![Release version](https://www.r-pkg.org/badges/version/BrailleR?color=black)](https://cran.r-project.org/package=BrailleR)
 
 <!-- badges: start -->
 [![R build status](https://github.com/ajrgodfrey/BrailleR/workflows/R-CMD-check/badge.svg)](https://github.com/ajrgodfrey/BrailleR/actions)
@@ -52,14 +64,13 @@ By participating in the BrailleR Project, you are agreeing to this code of condu
 
 Some issues to resolve:
 
-1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones selected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot()
+1. Add to the work done by Debra Warren and Paul Murrell on VI.ggplot()  and related functions. Of critical importance is to expand the rane of geom_...() objects are described.
+1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones selected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot() N.B. possibly redundant if moving entirely to ggplot graphics
 2. Get extra bits of information for WTF() coming through, such as other shapes, lines etc.
-1. Add to the work done by Debra Warren and Paul Murrell on VI.ggplot()  and related functions.
 2. ascertain which shiny app widgets are useful for blind users' screen reading software.
 3. link various plot objects to sonify package.
 2. get more graphics ready for making into SVG for use on Tiger products; mostly in SVGThis() method
 3. Get more Graph types working with the additional XML to make them interactive.
-1. fix background of all code chunks in slides being made. This is probably an issue in the css file.
 2. get graph files named properly by TwoFactors(); including  boxplots etc vs each factor not both.
 3. In OneFactor() and TwoFactors(): ensure that boxplots are created for each factor unless a level is short of reps.
 4. WTF() doesn't pick up multiple outliers in boxplot() as more than one point
@@ -70,7 +81,7 @@ Some issues to resolve:
 5. Multiple language support was started but is in serious need of some love.
 7. Functions for the VI method to be completed include: VI.prcomp(), VI.factanal(), VI.glm(), VI.htest()?
 4. added functionality to compile all Rmd files in the current directory. Request from JYS; initial implementation done in June 2017. Includes batch file for use in Windows explorer and DOS prompt. Needs testing.
-5. VI.scatterplot() needs creating
+5. VI.scatterplot() needs creating N.B. possibly redundant if moving entirely to ggplot graphics
 
 
 
