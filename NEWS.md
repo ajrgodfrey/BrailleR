@@ -1,4 +1,6 @@
 # BrailleR 0.33.0
+- updated ScatterPlot(), FittedLinePlot(), and TimeSeriesPlot() functions  to have both base and ggplot style graphics.
+
 
 # BrailleR 0.32.2 
 (Temporary while waiting for CRAN approval)

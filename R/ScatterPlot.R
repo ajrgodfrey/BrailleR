@@ -1,7 +1,8 @@
 
 
-ScatterPlot = function(x, y=NULL, ...){
+ScatterPlot = function(.data, x, y=NULL, base=FALSE, ...){
     MC <- match.call(expand.dots = TRUE)
+if(base){
     Out = list()
     Out$data = .CleanData4TwoWayPlot(x, y)
     Out$ExtraArgs  = .GrabExtraArgs(MC)
@@ -15,12 +16,18 @@ ScatterPlot = function(x, y=NULL, ...){
     Out$par = par()
     class(Out) = "scatterplot"
     Out=Augment(Out)
+}
+else{ ## do it in ggplot2
+
+}
     return(invisible(Out))
 }
 
 
-FittedLinePlot = function(x, y, line.col=2, ...){
+FittedLinePlot = function(.data, x, y, line.col=2, base=FALSE, ...){
     MC <- match.call(expand.dots = TRUE)
+if(base){
+
     Out = list()
     Out$data = .CleanData4TwoWayPlot(x, y)
     Out$fittedline = list(coef = coef(lm(y~x, data=Out$data)),
@@ -37,6 +44,10 @@ FittedLinePlot = function(x, y, line.col=2, ...){
     class(Out) = c("fittedlineplot", "scatterplot")
     Out=Augment(Out)
     do.call(abline, Out$fittedline)
+}
+else{ ## do it in ggplot2
+
+}
     return(invisible(Out))
 }
 

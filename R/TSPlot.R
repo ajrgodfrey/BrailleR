@@ -1,6 +1,7 @@
 
 
-TimeSeriesPlot = function(x, ...){
+TimeSeriesPlot = function.data, (x, base, ...){
+if(base){
     Out = list(x=as.ts(x))
     MC <- match.call(expand.dots = TRUE)
 MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$x), MC$ylab)
@@ -16,6 +17,10 @@ Out$par = par()
     if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab) else {Out$xlab = "Time"}
     if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
     Out=Augment(Out)
+}
+else{ ## do it in ggplot2
+
+}
     return(invisible(Out))
 }
 
