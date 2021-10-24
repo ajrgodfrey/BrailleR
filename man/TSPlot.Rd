@@ -37,7 +37,7 @@ A. Jonathan R. Godfrey
 attach(airquality)
 op = par(mfcol=c(3,2))
 plot(as.ts(Wind), ylab="Wind", col=4)
-test1 = TimeSeriesPlotx=(Wind, col=4, base=TRUE)
+test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
 test1 #does the plot method work?
 plot(as.ts(Ozone), ylab="Ozone")
 test2 = TimeSeriesPlot(x=Ozone, base=TRUE)
