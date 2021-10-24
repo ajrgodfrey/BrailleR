@@ -29,12 +29,12 @@ Specify the label to be an empty text string if the desire is to delete the curr
 \examples{
 attach(airquality)
 op = par(mfcol=c(3,2))
-test1 = TimeSeriesPlot(Wind, col=4)
+test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
 XLab(test1, "Day")
 # check the change is permanent by doing another change
 test1 %>% Main("titles are important") # nice that the pipe works!
 
-test2 = TimeSeriesPlot(Ozone)
+test2 = TimeSeriesPlot(x=Ozone, base=TRUE)
 # using the update method
 update(test2, main="important title", sub="subtitles aren't always present", ylab="Ozone (ppb)") 
 # finally, change the graph to use different plotting characters/line types
