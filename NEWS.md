@@ -1,6 +1,6 @@
 # BrailleR 0.33.0
 - updated ScatterPlot(), FittedLinePlot(), and TimeSeriesPlot() functions  to have both base and ggplot style graphics.
-
+- updated qplot.Rmd vignette to remove all but one `VI()` command as they are redundant now that we get automatic descriptions of ggplot objects.
 
 # BrailleR 0.32.2 
 (Temporary while waiting for CRAN approval)

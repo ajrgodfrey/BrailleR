@@ -1,6 +1,7 @@
 
 
 TimeSeriesPlot = function(.data, x, base=FALSE, ...){
+    Out = list()
 if(base){
     Out = list(x=as.ts(x))
     MC <- match.call(expand.dots = TRUE)
