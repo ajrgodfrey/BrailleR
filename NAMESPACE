@@ -1,7 +1,7 @@
 importFrom("devtools", "spell_check")
 import(dplyr)
 import(extrafont)
-importFrom("ggplot2", "qplot", "ggplot_build") 
+importFrom("ggplot2", "aes", "geom_point", "ggplot", "ggplot_build", "qplot") 
 importFrom("graphics", "abline", "par", "plot") 
 importFrom("grDevices", "dev.cur", "dev.list", "pdf") 
 import(grid)

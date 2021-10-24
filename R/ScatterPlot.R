@@ -16,11 +16,13 @@ if(base){
     Out$par = par()
     class(Out) = "scatterplot"
     Out=Augment(Out)
+    return(invisible(Out))
 }
 else{ ## do it in ggplot2
-
+require(ggplot2)
+Out=ggplot(.data, aes(x=x, y=y)) + geom_point()
+    return(Out)
 }
-    return(invisible(Out))
 }
 
 
@@ -44,11 +46,12 @@ if(base){
     class(Out) = c("fittedlineplot", "scatterplot")
     Out=Augment(Out)
     do.call(abline, Out$fittedline)
+    return(invisible(Out))
 }
 else{ ## do it in ggplot2
 
+    return(Out)
 }
-    return(invisible(Out))
 }
 
 

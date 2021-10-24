@@ -9,7 +9,7 @@ UniDesc =
 
       if (is.null(Response)) {
         if (length(ResponseName) == 0)
-          stop("You must specify either the Response or the ResponseName.")
+          .NoResponse() 
         Response = get(ResponseName)
       }
 
@@ -350,7 +350,7 @@ print(xtable(Results, caption=TabCapt, label=\"',
       }  # end of formal tests of normality via moments section
 
       if (Process) {
-        # stop writing markdown and process the written file into html and an R script
+        # finish writing markdown and process the written file into html and an R script
         knit2html(Filename, quiet = TRUE,
                   stylesheet = FindCSSFile(getOption("BrailleR.Style")))
         file.remove(sub(".Rmd", ".md", Filename))

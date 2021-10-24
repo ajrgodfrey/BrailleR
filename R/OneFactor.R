@@ -37,17 +37,16 @@ OneFactor =
         } else {
           DataName = as.character(match.call()$Data)
         }
-        if (!is.data.frame(Data)) stop("The named dataset is not a data.frame.")
+        if (!is.data.frame(Data)) .NotADataFrame() 
       }
 
       with(
           Data,
           {
             if (!is.numeric(get(ResponseName)))
-              stop("The response variable is not numeric.")
+              .ResponseNotNumeric() 
             if (!is.factor(get(FactorName)))
-              stop(
-                  "The group variable is not a factor.\nTry using as.factor() on a copy of the data.frame.")
+              .GroupNotFactor() 
           })  # end data checking
 
 
@@ -236,7 +235,7 @@ plot(MyHSD)
       }
 
 
-      # stop writing markdown and process the written file into html and an R script
+      # finish writing markdown and process the written file into html and an R script
       knit2html(Filename, quiet = TRUE,
                 stylesheet = FindCSSFile(getOption("BrailleR.Style")))
       file.remove(sub(".Rmd", ".md", Filename))

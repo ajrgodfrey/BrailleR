@@ -1,4 +1,5 @@
 .BlankWarning  =     function() {
+warning("\n")
 return(invisible(NULL))
     }
 

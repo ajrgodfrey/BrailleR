@@ -1,4 +1,5 @@
 .BlankMSG  =     function() {
+message("\n")
 return(invisible(NULL))
     }
 

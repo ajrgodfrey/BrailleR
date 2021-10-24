@@ -40,14 +40,14 @@ OnePredictor =
         } else {
           DataName = as.character(match.call()$Data)
         }
-        if (!is.data.frame(Data)) stop("The named dataset is not a data.frame.")
+        if (!is.data.frame(Data)) .NotADataFrame()
       }
 
       with(Data, {
                    if (!is.numeric(get(ResponseName)))
-                     stop("The response variable is not numeric.")
+                     .ResponseNotNumeric()
                    if (!is.numeric(get(PredictorName)))
-                     stop("The Predictor variable is not numeric.")
+                     .PredictorNotNumeric()
                  })  # end data checking
 
       # create folder and filenames
@@ -226,7 +226,7 @@ print(xtable(anova(', ModelName,
             file = Filename, append = TRUE)
       }
 
-      # stop writing markdown and process the written file into html and an R script
+      # finish writing markdown and process the written file into html and an R script
       knit2html(Filename, quiet = TRUE,
                 stylesheet = FindCSSFile(getOption("BrailleR.Style")))
       file.remove(sub(".Rmd", ".md", Filename))

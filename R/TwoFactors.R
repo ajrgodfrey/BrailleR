@@ -44,22 +44,20 @@ TwoFactors =
         } else {
           DataName = as.character(match.call()$Data)
         }
-        if (!is.data.frame(Data)) stop("The named dataset is not a data.frame.")
+        if (!is.data.frame(Data)) .NotADataFrame()
       }
 
       with(
           Data,
           {
             if (!is.numeric(get(ResponseName)))
-              stop("The response variable is not numeric.")
+              .ResponseNotNumeric()
             if (!is.vector(get(ResponseName)))
-              stop("Input response is not a vector.")
+              .ResponseNotAVector()
             if (!is.factor(get(Factor1Name)))
-              stop(
-                  "The first factor is not a factor.\nTry using as.factor() on a copy of the data.frame.")
+              .FactorNotFactor(which="first")
             if (!is.factor(get(Factor2Name)))
-              stop(
-                  "The second factor is not a factor.\nTry using as.factor() on a copy of the data.frame.")
+              .FactorNotFactor(which="second")
           })  # end data checking
 
       # create folder and filenames
@@ -340,7 +338,7 @@ plot( MyHSD )
             append = TRUE)
       }
 
-      # stop writing markdown and process the written file into html and an R script
+      # finish writing markdown and process the written file into html and an R script
       knit2html(Filename, quiet = TRUE,
                 stylesheet = FindCSSFile(getOption("BrailleR.Style")))
       file.remove(sub(".Rmd", ".md", Filename))

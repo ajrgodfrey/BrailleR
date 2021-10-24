@@ -5,15 +5,15 @@ WhereXY =
       if (is.null(y)) {
         x = as.matrix(x)
         if (length(x[1, ]) != 2) {
-          stop("If y is not supplied, x must have two numeric columns")
+          .NoYNeeds2X() 
         }
         y = x[, 2]
         if (!is.numeric(y)) {
-          stop("This function will fail because y is not numeric")
+          .XOrYNotNumeric(which="y")
         }
         x = x[, 1]
         if (!is.numeric(x)) {
-          stop("This function will fail because x is not numeric")
+          .XOrYNotNumeric(which="x")
         }
       }
       XMin = min(x, na.rm = TRUE)
