@@ -24,8 +24,7 @@ FindReplace =
         }
         writeLines(gsub(find, replace, OldText, fixed=TRUE)[1:NoLines], con = file)
       } else {
-        warning(
-            "The specified file does not exist.\nNo action has been taken.\n")
+        .FileNotFound()
       }
       return(invisible(NULL))
     }

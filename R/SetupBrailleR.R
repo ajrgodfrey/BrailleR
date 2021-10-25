@@ -1,7 +1,23 @@
-SetupBrailleR =
-    function() {
+.DefaultPath = function(){
       defaultPath = "~/MyBrailleR/"
       defaultPath <- normalizePath(defaultPath, mustWork = FALSE)
+return(DefaultPath)
+}
+
+.CheckMyBrailleR = function(){
+return(dir.exists(.DefaultPath()))
+}
+
+.MyBrailleRName = function(){
+Out=NULL
+if(.CheckMyBrailleR())  {Out = .DefaultPath()}
+else{ .NoBrailleRFolder()}
+return(Out)
+}
+
+SetupBrailleR =
+    function() {
+defaultPath = .DefaultPath()
       Folder = NULL
 
       if (dir.exists(defaultPath)) {

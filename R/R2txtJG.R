@@ -55,7 +55,7 @@ txtStart <- function(file, commands = TRUE, results = TRUE, append = FALSE,
   } else if (any(class(file) == 'connection')) {
     con <- file
   } else {
-    stop('file must be a character string or connection')
+    .NotAProperFileName()  
   }
   if (tmp && isOpen(con)) {
     .R2txt.vars$closecon <- FALSE

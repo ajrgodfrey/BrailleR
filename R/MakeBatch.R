@@ -10,20 +10,21 @@ MakeBatch =
             # write a batch file for processing R scripts
             cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet %1\n"),
                 file = "RBatch.bat")
-            message("RBatch.bat created successfully.")
+            .NewFile(file = "RBatch.bat")
             # write a batch file for processing a specific R markdown file
             cat(paste0(RHome,
                        "\\bin\\RScript.exe --vanilla -e \"rmarkdown::render('%1')\"\n"),
                 file = "RmdBatch.bat")
-            message("RmdBatch.bat created successfully.")
+                        .NewFile(file = "RmdBatch.bat")
             # write a batch file for processing all R markdown files
             cat(paste0(RHome, '\\bin\\Rscript.exe --vanilla -e "BrailleR::ProcessAllRmd()"\n'),
                 file = "ProcessAllRmd.bat")
-            message("ProcessAllRmd.bat created successfully.")
+                        .NewFile(file = "ProcessAllRmd.bat")
             # write a batch file for processing all markdown files
             cat(paste0(RHome, '\\bin\\Rscript.exe --vanilla -e "BrailleR::ProcessAllMd()"\n'),
                 file = "ProcessAllMd.bat")
-            message("ProcessAllMd.bat created successfully.")
+                                    .NewFile(file = "ProcessAllMd.bat")
+
             message(
                 "These files need to be moved to a folder that is on your system path.")
             # write a file to show the system path settings
@@ -36,7 +37,7 @@ MakeBatch =
 My R version is `r version$major`.`r version$minor` and is being used to create this test file
 It will then be used to process the test file later once the necessary actions are taken in Windows Explorer.  \n",
                 file = "test1.Rmd")
-            message("test1.Rmd created successfully.")
+                                    .NewFile(file="test1.Rmd")
             MakeBatch("test1.Rmd")
             # write a test R script
             cat("# a test file
@@ -60,15 +61,14 @@ mean(MySample)  \n",
               cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet ",
                          FullFile[1], ".R\n"),
                   file = paste0(FullFile[1], ".bat"))
-              message(FullFile[1], ".bat created successfully.")
+                                      .NewFile(file = paste0(FullFile[1], ".bat"))
             }
             if (endsWith(file, ".Rmd") | endsWith(file, ".rmd")) {
-
               # write a batch file for processing the R markdown file
               cat(paste0(RHome, "\\bin\\RScript.exe -e \"rmarkdown::render('",
                          FullFile[1], ".Rmd')\"\n"),
                   file = paste0(FullFile[1], ".bat"))
-              message(FullFile[1], ".bat created successfully.")
+                                      .NewFile(file = paste0(FullFile[1], ".bat"))
             }
           }
         } else {

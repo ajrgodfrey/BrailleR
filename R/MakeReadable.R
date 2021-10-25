@@ -27,17 +27,17 @@ MakeReadable =
             file.copy(paste0(VignetteFolder, "/", RnwFiles),
                       paste0(MoveTo, RnwFiles), overwrite = TRUE)
             for (i in RnwFiles) {
-              message("Copying and converting line breaks:")
+              message("Copying and converting line breaks:", i)
               shell(paste0(system.file(
                                "Python/FixLineBreaks.py", package = "BrailleR"),
                            " ", MoveTo, i))
-              message("Converting tabs to spaces:")
+              message("Converting tabs to spaces:", i)
               shell(paste0(system.file(
                                "Python/RemoveTabs.py", package = "BrailleR"),
                            " ", MoveTo, i))
             }
           } else {
-            warning("The specified package is not installed.\n")
+            .PkgNotFound()
           }
         } else {
           .NeedsPython()

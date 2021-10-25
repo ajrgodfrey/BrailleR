@@ -26,6 +26,13 @@ stop("Specified method is not yet available.\n")
 return(invisible(NULL))
     }
 
+
+.NoBrailleRFolder=     function() {
+stop("No permanent MyBrailleR folder was found.\n Use `SetupBrailleR()` to fix this problem.")
+return(invisible(NULL))
+    }
+
+
 .NoResponse =     function() {
 stop("You must specify either the Response or the ResponseName.")
 return(invisible(NULL))
@@ -36,6 +43,19 @@ return(invisible(NULL))
 stop("The named dataset is not a data.frame.")
 return(invisible(NULL))
     }
+
+
+.NotAProperFileName =     function() {
+stop('file must be a character string or connection')
+return(invisible(NULL))
+    }
+
+.NotViewable =     function() {
+stop("The named data is not a data.frame, matrix, or vector so cannot be viewed.")
+return(invisible(NULL))
+    }
+
+
 
 .NoYNeeds2X =     function() {
 stop("If y is not supplied, x must have two numeric columns")

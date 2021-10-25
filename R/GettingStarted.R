@@ -63,7 +63,7 @@ GetGoing =
 
         #end interactive section.
       } else {
-        warning("This function is only intended for interactive R sessions.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

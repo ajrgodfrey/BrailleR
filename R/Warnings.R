@@ -8,8 +8,20 @@ warning("This function has been deprecated.\n")
 return(invisible(NULL))
     }
 
+
+.FileExists =     function(file) {
+warning(file, "already exists.\n")
+return(invisible(NULL))
+    }
+
 .FileNotFound =     function() {
 warning("The specified file does not exist.\n")
+return(invisible(NULL))
+    }
+
+
+.FolderNotFound =     function() {
+warning("The specified folder does not exist.\n")
 return(invisible(NULL))
     }
 
@@ -27,6 +39,20 @@ return(invisible(NULL))
 
 .NeedsWX =     function() {
 warning("This function requires an installation of Python and wxPython.\n")
+return(invisible(NULL))
+    }
+
+
+
+
+.OverWriteNeeded =     function(file=NULL) {
+warning("No action has been taken. Use `Overwrite=TRUE` if you want to replace it.\n")
+return(invisible(NULL))
+    }
+
+
+.PkgNotFound =     function() {
+warning("The specified package is not installed.\n")
 return(invisible(NULL))
     }
 

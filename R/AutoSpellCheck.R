@@ -19,7 +19,7 @@ AutoSpellCheck =
           }
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

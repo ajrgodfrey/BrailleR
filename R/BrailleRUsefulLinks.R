@@ -3,7 +3,7 @@ BrailleRHome =
       if (interactive()) {
         browseURL("https://R-Resources.massey.ac.nz/BrailleR/")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -13,7 +13,7 @@ BrailleRInAction =
       if (interactive()) {
         browseURL("https://R-Resources.massey.ac.nz/BrailleRInAction/")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -26,7 +26,7 @@ LURN = function(BlindVersion = getOption("BrailleR.VI")) {
              browseURL("https://R-Resources.massey.ac.nz/LURN/")
            }
          } else {
-           warning("This function is meant for use in interactive mode only.\n")
+           .InteractiveOnly()
          }
          return(invisible(NULL))
        }
@@ -38,7 +38,7 @@ google = Google =
       if (interactive()) {
         browseURL("https://www.google.com")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -49,7 +49,7 @@ R4DS = r4ds  =
       if (interactive()) {
         browseURL("http://r4ds.had.co.nz/")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

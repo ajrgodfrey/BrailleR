@@ -1,3 +1,5 @@
+# add filenames to messages for file creation
+
 .BlankMSG  =     function() {
 message("\n")
 return(invisible(NULL))
@@ -8,8 +10,31 @@ message("The installer file has been added to your MyBrailleR folder.")
 return(invisible(NULL))
 }
 
+.CannotSeeWxPython = function(){
+message("Python cannot see the necessary wx module.\nYou need to get that fixed.\n")
+return(invisible(NULL))
+}
+
+
+
+.CanSeeWxPython = function(){
+message("Python can see the necessary wx module.\n")
+return(invisible(NULL))
+}
+
+.CanUseWriteR  = function(){
+message("You are ready to use WriteR.\n")
+return(invisible(NULL))
+}
+
+
 .DeleteAnytime  = function(){
 message("You can delete it at any time, but that will not uninstall the application.")
+return(invisible(NULL))
+}
+
+.Done  = function(){
+message("Done.")
 return(invisible(NULL))
 }
 
@@ -23,8 +48,9 @@ message("You could use GetPython3() and GetWxPython3() to help install them.\n")
 return(invisible(NULL))
     }
 
-.NewFile =     function() {
-message("A new file has been created in your working directory.")
+.NewFile =     function(file=NULL) {
+NewFile = ifelse(is.null(file), "", file)
+message(NewFile, " has been created in your working directory.")
 return(invisible(NULL))
     }
 
@@ -37,6 +63,15 @@ return(invisible(NULL))
 message("Nothing done to augment this graph object.\n")
 return(invisible(NULL))
     }
+
+
+.PythonVersion =     function() {
+VersionString = system2("python", "--version", stdout=TRUE, stderr=TRUE)
+message("Your system is using ", VersionString, "\n")
+return(invisible(NULL))
+    }
+
+
 
 
 .SVGAndXMLMade =     function() {

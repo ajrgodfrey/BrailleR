@@ -7,15 +7,14 @@ GetWxPython27 =  function(...){
 }
 
 TestPython = function(){
-if(nchar(Sys.which("python"))>0){
-VersionString = system2("python", "--version", stdout=TRUE, stderr=TRUE)
-message("Your system is using ", VersionString, "\n")
-return(TRUE)
+HasPython=nzchar(Sys.which("python"))
+if(HasPython){
+.PythonVersion()
 }
 else{
 .NoSeePython()
-return(FALSE)
 }
+return(HasPython)
 }
 
 
@@ -29,9 +28,10 @@ shell(paste("python", system.file("Python/TestWX.py", package="BrailleR")))
         }
 }
         if(.IsWxAvailable()){
- message("Python can see the necessary wx module.\nYou are ready to use WriteR.\n")
+ .CanSeeWxPython() 
+.CanUseWriteR()
 return(invisible(TRUE))}
-else{ message("Python cannot see the necessary wx module.\nYou need to get that fixed.\n")
+else{ .CannotSeeWxPython() 
 return(invisible(FALSE))}
 }
 }

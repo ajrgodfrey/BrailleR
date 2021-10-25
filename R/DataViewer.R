@@ -4,7 +4,7 @@ DataViewer =
       if (interactive()) {
         # check here that x is one of data.frame, matrix, or a vector.
         if (!is.data.frame(x) & !is.matrix(x) & !is.vector(x)) {
-          stop("Argument x must be a data.frame, matrix, or vector.")
+          .NotViewable() 
         }
         if (is.null(Filename)) {
           Filename = tempfile(pattern = "DV-", tmpdir = ".", fileext = ".csv")
@@ -34,8 +34,7 @@ DataViewer =
         file.remove(Filename)
       }  # end interactive
           else {
-        warning(
-            "This function is only useful in interactive sessions running under Windows.")
+        .InteractiveOnly()
       }  # end not interactive
       invisible(NULL)
     }  # end function
