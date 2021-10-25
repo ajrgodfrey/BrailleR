@@ -1,0 +1,14 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  BrailleRHistory: BrailleRHistory.html
+  Ex1histograms: Ex1histograms.html
+  Ex2BasicNumerical: Ex2BasicNumerical.html
+  Ex3UnivariateDescription: Ex3UnivariateDescription.html
+  Ex4SingleResponseOneGroupingFactor: Ex4SingleResponseOneGroupingFactor.html
+  GettingStarted: GettingStarted.html
+  IntroWriteR: IntroWriteR.html
+  qplot: qplot.html
+last_built: 2021-10-25T08:24Z
+
