@@ -1,7 +1,7 @@
 .DefaultPath = function(){
       defaultPath = "~/MyBrailleR/"
       defaultPath <- normalizePath(defaultPath, mustWork = FALSE)
-return(DefaultPath)
+return(defaultPath)
 }
 
 .CheckMyBrailleR = function(){

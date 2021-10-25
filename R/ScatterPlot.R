@@ -19,7 +19,6 @@ if(base){
     return(invisible(Out))
 }
 else{ ## do it in ggplot2
-require(ggplot2)
 Out=ggplot(.data, aes(x=x, y=y)) + geom_point()
     return(Out)
 }
@@ -49,7 +48,7 @@ if(base){
     return(invisible(Out))
 }
 else{ ## do it in ggplot2
-
+Out=ggplot(.data, aes(x=x, y=y)) + geom_point() + geom_smooth(method="lm")
     return(Out)
 }
 }
