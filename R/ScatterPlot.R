@@ -48,7 +48,7 @@ if(base){
     return(invisible(Out))
 }
 else{ ## do it in ggplot2
-Out=ggplot(.data, aes(x=x, y=y)) + geom_point() + geom_smooth(method="lm")
+Out=ggplot(.data, aes(x=x, y=y)) + geom_point() + geom_smooth(method="lm", col=line.col)
     return(Out)
 }
 }
@@ -66,9 +66,7 @@ plot.fittedlineplot = function(x, ...){
     return(invisible(NULL))
 }
 
-plot.scatterplot = plot.fittedlineplot
-print.fittedlineplot = plot.fittedlineplot
-print.scatterplot = plot.scatterplot
+plot.scatterplot = print.fittedlineplot = print.scatterplot = plot.scatterplot
 
 .RemoveExtraGraphPars = function(x){
 ToRemoveBrailleRBits = c("xTicks", "yTicks", "par", "GroupSummaries", "Continuous", "coef", "data", "fittedline", "main", "sub", "xlab", "ylab", "ExtraArgs", "line.col")
