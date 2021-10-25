@@ -3,6 +3,7 @@
 - updated qplot.Rmd vignette to remove all but one `VI()` command as they are redundant now that we get automatic descriptions of ggplot objects.
 - moved all stop() error message commands to stop.r and used hidden commands to pull the errors. Will make translation easier.
 - moved a lot of message() and warning() calls to use specific functions instead. Shoudl reduce the number of text strngs that need translation.
+- added use of pkgdown
 
 
 
