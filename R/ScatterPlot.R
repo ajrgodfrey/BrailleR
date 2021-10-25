@@ -66,7 +66,7 @@ plot.fittedlineplot = function(x, ...){
     return(invisible(NULL))
 }
 
-plot.scatterplot = print.fittedlineplot = print.scatterplot = plot.scatterplot
+plot.scatterplot = print.fittedlineplot = print.scatterplot = plot.fittedlineplot
 
 .RemoveExtraGraphPars = function(x){
 ToRemoveBrailleRBits = c("xTicks", "yTicks", "par", "GroupSummaries", "Continuous", "coef", "data", "fittedline", "main", "sub", "xlab", "ylab", "ExtraArgs", "line.col")
