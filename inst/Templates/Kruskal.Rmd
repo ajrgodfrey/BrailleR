@@ -1,0 +1,21 @@
+
+## Kruskal-Wallis Rank Sum Test
+
+```{r GetRStatix}
+library(rstatix)
+```
+
+```{r DataName.kt}
+DataName.kt = DataName %>% kruskal_test(ResponseName ~ FactorName)
+DataName.kt %>% kable()
+```
+
+
+```{r DunnTest}
+DataName.dt = DataName %>% dunn_test((ResponseName ~ FactorName)
+DataName.dt %>% kable()
+```
+
+```{r getMeans}
+get_emmeans(DataName.dt)DataName.kt %>% kable()
+```

@@ -1,0 +1,12 @@
+
+## Levene's Test
+
+```{r GetRStatix}
+library(rstatix)
+```
+
+```{r DataName.lt}
+DataName.lt = DataName %>% levene_test(ResponseName ~ FactorName)
+DataName.lt %>% kable()
+```
+

@@ -1,0 +1,13 @@
+
+```{r GetRStatix}
+library(rstatix)
+```
+
+```{r DataName.hsd}
+DataName.hsd = DataName %>% tukey_hsd(ResponseName ~ FactorName)
+DataName.hsd %>% kable()
+```
+
+```{r plotDataName.hsd}
+plot(DataName.hsd)
+```

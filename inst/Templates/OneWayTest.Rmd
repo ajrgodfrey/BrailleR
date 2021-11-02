@@ -1,0 +1,21 @@
+
+## Welch Test for Equal Means in a One-Way Layout
+
+Description: Test whether two or more samples from normal distributions have the same means. The variances are not necessarily assumed to be equal.
+
+
+```{r DataName.owt}
+DataName.wt = DataName %>% welch_anova_test(ResponseName ~ FactorName)
+DataName.wt %>% kable()
+```
+
+## Games Howell Post-hoc Tests
+
+Description: Performs Games-Howell test, which is used to compare all possible combinations of group differences when the assumption of homogeneity of variances is violated. This post hoc test provides confidence intervals for the differences between group means and shows whether the differences are statistically significant.
+
+
+```{r DataName.ght}
+DataName.ght = DataName %>% games_howell_test(ResponseName ~ FactorName)
+DataName.ght %>% kable()
+```
+

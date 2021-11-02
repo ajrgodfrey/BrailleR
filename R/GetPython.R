@@ -14,7 +14,7 @@ if(HasPython){
 else{
 .NoSeePython()
 }
-return(HasPython)
+return(invisible(HasPython))
 }
 
 
