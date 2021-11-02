@@ -4,6 +4,7 @@
 - moved all stop() error message commands to stop.r and used hidden commands to pull the errors. Will make translation easier.
 - moved a lot of message() and warning() calls to use specific functions instead. Shoudl reduce the number of text strngs that need translation.
 - added use of pkgdown
+- updated templates to make use of pipe chains where possible
 
 
 
