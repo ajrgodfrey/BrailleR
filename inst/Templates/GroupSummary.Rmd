@@ -8,5 +8,5 @@ StDev = sd(ResponseName),
 Count = n()
 ) %>%
 mutate(StdErr = StDev/sqrt(Count)) %>%
-kable(caption="Descriptive statistics for ResponseName disaggregated by FactorSet")
+kable(caption="Descriptive statistics for ResponseName disaggregated by FactorSet.")
 ```

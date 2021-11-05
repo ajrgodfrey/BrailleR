@@ -1,0 +1,12 @@
+
+## Friedman Rank Sum Test
+Description: Performs a Friedman rank sum test with unreplicated blocked data.
+friedman.test can be used for analyzing unreplicated complete block designs (i.e., there is exactly one observation in y for each combination of levels of groups and blocks) where the normality assumption may be violated.
+
+The null hypothesis is that apart from an effect of blocks, the location parameter of y is the same in each of the groups.
+
+
+```{r }
+friedman.test(ResponseName ~ FactorName | BlockingName, data=DataName)
+```
+

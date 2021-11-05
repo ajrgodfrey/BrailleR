@@ -5,7 +5,7 @@ library(rstatix)
 
 ```{r DataName.hsd}
 DataName.hsd = DataName %>% tukey_hsd(ResponseName ~ FactorName)
-DataName.hsd %>% kable()
+DataName.hsd %>% kable(caption="Tukey's Honestly Significant Difference multiple comparison test for ResponseName grouped by FactorName.")
 ```
 
 ```{r plotDataName.hsd}

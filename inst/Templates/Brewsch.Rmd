@@ -1,0 +1,13 @@
+## Breusch-Godfrey Test
+
+Description: Tests for higher-order serial correlation.
+
+
+```{r GetLibLMTest}
+library(lmtest)
+```
+
+```{r DataName.bg}
+DataName.bg = bgtest(DataName.lm)
+```
+

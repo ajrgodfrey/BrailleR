@@ -1,0 +1,12 @@
+
+
+## Anscombe-Glynn test of kurtosis for normal samples
+
+```{r GetMomentsPkg}
+library(moments)
+```
+
+```{r ResponseName.agt}
+ResponseName.agt = anscombe.test(ResponseName)
+```
+

@@ -7,15 +7,15 @@ library(rstatix)
 
 ```{r DataName.kt}
 DataName.kt = DataName %>% kruskal_test(ResponseName ~ FactorName)
-DataName.kt %>% kable()
+DataName.kt %>% kable(caption="Kruskal-Wallace nonparametric one-way test for differences in ResponseName grouped by FactorName.")
 ```
 
 
 ```{r DunnTest}
 DataName.dt = DataName %>% dunn_test((ResponseName ~ FactorName)
-DataName.dt %>% kable()
+DataName.dt %>% kable(caption="Dunn's multiple comparison test for ResponseName disaggregated by FactorName.")
 ```
 
 ```{r getMeans}
-get_emmeans(DataName.dt)DataName.kt %>% kable()
+get_emmeans(DataName.dt)DataName.kt %>% kable(caption="Means of ResponseName disaggregated by FactorName.")
 ```

@@ -12,7 +12,7 @@ summary(DataName.lm)
 
 
 ```{r glanceDataName.lm}
-glance(DataName.lm) %>% kable()
+glance(DataName.lm) %>% kable(caption="Summary statistics for DataName.lm.")
 ```
 
 ```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}

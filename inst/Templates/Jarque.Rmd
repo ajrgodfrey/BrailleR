@@ -1,0 +1,9 @@
+## Jarque-Bera test for normality
+
+```{r GetMomentsPkg}
+library(moments)
+```
+
+```{r ResponseName.jbt}
+ResponseName.jbt = jarque.test(ResponseName)
+```

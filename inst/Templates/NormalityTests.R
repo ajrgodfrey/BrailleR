@@ -1,3 +1,4 @@
+```{r DataNameResponseNameNormality}
 library(nortest)
 Results = matrix(0, nrow=6, ncol=2)
 dimnames(Results) = list(c("Shapiro-Wilk", "Anderson-Darling", "Cramer-von Mises",
@@ -14,3 +15,5 @@ PE = pearson.test(ResponseName)
 Results[5,] = c(PE$statistic, PE$p.value)
 SF = sf.test(ResponseName)
 Results[6,] = c(SF$statistic, SF$p.value)
+Results %>% kable(caption="Normality tests for ResponseName.")
+```

@@ -1,0 +1,26 @@
+## Harvey-Collier Test
+Description: Harvey-Collier test for linearity.
+
+
+```{r GetLibLMTest}
+library(lmtest)
+```
+
+```{r DataName.harv}
+DataName.harv = harvtest(DataName.lm)
+```
+
+## Ramsey's RESET test for functional form.
+
+```{r DataName.reset}
+DataName.reset = resettest(DataName.lm)
+```
+
+## Rainbow test for linearity.
+
+
+
+
+```{r DataName.rain}
+DataName.rain = raintest(DataName.lm)
+```

@@ -6,7 +6,7 @@ Description: Test whether two or more samples from normal distributions have the
 
 ```{r DataName.owt}
 DataName.wt = DataName %>% welch_anova_test(ResponseName ~ FactorName)
-DataName.wt %>% kable()
+DataName.wt %>% kable(caption="Welch's one-way hypothesis test for ResponseName grouped by FactorName.")
 ```
 
 ## Games Howell Post-hoc Tests
@@ -16,6 +16,6 @@ Description: Performs Games-Howell test, which is used to compare all possible c
 
 ```{r DataName.ght}
 DataName.ght = DataName %>% games_howell_test(ResponseName ~ FactorName)
-DataName.ght %>% kable()
+DataName.ght %>% kable((caption="Games-Howell multiple comparison test for ResponseName disaggregated by FactorName.")
 ```
 

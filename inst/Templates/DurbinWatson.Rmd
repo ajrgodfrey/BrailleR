@@ -1,0 +1,12 @@
+
+## Durbin-Watson Test
+
+
+```{r GetLibLMTest}
+library(lmtest)
+```
+
+```{r DataName.dw}
+DataName.dw = dwtest(DataName.lm)
+```
+
