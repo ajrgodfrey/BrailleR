@@ -217,22 +217,31 @@ View <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/
     <div class='dont-index'><p>Other convenience functions can be investigated via their help pages. See <code><a href='UniDesc.html'>UniDesc</a></code>, <code><a href='OnePredictor.html'>OnePredictor</a></code>, and <code><a href='TwoFactors.html'>TwoFactors</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>DIR</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>airquality</span><span class='op'>)</span>
-
-<span class='co'># the following line  returns an error:</span>
-<span class='co'>## OneFactor("Ozone", "Month", airquality, Folder=tempdir(), View=FALSE)</span>
-<span class='co'># so we make a copy of the data.frame, and fix that:</span>
-
-<span class='va'>airquality2</span> <span class='op'>=</span> <span class='va'>airquality</span>
-<span class='va'>airquality2</span><span class='op'>$</span><span class='va'>Month</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>airquality</span><span class='op'>$</span><span class='va'>Month</span><span class='op'>)</span>
-<span class='co'># and now all is good to try:</span>
-<span class='fu'>OneFactor</span><span class='op'>(</span><span class='st'>"Ozone"</span>, <span class='st'>"Month"</span>, <span class='va'>airquality2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in get(DataName): object 'airquality2' not found</span></div><div class='input'><span class='co'># N.B. Various files and a folder were created in a temporary directory. </span>
-<span class='co'># Please investigate them to see how this function worked.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='va'>DIR</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>DIR</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>airquality</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Attaching package: ‘dplyr’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following objects are masked from ‘package:stats’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     filter, lag</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following objects are masked from ‘package:base’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     intersect, setdiff, setequal, union</span>
+<span class='r-in'><span class='co'># the following line  returns an error:</span></span>
+<span class='r-in'><span class='co'>## OneFactor("Ozone", "Month", airquality, View=FALSE)</span></span>
+<span class='r-in'><span class='co'># so we make a copy of the data.frame, and fix that:</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>airquality2</span> <span class='op'>=</span> <span class='va'>airquality</span> </span>
+<span class='r-in'><span class='co'># and now all is good to try:</span></span>
+<span class='r-in'><span class='fu'>OneFactor</span><span class='op'>(</span><span class='st'>"Ozone"</span>, <span class='st'>"Month"</span>, <span class='va'>airquality2</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in .GroupNotFactor():</span> The group variable is not a factor.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> Try using as.factor() on a copy of the data.frame.</span>
+<span class='r-in'><span class='co'># N.B. Various files and a folder were created in a temporary directory. </span></span>
+<span class='r-in'><span class='co'># Please investigate them to see how this function worked.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='va'>DIR</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -185,117 +185,122 @@
     <div class='dont-index'><p>The base R implementation of the <code><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></code> function should be consulted, using  the entry in the <span class="pkg"><a href='https://rdrr.io/r/graphics/graphics-package.html'>graphics</a></span> package</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span>
-<span class='co'># the stamdard hist function returns</span>
-<span class='va'>MyHist</span><span class='op'>=</span><span class='fu'>graphics</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>x</span>, xlab<span class='op'>=</span><span class='st'>"random normal values"</span>, main<span class='op'>=</span><span class='st'>"Example histogram (graphics package)"</span><span class='op'>)</span>
-</div><div class='img'><img src='hist-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>MyHist</span>
-</div><div class='output co'>#&gt; $breaks
-#&gt;  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0
-#&gt; 
-#&gt; $counts
-#&gt;  [1]   4  21  37  96 130 211 205 151  78  40  22   2   2   1
-#&gt; 
-#&gt; $density
-#&gt;  [1] 0.008 0.042 0.074 0.192 0.260 0.422 0.410 0.302 0.156 0.080 0.044 0.004
-#&gt; [13] 0.004 0.002
-#&gt; 
-#&gt; $mids
-#&gt;  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75
-#&gt; [13]  3.25  3.75
-#&gt; 
-#&gt; $xname
-#&gt; [1] "x"
-#&gt; 
-#&gt; $equidist
-#&gt; [1] TRUE
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "histogram"</div><div class='input'>
-<span class='co'># while this version returns</span>
-<span class='va'>MyHist</span><span class='op'>=</span><span class='fu'>hist</span><span class='op'>(</span><span class='va'>x</span>, xlab<span class='op'>=</span><span class='st'>"random normal values"</span>, main<span class='op'>=</span><span class='st'>"Example histogram (BrailleR package)"</span><span class='op'>)</span>
-</div><div class='img'><img src='hist-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>MyHist</span>
-</div><div class='output co'>#&gt; $breaks
-#&gt;  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0
-#&gt; 
-#&gt; $counts
-#&gt;  [1]   4  21  37  96 130 211 205 151  78  40  22   2   2   1
-#&gt; 
-#&gt; $density
-#&gt;  [1] 0.008 0.042 0.074 0.192 0.260 0.422 0.410 0.302 0.156 0.080 0.044 0.004
-#&gt; [13] 0.004 0.002
-#&gt; 
-#&gt; $mids
-#&gt;  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75
-#&gt; [13]  3.25  3.75
-#&gt; 
-#&gt; $xname
-#&gt; [1] "x"
-#&gt; 
-#&gt; $equidist
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $main
-#&gt; [1] "Example histogram (BrailleR package)"
-#&gt; 
-#&gt; $xlab
-#&gt; [1] "random normal values"
-#&gt; 
-#&gt; $ExtraArgs
-#&gt; $ExtraArgs$main
-#&gt; [1] "Histogram of x"
-#&gt; 
-#&gt; $ExtraArgs$xlab
-#&gt; [1] "x"
-#&gt; 
-#&gt; $ExtraArgs$ylab
-#&gt; [1] "Frequency"
-#&gt; 
-#&gt; $ExtraArgs$sub
-#&gt; [1] ""
-#&gt; 
-#&gt; 
-#&gt; $NBars
-#&gt; [1] 14
-#&gt; 
-#&gt; $par
-#&gt; $par$xaxp
-#&gt; [1] -3  4  7
-#&gt; 
-#&gt; $par$yaxp
-#&gt; [1]   0 200   4
-#&gt; 
-#&gt; 
-#&gt; $xTicks
-#&gt; [1] -3 -2 -1  0  1  2  3  4
-#&gt; 
-#&gt; $yTicks
-#&gt; [1]   0  50 100 150 200
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "Augmented" "histogram"</div><div class='input'>
-<span class='co'># The VI() method then uses the extra information stored</span>
-<span class='fu'><a href='VI.html'>VI</a></span><span class='op'>(</span><span class='va'>MyHist</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; This is a histogram, with the title: Histogram of x
-#&gt; "x" is marked on the x-axis.
-#&gt; Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, 3, and 4 
-#&gt; There are a total of 1000 elements for this variable.
-#&gt; Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-#&gt; It has 14 bins with equal widths, starting at -3 and ending at 4 .
-#&gt; The mids and counts for the bins are:
-#&gt; mid = -2.75  count = 4 
-#&gt; mid = -2.25  count = 21 
-#&gt; mid = -1.75  count = 37 
-#&gt; mid = -1.25  count = 96 
-#&gt; mid = -0.75  count = 130 
-#&gt; mid = -0.25  count = 211 
-#&gt; mid = 0.25  count = 205 
-#&gt; mid = 0.75  count = 151 
-#&gt; mid = 1.25  count = 78 
-#&gt; mid = 1.75  count = 40 
-#&gt; mid = 2.25  count = 22 
-#&gt; mid = 2.75  count = 2 
-#&gt; mid = 3.25  count = 2 
-#&gt; mid = 3.75  count = 1</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># the stamdard hist function returns</span></span>
+<span class='r-in'><span class='va'>MyHist</span><span class='op'>=</span><span class='fu'>graphics</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>x</span>, xlab<span class='op'>=</span><span class='st'>"random normal values"</span>, main<span class='op'>=</span><span class='st'>"Example histogram (graphics package)"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='hist-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='va'>MyHist</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $breaks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $counts</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]   4  21  37  96 130 211 205 151  78  40  22   2   2   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $density</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 0.008 0.042 0.074 0.192 0.260 0.422 0.410 0.302 0.156 0.080 0.044 0.004</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] 0.004 0.002</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mids</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13]  3.25  3.75</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $xname</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "x"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $equidist</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "histogram"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># while this version returns</span></span>
+<span class='r-in'><span class='va'>MyHist</span><span class='op'>=</span><span class='fu'>hist</span><span class='op'>(</span><span class='va'>x</span>, xlab<span class='op'>=</span><span class='st'>"random normal values"</span>, main<span class='op'>=</span><span class='st'>"Example histogram (BrailleR package)"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='hist-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='va'>MyHist</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $breaks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $counts</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]   4  21  37  96 130 211 205 151  78  40  22   2   2   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $density</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 0.008 0.042 0.074 0.192 0.260 0.422 0.410 0.302 0.156 0.080 0.044 0.004</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] 0.004 0.002</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mids</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13]  3.25  3.75</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $xname</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "x"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $equidist</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $main</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Example histogram (BrailleR package)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $xlab</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "random normal values"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$main</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Histogram of x"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$xlab</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "x"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$ylab</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Frequency"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$sub</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $NBars</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $par</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $par$xaxp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -3  4  7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $par$yaxp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]   0 200   4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $xTicks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -3 -2 -1  0  1  2  3  4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $yTicks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]   0  50 100 150 200</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Augmented" "histogram"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># The VI() method then uses the extra information stored</span></span>
+<span class='r-in'><span class='fu'><a href='VI.html'>VI</a></span><span class='op'>(</span><span class='va'>MyHist</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> This is a histogram, with the title: Histogram of x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "x" is marked on the x-axis.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, 3, and 4 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> There are a total of 1000 elements for this variable.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> It has 14 bins with equal widths, starting at -3 and ending at 4 .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The mids and counts for the bins are:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -2.75  count = 4 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -2.25  count = 21 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -1.75  count = 37 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -1.25  count = 96 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -0.75  count = 130 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -0.25  count = 211 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 0.25  count = 205 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 0.75  count = 151 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 1.25  count = 78 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 1.75  count = 40 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 2.25  count = 22 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 2.75  count = 2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 3.25  count = 2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 3.75  count = 1</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

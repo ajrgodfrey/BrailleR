@@ -221,25 +221,31 @@
     <div class='dont-index'><p>The <code><a href='OneFactor.html'>OneFactor</a></code> script was the basis for this function;.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>DIR</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>TG</span> <span class='op'>&lt;-</span> <span class='va'>ToothGrowth</span>
-<span class='va'>TG</span><span class='op'>$</span><span class='va'>dose</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>TG</span><span class='op'>$</span><span class='va'>dose</span><span class='op'>)</span>
-
-<span class='co'># Without interaction</span>
-<span class='fu'>TwoFactors</span><span class='op'>(</span><span class='st'>'len'</span>,<span class='st'>'supp'</span>,<span class='st'>'dose'</span>,Data<span class='op'>=</span><span class='va'>TG</span>, Inter<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in get(DataName): object 'TG' not found</span></div><div class='input'>
-<span class='co'># With two-way interaction</span>
-<span class='fu'>TwoFactors</span><span class='op'>(</span><span class='st'>'len'</span>, <span class='st'>'supp'</span>, <span class='st'>'dose'</span>, Data<span class='op'>=</span><span class='va'>TG</span>, Inter<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in get(DataName): object 'TG' not found</span></div><div class='input'>
-<span class='co'># For unbalanced data</span>
-<span class='va'>TG_Unb</span> <span class='op'>&lt;-</span> <span class='va'>TG</span><span class='op'>[</span><span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>53</span><span class='op'>:</span><span class='fl'>60</span><span class='op'>)</span>,<span class='op'>]</span>
-<span class='fu'>TwoFactors</span><span class='op'>(</span><span class='st'>'len'</span>, <span class='st'>'supp'</span>, <span class='st'>'dose'</span>, Data<span class='op'>=</span><span class='va'>TG_Unb</span>, Inter<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in get(DataName): object 'TG_Unb' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>TG</span><span class='op'>)</span>; <span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>TG_Unb</span><span class='op'>)</span>
-<span class='co'># N.B. Various files and a folder were created in a temporary directory. </span>
-<span class='co'># Please investigate them to see how this function worked.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='va'>DIR</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>DIR</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>TG</span> <span class='op'>&lt;-</span> <span class='va'>ToothGrowth</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Without interaction</span></span>
+<span class='r-in'><span class='fu'>TwoFactors</span><span class='op'>(</span><span class='st'>'len'</span>,<span class='st'>'supp'</span>,<span class='st'>'dose'</span>,Data<span class='op'>=</span><span class='va'>TG</span>, Inter<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in .FactorNotFactor(which = "second"):</span> The factor is not stored as a factor.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> Try using as.factor() on a copy of the data.frame.</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># With two-way interaction</span></span>
+<span class='r-in'><span class='fu'>TwoFactors</span><span class='op'>(</span><span class='st'>'len'</span>, <span class='st'>'supp'</span>, <span class='st'>'dose'</span>, Data<span class='op'>=</span><span class='va'>TG</span>, Inter<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in .FactorNotFactor(which = "second"):</span> The factor is not stored as a factor.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> Try using as.factor() on a copy of the data.frame.</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># For unbalanced data</span></span>
+<span class='r-in'><span class='va'>TG_Unb</span> <span class='op'>&lt;-</span> <span class='va'>TG</span><span class='op'>[</span><span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>53</span><span class='op'>:</span><span class='fl'>60</span><span class='op'>)</span>,<span class='op'>]</span></span>
+<span class='r-in'><span class='fu'>TwoFactors</span><span class='op'>(</span><span class='st'>'len'</span>, <span class='st'>'supp'</span>, <span class='st'>'dose'</span>, Data<span class='op'>=</span><span class='va'>TG_Unb</span>, Inter<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in .FactorNotFactor(which = "second"):</span> The factor is not stored as a factor.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> Try using as.factor() on a copy of the data.frame.</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>TG</span><span class='op'>)</span>; <span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>TG_Unb</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># N.B. Various files and a folder were created in a temporary directory. </span></span>
+<span class='r-in'><span class='co'># Please investigate them to see how this function worked.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='va'>DIR</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

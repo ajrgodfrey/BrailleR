@@ -189,137 +189,141 @@ Godfrey, A.J.R. (2013) &#8216;Statistical Software from a Blind Person's Perspec
     <div class='dont-index'><p>The base R implementation of the <code><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></code> function should be consulted; see the entry in the <span class="pkg"><a href='https://rdrr.io/r/graphics/graphics-package.html'>graphics</a></span> package</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span>
-<span class='va'>op</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfcol<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># the stamdard boxplot function returns</span>
-<span class='va'>MyBoxplot</span><span class='op'>=</span><span class='fu'>graphics</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='va'>x</span>, main<span class='op'>=</span><span class='st'>"Example boxplot (graphics package)"</span>, horizontal<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>MyBoxplot</span>
-</div><div class='output co'>#&gt; $stats
-#&gt;             [,1]
-#&gt; [1,] -2.56959690
-#&gt; [2,] -0.65363156
-#&gt; [3,] -0.01612928
-#&gt; [4,]  0.69036261
-#&gt; [5,]  2.61617869
-#&gt; 
-#&gt; $n
-#&gt; [1] 1000
-#&gt; 
-#&gt; $conf
-#&gt;             [,1]
-#&gt; [1,] -0.08328059
-#&gt; [2,]  0.05102202
-#&gt; 
-#&gt; $out
-#&gt; [1]  2.839266  2.715540  3.008093 -2.821799  3.097231
-#&gt; 
-#&gt; $group
-#&gt; [1] 1 1 1 1 1
-#&gt; 
-#&gt; $names
-#&gt; [1] ""
-#&gt; </div><div class='input'>
-<span class='co'># while this version returns</span>
-<span class='va'>MyBoxplot</span><span class='op'>=</span><span class='fu'>boxplot</span><span class='op'>(</span><span class='va'>x</span>, main<span class='op'>=</span><span class='st'>"Example boxplot (BrailleR package)"</span>, horizontal<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='boxplot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>MyBoxplot</span>
-</div><div class='output co'>#&gt; $stats
-#&gt;             [,1]
-#&gt; [1,] -2.56959690
-#&gt; [2,] -0.65363156
-#&gt; [3,] -0.01612928
-#&gt; [4,]  0.69036261
-#&gt; [5,]  2.61617869
-#&gt; 
-#&gt; $n
-#&gt; [1] 1000
-#&gt; 
-#&gt; $conf
-#&gt;             [,1]
-#&gt; [1,] -0.08328059
-#&gt; [2,]  0.05102202
-#&gt; 
-#&gt; $out
-#&gt; [1]  2.839266  2.715540  3.008093 -2.821799  3.097231
-#&gt; 
-#&gt; $group
-#&gt; [1] 1 1 1 1 1
-#&gt; 
-#&gt; $names
-#&gt; [1] ""
-#&gt; 
-#&gt; $main
-#&gt; [1] "Example boxplot (BrailleR package)"
-#&gt; 
-#&gt; $horizontal
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $call
-#&gt; graphics::boxplot(x, main = "Example boxplot (BrailleR package)", 
-#&gt;     horizontal = TRUE)
-#&gt; 
-#&gt; $par
-#&gt; $par$xaxp
-#&gt; [1] -3  3  6
-#&gt; 
-#&gt; $par$yaxp
-#&gt; [1] 0.6 1.4 4.0
-#&gt; 
-#&gt; 
-#&gt; $xTicks
-#&gt; [1] -3 -2 -1  0  1  2  3
-#&gt; 
-#&gt; $yTicks
-#&gt; [1] 0.6 0.8 1.0 1.2 1.4
-#&gt; 
-#&gt; $ExtraArgs
-#&gt; $ExtraArgs$main
-#&gt; [1] ""
-#&gt; 
-#&gt; $ExtraArgs$sub
-#&gt; [1] ""
-#&gt; 
-#&gt; $ExtraArgs$xlab
-#&gt; [1] ""
-#&gt; 
-#&gt; $ExtraArgs$ylab
-#&gt; [1] ""
-#&gt; 
-#&gt; 
-#&gt; $NBox
-#&gt; [1] 1
-#&gt; 
-#&gt; $VarGroup
-#&gt; [1] "variable"
-#&gt; 
-#&gt; $VarGroupUpp
-#&gt; [1] "This variable"
-#&gt; 
-#&gt; $IsAre
-#&gt; [1] "is"
-#&gt; 
-#&gt; $Boxplots
-#&gt; [1] "a boxplot"
-#&gt; 
-#&gt; $VertHorz
-#&gt; [1] "horizontally"
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "Augmented" "boxplot"  </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>op</span><span class='op'>)</span>
-
-<span class='co'># The VI() method then uses the extra information stored</span>
-<span class='fu'><a href='VI.html'>VI</a></span><span class='op'>(</span><span class='va'>MyBoxplot</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; This graph has a boxplot printed horizontally
-#&gt; with the title: 
-#&gt; "" appears on the x-axis.
-#&gt; "" appears on the y-axis.
-#&gt; Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
-#&gt; This variable  has 1000 values.
-#&gt; An outlier is marked at: 2.839266 2.71554 3.008093 -2.821799 3.097231 
-#&gt; The whiskers extend to -2.569597 and 2.616179 from the ends of the box, 
-#&gt; which are at -0.6536316 and 0.6903626 
-#&gt; The median, -0.01612928 is 47 % from the left end of the box to the right end.
-#&gt; The right whisker is 1.01 times the length of the left whisker.
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>op</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfcol<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># the stamdard boxplot function returns</span></span>
+<span class='r-in'><span class='va'>MyBoxplot</span><span class='op'>=</span><span class='fu'>graphics</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='va'>x</span>, main<span class='op'>=</span><span class='st'>"Example boxplot (graphics package)"</span>, horizontal<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>MyBoxplot</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $stats</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             [,1]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -2.56959690</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] -0.65363156</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] -0.01612928</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]  0.69036261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,]  2.61617869</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $conf</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             [,1]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.08328059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  0.05102202</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $out</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  2.839266  2.715540  3.008093 -2.821799  3.097231</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $group</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $names</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># while this version returns</span></span>
+<span class='r-in'><span class='va'>MyBoxplot</span><span class='op'>=</span><span class='fu'>boxplot</span><span class='op'>(</span><span class='va'>x</span>, main<span class='op'>=</span><span class='st'>"Example boxplot (BrailleR package)"</span>, horizontal<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='boxplot-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='va'>MyBoxplot</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $stats</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             [,1]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -2.56959690</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] -0.65363156</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] -0.01612928</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]  0.69036261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,]  2.61617869</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $conf</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             [,1]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.08328059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  0.05102202</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $out</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  2.839266  2.715540  3.008093 -2.821799  3.097231</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $group</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $names</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $main</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Example boxplot (BrailleR package)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $horizontal</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $call</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> graphics::boxplot(x, main = "Example boxplot (BrailleR package)", </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     horizontal = TRUE)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $par</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $par$xaxp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -3  3  6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $par$yaxp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.6 1.4 4.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $xTicks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -3 -2 -1  0  1  2  3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $yTicks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.6 0.8 1.0 1.2 1.4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$main</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$sub</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$xlab</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ExtraArgs$ylab</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $NBox</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $VarGroup</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "variable"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $VarGroupUpp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "This variable"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $IsAre</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "is"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Boxplots</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "a boxplot"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $VertHorz</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "horizontally"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Augmented" "boxplot"  </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>op</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># The VI() method then uses the extra information stored</span></span>
+<span class='r-in'><span class='fu'><a href='VI.html'>VI</a></span><span class='op'>(</span><span class='va'>MyBoxplot</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> This graph has a boxplot printed horizontally</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> with the title: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "" appears on the x-axis.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "" appears on the y-axis.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> This variable  has 1000 values.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An outlier is marked at: 2.839266 2.71554 3.008093 -2.821799 3.097231 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The whiskers extend to -2.569597 and 2.616179 from the ends of the box, </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> which are at -0.6536316 and 0.6903626 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The median, -0.01612928 is 47 % from the left end of the box to the right end.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The right whisker is 1.01 times the length of the left whisker.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

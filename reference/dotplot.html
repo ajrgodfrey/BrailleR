@@ -185,19 +185,22 @@
     <p>An object of class dotplot. This class is just a placeholder for the contents of the object used to create a boxplot which would otherwise not be stored in a usable format. The class is not intended for the user; it is a tool that enables the BrailleR package to deliver a readable text version of the plot.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='VI.html'>VI</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>airquality</span>, <span class='fu'>dotplot</span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>~</span><span class='va'>Month</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: The dotplot command is a wrapper for stripchart, and is not a base R function.</span></div><div class='img'><img src='dotplot-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; This graph has 5 dotplots printed horizontally
-#&gt; with the title: 
-#&gt; "" appears on the x-axis.
-#&gt; "" appears on the y-axis.
-#&gt; Tick marks for the x-axis are at: 0, 50, 100, and 150 
-#&gt; the data that range from 1 to 168 has been broken into 6 bins.
-#&gt; The counts are:
-#&gt; 5: 18 7 0 0 1 0 
-#&gt; 6: 5 3 1 0 0 0 
-#&gt; 7: 5 7 9 4 1 0 
-#&gt; 8: 7 6 7 3 2 1 
-#&gt; 9: 19 6 2 2 0 0 </div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='VI.html'>VI</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>airquality</span>, <span class='fu'>dotplot</span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>~</span><span class='va'>Month</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>The dotplot command is a wrapper for stripchart, and is not a base R function.</span>
+<span class='r-plt img'><img src='dotplot-1.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> This graph has 5 dotplots printed horizontally</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> with the title: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "" appears on the x-axis.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "" appears on the y-axis.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tick marks for the x-axis are at: 0, 50, 100, and 150 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> the data that range from 1 to 168 has been broken into 6 bins.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The counts are:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5: 18 7 0 0 1 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6: 5 3 1 0 0 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7: 5 7 9 4 1 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8: 7 6 7 3 2 1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9: 19 6 2 2 0 0 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

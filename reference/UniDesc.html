@@ -228,15 +228,17 @@ View <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/
     <p>A. Jonathan R. Godfrey <a href='mailto:a.j.godfrey@massey.ac.nz'>a.j.godfrey@massey.ac.nz</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>DIR</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>Ozone</span><span class='op'>=</span><span class='va'>airquality</span><span class='op'>$</span><span class='va'>Ozone</span>
-<span class='fu'>UniDesc</span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Quitting from lines 27-43 (Ozone-UniDesc.Rmd) </span></div><div class='output co'>#&gt; <span class='error'>Error in eval(parse_only(code), envir = envir): object 'Ozone.count' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>)</span>
-<span class='co'># N.B. Various files and a folder were created in a temporary directory. </span>
-<span class='co'># Please investigate them to see how this function worked.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='va'>DIR</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>DIR</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>Ozone</span><span class='op'>=</span><span class='va'>airquality</span><span class='op'>$</span><span class='va'>Ozone</span></span>
+<span class='r-in'><span class='fu'>UniDesc</span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Quitting from lines 27-43 (Ozone-UniDesc.Rmd) </span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in eval(parse_only(code), envir = envir):</span> object 'Ozone.count' not found</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># N.B. Various files and a folder were created in a temporary directory. </span></span>
+<span class='r-in'><span class='co'># Please investigate them to see how this function worked.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='va'>DIR</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

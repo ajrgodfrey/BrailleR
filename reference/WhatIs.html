@@ -183,27 +183,27 @@
     <p>A. Jonathan R. Godfrey</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: dplyr</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='va'>airquality</span> <span class='op'>%&gt;%</span> <span class='fu'>CheckIt</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span></div><div class='output co'>#&gt; 'data.frame':	153 obs. of  6 variables:
-#&gt;  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
-#&gt;  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
-#&gt;  $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
-#&gt;  $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
-#&gt;  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
-#&gt;  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span></div><div class='output co'>#&gt;   Ozone Solar.R Wind Temp Month Day
-#&gt; 1     1       8  9.7   59     5  21
-#&gt; 2     4      25  9.7   61     5  23
-#&gt; 3     6      78 18.4   57     5  18
-#&gt; 4     7      NA  6.9   74     5  11
-#&gt; 5     7      48 14.3   80     7  15
-#&gt; 6     7      49 10.3   69     9  24</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>airquality</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>CheckIt</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>Ozone</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 'data.frame':	153 obs. of  6 variables:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Ozone Solar.R Wind Temp Month Day</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1     1       8  9.7   59     5  21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2     4      25  9.7   61     5  23</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3     6      78 18.4   57     5  18</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4     7      NA  6.9   74     5  11</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5     7      48 14.3   80     7  15</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6     7      49 10.3   69     9  24</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

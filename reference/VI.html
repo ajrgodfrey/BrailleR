@@ -214,37 +214,40 @@ The method includes representations of summary methods that are more suitable fo
     <p>A. Jonathan R. Godfrey and Timothy P. Bilton</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>RandomX</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>500</span><span class='op'>)</span>
-<span class='va'>PlottedFig</span><span class='op'>=</span><span class='fu'><a href='hist.html'>hist</a></span><span class='op'>(</span><span class='va'>RandomX</span><span class='op'>)</span>
-</div><div class='img'><img src='VI-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>VI</span><span class='op'>(</span><span class='va'>PlottedFig</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; This is a histogram, with the title: Histogram of RandomX
-#&gt; "RandomX" is marked on the x-axis.
-#&gt; Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
-#&gt; There are a total of 500 elements for this variable.
-#&gt; Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 
-#&gt; It has 13 bins with equal widths, starting at -3 and ending at 3.5 .
-#&gt; The mids and counts for the bins are:
-#&gt; mid = -2.75  count = 1 
-#&gt; mid = -2.25  count = 6 
-#&gt; mid = -1.75  count = 25 
-#&gt; mid = -1.25  count = 45 
-#&gt; mid = -0.75  count = 90 
-#&gt; mid = -0.25  count = 108 
-#&gt; mid = 0.25  count = 87 
-#&gt; mid = 0.75  count = 63 
-#&gt; mid = 1.25  count = 50 
-#&gt; mid = 1.75  count = 17 
-#&gt; mid = 2.25  count = 4 
-#&gt; mid = 2.75  count = 3 
-#&gt; mid = 3.25  count = 1</div><div class='input'><span class='fu'>Describe</span><span class='op'>(</span><span class='va'>PlottedFig</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; A histogram created using the base graphics package.
-#&gt; 
-#&gt; General description: A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present.
-#&gt; As with most graphs created by the base graphics package, the axes do not join at the bottom left corner and are separated from the area where the data are being plotted. Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted.The vertical axis for frequency always starts at zero.
-#&gt; R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents.
-#&gt; 
-#&gt; R hints: If you intend to make a tactile version of a histogram, you may find it useful to alter the aspect ratio so that the histogram is wider than it is tall.
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>RandomX</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>500</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>PlottedFig</span><span class='op'>=</span><span class='fu'><a href='hist.html'>hist</a></span><span class='op'>(</span><span class='va'>RandomX</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='VI-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'>VI</span><span class='op'>(</span><span class='va'>PlottedFig</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> This is a histogram, with the title: Histogram of RandomX</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "RandomX" is marked on the x-axis.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> There are a total of 500 elements for this variable.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> It has 13 bins with equal widths, starting at -3 and ending at 3.5 .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The mids and counts for the bins are:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -2.75  count = 1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -2.25  count = 6 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -1.75  count = 25 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -1.25  count = 45 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -0.75  count = 90 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = -0.25  count = 108 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 0.25  count = 87 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 0.75  count = 63 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 1.25  count = 50 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 1.75  count = 17 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 2.25  count = 4 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 2.75  count = 3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mid = 3.25  count = 1</span>
+<span class='r-in'><span class='fu'>Describe</span><span class='op'>(</span><span class='va'>PlottedFig</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A histogram created using the base graphics package.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> General description: A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> As with most graphs created by the base graphics package, the axes do not join at the bottom left corner and are separated from the area where the data are being plotted. Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted.The vertical axis for frequency always starts at zero.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R hints: If you intend to make a tactile version of a histogram, you may find it useful to alter the aspect ratio so that the histogram is wider than it is tall.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
