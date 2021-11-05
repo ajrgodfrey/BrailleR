@@ -1,13 +1,10 @@
 
-```{r GetRStatix}
-library(rstatix)
-```
-
 ```{r DataName.hsd}
-DataName.hsd = DataName %>% tukey_hsd(ResponseName ~ FactorName)
-DataName.hsd %>% kable(caption="Tukey's Honestly Significant Difference multiple comparison test for ResponseName grouped by FactorName.")
+library(multcomp)
+DataName.hsd = glht(DataName.lm, linfct = mcp(FactorName = "Tukey"))
+DataName.hsd
 ```
 
-```{r plotDataName.hsd}
+```{r plotDataName.hsd, fig.cap="Plot of Tukey's HSD for ResponseName grouped by FactorName."}
 plot(DataName.hsd)
 ```

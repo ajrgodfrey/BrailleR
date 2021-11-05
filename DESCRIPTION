@@ -61,6 +61,6 @@ SystemRequirements: Python 3 and wxPython 4.0
 VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR
 BugReports: https://github.com/ajrgodfrey/BrailleR/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 RdMacros: mathjaxr
 Language: en-US
