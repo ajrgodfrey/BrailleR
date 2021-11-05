@@ -32,8 +32,8 @@ The \code{\link{OneFactor}} script was the basis for this function;.
 \examples{
 DIR = getwd()
 setwd(tempdir())
-library(dplyr)
-TG <- ToothGrowth %>% mutate(dose = as.factor(dose))
+if(require(dplyr)){
+TG <- ToothGrowth \%>\% mutate(dose = as.factor(dose))
 
 # Without interaction
 TwoFactors('len','supp','dose',Data=TG, Inter=FALSE)
@@ -47,5 +47,6 @@ TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE)
 rm(TG); rm(TG_Unb)
 # N.B. Various files and a folder were created in a temporary directory. 
 # Please investigate them to see how this function worked.
+}
 setwd(DIR)
 }

@@ -19,6 +19,8 @@ There are a few quirks with respect to variables that could be interpreted as fa
 \value{If code Update=TRUE and code New=NULL, the original data object is overwritten. To create a new object the user must specify  code New.}
 \author{A. Jonathan R. Godfrey \email{a.j.godfrey@massey.ac.nz}}
 \examples{
+\donttest{
 data(airquality)
 DataViewer(airquality, Update=TRUE, New="NewAirQuality")
+}
 }

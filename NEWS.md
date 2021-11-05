@@ -5,6 +5,8 @@
 - moved a lot of message() and warning() calls to use specific functions instead. Shoudl reduce the number of text strngs that need translation.
 - added use of pkgdown
 - updated templates to make use of pipe chains where possible
+- updated examples to use dplyr syntax
+- added quite a few more templates for tests that will help VI users
 
 
 
