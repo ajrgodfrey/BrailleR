@@ -157,14 +157,20 @@
 
 <span class='fu'>Rnw2Rmd</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
 
-<span class='fu'>UseTemplate</span><span class='op'>(</span><span class='va'>file</span>, find<span class='op'>=</span><span class='cn'>NULL</span>, replace<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span></pre>
+<span class='fu'>UseTemplate</span><span class='op'>(</span><span class='va'>file</span>, find<span class='op'>=</span><span class='cn'>NULL</span>, replace<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>UseTemplateList</span><span class='op'>(</span><span class='va'>newfile</span>, <span class='va'>fileList</span>, find<span class='op'>=</span><span class='cn'>NULL</span>, replace<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>The external (text) file or template to be updated.</p></td>
+      <th>file,fileList</th>
+      <td><p>The external (text) file, template, or list of templates  to be updated.</p></td>
+    </tr>
+    <tr>
+      <th>newfile</th>
+      <td><p>the file to write output to</p></td>
     </tr>
     <tr>
       <th>find</th>
