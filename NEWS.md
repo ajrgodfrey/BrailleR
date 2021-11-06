@@ -7,6 +7,8 @@
 - updated templates to make use of pipe chains where possible
 - updated examples to use dplyr syntax
 - added quite a few more templates for tests that will help VI users
+- added UseTemplateList() as a fast wrapper for UseTemplate()
+
 
 
 

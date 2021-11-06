@@ -2,6 +2,7 @@
 \alias{FindReplace}
 \alias{Rnw2Rmd}
 \alias{UseTemplate}
+\alias{UseTemplateList}
 \title{Find/Replace text in a file}
 \usage{
 FindReplace(file, find, replace)
@@ -9,9 +10,12 @@ FindReplace(file, find, replace)
 Rnw2Rmd(file)
 
 UseTemplate(file, find=NULL, replace=NULL)
+
+UseTemplateList(newfile, fileList, find=NULL, replace=NULL)
 }
 \arguments{
-\item{file}{The external (text) file or template to be updated.}
+\item{file,fileList}{The external (text) file, template, or list of templates  to be updated.}
+\item{newfile}{the file to write output to}
 
 \item{find}{The text to remove.}
 
