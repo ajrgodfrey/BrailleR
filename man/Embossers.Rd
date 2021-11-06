@@ -17,8 +17,10 @@ These functions are only relevant for owners of the specified embossers. Ownersh
 The Premier 100 embosser uses standard 11 by 11.5 inch fanfold braille paper. Printing in landscape or portrait is possible.
 }
 \examples{
-#Premier100() #' Specify use of the Premier 100 embosser.
-#ChooseEmbosser() #' reset to default: using no embosser.
+\donttest{
+#Premier100() # Specify use of the Premier 100 embosser.
+#ChooseEmbosser() # reset to default: using no embosser.
+}
 }
 \author{
 A. Jonathan R. Godfrey.
