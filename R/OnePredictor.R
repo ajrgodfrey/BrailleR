@@ -111,7 +111,9 @@ detach(',
 
 ```{r PrintSummary, results="asis", purl=FALSE}
 kable(t(SummaryTable), row.names=T, align=rep("c",8))
-```  \n\n'),
+```  
+
+## Scatter Plot\n\n'),
           file = Filename, append = TRUE)
 
       if (Latex) {
@@ -132,13 +134,9 @@ print(xtable(t(SummaryTable), caption=TabCapt, label="',
             file = Filename, append = TRUE)
       }
 
-if(Modern){
-      cat(.GetModernStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
-          file = Filename, append = TRUE)
-} else {
-      cat(.GetOldStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
-          file = Filename, append = TRUE)
-}
+ScatterText = ifelse(Modern, .GetModernStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
+ .GetOldStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName))
+      cat(ScatterText, file = Filename, append = TRUE)
 
       cat(paste0(
               '## Linear regression
@@ -153,23 +151,16 @@ if(Modern){
               '
 summary(', ModelName,
               ')
-```
+```\n\n'),
+          file = Filename, append = TRUE)
 
-```{r FittedLinePlot}
-plot(', ResponseName, '~',
-              PredictorName, ', data=', DataName, ', ylab=',
-              .simpleCap(ResponseName), ', xlab=', .simpleCap(PredictorName),
-              ')
-abline(', ModelName,
-              ')
-```
+FittedText = ifelse(Modern, .GetModernStyleFittedText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName, ModelName=ModelName),
+.GetOldStyleFittedText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName, ModelName=ModelName))
+      cat(FittedText, file = Filename, append = TRUE)
 
+ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName=ModelName), .GetOldStyleResidualText(ModelName=ModelName))
+      cat(ResidualText, file = Filename, append = TRUE)
 
-```{r SimpleLinModResAnal, fig.cap="Residual analysis"}
-par(mfrow=c(2,2))
-plot(',
-              ModelName, ')
-```  \n\n'), file = Filename, append = TRUE)
 
       if (VI) {
         cat(paste0(
@@ -226,9 +217,7 @@ print(xtable(anova(', ModelName,
 
 .GetOldStyleScatterText = function(ResponseName, PredictorName, DataName){
 TextOut = paste0(
-              '## Scatter Plot
-
-```{r ScatterPlot, fig.cap="Scatter Plot"}
+              '```{r ScatterPlot, fig.cap="Scatter Plot"}
 # Remove the missing values
 completeCases <- complete.cases(Data[ResponseName])*complete.cases(Data[PredictorName])
 assign(DataName, Data[completeCases==1,])
@@ -247,10 +236,43 @@ return(TextOut)
 
 .GetModernStyleScatterText = function(ResponseName, PredictorName, DataName){
 TextOut = paste0(
-              '## Scatter Plot
-
-```{r ScatterPlot, fig.cap="Scatter Plot"}
+              '```{r ScatterPlot, fig.cap="Scatter Plot"}
 ```  \n\n')
+return(TextOut)
+}
+
+.GetOldStyleFittedText = function(ResponseName, PredictorName, DataName, ModelName){
+TextOut = paste0('
+```{r FittedLinePlot}
+plot(', ResponseName, '~',
+              PredictorName, ', data=', DataName, ', ylab=',
+              .simpleCap(ResponseName), ', xlab=', .simpleCap(PredictorName),
+              ')
+abline(', ModelName,
+              ')
+```\n\n')
+return(TextOut)
+}
+
+.GetModernStyleFittedText = function(ResponseName, PredictorName, DataName, ModelName){
+TextOut=""
+return(TextOut)
+}
+
+
+.GetOldStyleResidualText = function(ModelName){
+TextOut=paste0('
+```{r SimpleLinModResAnal, fig.cap="Residual analysis"}
+par(mfrow=c(2,2))
+plot(',
+              ModelName, ')
+```  \n\n')
+return(TextOut)
+}
+
+
+.GetModernStyleResidualText = function(ModelName){
+TextOut=""
 return(TextOut)
 }
 
