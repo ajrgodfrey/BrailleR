@@ -50,7 +50,8 @@ return(TextOut)
 }
 
 .GetModernStyleScatterText = function(ResponseName, PredictorName, DataName){
-TextOut=UseTemplate(file="ScatterPlot.Rmd", find=c("DataName", "ResponseName", "PredictorName"), replace=c(DataName, ResponseName, PredictorName))
+TextOut=UseTemplate(file="ScatterPlot.Rmd", find=c("library\\(ggplot2\\)", "DataName", "ResponseName", "PredictorName"), 
+replace=c("# N.B. using the ggplot2 package", DataName, ResponseName, PredictorName))
 return(TextOut)
 }
 
@@ -68,7 +69,8 @@ return(TextOut)
 }
 
 .GetModernStyleFittedText = function(ResponseName, PredictorName, DataName, ModelName){
-TextOut=UseTemplate(file="FittedLinePlot.Rmd", find=c("DataName", "ResponseName", "PredictorName"), replace=c(DataName, ResponseName, PredictorName))
+TextOut=UseTemplate(file="FittedLinePlot.Rmd", find=c("library\\(ggplot2\\)", "DataName", "ResponseName", "PredictorName"), 
+replace=c("# N.B. using the ggplot2 package", DataName, ResponseName, PredictorName))
 return(TextOut)
 }
 
@@ -85,7 +87,8 @@ return(TextOut)
 
 
 .GetModernStyleResidualText = function(ModelName){
-TextOut=""
+TextOut=UseTemplate(file="ResidualAnalysis.Rmd", find=c("library\\(ggfortify\\)", "ModelName"), 
+replace=c("# N.B. using the ggfortify package", ModelName))
 return(TextOut)
 }
 

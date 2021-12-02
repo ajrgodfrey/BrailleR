@@ -2,7 +2,7 @@ OneFactor =
     function(Response, Factor, Data = NULL, HSD = TRUE, AlphaE = 0.05,
              Filename = NULL, Folder = NULL, VI = getOption("BrailleR.VI"),
              Latex = getOption("BrailleR.Latex"),
-             View = getOption("BrailleR.View")) {
+             View = getOption("BrailleR.View"), Modern=TRUE) {
 
 
       if (length(Response) == 1) {

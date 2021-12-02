@@ -71,10 +71,12 @@ OnePredictor =
       cat(paste0(
               '```{r setup2, purl=FALSE, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", "library(knitr)"),
+              ifelse(VI, "library(BrailleR)", ""),
+              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
-knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
-knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
+library(knitr)
+opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
+opts_chunk$set(echo=FALSE, comment="", fig.path="',
               Folder, '/', .simpleCap(ResponseName), '.',
               .simpleCap(PredictorName),
               '-", fig.width=7)
