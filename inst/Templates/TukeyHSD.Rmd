@@ -1,8 +1,11 @@
 
+## Tukey's Honestly sinificant difference
+
 ```{r DataName.hsd}
 library(multcomp)
 DataName.hsd = glht(DataName.lm, linfct = mcp(FactorName = "Tukey"))
-DataName.hsd
+summary(DataName.hsd)
+cld(DataName.hsd)
 ```
 
 ```{r plotDataName.hsd, fig.cap="Plot of Tukey's HSD for ResponseName grouped by FactorName."}

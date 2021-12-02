@@ -1,0 +1,17 @@
+
+```{r DataName.lme}
+library(nlme)
+DataName.lme = lme(ResponseName ~ FactorName, random=1|BlockingName, data=DataName)
+library(broom)
+augment(DataName.lme)
+anova(DataName.lme)
+```
+
+```{r glanceDataName.lme}
+glance(DataName.lme) %>% kable()
+```
+
+```{r plotDataName.lme, fig.cap="Residual analysis for DataName.lme"}
+library(ggfortify)
+autoplot(DataName.lme)
+```

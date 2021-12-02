@@ -8,9 +8,8 @@
 - updated examples to use dplyr syntax
 - added quite a few more templates for tests that will help VI users
 - added UseTemplateList() as a fast wrapper for UseTemplate()
-
-
-
+- added use of Rdpack package for use of bibtex references in Rd files
+- brought ggplot style graphics into OnePredictor() with new `Modern=TRUE` while still allowing old-style graphs (must set `Modern=FALSE`)
 
 # BrailleR 0.32.2 
 (Temporary while waiting for CRAN approval)

@@ -1,0 +1,13 @@
+
+## Dunnett's procedure for comparing all treatments with a control
+
+```{r DataName.Dunnett}
+library(multcomp)
+DataName.Dunnett = glht(DataName.lm, linfct = mcp(FactorName = "Dunnett"))
+summary(DataName.Dunnett)
+cld(DataName.Dunnett)
+```
+
+```{r plotDataName.Dunnett, fig.cap="Plot of Tukey's HSD for ResponseName grouped by FactorName."}
+plot(DataName.Dunnett)
+```

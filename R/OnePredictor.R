@@ -4,7 +4,7 @@
 OnePredictor =
     function(Response, Predictor, Data = NULL, Filename = NULL, Folder = NULL,
              VI = getOption("BrailleR.VI"), Latex = getOption("BrailleR.Latex"),
-             View = getOption("BrailleR.View")) {
+             View = getOption("BrailleR.View"), Modern=TRUE) {
 
       # Need to redefine the environment for VI.lm function
       VI.env <- environment(VI.lm)
@@ -132,25 +132,13 @@ print(xtable(t(SummaryTable), caption=TabCapt, label="',
             file = Filename, append = TRUE)
       }
 
-      cat(paste0(
-              '## Scatter Plot
-
-```{r ScatterPlot, fig.cap="Scatter Plot"}
-# Remove the missing values
-completeCases <- complete.cases(Data[ResponseName])*complete.cases(Data[PredictorName])
-assign(DataName, Data[completeCases==1,])
-
-plot(',
-              ResponseName, '~', PredictorName, ', data=', DataName, ', ylab=',
-              .simpleCap(ResponseName), ', xlab=', .simpleCap(PredictorName),
-              ')
-attach(', DataName, ')
-WhereXY(', ResponseName, ',',
-              PredictorName, ')
-detach(', DataName, ')
-```  \n\n'),
+if(Modern){
+      cat(.GetModernStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
           file = Filename, append = TRUE)
-
+} else {
+      cat(.GetOldStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
+          file = Filename, append = TRUE)
+}
 
       cat(paste0(
               '## Linear regression
@@ -234,3 +222,35 @@ print(xtable(anova(', ModelName,
       if (View) browseURL(sub(".Rmd", ".html", Filename))
       environment(VI.lm) <- VI.env
     }  # end of OnePredictor function
+
+
+.GetOldStyleScatterText = function(ResponseName, PredictorName, DataName){
+TextOut = paste0(
+              '## Scatter Plot
+
+```{r ScatterPlot, fig.cap="Scatter Plot"}
+# Remove the missing values
+completeCases <- complete.cases(Data[ResponseName])*complete.cases(Data[PredictorName])
+assign(DataName, Data[completeCases==1,])
+
+plot(',
+              ResponseName, '~', PredictorName, ', data=', DataName, ', ylab=',
+              .simpleCap(ResponseName), ', xlab=', .simpleCap(PredictorName),
+              ')
+attach(', DataName, ')
+WhereXY(', ResponseName, ',',
+              PredictorName, ')
+detach(', DataName, ')
+```  \n\n')
+return(TextOut)
+}
+
+.GetModernStyleScatterText = function(ResponseName, PredictorName, DataName){
+TextOut = paste0(
+              '## Scatter Plot
+
+```{r ScatterPlot, fig.cap="Scatter Plot"}
+```  \n\n')
+return(TextOut)
+}
+

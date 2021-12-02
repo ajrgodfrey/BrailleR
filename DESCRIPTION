@@ -1,4 +1,4 @@
-Package: BrailleR
+	Package: BrailleR
 Title: Improved Access for Blind Users
 Version: 0.33.0
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
@@ -43,6 +43,7 @@ Imports:
     mathjaxr,
     moments,
     nortest,
+    Rdpack,
     reticulate,
     rlang,
     rmarkdown,
@@ -62,5 +63,5 @@ VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR
 BugReports: https://github.com/ajrgodfrey/BrailleR/issues
 RoxygenNote: 7.1.2
-RdMacros: mathjaxr
+RdMacros: mathjaxr, Rdpack
 Language: en-US
