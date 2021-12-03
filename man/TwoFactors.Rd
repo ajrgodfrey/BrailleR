@@ -6,7 +6,7 @@
 TwoFactors(Response, Factor1, Factor2, Inter = FALSE, HSD = TRUE, 
    AlphaE = getOption("BrailleR.SigLevel"), Data = NULL, Filename = NULL, 
     Folder = NULL, VI = getOption("BrailleR.VI"), Latex = getOption("BrailleR.Latex"), 
-    View = getOption("BrailleR.View"))
+    View = getOption("BrailleR.View"), Modern=TRUE)
 }
 \arguments{
   \item{Response}{Name of the continuous response variable.}
@@ -20,6 +20,7 @@ TwoFactors(Response, Factor1, Factor2, Inter = FALSE, HSD = TRUE,
   \item{VI}{Logical: Should the VI method for blind users be employed?}
   \item{Latex}{Logical: Should the tabulated sections be saved in LaTeX format?}
   \item{View}{Logical: Should the HTML file be opened for inspection?}
+  \item{Modern}{Logical: Should the graphics be createdusing ggplot?}
 }
 \details{
 to complete}

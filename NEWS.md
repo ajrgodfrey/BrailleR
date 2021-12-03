@@ -10,6 +10,7 @@
 - added UseTemplateList() as a fast wrapper for UseTemplate()
 - added use of Rdpack package for use of bibtex references in Rd files
 - brought ggplot style graphics into OnePredictor() with new `Modern=TRUE` while still allowing old-style graphs (must set `Modern=FALSE`)
+- tried to reduce package dependencies list. Added packages to suggests list.
 
 # BrailleR 0.32.2 
 (Temporary while waiting for CRAN approval)

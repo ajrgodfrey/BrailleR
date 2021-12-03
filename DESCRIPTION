@@ -44,12 +44,10 @@ Imports:
     moments,
     nortest,
     Rdpack,
-    reticulate,
     rlang,
     rmarkdown,
     roloc,
     rolocISCCNBS,
-    utils,
     whisker,
     XML,
     xtable
@@ -57,7 +55,8 @@ Suggests:
     ggfortify,
     installr,
     markdown,
-    spelling
+    spelling,
+    tidyverse
 SystemRequirements: Python 3 and wxPython 4.0
 VignetteBuilder: knitr
 URL: https://github.com/ajrgodfrey/BrailleR

@@ -4,7 +4,7 @@ ThreeFactors =
     function(Response, Factor1, Factor2, Factor3, Data = NULL,
              Filename = NULL, Folder = NULL, VI = getOption("BrailleR.VI"),
              Latex = getOption("BrailleR.Latex"),
-             View = getOption("BrailleR.View")) {
+             View = getOption("BrailleR.View"), Modern=TRUE) {
 
       # Check inputs are right form
       if (length(Response) == 1) {
@@ -88,7 +88,8 @@ ThreeFactors =
       cat(paste0(
               '```{r setup, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", "library(knitr)"),
+              ifelse(VI, "library(BrailleR)", ""),
+              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',

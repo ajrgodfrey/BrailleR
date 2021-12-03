@@ -199,7 +199,7 @@ print(xtable(MyANOVA, caption=TabCapt, label="',
       }
 
 
-      cat(paste0('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
+      cat('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
 
 ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
       cat(ResidualText, file = Filename, append = TRUE)

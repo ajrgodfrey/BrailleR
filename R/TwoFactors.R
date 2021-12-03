@@ -1,11 +1,11 @@
-## Last Edited: 16/01/16
+## Last Edited: 3/12/21
 
 TwoFactors =
     function(Response, Factor1, Factor2, Inter = FALSE, HSD = TRUE,
              AlphaE = getOption("BrailleR.SigLevel"), Data = NULL,
              Filename = NULL, Folder = NULL, VI = getOption("BrailleR.VI"),
              Latex = getOption("BrailleR.Latex"),
-             View = getOption("BrailleR.View")) {
+             View = getOption("BrailleR.View"), Modern=TRUE) {
 
       # Check inputs are right form
       if (length(Response) == 1) {
@@ -80,7 +80,8 @@ TwoFactors =
       cat(paste0(
               '```{r setup, purl=FALSE, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", "library(knitr)"),
+              ifelse(VI, "library(BrailleR)", ""),
+              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
