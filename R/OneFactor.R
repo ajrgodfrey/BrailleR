@@ -70,7 +70,8 @@ OneFactor =
       cat(paste0(
               '```{r setup, purl=FALSE, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", "library(knitr)"),
+              ifelse(VI, "library(BrailleR)", ""),
+              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
@@ -175,6 +176,7 @@ with(',
 MyANOVA <- aov(', ResponseName, '~',
                  FactorName, ', data=', DataName, ')', ifelse(VI, ")", "")),
           '
+summary(MyANOVA)
 ```  \n\n', file = Filename, append = TRUE)
 
       if (Latex) {
@@ -196,14 +198,18 @@ print(xtable(MyANOVA, caption=TabCapt, label="',
             file = Filename, append = TRUE)
       }
 
-      cat(paste0(
-              '```{r OneWayANOVA, fig.cap="Residual analysis"}
-summary(MyANOVA)
-par(mfrow=c(2,2))
-plot(MyANOVA)
-```
 
-## Tests for homogeneity of Variance
+      cat(paste0('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
+
+ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
+      cat(ResidualText, file = Filename, append = TRUE)
+
+
+
+
+
+        cat(paste0(
+                '\n\n## Tests for homogeneity of Variance
 
 ```{r BartlettTest}
 bartlett.test(',
