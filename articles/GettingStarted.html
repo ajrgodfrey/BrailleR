@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.33.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -85,7 +81,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ajrgodfrey/BrailleR/">
+  <a href="https://github.com/ajrgodfrey/BrailleR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,10 +100,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with the BrailleR package</h1>
-                        <h4 class="author">A. Jonathan R. Godfrey</h4>
+                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/master/vignettes/GettingStarted.Rmd"><code>vignettes/GettingStarted.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/GettingStarted.Rmd" class="external-link"><code>vignettes/GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>GettingStarted.Rmd</code></div>
 
     </div>
@@ -115,76 +111,76 @@
     
     
 <p>The BrailleR package has been created for the benefit of blind people wishing to get more out of R than it already offers — which is actually quite a lot!</p>
-<div id="what-you-need" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-you-need" class="anchor"></a>What you need</h2>
+<div class="section level2">
+<h2 id="what-you-need">What you need<a class="anchor" aria-label="anchor" href="#what-you-need"></a>
+</h2>
 <p>You obviously have R installed or an intention to do so soon if you are reading this document. Aside from R and the add-on packages that BrailleR needs, there are no other software requirements. There are several optional software installations that could make life easier if they are installed before you need them. In order of necessity, they are:</p>
-<div id="the-document-converter-pandoc" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-document-converter-pandoc" class="anchor"></a>The document converter — pandoc</h3>
-<p>BrailleR requires the very useful file converter called pandoc. Get it from the <a href="https://github.com/jgm/pandoc/releases">pandoc download page</a></p>
+<div class="section level3">
+<h3 id="the-document-converter-pandoc">The document converter — pandoc<a class="anchor" aria-label="anchor" href="#the-document-converter-pandoc"></a>
+</h3>
+<p>BrailleR requires the very useful file converter called pandoc. Get it from the <a href="https://github.com/jgm/pandoc/releases" class="external-link">pandoc download page</a></p>
 </div>
-<div id="the-principal-integrated-development-environment-rstudio" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-principal-integrated-development-environment-rstudio" class="anchor"></a>The principal integrated development environment — RStudio</h3>
-<p>It is a good idea to install RStudio, even if you can’t actually use it as a blind person using screen reading software. The reason is that RStudio installs a few other useful tools that we will make use of by other means. Get it from the <a href="https://www.rstudio.com/products/rstudio/download/">RStudio download page</a></p>
+<div class="section level3">
+<h3 id="the-principal-integrated-development-environment-rstudio">The principal integrated development environment — RStudio<a class="anchor" aria-label="anchor" href="#the-principal-integrated-development-environment-rstudio"></a>
+</h3>
+<p>It is a good idea to install RStudio, even if you can’t actually use it as a blind person using screen reading software. The reason is that RStudio installs a few other useful tools that we will make use of by other means. Get it from the <a href="https://www.rstudio.com/products/rstudio/download/" class="external-link">RStudio download page</a></p>
 </div>
-<div id="one-programming-language-python" class="section level3">
-<h3 class="hasAnchor">
-<a href="#one-programming-language-python" class="anchor"></a>One programming language — Python</h3>
+<div class="section level3">
+<h3 id="one-programming-language-python">One programming language — Python<a class="anchor" aria-label="anchor" href="#one-programming-language-python"></a>
+</h3>
 <p>WriteR is a simple text editor written in wxPython that needs Python and wxPython. Unfortunately, they are two separate downloads at present. You do not need this editor so do not install Python unless you are really keen.</p>
 </div>
 </div>
-<div id="installing-the-brailler-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installing-the-brailler-package" class="anchor"></a>Installing the BrailleR package</h2>
+<div class="section level2">
+<h2 id="installing-the-brailler-package">Installing the BrailleR package<a class="anchor" aria-label="anchor" href="#installing-the-brailler-package"></a>
+</h2>
 <p>To use the functionality of the BrailleR package you need to have it installed. The package has several dependencies so installation from the CRAN repository is recommended. This would be done by issuing the following two commands in an R session:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/chooseCRANmirror.html">chooseCRANmirror</a></span><span class="op">(</span>ind<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BrailleR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/chooseCRANmirror.html" class="external-link">chooseCRANmirror</a></span><span class="op">(</span>ind<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BrailleR"</span><span class="op">)</span></code></pre></div>
 <p>If for some reason you have difficulty with the above commands, you can install the BrailleR package using a zip file version available from a CRAN repository or the latest version on GitHub.</p>
 <p>From time to time, you should check that you are using the most recent version of the BrailleR package. You can update all installed packages using the commands:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/chooseCRANmirror.html">chooseCRANmirror</a></span><span class="op">(</span>ind<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/update.packages.html">update.packages</a></span><span class="op">(</span>ask<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/chooseCRANmirror.html" class="external-link">chooseCRANmirror</a></span><span class="op">(</span>ind<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/update.packages.html" class="external-link">update.packages</a></span><span class="op">(</span>ask<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Once you’ve got the package installed, you still need to get it running in your current R session by issuing one last command. When you issue the first of the following lines, the package start messages will also appear.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ajrgodfrey/BrailleR">BrailleR</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ajrgodfrey/BrailleR" class="external-link">BrailleR</a></span><span class="op">)</span></code></pre></div>
 <p>You’re ready to go!</p>
 </div>
-<div id="why-will-i-use-the-brailler-package-as-a-novice" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-will-i-use-the-brailler-package-as-a-novice" class="anchor"></a>Why will I use the BrailleR package as a novice?</h2>
+<div class="section level2">
+<h2 id="why-will-i-use-the-brailler-package-as-a-novice">Why will I use the BrailleR package as a novice?<a class="anchor" aria-label="anchor" href="#why-will-i-use-the-brailler-package-as-a-novice"></a>
+</h2>
 <p>Blind users will want to use the BrailleR package while they are novice R users, but may also want to continue using some of the tools as their skill levels increase. Each of the following reasons for using the BrailleR package have their own example document which goes into more detail.</p>
-<div id="brailler-improves-the-accessibility-of-graphical-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#brailler-improves-the-accessibility-of-graphical-information" class="anchor"></a>BrailleR improves the accessibility of graphical information</h3>
+<div class="section level3">
+<h3 id="brailler-improves-the-accessibility-of-graphical-information">BrailleR improves the accessibility of graphical information<a class="anchor" aria-label="anchor" href="#brailler-improves-the-accessibility-of-graphical-information"></a>
+</h3>
 <p>BrailleR converts standard graphs created by standard R commands into a textual form that can be interpreted by blind students who cannot access the graphs without printing the image to a tactile embosser, or who need the extra text to support any tactile images they do create.</p>
 <p>At present this is limited to only a few graph types found in base R functionality. <a href="Ex1histograms.html">Example 1 shows how histogram</a> can be converted to a text representation.</p>
 </div>
-<div id="brailler-helps-gain-access-to-the-content-of-the-r-console" class="section level3">
-<h3 class="hasAnchor">
-<a href="#brailler-helps-gain-access-to-the-content-of-the-r-console" class="anchor"></a>BrailleR helps gain access to the content of the R console</h3>
+<div class="section level3">
+<h3 id="brailler-helps-gain-access-to-the-content-of-the-r-console">BrailleR helps gain access to the content of the R console<a class="anchor" aria-label="anchor" href="#brailler-helps-gain-access-to-the-content-of-the-r-console"></a>
+</h3>
 <p>BrailleR makes text output (that is visually appealing) more useful for a blind user who is reliant on synthesized speech or braille output to interpret the results.</p>
 <p><a href="Ex2BasicNumerical.html">Example 2 on data summaries</a> shows this for a data frame.</p>
 </div>
-<div id="brailler-includes-convenience-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#brailler-includes-convenience-functions" class="anchor"></a>BrailleR includes convenience functions</h3>
+<div class="section level3">
+<h3 id="brailler-includes-convenience-functions">BrailleR includes convenience functions<a class="anchor" aria-label="anchor" href="#brailler-includes-convenience-functions"></a>
+</h3>
 <p>Many analyses get repeated over and over again with different variables. Some people like a graphical user interface (GUI) but none of the GUIs developed for R to date are accessible by screen reader users.</p>
 <p>BrailleR includes some functions which generate pro forma analyses. When these functions are employed, they generate an HTML document that includes the analysis in an easy to use format. The R commands used to create the analysis are stored in an R script file so that a user can modify the commands if changes are necessary.</p>
 <p><a href="Ex3UnivariateDescription.html">Example 3 Univariate Description</a> shows how the UniDesc() function works, and <a href="Ex4SingleResponseOneGroupingFactor.html">Example 4 for one response and one factor</a> shows how descriptive tools are created before a simple one-way analysis of variance model is fitted.</p>
 </div>
 </div>
-<div id="why-will-i-use-the-brailler-package-if-i-am-not-a-novice" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-will-i-use-the-brailler-package-if-i-am-not-a-novice" class="anchor"></a>Why will I use the BrailleR package if I am not a novice?</h2>
+<div class="section level2">
+<h2 id="why-will-i-use-the-brailler-package-if-i-am-not-a-novice">Why will I use the BrailleR package if I am not a novice?<a class="anchor" aria-label="anchor" href="#why-will-i-use-the-brailler-package-if-i-am-not-a-novice"></a>
+</h2>
 <p>I think some of the reasons for using the package while you are a novice R user remain relevant to more-experienced users, but perhaps the main reason for continuing to use BrailleR is that of efficiency. The convenience functions give you a starting point for analyses. Behind those convenience functions was an R markdown file that generated the R script and the HTML document. Getting into markdown is a great idea and will not take you long to learn.</p>
 <p>BrailleR also includes some tools for helping run your R jobs without running R. Experienced users do this all the time so these tools aren’t really meant for blind users alone.</p>
 </div>
-<div id="personalising-brailler" class="section level2">
-<h2 class="hasAnchor">
-<a href="#personalising-brailler" class="anchor"></a>Personalising BrailleR</h2>
+<div class="section level2">
+<h2 id="personalising-brailler">Personalising BrailleR<a class="anchor" aria-label="anchor" href="#personalising-brailler"></a>
+</h2>
 <p>Once you’ve played with a few examples, you might want to settle on the way you want BrailleR to work for you.</p>
 <p>You might want your analyses to use your name instead of the default name <code>BrailleR</code>. Do this using the <code><a href="../reference/SetOptions.html">SetAuthor()</a></code> function. e.g.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -204,11 +200,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by A. Jonathan R. Godfrey, Debra Warren, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
+  <p></p>
+<p>Developed by A. Jonathan R. Godfrey, Debra Warren, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -216,6 +214,8 @@
 
   
 
+
+  
 
   </body>
 </html>

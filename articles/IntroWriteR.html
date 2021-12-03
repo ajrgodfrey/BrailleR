@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.33.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -85,7 +81,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ajrgodfrey/BrailleR/">
+  <a href="https://github.com/ajrgodfrey/BrailleR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,50 +100,50 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with the WriteR application</h1>
-                        <h4 class="author">A. Jonathan R. Godfrey</h4>
+                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/master/vignettes/IntroWriteR.Rmd"><code>vignettes/IntroWriteR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/IntroWriteR.Rmd" class="external-link"><code>vignettes/IntroWriteR.Rmd</code></a></small>
       <div class="hidden name"><code>IntroWriteR.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>The WriteR application was written to support use of R markdown and the BrailleR package. It is a Python script making use of wxPython to help build the graphic user interface (GUI) in such a way that it works for screen reader users.</p>
 <p>The script is in the BrailleR package, but it cannot run unless the user has both Python and wxPython installed. Two commands have been included in the BrailleR package to help Windows users obtain installation files for them.</p>
 </div>
-<div id="getting-python-and-wxpython-windows-users-only" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-python-and-wxpython-windows-users-only" class="anchor"></a>Getting Python and wxPython (Windows users only)</h2>
+<div class="section level2">
+<h2 id="getting-python-and-wxpython-windows-users-only">Getting Python and wxPython (Windows users only)<a class="anchor" aria-label="anchor" href="#getting-python-and-wxpython-windows-users-only"></a>
+</h2>
 <p>Issue the following commands at the R prompt</p>
-<p><code><a href="https://github.com/ajrgodfrey/BrailleR">library(BrailleR)</a></code></p>
+<p><code><a href="https://github.com/ajrgodfrey/BrailleR" class="external-link">library(BrailleR)</a></code></p>
 <p><code>GetPython()</code></p>
 <p><code>GetWxPython()</code></p>
 <p>These commands automatically download the installation files and start the installation process going. The downloaded files will be saved in your MyBrailleR folder. You will need to follow the instructions and answer questions that arise whenever you install new software. These are reputable installation files from the primary sites for Python and wxPython. Windows and any security software you might have should know that, but you can never tell! You will probably need to let Windows know it is OK to install the software in the default location. That pop-up might not appear as the window with focus so if things look like they’re going slowly, look around for the pop-up window.</p>
 <p>Once you have completed both installations, you are ready to go. You shouldn’t need those installation files again, but keep them just in case.</p>
 </div>
-<div id="opening-writer-from-brailler" class="section level2">
-<h2 class="hasAnchor">
-<a href="#opening-writer-from-brailler" class="anchor"></a>Opening WriteR from BrailleR</h2>
+<div class="section level2">
+<h2 id="opening-writer-from-brailler">Opening WriteR from BrailleR<a class="anchor" aria-label="anchor" href="#opening-writer-from-brailler"></a>
+</h2>
 <p>Opening WriteR is as easy as typing WriteR! Well almost. You have the option of specifying a filename; if that file exists, it gets opened for you, and if it doesn’t exist, then it gets created with a few lines already included at the top to help get you started. Try:</p>
 <p><code>WriteR("MyFirst.Rmd")</code></p>
 </div>
-<div id="what-can-i-do-with-writer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-can-i-do-with-writer" class="anchor"></a>What can I do with WriteR?</h2>
+<div class="section level2">
+<h2 id="what-can-i-do-with-writer">What can I do with WriteR?<a class="anchor" aria-label="anchor" href="#what-can-i-do-with-writer"></a>
+</h2>
 <p>The window you are in has a number of menus, a status bar at the bottom and a big space in the middle for your work. Take a quick look at those menus; some will look familiar because they are common to many Windows applications.</p>
 <p>The file you have open is a markdown file. It is just text which is why it is so easy to read. The file extension of <code>Rmd</code> means it is an R markdown file. There are several flavours of markdown in common use, but they are practically all the same except for some very minor differences.</p>
 <p>A markdown file can be converted into many file formats for distribution. These include HTML, pdf, Microsoft Word, Open Office, and a number of different slide presentation formats. Let’s make the HTML file now.</p>
 </div>
-<div id="our-first-html-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#our-first-html-file" class="anchor"></a>Our first HTML file</h2>
+<div class="section level2">
+<h2 id="our-first-html-file">Our first HTML file<a class="anchor" aria-label="anchor" href="#our-first-html-file"></a>
+</h2>
 <p>Making your first HTML file is as easy as hitting a single key, or using one of the options in the <code>Build</code> menu. The variety of options are the commonly used ones in RStudio.</p>
-<p>Navigate to the current working directory using your file browser. To find out where that is, type <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> back in the R window. You should see the file <code>MyFirst.Rmd</code> and once you have built it, the associated HTML file.</p>
+<p>Navigate to the current working directory using your file browser. To find out where that is, type <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd()</a></code> back in the R window. You should see the file <code>MyFirst.Rmd</code> and once you have built it, the associated HTML file.</p>
 <p>Open the HTML file and see how the markdown has been rendered. You may need to switch back and forth between the WriteR window and your browser to compare the plain text and the beautiful HTML.</p>
 </div>
   </div>
@@ -163,11 +159,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by A. Jonathan R. Godfrey, Debra Warren, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
+  <p></p>
+<p>Developed by A. Jonathan R. Godfrey, Debra Warren, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -175,6 +173,8 @@
 
   
 
+
+  
 
   </body>
 </html>

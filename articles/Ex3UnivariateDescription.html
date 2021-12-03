@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.33.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -85,7 +81,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ajrgodfrey/BrailleR/">
+  <a href="https://github.com/ajrgodfrey/BrailleR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,28 +100,28 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The BrailleR package Example 3</h1>
-                        <h4 class="author">A. Jonathan R. Godfrey</h4>
+                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/master/vignettes/Ex3UnivariateDescription.rmd"><code>vignettes/Ex3UnivariateDescription.rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/Ex3UnivariateDescription.rmd" class="external-link"><code>vignettes/Ex3UnivariateDescription.rmd</code></a></small>
       <div class="hidden name"><code>Ex3UnivariateDescription.rmd</code></div>
 
     </div>
 
     
     
-<div id="the-brailler-package-example-3-" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-brailler-package-example-3-" class="anchor"></a>The BrailleR package Example 3.</h1>
-<div id="description-of-a-single-numeric-variable" class="section level2">
-<h2 class="hasAnchor">
-<a href="#description-of-a-single-numeric-variable" class="anchor"></a>Description of a single numeric variable</h2>
+<div class="section level1">
+<h1 id="the-brailler-package-example-3-">The BrailleR package Example 3.<a class="anchor" aria-label="anchor" href="#the-brailler-package-example-3-"></a>
+</h1>
+<div class="section level2">
+<h2 id="description-of-a-single-numeric-variable">Description of a single numeric variable<a class="anchor" aria-label="anchor" href="#description-of-a-single-numeric-variable"></a>
+</h2>
 <p>There are many commands needed to get the numeric and graphic summary measures that might be required to collect all relevant information on a single numeric variable. The UniDesc() command has been written as a shortcut for a blind user who wishes to obtain: - the counts of points in the sample that were observed and not observed, - the mean and trimmed mean, - the five number summary: minimum, lower quartile, median, upper quartile, and maximum, - the interquartile range (IQR) and standard deviation, - measures of skewness and kurtosis (thanks to the moments package), - a histogram and/or a boxplot, - a normality (quantile-quantile) plot, - various tests for normality (thanks to the nortest package), and - tests on the significance of the skewness and kurtosis (again, thanks to the moments package).</p>
 <p>In addition, the blind user may need any/all of the graphs in a variety of formats (png, pdf, eps, or svg), nicely formatted tables for insertion into documents (LaTeX or HTML), and access to the code that generated these graphs and tables (an R script).</p>
 <p>The UniDesc() function can deliver all of this with minimal effort from the user. In addition, the output HTML file is opened automatically if R is being used interactively, giving the blind user immediate access to the information. The content is presented using sufficiently marked up HTML code including headings and tables so that the blind user can make best use of their screen reading software. All graphs included in the HTML file can be presented using a text description available from the VI() functionality of the BrailleR package.</p>
 <p>The main output document (HTML) can be viewed by issuing the command</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/example.html">example</a></span><span class="op">(</span><span class="va">UniDesc</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">UniDesc</span><span class="op">)</span></code></pre></div>
 <p>while running R interactively.</p>
 </div>
 </div>
@@ -142,11 +138,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by A. Jonathan R. Godfrey, Debra Warren, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
+  <p></p>
+<p>Developed by A. Jonathan R. Godfrey, Debra Warren, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -154,6 +152,8 @@
 
   
 
+
+  
 
   </body>
 </html>
