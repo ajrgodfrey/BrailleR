@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
       </span>
     </div>
 
@@ -83,10 +83,12 @@
     <p>Prepares an analysis of a data set with one response and two predictors that are both factors. An interaction between the two factors is also allowed for. The function creates a number of graphs and tables relevant for the analysis.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">TwoFactors</span><span class="op">(</span><span class="va">Response</span>, <span class="va">Factor1</span>, <span class="va">Factor2</span>, Inter <span class="op">=</span> <span class="cn">FALSE</span>, HSD <span class="op">=</span> <span class="cn">TRUE</span>, 
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">TwoFactors</span><span class="op">(</span><span class="va">Response</span>, <span class="va">Factor1</span>, <span class="va">Factor2</span>, Inter <span class="op">=</span> <span class="cn">FALSE</span>, HSD <span class="op">=</span> <span class="cn">TRUE</span>, 
    AlphaE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.SigLevel"</span><span class="op">)</span>, Data <span class="op">=</span> <span class="cn">NULL</span>, Filename <span class="op">=</span> <span class="cn">NULL</span>, 
     Folder <span class="op">=</span> <span class="cn">NULL</span>, VI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.VI"</span><span class="op">)</span>, Latex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Latex"</span><span class="op">)</span>, 
-    View <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.View"</span><span class="op">)</span>, Modern<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div></div>
+    View <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.View"</span><span class="op">)</span>, Modern<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
@@ -152,7 +154,9 @@
 <span class="r-in"><span class="co"># N.B. Various files and a folder were created in a temporary directory. </span></span>
 <span class="r-in"><span class="co"># Please investigate them to see how this function worked.</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get(DataName):</span> object 'TG' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>stylesheet must either be valid CSS or a file containing CSS!</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>stylesheet must either be valid CSS or a file containing CSS!</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>stylesheet must either be valid CSS or a file containing CSS!</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">DIR</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
@@ -168,7 +172,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer></div>

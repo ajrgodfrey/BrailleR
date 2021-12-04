@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
       </span>
     </div>
 
@@ -83,7 +83,9 @@
     <p>Creates the necessary details that feed into the text descriptions in the VI() function and into the descriptions used in the accessible online versions of the graphs.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">Augment</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">Augment</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
@@ -110,18 +112,18 @@
 <span class="r-plt img"><img src="AugmentMethod-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="va">MyHist</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $breaks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $counts</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]   2   5  20  48 104 155 177 182 149  88  41  18   9   2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]   5  11  41 106 150 182 203 148  93  44  12   4   1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $density</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.004 0.010 0.040 0.096 0.208 0.310 0.354 0.364 0.298 0.176 0.082 0.036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.018 0.004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.010 0.022 0.082 0.212 0.300 0.364 0.406 0.296 0.186 0.088 0.024 0.008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.002</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mids</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  2.75  3.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  3.25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $xname</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "x"</span>
@@ -144,21 +146,21 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $NBars</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par$xaxp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3  3  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par$yaxp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0 150   3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0 200   4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $xTicks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3 -2 -1  0  1  2  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $yTicks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0  50 100 150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0  50 100 150 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Augmented" "histogram"</span>
@@ -176,7 +178,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer></div>

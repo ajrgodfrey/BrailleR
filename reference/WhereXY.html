@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
       </span>
     </div>
 
@@ -83,8 +83,10 @@
     <p>count the number of points that fall into various sized subparts of a scatter plot. The graphing region can be split into cells based on a uniform or normal marginal distribution separately for the x and y variables.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>, y <span class="op">=</span> <span class="cn">NULL</span>, grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span>, xDist <span class="op">=</span> <span class="st">"uniform"</span>, 
-       yDist <span class="op">=</span> <span class="va">xDist</span>, addmargins<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>, y <span class="op">=</span> <span class="cn">NULL</span>, grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span>, xDist <span class="op">=</span> <span class="st">"uniform"</span>, 
+       yDist <span class="op">=</span> <span class="va">xDist</span>, addmargins<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
@@ -112,25 +114,25 @@
 <span class="r-in"><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     1  2  3  4 Sum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   0  3  0  2   5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   3  2  5  6  16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   5  7  5  6  23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1  1  2  2   6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 9 13 12 16  50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   0  1  0  0   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   0  4  4  4  12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   6  9  8  3  26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   3  1  4  3  11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 9 15 16 10  50</span>
 <span class="r-in"><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      1  2  3 Sum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    0  3  2   5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    4  5  7  16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    6 10  7  23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1  3  2   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    0  1  0   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    1  6  5  12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    7 11  8  26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3  3  5  11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sum 11 21 18  50</span>
 <span class="r-in"><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, xDist<span class="op">=</span><span class="st">"other"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      1  2  3  4 Sum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    2  3  2  5  12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    5  0  2  4  11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    4  4  2  3  13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3  3  4  4  14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 14 10 10 16  50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    1  4  4  2  11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3  6  2  3  14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    4  3  2  4  13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3  1  4  4  12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 11 14 12 13  50</span>
 </code></pre></div>
     </div>
   </div>
@@ -145,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer></div>
