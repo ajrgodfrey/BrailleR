@@ -47,9 +47,7 @@ TwoFactors =
         if (!is.data.frame(Data)) .NotADataFrame()
       }
 
-      with(
-          Data,
-          {
+      with(Data, {
             if (!is.numeric(get(ResponseName)))
               .ResponseNotNumeric()
             if (!is.vector(get(ResponseName)))
@@ -62,11 +60,16 @@ TwoFactors =
 
       # create folder and filenames
       if (is.null(Folder)) Folder = DataName
+
       if (Folder != "" & !file.exists(Folder)) dir.create(Folder)
-      if (is.null(Filename))
+
+      if (is.null(Filename)){
         Filename =
-            paste0(ResponseName, ".", Factor1Name, ".", Factor2Name,
-                   "-TwoFactors", ifelse(Inter, 'WithInt', 'NoInt'), ".Rmd")
+            paste0(ResponseName, '.', Factor1Name, '.', Factor2Name,
+                   '-TwoFactors', ifelse(Inter, "WithInt", "NoInt"), '.Rmd')
+}
+
+
 
       # start writing to the R markdown file
       cat(paste0('# Analysis of the ', DataName, ' data, using ', ResponseName,
@@ -76,6 +79,7 @@ TwoFactors =
                  ' as factors.
 #### Prepared by ',
                  getOption("BrailleR.Author"), '  \n\n'), file = Filename)
+
 
       cat(paste0(
               '```{r setup, purl=FALSE, include=FALSE}
@@ -87,6 +91,12 @@ knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
               Folder, '/', ResponseName, '.', Factor1Name, '.', Factor2Name,
               '-", fig.width=7)
+```
+
+<!--- IMPORTANT NOTE: This Rmd file does not yet import the data it uses. 
+You will need to add a data import command of some description into the next R chunk to use the file as a stand alone file. --->
+
+```{r importData}
 ```
 
 ## Group summaries
@@ -125,121 +135,6 @@ kable(as.matrix(DataSummary), row.names=FALSE)
 ```  \n\n'),
           file = Filename, append = TRUE)
 
-      if (Latex) {
-        cat(paste0(
-                '```{r DataSummaryTex, purl=FALSE}
-library(xtable)
-ThisTexFile = "',
-                Folder, '/', ResponseName, '.', Factor1Name, '.', Factor2Name,
-                '-GroupSummary.tex"
-TabCapt = "Summary statistics for ',
-                ResponseName, ' by level of ', Factor1Name, ' and ',
-                Factor2Name,
-                '"
-print(xtable(DataSummary, caption=TabCapt, label="',
-                ResponseName,
-                'GroupSummary", digits=4, align="llrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-    ```  \n\n'),
-            file = Filename, append = TRUE)
-      }
-
-      ### Produce the EDA plots depending on whether interactions are included or not.
-
-      nNonMissing <- function(x) {
-        length(na.omit(x))  # length() includes NAs
-      }
-      Data.n <- with(
-          get(DataName),
-          aggregate(get(ResponseName), list(get(Factor1Name), get(Factor2Name)),
-                    nNonMissing))
-
-      if (Inter) {
-        if (min(Data.n[, 3]) > 4) {
-          cat(paste0(
-                  '## Comparative boxplots
-```{r boxplots, fig.cap="Comparative boxplots"}  \n',
-                  ifelse(VI, "VI(", ""), 'boxplot(', ResponseName,
-                  '~interaction(', Factor1Name, ',', Factor2Name,
-                  ', sep=":"), data=', DataName, ifelse(VI, ")", ""),
-                  ')
-```\n\n'), file = Filename, append = TRUE)
-        } else {
-          cat(paste0(
-                  '## Comparative boxplots
-
-When boxplots are not included, it is  because at least one group size is too small.  \n\n'),
-              file = Filename, append = TRUE)
-        }
-      } else {
-        if (min(Data.n[, 3]) > 4) {
-          cat(paste0(
-                  '## Comparative boxplots
-```{r boxplots, fig.cap="Comparative boxplots"}  \n',
-                  ifelse(VI, "VI(", ""), 'boxplot(', ResponseName, '~',
-                  Factor1Name, ', data=', DataName, ifelse(VI, ")", ""), ')\n',
-                  ifelse(VI, "VI(", ""), 'boxplot(', ResponseName, '~',
-                  Factor2Name, ', data=', DataName, ifelse(VI, ")", ""),
-                  ')
-``` \n\n'), file = Filename, append = TRUE)
-        } else {
-          cat(paste0(
-                  '## Comparative boxplots
-
-When boxplots are not included, it is  because at least one group size is too small.   \n\n'),
-              file = Filename, append = TRUE)
-        }
-      }
-
-      cat(paste0(
-              '## Comparative dotplots
-
-```{r Dotplots-by',
-              .simpleCap(Factor1Name), ', fig.cap="Comparative dotplots for ',
-              .simpleCap(ResponseName), ' by ', .simpleCap(Factor1Name),
-              '"}
-', ifelse(VI, "VI(", ""), 'stripchart(', ResponseName, '~',
-              Factor1Name, ', data=', DataName, ifelse(VI, ")", ""),
-              ')
-```
-
-```{r Dotplots-by', .simpleCap(Factor2Name),
-              ', fig.cap="Comparative dotplots for ', .simpleCap(ResponseName),
-              ' by ', .simpleCap(Factor2Name), '"}
-', ifelse(VI, "VI(", ""),
-              'stripchart(', ResponseName, '~', Factor2Name, ', data=',
-              DataName, ifelse(VI, ")", ""), ')
-``` \n\n'), file = Filename,
-          append = TRUE)
-
-
-      #### Interaction plot (if specified)
-
-      if (Inter) {
-
-        F1.Big = length(levels(Data[[Factor2Name]])) <
-                 length(levels(Data[[Factor1Name]]))
-        xFactor = ifelse(F1.Big, Factor1Name, Factor2Name)
-        Trace = ifelse(!F1.Big, Factor1Name, Factor2Name)
-
-        cat(paste0(
-                '## Interaction Plot
-
-```{r InteractionPlot, fig.cap="Interaction Plot"}
-with(',
-                DataName, ', interaction.plot(', xFactor, ',', Trace, ',',
-                ResponseName, '))
-```  \n\n',
-
-                ifelse(
-                    VI,
-                    "Means table: Rows are for the trace factor, ', .simpleCap(Trace), ', and columns are for the factor along the x-axis, ', .simpleCap(xFactor), '.
-
-```{r }
-xtabs(Mean~',Trace, '+', xFactor,',data=Data.Mean)
-```  \n\n",
-                    "")), file = Filename, append = TRUE)
-      }
-
 
       ######## Fit the anova model
 
@@ -265,10 +160,83 @@ summary(MyANOVA2)
 ```  \n\n'),
           file = Filename, append = TRUE)
 
+
+      cat('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
+ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
+      cat(ResidualText, file = Filename, append = TRUE)
+
+        cat('\n\n## Tests for homogeneity of Variance \n\n', file = Filename, append = TRUE)
+
+      if (Inter) {
+
+        cat(paste0('```{r BartlettTest}
+bartlett.test(',
+                ResponseName, '~interaction(', Factor1Name, ',', Factor2Name,
+                '), data=', DataName,
+                ')
+``` 
+
+```{r FlignerTest}
+fligner.test(', ResponseName,
+                '~interaction(', Factor1Name, ',', Factor2Name, '), data=',
+                DataName, ')
+``` \n\n'), file = Filename, append = TRUE)
+      } else {
+        cat(paste0('```{r BartlettTest}
+bartlett.test(',
+                ResponseName, '~', Factor1Name, ', data=', DataName,
+                ')
+bartlett.test(', ResponseName, '~', Factor2Name, ', data=',
+                DataName, ')
+``` 
+
+```{r FlignerTest}
+fligner.test(',
+                ResponseName, '~', Factor1Name, ', data=', DataName,
+                ')
+fligner.test(', ResponseName, '~', Factor2Name, ', data=',
+                DataName, ')
+``` \n\n'), file = Filename, append = TRUE)
+      }
+
+
+      # Tukey HSD output and plots
+      if (HSD) {
+        cat(paste0(
+                '## Tukey Honestly Significant Difference test 
+
+```{r TukeyHSD, fig.cap="Plot of Tukey HSD"}
+MyHSD <- TukeyHSD(MyANOVA, ordered=TRUE, conf.level=',
+                1 - AlphaE, ')
+', ifelse(VI, 'VI(MyHSD)', ""),
+                '
+MyHSD
+plot( MyHSD )
+``` \n\n'), file = Filename,
+            append = TRUE)
+      }
+
+
       if (Latex) {
         cat(paste0(
-                '```{r ANOVA-TEX, purl=FALSE}
+                '```{r DataSummaryTex, purl=FALSE}
 library(xtable)
+ThisTexFile = "',
+                Folder, '/', ResponseName, '.', Factor1Name, '.', Factor2Name,
+                '-GroupSummary.tex"
+TabCapt = "Summary statistics for ',
+                ResponseName, ' by level of ', Factor1Name, ' and ',
+                Factor2Name,
+                '"
+print(xtable(DataSummary, caption=TabCapt, label="',
+                ResponseName,
+                'GroupSummary", digits=4, align="llrrrrr"), include.rownames = FALSE, file = ThisTexFile)
+    ```  \n\n'),
+            file = Filename, append = TRUE)
+
+
+        cat(paste0(
+                '```{r ANOVA-TEX, purl=FALSE}
 ThisTexFile = "',
                 Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name,
                 ifelse(Inter, "WithInt", "NoInt"),
@@ -278,66 +246,13 @@ TabCapt = "Two-way ANOVA for ',
                 .simpleCap(Factor1Name), ' and ', .simpleCap(Factor2Name),
                 ifelse(Inter, ", as well as their interaction",
                        " without their interaction"),
-                '."
+                '.
 print(xtable(MyANOVA, caption=TabCapt, label="',
                 ResponseName, '-', Factor1Name,
                 '-ANOVA", digits=4), file = ThisTexFile)
 ```  \n\n'),
             file = Filename, append = TRUE)
-      }
-
-      if (Inter) {
-        cat(paste0(
-                "```{r TwoWayANOVA2, fig.cap=\"Residual analysis\"}
-par(mfrow=c(2,2))
-plot(MyANOVA)
-``` \n\n## Tests for homogeneity of Variance  \n
-```{r BartlettTest}
-bartlett.test(",
-                ResponseName, "~interaction(", Factor1Name, ",", Factor2Name,
-                "), data=", DataName,
-                ")
-``` \n\n```{r FlignerTest}
-fligner.test(", ResponseName,
-                "~interaction(", Factor1Name, ",", Factor2Name, "), data=",
-                DataName, ")
-``` \n\n"), file = Filename, append = TRUE)
-      } else {
-        cat(paste0(
-                "```{r TwoWayANOVA2, fig.cap=\"Residual analysis\"}
-par(mfrow=c(2,2))
-plot(MyANOVA)
-``` \n\n## Tests for homogeneity of Variance  \n
-```{r BartlettTest}
-bartlett.test(",
-                ResponseName, "~", Factor1Name, ", data=", DataName,
-                ")
-bartlett.test(", ResponseName, "~", Factor2Name, ", data=",
-                DataName, ")
-``` \n\n```{r FlignerTest}
-fligner.test(",
-                ResponseName, "~", Factor1Name, ", data=", DataName,
-                ")
-fligner.test(", ResponseName, "~", Factor2Name, ", data=",
-                DataName, ")
-``` \n\n"), file = Filename, append = TRUE)
-      }
-
-      # Tukey HSD output and plots
-
-      if (HSD) {
-        cat(paste0(
-                "## Tukey Honestly Significant Difference test \n
-```{r TukeyHSD, fig.cap=\"Plot of Tukey HSD\"}
-MyHSD <- TukeyHSD(MyANOVA, ordered=TRUE, conf.level=",
-                1 - AlphaE, ")
-", ifelse(VI, "VI(MyHSD)", ""),
-                "
-MyHSD
-plot( MyHSD )
-``` \n\n"), file = Filename,
-            append = TRUE)
-      }
+      } # end LaTeX table creation
 
       # finish writing markdown and process the written file into html and an R script
       knit2html(Filename, quiet = TRUE,
@@ -346,7 +261,3 @@ plot( MyHSD )
       purl(Filename, quiet = TRUE, documentation = 0)
       if (View) browseURL(sub(".Rmd", ".html", Filename))
     }  # end of TwoFactors function
-
-
-
-

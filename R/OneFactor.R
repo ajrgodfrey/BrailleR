@@ -80,6 +80,12 @@ knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
               '-", fig.width=7)
 ```
 
+<!--- IMPORTANT NOTE: This Rmd file does not yet import the data it uses. 
+You will need to add a data import command of some description into the next R chunk to use the file as a stand alone file. --->
+
+```{r importData}
+```
+
 ## Group summaries
 
 ```{r GroupSummary}
@@ -111,22 +117,6 @@ kable(as.matrix(DataSummary), row.names=FALSE)
 
 
       if (Latex) {
-        cat(paste0(
-                '```{r DataSummaryTex, purl=FALSE}
-library(xtable)
-ThisTexFile = "',
-                Folder, '/', .simpleCap(ResponseName), '.',
-                .simpleCap(FactorName),
-                '-GroupSummary.tex"
-TabCapt = "Summary statistics for ',
-                .simpleCap(ResponseName), ' by level of ',
-                .simpleCap(FactorName),
-                '"
-print(xtable(DataSummary, caption=TabCapt, label="',
-                ResponseName,
-                'GroupSummary", digits=4, align="llrrrr"), include.rownames = FALSE, file = ThisTexFile)
-```  \n\n'),
-            file = Filename, append = TRUE)
       }
 
 
@@ -140,18 +130,20 @@ print(xtable(DataSummary, caption=TabCapt, label="',
                      tapply(get(ResponseName), get(FactorName), nNonMissing))
 
       if (min(Data.n) > 4) {
-        cat('## Comparative boxplots  \n\n',
-            '```{r boxplots, fig.cap="Comparative boxplots"}  \n',
-            paste0(
-                ifelse(VI, 'VI(', ''), 'boxplot(', ResponseName, '~',
+        cat(paste0('## Comparative boxplots 
+
+```{r boxplots, fig.cap="Comparative boxplots"}  
+            ',
+                ifelse(VI, "VI(", ""), 'boxplot(', ResponseName, '~',
                 FactorName, ', data=', DataName, ', ylab=',
                 InQuotes(.simpleCap(ResponseName)), ', xlab=',
-                InQuotes(.simpleCap(FactorName)), ifelse(VI, ')', ''), ')  \n'),
-            '``` \n', file = Filename, append = TRUE)
+                InQuotes(.simpleCap(FactorName)), ifelse(VI, ")", ""),
+ ')
+``` \n\n'), file = Filename, append = TRUE)
       }
         else {
         cat('## Comparative boxplots  \n
-When boxplots are not included, it is  because at least one group size is too small.  \n\n',
+No boxplots are included because at least one group size is too small.  \n\n',
             file = Filename, append = TRUE)
       }
 
@@ -178,26 +170,6 @@ MyANOVA <- aov(', ResponseName, '~',
           '
 summary(MyANOVA)
 ```  \n\n', file = Filename, append = TRUE)
-
-      if (Latex) {
-        cat(paste0(
-                '```{r ANOVA-TEX, purl=FALSE}
-library(xtable)
-ThisTexFile = "',
-                Folder, '/', .simpleCap(ResponseName), '-',
-                .simpleCap(FactorName),
-                '-ANOVA.tex"
-TabCapt = "One-way ANOVA for ',
-                .simpleCap(ResponseName), ' with the group factor ',
-                .simpleCap(FactorName),
-                '."
-print(xtable(MyANOVA, caption=TabCapt, label="',
-                .simpleCap(ResponseName), '-', .simpleCap(FactorName),
-                '-ANOVA", digits=4), file = ThisTexFile)
-```  \n\n'),
-            file = Filename, append = TRUE)
-      }
-
 
       cat('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
 
@@ -240,6 +212,44 @@ plot(MyHSD)
             append = TRUE)
       }
 
+      if (Latex) {
+        cat(paste0(
+                '## Tables for LaTeX documents
+
+N.B. Set `Latex=FALSE` to stop creation of these tables in future
+
+```{r DataSummaryTex, purl=FALSE}
+library(xtable)
+ThisTexFile = "',
+                Folder, '/', .simpleCap(ResponseName), '.',
+                .simpleCap(FactorName),
+                '-GroupSummary.tex"
+TabCapt = "Summary statistics for ',
+                .simpleCap(ResponseName), ' by level of ',
+                .simpleCap(FactorName),
+                '"
+print(xtable(DataSummary, caption=TabCapt, label="',
+                ResponseName,
+                'GroupSummary", digits=4, align="llrrrr"), include.rownames = FALSE, file = ThisTexFile)
+```  
+
+```{r ANOVA-TEX, purl=FALSE}
+ThisTexFile = "',
+                Folder, '/', .simpleCap(ResponseName), '-',
+                .simpleCap(FactorName),
+                '-ANOVA.tex"
+TabCapt = "One-way ANOVA for ',
+                .simpleCap(ResponseName), ' with the group factor ',
+                .simpleCap(FactorName),
+                '."
+print(xtable(MyANOVA, caption=TabCapt, label="',
+                .simpleCap(ResponseName), '-', .simpleCap(FactorName),
+                '-ANOVA", digits=4), file = ThisTexFile)
+```  \n\n'),
+            file = Filename, append = TRUE)
+      }
+
+
 
       # finish writing markdown and process the written file into html and an R script
       knit2html(Filename, quiet = TRUE,
@@ -247,4 +257,4 @@ plot(MyHSD)
       file.remove(sub(".Rmd", ".md", Filename))
       purl(Filename, quiet = TRUE, documentation = 0)
       if (View) browseURL(sub(".Rmd", ".html", Filename))
-    }  # end of OneWay function
+    }  # end of OneFactor function

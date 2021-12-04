@@ -33,6 +33,7 @@ Saves an R markdown file, (and then if \code{Process=TRUE}) an R script file,  a
 }
 \author{A. Jonathan R. Godfrey \email{a.j.godfrey@massey.ac.nz}}
 \examples{
+if(require(nortest)){ # used in the Rmd file, not the UniDesc function
 DIR = getwd()
 setwd(tempdir())
 Ozone=airquality$Ozone
@@ -41,4 +42,5 @@ rm(Ozone)
 # N.B. Various files and a folder were created in a temporary directory. 
 # Please investigate them to see how this function worked.
 setwd(DIR)
+}
 }

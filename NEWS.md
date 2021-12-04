@@ -1,5 +1,7 @@
 # BrailleR 0.33.1
 - working on modernising other convenience functions
+- serious compaction of code was possible; used new internal functions where code is repeated over convenience functions
+
 
 # BrailleR 0.33.0
 - updated ScatterPlot(), FittedLinePlot(), and TimeSeriesPlot() functions  to have both base and ggplot style graphics.

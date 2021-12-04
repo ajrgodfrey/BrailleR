@@ -82,6 +82,12 @@ opts_chunk$set(echo=FALSE, comment="", fig.path="',
               '-", fig.width=7)
 ```
 
+<!--- IMPORTANT NOTE: This Rmd file does not yet import the data it uses. 
+You will need to add a data import command of some description into the next R chunk to use the file as a stand alone file. --->
+
+```{r importData}
+```
+
 ## Variable summaries
 
 The response variable is ',

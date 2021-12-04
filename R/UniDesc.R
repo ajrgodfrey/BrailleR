@@ -64,7 +64,13 @@ opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 opts_chunk$set(comment="", echo=FALSE, fig.path="',
               Folder, '/', .simpleCap(ResponseName),
               '-", fig.width=7)
-```  \n\n'), file = Filename, append = TRUE)
+```  
+
+<!--- IMPORTANT NOTE: This Rmd file does not yet import the data it uses. 
+You will need to add a data import command of some description into the next R chunk to use the file as a stand alone file. --->
+
+```{r importData}
+```\n\n'), file = Filename, append = TRUE)
 
 
       if (Basic) {

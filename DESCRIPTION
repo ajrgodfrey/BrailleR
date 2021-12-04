@@ -34,7 +34,6 @@ Imports:
     dplyr,
     extrafont,
     ggplot2,
-    grid,
     gridGraphics,
     gridSVG,
     hunspell,
@@ -42,7 +41,6 @@ Imports:
     magrittr,
     mathjaxr,
     moments,
-    nortest,
     Rdpack,
     rlang,
     rmarkdown,
@@ -55,6 +53,7 @@ Suggests:
     ggfortify,
     installr,
     markdown,
+    nortest,
     spelling,
     tidyverse
 SystemRequirements: Python 3 and wxPython 4.0
