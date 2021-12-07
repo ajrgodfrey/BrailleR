@@ -50,10 +50,15 @@ Imports:
     XML,
     xtable
 Suggests:
+    broom,
+    emmeans,
     ggfortify,
     installr,
+    lmtest,
     markdown,
+    multcomp,
     nortest,
+    rstatix,
     spelling,
     tidyverse
 SystemRequirements: Python 3 and wxPython 4.0

@@ -231,12 +231,9 @@ TabCapt = "Summary statistics for ',
 print(xtable(DataSummary, caption=TabCapt, label="',
                 ResponseName,
                 'GroupSummary", digits=4, align="llrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-    ```  \n\n'),
-            file = Filename, append = TRUE)
+```  
 
-
-        cat(paste0(
-                '```{r ANOVA-TEX, purl=FALSE}
+```{r ANOVA-TEX, purl=FALSE}
 ThisTexFile = "',
                 Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name,
                 ifelse(Inter, "WithInt", "NoInt"),

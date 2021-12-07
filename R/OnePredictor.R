@@ -124,21 +124,6 @@ kable(t(SummaryTable), row.names=T, align=rep("c",8))
 
 
       if (Latex) {
-        cat(paste0(
-                '```{r VariableSummaryTex, purl=FALSE}
-library(xtable)
-ThisTexFile = "',
-                Folder, '/', .simpleCap(ResponseName), '.',
-                .simpleCap(PredictorName),
-                '-VariableSummary.tex"
-TabCapt = "Summary statistics for variables ',
-                .simpleCap(ResponseName), ' and ', .simpleCap(PredictorName),
-                '."
-print(xtable(t(SummaryTable), caption=TabCapt, label="',
-                .simpleCap(ResponseName),
-                '-VariableSummary", digits=4, align="lrrrrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-```  \n\n'),
-            file = Filename, append = TRUE)
       }
 
 
@@ -189,7 +174,21 @@ anova(',
 
       if (Latex) {
         cat(paste0(
-                '```{r SimpleLinMod-TEX, purl=FALSE}
+                '```{r VariableSummaryTex, purl=FALSE}
+library(xtable)
+ThisTexFile = "',
+                Folder, '/', .simpleCap(ResponseName), '.',
+                .simpleCap(PredictorName),
+                '-VariableSummary.tex"
+TabCapt = "Summary statistics for variables ',
+                .simpleCap(ResponseName), ' and ', .simpleCap(PredictorName),
+                '."
+print(xtable(t(SummaryTable), caption=TabCapt, label="',
+                .simpleCap(ResponseName),
+                '-VariableSummary", digits=4, align="lrrrrrrrr"), include.rownames = FALSE, file = ThisTexFile)
+```
+
+```{r SimpleLinMod-TEX, purl=FALSE}
 ThisTexFile = "', Folder,
                 '/', .simpleCap(ResponseName), '-', .simpleCap(PredictorName),
                 '-lm.tex"

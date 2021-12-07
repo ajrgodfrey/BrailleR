@@ -116,8 +116,6 @@ kable(as.matrix(DataSummary), row.names=FALSE)
           file = Filename, append = TRUE)
 
 
-      if (Latex) {
-      }
 
 
       cat("The ratio of the largest group standard deviation to the smallest is `r round(max(Data.StDev)/min(Data.StDev),2)`  \n\n",
@@ -175,10 +173,6 @@ summary(MyANOVA)
 
 ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
       cat(ResidualText, file = Filename, append = TRUE)
-
-
-
-
 
         cat(paste0(
                 '\n\n## Tests for homogeneity of Variance

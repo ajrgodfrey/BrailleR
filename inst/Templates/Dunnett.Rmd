@@ -3,8 +3,9 @@
 
 ```{r DataName.Dunnett}
 library(multcomp)
+library(broom)
 DataName.Dunnett = glht(DataName.lm, linfct = mcp(FactorName = "Dunnett"))
-summary(DataName.Dunnett)
+tidy(summary(DataName.Dunnett))
 cld(DataName.Dunnett)
 ```
 

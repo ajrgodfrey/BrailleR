@@ -1,0 +1,34 @@
+
+```{r getLibs}
+library(tidyverse)
+library(knitr)
+```
+
+```{r getDistMat}
+```
+
+```{r DataName.mds}
+DataName.mds = DistMat %>%
+cmdscale() 
+colnames(DataName.mds) = c("x", "y")
+```
+
+```{r DataName.kmeans}
+DataName.kmeans = kmeans(DataName.mds , 5)$cluster %>% 
+as.factor()
+```
+
+```{r addClusters}
+DataName.mds = DataName.mds %>%
+as_tibble() %>%
+mutate(Labels = labels(DistMat), Cluster = DataName.kmeans)
+```
+
+
+```{r plotDataName.mds, fig.cap="Multidimensional scaling of the DataName data."}
+DataName.mds %>%ggplot(aes(x=x, y=y, groups=Cluster)) + geom_point()
+```
+
+```{r getClusters}
+DataName.mds %>% arrange(Cluster) %>% kable(caption="Cluster memberships for the DataName data.")
+```

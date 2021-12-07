@@ -1,0 +1,44 @@
+```{r getLibs}
+library(tidyverse)
+library(broom)
+library(knitr)
+```
+
+```{r DataName.pc}
+DataName.pc = DataName %>%
+  select(where(is.numeric)) %>% 
+prcomp(center=TRUE, scale=FALSE)
+```
+
+
+```{r GetVariances}
+DataName.pc %>%
+  tidy(matrix = "pcs") %>% 
+kable(caption="Principal Component contributions for the DataName data.")
+```
+
+
+```{r ScreePlotDataName.pc, fig.cap="Scree plot for the principal components analysis of the DataName data."}
+DataName.pc %>% plot()
+```
+
+
+```{r getLoadings }
+DataName.pc$rotation %>%
+kable(caption="Principal Component Loadings for the DataName data.")
+```
+
+
+```{r biplotDataName.pc, fig.cap="Biplot for the DataName data."}
+DataName.pc %>% biplot()
+```
+
+```{r augmentDataName.pc}
+DataName.pc.fit = DataName.pc %>% augment(DataName)  
+```
+
+
+```{r scatterDataName.pc, fig.cap="Scatter plot of the first and second principle component scores."}
+DataName.pc.fit %>% ggplot(aes(x=.fittedPC1, y=.fittedPC2)) + 
+  geom_point(size = 1.5) 
+```

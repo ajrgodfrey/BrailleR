@@ -3,8 +3,9 @@
 
 ```{r DataName.hsd}
 library(multcomp)
+library(broom)
 DataName.hsd = glht(DataName.lm, linfct = mcp(FactorName = "Tukey"))
-summary(DataName.hsd)
+tidy(summary(DataName.hsd))
 cld(DataName.hsd)
 ```
 
