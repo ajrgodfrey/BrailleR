@@ -1,6 +1,7 @@
 
 ```{r getLibs}
 library(tidyverse)
+library(broom)
 library(knitr)
 ```
 
@@ -14,14 +15,14 @@ colnames(DataName.mds) = c("x", "y")
 ```
 
 ```{r DataName.kmeans}
-DataName.kmeans = kmeans(DataName.mds , 5)$cluster %>% 
-as.factor()
+DataName.kmeans = kmeans(DataName.mds , NClust)
+DataName.kmeans %>% tidy() %>% kable(caption="Cluster details fort he DataName data.")
 ```
 
 ```{r addClusters}
 DataName.mds = DataName.mds %>%
 as_tibble() %>%
-mutate(Labels = labels(DistMat), Cluster = DataName.kmeans)
+mutate(Labels = labels(DistMat), Cluster = as.factor(DataName.kmeans$cluster))
 ```
 
 

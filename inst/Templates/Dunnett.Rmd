@@ -1,14 +1,26 @@
 
+```{r getLibs}
+library(multcomp)
+library(tidyverse)
+library(knitr)
+library(broom)
+```
+
 ## Dunnett's procedure for comparing all treatments with a control
 
 ```{r DataName.Dunnett}
-library(multcomp)
-library(broom)
 DataName.Dunnett = glht(DataName.lm, linfct = mcp(FactorName = "Dunnett"))
-tidy(summary(DataName.Dunnett))
-cld(DataName.Dunnett)
+DataName.Dunnett %>% tidy() %>% kable(caption="Dunnett's multiple comparison procedure for the DataName data.)
 ```
 
-```{r plotDataName.Dunnett, fig.cap="Plot of Tukey's HSD for ResponseName grouped by FactorName."}
+```{r getSummary}
+DataName.Dunnett%>% summary() %>% tidy() %>% kable(caption="Summary of Dunnett's multiple comparison procedure for the DataName data.)
+```
+
+```{r getCLD}
+DataName.Dunnett%>% cld() %>% tidy() %>% kable(caption="Compact letter display of Dunnett's multiple comparison procedure for the DataName data.)
+```
+
+```{r plotDataName.Dunnett, fig.cap="Plot of Dunnett's procedure for ResponseName grouped by FactorName."}
 plot(DataName.Dunnett)
 ```
