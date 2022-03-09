@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -110,12 +110,12 @@
 
     
     
-<div class="section level1">
-<h1 id="the-brailler-package-example-1-">The BrailleR package Example 1.<a class="anchor" aria-label="anchor" href="#the-brailler-package-example-1-"></a>
-</h1>
 <div class="section level2">
-<h2 id="histograms">Histograms<a class="anchor" aria-label="anchor" href="#histograms"></a>
+<h2 id="the-brailler-package-example-1-">The BrailleR package Example 1.<a class="anchor" aria-label="anchor" href="#the-brailler-package-example-1-"></a>
 </h2>
+<div class="section level3">
+<h3 id="histograms">Histograms<a class="anchor" aria-label="anchor" href="#histograms"></a>
+</h3>
 <p>The first and most commonly used example demonstrating the value of the BrailleR package to a blind user is the creation of a histogram.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>
@@ -129,26 +129,27 @@ A histogram of 1000 random values from a normal distribution
 "x" is marked on the x-axis.
 Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
-Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 12 bins with equal widths, starting at -3 and ending at 3 .
+Tick marks for the y-axis are at: 0, 50, 100, and 150 
+It has 13 bins with equal widths, starting at -3.5 and ending at 3 .
 The mids and counts for the bins are:
-mid = -2.75  count = 5 
-mid = -2.25  count = 20 
-mid = -1.75  count = 45 
-mid = -1.25  count = 78 
-mid = -0.75  count = 147 
-mid = -0.25  count = 189 
-mid = 0.25  count = 193 
-mid = 0.75  count = 180 
-mid = 1.25  count = 91 
-mid = 1.75  count = 33 
+mid = -3.25  count = 4 
+mid = -2.75  count = 3 
+mid = -2.25  count = 14 
+mid = -1.75  count = 43 
+mid = -1.25  count = 98 
+mid = -0.75  count = 152 
+mid = -0.25  count = 187 
+mid = 0.25  count = 187 
+mid = 0.75  count = 163 
+mid = 1.25  count = 96 
+mid = 1.75  count = 38 
 mid = 2.25  count = 13 
-mid = 2.75  count = 6</code></pre>
+mid = 2.75  count = 2</code></pre>
 <p>The VI() command actually calls the VI.histogram() command as the hist() command creates an object of class “histogram”.</p>
 </div>
-<div class="section level2">
-<h2 id="important-features">Important features<a class="anchor" aria-label="anchor" href="#important-features"></a>
-</h2>
+<div class="section level3">
+<h3 id="important-features">Important features<a class="anchor" aria-label="anchor" href="#important-features"></a>
+</h3>
 <p>The VI() command has added to the impact of issuing the hist() command as the actual graphic is generated for the sighted audience. The blind student can read from the text description so that they can interpret the information that the histogram offers the sighted world.</p>
 <p>The above example showed the standard implementation of the hist() function. The hist() function of the graphics package does not store the additional arguments that improve the visual attractiveness. The solution (perhaps temporary) is to mask the original function with one included in the BrailleR package that calls the graphics package function, and then adds extra detail for any added plotting arguments.</p>
 <p>This is best illustrated using the example included in the BrailleR::hist() function.</p>
@@ -163,18 +164,18 @@ hist&gt; MyHist=graphics::hist(x, xlab="random normal values", main="Example his
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
+ [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   2  14  50 112 139 189 190 145  91  44  18   5
+ [1]   1   3  19  36  90 152 191 196 160  82  39  21   7   3
 
 $density
- [1] 0.002 0.004 0.028 0.100 0.224 0.278 0.378 0.380 0.290 0.182 0.088 0.036
-[13] 0.010
+ [1] 0.002 0.006 0.038 0.072 0.180 0.304 0.382 0.392 0.320 0.164 0.078 0.042
+[13] 0.014 0.006
 
 $mids
  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75
+[13]  2.75  3.25
 
 $xname
 [1] "x"
@@ -191,18 +192,18 @@ hist&gt; MyHist=hist(x, xlab="random normal values", main="Example histogram (Br
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
+ [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   2  14  50 112 139 189 190 145  91  44  18   5
+ [1]   1   3  19  36  90 152 191 196 160  82  39  21   7   3
 
 $density
- [1] 0.002 0.004 0.028 0.100 0.224 0.278 0.378 0.380 0.290 0.182 0.088 0.036
-[13] 0.010
+ [1] 0.002 0.006 0.038 0.072 0.180 0.304 0.382 0.392 0.320 0.164 0.078 0.042
+[13] 0.014 0.006
 
 $mids
  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75
+[13]  2.75  3.25
 
 $xname
 [1] "x"
@@ -231,21 +232,21 @@ $ExtraArgs$sub
 
 
 $NBars
-[1] 13
+[1] 14
 
 $par
 $par$xaxp
 [1] -3  3  6
 
 $par$yaxp
-[1]   0 150   3
+[1]   0 200   4
 
 
 $xTicks
 [1] -3 -2 -1  0  1  2  3
 
 $yTicks
-[1]   0  50 100 150
+[1]   0  50 100 150 200
 
 attr(,"class")
 [1] "Augmented" "histogram"
@@ -256,26 +257,27 @@ This is a histogram, with the title: Histogram of x
 "x" is marked on the x-axis.
 Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
-Tick marks for the y-axis are at: 0, 50, 100, and 150 
-It has 13 bins with equal widths, starting at -3.5 and ending at 3 .
+Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
+It has 14 bins with equal widths, starting at -3.5 and ending at 3.5 .
 The mids and counts for the bins are:
 mid = -3.25  count = 1 
-mid = -2.75  count = 2 
-mid = -2.25  count = 14 
-mid = -1.75  count = 50 
-mid = -1.25  count = 112 
-mid = -0.75  count = 139 
-mid = -0.25  count = 189 
-mid = 0.25  count = 190 
-mid = 0.75  count = 145 
-mid = 1.25  count = 91 
-mid = 1.75  count = 44 
-mid = 2.25  count = 18 
-mid = 2.75  count = 5</code></pre>
+mid = -2.75  count = 3 
+mid = -2.25  count = 19 
+mid = -1.75  count = 36 
+mid = -1.25  count = 90 
+mid = -0.75  count = 152 
+mid = -0.25  count = 191 
+mid = 0.25  count = 196 
+mid = 0.75  count = 160 
+mid = 1.25  count = 82 
+mid = 1.75  count = 39 
+mid = 2.25  count = 21 
+mid = 2.75  count = 7 
+mid = 3.25  count = 3</code></pre>
 </div>
-<div class="section level2">
-<h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
-</h2>
+<div class="section level3">
+<h3 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
+</h3>
 <p>The VI() function is partially reliant on the use of the hist() function that is included in the BrailleR package. If a histogram is created using a command that directly links to the original hist() command found in the graphics package, then the VI() command’s output will not be as useful to the blind user. This mainly affects the presentation of the title and axis labels; it should not affect the details of the counts etc. within the histogram itself.</p>
 <p>This behaviour could arise if the histogram is sought indirectly. If for example, a function offers (as a side effect) to create a histogram, the author of the function may have explicitly stated use of the hist() function from the graphics package using graphics::hist() instead of hist(). Use of graphics::hist() will bypass the BrailleR::hist() function that the VI() command needs. This should not create error messages.</p>
 </div>
@@ -299,7 +301,7 @@ mid = 2.75  count = 5</code></pre>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
