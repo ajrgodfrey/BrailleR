@@ -149,7 +149,7 @@ TabCapt = "Summary statistics for ',
 print(xtable(DataSummary, caption=TabCapt, label="',
                 ResponseName,
                 'GroupSummary", digits=4, align="lllrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-    ```  \n\n'),
+```  \n\n'),
             file = Filename, append = TRUE)
       }
 
@@ -207,7 +207,7 @@ TabCapt = "Summary statistics for ',
 print(xtable(DataSummary, caption=TabCapt, label="',
                 ResponseName,
                 'GroupSummary", digits=4, align="llrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-    ```  \n\n'),
+```  \n\n'),
             file = Filename, append = TRUE)
       }
 
@@ -254,7 +254,7 @@ TabCapt = "Summary statistics for ',
 print(xtable(DataSummary, caption=TabCapt, label="',
                 ResponseName,
                 'GroupSummary", digits=4, align="llrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-    ```  \n\n'),
+```  \n\n'),
             file = Filename, append = TRUE)
       }
 
@@ -301,7 +301,7 @@ TabCapt = "Summary statistics for ',
 print(xtable(DataSummary, caption=TabCapt, label="',
                 ResponseName,
                 'GroupSummary", digits=4, align="llrrrrr"), include.rownames = FALSE, file = ThisTexFile)
-    ```  \n\n'),
+```  \n\n'),
             file = Filename, append = TRUE)
       }
 
