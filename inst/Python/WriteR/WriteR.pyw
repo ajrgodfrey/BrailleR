@@ -210,14 +210,12 @@ class MainWindow(wx.Frame):
         self._mgr.SetManagedWindow(self)
         self.ChosenFontSize = 14
         self.font = wx.Font(self.ChosenFontSize, wx.MODERN, wx.NORMAL, wx.NORMAL, False, u'Consolas')
-        self.settingsFile = "WriteROptions"
         self.settings = {#'dirname': 'none',
 #                         'templates': 'none',
                          'lastdir': '.',
                          'filename': 'none',
                          'newText': "Use WriteR to edit your R markdown files, perhaps by starting from a template file",
                          'RDirectory': self.GetRDirectory()}
-        self.settings = self.getSettings(self.settingsFile, self.settings)
         if len(sys.argv) > 1:
             self.settings['lastdir'], self.settings['filename'] = split(realpath(sys.argv[-1]))
             self.filename = self.settings['filename']
@@ -852,7 +850,6 @@ class MainWindow(wx.Frame):
     def OnClose(self, event):
         self.settings['filename'] = self.filename
         self.settings['lastdir'] = self.dirname
-        self.setSettings(self.settingsFile, self.settings)
         if event.CanVeto() and self.editor.IsModified():
             hold = wx.MessageBox("Would you like to save your work?",
                                  "Save before exit?",
@@ -913,25 +910,6 @@ class MainWindow(wx.Frame):
         x = self.x
         pt = self.ClientToScreen(wx.Point(0, 0))
         return wx.Point(pt.x + x, pt.y + x)
-
-    def getSettings(self, filepath, settings):
-        try:
-            file = open(filepath, 'r')
-            sets = file.read()
-            file.close()
-            if len(sets) > 0:
-                sets = dcf_loads(sets)
-                assert (set(settings.keys()) == set(sets.keys()))
-                return sets
-        except:
-            pass
-        return self.setSettings(filepath, settings)
-
-    def setSettings(self, filepath, settings):
-        file = open(filepath, 'w')
-        file.write(dcf_dumps(settings))
-        file.close()
-        return settings
 
     def OnSettings(self, event):
         wx.MessageBox("You wanted to see the settings")

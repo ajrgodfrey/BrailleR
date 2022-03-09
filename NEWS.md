@@ -1,6 +1,7 @@
 # BrailleR 0.33.1
 - working on modernising other convenience functions
 - serious compaction of code was possible; used new internal functions where code is repeated over convenience functions
+- WriteR was updated so that it does not create a settings file anywhere. Python 3.8 works but 3.10 has issues getting the necessary wxpython module installed.
 
 
 # BrailleR 0.33.0

@@ -6,7 +6,7 @@ DataName %>% ggplot(aes(y=ResponseName, x=PredictorName)) + geom.point() + geom_
 ```{r DataName.lm}
 DataName.lm = lm(ResponseName ~ PredictorName, data=DataName)
 library(broom)
-augment(DataName.lm)
+DataName.lm.aug = augment(DataName.lm)
 summary(DataName.lm)
 ```
 
