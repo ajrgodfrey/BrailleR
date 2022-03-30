@@ -1,3 +1,5 @@
+## need to fix this to revert to spelling package
+
 SpellCheckFiles =
     function(file = ".", ignore = character(), local.ignore = TRUE,
              global.ignore = TRUE) {

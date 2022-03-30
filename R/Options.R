@@ -393,6 +393,25 @@ GoBlind =
       return(invisible(NULL))
     }
 
+GoAdvanced =
+    function() {
+      options(BrailleR.Advanced = TRUE)
+      message(
+          "By going advanced, you have reduced the verbosity of text descriptions of graphs.\n")
+      return(invisible(NULL))
+    }
+
+
+GoNovice =
+    function() {
+      options(BrailleR.Advanced = FALSE)
+      message(
+          "By going novice, you have returned to receiving all of the automatically generated text descriptions of graphs.\n")
+      return(invisible(NULL))
+    }
+
+
+
 ViewOn = function() {
            options(BrailleR.View = TRUE)
            message("You have turned the automatic opening of html pages on.\n")
