@@ -1,7 +1,7 @@
 \name{Options}
 \alias{GoBlind}
 \alias{GoSighted}
-\alias{GoBAdvanced}
+\alias{GoAdvanced}
 \alias{GoNovice}
 \alias{LatexOn}
 \alias{LatexOff}
