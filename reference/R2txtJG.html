@@ -20,7 +20,7 @@ They work as combinations of sink and history with a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -90,45 +90,55 @@ They work as combinations of sink and history with a
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">txtStart</span><span class="op">(</span><span class="va">file</span>, commands<span class="op">=</span><span class="cn">TRUE</span>, results<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">cmdfile</span>,
-          visible.only<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">txtOut</span><span class="op">(</span>Filename<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">txtStop</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">txtComment</span><span class="op">(</span><span class="va">txt</span>,<span class="va">cmdtxt</span><span class="op">)</span>
-
-<span class="fu">txtSkip</span><span class="op">(</span><span class="va">expr</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">txtStart</span><span class="op">(</span><span class="va">file</span>, commands<span class="op">=</span><span class="cn">TRUE</span>, results<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">cmdfile</span>,</span>
+<span>          visible.only<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">txtOut</span><span class="op">(</span>Filename<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">txtStop</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">txtComment</span><span class="op">(</span><span class="va">txt</span>,<span class="va">cmdtxt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">txtSkip</span><span class="op">(</span><span class="va">expr</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>Text file to save transcript in</p></dd>
+
 <dt>Filename</dt>
 <dd><p>A filename to be given for the <code>txtOut</code> command. If this is not specified, the user will be prompted for a filename. If the user presses the enter key, a filename will be automatically generated that is based on the current date and time.</p></dd>
-<dt>commands</dt>
+
+  <dt>commands</dt>
 <dd><p>Logical, should the commands be echoed to the
          transcript file</p></dd>
-<dt>results</dt>
+
+  <dt>results</dt>
 <dd><p>Logical, should the results be saved in the transcript
          file</p></dd>
-<dt>append</dt>
+
+  <dt>append</dt>
 <dd><p>Logical, should we append to <code>file</code> or replace it</p></dd>
-<dt>cmdfile</dt>
+
+  <dt>cmdfile</dt>
 <dd><p>A filename to store commands such that it can be
          <code>source</code>d or copied and pasted from</p></dd>
-<dt>visible.only</dt>
+
+  <dt>visible.only</dt>
 <dd><p>Should non-printed output be included, not
          currently implemented.</p></dd>
-<dt>txt</dt>
+
+  <dt>txt</dt>
 <dd><p>Text of a comment to be inserted into <code>file</code></p></dd>
-<dt>cmdtxt</dt>
+
+  <dt>cmdtxt</dt>
 <dd><p>Text of a comment to be inserted into <code>cmdfile</code></p></dd>
-<dt>expr</dt>
+
+  <dt>expr</dt>
 <dd><p>An expression to be executed without being included in
          <code>file</code> or <code>cmdfile</code></p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -177,8 +187,12 @@ They work as combinations of sink and history with a
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>Most of these commands do not return anything of use.  The exception is:
-<code>txtSkip</code> returns the value of <code>expr</code>.</p>
+    
+
+<p>Most of these commands do not return anything of use.  The exception is:</p>
+
+
+<p><code>txtSkip</code> returns the value of <code>expr</code>.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -200,18 +214,18 @@ then you should look into <code>Sweave</code> or the use of markdown documents..
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">txtStart</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">txtComment</span><span class="op">(</span><span class="st">'This is todays transcript'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/stem.html" class="external-link">stem</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">txtSkip</span><span class="op">(</span><span class="op">?</span><span class="va">hist</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="hist.html">hist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">txtStart</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">txtComment</span><span class="op">(</span><span class="st">'This is todays transcript'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/stem.html" class="external-link">stem</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">txtSkip</span><span class="op">(</span><span class="op">?</span><span class="va">hist</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hist.html">hist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -226,7 +240,7 @@ then you should look into <code>Sweave</code> or the use of markdown documents..
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

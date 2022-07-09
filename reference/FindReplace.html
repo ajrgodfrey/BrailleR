@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,29 +84,37 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">FindReplace</span><span class="op">(</span><span class="va">file</span>, <span class="va">find</span>, <span class="va">replace</span><span class="op">)</span>
-
-<span class="fu">Rnw2Rmd</span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
-
-<span class="fu">UseTemplate</span><span class="op">(</span><span class="va">file</span>, find<span class="op">=</span><span class="cn">NULL</span>, replace<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">UseTemplateList</span><span class="op">(</span><span class="va">newfile</span>, <span class="va">fileList</span>, find<span class="op">=</span><span class="cn">NULL</span>, replace<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">FindReplace</span><span class="op">(</span><span class="va">file</span>, <span class="va">find</span>, <span class="va">replace</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Rnw2Rmd</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">UseTemplate</span><span class="op">(</span><span class="va">file</span>, find<span class="op">=</span><span class="cn">NULL</span>, replace<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">UseTemplateList</span><span class="op">(</span><span class="va">newfile</span>, <span class="va">fileList</span>, find<span class="op">=</span><span class="cn">NULL</span>, replace<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file,fileList</dt>
 <dd><p>The external (text) file, template, or list of templates  to be updated.</p></dd>
+
 <dt>newfile</dt>
 <dd><p>the file to write output to</p></dd>
+
+
 <dt>find</dt>
 <dd><p>The text to remove.</p></dd>
+
+
 <dt>replace</dt>
 <dd><p>The text to insert.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>FindReplace will replace the existing file with the updated version while UseTemplate will return a character string which will usually be pushed out to an R script or R markdown file.</p>
+    
+
+<p>FindReplace will replace the existing file with the updated version while UseTemplate will return a character string which will usually be pushed out to an R script or R markdown file.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -121,9 +129,9 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">UseTemplate</span><span class="op">(</span><span class="st">"DTGroupSummary.R"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">UseTemplate</span><span class="op">(</span><span class="st">"DTGroupSummary.R"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "require(data.table)\nDataSummary = as.data.table(DataName)[, list(Mean = mean(ResponseName, na.rm=T), StdDev = sd(ResponseName, na.rm=T), N=sum(!is.na(ResponseName)) ), FactorSet] \nDataSummary$\"Standard Error\" =  DataSummary$StdDev/sqrt(DataSummary$N)\n"</span>
-<span class="r-in"><span class="fu">UseTemplate</span><span class="op">(</span><span class="st">"DTGroupSummary.R"</span>, <span class="st">"DataName"</span>, <span class="st">"MyData"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">UseTemplate</span><span class="op">(</span><span class="st">"DTGroupSummary.R"</span>, <span class="st">"DataName"</span>, <span class="st">"MyData"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "require(data.table)\nDataSummary = as.data.table(MyData)[, list(Mean = mean(ResponseName, na.rm=T), StdDev = sd(ResponseName, na.rm=T), N=sum(!is.na(ResponseName)) ), FactorSet] \nDataSummary$\"Standard Error\" =  DataSummary$StdDev/sqrt(DataSummary$N)\n"</span>
 </code></pre></div>
     </div>
@@ -139,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,31 +84,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ThreeFactors</span><span class="op">(</span><span class="va">Response</span>, <span class="va">Factor1</span>, <span class="va">Factor2</span>, <span class="va">Factor3</span>, Data <span class="op">=</span> <span class="cn">NULL</span>, Filename <span class="op">=</span> <span class="cn">NULL</span>, 
-    Folder <span class="op">=</span> <span class="cn">NULL</span>, VI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.VI"</span><span class="op">)</span>, Latex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Latex"</span><span class="op">)</span>, 
-    View <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.View"</span><span class="op">)</span>, Modern<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ThreeFactors</span><span class="op">(</span><span class="va">Response</span>, <span class="va">Factor1</span>, <span class="va">Factor2</span>, <span class="va">Factor3</span>, Data <span class="op">=</span> <span class="cn">NULL</span>, Filename <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>    Folder <span class="op">=</span> <span class="cn">NULL</span>, VI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.VI"</span><span class="op">)</span>, Latex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Latex"</span><span class="op">)</span>, </span>
+<span>    View <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.View"</span><span class="op">)</span>, Modern<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Response</dt>
 <dd><p>Name of the continuous response variable.</p></dd>
-<dt>Factor1, Factor2, Factor3</dt>
+
+  <dt>Factor1, Factor2, Factor3</dt>
 <dd><p>Name the three factors to be included.</p></dd>
-<dt>Data</dt>
+
+  <dt>Data</dt>
 <dd><p>Name the data.frame that includes the three variables of interest.</p></dd>
-<dt>Filename</dt>
+
+  <dt>Filename</dt>
 <dd><p>Name of the Rmarkdown and HTML files to be created. A default will be created that uses the names of the variables if this is left set to NULL.</p></dd>
-<dt>Folder</dt>
+
+  <dt>Folder</dt>
 <dd><p>Name of the folder to store graph and LaTeX files. A default will be created based on the name of the data.frame being used.</p></dd>
-<dt>VI</dt>
+
+  <dt>VI</dt>
 <dd><p>Logical: Should the VI method for blind users be employed?</p></dd>
-<dt>Latex</dt>
+
+  <dt>Latex</dt>
 <dd><p>Logical: Should the tabulated sections be saved in LaTeX format?</p></dd>
-<dt>View</dt>
+
+  <dt>View</dt>
 <dd><p>Logical: Should the HTML file be opened for inspection?</p></dd>
-<dt>Modern</dt>
+
+  <dt>Modern</dt>
 <dd><p>Logical: Should the graphics be createdusing ggplot?</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -129,12 +138,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">DIR</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">TestData</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Resp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">54</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>F1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span><span class="op">)</span>, </span>
-<span class="r-in">    F2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span><span class="op">)</span>, F3<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>,<span class="st">"h"</span>,<span class="st">"i"</span><span class="op">)</span>, rep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/attach.html" class="external-link">attach</a></span><span class="op">(</span><span class="va">TestData</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ThreeFactors</span><span class="op">(</span><span class="va">Resp</span>,<span class="va">F1</span>,<span class="va">F2</span>,<span class="va">F3</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">DIR</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">TestData</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Resp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">54</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>F1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>    F2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span><span class="op">)</span>, F3<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>,<span class="st">"h"</span>,<span class="st">"i"</span><span class="op">)</span>, rep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/attach.html" class="external-link">attach</a></span><span class="op">(</span><span class="va">TestData</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ThreeFactors</span><span class="op">(</span><span class="va">Resp</span>,<span class="va">F1</span>,<span class="va">F2</span>,<span class="va">F3</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: data.table</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: 'data.table'</span>
@@ -145,11 +154,11 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     between, first, last</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>stylesheet must either be valid CSS or a file containing CSS!</span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="va">TestData</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">TestData</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># N.B. Various files and a folder were created in a temporary directory. </span></span>
-<span class="r-in"><span class="co"># Please investigate them to see how this function worked.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">DIR</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="va">TestData</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">TestData</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># N.B. Various files and a folder were created in a temporary directory. </span></span></span>
+<span class="r-in"><span><span class="co"># Please investigate them to see how this function worked.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">DIR</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -164,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

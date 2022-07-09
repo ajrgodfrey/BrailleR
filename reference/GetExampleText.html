@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,21 +84,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">GetExampleText</span><span class="op">(</span><span class="va">topic</span>, package <span class="op">=</span> <span class="cn">NULL</span>, lib.loc <span class="op">=</span> <span class="cn">NULL</span>, character.only <span class="op">=</span> <span class="cn">FALSE</span>, outFile<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">GetExampleText</span><span class="op">(</span><span class="va">topic</span>, package <span class="op">=</span> <span class="cn">NULL</span>, lib.loc <span class="op">=</span> <span class="cn">NULL</span>, character.only <span class="op">=</span> <span class="cn">FALSE</span>, outFile<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>topic</dt>
 <dd><p>name or literal character string: the online help topic the examples of which should be run.</p></dd>
-<dt>package</dt>
+
+  <dt>package</dt>
 <dd><p>a character vector giving the package names to look into for the topic, or NULL (the default), when all packages on the search path are used.</p></dd>
-<dt>lib.loc</dt>
+
+  <dt>lib.loc</dt>
 <dd><p>a character vector of directory names of R libraries, or NULL. The default value of NULL corresponds to all libraries currently known. If the default is used, the loaded packages are searched before the libraries.</p></dd>
-<dt>character.only</dt>
+
+  <dt>character.only</dt>
 <dd><p>a logical indicating whether topic can be assumed to be a character string.</p></dd>
-<dt>outFile</dt>
+
+  <dt>outFile</dt>
 <dd><p>an optional filename to save the results into. The default is to use a temporary file.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -106,7 +111,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>a vector of character strings each element being one line of the examples from the corresponding help topic.</p>
+    
+
+<p>a vector of character strings each element being one line of the examples from the corresponding help topic.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -119,7 +126,7 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu">GetExampleText</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu">GetExampleText</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x &lt;- c(0:10, 50)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xm &lt;- mean(x)</span>
@@ -140,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,52 +84,63 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ChooseEmbosser</span><span class="op">(</span>Embosser <span class="op">=</span> <span class="st">"none"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">ChooseStyle</span><span class="op">(</span>css <span class="op">=</span> <span class="st">"BrailleR.css"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">ChooseSlideStyle</span><span class="op">(</span>css <span class="op">=</span> <span class="st">"JGSlides.css"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">ResetDefaults</span><span class="op">(</span>Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">SetAuthor</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BrailleR"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">SetBRLPointSize</span><span class="op">(</span><span class="va">pt</span>, Permanent <span class="op">=</span> <span class="cn">FALSE</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">SetPaperHeight</span><span class="op">(</span><span class="va">Inches</span>, Permanent <span class="op">=</span> <span class="cn">FALSE</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">SetPaperWidth</span><span class="op">(</span><span class="va">Inches</span>, Permanent <span class="op">=</span> <span class="cn">FALSE</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">SetLanguage</span><span class="op">(</span>Language <span class="op">=</span> <span class="st">"en_us"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">SetMakeUpper</span><span class="op">(</span><span class="va">Upper</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">SetPValDigits</span><span class="op">(</span><span class="va">digits</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">SetSigLevel</span><span class="op">(</span><span class="va">alpha</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ChooseEmbosser</span><span class="op">(</span>Embosser <span class="op">=</span> <span class="st">"none"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ChooseStyle</span><span class="op">(</span>css <span class="op">=</span> <span class="st">"BrailleR.css"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">ChooseSlideStyle</span><span class="op">(</span>css <span class="op">=</span> <span class="st">"JGSlides.css"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ResetDefaults</span><span class="op">(</span>Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">SetAuthor</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BrailleR"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">SetBRLPointSize</span><span class="op">(</span><span class="va">pt</span>, Permanent <span class="op">=</span> <span class="cn">FALSE</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">SetPaperHeight</span><span class="op">(</span><span class="va">Inches</span>, Permanent <span class="op">=</span> <span class="cn">FALSE</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">SetPaperWidth</span><span class="op">(</span><span class="va">Inches</span>, Permanent <span class="op">=</span> <span class="cn">FALSE</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">SetLanguage</span><span class="op">(</span>Language <span class="op">=</span> <span class="st">"en_us"</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">SetMakeUpper</span><span class="op">(</span><span class="va">Upper</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">SetPValDigits</span><span class="op">(</span><span class="va">digits</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">SetSigLevel</span><span class="op">(</span><span class="va">alpha</span>, Permanent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, Local <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>alpha</dt>
 <dd><p>The level of alpha to be used for analyses. Must be between zero and one or a warning is given and the option is not changed.</p></dd>
-<dt>css</dt>
+
+  <dt>css</dt>
 <dd><p>a cascading style sheet file to be inserted in HTML documents created by convenience functions. The file must be placed in the css folder within the MyBrailleR folder created by the user when prompted, for this to work.</p></dd>
-<dt>digits</dt>
+
+  <dt>digits</dt>
 <dd><p>The number of decimal places to display. Must be an integer greater than one or a warning is given and the option is not changed.</p></dd>
-<dt>Embosser</dt>
+
+  <dt>Embosser</dt>
 <dd><p>the name of the embosser to be used for tactile images. Not all embossers will be immediately supported by the package. The supported embossers are listed in the relevant section below. Please contact the package maintainer to introduce a new embosser to the list of supported models.</p></dd>
-<dt>Inches</dt>
+
+  <dt>Inches</dt>
 <dd><p>The size of the area to use for embossing. This should be the size of the embossed area not the actual size of the paper itself.</p></dd>
+
 <dt>Language</dt>
 <dd><p>The character string for the language files to be used in spell checking.</p></dd>
+
 <dt>Local</dt>
 <dd><p>Should the local copy of BrailleROptions be updated?</p></dd>
-<dt>name</dt>
+
+  <dt>name</dt>
 <dd><p>a character string to be used for author details in various file writing functions.</p></dd>
-<dt>Permanent</dt>
+
+  <dt>Permanent</dt>
 <dd><p>Should the change be made permanent? Set to FALSE for a temporary change.</p></dd>
+
 <dt>pt</dt>
 <dd><p>The point size of the chosen braille font.</p></dd>
+
 <dt>Upper</dt>
 <dd><p>Should the initial letter of variable names be capitalised in captions and filenames? Logical, initially set to TRUE.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -152,12 +163,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># SetSigLevel(5) # not a valid alpha</span></span>
-<span class="r-in"><span class="fu">SetSigLevel</span><span class="op">(</span><span class="fl">0.05</span>, Local<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co"># valid alpha value</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># SetSigLevel(5) # not a valid alpha</span></span></span>
+<span class="r-in"><span><span class="fu">SetSigLevel</span><span class="op">(</span><span class="fl">0.05</span>, Local<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co"># valid alpha value</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The BrailleR.SigLevel option for the level of alpha has been changed to 0.05.</span>
-<span class="r-in"><span class="fu">SetAuthor</span><span class="op">(</span>Local<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">SetAuthor</span><span class="op">(</span>Local<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The BrailleR.Author option has been updated to BrailleR.</span>
-<span class="r-in"><span class="fu">SetAuthor</span><span class="op">(</span><span class="st">"Jonathan Godfrey"</span>, Local<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">SetAuthor</span><span class="op">(</span><span class="st">"Jonathan Godfrey"</span>, Local<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The BrailleR.Author option has been updated to Jonathan Godfrey.</span>
 </code></pre></div>
     </div>
@@ -173,7 +184,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

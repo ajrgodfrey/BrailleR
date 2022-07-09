@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 2.0.2
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   BrailleRHistory: BrailleRHistory.html
@@ -10,5 +10,5 @@ articles:
   GettingStarted: GettingStarted.html
   IntroWriteR: IntroWriteR.html
   qplot: qplot.html
-last_built: 2022-03-31T01:35Z
+last_built: 2022-07-09T04:53Z
 

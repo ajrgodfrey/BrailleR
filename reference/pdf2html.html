@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,23 +84,29 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pdf2html</span><span class="op">(</span><span class="va">pdffile</span>, htmlfile<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">".pdf"</span>, <span class="st">".html"</span>, <span class="va">pdffile</span><span class="op">)</span>, HeadingLevels<span class="op">=</span><span class="fl">4</span>, PageTag<span class="op">=</span><span class="st">"h6"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pdf2html</span><span class="op">(</span><span class="va">pdffile</span>, htmlfile<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">".pdf"</span>, <span class="st">".html"</span>, <span class="va">pdffile</span><span class="op">)</span>, HeadingLevels<span class="op">=</span><span class="fl">4</span>, PageTag<span class="op">=</span><span class="st">"h6"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pdffile</dt>
 <dd><p>A pdf file to be converted.</p></dd>
+
 <dt>htmlfile</dt>
 <dd><p>The filename for the resulting html; default is to change the file extension.</p></dd>
+
 <dt>HeadingLevels</dt>
 <dd><p>The depth of heading level to include; tags h1, h2, h3... are used.</p></dd>
+
 <dt>PageTag</dt>
 <dd><p>Which tag to use for replacing page numbers; default is h6, but any tag could be used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Logical: Has the conversion completed. Note that this does not mean the result is totally useful as this will depend on the quality of the input file.</p>
+    
+
+<p>Logical: Has the conversion completed. Note that this does not mean the result is totally useful as this will depend on the quality of the input file.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -123,7 +129,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

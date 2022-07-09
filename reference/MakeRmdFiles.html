@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,26 +84,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">History2Rmd</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"History.Rmd"</span><span class="op">)</span>
-
-<span class="fu">R2Rmd</span><span class="op">(</span><span class="va">ScriptFile</span><span class="op">)</span>
-
-<span class="fu">ProcessAllMd</span><span class="op">(</span>dir <span class="op">=</span><span class="st">"."</span><span class="op">)</span>
-<span class="fu">ProcessAllRmd</span><span class="op">(</span>dir <span class="op">=</span><span class="st">"."</span>, method <span class="op">=</span> <span class="st">"render"</span><span class="op">)</span>
-
-<span class="fu">RemoveBOM</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">History2Rmd</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"History.Rmd"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">R2Rmd</span><span class="op">(</span><span class="va">ScriptFile</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ProcessAllMd</span><span class="op">(</span>dir <span class="op">=</span><span class="st">"."</span><span class="op">)</span></span>
+<span><span class="fu">ProcessAllRmd</span><span class="op">(</span>dir <span class="op">=</span><span class="st">"."</span>, method <span class="op">=</span> <span class="st">"render"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">RemoveBOM</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dir</dt>
 <dd><p>The directory to find files.</p></dd>
-<dt>file</dt>
+
+  <dt>file</dt>
 <dd><p>the name of the file to be created or modified.</p></dd>
-<dt>method</dt>
+
+  <dt>method</dt>
 <dd><p>The method used to process Rmd files; one of "render" or "knit2html".</p></dd>
-<dt>ScriptFile</dt>
+
+  <dt>ScriptFile</dt>
 <dd><p>the R script to be processed into the R markdown file.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -136,7 +140,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

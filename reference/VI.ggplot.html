@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,28 +84,35 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for ggplot</span>
-<span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, threshold<span class="op">=</span><span class="fl">10</span>, 
-   template<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"whisker/VIdefault.txt"</span>, package<span class="op">=</span><span class="st">"BrailleR"</span><span class="op">)</span>,
-   <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for ggplot</span></span>
+<span><span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, threshold<span class="op">=</span><span class="fl">10</span>, </span>
+<span>   template<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"whisker/VIdefault.txt"</span>, package<span class="op">=</span><span class="st">"BrailleR"</span><span class="op">)</span>,</span>
+<span>   <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>an object created by ggplot() or qplot() from the ggplot2 package which therefore has class gg or ggplot.</p></dd>
+
 <dt>Describe</dt>
 <dd><p>Should the Describe function be called at the same time. Not currently implemented for ggplot objects.</p></dd>
+
 <dt>threshold</dt>
 <dd><p>Maximum number of data items that should be individually listed in the output.</p></dd>
+
 <dt>template</dt>
 <dd><p>Template file, in mustache format, to be used in creating the text</p></dd>
+
 <dt>...</dt>
 <dd><p>other arguments, currently ignored</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a structure containing a hierarchical representation of the graph as well as the text description as a character vector.  When run interactively, the text
+    
+
+<p>Returns a structure containing a hierarchical representation of the graph as well as the text description as a character vector.  When run interactively, the text
 description is printed.</p>
     </div>
     <div id="note">
@@ -122,12 +129,12 @@ misleading in some circumstances.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in"><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">economics_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">value01</span>, colour <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">g</span> <span class="op">=</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">'dummy title'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">g</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">economics_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">value01</span>, colour <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">'dummy title'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="VI.ggplot-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This chart has title 'dummy title'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'date' with labels 1970, 1980, 1990, 2000 and 2010.</span>
@@ -163,7 +170,7 @@ misleading in some circumstances.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

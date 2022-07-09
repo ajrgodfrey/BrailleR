@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,22 +84,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">WriteR</span><span class="op">(</span>file <span class="op">=</span> <span class="cn">NULL</span>, math <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"webTeX"</span>, <span class="st">"MathJax"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">TestPython</span><span class="op">(</span><span class="op">)</span>
-<span class="fu">TestWX</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">PrepareWriteR</span><span class="op">(</span>Author <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Author"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">WriteR</span><span class="op">(</span>file <span class="op">=</span> <span class="cn">NULL</span>, math <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"webTeX"</span>, <span class="st">"MathJax"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">TestPython</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">TestWX</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">PrepareWriteR</span><span class="op">(</span>Author <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Author"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Author</dt>
 <dd><p>Your name as you want it to appear in the default text that starts your R markdown documents.</p></dd>
+
 <dt>file</dt>
 <dd><p>The filename you want started. Not implemented yet.</p></dd>
+
 <dt>math</dt>
 <dd><p>The style for mathematical content in HTML documents created using LaTeX input. Not yet implemented.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -131,7 +134,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

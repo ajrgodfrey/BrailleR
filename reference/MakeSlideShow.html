@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,21 +84,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">MakeAllInOneSlide</span><span class="op">(</span><span class="va">Folder</span>, Style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.SlideStyle"</span><span class="op">)</span>, file<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-<span class="fu">MakeSlidy</span><span class="op">(</span><span class="va">Folder</span>, file <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-<span class="fu">MakeSlideShow</span><span class="op">(</span><span class="va">Folder</span>, Style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.SlideStyle"</span><span class="op">)</span>, ContentsSlide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">MakeAllInOneSlide</span><span class="op">(</span><span class="va">Folder</span>, Style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.SlideStyle"</span><span class="op">)</span>, file<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">MakeSlidy</span><span class="op">(</span><span class="va">Folder</span>, file <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">MakeSlideShow</span><span class="op">(</span><span class="va">Folder</span>, Style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.SlideStyle"</span><span class="op">)</span>, ContentsSlide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Folder</dt>
 <dd><p>name of the folder in the current working directory that contains the set of Rmd files.</p></dd>
-<dt>Style</dt>
+
+  <dt>Style</dt>
 <dd><p>Choose the cascading style sheet file to be applied. The file is looked for in three places: Your MyBrailleR folder, the current working directory, and finally the folder with the Rmd files. The last one found is the one that gets used if multiple copies exist.</p></dd>
+
 <dt>file</dt>
 <dd><p>The filename to use for the Rmd and HTML files. These files will be overwritten if they already exist.</p></dd>
-<dt>ContentsSlide</dt>
+
+  <dt>ContentsSlide</dt>
 <dd><p>Do you want links for the extra slide that has links to all slides? The file will be called 00_Contents.html</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -109,7 +113,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A printout of the slides made in the order they will appear. The HTML files are in the current working directory.</p>
+    
+
+<p>A printout of the slides made in the order they will appear. The HTML files are in the current working directory.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -132,7 +138,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

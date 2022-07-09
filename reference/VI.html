@@ -18,7 +18,7 @@ The method includes representations of summary methods that are more suitable fo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -86,35 +86,39 @@ The method includes representations of summary methods that are more suitable fo
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">Describe</span><span class="op">(</span><span class="va">x</span>, VI<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for histogram</span>
-<span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for histogram</span>
-<span class="fu">Describe</span><span class="op">(</span><span class="va">x</span>, VI<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for aov</span>
-<span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for htest</span>
-<span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span>,  <span class="va">...</span><span class="op">)</span> 
-
-
-<span class="co"># S3 method for lm</span>
-<span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Describe</span><span class="op">(</span><span class="va">x</span>, VI<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for histogram</span></span>
+<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for histogram</span></span>
+<span><span class="fu">Describe</span><span class="op">(</span><span class="va">x</span>, VI<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for aov</span></span>
+<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for htest</span></span>
+<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span>,  <span class="va">...</span><span class="op">)</span> </span>
+<span></span>
+<span></span>
+<span><span class="co"># S3 method for lm</span></span>
+<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>any <span style="R">R</span> object</p></dd>
+
 <dt>Describe,VI</dt>
 <dd><p>Should the other function be called at the same time</p></dd>
+
 <dt>digits </dt>
 <dd><p>number of decimal places to show</p></dd>
+
 <dt>...</dt>
 <dd><p>other arguments, currently ignored</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -125,10 +129,18 @@ The method includes representations of summary methods that are more suitable fo
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>This will vary according to the needs of vision impaired users and the specific objects that need to be interpreted.
-In general, the output from VI() is a series of text strings printed in the console/terminal window in addition to the embedded command's normal functionality. The <code>VI.lm()</code> method is the first to move away from this idea and use a process that builds on the <code><a href="UniDesc.html">UniDesc()</a></code> function. In this case, the method creates an R markdown file and compiles it into HTML. The HTML document is opened if the R session is interactive.
-The VI() functions do not create objects as do many <span style="R">R</span> commands. Manipulations on the objects created by regular <span style="R">R</span> expressions will need those regular expressions issued in addition to those of the VI family of functions. The <code>VI.lm()</code> method does create objects in the current workspace and then deletes them once the HTML document is compiled.
-The Describe() family of functions do create an object for passing onto other functions.</p>
+    
+
+<p>This will vary according to the needs of vision impaired users and the specific objects that need to be interpreted.</p>
+
+
+<p>In general, the output from VI() is a series of text strings printed in the console/terminal window in addition to the embedded command's normal functionality. The <code>VI.lm()</code> method is the first to move away from this idea and use a process that builds on the <code><a href="UniDesc.html">UniDesc()</a></code> function. In this case, the method creates an R markdown file and compiles it into HTML. The HTML document is opened if the R session is interactive.</p>
+
+
+<p>The VI() functions do not create objects as do many <span style="R">R</span> commands. Manipulations on the objects created by regular <span style="R">R</span> expressions will need those regular expressions issued in addition to those of the VI family of functions. The <code>VI.lm()</code> method does create objects in the current workspace and then deletes them once the HTML document is compiled.</p>
+
+
+<p>The Describe() family of functions do create an object for passing onto other functions.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -141,31 +153,30 @@ The Describe() family of functions do create an object for passing onto other fu
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">RandomX</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">PlottedFig</span><span class="op">=</span><span class="fu"><a href="hist.html">hist</a></span><span class="op">(</span><span class="va">RandomX</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">RandomX</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">PlottedFig</span><span class="op">=</span><span class="fu"><a href="hist.html">hist</a></span><span class="op">(</span><span class="va">RandomX</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="VI-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">VI</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">VI</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This is a histogram, with the title: Histogram of RandomX</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "RandomX" is marked on the x-axis.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -2, -1, 0, 1, 2, and 3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are a total of 500 elements for this variable.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It has 13 bins with equal widths, starting at -3 and ending at 3.5 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, 100, and 120 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has 12 bins with equal widths, starting at -2.5 and ending at 3.5 .</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The mids and counts for the bins are:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.75  count = 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.25  count = 7 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 12 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 39 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 81 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 87 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 101 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 78 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 49 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 20 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 34 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 79 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 95 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 119 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 72 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 34 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 23 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.25  count = 1</span>
-<span class="r-in"><span class="fu">Describe</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">Describe</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A histogram created using the base graphics package.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> General description: A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present.</span>
@@ -188,7 +199,7 @@ The Describe() family of functions do create an object for passing onto other fu
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,31 +84,43 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SpellCheckFiles</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"."</span>, ignore <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>, 
-    local.ignore <span class="op">=</span> <span class="cn">TRUE</span>, global.ignore <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
-
-<span class="co"># S3 method for wordlist</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SpellCheckFiles</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"."</span>, ignore <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>    local.ignore <span class="op">=</span> <span class="cn">TRUE</span>, global.ignore <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S3 method for wordlist</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>The filename of an individual file, or an individual folder.</p></dd>
+
+
 <dt>ignore</dt>
 <dd><p>The character vector of words to be ignored by hunspell</p></dd>
+
+
 <dt>local.ignore</dt>
 <dd><p>Use a local file of words to be ignored. This file has the same name as the file with .ignore.txt tacked on the end and is colocated with the file being checked. If the file argument is set to a folder then the local.ignore can be set to the name of a file in the current working directory.</p></dd>
+
+
 <dt>global.ignore</dt>
 <dd><p>Use the global word list called words.ignore.txt found in the MyBrailleR folder</p></dd>
+
+
 <dt>x</dt>
 <dd><p>the object to be printed</p></dd>
+
 <dt>...</dt>
 <dd><p>other parameters pass to the print method</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list object with each item of the list being the findings from spell checking each file. The words not found in the dictionary are given as well as the line numbers where they were found.</p>
+    
+
+<p>A list object with each item of the list being the findings from spell checking each file. The words not found in the dictionary are given as well as the line numbers where they were found.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -135,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

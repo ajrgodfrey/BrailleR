@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,32 +84,41 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">OnePredictor</span><span class="op">(</span><span class="va">Response</span>, <span class="va">Predictor</span>, Data <span class="op">=</span> <span class="cn">NULL</span>, 
-    Filename <span class="op">=</span> <span class="cn">NULL</span>, Folder <span class="op">=</span> <span class="cn">NULL</span>, 
-    VI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.VI"</span><span class="op">)</span>, Latex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Latex"</span><span class="op">)</span>, 
-   View <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.View"</span><span class="op">)</span>, Modern<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">OnePredictor</span><span class="op">(</span><span class="va">Response</span>, <span class="va">Predictor</span>, Data <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>    Filename <span class="op">=</span> <span class="cn">NULL</span>, Folder <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>    VI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.VI"</span><span class="op">)</span>, Latex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.Latex"</span><span class="op">)</span>, </span>
+<span>   View <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"BrailleR.View"</span><span class="op">)</span>, Modern<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Response</dt>
 <dd><p>Name of the continuous response variable.</p></dd>
-<dt>Predictor</dt>
+
+  <dt>Predictor</dt>
 <dd><p>Name of the continuous response variable.</p></dd>
-<dt>Data</dt>
+
+  <dt>Data</dt>
 <dd><p>The data.frame that contains both the response and the factor.</p></dd>
-<dt>Filename</dt>
+
+  <dt>Filename</dt>
 <dd><p>Name of the Rmarkdown and HTML files to be created. A default will be created that uses the names of the variables if this is left set to NULL.</p></dd>
-<dt>Folder</dt>
+
+  <dt>Folder</dt>
 <dd><p>Name of the folder to store graph and LaTeX files. A default will be created based on the name of the data.frame being used.</p></dd>
-<dt>VI</dt>
+
+  <dt>VI</dt>
 <dd><p>Logical: Should the VI method for blind users be employed?</p></dd>
-<dt>Latex</dt>
+
+  <dt>Latex</dt>
 <dd><p>Logical: Should the tabulated sections be saved in LaTeX format?</p></dd>
-<dt>View</dt>
+
+  <dt>View</dt>
 <dd><p>Logical: Should the HTML file be opened for inspection?</p></dd>
-<dt>Modern</dt>
+
+  <dt>Modern</dt>
 <dd><p>Logical: Should the graphics be createdusing ggplot?</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -130,15 +139,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span><span class="op">)</span><span class="op">{</span> <span class="co"># used in a dependent function's Rmd file</span></span>
-<span class="r-in"><span class="va">DIR</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">OnePredictor</span><span class="op">(</span><span class="st">"Ozone"</span>, <span class="st">"Wind"</span>, <span class="va">airquality</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># N.B. Various files and a folder were created in a temporary directory. </span></span>
-<span class="r-in"><span class="co"># Please investigate them to see how this function worked.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">DIR</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">nortest</span><span class="op">)</span><span class="op">)</span><span class="op">{</span> <span class="co"># used in a dependent function's Rmd file</span></span></span>
+<span class="r-in"><span><span class="va">DIR</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">OnePredictor</span><span class="op">(</span><span class="st">"Ozone"</span>, <span class="st">"Wind"</span>, <span class="va">airquality</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># N.B. Various files and a folder were created in a temporary directory. </span></span></span>
+<span class="r-in"><span><span class="co"># Please investigate them to see how this function worked.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">DIR</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: nortest</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>semi-transparency is not supported on this device: reported only once per page</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>semi-transparency is not supported on this device: reported only once per page</span>
@@ -157,7 +166,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

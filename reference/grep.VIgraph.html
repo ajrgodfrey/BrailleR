@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -86,23 +86,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for VIgraph</span>
-<span class="fu">grep</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for VIgraph</span>
-<span class="fu">gsub</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">replacement</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for VIgraph</span></span>
+<span><span class="fu">grep</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for VIgraph</span></span>
+<span><span class="fu">gsub</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">replacement</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pattern</dt>
 <dd><p>Regular expression for matching, as per <code>grep</code></p></dd>
-<dt>replacement</dt>
+
+  <dt>replacement</dt>
 <dd><p>Replacement text, as per <code>gsub</code></p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>object returned by <code>VI.ggplot</code></p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>other arguments passed on to <code>grep</code> or <code>gsub</code>
     to control matching behaviour</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -116,7 +120,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a new object of the same type as that returned by VI.ggplot, but
+    
+
+<p>Returns a new object of the same type as that returned by VI.ggplot, but
   with the text component restricted to only those lines that matched the
   pattern or with the text component replaced.</p>
     </div>
@@ -127,10 +133,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu">grep</span><span class="op">(</span><span class="st">"axis"</span>, <span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu">gsub</span><span class="op">(</span><span class="st">"labels"</span>, <span class="st">"tick labels"</span>, <span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">grep</span><span class="op">(</span><span class="st">"axis"</span>, <span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu">gsub</span><span class="op">(</span><span class="st">"labels"</span>, <span class="st">"tick labels"</span>, <span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This is an untitled chart with no subtitle or caption.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis '1' with tick labels 0.950, 0.975, 1.000, 1.025 and 1.050.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis '1' with tick labels 0.950, 0.975, 1.000, 1.025 and 1.050.</span>
@@ -151,7 +157,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

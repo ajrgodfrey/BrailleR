@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,15 +84,17 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">boxplot</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">boxplot</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>a numeric variable.</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments passed on to the plotting function.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -100,7 +102,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class boxplot. This class is just a placeholder for the contents of the object used to create a boxplot which would otherwise not be stored in a usable format. The class is not intended for the user; it is a tool that enables the BrailleR package to deliver a readable text version of the plot.</p>
+    
+
+<p>An object of class boxplot. This class is just a placeholder for the contents of the object used to create a boxplot which would otherwise not be stored in a usable format. The class is not intended for the user; it is a tool that enables the BrailleR package to deliver a readable text version of the plot.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -122,29 +126,29 @@ Godfrey, A.J.R. (2013) ‘Statistical Software from a Blind Person's Perspective
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">op</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfcol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># the stamdard boxplot function returns</span></span>
-<span class="r-in"><span class="va">MyBoxplot</span><span class="op">=</span><span class="fu">graphics</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">x</span>, main<span class="op">=</span><span class="st">"Example boxplot (graphics package)"</span>, horizontal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">MyBoxplot</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">op</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfcol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># the stamdard boxplot function returns</span></span></span>
+<span class="r-in"><span><span class="va">MyBoxplot</span><span class="op">=</span><span class="fu">graphics</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">x</span>, main<span class="op">=</span><span class="st">"Example boxplot (graphics package)"</span>, horizontal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">MyBoxplot</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stats</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -2.68524406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.66990042</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.01250112</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.69618794</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  2.64923712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -2.4890907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.6059549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.0426042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.6611257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  2.5053857</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $conf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.05575410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.08075635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.0207042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.1059126</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $out</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2.794145  2.867109 -2.816850  2.901640  2.868102  3.054491 -3.282247</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -2.912102 -2.571517  2.607862 -2.730452 -2.834126  2.601026 -2.574684</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 1 1 1 1 1</span>
@@ -152,29 +156,29 @@ Godfrey, A.J.R. (2013) ‘Statistical Software from a Blind Person's Perspective
 <span class="r-out co"><span class="r-pr">#&gt;</span> $names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># while this version returns</span></span>
-<span class="r-in"><span class="va">MyBoxplot</span><span class="op">=</span><span class="fu">boxplot</span><span class="op">(</span><span class="va">x</span>, main<span class="op">=</span><span class="st">"Example boxplot (BrailleR package)"</span>, horizontal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># while this version returns</span></span></span>
+<span class="r-in"><span><span class="va">MyBoxplot</span><span class="op">=</span><span class="fu">boxplot</span><span class="op">(</span><span class="va">x</span>, main<span class="op">=</span><span class="st">"Example boxplot (BrailleR package)"</span>, horizontal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="boxplot-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="va">MyBoxplot</span></span>
+<span class="r-in"><span><span class="va">MyBoxplot</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stats</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -2.68524406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.66990042</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.01250112</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.69618794</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  2.64923712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -2.4890907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.6059549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.0426042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.6611257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  2.5053857</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $conf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.05575410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.08075635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.0207042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.1059126</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $out</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2.794145  2.867109 -2.816850  2.901640  2.868102  3.054491 -3.282247</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -2.912102 -2.571517  2.607862 -2.730452 -2.834126  2.601026 -2.574684</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 1 1 1 1 1</span>
@@ -194,14 +198,14 @@ Godfrey, A.J.R. (2013) ‘Statistical Software from a Blind Person's Perspective
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par$xaxp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3  3  6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3  2  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par$yaxp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6 1.4 4.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $xTicks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3 -2 -1  0  1  2  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3 -2 -1  0  1  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $yTicks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6 0.8 1.0 1.2 1.4</span>
@@ -240,21 +244,21 @@ Godfrey, A.J.R. (2013) ‘Statistical Software from a Blind Person's Perspective
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Augmented" "boxplot"  </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># The VI() method then uses the extra information stored</span></span>
-<span class="r-in"><span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">MyBoxplot</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># The VI() method then uses the extra information stored</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">MyBoxplot</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This graph has a boxplot printed horizontally</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> with the title: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "" appears on the x-axis.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "" appears on the y-axis.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, and 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This variable  has 1000 values.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> An outlier is marked at: 2.794145 2.867109 -2.81685 2.90164 2.868102 3.054491 -3.282247 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The whiskers extend to -2.685244 and 2.649237 from the ends of the box, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> which are at -0.6699004 and 0.6961879 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The median, 0.01250112 is 50 % from the left end of the box to the right end.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The right whisker is 0.97 times the length of the left whisker.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> An outlier is marked at: -2.912102 -2.571517 2.607862 -2.730452 -2.834126 2.601026 -2.574684 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The whiskers extend to -2.489091 and 2.505386 from the ends of the box, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> which are at -0.6059549 and 0.6611257 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The median, 0.0426042 is 51 % from the left end of the box to the right end.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The right whisker is 0.98 times the length of the left whisker.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
@@ -270,7 +274,7 @@ Godfrey, A.J.R. (2013) ‘Statistical Software from a Blind Person's Perspective
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -132,47 +132,47 @@
 </h2>
 <p>The basic graph that has been used for almost every presentation of the BrailleR package is a histogram. There is a more detailed example, but the following commands create a set of numbers that can be kept for further processing once the graph has been created. It is the re-processing of these numbers that leads to the text description that follows.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ajrgodfrey/BrailleR" class="external-link">BrailleR</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## The BrailleR.View,  option is set to FALSE.</span></code></pre>
-<pre><code><span class="co">## </span>
-<span class="co">## Attaching package: 'BrailleR'</span></code></pre>
-<pre><code><span class="co">## The following objects are masked from 'package:graphics':</span>
-<span class="co">## </span>
-<span class="co">##     boxplot, hist</span></code></pre>
-<pre><code><span class="co">## The following object is masked from 'package:utils':</span>
-<span class="co">## </span>
-<span class="co">##     history</span></code></pre>
-<pre><code><span class="co">## The following objects are masked from 'package:base':</span>
-<span class="co">## </span>
-<span class="co">##     grep, gsub</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ajrgodfrey/BrailleR" class="external-link">BrailleR</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## The BrailleR.View,  option is set to FALSE.</span></span></code></pre>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Attaching package: 'BrailleR'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:graphics':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     boxplot, hist</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:utils':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     history</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     grep, gsub</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>
-<span class="fu"><a href="../reference/VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="../reference/hist.html">hist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="../reference/hist.html">hist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="BrailleRHistory_files/figure-html/hist-1.png" alt="A histogram of 1000 random values from a normal distribution" width="700"><p class="caption">
 A histogram of 1000 random values from a normal distribution
 </p>
 </div>
-<pre><code><span class="co">## This is a histogram, with the title: Histogram of x</span>
-<span class="co">## "x" is marked on the x-axis.</span>
-<span class="co">## Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
-<span class="co">## There are a total of 1000 elements for this variable.</span>
-<span class="co">## Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 </span>
-<span class="co">## It has 13 bins with equal widths, starting at -3 and ending at 3.5 .</span>
-<span class="co">## The mids and counts for the bins are:</span>
-<span class="co">## mid = -2.75  count = 7 </span>
-<span class="co">## mid = -2.25  count = 17 </span>
-<span class="co">## mid = -1.75  count = 48 </span>
-<span class="co">## mid = -1.25  count = 76 </span>
-<span class="co">## mid = -0.75  count = 143 </span>
-<span class="co">## mid = -0.25  count = 172 </span>
-<span class="co">## mid = 0.25  count = 214 </span>
-<span class="co">## mid = 0.75  count = 156 </span>
-<span class="co">## mid = 1.25  count = 102 </span>
-<span class="co">## mid = 1.75  count = 40 </span>
-<span class="co">## mid = 2.25  count = 19 </span>
-<span class="co">## mid = 2.75  count = 4 </span>
-<span class="co">## mid = 3.25  count = 2</span></code></pre>
+<pre><code><span><span class="co">## This is a histogram, with the title: Histogram of x</span></span>
+<span><span class="co">## "x" is marked on the x-axis.</span></span>
+<span><span class="co">## Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span></span>
+<span><span class="co">## There are a total of 1000 elements for this variable.</span></span>
+<span><span class="co">## Tick marks for the y-axis are at: 0, 50, 100, and 150 </span></span>
+<span><span class="co">## It has 13 bins with equal widths, starting at -3 and ending at 3.5 .</span></span>
+<span><span class="co">## The mids and counts for the bins are:</span></span>
+<span><span class="co">## mid = -2.75  count = 3 </span></span>
+<span><span class="co">## mid = -2.25  count = 15 </span></span>
+<span><span class="co">## mid = -1.75  count = 51 </span></span>
+<span><span class="co">## mid = -1.25  count = 110 </span></span>
+<span><span class="co">## mid = -0.75  count = 141 </span></span>
+<span><span class="co">## mid = -0.25  count = 188 </span></span>
+<span><span class="co">## mid = 0.25  count = 175 </span></span>
+<span><span class="co">## mid = 0.75  count = 153 </span></span>
+<span><span class="co">## mid = 1.25  count = 84 </span></span>
+<span><span class="co">## mid = 1.75  count = 55 </span></span>
+<span><span class="co">## mid = 2.25  count = 16 </span></span>
+<span><span class="co">## mid = 2.75  count = 7 </span></span>
+<span><span class="co">## mid = 3.25  count = 2</span></span></code></pre>
 <p>This first example showed me what was possible if only I could get a few things sorted out. All histograms are created by a function that stores the results (both numeric and text details) and called the stored set of numbers a “histogram”. The main issue is that storing the set of details is not consistent in R, nor is the fact that the stored object gets given a “class” to tell me what type of object it is. This problem haunted me for quite some time because I was talking to the wrong people about the problem; it was time to find people that held the solution instead of talking to the people that would benefit if a solution was found.</p>
 </div>
 <div class="section level2">
@@ -294,7 +294,7 @@ A histogram of 1000 random values from a normal distribution
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

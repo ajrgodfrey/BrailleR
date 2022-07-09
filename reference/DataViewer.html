@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BrailleR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.33.2</span>
       </span>
     </div>
 
@@ -84,19 +84,23 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">DataViewer</span><span class="op">(</span><span class="va">x</span>, Update <span class="op">=</span> <span class="cn">FALSE</span>, New <span class="op">=</span> <span class="cn">NULL</span>, Filename <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">DataViewer</span><span class="op">(</span><span class="va">x</span>, Update <span class="op">=</span> <span class="cn">FALSE</span>, New <span class="op">=</span> <span class="cn">NULL</span>, Filename <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>an object of class data.frame, matrix, or vector. A check is made for this condition.</p></dd>
-<dt>Update</dt>
+
+  <dt>Update</dt>
 <dd><p>Logical. Will changes made in the spreadsheet editor be returned to the R session.</p></dd>
-<dt>New</dt>
+
+  <dt>New</dt>
 <dd><p>If Update=TRUE, the original object will be replaced unless a name for a new object is given. N.B. the default is to overwrite the original object.</p></dd>
-<dt>Filename</dt>
+
+  <dt>Filename</dt>
 <dd><p>Provide a filename if desired. N.B. this does not guarantee that the csv file will be kept. Do not use this function as a shortcut for saving csv files.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -114,11 +118,11 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">DataViewer</span><span class="op">(</span><span class="va">airquality</span>, Update<span class="op">=</span><span class="cn">TRUE</span>, New<span class="op">=</span><span class="st">"NewAirQuality"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">DataViewer</span><span class="op">(</span><span class="va">airquality</span>, Update<span class="op">=</span><span class="cn">TRUE</span>, New<span class="op">=</span><span class="st">"NewAirQuality"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>This function is meant for use in interactive mode only.</span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +137,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
