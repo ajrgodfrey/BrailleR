@@ -1,3 +1,6 @@
+# BrailleR 0.33.2
+- updated batch file creation so that it allows search for current version of R.
+
 # BrailleR 0.33.1
 - working on modernising other convenience functions
 - serious compaction of code was possible; used new internal functions where code is repeated over convenience functions

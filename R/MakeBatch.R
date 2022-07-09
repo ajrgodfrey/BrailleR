@@ -2,7 +2,7 @@
 # Windows users only
 
 MakeBatch =
-    function(file = NULL) {
+    function(file = NULL, static=FALSE) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
           RHome = gsub("/", "\\\\", Sys.getenv("R_HOME"))
@@ -25,16 +25,16 @@ MakeBatch =
                 file = "ProcessAllMd.bat")
                                     .NewFile(file = "ProcessAllMd.bat")
 
-            message(
-                "These files need to be moved to a folder that is on your system path.")
+            .MoveOntoPath()
+
             # write a file to show the system path settings
-            cat(Sys.getenv("PATH"), file = "path.txt")
+            cat(Ss.getenv("PATH"), file = "path.txt")
             message("These details are saved in path.txt for reference.")
             # write a test Rmd file
             cat("# a test file
 ## created by the BrailleR package
 
-My R version is `r version$major`.`r version$minor` and is being used to create this test file
+My R version is `r getRversion()` and is being used to create this test file
 It will then be used to process the test file later once the necessary actions are taken in Windows Explorer.  \n",
                 file = "test1.Rmd")
                                     .NewFile(file="test1.Rmd")
@@ -49,12 +49,11 @@ mean(MySample)  \n",
                 file = "test2.R")
             cat("test2.R created successfully.\n")
             MakeBatch("test2.R")
-            message(
-                "Consult the help page for guidance on using these files in Windows Explorer.")
+            .ConsultHelpPage()
           } else {
             if (!file.exists(file))
-              warning(paste0('The specified file "', file,
-                             '" does not currently exist.\n'))
+              .FileDoesNotExist (file)
+
             FullFile = unlist(strsplit(file, split = ".", fixed = TRUE))
             if (endsWith(file, ".R") | endsWith(file, ".r")) {
               # write a batch file for processing the R script

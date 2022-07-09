@@ -85,7 +85,7 @@ def OnRGraph(self, event):
         self.editor.SetInsertionPoint(to)
         self.editor.WriteText("\n```\n\n")
         self.editor.SetInsertionPoint(frm)
-        self.editor.WriteText("\n```{r , fig.height=5, fig.width=5, fig.cap=\"\"}\n")
+        self.editor.WriteText("\n```{r , fig.height=5, fig.width=5, fig.alt=\" \", fig.cap=\"\"}\n")
         self.editor.SetInsertionPoint(frm + 8)
 
 def OnRmdComment(self, event):

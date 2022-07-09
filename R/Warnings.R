@@ -9,10 +9,16 @@ return(invisible(NULL))
     }
 
 
+.FileDoesNotExist =     function(file) {
+warning(file, "does not exist.\n")
+return(invisible(NULL))
+    }
+
 .FileExists =     function(file) {
 warning(file, "already exists.\n")
 return(invisible(NULL))
     }
+
 
 .FileNotFound =     function() {
 warning("The specified file does not exist.\n")
