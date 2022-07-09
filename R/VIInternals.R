@@ -255,7 +255,7 @@
 # facets are present or a stat other than identity is in play
 .getGGRawValues = function(x, xbuild, layer, var) {
   map = .getGGMapping(x, xbuild, layer, var)
-  if (class(x$layers[[layer]]$data) == "waiver")
+  if (inherits(x$layers[[layer]]$data, "waiver"))
     return(eval(map,x$data))
   else
     return(eval(map,x$layers[[layer]]$data))
