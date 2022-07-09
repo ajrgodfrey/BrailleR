@@ -4,13 +4,14 @@
 \title{Create batch files for processing R scripts and markdown files under Windows}
 \description{Convenience function for creating batch files that can be used under Windows to process R scripts, R markdown, and quarto  files. The main idea is that a user can click on the bacth files within Windows Explorer to get the desired task done faster.}
 \usage{
-MakeBatch(file=NULL, static=FALSE)
+MakeBatch(file=NULL, static = FALSE)
 
 
 MakeAdminBatch()
 }
 \arguments{
   \item{file}{A character string for the file to be processed. The file need not yet exist. The extension must be either R or Rmd and is case sensitive.}
+  \item{static}{Should a fixed version of R be used? It will be the current version if set to TRUE or allowed to vary with new installations.}
 }
 \details{
 These batch files are not for use in an R session. They do need to be created in an interactive session, so that users can process R scripts and Rmarkdown files without needing to open an R session later. 
