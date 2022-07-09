@@ -66,7 +66,8 @@ cat(.RTerminalText, file=paste0(where, "/RTerminal.bat"))
 
 
 .MakeUpdatePackages = function(where="."){
-.MakeRScriptBatch(commands="getRversion()", where=where, file="UpdateRPackages.bat")
+UpdatePkgsComs = paste(readLines(system.file("Scripts/UpdatePackages.R", package = "BrailleR")), collapse=";")
+.MakeRScriptBatch(commands=UpdatePkgsComs, where=where, file="UpdateRPackages.bat")
       return(invisible(NULL))
 }
 
