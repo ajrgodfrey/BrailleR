@@ -12,21 +12,20 @@ MakeAdminBatch =
     function() {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-
-# find MyBrailleR and put it in the following commands
-#.MakeRBatch()
+MyBrailleRFolder = .MyBrailleRName()
+.MakeRBatch(MyBrailleRFolder)
 .FileCreated("RBatch.bat")
-#.MakeRTerminal()
+.MakeRTerminal(MyBrailleRFolder)
 .FileCreated("RTerminal.bat")
-#.MakeRenderAllMd()
+.MakeRenderAllMd(MyBrailleRFolder)
 .FileCreated("RenderAllMD.bat")
-#.MakeRenderAllQmd()
+.MakeRenderAllQmd(MyBrailleRFolder)
 .FileCreated("RenderAllQmd.bat")
-#.MakeRenderAllRmd()
+.MakeRenderAllRmd(MyBrailleRFolder)
 .FileCreated("RenderAllRmd.bat")
-#.MakeUpdatePackages() # needs commands
-#.MoveOntoPath()
-#.ConsultHelpPage()
+.MakeUpdatePackages(MyBrailleRFolder) # needs commands
+.MoveOntoPath()
+.ConsultHelpPage()
 
         } else {
           .WindowsOnly()
@@ -67,7 +66,6 @@ cat(.RTerminalText, file=paste0(where, "/RTerminal.bat"))
 
 
 .MakeUpdatePackages = function(where="."){
-# use script and MakeBatch on it, all in the MyBrailleR folder.
 .MakeRScriptBatch(commands="getRversion()", where=where, file="UpdateRPackages.bat")
       return(invisible(NULL))
 }
