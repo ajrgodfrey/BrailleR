@@ -34,7 +34,7 @@ The \code{\link{OneFactor}} script was the basis for this function;.
 DIR = getwd()
 setwd(tempdir())
 if(require(dplyr)){
-TG <- ToothGrowth \%>\% mutate(dose = as.factor(dose))
+TG <- ToothGrowth |> mutate(dose = as.factor(dose))
 
 # Without interaction
 TwoFactors('len','supp','dose',Data=TG, Inter=FALSE)
@@ -42,10 +42,7 @@ TwoFactors('len','supp','dose',Data=TG, Inter=FALSE)
 # With two-way interaction
 TwoFactors('len', 'supp', 'dose', Data=TG, Inter=TRUE)
 
-# For unbalanced data
-TG_Unb <- TG[-c(53:60),]
-TwoFactors('len', 'supp', 'dose', Data=TG_Unb, Inter=TRUE)
-rm(TG); rm(TG_Unb)
+rm(TG); rm(TG)
 # N.B. Various files and a folder were created in a temporary directory. 
 # Please investigate them to see how this function worked.
 }
