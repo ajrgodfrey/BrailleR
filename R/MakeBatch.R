@@ -28,7 +28,7 @@ MakeBatch =
             .MoveOntoPath()
 
             # write a file to show the system path settings
-            cat(Ss.getenv("PATH"), file = "path.txt")
+            cat(Sys.getenv("PATH"), file = "path.txt")
             message("These details are saved in path.txt for reference.")
             # write a test Rmd file
             cat("# a test file
