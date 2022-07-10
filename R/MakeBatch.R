@@ -5,23 +5,24 @@ MakeBatch =
     function(file = NULL, static=FALSE) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          RHome = gsub("/", "\\\\", Sys.getenv("R_HOME"))
+          RHome = ifelse(static,
+paste0('"', gsub("/", "\\\\", R.home())), paste0(.FindRInstallPathText, '"%InstallPath%'))
           if (is.null(file)) {
             # write a batch file for processing R scripts
-            cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet %1\n"),
+            cat(paste0(RHome, '\\bin\\R.exe" CMD BATCH --vanilla --quiet %1\n'),
                 file = "RBatch.bat")
             .NewFile(file = "RBatch.bat")
             # write a batch file for processing a specific R markdown file
             cat(paste0(RHome,
-                       "\\bin\\RScript.exe --vanilla -e \"rmarkdown::render('%1')\"\n"),
+                       '\\bin\\RScript.exe" --vanilla -e \"rmarkdown::render(\'%1\')\"\n'),
                 file = "RmdBatch.bat")
                         .NewFile(file = "RmdBatch.bat")
             # write a batch file for processing all R markdown files
-            cat(paste0(RHome, '\\bin\\Rscript.exe --vanilla -e "BrailleR::ProcessAllRmd()"\n'),
+            cat(paste0(RHome, '\\bin\\Rscript.exe" --vanilla -e "BrailleR::ProcessAllRmd()"\n'),
                 file = "ProcessAllRmd.bat")
                         .NewFile(file = "ProcessAllRmd.bat")
             # write a batch file for processing all markdown files
-            cat(paste0(RHome, '\\bin\\Rscript.exe --vanilla -e "BrailleR::ProcessAllMd()"\n'),
+            cat(paste0(RHome, '\\bin\\Rscript.exec" --vanilla -e "BrailleR::ProcessAllMd()"\n'),
                 file = "ProcessAllMd.bat")
                                     .NewFile(file = "ProcessAllMd.bat")
 
@@ -57,15 +58,15 @@ mean(MySample)  \n",
             FullFile = unlist(strsplit(file, split = ".", fixed = TRUE))
             if (endsWith(file, ".R") | endsWith(file, ".r")) {
               # write a batch file for processing the R script
-              cat(paste0(RHome, "\\bin\\R.exe CMD BATCH --vanilla --quiet ",
-                         FullFile[1], ".R\n"),
+              cat(paste0(RHome, '\\bin\\R.exe" CMD BATCH --vanilla --quiet ',
+                         FullFile[1], '.R\n'),
                   file = paste0(FullFile[1], ".bat"))
                                       .NewFile(file = paste0(FullFile[1], ".bat"))
             }
             if (endsWith(file, ".Rmd") | endsWith(file, ".rmd")) {
               # write a batch file for processing the R markdown file
-              cat(paste0(RHome, "\\bin\\RScript.exe -e \"rmarkdown::render('",
-                         FullFile[1], ".Rmd')\"\n"),
+              cat(paste0(RHome, '\\bin\\RScript.exe" -e "rmarkdown::render(\'',
+                         FullFile[1], '.Rmd\')"\n'),
                   file = paste0(FullFile[1], ".bat"))
                                       .NewFile(file = paste0(FullFile[1], ".bat"))
             }
