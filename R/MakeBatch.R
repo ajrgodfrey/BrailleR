@@ -63,6 +63,15 @@ mean(MySample)  \n",
                   file = paste0(FullFile[1], ".bat"))
                                       .NewFile(file = paste0(FullFile[1], ".bat"))
             }
+            if (endsWith(file, ".Qmd") | endsWith(file, ".qmd")) {
+              # write batch files for rendering and previewing the quarto file
+              cat(paste0('quarto preview "', file,  '"'),
+                  file = paste0(FullFile[1], "Preview.bat"))
+                                      .NewFile(file = paste0(FullFile[1], "Preview.bat"))
+              cat(paste0('quarto render "', file,  '"'),
+                  file = paste0(FullFile[1], "Render.bat"))
+                                      .NewFile(file = paste0(FullFile[1], "Render.bat"))
+            }
             if (endsWith(file, ".Rmd") | endsWith(file, ".rmd")) {
               # write a batch file for processing the R markdown file
               cat(paste0(RHome, '\\bin\\RScript.exe" -e "rmarkdown::render(\'',
