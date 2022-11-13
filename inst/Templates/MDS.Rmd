@@ -9,27 +9,27 @@ library(knitr)
 ```
 
 ```{r DataName.mds}
-DataName.mds = DistMat %>%
+DataName.mds = DistMat |>
 cmdscale() 
 colnames(DataName.mds) = c("x", "y")
 ```
 
 ```{r DataName.kmeans}
 DataName.kmeans = kmeans(DataName.mds , NClust)
-DataName.kmeans %>% tidy() %>% kable(caption="Cluster details fort he DataName data.")
+DataName.kmeans |> tidy() |> kable(caption="Cluster details fort he DataName data.")
 ```
 
 ```{r addClusters}
-DataName.mds = DataName.mds %>%
-as_tibble() %>%
+DataName.mds = DataName.mds |>
+as_tibble() |>
 mutate(Labels = labels(DistMat), Cluster = as.factor(DataName.kmeans$cluster))
 ```
 
 
 ```{r plotDataName.mds, fig.cap="Multidimensional scaling of the DataName data."}
-DataName.mds %>%ggplot(aes(x=x, y=y, groups=Cluster)) + geom_point()
+DataName.mds |>ggplot(aes(x=x, y=y, groups=Cluster)) + geom_point()
 ```
 
 ```{r getClusters}
-DataName.mds %>% arrange(Cluster) %>% kable(caption="Cluster memberships for the DataName data.")
+DataName.mds |> arrange(Cluster) |> kable(caption="Cluster memberships for the DataName data.")
 ```

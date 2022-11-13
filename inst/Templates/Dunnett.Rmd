@@ -10,15 +10,15 @@ library(broom)
 
 ```{r DataName.Dunnett}
 DataName.Dunnett = glht(DataName.lm, linfct = mcp(FactorName = "Dunnett"))
-DataName.Dunnett %>% tidy() %>% kable(caption="Dunnett's multiple comparison procedure for the DataName data.)
+DataName.Dunnett |> tidy() |> kable(caption="Dunnett's multiple comparison procedure for the DataName data.)
 ```
 
 ```{r getSummary}
-DataName.Dunnett%>% summary() %>% tidy() %>% kable(caption="Summary of Dunnett's multiple comparison procedure for the DataName data.)
+DataName.Dunnett|> summary() |> tidy() |> kable(caption="Summary of Dunnett's multiple comparison procedure for the DataName data.)
 ```
 
 ```{r getCLD}
-DataName.Dunnett%>% cld() %>% tidy() %>% kable(caption="Compact letter display of Dunnett's multiple comparison procedure for the DataName data.)
+DataName.Dunnett|> cld() |> tidy() |> kable(caption="Compact letter display of Dunnett's multiple comparison procedure for the DataName data.)
 ```
 
 ```{r plotDataName.Dunnett, fig.cap="Plot of Dunnett's procedure for ResponseName grouped by FactorName."}

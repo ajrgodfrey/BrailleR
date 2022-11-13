@@ -1,0 +1,22 @@
+
+## Durbin-Watson Test
+
+Description: Performs the Durbin-Watson test for autocorrelation of disturbances.
+
+```{r GetLibLMTest}
+library(lmtest)
+```
+
+```{r DataName.dw}
+DataName.dw = dwtest(DataName.lm)
+```
+
+
+## Breusch-Godfrey Test
+
+Description: performs the Breusch-Godfrey test for higher-order serial correlation.
+
+```{r DataName.bg}
+DataName.bg = bgtest(DataName.lm, order=10)
+```
+

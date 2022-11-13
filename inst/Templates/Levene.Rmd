@@ -6,7 +6,7 @@ library(rstatix)
 ```
 
 ```{r DataName.lt}
-DataName.lt = DataName %>% levene_test(ResponseName ~ FactorName)
-DataName.lt %>% kable(caption="Levene's test for homogeneity of variance of ResponseName grouped by FactorName.")
+DataName.lt = DataName |> levene_test(ResponseName ~ FactorName)
+DataName.lt |> kable(caption="Levene's test for homogeneity of variance of ResponseName grouped by FactorName.")
 ```
 

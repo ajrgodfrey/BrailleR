@@ -1,12 +1,12 @@
 ```{r DescDataName}
-DataName %>% 
-drop_na(ResponseName) %>% 
-group_by(FactorSet) %>% 
+DataName |> 
+drop_na(ResponseName) |> 
+group_by(FactorSet) |> 
 summarise(
 Mean = mean(ResponseName),
 StDev = sd(ResponseName),
 Count = n()
-) %>%
-mutate(StdErr = StDev/sqrt(Count)) %>%
+) |>
+mutate(StdErr = StDev/sqrt(Count)) |>
 kable(caption="Descriptive statistics for ResponseName disaggregated by FactorSet.")
 ```

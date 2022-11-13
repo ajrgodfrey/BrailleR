@@ -1,6 +1,6 @@
 ```{r DataNamePlot, fig.cap="Plot of ResponseName versus PredictorName with fitted line added for each FactorName."}
 library(ggplot2)
-DataName %>% ggplot(aes(y=ResponseName, x=PredictorName)) + geom.point() + geom_smooth(method="lm")
+DataName |> ggplot(aes(y=ResponseName, x=PredictorName)) + geom.point() + geom_smooth(method="lm")
 ```
 
 ```{r DataName.lm}
@@ -12,7 +12,7 @@ summary(DataName.lm)
 
 
 ```{r glanceDataName.lm}
-glance(DataName.lm) %>% kable(caption="Summary statistics for DataName.lm.")
+glance(DataName.lm) |> kable(caption="Summary statistics for DataName.lm.")
 ```
 
 ```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}

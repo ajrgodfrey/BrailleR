@@ -8,7 +8,7 @@ anova(DataName.lme)
 ```
 
 ```{r glanceDataName.lme}
-glance(DataName.lme) %>% kable()
+glance(DataName.lme) |> kable()
 ```
 
 ```{r plotDataName.lme, fig.cap="Residual analysis for DataName.lme"}

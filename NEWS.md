@@ -1,6 +1,7 @@
 # BrailleR 0.33.2
 - updated batch file creation so that they search for current version of R. Batch files should not require updating as a consequence.
 - start adding support for quarto.
+- converted templates to use the native pipe instead of the magrittr pipe
 
 
 # BrailleR 0.33.1

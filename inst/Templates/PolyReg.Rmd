@@ -1,5 +1,5 @@
 ```{r PlotDataName, fig.cap=""}
-DataName %>% ggplot(aes(y=ResponseName, x=PredictorName)) + geom_point() + geom_smooth()
+DataName |> ggplot(aes(y=ResponseName, x=PredictorName)) + geom_point() + geom_smooth()
 ```
 
 

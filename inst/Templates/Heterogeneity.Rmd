@@ -1,4 +1,6 @@
+
 ## Breusch-Pagan Test
+
 Description: Performs the Breusch-Pagan test against heteroskedasticity.
 
 
@@ -11,6 +13,7 @@ DataName.lm.bp = bptest(DataName.lm)
 ```
 
 ## Harrison-McCabe test
+
 Description: Harrison-McCabe test for heteroskedasticity.
 
 
@@ -21,6 +24,7 @@ DataName.lm.hmc = hmctest(DataName.lm)
 
 
 ## Goldfeld-Quandt Test
+
 Description: Goldfeld-Quandt test against heteroskedasticity.
 
 ```{r DataName.lm.gq}

@@ -1,7 +1,7 @@
 
 ```{r DataName.lm.emmeans}
 library(emmeans)
-emmeans(DataName.lm, "FactorName") %>% kable(caption="Estimated marginal means for ResponseName, grouped by FactorName.")
+emmeans(DataName.lm, "FactorName") |> kable(caption="Estimated marginal means for ResponseName, grouped by FactorName.")
 ```
 
 

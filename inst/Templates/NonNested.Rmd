@@ -20,7 +20,7 @@ DataName.encomp = encomptest(DataName.lm1,DataName.lm2)
 
 
 
-## Tthe Davidson-MacKinnon J test for comparing non-nested models
+## The Davidson-MacKinnon J test for comparing non-nested models
 
 ```{r DataName.j}
 DataName.j = jtest(DataName.lm1,DataName.lm2)

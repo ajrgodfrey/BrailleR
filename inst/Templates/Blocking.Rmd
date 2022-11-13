@@ -1,12 +1,12 @@
 ```{r DataName.lm}
 DataName.lm = lm(ResponseName~BlockingName+FactorName, data = DataName)
-anova(DataName.lm)
+DataName.lm |> anova()
 ```
 
 
 ```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
 library(ggfortify)
-autoplot(DataName.lm)
+DataName.lm |> autoplot()
 ```
 
 

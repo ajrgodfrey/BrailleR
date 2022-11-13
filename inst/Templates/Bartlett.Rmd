@@ -1,7 +1,7 @@
 
 ## Bartlett Test of Homogeneity of Variances
 
-Description: Performs Bartlett's test of the null that the variances in each of the groups (samples) are the same.
+Description: Performs Bartlett's test of the null hypothesis that the variances in each of the groups (samples) are the same.
 
 ```{r DataNameBartlettTest}
 bartlett.test(ResponseName ~ FactorName, data=DataName)

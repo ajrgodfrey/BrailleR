@@ -69,7 +69,7 @@ mean(MySample)  \n",
                   file = paste0(FullFile[1], "Preview.bat"))
                                       .NewFile(file = paste0(FullFile[1], "Preview.bat"))
               cat(paste0('quarto render "', file,  '"'),
-                  file = paste0(FullFile[1], "Render.bat"))
+                  file = paste0(FullFile[1], ".bat"))
                                       .NewFile(file = paste0(FullFile[1], "Render.bat"))
             }
             if (endsWith(file, ".Rmd") | endsWith(file, ".rmd")) {

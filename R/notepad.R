@@ -1,5 +1,5 @@
 
-Notepad = notepad= function(file=""){
+Notepad = notepad = function(file=""){
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
 shell(paste('notepad', file), wait=FALSE)
