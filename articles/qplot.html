@@ -131,19 +131,21 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="va">dsmall</span> <span class="op">=</span> <span class="va">diamonds</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,<span class="op">]</span>   </span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">diamonds</span><span class="op">)</span>   </span>
-<span><span class="co"># summary(g1)   </span></span>
+<code class="sourceCode R"><span><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">diamonds</span><span class="op">)</span>   </span></code></pre></div>
+<pre><code><span><span class="co">## Warning: `qplot()` was deprecated in ggplot2 3.4.0.</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># summary(g1)   </span></span>
 <span><span class="va">g1</span>  </span></code></pre></div>
 <p><img src="qplot_files/figure-html/g1-1.png" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
 <span><span class="co">## The chart is a set of 53940 points.</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># VI(g1)   ### automatic since BrailleR v0.32.0</span></span></code></pre></div>
 <p>If the user does not actually plot the graph, they can still find out what it will look like once it is plotted by using the <code><a href="../reference/VI.html">VI()</a></code> command on the graph object. This became unnecessary from version 0.32.0 of BrailleR.</p>
 <p>N.B. All <code><a href="../reference/VI.html">VI()</a></code> commands can now be deleted from this document.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, colour <span class="op">=</span> <span class="va">color</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g2)   </span></span>
 <span><span class="va">g2</span></span></code></pre></div>
@@ -160,7 +162,7 @@
 <span><span class="co">## I shown as vivid yellow green colour and </span></span>
 <span><span class="co">## J shown as vivid greenish yellow colour.</span></span>
 <span><span class="co">## The chart is a set of 100 points.</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, shape <span class="op">=</span> <span class="va">cut</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g3)   </span></span>
 <span><span class="va">g3</span></span></code></pre></div>
@@ -177,7 +179,7 @@
 <span><span class="co">## Premium shown as plus shape and </span></span>
 <span><span class="co">## Ideal shown as boxed X shape.</span></span>
 <span><span class="co">## The chart is a set of 100 points.</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to get semi-transparent points   </span></span>
 <span><span class="va">g4</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">diamonds</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g4)   </span></span>
@@ -188,12 +190,12 @@
 <span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
 <span><span class="co">## The chart is a set of 53940 points.</span></span>
 <span><span class="co">## It has alpha set to 0.01.</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to add a smoother (default is loess for n&lt;1000)   </span></span>
 <span><span class="va">g5</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"point"</span>, <span class="st">"smooth"</span><span class="op">)</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g5)   </span></span>
 <span><span class="va">g5</span></span></code></pre></div>
-<pre><code><span><span class="co">## `geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></span></code></pre>
+<pre><code><span><span class="co">## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre>
 <p><img src="qplot_files/figure-html/g5-1.png" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0.2, 0.4, 0.6 and 0.8.</span></span>
@@ -201,12 +203,12 @@
 <span><span class="co">## It has 2 layers.</span></span>
 <span><span class="co">## Layer 1 is a set of 100 points.</span></span>
 <span><span class="co">## Layer 2 is a 'lowess' smoothed curve with 95% confidence intervals.</span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#! g5a = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), span = 1)    </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">splines</span><span class="op">)</span>    </span>
 <span><span class="co">#! g5b = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), method = "lm")    </span></span>
 <span><span class="co">#! g5c = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), method = "lm", formula = y ~ ns(x,5))    </span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># univariate plots   </span></span>
 <span><span class="va">g7a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"histogram"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g7a)   </span></span>
@@ -217,12 +219,12 @@
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 5000, 10000 and 15000.</span></span>
 <span><span class="co">## The chart is a bar chart with 30 vertical bars.</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g7b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"histogram"</span>, binwidth <span class="op">=</span> <span class="fl">1</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>    </span>
 <span><span class="va">g7b</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (stat_bin).</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values (geom_bar).</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (stat_bin).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (`stat_bin()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values (`geom_bar()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (`stat_bin()`).</span></span></code></pre>
 <p><img src="qplot_files/figure-html/g7-2.png" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2 and 3.</span></span>
@@ -230,30 +232,30 @@
 <span><span class="co">## The chart is a bar chart with 2 vertical bars.</span></span>
 <span><span class="co">## Bar 1 is centered horizontally at 1, and spans vertically from 0 to 29566.</span></span>
 <span><span class="co">## Bar 2 is centered horizontally at 2, and spans vertically from 0 to 5316.</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g7c</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"histogram"</span>, binwidth <span class="op">=</span> <span class="fl">0.1</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g7c</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (stat_bin).</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values (geom_bar).</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (stat_bin).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (`stat_bin()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values (`geom_bar()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (`stat_bin()`).</span></span></code></pre>
 <p><img src="qplot_files/figure-html/g7-3.png" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2 and 3.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 2500, 5000, 7500 and 10000.</span></span>
 <span><span class="co">## The chart is a bar chart with 29 vertical bars.</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g7d</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"histogram"</span>, binwidth <span class="op">=</span> <span class="fl">0.01</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g7d)   </span></span>
 <span><span class="va">g7d</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (stat_bin).</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values (geom_bar).</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (stat_bin).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (`stat_bin()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values (`geom_bar()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite values (`stat_bin()`).</span></span></code></pre>
 <p><img src="qplot_files/figure-html/g7-4.png" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2 and 3.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 1000 and 2000.</span></span>
 <span><span class="co">## The chart is a bar chart with 299 vertical bars.</span></span></code></pre>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># bar charts for categorical variable   </span></span>
 <span><span class="va">g11a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g11a)   </span></span>
@@ -270,7 +272,7 @@
 <span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 8304.</span></span>
 <span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5422.</span></span>
 <span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 2808.</span></span></code></pre>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g11b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g11b)   </span></span>
 <span><span class="va">g11b</span></span></code></pre></div>
@@ -286,7 +288,7 @@
 <span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 8304.</span></span>
 <span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5422.</span></span>
 <span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 2808.</span></span></code></pre>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g12a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, weight <span class="op">=</span> <span class="va">carat</span><span class="op">)</span>   </span>
 <span><span class="co"># summary(g12a)   </span></span>
 <span><span class="va">g12a</span></span></code></pre></div>
@@ -302,7 +304,7 @@
 <span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 7571.58.</span></span>
 <span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5568.</span></span>
 <span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 3263.28.</span></span></code></pre>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g12b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, weight <span class="op">=</span> <span class="va">carat</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span><span class="st">"carat"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g12b)   </span></span>
 <span><span class="va">g12b</span></span></code></pre></div>
@@ -318,7 +320,7 @@
 <span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 7571.58.</span></span>
 <span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5568.</span></span>
 <span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 3263.28.</span></span></code></pre>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># time series plots   </span></span>
 <span><span class="va">g13a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">unemploy</span> <span class="op">/</span> <span class="va">pop</span>, data <span class="op">=</span> <span class="va">economics</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g13a)   </span></span>
@@ -329,7 +331,7 @@
 <span><span class="co">## It has y-axis 'unemploy/pop' with labels 0.02, 0.03, 0.04 and 0.05.</span></span>
 <span><span class="co">## The chart is a set of 1 line.</span></span>
 <span><span class="co">## Line 1 connects 574 points.</span></span></code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g13b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">uempmed</span>, data <span class="op">=</span> <span class="va">economics</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g13b)   </span></span>
 <span><span class="va">g13b</span></span></code></pre></div>
@@ -339,7 +341,7 @@
 <span><span class="co">## It has y-axis 'uempmed' with labels 5, 10, 15, 20 and 25.</span></span>
 <span><span class="co">## The chart is a set of 1 line.</span></span>
 <span><span class="co">## Line 1 connects 574 points.</span></span></code></pre>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># rescaling of the axes   </span></span>
 <span><span class="va">g16</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, log <span class="op">=</span> <span class="st">"xy"</span><span class="op">)</span>   </span>
 <span><span class="co"># summary(g16)   </span></span>
@@ -366,7 +368,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
