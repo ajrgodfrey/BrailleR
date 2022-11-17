@@ -139,6 +139,10 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{#typesmooth}}
 a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
 {{/typesmooth}}
+{{#typeribbon}}
+a ribbon around the data {{^noybounds}}with a average width of {{ribbonwidth}}{{/noybounds}}{{#noybounds}}with no y bounds covering entire y range{{/noybounds}}. 
+{{^noxbounds}}It has a length of {{ribbonlength}}{{/noxbounds}}{{#noxbounds}}It spans the whole of the x range{{/noxbounds}}.<br>
+{{/typeribbon}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI can not process.<br>
 {{/typeunknown}}

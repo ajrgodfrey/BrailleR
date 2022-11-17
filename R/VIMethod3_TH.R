@@ -454,7 +454,30 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       #adding confidence level as a percentage
       deci = toString(.getGGSmoothLevel(x, xbuild, layeri)*100)
       layer$level = paste(deci, "%", sep = "")
-
+      
+      #Ribbon
+    } else if (layerClass == "GeomRibbon") {
+      layer$type = "ribbon"
+      data = xbuild$data[[layeri]]
+      
+      #Width of the ribbon
+      yMin = data$ymin
+      yMax = data$ymax
+      if (is.null(yMin) && is.null(yMax)) {
+        layer$noybounds = T
+      } else {
+        layer$ribbonwidth = mean(yMax-yMin)
+      }
+      
+      #Length of the ribbon
+      xMin = data$xmin
+      xMax = data$xmax
+      if ((is.null(xMin) && is.null(xMax)) || !is.null(layer$ribbonwidth)){
+        layer$noxbounds = T
+      } else {
+        layer$ribbonlength = mean(abs(xMax-xMin))
+      }
+      
       #U UNKNOWN
     } else {
       layer$type = "unknown"
