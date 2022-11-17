@@ -140,11 +140,11 @@ There are {{noutliers}} outliers for this boxplot.<br>
 a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
 {{/typesmooth}}
 {{#typeribbon}}
-a ribbon around the data 
+a ribbon 
 {{^noybounds}}
-{{^nonconstantribbonwidth}}with a constant width of {{ribbonwidth}}. At these five x values: {{intervalPoints}} the center of ribbon is{{/nonconstantribbonwidth}}
-{{#nonconstantribbonwidth}}with non constant width at these points on x axis: {{intervalPoints}} it was this wide: {{ribbonwidth}} with center at{{/nonconstantribbonwidth}}
-: {{centre}}.{{/noybounds}}
+{{^nonconstantribbonwidth}}with a constant width of {{ribbonwidth}}. The center of the ribbon is{{/nonconstantribbonwidth}}
+{{#nonconstantribbonwidth}}with non constant width it was this wide: {{ribbonwidth}} with center at{{/nonconstantribbonwidth}}
+{{#constantcentre}} constant{{/constantcentre}}: {{centre}}.{{/noybounds}}
 {{#noybounds}}with no y bounds covering entire y range.{{/noybounds}}
 {{^noxbounds}} It has a length of {{ribbonlength}}{{/noxbounds}}
 {{#noxbounds}} It spans the whole of the x range{{/noxbounds}}. <br>
