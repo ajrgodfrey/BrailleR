@@ -146,8 +146,8 @@ a ribbon
 {{#nonconstantribbonwidth}}with non constant width it was this wide: {{ribbonwidth}} with center at{{/nonconstantribbonwidth}}
 {{#constantcentre}} constant{{/constantcentre}}: {{centre}}.{{/noybounds}}
 {{#noybounds}}with no y bounds covering entire y range.{{/noybounds}}
-{{^noxbounds}} It has a length of {{ribbonlength}}{{/noxbounds}}
-{{#noxbounds}} It spans the whole of the x range{{/noxbounds}}. <br>
+{{^noxbounds}}{{^nonconstantribbonlength}} It has a constant length of{{/nonconstantribbonlength}}{{#nonconstantribbonlength}} It has a non constant lengths of{{/nonconstantribbonlength}}: {{ribbonlength}}.{{/noxbounds}}
+<br>
 {{/typeribbon}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI can not process.<br>

@@ -455,7 +455,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       deci = toString(.getGGSmoothLevel(x, xbuild, layeri)*100)
       layer$level = paste(deci, "%", sep = "")
       
-      #Ribbon
+      #RIBBON
     } else if (layerClass == "GeomRibbon") {
       layer$type = "ribbon"
       data = xbuild$data[[layeri]]
@@ -468,31 +468,40 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       yMax = data$ymax
       
       width = yMax-yMin
-      
       if (is.null(yMin) && is.null(yMax)) { #No bounds
         layer$noybounds = T
-      } else if (mean(width) != width[1]) { #Non constant bounds
+      } else if (length(unique(width)) != 1) { #Non constant width
         layer$nonconstantribbonwidth = T
         layer$ribbonwidth = width[widthIntervals] |> signif()  |> paste(collapse=", ")
-      } else { #Constant bounds
+      } else { #Constant width
         layer$ribbonwidth = width[1]
       }
       
       #Length of the ribbon
       xMin = data$xmin
       xMax = data$xmax
+      length = abs(xMin - xMax)
       if ((is.null(xMin) && is.null(xMax)) || !is.null(layer$ribbonwidth)){
         layer$noxbounds = T
+      } else if (length(unique(length)) != 1) { #Non constant length
+        layer$nonconstantribbonlength = T
+        layer$ribbonlength = length[widthIntervals] |> signif()  |> paste(collapse=", ")
       } else {
         layer$ribbonlength = mean(abs(xMax-xMin))
       }
       
       #Shape of ribbon
-      # Only showing the shape when there is y bounds
+      # Only showing the shape info when there is y bounds
       if (!is.null(data$ymin) || is.null(data$ymax)) { #Has min and max
-        layer$centre = (yMax + yMin)[widthIntervals] |>
-          map(~ signif((.x / 2)) ) |>
-          paste(collapse=", ")
+        centres = (yMax + yMin)[widthIntervals] |>
+          map(~ signif((.x / 2)) )
+        if (length(unique(centres)) == 1) { # Centre is constant
+          layer$constantcentre = T
+          layer$centre = centres[1]
+        } else { #Centre non constant turn into string
+          layer$centre = centres |>
+            paste(collapse=", ")
+        }
       }
 
       
