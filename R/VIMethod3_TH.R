@@ -460,13 +460,22 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       layer$type = "ribbon"
       data = xbuild$data[[layeri]]
       
+      widthIntervals = seq(from=1, to=length(data$y), length.out=5)
+      layer$intervalPoints = data$x[widthIntervals] |> paste(collapse=", ")
+      
       #Width of the ribbon
       yMin = data$ymin
       yMax = data$ymax
-      if (is.null(yMin) && is.null(yMax)) {
+      
+      width = yMax-yMin
+      
+      if (is.null(yMin) && is.null(yMax)) { #No bounds
         layer$noybounds = T
-      } else {
-        layer$ribbonwidth = mean(yMax-yMin)
+      } else if (mean(width) != width[1]) { #Non constant bounds
+        layer$nonconstantribbonwidth = T
+        layer$ribbonwidth = width[widthIntervals] |> signif()  |> paste(collapse=", ")
+      } else { #Constant bounds
+        layer$ribbonwidth = width[1]
       }
       
       #Length of the ribbon
@@ -477,6 +486,15 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       } else {
         layer$ribbonlength = mean(abs(xMax-xMin))
       }
+      
+      #Shape of ribbon
+      # Only showing the shape when there is y bounds
+      if (!is.null(data$ymin) || is.null(data$ymax)) { #Has min and max
+        layer$centre = (yMax + yMin)[widthIntervals] |>
+          map(~ signif((.x / 2)) ) |>
+          paste(collapse=", ")
+      }
+
       
       #U UNKNOWN
     } else {
