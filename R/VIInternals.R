@@ -314,4 +314,29 @@
   return(AnA)
 }
 
+.getGGShadedArea = function(x, xbuild, layer) {
+  data = xbuild$data[[layer]]
+  
+  #Width of the shaded area
+  width = data$ymax - data$ymin
+  
+  #Get the length of each shaded area
+  #I believe they might be constant
+  x_values = sort(data$x)
+  distances = rep(0, length(x_values))
+  for (i in 1:(length(x_values)-1)) {
+    distances[i] = x_values[i+1]-x_values[i]
+  }
+  
+  #Length of x and y axis
+  xaxis = xbuild$layout$panel_scales_x[[1]]$range$range
+  yaxis = xbuild$layout$panel_scales_y[[1]]$range$range
+  
+  #Calculate area approximations
+  shadedArea = sum(abs(distances) * abs(width))
+  totalArea = (xaxis[2] - xaxis[1]) * (yaxis[2] - yaxis[1])
+  
+  #Return percent
+  return(shadedArea / totalArea )
+}
 

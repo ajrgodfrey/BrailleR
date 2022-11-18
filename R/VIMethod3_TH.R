@@ -455,6 +455,14 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       deci = toString(.getGGSmoothLevel(x, xbuild, layeri)*100)
       layer$level = paste(deci, "%", sep = "")
       
+      if (.getGGSmoothSEflag(x, xbuild, layeri)) {
+        shadedproportion = .getGGShadedArea(x, xbuild, layeri)*100
+        layer$shadedarea = shadedproportion |>
+          round( 2) |>
+          toString() |>
+          paste("%", sep="")
+      }
+      
       #RIBBON
     } else if (layerClass == "GeomRibbon") {
       layer$type = "ribbon"

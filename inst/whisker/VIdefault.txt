@@ -137,7 +137,7 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}
-a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
+a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.{{#shadedarea}} The CI shaded area takes up {{shadedarea}} of graph.{{/shadedarea}}
 {{/typesmooth}}
 {{#typeribbon}}
 a ribbon 
