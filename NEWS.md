@@ -1,3 +1,7 @@
+# BrailleR 0.33.3
+-Update author files
+-Change the VI.ggplot output for unrecognized graphs to correct spelling of cannot
+
 # BrailleR 0.33.2
 - updated batch file creation so that they search for current version of R. Batch files should not require updating as a consequence.
 - start adding support for quarto.

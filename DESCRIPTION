@@ -9,6 +9,7 @@ Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.
     person("Greg", "Snow", email = "greg.snow@imail.org", role = "ctb"),
     person("Henrik", "Bengtsson", email = "henrikb@braju.com", role = "ctb"),
     person("James", "Curtis", email = "james@curtis.net.nz", role = "ctb"),
+    person("James", "Thompson", email = "1jamesthompson1@gmail.com", role = "aut"),
     person("JooYoung", "Seo", email = "jooyoung@psu.edu", role = "ctb"),
     person("Marshall", "Flax", email = "marshall.flax@gmail.com", role = "ctb"),
     person("Paul", "Murrell", email = "paul@stat.auckland.ac.nz", role = "aut"),

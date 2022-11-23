@@ -16,7 +16,7 @@ License: \tab GPL-2\cr
 }
 }
 \author{
-A. Jonathan R. Godfrey Volker Sorge and Timothy P. Bilton with other contributions.
+A. Jonathan R. Godfrey Volker Sorge, Debra Warren, Timothy P. Bilton and James Thompson with other contributions.
 
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
 }
