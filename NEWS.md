@@ -1,5 +1,6 @@
 #BrailleR 0.33.4
 -Add shaded area for geom_smooth CI info to VI output.
+-Add geom_ribbon support
 
 # BrailleR 0.33.3
 -Update author files
