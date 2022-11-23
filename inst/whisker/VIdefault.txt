@@ -140,7 +140,7 @@ There are {{noutliers}} outliers for this boxplot.<br>
 a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
 {{/typesmooth}}
 {{#typeunknown}}
-{{anA}} {{assign}} graph that VI can not process.<br>
+{{anA}} {{assign}} graph that VI cannot process.<br>
 {{/typeunknown}}
 {{#hasPos}}
 These are {{position}} {{mapping2}}.<br>
