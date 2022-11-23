@@ -454,6 +454,14 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       #adding confidence level as a percentage
       deci = toString(.getGGSmoothLevel(x, xbuild, layeri)*100)
       layer$level = paste(deci, "%", sep = "")
+      
+      if (layer$ci) {
+        shadedproportion = .getGGShadedArea(x, xbuild, layeri)*100
+        layer$shadedarea = shadedproportion |>
+          signif(2) |>
+          toString() |>
+          paste("%", sep="")
+      }
 
       #U UNKNOWN
     } else {
