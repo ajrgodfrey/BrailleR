@@ -202,7 +202,7 @@
 <span><span class="co">## It has y-axis 'price' with labels 0, 1000, 2000 and 3000.</span></span>
 <span><span class="co">## It has 2 layers.</span></span>
 <span><span class="co">## Layer 1 is a set of 100 points.</span></span>
-<span><span class="co">## Layer 2 is a 'lowess' smoothed curve with 95% confidence intervals.</span></span></code></pre>
+<span><span class="co">## Layer 2 is a 'lowess' smoothed curve with 95% confidence intervals covering 17% of the graph.</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#! g5a = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), span = 1)    </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">splines</span><span class="op">)</span>    </span>
