@@ -460,18 +460,34 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       }
     
       #RIBBON
-    } else if (layerClass == "GeomRibbon") {
+    } else if (layerClass == "GeomRibbon" | layerClass =="GeomArea") {
       layer$type = "ribbon"
       data = xbuild$data[[layeri]]
       
-      widthIntervals = seq(from=1, to=length(data$y), length.out=5)
       
       #Width of the ribbon
       yMin = data$ymin
       yMax = data$ymax
       
+      #Length of the ribbon
       xMin = data$xmin
       xMax = data$xmax
+      
+      #actual data
+      x_data = data$x
+      y_data = data$y
+      
+      #Removing the leading and trailing 0
+      if(layerClass == "GeomArea") {
+        yMin = yMin[2:(length(yMin)-1)]
+        yMax = yMax[2:(length(yMax)-1)]
+        xMin = xMin[2:(length(xMin)-1)]
+        xMax = xMax[2:(length(xMax)-1)]
+        x_data = x_data[2:(length(x_data)-1)]
+        y_data = y_data[2:(length(y_data)-1)]
+      }
+      
+      widthIntervals = seq(from=1, to=length(y_data), length.out=5)
       
       #Bound on the x or y axis
       if (is.null(yMin) && is.null(yMax) && !is.null(xMin) && !is.null(xMax)) {
@@ -520,8 +536,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       } else {
         layer$shadedarea = .getGGShadedArea(x, xbuild, layeri, useX=F)
       }
-      
-      
+    
       #U UNKNOWN
     } else {
       layer$type = "unknown"
