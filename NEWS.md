@@ -1,3 +1,6 @@
+#BrailleR 0.33.4
+-Add shaded area for geom_smooth CI info to VI output.
+
 # BrailleR 0.33.3
 -Update author files
 -Change the VI.ggplot output for unrecognized graphs to correct spelling of cannot

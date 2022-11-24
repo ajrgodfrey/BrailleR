@@ -137,7 +137,7 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}
-a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals{{/ci}}.
+a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals covering {{shadedarea}} of the graph{{/ci}}.
 {{/typesmooth}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI cannot process.<br>
