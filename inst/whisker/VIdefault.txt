@@ -139,6 +139,11 @@ There are {{noutliers}} outliers for this boxplot.<br>
 {{#typesmooth}}
 a '{{method}}' smoothed curve{{#ci}} with {{level}} confidence intervals covering {{shadedarea}} of the graph{{/ci}}.
 {{/typesmooth}}
+{{#typeribbon}}
+a ribbon which is bound on the {{bound}} axis, with {{^nonconstantribbonwidth}}a constant width of {{#ribbonwidth}}{{value}}{{sep}}{{/ribbonwidth}} and centers are{{/nonconstantribbonwidth}}
+{{#nonconstantribbonwidth}}non constant widths: {{#ribbonwidth}}{{value}}{{sep}}{{/ribbonwidth}} with centers at{{/nonconstantribbonwidth}}{{#constantcentre}} constant{{/constantcentre}}: {{#centre}}{{value}}{{sep}}{{/centre}}. The ribbon takes up {{shadedarea}} of the graph.
+<br>
+{{/typeribbon}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI cannot process.<br>
 {{/typeunknown}}

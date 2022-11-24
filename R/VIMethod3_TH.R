@@ -456,13 +456,72 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       layer$level = paste(deci, "%", sep = "")
       
       if (layer$ci) {
-        shadedproportion = .getGGShadedArea(x, xbuild, layeri)*100
-        layer$shadedarea = shadedproportion |>
-          signif(2) |>
-          toString() |>
-          paste("%", sep="")
+        layer$shadedarea = .getGGShadedArea(x, xbuild, layeri)
       }
-
+    
+      #RIBBON
+    } else if (layerClass == "GeomRibbon") {
+      layer$type = "ribbon"
+      data = xbuild$data[[layeri]]
+      
+      widthIntervals = seq(from=1, to=length(data$y), length.out=5)
+      
+      #Width of the ribbon
+      yMin = data$ymin
+      yMax = data$ymax
+      
+      xMin = data$xmin
+      xMax = data$xmax
+      
+      #Bound on the x or y axis
+      if (is.null(yMin) && is.null(yMax) && !is.null(xMin) && !is.null(xMax)) {
+        ybounds = FALSE
+        layer$bound = "x"
+      } else {
+        ybounds = TRUE
+        layer$bound = "y"
+      }
+      
+      #Get the width of the ribbon
+      if (ybounds) {
+        width = yMax-yMin
+      } else {
+        width = xMax-xMin
+      }
+      
+      #constant or nonconstant width
+      if (length(unique(width))!=1) {
+        layer$nonconstantribbonwidth = T
+        width = width[widthIntervals] |> signif()
+      } else {
+        width = width[1]
+      }
+      
+      layer$ribbonwidth = .listifyVars(list(value=width))
+      
+      #Centre
+      if (ybounds) {
+        centres = (yMax + yMin)[widthIntervals] |>
+          map(~ signif((.x / 2)) )
+      } else {
+        centres = (xMax + xMin)[widthIntervals] |>
+          map(~ signif((.x / 2)) )
+      }
+      
+      if (length(unique(centres)) == 1) { # Centre is constant
+        layer$constantcentre = T
+        centres = centres[1]
+      }
+      layer$centre = .listifyVars(list(value=unlist(centres)))
+      
+      #Shaded area
+      if (ybounds) {
+        layer$shadedarea = .getGGShadedArea(x, xbuild, layeri)
+      } else {
+        layer$shadedarea = .getGGShadedArea(x, xbuild, layeri, useX=F)
+      }
+      
+      
       #U UNKNOWN
     } else {
       layer$type = "unknown"
