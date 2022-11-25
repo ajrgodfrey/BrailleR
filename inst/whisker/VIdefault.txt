@@ -144,6 +144,13 @@ a ribbon which is bound on the {{bound}} axis, with {{^nonconstantribbonwidth}}a
 {{#nonconstantribbonwidth}}non constant widths: {{#ribbonwidth}}{{value}}{{sep}}{{/ribbonwidth}} with centers at{{/nonconstantribbonwidth}}{{#constantcentre}} constant{{/constantcentre}}: {{#centre}}{{value}}{{sep}}{{/centre}}. The ribbon takes up {{shadedarea}} of the graph.
 <br>
 {{/typeribbon}}
+{{#typeexpand_limits}}
+a expand limits
+{{#xIncrease}}, increasing x axis by {{xIncrease}}{{/xIncrease}}
+{{#yIncrease}},{{#xIncrease}} and{{/xIncrease}} increasing y axis by {{yIncrease}}{{/yIncrease}}
+{{^xIncrease}}{{^yIncrease}} which has no effect{{/yIncrease}}{{/xIncrease}}
+.
+{{/typeexpand_limits}}
 {{#typeunknown}}
 {{anA}} {{assign}} graph that VI cannot process.<br>
 {{/typeunknown}}
