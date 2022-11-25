@@ -2,6 +2,7 @@
 -Add shaded area for geom_smooth CI info to VI output.
 -Add geom_ribbon support
 -Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.
+-Add support for showing expand_limit effect on graph.
 
 # BrailleR 0.33.3
 -Update author files

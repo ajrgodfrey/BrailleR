@@ -537,7 +537,105 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
         layer$shadedarea = .getGGShadedArea(x, xbuild, layeri, useX=F)
       }
     
-      #U UNKNOWN
+      #expand_limits
+    } else if (layerClass == "GeomBlank") {
+      #As only one method uses geom blank at the moment it will be treated like 
+      #expand limits
+      layer$type = "expand_limits"
+      
+      data = xbuild$data[[layeri]]
+      
+      #Deal with situations of failed transformations. In these cases it wont affect
+      #the grpah so just removing the bound.
+      bounds <- list(x = data$x, y = data$y) |> 
+        lapply(function(bounds) {
+          unlist(lapply(bounds, function(bound) {
+            if (!is.null(bound) && !is.na(bound)) {
+              bound
+            } else {
+              NULL
+            }
+          }))
+        })
+
+      #Helper function to calculate the increase
+      getIncrease <- function(max, min, dataRange) {
+        if(max < dataRange[2]) max = dataRange[2]
+        if(min > dataRange[1]) min = dataRange[1]
+        dataSize = (dataRange[2] - dataRange[1])
+        if (dataSize == 0) {
+          increase = (max - min) / 0.1 
+          #It is divided by zero because if there is no width then the graph will
+          #be very narrow. From my testing it is about 0.1. But the emphasis here 
+          #is that any limit will probably make the graph very much larger.
+        } else {
+          increase = (max - min) / (dataRange[2] - dataRange[1])
+        }
+        
+        return(increase)
+      }
+      
+      #Get plots max and mins on both axis
+      xRange = NULL
+      yRange = NULL
+      #To get the min max of the plot it will go through all layers looking
+      #in any of the potential locations below
+      yLocations = c("y", "ymin", "ymax", "yintercept")
+      xLocations = c("x", "xmin", "xmax", "xintercept")
+      for (layerNum in 1:layerCount) {
+        if (layerNum == layeri) break
+        currentLayer = xbuild$data[[layerNum]]
+        
+        #x min
+        for (loc in xLocations) {
+          if (!is.null(currentLayer[[loc]])) {xRange[1] = min(min(currentLayer[[loc]]), xRange[1], na.rm=T)}
+        }
+        
+        #x max
+        for (loc in xLocations) {
+          if (!is.null(currentLayer[[loc]])) {xRange[2] = max(max(currentLayer[[loc]]), xRange[2], na.rm=T)}
+        }
+        
+        #y min
+        for (loc in yLocations) {
+          if (!is.null(currentLayer[[loc]])) {yRange[1] = min(min(currentLayer[[loc]]), yRange[1], na.rm = T)}
+        }
+        
+        #y max
+        for (loc in yLocations) {
+          if (!is.null(currentLayer[[loc]])) {yRange[2] = max(max(currentLayer[[loc]]), yRange[2], na.rm=T)}
+        }
+      }
+      
+      dataRange = list(x = xRange, y = yRange)
+
+      #Get the increase for each axis
+      axises = c('x', 'y')
+      increase = list()
+      for (axis in axises) {
+        bound = bounds[[axis]]
+        if (!is.null(bound) && !is.null(dataRange[[axis]])) {
+          increase[axis] = getIncrease(max(bound), min(bound), dataRange[[axis]])
+        }
+      }
+      
+      #Setup ready for moustache template
+      if (!is.null(increase[["x"]]) && increase[["x"]] > 1) {
+        if (increase[["x"]] < 1.01) {#Format really small changes differently
+          layer$xIncrease = sprintf("%0.1f%%",(increase[["x"]]-1)*100)
+        } else {
+          layer$xIncrease = sprintf("%0.0f%%",(increase[["x"]]-1)*100)
+        }
+      }
+      
+      if (!is.null(increase[["y"]]) && increase[["y"]] > 1) {
+        if (increase[["y"]] < 1.01) {
+          layer$yIncrease = sprintf("%0.1f%%",(increase[["y"]]-1)*100)
+        } else {
+          layer$yIncrease = sprintf("%0.0f%%",(increase[["y"]]-1)*100)
+        }
+      }
+      #Unknown
     } else {
       layer$type = "unknown"
       #Name the unknown type and give it a/an accordingly
