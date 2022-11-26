@@ -129,24 +129,24 @@ A histogram of 1000 random values from a normal distribution
 "x" is marked on the x-axis.
 Tick marks for the x-axis are at: -4, -2, 0, and 2 
 There are a total of 1000 elements for this variable.
-Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
+Tick marks for the y-axis are at: 0, 50, 100, and 150 
 It has 15 bins with equal widths, starting at -4 and ending at 3.5 .
 The mids and counts for the bins are:
 mid = -3.75  count = 1 
-mid = -3.25  count = 1 
-mid = -2.75  count = 3 
-mid = -2.25  count = 25 
-mid = -1.75  count = 44 
-mid = -1.25  count = 93 
-mid = -0.75  count = 139 
-mid = -0.25  count = 199 
-mid = 0.25  count = 188 
-mid = 0.75  count = 152 
-mid = 1.25  count = 97 
-mid = 1.75  count = 38 
-mid = 2.25  count = 15 
-mid = 2.75  count = 4 
-mid = 3.25  count = 1</code></pre>
+mid = -3.25  count = 2 
+mid = -2.75  count = 6 
+mid = -2.25  count = 19 
+mid = -1.75  count = 54 
+mid = -1.25  count = 99 
+mid = -0.75  count = 161 
+mid = -0.25  count = 182 
+mid = 0.25  count = 186 
+mid = 0.75  count = 139 
+mid = 1.25  count = 84 
+mid = 1.75  count = 41 
+mid = 2.25  count = 18 
+mid = 2.75  count = 6 
+mid = 3.25  count = 2</code></pre>
 <p>The VI() command actually calls the VI.histogram() command as the hist() command creates an object of class “histogram”.</p>
 </div>
 <div class="section level3">
@@ -166,18 +166,18 @@ hist&gt; MyHist=graphics::hist(x, xlab="random normal values", main="Example his
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
+ [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   5   9  48 101 183 198 171 137  83  44  13   7
+ [1]   5   9  51  99 161 170 183 153  97  49  15   6   2
 
 $density
- [1] 0.002 0.010 0.018 0.096 0.202 0.366 0.396 0.342 0.274 0.166 0.088 0.026
-[13] 0.014
+ [1] 0.010 0.018 0.102 0.198 0.322 0.340 0.366 0.306 0.194 0.098 0.030 0.012
+[13] 0.004
 
 $mids
- [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75
+ [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75
+[13]  3.25
 
 $xname
 [1] "x"
@@ -194,18 +194,18 @@ hist&gt; MyHist=hist(x, xlab="random normal values", main="Example histogram (Br
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
+ [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   5   9  48 101 183 198 171 137  83  44  13   7
+ [1]   5   9  51  99 161 170 183 153  97  49  15   6   2
 
 $density
- [1] 0.002 0.010 0.018 0.096 0.202 0.366 0.396 0.342 0.274 0.166 0.088 0.026
-[13] 0.014
+ [1] 0.010 0.018 0.102 0.198 0.322 0.340 0.366 0.306 0.194 0.098 0.030 0.012
+[13] 0.004
 
 $mids
- [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75
+ [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75
+[13]  3.25
 
 $xname
 [1] "x"
@@ -241,14 +241,14 @@ $par$xaxp
 [1] -3  3  6
 
 $par$yaxp
-[1]   0 200   4
+[1]   0 150   3
 
 
 $xTicks
 [1] -3 -2 -1  0  1  2  3
 
 $yTicks
-[1]   0  50 100 150 200
+[1]   0  50 100 150
 
 attr(,"class")
 [1] "Augmented" "histogram"
@@ -259,22 +259,22 @@ This is a histogram, with the title: Histogram of x
 "x" is marked on the x-axis.
 Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
-Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 13 bins with equal widths, starting at -3.5 and ending at 3 .
+Tick marks for the y-axis are at: 0, 50, 100, and 150 
+It has 13 bins with equal widths, starting at -3 and ending at 3.5 .
 The mids and counts for the bins are:
-mid = -3.25  count = 1 
 mid = -2.75  count = 5 
 mid = -2.25  count = 9 
-mid = -1.75  count = 48 
-mid = -1.25  count = 101 
-mid = -0.75  count = 183 
-mid = -0.25  count = 198 
-mid = 0.25  count = 171 
-mid = 0.75  count = 137 
-mid = 1.25  count = 83 
-mid = 1.75  count = 44 
-mid = 2.25  count = 13 
-mid = 2.75  count = 7</code></pre>
+mid = -1.75  count = 51 
+mid = -1.25  count = 99 
+mid = -0.75  count = 161 
+mid = -0.25  count = 170 
+mid = 0.25  count = 183 
+mid = 0.75  count = 153 
+mid = 1.25  count = 97 
+mid = 1.75  count = 49 
+mid = 2.25  count = 15 
+mid = 2.75  count = 6 
+mid = 3.25  count = 2</code></pre>
 </div>
 <div class="section level3">
 <h3 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
