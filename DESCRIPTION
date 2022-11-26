@@ -42,6 +42,7 @@ Imports:
     magrittr,
     mathjaxr,
     moments,
+    quarto,
     Rdpack,
     rlang,
     rmarkdown,

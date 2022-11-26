@@ -3,12 +3,13 @@
 ## the first function is the wrapper for the command line tool, and nothing more
 
 .winget = function(what, action=c("upgrade", "install", "show", "uninstall")){
-paste("winget", action, what)
+    out = shell(paste("winget", action, what), intern=TRUE)
+    return(TRUE)
 }
 
 
 
-wingetPandoc = function(){
+.wingetPandoc = function(){
     action =  ifelse(rmarkdown::pandoc_available(), "upgrade", "install")
     return(.winget("pandoc", action))
 }
