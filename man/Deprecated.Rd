@@ -11,7 +11,7 @@ GetWxPython27(...)
 
 MakeAllInOneSlide(...)
 MakeSlidy(...)
-akeSlideShow(...)
+MakeSlideShow(...)
 }
 \arguments{
 \item{...}{cover for unnecessary arguments going to deprocated functions.}

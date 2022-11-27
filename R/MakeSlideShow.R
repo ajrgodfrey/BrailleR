@@ -140,7 +140,7 @@ MakeSlideShow =
       return(invisible(NULL))
     }
 
-MakeAllInOneSlide = MakeSlidy =MakeSlideShow =
+MakeAllInOneSlide = MakeSlidy = MakeSlideShow =
     function(...){
 .DeprecatedFunction() 
 }
