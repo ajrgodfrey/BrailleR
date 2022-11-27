@@ -4,6 +4,7 @@
 -Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.
 -Add support for showing expand_limit effect on graph.
 - add functionality for winget tools into new winget.R file; should streamline software installation down the track
+- deprecated functions relating to Python 2.7 and functions relating to making slide shows
 
 # BrailleR 0.33.3
 -Update author files
@@ -27,7 +28,7 @@
 - updated ScatterPlot(), FittedLinePlot(), and TimeSeriesPlot() functions  to have both base and ggplot style graphics.
 - updated qplot.Rmd vignette to remove all but one `VI()` command as they are redundant now that we get automatic descriptions of ggplot objects.
 - moved all stop() error message commands to stop.r and used hidden commands to pull the errors. Will make translation easier.
-- moved a lot of message() and warning() calls to use specific functions instead. Shoudl reduce the number of text strngs that need translation.
+- moved a lot of message() and warning() calls to use specific functions instead. Should reduce the number of text strngs that need translation.
 - added use of pkgdown
 - updated templates to make use of pipe chains where possible
 - updated examples to use dplyr syntax

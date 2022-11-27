@@ -1,5 +1,7 @@
 # Getting started with the WriteR application
 # only for Windows users at present.
+## preparing for deprecation
+## substituted with temporarily unavailable while testing the impact of removal
 
 PrepareWriteR =
     function(Author = getOption("BrailleR.Author")) {
@@ -37,3 +39,9 @@ PrepareWriteR =
       return(invisible(NULL))
     }
 
+
+PrepareWriteR =
+    function(Author = getOption("BrailleR.Author")) {
+      .TempUnavailable()
+      return(invisible(NULL))
+}

@@ -1,4 +1,5 @@
 # file contains MakeAllInOneSlide(), MakeSlidy(),  and MakeSlideShow()
+## all deprecated
 
 MakeAllInOneSlide =
     function(Folder, Style = getOption("BrailleR.SlideStyle"), file = NULL) {
@@ -138,3 +139,11 @@ MakeSlideShow =
       }
       return(invisible(NULL))
     }
+
+MakeAllInOneSlide = MakeSlidy =MakeSlideShow =
+    function(...){
+.DeprecatedFunction() 
+}
+
+
+ 
