@@ -79,7 +79,7 @@ Data values may be reported incorrectly.
 {{/largecount}}.<br>
 {{/typehline}}
 {{#typebar}}
-a bar chart with {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
+a bar chart with {{numberOfBars}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
 {{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}

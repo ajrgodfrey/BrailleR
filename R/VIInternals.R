@@ -85,11 +85,11 @@
 }
 
 #Bar Orientation
-.findBarOrientation = function(x, xbuild, layer) {
-  flipped = xbuild$plot$layers[[layer]]$geom_params$flipped_aes
-  if (rlang::is_true(flipped))
-    return("horizontal")
-  else
+# It is done by looking at the the flipped_aes in the build object
+.findBarOrientation = function(x, xbuild, layeri) {
+  layer = xbuild$data[[layeri]]
+  #Vertical bars
+  if (sum(layer$flipped_aes == T) == 0) {
     return("vertical")
 }
 

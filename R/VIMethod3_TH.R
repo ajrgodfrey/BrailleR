@@ -374,6 +374,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       # as they won't be displayed
       cleandata = layer$data[!is.na(layer$data$xmin) & !is.na(layer$data$xmax),]
       # Recount rows
+      # Count how many bars are seen visually this is different
+      # to the number of actual bars as bars may be stacked on top of each other
+      layer$numberOfBars = .getNumOfBars(cleandata, layer$orientation)
       layer$n = nrow(cleandata)
       map = .mapDataValues(x, xbuild, list("x", "ymin", "ymax"), panel, 
                            list(x=cleandata$x, ymin=cleandata$ymin, ymax=cleandata$ymax))
