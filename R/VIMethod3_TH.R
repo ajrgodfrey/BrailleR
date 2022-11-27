@@ -374,23 +374,43 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       # as they won't be displayed
       cleandata = layer$data[!is.na(layer$data$xmin) & !is.na(layer$data$xmax),]
       # Recount rows
+      
+      # Whether the bar is vertical or horizontal
+      layer$orientation = .findBarOrientation(x, xbuild, layeri)
+      
       # Count how many bars are seen visually this is different
       # to the number of actual bars as bars may be stacked on top of each other
       layer$numberOfBars = .getNumOfBars(cleandata, layer$orientation)
       layer$n = nrow(cleandata)
-      map = .mapDataValues(x, xbuild, list("x", "ymin", "ymax"), panel, 
-                           list(x=cleandata$x, ymin=cleandata$ymin, ymax=cleandata$ymax))
+    
+      # If bar width varies then we should report xmin and xmax instead
+      if (layer$orientation == "vertical") {
+        width = cleandata$xmax - cleandata$xmin
+        valueList = list(loc=cleandata$x, min=cleandata$ymin, max=cleandata$ymax)
+      } else {
+        width = cleandata$ymax - cleandata$ymin
+        valueList = list(loc=cleandata$y, min=cleandata$xmin, max=cleandata$xmax)
+      }
+      map = .mapDataValues(x, xbuild, list("loc", "min", "max"), panel, 
+                           valueList)
+      
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
-      # If bar width varies then we should report xmin and xmax instead
-      width = cleandata$xmax - cleandata$xmin
-      if (max(width) - min(width) > .0001)   # allow for small rounding error
-        layer$scaledata = cbind(layer$scaledata, xmin=cleandata$xmin, xmax=cleandata$xmax)
-      # Whether the bar is vertical or horizontal
-      layer$orientation = .findBarOrientation(x, xbuild, layeri)
+
+      #Print out information of width of bar if they vary
+      if (max(width) - min(width) > .0001) {  # allow for small rounding error
+        if (layer$orientation == "vertical") {
+          layer$scaledata = cbind(layer$scaledata, widthmin=cleandata$xmin, widthmin=cleandata$xmax)
+        } else {
+          layer$scaledata = cbind(layer$scaledata, widthmin=cleandata$ymin, widthmin=cleandata$ymax)
+        }
+        layer$varyingWidths = T
+      } else {
+        layer$varyingWidths = F
+      }
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 

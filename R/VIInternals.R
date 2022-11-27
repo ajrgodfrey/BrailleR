@@ -91,6 +91,30 @@
   #Vertical bars
   if (sum(layer$flipped_aes == T) == 0) {
     return("vertical")
+    #Horizontal bars
+  } else if (sum(layer$flipped_aes == T) == length(layer$count)) {
+    return("horizontal")
+  } else {
+    return("(error with orientation)")
+  }
+}
+
+#Get number of bars in a geom_bar
+.getNumOfBars = function(data, flipped_aes) {
+  #Vertical bars
+  if (flipped_aes == "vertical") {
+    min = data$xmin
+    max = data$xmax
+  #Horizontal bars
+  } else {
+    min = data$ymin
+    max = data$ymax
+  }
+  widths = vector()
+  for (i in 1:length(min)) {
+    widths[length(widths)+1] = paste(toString(min[i]), " to ", toString(max[i]))
+  }
+  length(unique(widths))
 }
 
 ## Scales
