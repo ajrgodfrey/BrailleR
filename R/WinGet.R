@@ -2,17 +2,24 @@
 ## They are left as internal commands for this reason
 ## the first function is the wrapper for the command line tool, and nothing more
 
+
+## once working, look to update GetPython.R GetSoftware.R  and installPython.R
+
 .winget = function(what, action=c("upgrade", "install", "show", "uninstall")){
     out = shell(paste("winget", action, what), intern=TRUE)
-    return(TRUE)
+    return(Out)
 }
 
 
+
+# possibly create .winget7Zip .wingetMaxima and/or .wingetOctave
 
 .wingetPandoc = function(){
     action =  ifelse(rmarkdown::pandoc_available(), "upgrade", "install")
     return(.winget("pandoc", action))
 }
+
+# possibly create .wingetPython but need to wait for wxPython to be 3.10 compliant
 
 .wingetQuarto = function(){
     action = ifelse(is.null(quarto::quarto_path()), "install", "upgrade")
@@ -24,3 +31,7 @@
 .wingetR=function(){
     return(.winget("RProject.R", "install"))
 }
+
+# possibly create .wingetRStudio
+
+# possibly create .wingetRTools

@@ -55,3 +55,12 @@ R4DS = r4ds  =
     }
 
 
+WriteRHome =
+    function() {
+      if (interactive()) {
+        browseURL("https://R-Resources.massey.ac.nz/WriteR/")
+      } else {
+        .InteractiveOnly()
+      }
+      return(invisible(NULL))
+    }

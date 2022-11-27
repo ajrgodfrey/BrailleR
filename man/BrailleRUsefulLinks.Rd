@@ -6,6 +6,7 @@
 \alias{google}
 \alias{R4DS}
 \alias{r4ds}
+\alias{WriteRHome}
 \title{Open the home page for the BrailleR Project, the Google search engine, the BrailleR in Action book, or the Let's Use R Now (LURN) book in your browser}
 \usage{
 BrailleRHome()
@@ -19,6 +20,8 @@ google()
 
 R4DS()
 r4ds()
+
+WriteRHome()
 }
 \arguments{
 \item{BlindVersion}{Use the version of Let's Use R Now tailored to an audience of blind users.}
