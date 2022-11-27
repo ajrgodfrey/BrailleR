@@ -6,7 +6,7 @@
 ## once working, look to update GetPython.R GetSoftware.R  and installPython.R
 
 .winget = function(what, action=c("upgrade", "install", "show", "uninstall")){
-    out = shell(paste("winget", action, what), intern=TRUE)
+    Out = shell(paste("winget", action, what), intern=TRUE)
     return(Out)
 }
 
