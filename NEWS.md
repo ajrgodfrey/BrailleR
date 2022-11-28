@@ -1,5 +1,6 @@
 # BrailleR 0.33.4
 - fix issue #35 with incorrect bin counts
+- fix issue #24, correcting base plot titles
 - Add shaded area for geom_smooth CI info to VI output.
 - Add geom_ribbon support
 - Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.
