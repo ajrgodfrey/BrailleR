@@ -79,12 +79,12 @@ Data values may be reported incorrectly.
 {{/largecount}}.<br>
 {{/typehline}}
 {{#typebar}}
-a bar chart with {{n}} {{orientation}} bar{{#s}}s{{/s}}.<br>
+a bar chart with {{numberOfBars}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{^largecount}}
 {{#items}}Bar {{itemnum}}
-{{#xmin}} spans horizontally from {{xmin}} to {{xmax}}{{/xmin}}
-{{^xmin}} is centered horizontally at {{x}}{{/xmin}}
-, and spans vertically from {{ymin}} to {{ymax}}
+{{#varyingWidths}} spans width from {{widthmin}} to {{widthmin}}{{/varyingWidths}}
+{{^varyingWidths}} is centered at {{loc}}{{/varyingWidths}}
+, and length is from {{min}} to {{max}}
 {{#fill}} with fill colour {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
 {{#colour}} with border colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
 {{#linetype}} with border line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}{{/linetype}}
