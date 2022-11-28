@@ -3,17 +3,20 @@
 Description: Harvey-Collier test for linearity.
 
 
-```{r GetLibLMTest}
+```{r}
+#| label = "GetLibLMTest"
 library(lmtest)
 ```
 
-```{r DataName.harv}
+```{r}
+#| label = "DataName.harv"
 DataName.harv = harvtest(DataName.lm)
 ```
 
 ## Ramsey's RESET test for functional form.
 
-```{r DataName.reset}
+```{r}
+#| label = "DataName.reset"
 DataName.reset = resettest(DataName.lm)
 ```
 
@@ -22,6 +25,7 @@ DataName.reset = resettest(DataName.lm)
 
 
 
-```{r DataName.rain}
+```{r}
+#| label = "DataName.rain"
 DataName.rain = raintest(DataName.lm)
 ```

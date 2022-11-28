@@ -2,11 +2,13 @@
 ## Cox Test for Comparing Non-Nested Models
 
 
-```{r GetLibLMTest}
+```{r}
+#| label = "GetLibLMTest"
 library(lmtest)
 ```
 
-```{r DataName.cox}
+```{r}
+#| label = "DataName.cox"
 DataName.cox = coxtest(DataName.lm1,DataName.lm2)
 ```
 
@@ -14,7 +16,8 @@ DataName.cox = coxtest(DataName.lm1,DataName.lm2)
 
 
 
-```{r DataName.encomp}
+```{r}
+#| label = "DataName.encomp"
 DataName.encomp = encomptest(DataName.lm1,DataName.lm2)
 ```
 
@@ -22,7 +25,8 @@ DataName.encomp = encomptest(DataName.lm1,DataName.lm2)
 
 ## The Davidson-MacKinnon J test for comparing non-nested models
 
-```{r DataName.j}
+```{r}
+#| label = "DataName.j"
 DataName.j = jtest(DataName.lm1,DataName.lm2)
 ```
 

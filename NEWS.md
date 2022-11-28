@@ -4,7 +4,8 @@
 -Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.
 -Add support for showing expand_limit effect on graph.
 - add functionality for winget tools into new winget.R file; should streamline software installation down the track
-- deprecated functions relating to Python 2.7 and functions relating to making slide shows
+- deprecated functions relating to Python 2.7 and functions for making slide shows
+- updated template files so that chunk options are moved from opening fence to commented lines
 
 # BrailleR 0.33.3
 -Update author files

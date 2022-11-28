@@ -1,5 +1,8 @@
 
-```{r DataNameFittedLinePlot, fig.cap="Plot of ResponseName versus PredictorName with fitted line added."}
+```{r}
+#| label = "DataNameFittedLinePlot",
+#| fig.cap = "Plot of ResponseName versus PredictorName with fitted
+#| line added."
 library(ggplot2)
 DataName |> select(ResponseName, PredictorName) |> filter(!is.na(ResponseName), !is.na(PredictorName)) |>
 ggplot(aes(y=ResponseName, x=PredictorName)) + geom_point() + geom_smooth(method="lm")

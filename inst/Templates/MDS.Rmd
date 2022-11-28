@@ -1,35 +1,43 @@
 
-```{r getLibs}
+```{r}
+#| label = "getLibs"
 library(tidyverse)
 library(broom)
 library(knitr)
 ```
 
-```{r getDistMat}
+```{r}
+#| label = "getDistMat"
 ```
 
-```{r DataName.mds}
+```{r}
+#| label = "DataName.mds"
 DataName.mds = DistMat |>
 cmdscale() 
 colnames(DataName.mds) = c("x", "y")
 ```
 
-```{r DataName.kmeans}
+```{r}
+#| label = "DataName.kmeans"
 DataName.kmeans = kmeans(DataName.mds , NClust)
 DataName.kmeans |> tidy() |> kable(caption="Cluster details fort he DataName data.")
 ```
 
-```{r addClusters}
+```{r}
+#| label = "addClusters"
 DataName.mds = DataName.mds |>
 as_tibble() |>
 mutate(Labels = labels(DistMat), Cluster = as.factor(DataName.kmeans$cluster))
 ```
 
 
-```{r plotDataName.mds, fig.cap="Multidimensional scaling of the DataName data."}
+```{r}
+#| label = "plotDataName.mds",
+#| fig.cap = "Multidimensional scaling of the DataName data."
 DataName.mds |>ggplot(aes(x=x, y=y, groups=Cluster)) + geom_point()
 ```
 
-```{r getClusters}
+```{r}
+#| label = "getClusters"
 DataName.mds |> arrange(Cluster) |> kable(caption="Cluster memberships for the DataName data.")
 ```

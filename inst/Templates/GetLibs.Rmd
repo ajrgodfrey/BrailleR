@@ -1,4 +1,6 @@
-```{r getLibs, include=FALSE}
+```{r}
+#| label = "getLibs",
+#| include = FALSE
 library(tidyverse)
 library(PkgName)
 ```

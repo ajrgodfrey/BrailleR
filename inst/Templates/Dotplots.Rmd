@@ -1,4 +1,6 @@
 
-```{r DataNameDotplots, fig.cap="Plots for ResponseName grouped by FactorName."}  
+```{r}  
+#| label = "DataNameDotplots",
+#| fig.cap = "Plots for ResponseName grouped by FactorName."
 DataName |> ggplot(aes(y=ResponseName, x=FactorName)) + geom_boxplot()
 ``` 

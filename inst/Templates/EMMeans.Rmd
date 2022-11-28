@@ -1,11 +1,15 @@
 
-```{r DataName.lm.emmeans}
+```{r}
+#| label = "DataName.lm.emmeans"
 library(emmeans)
 emmeans(DataName.lm, "FactorName") |> kable(caption="Estimated marginal means for ResponseName, grouped by FactorName.")
 ```
 
 
-```{r DataName.lm.emmeansPlotted, fig.cap="plot of confidence intervals for estimated marginal means for ResponseName grouped by FactorName."}
+```{r}
+#| label = "DataName.lm.emmeansPlotted",
+#| fig.cap = "plot of confidence intervals for estimated marginal means
+#| for ResponseName grouped by FactorName."
 plot(emmeans(DataName.lm, "FactorName"))
 ```
 

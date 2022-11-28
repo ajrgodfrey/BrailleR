@@ -1,9 +1,13 @@
-```{r DataNamePlot, fig.cap="Plot of ResponseName versus Covariate with fitted lines added for each FactorName."}
+```{r}
+#| label = "DataNamePlot",
+#| fig.cap = "Plot of ResponseName versus Covariate with fitted lines
+#| added for each FactorName."
 library(ggplot2)
 DataName |> ggplot(aes(y=ResponseName, x=Covariate, group =FactorName)) + geom.point() + geom_smooth(method="lm")
 ```
 
-```{r DataName.lm}
+```{r}
+#| label = "DataName.lm"
 DataName.lm1 = lm(ResponseName ~ FactorName, data=DataName)
 DataName.lm2 = lm(ResponseName ~ FactorName+Covariate, data=DataName)
 DataName.lm3 = lm(ResponseName ~ FactorName*Covariate, data=DataName)
@@ -11,13 +15,16 @@ anova(DataName.lm1, DataName.lm2, DataName.lm3)
 ```
 
 
-```{r glanceDataName.lm}
+```{r}
+#| label = "glanceDataName.lm"
 library(broom)
 glance(DataName.lm1, DataName.lm2, DataName.lm3) |> kable(caption=Comparison of three models relating to ANCOVA of ResponseName using FactorName for groups and the covariate Covariate.")
 ```
 
 
-```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
+```{r}
+#| label = "plotDataName.lm",
+#| fig.cap = "Residual analysis for DataName.lm"
 library(ggfortify)
 DataName.lm3 |> autoplot()
 ```

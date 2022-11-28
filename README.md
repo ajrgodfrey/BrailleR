@@ -64,9 +64,7 @@ By participating in the BrailleR Project, you are agreeing to this code of condu
 
 Some issues to resolve:
 
-1. Add to the work done by Debra Warren and Paul Murrell on VI.ggplot()  and related functions. Of critical importance is to expand the rane of geom_...() objects are described.
-1. storing the graphical parameters in ScatterPlot() etc. does not necessarily get the right ones selected. Need to replace this by somehow keeping the ... arguments supplied by the user. Tested using col and pch in FittedLinePlot() N.B. possibly redundant if moving entirely to ggplot graphics
-2. Get extra bits of information for WTF() coming through, such as other shapes, lines etc.
+1. Get extra bits of information for WTF() coming through, such as other shapes, lines etc.
 2. ascertain which shiny app widgets are useful for blind users' screen reading software.
 3. link various plot objects to sonify package.
 2. get more graphics ready for making into SVG for use on Tiger products; mostly in SVGThis() method
@@ -80,8 +78,6 @@ Some issues to resolve:
 6. create function to re-create vignettes from Rnw source into HTML
 5. Multiple language support was started but is in serious need of some love.
 7. Functions for the VI method to be completed include: VI.prcomp(), VI.factanal(), VI.glm(), VI.htest()?
-4. added functionality to compile all Rmd files in the current directory. Request from JYS; initial implementation done in June 2017. Includes batch file for use in Windows explorer and DOS prompt. Needs testing.
-5. VI.scatterplot() needs creating N.B. possibly redundant if moving entirely to ggplot graphics
 
 
 

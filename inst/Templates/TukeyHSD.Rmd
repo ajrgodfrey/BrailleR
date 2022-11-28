@@ -1,5 +1,6 @@
 
-```{r getLibs}
+```{r}
+#| label = "getLibs"
 library(multcomp)
 library(tidyverse)
 library(knitr)
@@ -8,18 +9,24 @@ library(broom)
 
 ## Tukey's Honestly sinificant difference
 
-```{r DataName.hsd}
+```{r}
+#| label = "DataName.hsd"
 DataName.hsd = glht(DataName.lm, linfct = mcp(FactorName = "Tukey"))
 DataName.hsd |> tidy() |> kable(caption="Tukey's Honestly Significant Differences for the DataName data.)
 ```
-```{r getSummary}
+```{r}
+#| label = "getSummary"
 DataName.hsd |> summary() |> tidy() |> kable(caption="Summary of Tukey's Honestly Significant Differences for the DataName data.)
 ```
 
-```{r getCLD}
+```{r}
+#| label = "getCLD"
 DataName.hsd |> cld()  |> tidy() |> kable(caption="Compact letter display for Tukey's Honestly Significant Differences for the DataName data.)
 ```
 
-```{r plotDataName.hsd, fig.cap="Plot of Tukey's HSD for ResponseName grouped by FactorName."}
+```{r}
+#| label = "plotDataName.hsd",
+#| fig.cap = "Plot of Tukey's HSD for ResponseName grouped by
+#| FactorName."
 plot(DataName.hsd)
 ```

@@ -1,9 +1,13 @@
-```{r DataNamePlot, fig.cap="Plot of ResponseName versus PredictorName with fitted line added for each FactorName."}
+```{r}
+#| label = "DataNamePlot",
+#| fig.cap = "Plot of ResponseName versus PredictorName with fitted
+#| line added for each FactorName."
 library(ggplot2)
 DataName |> ggplot(aes(y=ResponseName, x=PredictorName)) + geom.point() + geom_smooth(method="lm")
 ```
 
-```{r DataName.lm}
+```{r}
+#| label = "DataName.lm"
 DataName.lm = lm(ResponseName ~ PredictorName, data=DataName)
 library(broom)
 DataName.lm.aug = augment(DataName.lm)
@@ -11,11 +15,14 @@ summary(DataName.lm)
 ```
 
 
-```{r glanceDataName.lm}
+```{r}
+#| label = "glanceDataName.lm"
 glance(DataName.lm) |> kable(caption="Summary statistics for DataName.lm.")
 ```
 
-```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
+```{r}
+#| label = "plotDataName.lm",
+#| fig.cap = "Residual analysis for DataName.lm"
 library(ggfortify)
 autoplot(DataName.lm)
 ```

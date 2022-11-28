@@ -3,11 +3,13 @@
 Description: Tests for higher-order serial correlation.
 
 
-```{r GetLibLMTest}
+```{r}
+#| label = "GetLibLMTest"
 library(lmtest)
 ```
 
-```{r DataName.bg}
+```{r}
+#| label = "DataName.bg"
 DataName.bg = bgtest(DataName.lm)
 ```
 

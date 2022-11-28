@@ -1,4 +1,7 @@
-```{r setup, purl=FALSE, include=FALSE}
+```{r}
+#| label = "setup",
+#| purl = FALSE,
+#| include = FALSE
 library(knitr)
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 opts_chunk$set(comment="", echo=FALSE, fig.path="FolderName/FileStem", fig.width=7)

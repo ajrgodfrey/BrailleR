@@ -1,5 +1,7 @@
 
-```{r plotModelName, fig.cap="Residual analysis for ModelName."}
+```{r}
+#| label = "plotModelName",
+#| fig.cap = "Residual analysis for ModelName."
 library(ggfortify)
 autoplot(ModelName)
 ```

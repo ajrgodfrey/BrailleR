@@ -2,11 +2,13 @@
 ## Durbin-Watson Test
 
 
-```{r GetLibLMTest}
+```{r}
+#| label = "GetLibLMTest"
 library(lmtest)
 ```
 
-```{r DataName.dw}
+```{r}
+#| label = "DataName.dw"
 DataName.dw = dwtest(DataName.lm)
 ```
 

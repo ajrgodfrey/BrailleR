@@ -7,12 +7,14 @@ friedman.test can be used for analyzing unreplicated complete block designs (i.e
 The null hypothesis is that apart from an effect of blocks, the location parameter of y is the same in each of the groups.
 
 
-```{r GetRStatix}
+```{r}
+#| label = "GetRStatix"
 library(rstatix)
 ```
 
 
-```{r DataName.ft}
+```{r}
+#| label = "DataName.ft"
 DataName.ft = DataName |> friedman_test(ResponseName ~ FactorName | BlockingName)
 DataName.ft |> kable(caption="Friedman test for ResponseName disaggregated by FactorName, and adjusting for BlockName.")
 ```

@@ -1,4 +1,5 @@
-```{r DescDataName}
+```{r}
+#| label = "DescDataName"
 DataName |> 
 drop_na(ResponseName) |> 
 group_by(FactorSet) |> 

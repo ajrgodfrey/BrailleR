@@ -1,21 +1,25 @@
 
 ## Kruskal-Wallis Rank Sum Test
 
-```{r GetRStatix}
+```{r}
+#| label = "GetRStatix"
 library(rstatix)
 ```
 
-```{r DataName.kt}
+```{r}
+#| label = "DataName.kt"
 DataName.kt = DataName |> kruskal_test(ResponseName ~ FactorName)
 DataName.kt |> kable(caption="Kruskal-Wallace nonparametric one-way test for differences in ResponseName grouped by FactorName.")
 ```
 
 
-```{r DunnTest}
+```{r}
+#| label = "DunnTest"
 DataName.dt = DataName |> dunn_test((ResponseName ~ FactorName)
 DataName.dt |> kable(caption="Dunn's multiple comparison test for ResponseName disaggregated by FactorName.")
 ```
 
-```{r getMeans}
+```{r}
+#| label = "getMeans"
 get_emmeans(DataName.dt)DataName.kt |> kable(caption="Means of ResponseName disaggregated by FactorName.")
 ```

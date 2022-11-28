@@ -1,5 +1,6 @@
 
-```{r DataName.lme}
+```{r}
+#| label = "DataName.lme"
 library(nlme)
 DataName.lme = lme(ResponseName ~ BlockingName+Factor1Name*Factor2Name, random=1|MainPlotID, data=DataName)
 library(broom)
@@ -7,11 +8,14 @@ augment(DataName.lme)
 anova(DataName.lme)
 ```
 
-```{r glanceDataName.lme}
+```{r}
+#| label = "glanceDataName.lme"
 glance(DataName.lme) |> kable()
 ```
 
-```{r plotDataName.lme, fig.cap="Residual analysis for DataName.lme"}
+```{r}
+#| label = "plotDataName.lme",
+#| fig.cap = "Residual analysis for DataName.lme"
 library(ggfortify)
 autoplot(DataName.lme)
 ```

@@ -3,12 +3,14 @@
 
 Description: Test whether two or more samples from normal distributions have the same means. The variances are not necessarily assumed to be equal.
 
-```{r GetRStatix}
+```{r}
+#| label = "GetRStatix"
 library(rstatix)
 ```
 
 
-```{r DataName.wt}
+```{r}
+#| label = "DataName.wt"
 DataName.wt = DataName |> welch_anova_test(ResponseName ~ FactorName)
 DataName.wt |> kable(caption="Welch's one-way hypothesis test for ResponseName grouped by FactorName.")
 ```
@@ -18,7 +20,8 @@ DataName.wt |> kable(caption="Welch's one-way hypothesis test for ResponseName g
 Description: Performs Games-Howell test, which is used to compare all possible combinations of group differences when the assumption of homogeneity of variances is violated. This post hoc test provides confidence intervals for the differences between group means and shows whether the differences are statistically significant.
 
 
-```{r DataName.ght}
+```{r}
+#| label = "DataName.ght"
 DataName.ght = DataName |> games_howell_test(ResponseName ~ FactorName)
 DataName.ght |> kable((caption="Games-Howell multiple comparison test for ResponseName disaggregated by FactorName.")
 ```

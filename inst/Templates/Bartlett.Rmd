@@ -3,7 +3,8 @@
 
 Description: Performs Bartlett's test of the null hypothesis that the variances in each of the groups (samples) are the same.
 
-```{r DataNameBartlettTest}
+```{r}
+#| label = "DataNameBartlettTest"
 bartlett.test(ResponseName ~ FactorName, data=DataName)
 ```
 

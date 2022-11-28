@@ -1,10 +1,12 @@
 ## D'Agostino test for skewness in normally distributed data.
 
-```{r GetMomentsPkg}
+```{r}
+#| label = "GetMomentsPkg"
 library(moments)
 ```
 
-```{r ResponseName.at}
+```{r}
+#| label = "ResponseName.at"
 ResponseName.at = agostino.test(ResponseName)
 ```
 

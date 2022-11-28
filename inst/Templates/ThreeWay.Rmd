@@ -1,11 +1,14 @@
 
-```{r DataName.lm}
+```{r}
+#| label = "DataName.lm"
 DataName.lm = lm(ResponseName ~ Factor1Name*Factor2Name*Factor3Name, data=DataName)
 anova(DataName.lm)
 ```
 
 
-```{r plotDataName.lm, fig.cap="Residual analysis for DataName.lm"}
+```{r}
+#| label = "plotDataName.lm",
+#| fig.cap = "Residual analysis for DataName.lm"
 library(ggfortify)
 autoplot(DataName.lm)
 ```

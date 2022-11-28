@@ -1,11 +1,13 @@
 
 ## Levene's Test
 
-```{r GetRStatix}
+```{r}
+#| label = "GetRStatix"
 library(rstatix)
 ```
 
-```{r DataName.lt}
+```{r}
+#| label = "DataName.lt"
 DataName.lt = DataName |> levene_test(ResponseName ~ FactorName)
 DataName.lt |> kable(caption="Levene's test for homogeneity of variance of ResponseName grouped by FactorName.")
 ```

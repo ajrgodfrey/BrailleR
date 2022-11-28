@@ -1,11 +1,13 @@
 
 ## Bonett-Seier test of Geary's measure of kurtosis for normally distributed data.
 
-```{r GetMomentsPkg}
+```{r}
+#| label = "GetMomentsPkg"
 library(moments)
 ```
 
-```{r ResponseName.bt}
+```{r}
+#| label = "ResponseName.bt"
 ResponseName.bt = bonett.test(ResponseName)
 ```
 

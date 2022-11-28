@@ -1,11 +1,14 @@
-```{r PlotDataName, fig.cap=""}
+```{r}
+#| label = "PlotDataName",
+#| fig.cap = ""
 DataName |> ggplot(aes(y=ResponseName, x=PredictorName)) + geom_point() + geom_smooth()
 ```
 
 
 
 
-```{r DataName.poly}
+```{r}
+#| label = "DataName.poly"
 DataName.poly1  <- lm(ResponseName ~ PredictorName, data = DataName)
 DataName.poly2 <- lm(ResponseName ~ poly(PredictorName, 2, raw=TRUE), data = DataName)
 DataName.poly3 <- lm(ResponseName ~ poly(PredictorName, 3, raw=TRUE), data = DataName)
@@ -14,7 +17,9 @@ anova(DataName.poly1, DataName.poly2, DataName.poly3, DataName.poly4)
 ```
 
 
-```{r plotDataName.lm, fig.cap="Residual analysis for DataName.poly"}
+```{r}
+#| label = "plotDataName.lm",
+#| fig.cap = "Residual analysis for DataName.poly"
 library(ggfortify)
 autoplot(DataName.poly4)
 ```
