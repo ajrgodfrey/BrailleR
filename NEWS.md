@@ -1,16 +1,12 @@
-#BrailleR 0.33.4
+# BrailleR 0.33.4
+- fix issue #35 with incorrect bin counts
 - Add shaded area for geom_smooth CI info to VI output.
 - Add geom_ribbon support
 - Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.
 - Add support for showing expand_limit effect on graph.
 - add functionality for winget tools into new winget.R file; should streamline software installation down the track
-<<<<<<< HEAD
 - deprecated functions relating to Python 2.7 and functions for making slide shows
 - updated template files so that chunk options are moved from opening fence to commented lines
-=======
-- deprecated functions relating to Python 2.7 and functions relating to making slide shows
-- fix issue #35 with incorrect bin counts
->>>>>>> d556f987adfc6434675689daea035a3dd142bf63
 
 # BrailleR 0.33.3
 -Update author files
