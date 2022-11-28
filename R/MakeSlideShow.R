@@ -39,7 +39,8 @@ MakeAllInOneSlide =
         }
       }  # end folder existence condition
           else {
-        warning("Specified folder does not exist. No action taken.")
+        .FolderNotFound()
+ .NoActionTaken()
       }
       return(invisible(NULL))
     }
@@ -69,7 +70,8 @@ Slidy presentation
           rmarkdown::render(OutRMD, output_format=slidy_presentation())
       }  # end folder existence condition
           else {
-        warning("Specified folder does not exist. No action taken.")
+        .FolderNotFound()
+ .NoActionTaken()
       }
       return(invisible(NULL))
     }
@@ -135,7 +137,8 @@ MakeSlideShow =
         }
       }  # end folder existence condition
           else {
-        warning("Specified folder does not exist. No action taken.")
+        .FolderNotFound()
+ .NoActionTaken()
       }
       return(invisible(NULL))
     }

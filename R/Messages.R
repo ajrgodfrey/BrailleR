@@ -99,6 +99,13 @@ message(NewFile, " has been created in your working directory.")
 return(invisible(NULL))
     }
 
+.NoActionTaken =     function() {
+message("No action taken.")
+return(invisible(NULL))
+    }
+
+
+
 .NoSeePython = function(){
 message("Python cannot be seen on your system.\nIf it is installed, then you may need to ensure your system settings are correct.")
 return(invisible(NULL))

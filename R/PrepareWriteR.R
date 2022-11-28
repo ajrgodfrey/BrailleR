@@ -30,11 +30,10 @@ PrepareWriteR =
           message(
               "You can move these files to your preferred folder for WriteR, \nor start working here.")
         } else {
-          warning(
-              "This function is for users running R under the Windows operating system.\n")
+          .WindowsOnly()
         }
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
