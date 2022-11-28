@@ -230,8 +230,8 @@
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2 and 3.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 10000, 20000 and 30000.</span></span>
 <span><span class="co">## The chart is a bar chart with 2 vertical bars.</span></span>
-<span><span class="co">## Bar 1 is centered horizontally at 1, and spans vertically from 0 to 29566.</span></span>
-<span><span class="co">## Bar 2 is centered horizontally at 2, and spans vertically from 0 to 5316.</span></span></code></pre>
+<span><span class="co">## Bar 1 is centered at 1, and length is from 0 to 29566.</span></span>
+<span><span class="co">## Bar 2 is centered at 2, and length is from 0 to 5316.</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g7c</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"histogram"</span>, binwidth <span class="op">=</span> <span class="fl">0.1</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g7c</span></span></code></pre></div>
@@ -265,13 +265,13 @@
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 3000, 6000 and 9000.</span></span>
 <span><span class="co">## The chart is a bar chart with 7 vertical bars.</span></span>
-<span><span class="co">## Bar 1 is centered horizontally at D, and spans vertically from 0 to 6775.</span></span>
-<span><span class="co">## Bar 2 is centered horizontally at E, and spans vertically from 0 to 9797.</span></span>
-<span><span class="co">## Bar 3 is centered horizontally at F, and spans vertically from 0 to 9542.</span></span>
-<span><span class="co">## Bar 4 is centered horizontally at G, and spans vertically from 0 to 11292.</span></span>
-<span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 8304.</span></span>
-<span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5422.</span></span>
-<span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 2808.</span></span></code></pre>
+<span><span class="co">## Bar 1 is centered at 1, and length is from 0 to 6775.</span></span>
+<span><span class="co">## Bar 2 is centered at 2, and length is from 0 to 9797.</span></span>
+<span><span class="co">## Bar 3 is centered at 3, and length is from 0 to 9542.</span></span>
+<span><span class="co">## Bar 4 is centered at 4, and length is from 0 to 11292.</span></span>
+<span><span class="co">## Bar 5 is centered at 5, and length is from 0 to 8304.</span></span>
+<span><span class="co">## Bar 6 is centered at 6, and length is from 0 to 5422.</span></span>
+<span><span class="co">## Bar 7 is centered at 7, and length is from 0 to 2808.</span></span></code></pre>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g11b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g11b)   </span></span>
@@ -281,13 +281,13 @@
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 3000, 6000 and 9000.</span></span>
 <span><span class="co">## The chart is a bar chart with 7 vertical bars.</span></span>
-<span><span class="co">## Bar 1 is centered horizontally at D, and spans vertically from 0 to 6775.</span></span>
-<span><span class="co">## Bar 2 is centered horizontally at E, and spans vertically from 0 to 9797.</span></span>
-<span><span class="co">## Bar 3 is centered horizontally at F, and spans vertically from 0 to 9542.</span></span>
-<span><span class="co">## Bar 4 is centered horizontally at G, and spans vertically from 0 to 11292.</span></span>
-<span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 8304.</span></span>
-<span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5422.</span></span>
-<span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 2808.</span></span></code></pre>
+<span><span class="co">## Bar 1 is centered at 1, and length is from 0 to 6775.</span></span>
+<span><span class="co">## Bar 2 is centered at 2, and length is from 0 to 9797.</span></span>
+<span><span class="co">## Bar 3 is centered at 3, and length is from 0 to 9542.</span></span>
+<span><span class="co">## Bar 4 is centered at 4, and length is from 0 to 11292.</span></span>
+<span><span class="co">## Bar 5 is centered at 5, and length is from 0 to 8304.</span></span>
+<span><span class="co">## Bar 6 is centered at 6, and length is from 0 to 5422.</span></span>
+<span><span class="co">## Bar 7 is centered at 7, and length is from 0 to 2808.</span></span></code></pre>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g12a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, weight <span class="op">=</span> <span class="va">carat</span><span class="op">)</span>   </span>
 <span><span class="co"># summary(g12a)   </span></span>
@@ -297,13 +297,13 @@
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 2500, 5000 and 7500.</span></span>
 <span><span class="co">## The chart is a bar chart with 7 vertical bars.</span></span>
-<span><span class="co">## Bar 1 is centered horizontally at D, and spans vertically from 0 to 4456.56.</span></span>
-<span><span class="co">## Bar 2 is centered horizontally at E, and spans vertically from 0 to 6445.12.</span></span>
-<span><span class="co">## Bar 3 is centered horizontally at F, and spans vertically from 0 to 7028.05.</span></span>
-<span><span class="co">## Bar 4 is centered horizontally at G, and spans vertically from 0 to 8708.28.</span></span>
-<span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 7571.58.</span></span>
-<span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5568.</span></span>
-<span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 3263.28.</span></span></code></pre>
+<span><span class="co">## Bar 1 is centered at 1, and length is from 0 to 4456.56.</span></span>
+<span><span class="co">## Bar 2 is centered at 2, and length is from 0 to 6445.12.</span></span>
+<span><span class="co">## Bar 3 is centered at 3, and length is from 0 to 7028.05.</span></span>
+<span><span class="co">## Bar 4 is centered at 4, and length is from 0 to 8708.28.</span></span>
+<span><span class="co">## Bar 5 is centered at 5, and length is from 0 to 7571.58.</span></span>
+<span><span class="co">## Bar 6 is centered at 6, and length is from 0 to 5568.</span></span>
+<span><span class="co">## Bar 7 is centered at 7, and length is from 0 to 3263.28.</span></span></code></pre>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g12b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, weight <span class="op">=</span> <span class="va">carat</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span><span class="st">"carat"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g12b)   </span></span>
@@ -313,13 +313,13 @@
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 2500, 5000 and 7500.</span></span>
 <span><span class="co">## The chart is a bar chart with 7 vertical bars.</span></span>
-<span><span class="co">## Bar 1 is centered horizontally at D, and spans vertically from 0 to 4456.56.</span></span>
-<span><span class="co">## Bar 2 is centered horizontally at E, and spans vertically from 0 to 6445.12.</span></span>
-<span><span class="co">## Bar 3 is centered horizontally at F, and spans vertically from 0 to 7028.05.</span></span>
-<span><span class="co">## Bar 4 is centered horizontally at G, and spans vertically from 0 to 8708.28.</span></span>
-<span><span class="co">## Bar 5 is centered horizontally at H, and spans vertically from 0 to 7571.58.</span></span>
-<span><span class="co">## Bar 6 is centered horizontally at I, and spans vertically from 0 to 5568.</span></span>
-<span><span class="co">## Bar 7 is centered horizontally at J, and spans vertically from 0 to 3263.28.</span></span></code></pre>
+<span><span class="co">## Bar 1 is centered at 1, and length is from 0 to 4456.56.</span></span>
+<span><span class="co">## Bar 2 is centered at 2, and length is from 0 to 6445.12.</span></span>
+<span><span class="co">## Bar 3 is centered at 3, and length is from 0 to 7028.05.</span></span>
+<span><span class="co">## Bar 4 is centered at 4, and length is from 0 to 8708.28.</span></span>
+<span><span class="co">## Bar 5 is centered at 5, and length is from 0 to 7571.58.</span></span>
+<span><span class="co">## Bar 6 is centered at 6, and length is from 0 to 5568.</span></span>
+<span><span class="co">## Bar 7 is centered at 7, and length is from 0 to 3263.28.</span></span></code></pre>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># time series plots   </span></span>
 <span><span class="va">g13a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">unemploy</span> <span class="op">/</span> <span class="va">pop</span>, data <span class="op">=</span> <span class="va">economics</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span>    </span>
