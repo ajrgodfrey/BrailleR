@@ -10,6 +10,25 @@ message("The installer file has been added to your MyBrailleR folder.")
 return(invisible(NULL))
 }
 
+
+        .AnswerQuestions=function(){
+message("You will be asked to enter answers for a series of questions.\nHit <enter> to use the default shown in parentheses.")
+return(invisible(NULL))
+}
+
+.AuthorName =     function() {
+message("\nEnter the name you want to use for authoring content. (",
+                getOption("BrailleR.Author"), ")")
+return(invisible(NULL))
+    }
+
+.AutoLoadBrailleR  =     function() {
+message("The BrailleR package will be automatically loaded on startup in this working directory.")
+return(invisible(NULL))
+    }
+
+
+
 .CannotSeeWxPython = function(){
 message("Python cannot see the necessary wx module.\nYou need to get that fixed.")
 return(invisible(NULL))
@@ -49,11 +68,18 @@ return(invisible(NULL))
 }
 
 
-.FileCreated =     function(file=NULL) {
+.FileCreated =     function(file=NULL, where="in your MyBrailleR directory.") {
 NewFile = ifelse(is.null(file), "", file)
-message(NewFile, " has been created in your MyBrailleR directory.")
+message(NewFile, " has been created ", where)
 return(invisible(NULL))
     }
+
+.FileUpdated =     function(file=NULL, where="in your MyBrailleR directory.") {
+NewFile = ifelse(is.null(file), "", file)
+message(NewFile, " has been updated ", where)
+return(invisible(NULL))
+    }
+
 
 
 .InstallPython =     function() {
@@ -89,6 +115,12 @@ VersionString = system2("python", "--version", stdout=TRUE, stderr=TRUE)
 message("Your system is using ", VersionString, "")
 return(invisible(NULL))
     }
+
+.SavedInPath =     function() {
+message("These details are saved in path.txt for reference.")
+return(invisible(NULL))
+    }
+
 
 
 

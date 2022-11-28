@@ -1,8 +1,3 @@
-.FileCreated =     function(file=NULL) {
-NewFile = ifelse(is.null(file), "", file)
-message(NewFile, " has been created in your MyBrailleR directory.")
-return(invisible(NULL))
-    }
 
 
 # getting some useful batch files for admin tasks

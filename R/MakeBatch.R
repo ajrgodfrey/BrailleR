@@ -30,7 +30,7 @@ paste0('"', gsub("/", "\\\\", R.home())), paste0(.FindRInstallPathText, '"%Insta
 
             # write a file to show the system path settings
             cat(Sys.getenv("PATH"), file = "path.txt")
-            message("These details are saved in path.txt for reference.")
+            .SavedInPath()
             # write a test Rmd file
             cat("# a test file
 ## created by the BrailleR package

@@ -1,11 +1,9 @@
 GetGoing =
     function() {
       if (interactive()) {
-        message(
-            "You will be asked to enter answers for a series of questions.\nHit <enter> to use the default shown in parentheses.")
+        .AnswerQuestions()
 
-        message("\nEnter the name you want to use for authoring content. (",
-                getOption("BrailleR.Author"), ")")
+        .AuthorName()
         name = readLines(n = 1)
         if (name != "") SetAuthor(name)
 
@@ -18,7 +16,7 @@ GetGoing =
         message(
             "\nWhat is the level of significance you plan to use as your default? (",
             getOption("BrailleR.SigLevel"), ")")
-        alpha = as.numeric(readLines(n = 1))
+       alpha = as.numeric(readLines(n = 1))
         if (!is.na(alpha)) SetSigLevel(alpha)
 
         message(

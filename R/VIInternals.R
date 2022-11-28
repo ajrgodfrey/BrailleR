@@ -379,3 +379,4 @@
   
   return(areaPercentageStr)
 }
+

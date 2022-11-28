@@ -39,7 +39,6 @@ NewFunction =
 }
 "), file = Filename,
           append = TRUE)
-      return(
-          message(
-              "Script file successfully created in current working directory.\n"))
+        .FileCreated(Filename, "in the current working directory.") 
+      return(invisible(NULL))
     }
