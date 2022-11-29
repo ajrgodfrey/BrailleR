@@ -140,7 +140,7 @@
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
-<span><span class="co">## The chart is a set of 53940 points.</span></span></code></pre>
+<span><span class="co">## The chart is a set of 53940 big solid circle points.</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># VI(g1)   ### automatic since BrailleR v0.32.0</span></span></code></pre></div>
 <p>If the user does not actually plot the graph, they can still find out what it will look like once it is plotted by using the <code><a href="../reference/VI.html">VI()</a></code> command on the graph object. This became unnecessary from version 0.32.0 of BrailleR.</p>
@@ -161,7 +161,7 @@
 <span><span class="co">## H shown as brilliant green colour, </span></span>
 <span><span class="co">## I shown as vivid yellow green colour and </span></span>
 <span><span class="co">## J shown as vivid greenish yellow colour.</span></span>
-<span><span class="co">## The chart is a set of 100 points.</span></span></code></pre>
+<span><span class="co">## The chart is a set of 100 big solid circle points.</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, shape <span class="op">=</span> <span class="va">cut</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g3)   </span></span>
@@ -188,7 +188,7 @@
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
-<span><span class="co">## The chart is a set of 53940 points.</span></span>
+<span><span class="co">## The chart is a set of 53940 big solid circle points.</span></span>
 <span><span class="co">## It has alpha set to 0.01.</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to add a smoother (default is loess for n&lt;1000)   </span></span>
@@ -201,7 +201,7 @@
 <span><span class="co">## It has x-axis 'carat' with labels 0.2, 0.4, 0.6 and 0.8.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 1000, 2000 and 3000.</span></span>
 <span><span class="co">## It has 2 layers.</span></span>
-<span><span class="co">## Layer 1 is a set of 100 points.</span></span>
+<span><span class="co">## Layer 1 is a set of 100 big solid circle points.</span></span>
 <span><span class="co">## Layer 2 is a 'lowess' smoothed curve with 95% confidence intervals covering 17% of the graph.</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#! g5a = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), span = 1)    </span></span>
@@ -350,7 +350,7 @@
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0.3, 0.5 and 1.0.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 300, 1000 and 3000.</span></span>
-<span><span class="co">## The chart is a set of 100 points.</span></span></code></pre>
+<span><span class="co">## The chart is a set of 100 big solid circle points.</span></span></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
