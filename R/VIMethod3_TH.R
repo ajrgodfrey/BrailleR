@@ -363,6 +363,15 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
         layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
+      
+      # Check to see if the shape parameter has been set.
+      if (is.null(cleandata$aes_params[["shape"]])) {
+        # Make sure there is only one shape for all points
+        # We know this is the default from the previous conditional
+        if (length(unique(xbuild$data[[layeri]]$shape)) == 1) {
+          layer$defaultShape = .convertAes(data.frame(shape = xbuild$data[[layeri]]$shape[1]))$shape[1]
+        }
+      }
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 

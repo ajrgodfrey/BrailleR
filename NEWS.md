@@ -7,6 +7,7 @@
 - add functionality for winget tools into new winget.R file; should streamline software installation down the track
 - deprecated functions relating to Python 2.7 and functions for making slide shows
 - updated template files so that chunk options are moved from opening fence to commented lines
+- resolve issue #31, add default shape message.
 
 # BrailleR 0.33.3
 -Update author files
