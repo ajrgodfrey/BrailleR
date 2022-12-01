@@ -1,64 +1,71 @@
 
 # help page is shared with VI()
 
+#The heavy lifting of this function is done with these internal functions which 
+#Interact with the mustache templates.
+
+#This method is somewhat inefficient as it will just get slower and slower as more is added.
+.readTxtCSV = function(location) {
+  temp = read.csv(system.file(paste0("whisker/", location), package="BrailleR"), header = T, as.is = T)
+  sublists = length(temp) > 2
+  templates = list()
+  for (plot in 1:length(temp[,1])) {
+    templates[[temp[plot,1]]] = if (sublists) {
+      sublist = as.list(gsub("\n", "",temp[plot,2:length(temp)]))
+      names(sublist) = colnames(temp)[2:length(temp)]
+      sublist
+    } else {
+      gsub("\n", "",temp[plot,2])
+    }
+  }
+  return(templates)
+}
+
+.renderDescription = function(name) {
+  template = .readTxtCSV("Describe/baseR.txt")
+  generics = .readTxtCSV("Describe/generics.txt")
+  rendered = list(
+    title = whisker::whisker.render(template = template[[name]]["title"], data=generics),
+    general = whisker::whisker.render(template = template[[name]]["general"], data=generics),
+    RHints = whisker::whisker.render(template = template[[name]]["RHints"], data=generics)
+  )
+  class(rendered) = "description"
+  return(rendered)
+}
+
 Describe = 
     function(x, VI=FALSE, ...){
       UseMethod("Describe")
     }
 
-.CommonAxisStyleText ="As with most graphs created by the base graphics package, the axes do not join at the bottom left corner and are separated from the area where the data are being plotted."
-
-.CommonTickMarkText = "Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted."
-
-.CommonAspectRatioText = "R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents."
-
 print.description = 
     function(x, ...){
-        cat(paste0(x$title, "\n\n", "General description: ", x$general, "\n\n", "R hints: ", x$RHints, "\n\n"))
+        template = paste(readLines(system.file("whisker/Describe/Describedefault.txt", package="BrailleR")), collapse="\n")
+        output = whisker::whisker.render(template, x)
+        cat(output)
         return(invisible(NULL))
     }
 
 Describe.default = 
     function(x, VI=FALSE, ...){
         if(VI) VI(x)
-        title = "No description of this type of object has been written at this time."
-        general = "none yet"
-        RHints = "none yet"
-        Out = list(title = title, general = general, RHints = RHints)
-        class(Out) = "description"
-        return(Out)
+        .renderDescription("default")
     }
 
 Describe.histogram = 
     function(x, VI=FALSE, ...){
         if(VI) VI(x)
-        title = "A histogram created using the base graphics package."
-        general = paste0("A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present.\n", .CommonAxisStyleText, " ", .CommonTickMarkText, "The vertical axis for frequency always starts at zero.\n", .CommonAspectRatioText) 
-        RHints = "If you intend to make a tactile version of a histogram, you may find it useful to alter the aspect ratio so that the histogram is wider than it is tall."
-        Out = list(title = title, general = general, RHints = RHints)
-        class(Out) = "description"
-        return(Out)
+        .renderDescription("histogram")
     }
 
 Describe.scatterplot = 
     function(x, VI=FALSE, ...){
         if(VI) VI(x)
-        title = "A scatter plot created using BrailleR which builds on base graphics use of the plot() command"
-        general = paste0("A scatter plot shows the relationship between two variables by plotting a symbol for each observation at the coordinates for the two variables.\n", .CommonAxisStyleText, " ", .CommonTickMarkText, "\n", .CommonAspectRatioText)
-        RHints = "Default settings would use a small black open circle for each observation in the dataset that has a value for both variables being plotted. The `col` and `pch` arguments alter the colour and shape of the symbols; these might vary according to some other information known about each observation. It is common to add a straight line with the `abline()` command to show how well a linear relationship summarises the data."
-        Out = list(title = title, general = general, RHints = RHints)
-        class(Out) = "description"
-        return(Out)
+        .renderDescription("scatterplot")
     }
 
 Describe.tsplot = 
     function(x, VI=FALSE, ...){
         if(VI) VI(x)
-        title = "A time series plot created using BrailleR which builds on base graphics use of the plot() command"
-        general = paste0('A time series plot shows the behaviour of a variable over time, by connecting successive points at the height of the variable of interest using line segments. The x-axis is labelled as "Time" by default.\n', .CommonAxisStyleText, " ", .CommonTickMarkText, "\n", .CommonAspectRatioText)
-        RHints = "Default settings would use a series of straight black line segments to join adjacent points. Each  missing observation contributes to the absence of two line segments. \nThe line segments are printed as solid black lines, unless the colour is changed using the `col` argument. The type of line is changed with the `lty` argument. It can prove useful to alter the width of lines using the `lwd` argument."
-        Out = list(title = title, general = general, RHints = RHints)
-        class(Out) = "description"
-        return(Out)
+        .renderDescription("tsplot")
     }
-
