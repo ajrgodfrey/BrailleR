@@ -55,15 +55,15 @@ SpellCheck =
               }
             }
             writeLines(OldText[1:NoLines], con = ThisFile)
-            message("Done.")
+            .Done()
           }  # end ThisFile exists condition
               else {
-            warning("The specified file does not exist.\n")
+            .FileDoesNotExist(file)
           }
         }  # end for loop for files
       }  # end interactive ondition
           else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

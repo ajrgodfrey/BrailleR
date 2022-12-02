@@ -11,8 +11,7 @@ return(invisible(x))
 
 VI.default =
     function(x, Describe=FALSE, ...) {
-      message("There is no specific method written for  this type of object.\n")
-      message("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
+      .NoVIMethod()
       print(x)
     }
 

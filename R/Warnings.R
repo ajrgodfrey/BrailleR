@@ -1,13 +1,26 @@
-.BlankWarning  =     function() {
+
+.BlankWarning =     function() {
 warning("\n")
 return(invisible(NULL))
-    }
+}
 
 .DeprecatedFunction =     function() {
 warning("This function has been deprecated.\n")
 return(invisible(NULL))
     }
 
+
+
+
+.ExpectingText =     function() {
+warning("A text string was expected. No action taken.\n")
+return(invisible(NULL))
+}
+
+.ExperimentalFunction =     function() {
+warning("This function is purely experimental. Use it at your own risk.\n")
+return(invisible(NULL))
+}
 
 .FileDoesNotExist =     function(file) {
 warning(file, "does not exist.\n")
@@ -20,7 +33,9 @@ return(invisible(NULL))
     }
 
 
-.FileNotFound =     function() {
+
+##kill this one
+.FileNotFound =     function(file=NULL) {
 warning("The specified file does not exist.\n")
 return(invisible(NULL))
     }
@@ -47,6 +62,17 @@ return(invisible(NULL))
 warning("This function requires an installation of Python and wxPython.\n")
 return(invisible(NULL))
     }
+
+
+.NoConversion =     function() {
+warning("There was a problem and no conversion was possible.\n")
+return(invisible(NULL))
+    }
+
+.NoGraphicsDevice =     function() {
+warning("There is no current graphics device to investigate.\n")
+return(invisible(NULL))
+}
 
 
 

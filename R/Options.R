@@ -15,7 +15,7 @@ ResetDefaults =
         if (Local) file.remove("BrailleROptions")
         devtools::reload("BrailleR")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -46,7 +46,7 @@ ChooseEmbosser =
               "The new setting will remain in effect next time you load the BrailleR package in this directory.")
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -82,7 +82,7 @@ ChooseSlideStyle =
           }
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -117,7 +117,7 @@ ChooseStyle =
           }
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -147,7 +147,7 @@ SetAuthor =
               "The new setting will remain in effect next time you load the BrailleR package in this directory.")
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -210,7 +210,7 @@ SetLanguage =
               "The new setting will remain in effect next time you load the BrailleR package in this directory.")
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
