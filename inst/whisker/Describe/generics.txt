@@ -1,0 +1,9 @@
+name,text
+BaseAxisStyleText,"
+As with most graphs created by the base graphics package, the axes do not join at the bottom left corner and are separated from the area where the data are being plotted."
+CommonTickMarkText,"
+Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted."
+CommonAspectRatioText,"
+R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents."
+CommonScatterplotGen,"
+A scatter plot shows the relationship between two variables by plotting a symbol for each observation at the coordinates for the two variables."
