@@ -93,7 +93,7 @@ a bar chart with {{numberOfBars}} {{orientation}} bar{{#s}}s{{/s}}.<br>
 {{/largecount}}
 {{/typebar}}
 {{#typepoint}}
-a set of {{n}} point{{#s}}s{{/s}}.<br>
+a set of {{n}}{{#defaultShape}} {{defaultShape}}{{/defaultShape}} point{{#s}}s{{/s}}.<br>
 {{^largecount}}
 The points are at:<br>
 {{#items}}({{x}}, {{y}})

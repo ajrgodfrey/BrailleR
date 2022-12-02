@@ -11,7 +11,9 @@
 \alias{Describe.summary.lm}
 \alias{Describe.tsplot}
 \alias{Describe.TukeyHSD}
+\alias{Describe.ggplot}
 \alias{print.description}
+\alias{print.multiDescription}
 \alias{print.VI}
 \alias{VI}
 \alias{VI.default}
@@ -48,13 +50,15 @@ VI(x, Describe=FALSE, ...)
 
 \method{VI}{htest}(x, Describe=FALSE, digits = getOption("digits"),  ...) 
 
-
 \method{VI}{lm}(x, Describe=FALSE, ...)
+
+\method{Describe}{ggplot}(x,VI=FALSE, whichLayer=NULL, ...)
 }
 \arguments{
   \item{x}{any \R object}
 \item{Describe,VI}{Should the other function be called at the same time}
 \item{digits }{number of decimal places to show}
+\item{whichLayer}{Only used with Describe.ggplot, if NULL will either display the layer if ggplot has one layer, ask user for input if it is an interactive session or print out all of the layers}
 \item{...}{other arguments, currently ignored}
 }
 \details{
@@ -72,13 +76,13 @@ In general, the output from VI() is a series of text strings printed in the cons
 
 The VI() functions do not create objects as do many \R commands. Manipulations on the objects created by regular \R expressions will need those regular expressions issued in addition to those of the VI family of functions. The \code{VI.lm()} method does create objects in the current workspace and then deletes them once the HTML document is compiled.
 
-The Describe() family of functions do create an object for passing onto other functions.
+The Describe() family of functions do create an object for passing onto other functions. If multiple layers of a ggplot are being describied then it will be a list of descriptions for each layer.
 }
 \note{
 The \code{VI.lm} method fails if you use  the one line \code{VI(lm(...))} even if the model is named using \code{VI(Model1 <- lm(...))}. It does work if two explicit commands are used. For example \code{Model1 = lm(...)} followed by \code{VI(Model1)}.
 }
 \author{
-A. Jonathan R. Godfrey and Timothy P. Bilton
+A. Jonathan R. Godfrey, Timothy P. Bilton and James A. Thompson
 }
 
 \examples{
