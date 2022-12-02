@@ -23,7 +23,7 @@
         temp <- readLines(con = svgfile)
         writeLines(gsub("ISO8859-1", "ASCII", temp), con = svgfile)
       } else {
-        warning("The specified file does not exist.\n")
+        .FileDoesNotExist(svgfile)
       }
       return(invisible(NULL))
     }
@@ -172,7 +172,7 @@ x$data=NULL
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
       .MakeTigerReady(svgfile = file)
-      message("SVG file created.\n")
+      .FileCreated(file)
       return(invisible(NULL))
 }
 
@@ -182,6 +182,6 @@ SVGThis.tsplot = function(x, file = "test.svg", ...) {
       gridSVG::grid.export(name = file)
       dev.off()  # remove our graph window
       .MakeTigerReady(svgfile = file)
-      message("SVG file created.\n")
+      .FileCreated(file)
       return(invisible(NULL))
 }

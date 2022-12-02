@@ -29,7 +29,7 @@ setwd(MoveTo)
             RnwFiles = c(list.files(pattern = "Rnw"),
                          list.files(pattern = "rnw"))
 
-#              message("Copying and converting line breaks:", file)
+              # Copying and converting line breaks
 
             for (i in RnwFiles) {
 try(Sweave(i))
@@ -61,7 +61,7 @@ unlink(MoveTo)
 
 
 .RemoveWhiteSpace = function(file){
-message("done")
+.Done()
 writeLines(gsub("  *", " ", readLines(file)), file)
 return(invisible(NULL))
 }
@@ -69,7 +69,7 @@ return(invisible(NULL))
 
 
 .RemoveTabs = function(file){
-              message("Converting tabs to spaces:", file)
+              # Converting tabs to spaces
 writeLines(gsub("\t", "    ", readLines(file)), file)
 #              shell(paste0(system.file(
 #                               "Python/RemoveTabs.py", package = "BrailleR"),
@@ -80,7 +80,6 @@ return(invisible(NULL))
 .MakeBackUp = function(file){
 OldFile=paste0(file, ".bak")
 file.copy(file, OldFile)
-# message
 return(invisible(NULL))
 }
 

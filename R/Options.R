@@ -10,8 +10,7 @@ ResetDefaults =
         PrefSettings =
             file.path(getOption("BrailleR.Folder"), "BrailleROptions")
         file.copy(DefSettings, PrefSettings, overwrite = TRUE)
-        message(
-            "You have reset all preferences to the original package defaults.\n")
+        .OriginalDefaults()
         if (Local) file.remove("BrailleROptions")
         devtools::reload("BrailleR")
       } else {
@@ -41,8 +40,7 @@ ChooseEmbosser =
           }
           OpSet$BrailleR.Embosser = Embosser
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         .ExpectingText()
@@ -75,8 +73,7 @@ ChooseSlideStyle =
             }
             OpSet$BrailleR.SlideStyle = css
             write.dcf(OpSet, file = Prefs)
-            message(
-                "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+            .OptionLocal()
           }
         }
       } else {
@@ -110,8 +107,7 @@ ChooseStyle =
             }
             OpSet$BrailleR.Style = css
             write.dcf(OpSet, file = Prefs)
-            message(
-                "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+            .OptionLocal()
           }
         }
       } else {
@@ -141,8 +137,7 @@ SetAuthor =
           }
           OpSet$BrailleR.Author = name
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         .ExpectingText()
@@ -170,8 +165,7 @@ SetBRLPointSize =
           }
           OpSet$BrailleR.BRLPointSize = pt
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -201,8 +195,7 @@ SetLanguage =
           }
           OpSet$BrailleR.Language = Language
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         .ExpectingText()
@@ -233,8 +226,7 @@ SetMakeUpper =
           }
           OpSet$BrailleR.MakeUpper = Upper
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -264,8 +256,7 @@ SetPaperHeight =
           }
           OpSet$BrailleR.PaperHeight = Inches
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -295,8 +286,7 @@ SetPaperWidth =
           }
           OpSet$BrailleR.PaperWidth = Inches
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -329,8 +319,7 @@ SetPValDigits =
           }
           OpSet$BrailleR.PValDigits = digits
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -360,8 +349,7 @@ SetSigLevel =
           }
           OpSet$BrailleR.SigLevel = alpha
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(

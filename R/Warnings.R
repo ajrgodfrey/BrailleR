@@ -22,8 +22,8 @@ warning("This function is purely experimental. Use it at your own risk.\n")
 return(invisible(NULL))
 }
 
-.FileDoesNotExist =     function(file) {
-warning(file, "does not exist.\n")
+.FileDoesNotExist =     function(file=NULL) {
+warning(is.null(file), "The specified file", file),  " does not exist.\n")
 return(invisible(NULL))
     }
 

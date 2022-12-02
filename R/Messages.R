@@ -124,6 +124,11 @@ return(invisible(NULL))
     }
 
 
+.OptionLocal =     function() {
+message("The new setting will remain in effect next time you load the BrailleR package in this directory.")
+return(invisible(NULL))
+}
+
 .OptionPermanent =     function() {
 message("and has overwritten the setting for all folders.")
 return(invisible(NULL))
@@ -136,6 +141,11 @@ message("The BrailleR.", option, " option has been updated", ifelse(is.null(to),
 return(invisible(NULL))
 }
 
+
+.OriginalDefaults =     function() {
+message("You have reset all preferences to the original package defaults.\n")
+return(invisible(NULL))
+}
 
 
 .PythonVersion =     function() {
