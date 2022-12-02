@@ -100,9 +100,11 @@ The method includes representations of summary methods that are more suitable fo
 <span><span class="co"># S3 method for htest</span></span>
 <span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span>,  <span class="va">...</span><span class="op">)</span> </span>
 <span></span>
-<span></span>
 <span><span class="co"># S3 method for lm</span></span>
-<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">VI</span><span class="op">(</span><span class="va">x</span>, Describe<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ggplot</span></span>
+<span><span class="fu">Describe</span><span class="op">(</span><span class="va">x</span>,VI<span class="op">=</span><span class="cn">FALSE</span>, whichLayer<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -115,6 +117,9 @@ The method includes representations of summary methods that are more suitable fo
 
 <dt>digits </dt>
 <dd><p>number of decimal places to show</p></dd>
+
+<dt>whichLayer</dt>
+<dd><p>Only used with Describe.ggplot, if NULL will either display the layer if ggplot has one layer, ask user for input if it is an interactive session or print out all of the layers</p></dd>
 
 <dt>...</dt>
 <dd><p>other arguments, currently ignored</p></dd>
@@ -140,7 +145,7 @@ The method includes representations of summary methods that are more suitable fo
 <p>The VI() functions do not create objects as do many <span style="R">R</span> commands. Manipulations on the objects created by regular <span style="R">R</span> expressions will need those regular expressions issued in addition to those of the VI family of functions. The <code>VI.lm()</code> method does create objects in the current workspace and then deletes them once the HTML document is compiled.</p>
 
 
-<p>The Describe() family of functions do create an object for passing onto other functions.</p>
+<p>The Describe() family of functions do create an object for passing onto other functions. If multiple layers of a ggplot are being describied then it will be a list of descriptions for each layer.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -148,7 +153,7 @@ The method includes representations of summary methods that are more suitable fo
     </div>
     <div id="author">
     <h2>Author</h2>
-    <p>A. Jonathan R. Godfrey and Timothy P. Bilton</p>
+    <p>A. Jonathan R. Godfrey, Timothy P. Bilton and James A. Thompson</p>
     </div>
 
     <div id="ref-examples">
@@ -159,32 +164,28 @@ The method includes representations of summary methods that are more suitable fo
 <span class="r-in"><span><span class="fu">VI</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This is a histogram, with the title: Histogram of RandomX</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "RandomX" is marked on the x-axis.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -4, -2, 0, 2, and 4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are a total of 500 elements for this variable.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It has 13 bins with equal widths, starting at -3.5 and ending at 3 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the y-axis are at: 0, 50, 100, and 150 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has 9 bins with equal widths, starting at -4 and ending at 5 .</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The mids and counts for the bins are:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -3.25  count = 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.75  count = 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.25  count = 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 14 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 49 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 86 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 81 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 98 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 73 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 58 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 27 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -3.5  count = 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.5  count = 5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.5  count = 82 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.5  count = 161 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.5  count = 171 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.5  count = 68 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.5  count = 11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.5  count = 0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 4.5  count = 1</span>
 <span class="r-in"><span><span class="fu">Describe</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A histogram created using the base graphics package.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> General description: A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> As with most graphs created by the base graphics package, the axes do not join at the bottom left corner and are separated from the area where the data are being plotted. Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted.The vertical axis for frequency always starts at zero.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> General Description:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present. The vertical axis for frequency always starts at zero. As with most graphs created by the base graphics package, the axes do not join at the bottom left corner and are separated from the area where the data are being plotted. Tick marks are automatically chosen for the data, and the axes may not extend past the ends of variables being plotted. R normally plots a graph in a square window. This can be altered; the way this is done depends heavily on the method being used to create the graph. See the help on win.graph() or  x11() for the graphs made in an interactive  session or part of an R script; png(), pdf() or postscript() for specific file formats being created; or, use fig.height and fig.width arguments in your R markdown documents.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R hints: If you intend to make a tactile version of a histogram, you may find it useful to alter the aspect ratio so that the histogram is wider than it is tall.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R hints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> If you intend to make a tactile version of a histogram, you may find it useful to alter the aspect ratio so that the histogram is wider than it is tall. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
