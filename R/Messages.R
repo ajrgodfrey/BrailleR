@@ -1,9 +1,10 @@
 # add filenames to messages for file creation
 
-.BlankMSG  =     function() {
+
+.BlankMSG =     function() {
 message("")
 return(invisible(NULL))
-    }
+}
 
 .Added2MyBrailleR = function(){
 message("The installer file has been added to your MyBrailleR folder.")
@@ -121,6 +122,19 @@ return(invisible(NULL))
       message("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
       return(invisible(NULL))
     }
+
+
+.OptionPermanent =     function() {
+message("and has overwritten the setting for all folders.")
+return(invisible(NULL))
+}
+
+
+
+.OptionUpdated =     function(option, to=NULL) {
+message("The BrailleR.", option, " option has been updated", ifelse(is.null(to), "", paste0("to ", to ), ".")
+return(invisible(NULL))
+}
 
 
 
