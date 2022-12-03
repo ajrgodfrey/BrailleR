@@ -40,7 +40,7 @@ R2Rmd =
         .NewFile()
         return(RmdFile)
       } else {
-        .FileNotFound()
+        .FileDoesNotExist()
         return(invisible(NULL))
       }
     }

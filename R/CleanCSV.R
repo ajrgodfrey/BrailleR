@@ -11,7 +11,7 @@ CleanCSV =
             .Done() 
           }  # end ThisFile exists condition
               else {
-            .FileNotFound()
+            .FileDoesNotExist()
           }
         }  # end for loop for files
       }  # end interactive ondition
