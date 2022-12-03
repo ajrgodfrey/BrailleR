@@ -137,7 +137,7 @@ return(invisible(NULL))
 
 
 .OptionUpdated =     function(option, to=NULL) {
-message("The BrailleR.", option, " option has been updated", ifelse(is.null(to), "", paste0("to ", to ), ".")
+message("The BrailleR.", option, " option has been updated", ifelse(is.null(to), "", paste0("to ", to )), ".")
 return(invisible(NULL))
 }
 
