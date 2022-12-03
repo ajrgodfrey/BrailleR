@@ -180,7 +180,7 @@ SetLanguage =
         Language = "en_us", Permanent = interactive(), Local = interactive()) {
       if (is.character(Language)) {
         options(BrailleR.Language = Language)
-        .OptionUpdated"Language", Language)
+        .OptionUpdated("Language", Language)
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))

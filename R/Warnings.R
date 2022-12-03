@@ -23,7 +23,7 @@ return(invisible(NULL))
 }
 
 .FileDoesNotExist =     function(file=NULL) {
-warning(is.null(file), "The specified file", file),  " does not exist.\n")
+warning(ifelse(is.null(file), "The specified file", file),  " does not exist.\n")
 return(invisible(NULL))
     }
 
