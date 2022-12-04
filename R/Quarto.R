@@ -1,5 +1,4 @@
-# add quarto package
 
 # add commands to launch QuartoWriter
 
-# add commands to create Qmd files
+# add commands to create Qmd batch files
