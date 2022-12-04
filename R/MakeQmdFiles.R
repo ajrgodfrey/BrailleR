@@ -11,8 +11,8 @@
             '"\nauthor: "by ', getOption("BrailleR.Author"), '"\ndate: Updated on `r format(Sys.Date(), \'%A %d %B %Y\')`\n---\n\n```{r setup, include=FALSE}\nlibrary(knitr)
 opts_chunk$set(comment="", fig.cap="to fix")
 ```\n\n'), file = file)
-        cat(paste0("```{r}\n
-\#| line", LineNo, "\n", Lines, "\n```  \n\n"),
+        cat(paste0("```{r}
+#| line", LineNo, "\n", Lines, "\n```  \n\n"),
             file = file, append = TRUE)
         .NewFile(file)
         return(file)
