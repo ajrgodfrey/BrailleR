@@ -123,16 +123,16 @@ Line {{linenum}} connects {{npoints}} points{{^largecount}}, at {{#items}}({{x}}
 {{/largecount}}
 {{/typeline}}
 {{#typebox}}
-a boxplot comprised of {{n}} box{{#s}}es{{/s}} with whiskers.<br>
+a boxplot comprised of {{n}}{{#flipped}} horizontal{{/flipped}}{{^flipped}} vertical{{/flipped}} box{{#s}}es{{/s}} with whiskers.<br>
 {{#items}}
-There is a box at x={{x}}
+There is a box at {{#flipped}}y{{/flipped}}{{^flipped}}x{{/flipped}}={{loc}}
 {{#alpha}} with alpha {{alpha}}{{#alphamap}} which maps to {{alphalabel}} = {{alphamap}}{{/alphamap}}{{/alpha}}
 {{#colour}} with colour {{colour}}{{#colourmap}} which maps to {{colourlabel}} = {{colourmap}}{{/colourmap}}{{/colour}}
 {{#fill}} with fill {{fill}}{{#fillmap}} which maps to {{filllabel}} = {{fillmap}}{{/fillmap}}{{/fill}}
 {{#size}} with line size {{size}} mm{{#sizemap}} which maps to {{sizelabel}} = {{sizemap}}{{/sizemap}}{{/size}}
 {{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}{{/linetype}}
 .<br>It has median {{middle}}.
- The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{ymin}} and {{ymax}}.<br>
+ The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{min}} and {{max}}.<br>
 There are {{noutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}

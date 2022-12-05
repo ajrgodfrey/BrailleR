@@ -456,14 +456,28 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
 
       #BOXPLOT
     } else if (layerClass == "GeomBoxplot") {
+      ## Could add information about the varying widths
+      
       layer$type = "box"
       cleandata = layer$data   # No need for cleaning since this data is already aggregated
       layer$n = nrow(layer$data)
       nOutliers = sapply(cleandata$outliers,length)
-      map = .mapDataValues(x, xbuild,list("x", "ymin", "lower", "middle", "upper", "ymax"), panel,
-                           list(x=cleandata$x, ymin=cleandata$ymin, lower=cleandata$lower, 
-                                middle=cleandata$middle, upper=cleandata$upper, 
-                                ymax=cleandata$ymax))
+      
+      #Deal with them either being horizontal or vertical
+      flipped = sum(cleandata$flipped_aes) == length(cleandata$flipped_aes)
+      if (flipped) {
+        map = .mapDataValues(x, xbuild,list("loc", "min", "lower", "middle", "upper", "max"), panel,
+                             list(loc=cleandata$y, min=cleandata$xmin, lower=cleandata$xlower, 
+                                  middle=cleandata$xmiddle, upper=cleandata$xupper, 
+                                  max=cleandata$xmax))
+      } else {
+        map = .mapDataValues(x, xbuild,list("loc", "min", "lower", "middle", "upper", "max"), panel,
+                             list(loc=cleandata$x, min=cleandata$ymin, lower=cleandata$lower, 
+                                  middle=cleandata$middle, upper=cleandata$upper, 
+                                  max=cleandata$ymax))
+      }
+      layer$flipped = flipped
+      
       if (!is.null(map$badTransform)) {
         layer$badtransform = TRUE
         layer$transform = map$badTransform
