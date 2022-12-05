@@ -133,7 +133,7 @@ There is a box at {{#flipped}}y{{/flipped}}{{^flipped}}x{{/flipped}}={{loc}}
 {{#linetype}} with line type {{linetype}}{{#linetypemap}} which maps to {{linetypelabel}} = {{linetypemap}}{{/linetypemap}}{{/linetype}}
 .<br>It has median {{middle}}.
  The box goes from {{lower}} to {{upper}}, and the whiskers extend to {{min}} and {{max}}.<br>
-There are {{noutliers}} outliers for this boxplot.<br>
+There are {{#nooutliers}}0{{/nooutliers}}{{^nooutliers}}{{maxoutliers}} max and {{minoutliers}} min{{/nooutliers}} outliers for this boxplot.<br>
 {{/items}}
 {{/typebox}}
 {{#typesmooth}}

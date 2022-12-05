@@ -461,7 +461,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       layer$type = "box"
       cleandata = layer$data   # No need for cleaning since this data is already aggregated
       layer$n = nrow(layer$data)
-      nOutliers = sapply(cleandata$outliers,length)
+
       
       #Deal with them either being horizontal or vertical
       flipped = sum(cleandata$flipped_aes) == length(cleandata$flipped_aes)
@@ -483,12 +483,17 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
         layer$transform = map$badTransform
       } 
       layer$scaledata = map$value
-      layer$scaledata[["noutliers"]] = nOutliers
-      # Might want to report high and low outliers separately?
-      # Would like to include outlier detail as well.
-      # scaledata is currently a list of vectors.  If we wanted to include outliers
-      # within each boxes object for reporting, then boxes would need to become
-      # a list of lists.
+      
+      nOutliers = sapply(cleandata$outliers,length)
+      layer$scaledata[["nooutliers"]] = nOutliers == 0
+      
+      #Outlier code made nicer with help from josliber on code review
+      #https://codereview.stackexchange.com/questions/281708/calculate-number-of-max-and-min-outliers-from-data-frame/281730#281730
+      
+      middle = if (flipped) cleandata$xmiddle else cleandata$middle
+      layer$scaledata[["minoutliers"]] = mapply(function(x, y) sum(x < y), cleandata$outliers, middle)
+      layer$scaledata[["maxoutliers"]] = mapply(function(x, y) sum(x > y), cleandata$outliers, middle)
+      
       # Also report on any aesthetic variables that vary across the layer
       layer = .addAesVars(x, xbuild, cleandata, layeri, layer, panel)
 
