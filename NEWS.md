@@ -10,6 +10,7 @@
 - updated template files so that chunk options are moved from opening fence to commented lines
 - resolve issue #31, add default shape message.
 - resolve issue #62, add ggplot support for TimeSeries
+- resolve issue #61, fix geom_boxplot VI output and add outlier information to VI output.
 - Add ggplot to describe
 
 # BrailleR 0.33.3

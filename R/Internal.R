@@ -1,3 +1,11 @@
+
+.ifelse = function(condition, yes, no){
+    if(condition){
+      return(yes)}
+    else {
+     return(no)}
+}
+
 FindCSSFile =
     function(file) {
       out = NULL

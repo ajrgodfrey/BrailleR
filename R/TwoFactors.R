@@ -1,4 +1,4 @@
-## Last Edited: 3/12/21
+## Last Edited: 7/12/22
 
 TwoFactors =
     function(Response, Factor1, Factor2, Inter = FALSE, HSD = TRUE,
@@ -66,7 +66,7 @@ TwoFactors =
       if (is.null(Filename)){
         Filename =
             paste0(ResponseName, '.', Factor1Name, '.', Factor2Name,
-                   '-TwoFactors', ifelse(Inter, "WithInt", "NoInt"), '.Rmd')
+                   '-TwoFactors', .ifelse(Inter, "WithInt", "NoInt"), '.Rmd')
 }
 
 
@@ -74,8 +74,8 @@ TwoFactors =
       # start writing to the R markdown file
       cat(paste0('# Analysis of the ', DataName, ' data, using ', ResponseName,
                  ' as the response variable and the variables ', Factor1Name,
-                 ifelse(Inter, ", ", " and "), Factor2Name,
-                 ifelse(Inter, ", and their interaction", ""),
+                 .ifelse(Inter, ", ", " and "), Factor2Name,
+                 .ifelse(Inter, ", and their interaction", ""),
                  ' as factors.
 #### Prepared by ',
                  getOption("BrailleR.Author"), '  \n\n'), file = Filename)
@@ -84,8 +84,8 @@ TwoFactors =
       cat(paste0(
               '```{r setup, purl=FALSE, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", ""),
-              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
+              .ifelse(VI, "library(BrailleR)", ""),
+              .ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
@@ -143,18 +143,18 @@ kable(as.matrix(DataSummary), row.names=FALSE)
 
 ```{r TwoWayANOVA}
 MyANOVA <- aov(',
-              ResponseName, '~', Factor1Name, ifelse(Inter, "*", "+"),
+              ResponseName, '~', Factor1Name, .ifelse(Inter, "*", "+"),
               Factor2Name, ', data=', DataName, ')
 ',
-              ifelse(VI, "VI(MyANOVA)", ""),
+              .ifelse(VI, "VI(MyANOVA)", ""),
               '
 summary(MyANOVA)
 if(length(unique(Data.n[,3]))!=1){
 MyANOVA2 <- aov(',
-              ResponseName, '~', Factor2Name, ifelse(Inter, "*", "+"),
+              ResponseName, '~', Factor2Name, .ifelse(Inter, "*", "+"),
               Factor1Name, ', data=', DataName, ')
 ',
-              ifelse(VI, "VI(MyANOVA2)", ""), '
+              .ifelse(VI, "VI(MyANOVA2)", ""), '
 summary(MyANOVA2)
 }
 ```  \n\n'),
@@ -162,7 +162,7 @@ summary(MyANOVA2)
 
 
       cat('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
-ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
+ResidualText = .ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
       cat(ResidualText, file = Filename, append = TRUE)
 
         cat('\n\n## Tests for homogeneity of Variance \n\n', file = Filename, append = TRUE)
@@ -208,7 +208,7 @@ fligner.test(', ResponseName, '~', Factor2Name, ', data=',
 ```{r TukeyHSD, fig.cap="Plot of Tukey HSD"}
 MyHSD <- TukeyHSD(MyANOVA, ordered=TRUE, conf.level=',
                 1 - AlphaE, ')
-', ifelse(VI, 'VI(MyHSD)', ""),
+', .ifelse(VI, 'VI(MyHSD)', ""),
                 '
 MyHSD
 plot( MyHSD )
@@ -236,12 +236,12 @@ print(xtable(DataSummary, caption=TabCapt, label="',
 ```{r ANOVA-TEX, purl=FALSE}
 ThisTexFile = "',
                 Folder, '/', ResponseName, '-', Factor1Name, '-', Factor2Name,
-                ifelse(Inter, "WithInt", "NoInt"),
+                .ifelse(Inter, "WithInt", "NoInt"),
                 '-ANOVA.tex"
 TabCapt = "Two-way ANOVA for ',
                 .simpleCap(ResponseName), ' with the group factors ',
                 .simpleCap(Factor1Name), ' and ', .simpleCap(Factor2Name),
-                ifelse(Inter, ", as well as their interaction",
+                .ifelse(Inter, ", as well as their interaction",
                        " without their interaction"),
                 '.
 print(xtable(MyANOVA, caption=TabCapt, label="',

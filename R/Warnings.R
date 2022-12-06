@@ -35,7 +35,7 @@ return(invisible(NULL))
 }
 
 .FileDoesNotExist =     function(file=NULL) {
-warning(ifelse(is.null(file), "The specified file", file),  " does not exist.")
+warning(.ifelse(is.null(file), "The specified file", file),  " does not exist.")
 return(invisible(NULL))
 }
 
@@ -49,7 +49,7 @@ return(invisible(NULL))
 
 
 .FolderNotFound =     function(folder=NULL) {
-warning(ifelse(is.null(folder), "The specified folder", folder),  " does not exist.")
+warning(.ifelse(is.null(folder), "The specified folder", folder),  " does not exist.")
 return(invisible(NULL))
 }
 
@@ -91,7 +91,7 @@ return(invisible(NULL))
 
 
 .PkgNotFound =     function(Pkg=NULL) {
-warning("The ", ifelse(is.null(Pkg), "specified package", Pkg),  " does not exist.")
+warning("The ", .ifelse(is.null(Pkg), "specified package", Pkg),  " does not exist.")
 return(invisible(NULL))
 }
 
