@@ -22,7 +22,7 @@ importFrom("stats", "aggregate", "anova", "as.ts", "coef", "cor", "lm", "median"
 importFrom("tools", "Rd2ex")
 importFrom("utils", "browseURL", "create.post", "download.file", "file.edit", "head", "menu", "packageVersion", "read.csv", "read.table", "savehistory", "Sweave", "str", "tail", "unzip", "write.csv") 
 importFrom("whisker", "whisker.render")
-import(XML)
+importFrom("XML", "addAttributes", "newXMLDoc", "newXMLNode", "ensureNamespace", "newXMLTextNode", "xmlName", "xmlRoot", "saveXML", "getNodeSet", "xmlGetAttr", "addChildren", "removeChildren", "xmlChildren")
 importFrom("xtable", "xtable")
 S3method(AddXML,default)
   S3method(AddXML,boxplot)
