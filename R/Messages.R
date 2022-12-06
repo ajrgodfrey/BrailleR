@@ -59,13 +59,13 @@ return(invisible(NULL))
 
 
 .FileCreated =     function(file=NULL, where="in your MyBrailleR directory.") {
-NewFile = ifelse(is.null(file), "A new file", file)
+NewFile = .ifelse(is.null(file), "A new file", file)
 message(NewFile, " has been created ", where)
 return(invisible(NULL))
 }
 
 .FileUpdated =     function(file=NULL, where="in your MyBrailleR directory.") {
-NewFile = ifelse(is.null(file), "The specified", file)
+NewFile = .ifelse(is.null(file), "The specified", file)
 message(NewFile, " has been updated ", where)
 return(invisible(NULL))
 }
@@ -84,7 +84,7 @@ return(invisible(NULL))
 
 
 .NewFile =     function(file=NULL) {
-NewFile = ifelse(is.null(file), "", file)
+NewFile = .ifelse(is.null(file), "", file)
 message(NewFile, " has been created in your working directory.")
 return(invisible(NULL))
 }
@@ -126,7 +126,7 @@ return(invisible(NULL))
 
 
 .OptionUpdated =     function(option, to=NULL) {
-message("The BrailleR.", option, " option has been updated", ifelse(is.null(to), "", paste0("to ", to )), ".")
+message("The BrailleR.", option, " option has been updated", .ifelse(is.null(to), "", paste0("to ", to )), ".")
 return(invisible(NULL))
 }
 
