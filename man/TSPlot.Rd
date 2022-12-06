@@ -7,7 +7,6 @@
 \description{This function is a wrapper to the standard \code{plott()} function in the \pkg{graphics} package. It is tailored to generating a time series plot, and adds detail to the stored object so that a better text description can be formulated using the \code{VI()} method in the \pkg{BrailleR} package. The function will become redundant once all other \pkg{BrailleR} functionality is working well with ggplot style graphics.}
 \usage{
 TimeSeriesPlot(.data, x, time=NULL, base=FALSE, ...)
-TimeSeriesPlot(.data, x, base=TRUE, ...)
 }
 \arguments{
 \item{.data}{the data.frame from which variables are drawn. Ignored if using base graphics.}
@@ -50,12 +49,13 @@ par(op)
 detach(airquality)
 
 # with ggplot
-#Normal data
-basic = TimeSeriesPlot(airquality, x=Temp)
-basic
-#ts data
-withTitle = TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For the month Januaray")
-withTitle
-withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
-withLabs
+if(require(ggplot2)){
+  basic = TimeSeriesPlot(airquality, x=airquality$Temp)
+  basic
+  #ts data
+  withTitle = TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For the month Januaray")
+  withTitle
+  withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
+  withLabs
+}
 }
