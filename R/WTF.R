@@ -10,17 +10,16 @@ WTF =
       }  # end open device condition
 
       if (length(grid::grid.ls(print = FALSE)$name) == 0) {
-        warning("There is no current graphics device to investigate.\n")
+        .NoGraphicsDevice()
         GridLS = NULL
       } else {
         GridLS = grid::grid.ls(print = FALSE, flatten = TRUE)
       }
 
 
-      #message("Now looking for things using the grobs on device ", dev.cur(), ".")
+      # Now looking for things using the grobs on device ", dev.cur(), ".
       #print(GridLS)
       ## there is a dictionary listing of these in the gridGraphs paper.
-      #cat("\n\n")
 
 
       if (is.null(names(grid.get("graphics-plot-1-points-2")))) {
@@ -83,6 +82,5 @@ WTF =
       ## "This window has <b> rectangles." etc. etc.
 
       ## I would guess that a window having boxes and lines might be a boxplot, while a window having no lines but rectangles is a histogram. etc.
-      #message("\n\nDone.")
       return(invisible(NULL))
     }

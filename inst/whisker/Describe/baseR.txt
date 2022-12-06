@@ -1,0 +1,19 @@
+type,title,general,RHints
+default,"
+No description of this type of object has been written at this time.","
+none yet","
+none yet"
+histogram,"
+A histogram created using the base graphics package.","
+A histogram uses rectangles to represent the counts or relative frequencies of observations falling in each subrange of the numeric variable being investigated. The rectangles are standing side by side with their bottom end at the zero mark of the vertical axis. The widths of the rectangles are usually constant, but this can be altered by the user. A sighted person uses the heights and therefore the areas of the rectangles to help determine the overall shape of the distribution, the presence of gaps in the data, and any outliers that might be present. The vertical axis for frequency always starts at zero. {{BaseAxisStyleText}} {{CommonTickMarkText}} {{CommonAspectRatioText}}","
+If you intend to make a tactile version of a histogram, you may find it useful to alter the aspect ratio so that the histogram is wider than it is tall."
+scatterplot,"
+A scatter plot created using BrailleR which builds on base graphics use of the plot() command","
+{{CommonScatterplotGen}} {{BaseAxisStyleText}} {{CommonTickMarkText}} 
+{{CommonAspectRatioText}}","
+Default settings would use a small black open circle for each observation in the dataset that has a value for both variables being plotted. The `col` and `pch` arguments alter the colour and shape of the symbols; these might vary according to some other information known about each observation. It is common to add a straight line with the `abline()` command to show how well a linear relationship summarises the data."
+tsplot,"
+A time series plot created using BrailleR which builds on base graphics use of the plot() command","
+A time series plot shows the behaviour of a variable over time, by connecting successive points at the height of the variable of interest using line segments. The x-axis is labelled as "Time" by default.{{BaseAxisStyleText}} {{CommonTickMarkText}} 
+{{CommonAspectRatioText}}","
+Default settings would use a series of straight black line segments to join adjacent points. Each  missing observation contributes to the absence of two line segments. \nThe line segments are printed as solid black lines, unless the colour is changed using the `col` argument. The type of line is changed with the `lty` argument. It can prove useful to alter the width of lines using the `lwd` argument."

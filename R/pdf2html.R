@@ -96,8 +96,7 @@ return(LastPageNo)
         if(TestPython()){
           Success = .PullPDFMinerUsingPip()
         }else{
-          warning("This function requires installation of Python.\n")
-message("You can install Python with the GetPython3() function.\n")
+          .NeedsPython()
         }
       }
       return(invisible(Success))
@@ -106,6 +105,7 @@ message("You can install Python with the GetPython3() function.\n")
 
 pdf2html =
     function(pdffile, htmlfile=sub(".pdf", ".html", pdffile), HeadingLevels=4, PageTag="h6"){
+      .ExperimentalFunction()
       Success = FALSE
       if (.IsPDFMinerAvailable()) {
         shell(paste("pdf2txt.py -O TempDir -o tempfile.html -t html", pdffile))
@@ -115,7 +115,7 @@ pdf2html =
 .PageNumbers2Headings(htmlfile, outfile=htmlfile, HeadingTag=PageTag)
         Success = TRUE
       } else {
-        warning("There was a problem and no conversion was possible.\n")
+        .NoConversion()
       }
       return(invisible(Success))
     }

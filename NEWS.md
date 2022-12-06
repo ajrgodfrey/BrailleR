@@ -1,5 +1,6 @@
 # BrailleR 0.33.4
 - fix issue #35 with incorrect bin counts
+- fix issue #24, correcting base r plot titles in VI
 - Add shaded area for geom_smooth CI info to VI output.
 - Add geom_ribbon support
 - Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.
@@ -9,6 +10,7 @@
 - updated template files so that chunk options are moved from opening fence to commented lines
 - resolve issue #31, add default shape message.
 - resolve issue #62, add ggplot support for TimeSeries
+- Add ggplot to describe
 
 # BrailleR 0.33.3
 -Update author files

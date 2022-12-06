@@ -10,12 +10,11 @@ ResetDefaults =
         PrefSettings =
             file.path(getOption("BrailleR.Folder"), "BrailleROptions")
         file.copy(DefSettings, PrefSettings, overwrite = TRUE)
-        message(
-            "You have reset all preferences to the original package defaults.\n")
+        .OriginalDefaults()
         if (Local) file.remove("BrailleROptions")
         devtools::reload("BrailleR")
       } else {
-        warning("This function is meant for use in interactive mode only.\n")
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }
@@ -26,14 +25,13 @@ ChooseEmbosser =
         Embosser = "none", Permanent = interactive(), Local = interactive()) {
       if (is.character(Embosser)) {
         options(BrailleR.Embosser = Embosser)
-        message(
-            "The BrailleR.Embosser option has been updated to ", Embosser, ".")
+        .OptionUpdated("Embosser", Embosser)
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.Embosser = Embosser
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -42,11 +40,10 @@ ChooseEmbosser =
           }
           OpSet$BrailleR.Embosser = Embosser
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -61,14 +58,13 @@ ChooseSlideStyle =
               "The file", css,
               "is not in the css folder of the BrailleR package.\nPlease put it there before re-issuing this command.\n")
         } else {
-          message(
-              "The BrailleR.SlideStyle option has been updated to ", css, ".")
+          .OptionUpdated("SlideStyle", css)
           if (Permanent) {
             Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
             OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
             OpSet$BrailleR.SlideStyle = css
             write.dcf(OpSet, file = Prefs)
-            message("and has overwritten the setting for all folders.")
+            .OptionPermanent()
           }
           if (Local) {
             Prefs = "BrailleROptions"
@@ -77,12 +73,11 @@ ChooseSlideStyle =
             }
             OpSet$BrailleR.SlideStyle = css
             write.dcf(OpSet, file = Prefs)
-            message(
-                "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+            .OptionLocal()
           }
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -97,13 +92,13 @@ ChooseStyle =
               "The file", css,
               "is not in the css folder of the BrailleR package.\nPlease put it there before re-issuing this command.\n")
         } else {
-          message("The BrailleR.Style option has been updated to ", css, ".")
+          .OptionUpdated("Style", css)
           if (Permanent) {
             Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
             OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
             OpSet$BrailleR.Style = css
             write.dcf(OpSet, file = Prefs)
-            message("and has overwritten the setting for all folders.")
+            .OptionPermanent()
           }
           if (Local) {
             Prefs = "BrailleROptions"
@@ -112,12 +107,11 @@ ChooseStyle =
             }
             OpSet$BrailleR.Style = css
             write.dcf(OpSet, file = Prefs)
-            message(
-                "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+            .OptionLocal()
           }
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -128,13 +122,13 @@ SetAuthor =
         name = "BrailleR", Permanent = interactive(), Local = interactive()) {
       if (is.character(name)) {
         options(BrailleR.Author = name)
-        message("The BrailleR.Author option has been updated to ", name, ".")
+        .OptionUpdated("Author", name)
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.Author = name
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -143,11 +137,10 @@ SetAuthor =
           }
           OpSet$BrailleR.Author = name
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -157,15 +150,13 @@ SetBRLPointSize =
     function(pt, Permanent = FALSE, Local = interactive()) {
       if ((10 < pt) & (pt < 40)) {
         options(BrailleR.BRLPointSize = pt)
-        message(
-            "The BrailleR.BRLPointSize option for the braille font has been changed to ",
-            pt, " inches.")
+        .OptionUpdated("BRLPointSize (for the braille font)", paste0(pt, " inches"))
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.BRLPointSize = pt
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -174,8 +165,7 @@ SetBRLPointSize =
           }
           OpSet$BrailleR.BRLPointSize = pt
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -190,14 +180,13 @@ SetLanguage =
         Language = "en_us", Permanent = interactive(), Local = interactive()) {
       if (is.character(Language)) {
         options(BrailleR.Language = Language)
-        message(
-            "The BrailleR.Language option has been updated to ", Language, ".")
+        .OptionUpdated("Language", Language)
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.Language = Language
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -206,11 +195,10 @@ SetLanguage =
           }
           OpSet$BrailleR.Language = Language
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
-        warning("A text string was expected. No action taken.\n")
+        .ExpectingText()
       }
       return(invisible(NULL))
     }
@@ -229,7 +217,7 @@ SetMakeUpper =
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.MakeUpper = Upper
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -238,8 +226,7 @@ SetMakeUpper =
           }
           OpSet$BrailleR.MakeUpper = Upper
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -260,7 +247,7 @@ SetPaperHeight =
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.PaperHeight = Inches
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -269,8 +256,7 @@ SetPaperHeight =
           }
           OpSet$BrailleR.PaperHeight = Inches
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -291,7 +277,7 @@ SetPaperWidth =
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.PaperWidth = Inches
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -300,8 +286,7 @@ SetPaperWidth =
           }
           OpSet$BrailleR.PaperWidth = Inches
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -325,7 +310,7 @@ SetPValDigits =
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.PValDigits = digits
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -334,8 +319,7 @@ SetPValDigits =
           }
           OpSet$BrailleR.PValDigits = digits
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(
@@ -356,7 +340,7 @@ SetSigLevel =
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
           OpSet$BrailleR.SigLevel = alpha
           write.dcf(OpSet, file = Prefs)
-          message("and has overwritten the setting for all folders.")
+          .OptionPermanent()
         }
         if (Local) {
           Prefs = "BrailleROptions"
@@ -365,8 +349,7 @@ SetSigLevel =
           }
           OpSet$BrailleR.SigLevel = alpha
           write.dcf(OpSet, file = Prefs)
-          message(
-              "The new setting will remain in effect next time you load the BrailleR package in this directory.")
+          .OptionLocal()
         }
       } else {
         warning(

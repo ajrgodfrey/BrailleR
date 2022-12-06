@@ -8,8 +8,8 @@ check_it = CheckIt = function(x, ...){
 
 
 what_is = WhatIs = function(x, ...){
-message("\n")
-    message(VI(x, ...))
-message("\n")
+cat("\n")
+VI(x, ...)
+cat("\n")
 return(    invisible(x))
 }
