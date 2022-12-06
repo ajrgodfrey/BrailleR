@@ -43,7 +43,7 @@ VI(x, Describe=FALSE, ...)
 }
 \arguments{
 \item{x}{any \R object}
-\item{Describe}{Should the \code{\link{Describe()}} function be called at the same time}
+\item{Describe}{Should the \code{Describe()} function be called at the same time}
 \item{digits }{number of decimal places to show}
 \item{threshold}{Only for ggplot. Maximum number of data items that should be individually listed in the output.}
 \item{template}{Only for ggplot. Template file, in mustache format, to be used in creating the text}
@@ -78,7 +78,9 @@ PlottedFig=hist(RandomX)
 VI(PlottedFig)
 
 # ggplot
+if(require(ggplot2)){
 ggplot(economics_long, aes(date, value01, colour = variable)) +
   geom_line() +
   ggtitle('dummy title')
+}
 }
