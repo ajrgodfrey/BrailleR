@@ -1,9 +1,14 @@
 
+
+.RunWriteRExecutable = function(file=NULL){
+            shell(paste0(Sys.which("WriteR"), ifelse(is.null(file), "", file)), wait=FALSE)
+}
+)
 .IsWriteRAvailable =
     function(){
       Success = FALSE
       PyExists = TestPython()
-      if(PyExists && .IsWxAvailable()){
+      if(PyExists && .sWxAvailable()){
         Success=TRUE
       }else{
         if(PyExists){
@@ -22,10 +27,10 @@ WriteR =
     function(file = NULL, math = c("webTeX", "MathJax")) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          if (.IsWriteRAvailable()) {
+          if (.IsWriteRAvailable() | Sys.which("WriteR") != "") {
             if (!is.null(file)) {
               if (!file.exists(file)) {
-                #cat("Starting new file\n", file = file)
+                .FileCreated(file=file, where="in the current directory.") 
                 file.copy(system.file("Templates/simpleYAMLHeader.Rmd", package="BrailleR"), file)
               }
             }
