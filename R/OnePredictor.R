@@ -1,5 +1,5 @@
 ## add this back in when the VI.anova() is done
-#  ', ifelse(VI, "VI(", ""), 'anova(', ModelName, ifelse(VI,")", ""), ')
+#  ', .ifelse(VI, "VI(", ""), 'anova(', ModelName, .ifelse(VI,")", ""), ')
 
 OnePredictor =
     function(Response, Predictor, Data = NULL, Filename = NULL, Folder = NULL,
@@ -71,8 +71,8 @@ OnePredictor =
       cat(paste0(
               '```{r setup2, purl=FALSE, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", ""),
-              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
+              .ifelse(VI, "library(BrailleR)", ""),
+              .ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 library(knitr)
 opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
@@ -130,7 +130,7 @@ kable(t(SummaryTable), row.names=T, align=rep("c",8))
       cat('## Scatter Plot\n\n', file = Filename, append = TRUE)
 
 
-ScatterText = ifelse(Modern, .GetModernStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
+ScatterText = .ifelse(Modern, .GetModernStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName),
  .GetOldStyleScatterText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName))
       cat(ScatterText, file = Filename, append = TRUE)
 
@@ -141,20 +141,20 @@ ScatterText = ifelse(Modern, .GetModernStyleScatterText(ResponseName=ResponseNam
 ', ModelName,
               ' <- lm(', ResponseName, '~', PredictorName, ', data=', DataName,
               ')
-', ifelse(VI, paste("VI(", ModelName, ")"), ""), '
+', .ifelse(VI, paste("VI(", ModelName, ")"), ""), '
 ',
-              ifelse(VI, paste0("VI(summary(", ModelName, "))"), ""),
+              .ifelse(VI, paste0("VI(summary(", ModelName, "))"), ""),
               '
 summary(', ModelName,
               ')
 ```\n\n'),
           file = Filename, append = TRUE)
 
-FittedText = ifelse(Modern, .GetModernStyleFittedText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName, ModelName=ModelName),
+FittedText = .ifelse(Modern, .GetModernStyleFittedText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName, ModelName=ModelName),
 .GetOldStyleFittedText(ResponseName=ResponseName, PredictorName=PredictorName, DataName=DataName, ModelName=ModelName))
       cat(FittedText, file = Filename, append = TRUE)
 
-ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName=ModelName), .GetOldStyleResidualText(ModelName=ModelName))
+ResidualText = .ifelse(Modern, .GetModernStyleResidualText(ModelName=ModelName), .GetOldStyleResidualText(ModelName=ModelName))
       cat(ResidualText, file = Filename, append = TRUE)
 
 

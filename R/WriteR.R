@@ -1,14 +1,14 @@
 
 
 .RunWriteRExecutable = function(file=NULL){
-            shell(paste0(Sys.which("WriteR"), ifelse(is.null(file), "", file)), wait=FALSE)
+            shell(paste0(Sys.which("WriteR"), .ifelse(is.null(file), "", file)), wait=FALSE)
 }
-)
+
 .IsWriteRAvailable =
     function(){
       Success = FALSE
       PyExists = TestPython()
-      if(PyExists && .sWxAvailable()){
+      if(PyExists && .IsWxAvailable()){
         Success=TRUE
       }else{
         if(PyExists){
