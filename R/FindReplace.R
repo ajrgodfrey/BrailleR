@@ -12,7 +12,7 @@ FindReplace =
         }
         writeLines(gsub(find, replace, OldText, fixed=TRUE)[1:NoLines], con = file)
       } else {
-        .FileNotFound()
+        .FileDoesNotExist()
       }
       return(invisible(NULL))
     }
