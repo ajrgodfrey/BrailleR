@@ -43,6 +43,26 @@ OnePredictor =
         if (!is.data.frame(Data)) .NotADataFrame()
       }
 
+
+      if(VI){
+        VIOpenText = "VI("
+        VICloseText = ")"
+        }
+      else {
+        VIOpenText = ""
+        VICloseText = ""
+        }
+
+
+      if(Latex){
+        LatexOpenText = "VI("
+        LatexCloseText = ")"
+        }
+      else {
+        LatexOpenText = ""
+        LatexCloseText = ""
+        }
+
       with(Data, {
                    if (!is.numeric(get(ResponseName)))
                      .ResponseNotNumeric()

@@ -58,6 +58,28 @@ TwoFactors =
               .FactorNotFactor(which="second")
           })  # end data checking
 
+
+      if(VI){
+        VIOpenText = "VI("
+        VICloseText = ")"
+        }
+      else {
+        VIOpenText = ""
+        VICloseText = ""
+        }
+
+
+      if(Latex){
+        LatexOpenText = "VI("
+        LatexCloseText = ")"
+        }
+      else {
+        LatexOpenText = ""
+        LatexCloseText = ""
+        }
+
+
+
       # create folder and filenames
       if (is.null(Folder)) Folder = DataName
 
