@@ -1,5 +1,4 @@
 
-# help page is shared with VI()
 
 #The heavy lifting of this function is done with these internal functions which 
 #Interact with the mustache templates.

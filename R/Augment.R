@@ -1,3 +1,4 @@
+	
 
 Augment = function(x) {
             UseMethod("Augment")
@@ -17,11 +18,11 @@ return(invisible(x))
 Augment.boxplot = function(x) {
       x=.AugmentBase(x)
       x$NBox = length(x$n)
-      x$VarGroup = ifelse(x$NBox > 1, 'group', 'variable')
-      x$VarGroupUpp = ifelse(x$NBox > 1, 'Group', 'This variable')
-      x$IsAre = ifelse(x$NBox > 1, 'are', 'is')
-      x$Boxplots = ifelse(x$NBox > 1, paste(x$NBox, 'boxplots'), 'a boxplot')
-      x$VertHorz = ifelse(x$horizontal, 'horizontally', 'vertically')
+      x$VarGroup = .ifelse(x$NBox > 1, 'group', 'variable')
+      x$VarGroupUpp = .ifelse(x$NBox > 1, 'Group', 'This variable')
+      x$IsAre = .ifelse(x$NBox > 1, 'are', 'is')
+      x$Boxplots = .ifelse(x$NBox > 1, paste(x$NBox, 'boxplots'), 'a boxplot')
+      x$VertHorz = .ifelse(x$horizontal, 'horizontally', 'vertically')
       ##vs This should be done when one actually wants to use the names
       ##
       ## if (x$NBox > 1) {
@@ -35,11 +36,11 @@ Augment.boxplot = function(x) {
 Augment.dotplot = function(x) {
       x=.AugmentBase(x)
       x$NPlot = length(x$vals)
-      x$VarGroup = ifelse(x$NPlot > 1, 'group', 'variable')
-      x$VarGroupUpp = ifelse(x$NPlot > 1, 'Group', 'This variable')
-      x$IsAre = ifelse(x$NPlot > 1, 'are', 'is')
-      x$dotplots = ifelse(x$NPlot > 1, paste(x$NPlot, 'dotplots'), 'a dotplot')
-      x$VertHorz = ifelse(x$vertical, 'vertically', 'horizontally')
+      x$VarGroup = .ifelse(x$NPlot > 1, 'group', 'variable')
+      x$VarGroupUpp = .ifelse(x$NPlot > 1, 'Group', 'This variable')
+      x$IsAre = .ifelse(x$NPlot > 1, 'are', 'is')
+      x$dotplots = .ifelse(x$NPlot > 1, paste(x$NPlot, 'dotplots'), 'a dotplot')
+      x$VertHorz = .ifelse(x$vertical, 'vertically', 'horizontally')
 return(invisible(x))
 }
 
@@ -55,10 +56,10 @@ x$TextPositions=list(x=X, y=Y)
 
 
 Augment.gg = Augment.ggplot = function(x) {
-      x$ExtraArgs$main <- ifelse(is.null(x$labels$title), "", x$labels$title)
-      x$ExtraArgs$sub <- ifelse(is.null(x$labels$subtitle), "", x$labels$subtitle)
-      x$ExtraArgs$xlab <- ifelse(is.null(x$labels$x), "", x$labels$x)
-      x$ExtraArgs$ylab <- ifelse(is.null(x$labels$y), "", x$labels$y)
+      x$ExtraArgs$main <- .ifelse(is.null(x$labels$title), "", x$labels$title)
+      x$ExtraArgs$sub <- .ifelse(is.null(x$labels$subtitle), "", x$labels$subtitle)
+      x$ExtraArgs$xlab <- .ifelse(is.null(x$labels$x), "", x$labels$x)
+      x$ExtraArgs$ylab <- .ifelse(is.null(x$labels$y), "", x$labels$y)
       class(x)=c(class(x), "Augmented") # order change here means updates are possible using functions in UpdateGraphs.R
       return(invisible(x))
 }

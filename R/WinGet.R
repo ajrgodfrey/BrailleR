@@ -15,14 +15,14 @@
 # possibly create .winget7Zip .wingetMaxima and/or .wingetOctave
 
 .wingetPandoc = function(){
-    action =  ifelse(rmarkdown::pandoc_available(), "upgrade", "install")
+    action =  .ifelse(rmarkdown::pandoc_available(), "upgrade", "install")
     return(.winget("pandoc", action))
 }
 
 # possibly create .wingetPython but need to wait for wxPython to be 3.10 compliant
 
 .wingetQuarto = function(){
-    action = ifelse(is.null(quarto::quarto_path()), "install", "upgrade")
+    action = .ifelse(is.null(quarto::quarto_path()), "install", "upgrade")
     return(.winget("Quarto", action))
 }
 

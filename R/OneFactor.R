@@ -70,8 +70,8 @@ OneFactor =
       cat(paste0(
               '```{r setup, purl=FALSE, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", ""),
-              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
+              .ifelse(VI, "library(BrailleR)", ""),
+              .ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
@@ -132,10 +132,10 @@ kable(as.matrix(DataSummary), row.names=FALSE)
 
 ```{r boxplots, fig.cap="Comparative boxplots"}  
             ',
-                ifelse(VI, "VI(", ""), 'boxplot(', ResponseName, '~',
+                .ifelse(VI, "VI(", ""), 'boxplot(', ResponseName, '~',
                 FactorName, ', data=', DataName, ', ylab=',
                 InQuotes(.simpleCap(ResponseName)), ', xlab=',
-                InQuotes(.simpleCap(FactorName)), ifelse(VI, ")", ""),
+                InQuotes(.simpleCap(FactorName)), .ifelse(VI, ")", ""),
  ')
 ``` \n\n'), file = Filename, append = TRUE)
       }
@@ -151,10 +151,10 @@ No boxplots are included because at least one group size is too small.  \n\n',
 ```{r dotplots, fig.cap="Comparative dotplots"}
 with(',
               DataName, ',
-', ifelse(VI, 'VI(dotplot(', 'stripchart('),
+', .ifelse(VI, 'VI(dotplot(', 'stripchart('),
               ResponseName, '~', FactorName, ', xlab=',
               InQuotes(.simpleCap(ResponseName)), ', ylab=',
-              InQuotes(.simpleCap(FactorName)), ifelse(VI, ')', ''),
+              InQuotes(.simpleCap(FactorName)), .ifelse(VI, ')', ''),
               '))
 ``` \n\n'), file = Filename, append = TRUE)
 
@@ -162,16 +162,16 @@ with(',
 
 ```{r OneWayANOVA1}
 ',
-                 ifelse(VI, "VI(", ""), '
+                 .ifelse(VI, "VI(", ""), '
 MyANOVA <- aov(', ResponseName, '~',
-                 FactorName, ', data=', DataName, ')', ifelse(VI, ")", "")),
+                 FactorName, ', data=', DataName, ')', .ifelse(VI, ")", "")),
           '
 summary(MyANOVA)
 ```  \n\n', file = Filename, append = TRUE)
 
       cat('\n\n## Residual Analysis\n\n', file = Filename, append = TRUE)
 
-ResidualText = ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
+ResidualText = .ifelse(Modern, .GetModernStyleResidualText(ModelName="MyANOVA"), .GetOldStyleResidualText(ModelName="MyANOVA"))
       cat(ResidualText, file = Filename, append = TRUE)
 
         cat(paste0(
@@ -198,7 +198,7 @@ fligner.test(', ResponseName, '~',
 ```{r TukeyHSD, fig.cap="Plot of Tukey HSD"}
 MyHSD <- TukeyHSD(MyANOVA, ordered=TRUE, conf.level=',
                 1 - AlphaE, ')
-', ifelse(VI, "VI(MyHSD)  \n", ""),
+', .ifelse(VI, "VI(MyHSD)  \n", ""),
                 '
 MyHSD
 plot(MyHSD)

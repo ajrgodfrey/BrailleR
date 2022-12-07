@@ -36,7 +36,7 @@ WriteR =
             }
             shell(paste0('"', file.path(system.file(
                             "Python/WriteR/WriteR.pyw", package = "BrailleR")), '" ',
-                        ifelse(is.null(file), "", file)), wait=FALSE)
+                        .ifelse(is.null(file), "", file)), wait=FALSE)
           } else {
             .NeedsWX()
             .InstallPython()

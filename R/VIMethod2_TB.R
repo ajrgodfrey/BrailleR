@@ -1,3 +1,4 @@
+
 VI.aov <- function(x, Describe=FALSE, ...)  # Last Edited: 18/02/15
     {
   GroupL <- interaction(x$model[, -1], sep = ":")
@@ -40,9 +41,9 @@ VI.summary.lm <- function(x, Describe=FALSE, ...) {
   for (SigLevel in c(0.01, 0.05, 0.1)) {
     SigTerms <- which(SigPValues == SigLevel)
     if (length(SigTerms) != 0) {
-      cat('The', ifelse(length(SigTerms) == 1, " term which is ",
+      cat('The', .ifelse(length(SigTerms) == 1, " term which is ",
                         " terms which are;"), 'significant to ', SigLevel * 100,
-          ifelse(length(SigTerms) == 1, "% is", "% are"), '\n', sep = "")
+          .ifelse(length(SigTerms) == 1, "% is", "% are"), '\n', sep = "")
       for (Term in 1:length(SigTerms)) {
         Index = SigTerms[Term] + IsInter
         cat(row.names(CoeTable)[Index], 'with an estimate of',

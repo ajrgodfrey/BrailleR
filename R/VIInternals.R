@@ -334,7 +334,7 @@
 #Helper list for finding whether words start with vowels to give them an/a accordingly
 .giveAnOrA =function(wordChosen){
   vowels = c("a", "e", "i", "o", "u")
-  AnA = ifelse(is.element(substr(wordChosen, 1,1), vowels), "an", "a")
+  AnA = .ifelse(is.element(substr(wordChosen, 1,1), vowels), "an", "a")
   return(AnA)
 }
 
