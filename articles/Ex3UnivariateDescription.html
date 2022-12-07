@@ -96,11 +96,12 @@
 
       
 
-      </header><script src="Ex3UnivariateDescription_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The BrailleR package Example 3</h1>
-                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
+                        <h4 data-toc-skip class="author">A. Jonathan R.
+Godfrey</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/Ex3UnivariateDescription.rmd" class="external-link"><code>vignettes/Ex3UnivariateDescription.rmd</code></a></small>
@@ -116,10 +117,32 @@
 <div class="section level3">
 <h3 id="description-of-a-single-numeric-variable">Description of a single numeric variable<a class="anchor" aria-label="anchor" href="#description-of-a-single-numeric-variable"></a>
 </h3>
-<p>There are many commands needed to get the numeric and graphic summary measures that might be required to collect all relevant information on a single numeric variable. The UniDesc() command has been written as a shortcut for a blind user who wishes to obtain: - the counts of points in the sample that were observed and not observed, - the mean and trimmed mean, - the five number summary: minimum, lower quartile, median, upper quartile, and maximum, - the interquartile range (IQR) and standard deviation, - measures of skewness and kurtosis (thanks to the moments package), - a histogram and/or a boxplot, - a normality (quantile-quantile) plot, - various tests for normality (thanks to the nortest package), and - tests on the significance of the skewness and kurtosis (again, thanks to the moments package).</p>
-<p>In addition, the blind user may need any/all of the graphs in a variety of formats (png, pdf, eps, or svg), nicely formatted tables for insertion into documents (LaTeX or HTML), and access to the code that generated these graphs and tables (an R script).</p>
-<p>The UniDesc() function can deliver all of this with minimal effort from the user. In addition, the output HTML file is opened automatically if R is being used interactively, giving the blind user immediate access to the information. The content is presented using sufficiently marked up HTML code including headings and tables so that the blind user can make best use of their screen reading software. All graphs included in the HTML file can be presented using a text description available from the VI() functionality of the BrailleR package.</p>
-<p>The main output document (HTML) can be viewed by issuing the command</p>
+<p>There are many commands needed to get the numeric and graphic summary
+measures that might be required to collect all relevant information on a
+single numeric variable. The UniDesc() command has been written as a
+shortcut for a blind user who wishes to obtain: - the counts of points
+in the sample that were observed and not observed, - the mean and
+trimmed mean, - the five number summary: minimum, lower quartile,
+median, upper quartile, and maximum, - the interquartile range (IQR) and
+standard deviation, - measures of skewness and kurtosis (thanks to the
+moments package), - a histogram and/or a boxplot, - a normality
+(quantile-quantile) plot, - various tests for normality (thanks to the
+nortest package), and - tests on the significance of the skewness and
+kurtosis (again, thanks to the moments package).</p>
+<p>In addition, the blind user may need any/all of the graphs in a
+variety of formats (png, pdf, eps, or svg), nicely formatted tables for
+insertion into documents (LaTeX or HTML), and access to the code that
+generated these graphs and tables (an R script).</p>
+<p>The UniDesc() function can deliver all of this with minimal effort
+from the user. In addition, the output HTML file is opened automatically
+if R is being used interactively, giving the blind user immediate access
+to the information. The content is presented using sufficiently marked
+up HTML code including headings and tables so that the blind user can
+make best use of their screen reading software. All graphs included in
+the HTML file can be presented using a text description available from
+the VI() functionality of the BrailleR package.</p>
+<p>The main output document (HTML) can be viewed by issuing the
+command</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">UniDesc</span><span class="op">)</span></span></code></pre></div>
 <p>while running R interactively.</p>

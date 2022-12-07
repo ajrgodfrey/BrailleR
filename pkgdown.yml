@@ -1,4 +1,4 @@
-pandoc: 2.7.3
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
@@ -10,5 +10,5 @@ articles:
   GettingStarted: GettingStarted.html
   IntroWriteR: IntroWriteR.html
   qplot: qplot.html
-last_built: 2022-12-03T03:18Z
+last_built: 2022-12-07T21:29Z
 

@@ -96,11 +96,12 @@
 
       
 
-      </header><script src="Ex1histograms_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The BrailleR package Example 1</h1>
-                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
+                        <h4 data-toc-skip class="author">A. Jonathan R.
+Godfrey</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/Ex1histograms.rmd" class="external-link"><code>vignettes/Ex1histograms.rmd</code></a></small>
@@ -116,7 +117,8 @@
 <div class="section level3">
 <h3 id="histograms">Histograms<a class="anchor" aria-label="anchor" href="#histograms"></a>
 </h3>
-<p>The first and most commonly used example demonstrating the value of the BrailleR package to a blind user is the creation of a histogram.</p>
+<p>The first and most commonly used example demonstrating the value of
+the BrailleR package to a blind user is the creation of a histogram.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/VI.html">VI</a></span><span class="op">(</span><span class="fu"><a href="../reference/hist.html">hist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -125,37 +127,48 @@
 A histogram of 1000 random values from a normal distribution
 </p>
 </div>
-<pre><code>This is a histogram, with the title: Histogram of x
+<pre><code>This is a histogram, with the title: with the title: Histogram of x
 "x" is marked on the x-axis.
-Tick marks for the x-axis are at: -4, -2, 0, 2, and 4 
+Tick marks for the x-axis are at: -2, 0, 2, and 4 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 16 bins with equal widths, starting at -4 and ending at 4 .
+It has 15 bins with equal widths, starting at -3.5 and ending at 4 .
 The mids and counts for the bins are:
-mid = -3.75  count = 1 
-mid = -3.25  count = 1 
+mid = -3.25  count = 2 
 mid = -2.75  count = 2 
-mid = -2.25  count = 19 
-mid = -1.75  count = 39 
-mid = -1.25  count = 81 
-mid = -0.75  count = 174 
-mid = -0.25  count = 194 
-mid = 0.25  count = 189 
-mid = 0.75  count = 138 
-mid = 1.25  count = 80 
-mid = 1.75  count = 54 
-mid = 2.25  count = 18 
-mid = 2.75  count = 8 
-mid = 3.25  count = 1 
+mid = -2.25  count = 18 
+mid = -1.75  count = 45 
+mid = -1.25  count = 102 
+mid = -0.75  count = 158 
+mid = -0.25  count = 197 
+mid = 0.25  count = 190 
+mid = 0.75  count = 146 
+mid = 1.25  count = 75 
+mid = 1.75  count = 46 
+mid = 2.25  count = 9 
+mid = 2.75  count = 6 
+mid = 3.25  count = 3 
 mid = 3.75  count = 1</code></pre>
-<p>The VI() command actually calls the VI.histogram() command as the hist() command creates an object of class “histogram”.</p>
+<p>The VI() command actually calls the VI.histogram() command as the
+hist() command creates an object of class “histogram”.</p>
 </div>
 <div class="section level3">
 <h3 id="important-features">Important features<a class="anchor" aria-label="anchor" href="#important-features"></a>
 </h3>
-<p>The VI() command has added to the impact of issuing the hist() command as the actual graphic is generated for the sighted audience. The blind student can read from the text description so that they can interpret the information that the histogram offers the sighted world.</p>
-<p>The above example showed the standard implementation of the hist() function. The hist() function of the graphics package does not store the additional arguments that improve the visual attractiveness. The solution (perhaps temporary) is to mask the original function with one included in the BrailleR package that calls the graphics package function, and then adds extra detail for any added plotting arguments.</p>
-<p>This is best illustrated using the example included in the BrailleR::hist() function.</p>
+<p>The VI() command has added to the impact of issuing the hist()
+command as the actual graphic is generated for the sighted audience. The
+blind student can read from the text description so that they can
+interpret the information that the histogram offers the sighted
+world.</p>
+<p>The above example showed the standard implementation of the hist()
+function. The hist() function of the graphics package does not store the
+additional arguments that improve the visual attractiveness. The
+solution (perhaps temporary) is to mask the original function with one
+included in the BrailleR package that calls the graphics package
+function, and then adds extra detail for any added plotting
+arguments.</p>
+<p>This is best illustrated using the example included in the
+BrailleR::hist() function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">hist</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
@@ -167,19 +180,18 @@ hist&gt; MyHist=graphics::hist(x, xlab="random normal values", main="Example his
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
-[16]  4.0  4.5  5.0
+ [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   2  21  47  78 143 184 174 156 106  57  22   6   2   0   0   1
+ [1]   2  17  39 114 144 184 187 137 110  50  12   3   1
 
 $density
- [1] 0.002 0.004 0.042 0.094 0.156 0.286 0.368 0.348 0.312 0.212 0.114 0.044
-[13] 0.012 0.004 0.000 0.000 0.002
+ [1] 0.004 0.034 0.078 0.228 0.288 0.368 0.374 0.274 0.220 0.100 0.024 0.006
+[13] 0.002
 
 $mids
- [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75  3.25  3.75  4.25  4.75
+ [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75
+[13]  3.25
 
 $xname
 [1] "x"
@@ -196,19 +208,18 @@ hist&gt; MyHist=hist(x, xlab="random normal values", main="Example histogram (Br
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
-[16]  4.0  4.5  5.0
+ [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   2  21  47  78 143 184 174 156 106  57  22   6   2   0   0   1
+ [1]   2  17  39 114 144 184 187 137 110  50  12   3   1
 
 $density
- [1] 0.002 0.004 0.042 0.094 0.156 0.286 0.368 0.348 0.312 0.212 0.114 0.044
-[13] 0.012 0.004 0.000 0.000 0.002
+ [1] 0.004 0.034 0.078 0.228 0.288 0.368 0.374 0.274 0.220 0.100 0.024 0.006
+[13] 0.002
 
 $mids
- [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75  3.25  3.75  4.25  4.75
+ [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75
+[13]  3.25
 
 $xname
 [1] "x"
@@ -237,18 +248,18 @@ $ExtraArgs$sub
 
 
 $NBars
-[1] 17
+[1] 13
 
 $par
 $par$xaxp
-[1] -2  4  3
+[1] -3  3  6
 
 $par$yaxp
 [1]   0 150   3
 
 
 $xTicks
-[1] -2  0  2  4
+[1] -3 -2 -1  0  1  2  3
 
 $yTicks
 [1]   0  50 100 150
@@ -258,36 +269,44 @@ attr(,"class")
 
 hist&gt; # The VI() method then uses the extra information stored
 hist&gt; VI(MyHist)
-This is a histogram, with the title: Histogram of x
+This is a histogram, with the title: with the title: Example histogram (BrailleR package)
 "x" is marked on the x-axis.
-Tick marks for the x-axis are at: -2, 0, 2, and 4 
+Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, and 150 
-It has 17 bins with equal widths, starting at -3.5 and ending at 5 .
+It has 13 bins with equal widths, starting at -3 and ending at 3.5 .
 The mids and counts for the bins are:
-mid = -3.25  count = 1 
 mid = -2.75  count = 2 
-mid = -2.25  count = 21 
-mid = -1.75  count = 47 
-mid = -1.25  count = 78 
-mid = -0.75  count = 143 
+mid = -2.25  count = 17 
+mid = -1.75  count = 39 
+mid = -1.25  count = 114 
+mid = -0.75  count = 144 
 mid = -0.25  count = 184 
-mid = 0.25  count = 174 
-mid = 0.75  count = 156 
-mid = 1.25  count = 106 
-mid = 1.75  count = 57 
-mid = 2.25  count = 22 
-mid = 2.75  count = 6 
-mid = 3.25  count = 2 
-mid = 3.75  count = 0 
-mid = 4.25  count = 0 
-mid = 4.75  count = 1</code></pre>
+mid = 0.25  count = 187 
+mid = 0.75  count = 137 
+mid = 1.25  count = 110 
+mid = 1.75  count = 50 
+mid = 2.25  count = 12 
+mid = 2.75  count = 3 
+mid = 3.25  count = 1</code></pre>
 </div>
 <div class="section level3">
 <h3 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
 </h3>
-<p>The VI() function is partially reliant on the use of the hist() function that is included in the BrailleR package. If a histogram is created using a command that directly links to the original hist() command found in the graphics package, then the VI() command’s output will not be as useful to the blind user. This mainly affects the presentation of the title and axis labels; it should not affect the details of the counts etc. within the histogram itself.</p>
-<p>This behaviour could arise if the histogram is sought indirectly. If for example, a function offers (as a side effect) to create a histogram, the author of the function may have explicitly stated use of the hist() function from the graphics package using graphics::hist() instead of hist(). Use of graphics::hist() will bypass the BrailleR::hist() function that the VI() command needs. This should not create error messages.</p>
+<p>The VI() function is partially reliant on the use of the hist()
+function that is included in the BrailleR package. If a histogram is
+created using a command that directly links to the original hist()
+command found in the graphics package, then the VI() command’s output
+will not be as useful to the blind user. This mainly affects the
+presentation of the title and axis labels; it should not affect the
+details of the counts etc. within the histogram itself.</p>
+<p>This behaviour could arise if the histogram is sought indirectly. If
+for example, a function offers (as a side effect) to create a histogram,
+the author of the function may have explicitly stated use of the hist()
+function from the graphics package using graphics::hist() instead of
+hist(). Use of graphics::hist() will bypass the BrailleR::hist()
+function that the VI() command needs. This should not create error
+messages.</p>
 </div>
 </div>
   </div>

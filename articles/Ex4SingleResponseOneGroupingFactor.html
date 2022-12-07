@@ -96,11 +96,12 @@
 
       
 
-      </header><script src="Ex4SingleResponseOneGroupingFactor_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The BrailleR package Example 4</h1>
-                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
+                        <h4 data-toc-skip class="author">A. Jonathan R.
+Godfrey</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/Ex4SingleResponseOneGroupingFactor.rmd" class="external-link"><code>vignettes/Ex4SingleResponseOneGroupingFactor.rmd</code></a></small>
@@ -111,12 +112,32 @@
     
     
 <div class="section level2">
-<h2 id="analysis-of-a-single-continuous-variable-with-respect-to-a-single-grouping-factor">Analysis of a single continuous variable with respect to a single grouping factor<a class="anchor" aria-label="anchor" href="#analysis-of-a-single-continuous-variable-with-respect-to-a-single-grouping-factor"></a>
+<h2 id="analysis-of-a-single-continuous-variable-with-respect-to-a-single-grouping-factor">Analysis of a single continuous variable with respect to a single
+grouping factor<a class="anchor" aria-label="anchor" href="#analysis-of-a-single-continuous-variable-with-respect-to-a-single-grouping-factor"></a>
 </h2>
-<p>There are many commands needed to get the numeric and graphic summary measures that might be required to collect all relevant information on a single numeric variable when it might depend on a grouping factor. The OneFactor() command has been written as a shortcut for a blind user who wishes to obtain: - the counts of observations within each group, - the mean, standard deviation and standard error for each group, - boxplots and/or dotplots, - the one-way analysis of variance, and - Tukey’s Honestly Significant Difference (HSD) test on the significance of the between group differences.</p>
-<p>In addition, the blind user may need any/all of the graphs in a variety of formats (png, pdf, eps, or svg), nicely formatted tables for insertion into documents (LaTeX or HTML), and access to the code that generated these graphs and tables (an R script).</p>
-<p>The OneFactor() function can deliver all of this with minimal effort from the user. In addition, the output HTML file is opened automatically if using R interactively, giving the blind user immediate access to the information. The content is presented using sufficiently marked up HTML code including headings and tables so that the blind user can make best use of their screen reading software. All graphs included in the HTML file can be presented using a text description available from the VI() functionality of the BrailleR package.</p>
-<p>The main output document (HTML) can be viewed by issuing the command</p>
+<p>There are many commands needed to get the numeric and graphic summary
+measures that might be required to collect all relevant information on a
+single numeric variable when it might depend on a grouping factor. The
+OneFactor() command has been written as a shortcut for a blind user who
+wishes to obtain: - the counts of observations within each group, - the
+mean, standard deviation and standard error for each group, - boxplots
+and/or dotplots, - the one-way analysis of variance, and - Tukey’s
+Honestly Significant Difference (HSD) test on the significance of the
+between group differences.</p>
+<p>In addition, the blind user may need any/all of the graphs in a
+variety of formats (png, pdf, eps, or svg), nicely formatted tables for
+insertion into documents (LaTeX or HTML), and access to the code that
+generated these graphs and tables (an R script).</p>
+<p>The OneFactor() function can deliver all of this with minimal effort
+from the user. In addition, the output HTML file is opened automatically
+if using R interactively, giving the blind user immediate access to the
+information. The content is presented using sufficiently marked up HTML
+code including headings and tables so that the blind user can make best
+use of their screen reading software. All graphs included in the HTML
+file can be presented using a text description available from the VI()
+functionality of the BrailleR package.</p>
+<p>The main output document (HTML) can be viewed by issuing the
+command</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">OneFactor</span><span class="op">)</span></span></code></pre></div>
 <p>while running R interactively.</p>

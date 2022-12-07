@@ -76,6 +76,9 @@
     <loc>/reference/Deprecated.html</loc>
   </url>
   <url>
+    <loc>/reference/Describe.html</loc>
+  </url>
+  <url>
     <loc>/reference/Embossers.html</loc>
   </url>
   <url>
@@ -173,9 +176,6 @@
   </url>
   <url>
     <loc>/reference/UpdateGraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/VI.ggplot.html</loc>
   </url>
   <url>
     <loc>/reference/VI.html</loc>

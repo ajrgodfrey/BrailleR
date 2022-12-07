@@ -96,11 +96,13 @@
 
       
 
-      </header><script src="qplot_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Testing the VI.ggplot() within the BrailleR package"</h1>
-                        <h4 data-toc-skip class="author">A. Jonathan R. Godfrey</h4>
+      <h1 data-toc-skip>Testing the VI.ggplot() within the BrailleR
+package”</h1>
+                        <h4 data-toc-skip class="author">A. Jonathan R.
+Godfrey</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ajrgodfrey/BrailleR/blob/HEAD/vignettes/qplot.Rmd" class="external-link"><code>vignettes/qplot.Rmd</code></a></small>
@@ -110,8 +112,18 @@
 
     
     
-<p>This vignette contained many more plots in its initial development. The set has been cut back considerably to offer meaningful testing only, and because much of the material was moved over to a book called <a href="https://R-Resources.massey.ac.nz/BrailleRInAction/" class="external-link">BrailleR in Action</a>. Doing so also had an advantage of speeding up the package creation, testing, and installation. N.B. the commands here are either exact copies of the commands presented in Wickham (2009) or some minor alterations to them. Notably, some code given in the book no longer works. This is given a <code>#!</code></p>
-<p>The <code>ggplot2</code> package has a <code>summary</code> method that often but not always offers something to show that things have changed from one plot to another. Summary commands are included below but commented out.</p>
+<p>This vignette contained many more plots in its initial development.
+The set has been cut back considerably to offer meaningful testing only,
+and because much of the material was moved over to a book called <a href="https://R-Resources.massey.ac.nz/BrailleRInAction/" class="external-link">BrailleR in
+Action</a>. Doing so also had an advantage of speeding up the package
+creation, testing, and installation. N.B. the commands here are either
+exact copies of the commands presented in Wickham (2009) or some minor
+alterations to them. Notably, some code given in the book no longer
+works. This is given a <code>#!</code></p>
+<p>The <code>ggplot2</code> package has a <code>summary</code> method
+that often but not always offers something to show that things have
+changed from one plot to another. Summary commands are included below
+but commented out.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ajrgodfrey/BrailleR" class="external-link">BrailleR</a></span><span class="op">)</span>   </span></code></pre></div>
 <pre><code><span><span class="co">## The BrailleR.View,  option is set to FALSE.</span></span></code></pre>
@@ -143,8 +155,12 @@
 <span><span class="co">## The chart is a set of 53940 big solid circle points.</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># VI(g1)   ### automatic since BrailleR v0.32.0</span></span></code></pre></div>
-<p>If the user does not actually plot the graph, they can still find out what it will look like once it is plotted by using the <code><a href="../reference/VI.html">VI()</a></code> command on the graph object. This became unnecessary from version 0.32.0 of BrailleR.</p>
-<p>N.B. All <code><a href="../reference/VI.html">VI()</a></code> commands can now be deleted from this document.</p>
+<p>If the user does not actually plot the graph, they can still find out
+what it will look like once it is plotted by using the <code><a href="../reference/VI.html">VI()</a></code>
+command on the graph object. This became unnecessary from version 0.32.0
+of BrailleR.</p>
+<p>N.B. All <code><a href="../reference/VI.html">VI()</a></code> commands can now be deleted from this
+document.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, colour <span class="op">=</span> <span class="va">color</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g2)   </span></span>

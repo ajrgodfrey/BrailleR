@@ -81,6 +81,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.33.4" id="brailler-0334">BrailleR 0.33.4<a class="anchor" aria-label="anchor" href="#brailler-0334"></a></h2>
 <ul><li>fix issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/35" class="external-link">#35</a> with incorrect bin counts</li>
+<li>fix issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/24" class="external-link">#24</a>, correcting base r plot titles in VI</li>
 <li>Add shaded area for geom_smooth CI info to VI output.</li>
 <li>Add geom_ribbon support</li>
 <li>Add geom_area support. This has been added to the geom_ribbon branch and is treated like a geom_ribbon almost exactly the same.</li>
@@ -89,6 +90,8 @@
 <li>deprecated functions relating to Python 2.7 and functions for making slide shows</li>
 <li>updated template files so that chunk options are moved from opening fence to commented lines</li>
 <li>resolve issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/31" class="external-link">#31</a>, add default shape message.</li>
+<li>resolve issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/62" class="external-link">#62</a>, add ggplot support for TimeSeries</li>
+<li>resolve issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/61" class="external-link">#61</a>, fix geom_boxplot VI output and add outlier information to VI output.</li>
 <li>Add ggplot to describe</li>
 </ul></div>
     <div class="section level2">
@@ -138,7 +141,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.32.0" id="brailler-0320">BrailleR 0.32.0<a class="anchor" aria-label="anchor" href="#brailler-0320"></a></h2>
-<ul><li>attempted return to CRAN</li></ul></div>
+<ul><li>attempted return to CRAN</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.31.4" id="brailler-0314">BrailleR 0.31.4<a class="anchor" aria-label="anchor" href="#brailler-0314"></a></h2>
 <ul><li>Testing for a return to CRAN; looked right.</li>
@@ -182,10 +186,12 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.30.2" id="brailler-0302">BrailleR 0.30.2<small>2020-01-22</small><a class="anchor" aria-label="anchor" href="#brailler-0302"></a></h2>
-<ul><li>trying to ensure examples that create files pass CRAN checks; see UniDesc() etc.</li></ul></div>
+<ul><li>trying to ensure examples that create files pass CRAN checks; see UniDesc() etc.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.30.1" id="brailler-0301">BrailleR 0.30.1<a class="anchor" aria-label="anchor" href="#brailler-0301"></a></h2>
-<ul><li>made sure to use tempdir() in some examples so that CRAN checks on Devian see clean folders</li></ul></div>
+<ul><li>made sure to use tempdir() in some examples so that CRAN checks on Devian see clean folders</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.30.0" id="brailler-0300">BrailleR 0.30.0<a class="anchor" aria-label="anchor" href="#brailler-0300"></a></h2>
 <ul><li>making ready for upload to CRAN</li>
@@ -207,7 +213,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.29.3" id="brailler-0293">BrailleR 0.29.3<a class="anchor" aria-label="anchor" href="#brailler-0293"></a></h2>
-<ul><li>added more detail to Describe() methods</li></ul></div>
+<ul><li>added more detail to Describe() methods</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.29.2" id="brailler-0292">BrailleR 0.29.2<a class="anchor" aria-label="anchor" href="#brailler-0292"></a></h2>
 <ul><li>added a starting template for the WriteR files</li>
@@ -232,7 +239,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.28.0" id="brailler-0280">BrailleR 0.28.0<small>2018-06-05</small><a class="anchor" aria-label="anchor" href="#brailler-0280"></a></h2>
-<ul><li>submitted to CRAN</li></ul></div>
+<ul><li>submitted to CRAN</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.27.3" id="brailler-0273">BrailleR 0.27.3<a class="anchor" aria-label="anchor" href="#brailler-0273"></a></h2>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
@@ -321,7 +329,9 @@
 <li>added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), OnePredictor() etc type; it will also include the code chunks that are reused frequently in other functions.</li>
 <li>added UseTemplate() to make use of the template files faster. Not intended for wide use at this stage.</li>
 <li>Moved installr package from Imports to Suggests so that installation from GitHub works for OS!=Windows.</li>
-<li>removed use of require(<p kg>) and used requireNamespace(“<pkg>”) instead, and then used pkg::blah()</pkg></p>
+<li>removed use of require(
+<p kg>
+) and used requireNamespace(“<pkg>”) instead, and then used pkg::blah()</pkg></p>
 </li>
 <li>added initial version of ThreeFactors()</li>
 <li>updated FindReplace() to avoid using pattern matching</li>
@@ -330,7 +340,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.25.2" id="brailler-0252">BrailleR 0.25.2<a class="anchor" aria-label="anchor" href="#brailler-0252"></a></h2>
-<ul><li>fixed formatting of the R functions so it is easier to read. Request from Henrik Bengtsson resolved using the rfmt package seen at UseR!2016</li></ul></div>
+<ul><li>fixed formatting of the R functions so it is easier to read. Request from Henrik Bengtsson resolved using the rfmt package seen at UseR!2016</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.25.1" id="brailler-0251">BrailleR 0.25.1<a class="anchor" aria-label="anchor" href="#brailler-0251"></a></h2>
 <ul><li>added SpellCheck() which is an interface to spell check a set of files, allowing ignore this time, always for all files, always for this file, replacement, and reading the word in context.</li>
@@ -362,7 +373,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.24.2" id="brailler-0242">BrailleR 0.24.2<small>2016-03-30</small><a class="anchor" aria-label="anchor" href="#brailler-0242"></a></h2>
-<ul><li>CRAN check uncovered need to have dependency of R &gt;= 3.2.0.</li></ul></div>
+<ul><li>CRAN check uncovered need to have dependency of R &gt;= 3.2.0.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.24.1" id="brailler-0241">BrailleR 0.24.1<small>2016-03-19</small><a class="anchor" aria-label="anchor" href="#brailler-0241"></a></h2>
 <ul><li>fixed issue with inappropriate use of tempdir() in conjunction with paste0() instead of the more correct file.path(). Direct request from Brian Ripley on behalf of CRAN.</li>
@@ -372,7 +384,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.24.0" id="brailler-0240">BrailleR 0.24.0<small>2016-03-17</small><a class="anchor" aria-label="anchor" href="#brailler-0240"></a></h2>
-<ul><li>Made ready for CRAN submission</li></ul></div>
+<ul><li>Made ready for CRAN submission</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.23.10" id="brailler-02310">BrailleR 0.23.10<a class="anchor" aria-label="anchor" href="#brailler-02310"></a></h2>
 <ul><li>added MakeReadable() which cleans up vignette source files from installed packages, by converting tabs to spaces and Linux line breaks to Windows line breaks. This currently requires Python 2.7 to be installed. -Added BrailleRHome() which takes the user to the BrailleR Project home page.</li>
@@ -437,7 +450,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.23.4" id="brailler-0234">BrailleR 0.23.4<a class="anchor" aria-label="anchor" href="#brailler-0234"></a></h2>
-<ul><li>changed preferences to use local options files. Removed PREFERENCES from Inst folder.</li></ul></div>
+<ul><li>changed preferences to use local options files. Removed PREFERENCES from Inst folder.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.23.3" id="brailler-0233">BrailleR 0.23.3<a class="anchor" aria-label="anchor" href="#brailler-0233"></a></h2>
 <ul><li>added fitted line plot to OnePredictor().</li>
@@ -449,7 +463,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.23.2" id="brailler-0232">BrailleR 0.23.2<a class="anchor" aria-label="anchor" href="#brailler-0232"></a></h2>
-<ul><li>introduced use of pander for tables in html</li></ul></div>
+<ul><li>introduced use of pander for tables in html</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.23.1" id="brailler-0231">BrailleR 0.23.1<a class="anchor" aria-label="anchor" href="#brailler-0231"></a></h2>
 <ul><li>fixed MakeBatch() and PrepareWriteR() so that it works for new representations of windows versions. Discovered at the SZS 8 July 2015.</li>
@@ -457,7 +472,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.23.0" id="brailler-0230">BrailleR 0.23.0<a class="anchor" aria-label="anchor" href="#brailler-0230"></a></h2>
-<ul><li>moved from import to importFrom in the namespace. This was required for the base packages being used so I did it for all packages.</li></ul></div>
+<ul><li>moved from import to importFrom in the namespace. This was required for the base packages being used so I did it for all packages.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.22.0" id="brailler-0220">BrailleR 0.22.0<small>2015-06-26</small><a class="anchor" aria-label="anchor" href="#brailler-0220"></a></h2>
 <p>Successfully uploaded to CRAN</p>
@@ -486,7 +502,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.20" id="brailler-020">BrailleR 0.20<small>2015-05-30</small><a class="anchor" aria-label="anchor" href="#brailler-020"></a></h2>
-<ul><li>uploaded to CRAN</li></ul></div>
+<ul><li>uploaded to CRAN</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.19-5" id="brailler-019-5">BrailleR 0.19-5<a class="anchor" aria-label="anchor" href="#brailler-019-5"></a></h2>
 <ul><li>replaced settings folder with individual files for each setting with a single devian control file called PREFERENCES</li>
@@ -542,7 +559,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.18-0" id="brailler-018-0">BrailleR 0.18-0<a class="anchor" aria-label="anchor" href="#brailler-018-0"></a></h2>
-<ul><li>This version was rejected by CRAN because it had too many other packages listed as depends and CRAN wants them to be imports instead.</li></ul></div>
+<ul><li>This version was rejected by CRAN because it had too many other packages listed as depends and CRAN wants them to be imports instead.</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
