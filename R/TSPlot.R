@@ -20,7 +20,6 @@ TimeSeriesPlot = function(.data, x, time=NULL, base=FALSE, ...){
     Out=Augment(Out)
   }
   else{ ## do it in ggplot2
-    print(MC$ylab)
     MC$ylab = ifelse(is.null(MC$ylab), tail(strsplit(as.character(MC$x), "$"),n=1), MC$ylab)
     if (length(MC$sub) > 0) Out$sub = as.character(MC$sub)
     if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab) else {Out$xlab = "Time"}
