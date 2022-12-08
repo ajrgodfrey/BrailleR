@@ -13,6 +13,26 @@ UniDesc =
         Response = get(ResponseName)
       }
 
+      if(VI){
+        VIOpenText = "VI("
+        VICloseText = ")"
+        }
+      else {
+        VIOpenText = ""
+        VICloseText = ""
+        }
+
+
+      if(Latex){
+        LatexOpenText = "VI("
+        LatexCloseText = ")"
+        }
+      else {
+        LatexOpenText = ""
+        LatexCloseText = ""
+        }
+
+
       # to ensure consistent and predictable appearance
       StartChunk =
           function(ChunkName, ThisFile = Filename) {
@@ -213,17 +233,17 @@ Value | `r ',
         cat("\n## Basic univariate graphs    \n### Histogram    \n",
             file = Filename, append = TRUE)
         GraphHead("Hist", "The histogram")
-        cat(paste0(ifelse(VI, 'VI(', ''), 'hist(', ResponseName, ', xlab="',
+        cat(paste0(VIOpenText, 'hist(', ResponseName, ', xlab="',
                    ResponseName, '", main="Histogram of ',
-                   .simpleCap(ResponseName), '")', ifelse(VI, ')', '')),
+                   .simpleCap(ResponseName), '")', VICloseText),
             file = Filename, append = TRUE)
         CloseChunk()
 
         cat("\n### Boxplot    \n", file = Filename, append = TRUE)
         GraphHeadWide("Boxplot", "The boxplot")
-        cat(paste0(ifelse(VI, 'VI(', ''), 'boxplot(', ResponseName,
+        cat(paste0(VIOpenText, 'boxplot(', ResponseName,
                    ', horizontal=TRUE, main = "Boxplot of ',
-                   .simpleCap(ResponseName), '")', ifelse(VI, ')', '')),
+                   .simpleCap(ResponseName), '")', VICloseText),
             file = Filename, append = TRUE)
         CloseChunk()
 

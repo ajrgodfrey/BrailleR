@@ -1,3 +1,22 @@
+### Internal functions for base R plots
+
+.getGraphName = function(graph, titlePreamble = "With the title:", noTitleMessage="With no title") {
+  if (length(graph$main) > 0) {
+    if (nchar(gsub(" ", "",graph$main, fixed=T)) != 0) {
+      paste(titlePreamble,graph$main)
+    } else {
+      noTitleMessage
+    }
+    
+  } else if (nchar(graph$ExtraArgs$main) > 0) {
+    paste(titlePreamble,graph$ExtraArgs$main)
+  } else {
+    noTitleMessage
+  }
+}
+
+
+###VI methods
 
 VI = function(x, Describe=FALSE, ...) {
        UseMethod("VI")
@@ -11,8 +30,7 @@ return(invisible(x))
 
 VI.default =
     function(x, Describe=FALSE, ...) {
-      message("There is no specific method written for  this type of object.\n")
-      message("You might try to use the print() function on the object or the str() command to investigate its contents.\n")
+      .NoVIMethod()
       print(x)
     }
 
@@ -23,8 +41,7 @@ VI.boxplot =
 x=Augment(x)
       cat(paste0(
               'This graph has ', x$Boxplots, ' printed ', x$VertHorz,
-              '\n', ifelse(length(x$ExtraArgs$main) > 0, 'with the title: ',
-                           'but has no title'), x$ExtraArgs$main, '\n',
+              '\n', .getGraphName(x), '\n',
               ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), 'No label'),
               ' appears on the x-axis.\n',
               ifelse(length(x$ExtraArgs$ylab) > 0, paste0('"', x$ExtraArgs$ylab, '"'), 'No label'),
@@ -82,8 +99,7 @@ VI.dotplot =
       Cuts = seq(MinVal, MaxVal, (MaxVal - MinVal) / Bins)
       # now do the description bit
       cat(paste0('This graph has ', x$dotplots, ' printed ', x$VertHorz, '\n',
-                 ifelse(length(x$ExtraArgs$main) > 0, 'with the title: ',
-                        'but has no title'), x$ExtraArgs$main, '\n'))
+                 .getGraphName(x), '\n'))
       if (!is.null(x$ExtraArgs$dlab) | !is.null(x$ExtraArgs$glab)) {
         warning(
             "Use of dlab or glab arguments is not advised. Use xlab and ylab instead.")
@@ -112,7 +128,7 @@ VI.dotplot =
 VI.histogram =
     function(x, Describe=FALSE, ...) {
       cat(paste0('This is a histogram, with the title: ',
-          ifelse(length(x$ExtraArgs$main) > 0, x$ExtraArgs$main, paste("Histogram of", x$xname)),
+                 .getGraphName(x, titlePreamble = "with the title:", noTitleMessage = "with no title"),
           '\n', ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), InQuotes(x$xname)),
           ' is marked on the x-axis.\n'))
       cat("Tick marks for the x-axis are at:", .GetAxisTicks(x$par$xaxp), "\n")
