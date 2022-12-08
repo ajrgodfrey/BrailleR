@@ -9,6 +9,7 @@
 - deprecated functions relating to Python 2.7 and functions for making slide shows
 - updated template files so that chunk options are moved from opening fence to commented lines
 - resolve issue #31, add default shape message.
+- resolve issue #34, add information about visible points. It only works at the moment up to point size of 18.
 - resolve issue #62, add ggplot support for TimeSeries
 - resolve issue #61, fix geom_boxplot VI output and add outlier information to VI output.
 - Add ggplot to describe

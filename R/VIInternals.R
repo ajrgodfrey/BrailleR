@@ -380,3 +380,36 @@
   return(areaPercentageStr)
 }
 
+
+#Get the number of points that can be individually seen
+#This will help for users to tell how much overlap there really is
+.getGGVisiblePoints = function(cleandata) {
+  # This model is hardcoded in to keep it simple.
+  # It was achieved by getting a whole bunch of data by manually plotting 
+  # points and working out how many distinct points will fit in a fig dimmensions
+  # for a given point size.
+  # The model was run on this data was "number ~ figDim * log(size)- 1"
+  getNumber = function(figDim, size) 18.8451775594414 * figDim + -0.670862804568509 * log(size) + -5.94685845490627 * log(size) * figDim
+  size = dev.size()
+  axes = c('x', 'y')
+  #Get grid for points to be put into
+  roundedPoints = list()
+  for (axis in axes) {
+    data = cleandata[axis]
+    range = max(data) - min(data)
+    avgPointSize = mean(cleandata$size)
+    figDim = size[which(axes == axis)]
+    #print(avgPointSize)
+    numberOfPoints = getNumber(figDim, avgPointSize)
+    #print(numberOfPoints)
+    cellWidth = range / numberOfPoints
+    
+    roundedPoints[axis] = cellWidth * round(data/cellWidth)
+  }
+  rounded = data.frame(roundedPoints)
+  save(rounded, file = "roundedPoints.rData")
+  #Return proportion of indiviual points
+  numberOfVisiblePoints = data.frame(roundedPoints) |> distinct() |> nrow()
+  numberOfPoints = length(roundedPoints$x)
+  (numberOfVisiblePoints / numberOfPoints)
+}
