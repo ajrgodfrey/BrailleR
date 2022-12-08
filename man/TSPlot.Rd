@@ -48,14 +48,11 @@ A. Jonathan R. Godfrey and James A. Thompson
 #par(op)
 #detach(airquality)
 
-# with ggplot
-if(require(ggplot2)){
-#  basic = TimeSeriesPlot(airquality, x=airquality$Temp)
-#  basic
-  #ts data
-#  withTitle = TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For the month Januaray")
-#  withTitle
-#  withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
-#  withLabs
-}
+## with ggplot
+# basic
+basic = TimeSeriesPlot(airquality, x=airquality$Temp)
+basic # proves it prints/plots
+# ts data
+TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For January")
+TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
 }
