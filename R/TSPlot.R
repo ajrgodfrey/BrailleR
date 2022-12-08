@@ -5,7 +5,7 @@ TimeSeriesPlot = function(.data, x, time=NULL, base=FALSE, ...){
   MC = match.call(expand.dots = TRUE)
   if(base){
     Out = list(x=as.ts(x))
-    MC$ylab= .ifelse(is.null(MC$ylab), as.character(MC$x), MC$ylab)
+    MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$x), MC$ylab)
     MC[[1L]] <- quote(graphics::plot)
     MC$x <- Out$x
     

@@ -37,25 +37,25 @@ A. Jonathan R. Godfrey and James A. Thompson
 }
 \examples{
 # with base
-attach(airquality)
-op = par(mfcol=c(3,2))
-plot(as.ts(Wind), ylab="Wind", col=4)
+#attach(airquality)
+#op = par(mfcol=c(3,2))
+#plot(as.ts(Wind), ylab="Wind", col=4)
 #test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
 #test1 #does the plot method work?
-plot(as.ts(Ozone), ylab="Ozone")
+#plot(as.ts(Ozone), ylab="Ozone")
 #test2 = TimeSeriesPlot(x=Ozone, base=TRUE)
 #test2 # does the plot method work?
-par(op)
-detach(airquality)
+#par(op)
+#detach(airquality)
 
 # with ggplot
 if(require(ggplot2)){
-  basic = TimeSeriesPlot(airquality, x=airquality$Temp)
-  basic
+#  basic = TimeSeriesPlot(airquality, x=airquality$Temp)
+#  basic
   #ts data
-  withTitle = TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For the month Januaray")
-  withTitle
-  withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
-  withLabs
+#  withTitle = TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For the month Januaray")
+#  withTitle
+#  withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
+#  withLabs
 }
 }
