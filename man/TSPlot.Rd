@@ -37,17 +37,18 @@ A. Jonathan R. Godfrey and James A. Thompson
 }
 \examples{
 # with base
-#attach(airquality)
-#op = par(mfcol=c(3,2))
-#plot(as.ts(Wind), ylab="Wind", col=4)
-#test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
-#test1 #does the plot method work?
-#plot(as.ts(Ozone), ylab="Ozone")
-#test2 = TimeSeriesPlot(x=Ozone, base=TRUE)
-#test2 # does the plot method work?
-#par(op)
-#detach(airquality)
+attach(airquality)
+op = par(mfcol=c(3,2))
+plot(as.ts(Wind), ylab="Wind", col=4)
+test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
+test1 #does the plot method work?
+plot(as.ts(Ozone), ylab="Ozone")
+test2 = TimeSeriesPlot(x=Ozone, base=TRUE)
+test2 # does the plot method work?
+par(op)
+detach(airquality)
 
+<<<<<<< HEAD
 ## with ggplot
 # basic
 basic = TimeSeriesPlot(airquality, x=airquality$Temp)
@@ -55,4 +56,18 @@ basic # proves it prints/plots
 # ts data
 TimeSeriesPlot(UKDriverDeaths,  main = "UK driver deaths", sub = "For January")
 TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
+=======
+# with ggplot
+if(require(ggplot2)){
+   basic = TimeSeriesPlot(airquality, x=airquality$Temp)
+   basic
+   # ts data
+   withTitle = TimeSeriesPlot(UKDriverDeaths,  
+    main = "UK driver deaths",
+    sub = "For the month Januaray")
+   withTitle
+   withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
+   withLabs
+}
+>>>>>>> 6d4d1fdf3afa7ad005e8eb4c9f791f202afb8533
 }
