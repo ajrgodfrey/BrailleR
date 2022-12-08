@@ -364,6 +364,15 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
       } 
       layer$scaledata = map$value
       
+      # Get visible points.
+      # Current model is only effective for median sizes less than 18.
+      if (median(cleandata$size) < 18) {
+        layer$visibleproportion = (.getGGVisiblePoints(cleandata)* 100) |> 
+          signif(digits = 2) |>
+          paste0("%")
+      }
+
+      
       # Check to see if the shape parameter has been set.
       if (is.null(cleandata$aes_params[["shape"]])) {
         # Make sure there is only one shape for all points

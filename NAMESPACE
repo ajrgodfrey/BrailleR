@@ -24,6 +24,7 @@ importFrom("utils", "browseURL", "create.post", "download.file", "file.edit", "h
 importFrom("whisker", "whisker.render")
 import(XML)
 importFrom("xtable", "xtable")
+importFrom("grDevices", "dev.size")
 S3method(AddXML,default)
   S3method(AddXML,boxplot)
   S3method(AddXML,dotplot)
