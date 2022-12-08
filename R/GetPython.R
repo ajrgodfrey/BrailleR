@@ -59,7 +59,7 @@ GetPython3 =
           if (requireNamespace("BrailleR")) {
             if (requireNamespace("installr")) {
               .DownloadAFile()
-bit = ifelse(x64, 64, 32)
+bit = .ifelse(x64, 64, 32)
 
             installr::install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE, x64=x64)
              .Added2MyBrailleR()

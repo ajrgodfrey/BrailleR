@@ -21,7 +21,7 @@ TimeSeriesPlot = function(.data, x, time=NULL, base=FALSE, ...){
   }
   else{ ## do it in ggplot2
     print(MC$ylab)
-    MC$ylab = .ifelse(is.null(MC$ylab), tail(strsplit(as.character(MC$x), "$"),n=1), MC$ylab)
+    MC$ylab = ifelse(is.null(MC$ylab), tail(strsplit(as.character(MC$x), "$"),n=1), MC$ylab)
     if (length(MC$sub) > 0) Out$sub = as.character(MC$sub)
     if (length(MC$xlab) > 0) Out$xlab = as.character(MC$xlab) else {Out$xlab = "Time"}
     if (length(MC$ylab) > 0) Out$ylab = as.character(MC$ylab)
@@ -34,7 +34,7 @@ TimeSeriesPlot = function(.data, x, time=NULL, base=FALSE, ...){
       time = .data$date
       x = .data$Y
       #Get correct ylab
-      Out$ylab = .ifelse(is.null(MC$ylab[[1]]), deparse(MC$.data), MC$ylab)
+      Out$ylab = ifelse(is.null(MC$ylab[[1]]), deparse(MC$.data), MC$ylab)
     }
     
     if (is.null(time)) time = 1:length(x)

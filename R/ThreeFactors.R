@@ -88,8 +88,8 @@ ThreeFactors =
       cat(paste0(
               '```{r setup, include=FALSE}
 ',
-              ifelse(VI, "library(BrailleR)", ""),
-              ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
+              .ifelse(VI, "library(BrailleR)", ""),
+              .ifelse(Modern, "\nlibrary(tidyverse)\nlibrary(ggfortify)", ""),
               '
 knitr::opts_chunk$set(dev=c("png", "pdf", "postscript", "svg"))
 knitr::opts_chunk$set(echo=FALSE, comment="", fig.path="',
@@ -315,7 +315,7 @@ MyANOVA <- aov(',
               ResponseName, '~', Factor1Name, '*', Factor2Name, '*', 
               Factor3Name, ', data=', DataName, ')
 ',
-              ifelse(VI, "VI(MyANOVA)", ""),
+              .ifelse(VI, "VI(MyANOVA)", ""),
               '
 summary(MyANOVA)
 ```  \n\n'),

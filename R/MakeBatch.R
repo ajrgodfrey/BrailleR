@@ -5,7 +5,7 @@ MakeBatch =
     function(file = NULL, static=FALSE) {
       if (interactive()) {
         if (.Platform$OS.type == "windows") {
-          RHome = ifelse(static,
+          RHome = .ifelse(static,
 paste0('"', gsub("/", "\\\\", R.home())), paste0(.FindRInstallPathText, '"%InstallPath%'))
           if (is.null(file)) {
             # write a batch file for processing R scripts

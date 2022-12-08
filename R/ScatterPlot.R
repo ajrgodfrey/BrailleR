@@ -6,8 +6,8 @@ if(base){
     Out = list()
     Out$data = .CleanData4TwoWayPlot(x, y)
     Out$ExtraArgs  = .GrabExtraArgs(MC)
-    Out$ExtraArgs$xlab =     MC$xlab= ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
-    Out$ExtraArgs$ylab =     MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
+    Out$ExtraArgs$xlab =     MC$xlab= .ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
+    Out$ExtraArgs$ylab =     MC$ylab= .ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
     Out = .checkTextLabels(MC, Out)
     MC[[1L]] <- quote(graphics::plot)
     MC$x <- Out$data$x
@@ -34,8 +34,8 @@ if(base){
     Out$fittedline = list(coef = coef(lm(y~x, data=Out$data)),
                     col = line.col)
     Out$ExtraArgs  = .GrabExtraArgs(MC)
-    Out$ExtraArgs$xlab  = MC$xlab = ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
-    Out$ExtraArgs$ylab  =     MC$ylab= ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
+    Out$ExtraArgs$xlab  = MC$xlab = .ifelse(is.null(MC$xlab), as.character(MC$x), MC$xlab)
+    Out$ExtraArgs$ylab  =     MC$ylab= .ifelse(is.null(MC$ylab), as.character(MC$y), MC$ylab)
     Out = .checkTextLabels(MC, Out)
     MC$x <- Out$data$x
     MC$y <- Out$data$y

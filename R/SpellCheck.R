@@ -1,4 +1,4 @@
-# do we need this given spelling package now exists??
+m# do we need this given spelling package now exists??
 SpellCheck =
     function(file) {
       if (interactive()) {
