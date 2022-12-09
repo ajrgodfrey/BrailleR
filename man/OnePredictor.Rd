@@ -27,6 +27,7 @@ OnePredictor(Response, Predictor, Data = NULL,
 }
 \examples{
 if(require(nortest)){ # used in a dependent function's Rmd file
+library(knitr)
 DIR = getwd()
 setwd(tempdir())
 data(airquality)

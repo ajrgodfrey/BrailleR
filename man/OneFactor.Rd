@@ -33,15 +33,14 @@ DIR = getwd()
 setwd(tempdir())
 data(airquality)
 library(dplyr)
+library(knitr)
 # the following line  returns an error:
 ## OneFactor("Ozone", "Month", airquality, View=FALSE)
 # so we make a copy of the data.frame, and fix that:
-if(require(dplyr)){
 airquality2 = airquality |> mutate(Month = as.factor(Month))
 # and now all is good to try:
 OneFactor("Ozone", "Month", airquality2)
 # N.B. Various files and a folder were created in a temporary directory. 
 # Please investigate them to see how this function worked.
-}
 setwd(DIR)
 }
