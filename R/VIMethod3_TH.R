@@ -218,8 +218,9 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
 .VIstruct.ggplot = function(x) {
   xbuild = suppressMessages(ggplot_build(x))
   # If this is a plot we really can't deal with, say so now
-  if (!(.getGGCoord(x, xbuild) %in% c("CoordCartesian", "CoordFixed"))) {
-    message("VI cannot process ggplot objects with flipped or non-Cartesian coordinates")
+  supportedClasses = c("CoordCartesian", "CoordFixed")
+  if (!sum(supportedClasses %in% .getGGCoord(x, xbuild)) > 0) {
+    message("VI cannot process ggplot objects with non-Cartesian coordinates")
     return(NULL)
   }
   title = .getGGTitle(x, xbuild)
@@ -245,7 +246,8 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
   panelcols = as.list(.getGGFacetCols(x, xbuild))
   layerCount = .getGGLayerCount(x, xbuild);
   VIstruct = .VIlist(annotations=annotations, xaxis=xaxis, yaxis=yaxis, legends=legends, panels=panels,
-                     npanels=length(panels), nlayers=layerCount, panelrows=panelrows, panelcols=panelcols, type="ggplot")
+                     npanels=length(panels), nlayers=layerCount,
+                     panelrows=panelrows, panelcols=panelcols, flippedCoord=.isGGCoordFlipped(x), type="ggplot")
   class(VIstruct) = "VIstruct"
   return(VIstruct)
 }

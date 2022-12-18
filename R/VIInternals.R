@@ -36,12 +36,26 @@
 }
 
 ## Axes
+## This will get whether the plot is flipped or not
+.isGGCoordFlipped = function(x) {
+  return(sum("CoordFlip" %in% .getGGCoord(x)) > 0)
+}
+
 .getGGXLab = function(x, xbuild) {
-  return(x$labels$x)
+  if (.isGGCoordFlipped(x)) {
+    return(x$labels$y)
+  } else {
+    return(x$labels$x)
+  }
+
 }
 
 .getGGYLab = function(x, xbuild) {
-  return(x$labels$y)
+  if (.isGGCoordFlipped(x)) {
+    return(x$labels$x)
+  } else {
+    return(x$labels$y)
+  }
 }
 
 .getGGXTicks = function(x, xbuild, layer) {
@@ -81,7 +95,7 @@
 
 # Coordinates
 .getGGCoord = function(x, xbuild) {
-  return(class(x$coordinates)[1])
+  return(class(x$coordinates))
 }
 
 #Bar Orientation
