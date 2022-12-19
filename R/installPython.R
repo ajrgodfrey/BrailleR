@@ -56,8 +56,8 @@
   # or annoyingly, the extension for the Python 2.7 installer is msi. and requires
   # https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
   file_extension <- switch(as.character(version_number), 
-							"2" = "msi",
-							"3" = "exe")
+"2" = "msi",
+"3" = "exe")
   URL <- paste0("https://www.python.org/ftp/python/",VersionNo, "/python-",VersionNo  , ".", file_extension)[1]
   if(x64){ #different filenames for P3  Py27#Py3
     URL <- sub(".exe", "-amd64.exe", URL)  #Py3

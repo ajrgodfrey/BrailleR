@@ -414,8 +414,6 @@
     
     roundedPoints[axis] = cellWidth * round(data/cellWidth)
   }
-  rounded = data.frame(roundedPoints)
-  save(rounded, file = "roundedPoints.rData")
   #Return proportion of indiviual points
   numberOfVisiblePoints = data.frame(roundedPoints) |> distinct() |> nrow()
   numberOfPoints = length(roundedPoints$x)
