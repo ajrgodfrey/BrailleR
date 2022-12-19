@@ -29,6 +29,15 @@
 .VIpreprocess = function(x, threshold=10) {
   if (is.null(x))
     return(NULL)
+  
+  # Deal with coords
+  supportedNonCartesian = c("CoordPolar")
+  if (x$coord %in% supportedNonCartesian) {
+    x$noncartesian = TRUE
+  }
+  x[[x$coord]] = TRUE
+  x = append(x, x$coordInformation) # Add all coord information
+  
   if (x$npanels == 1) 
     x$singlepanel = TRUE
   if (x$nlayers == 1) 
@@ -39,6 +48,10 @@
     x$singlecol = TRUE
   if (length(x$panelrows) > 0 && length(x$panelcols) > 0) 
     x$panelgrid = TRUE
+  if (length(x$xaxis) ==1)
+    x$xaxis = NULL
+  if (length(x$yaxis) == 1)
+    x$yaxis = NULL
   # If samescale then axis labels are at top level
   if (!is.null(x$xaxis$xticklabels))
     x$xaxis$xtickitems = .listifyVars(list(label=x$xaxis$xticklabels))
@@ -138,7 +151,11 @@ print.VIgraph = function(x, ...) {
 # Small helper function - builds list excluding items that are null or length 0
 .VIlist = function(...) {
   l = list(...)
-  l[(lapply(l,length) > 0)] 
+  if (length(l[(lapply(l,length) > 0)] ) == 0) {
+    return(NULL)
+  } else {
+    return(l[(lapply(l,length) > 0)])
+  }
 }
 
 sort.VIgraph <- function(x, decreasing = FALSE, by="x", ...) {
@@ -217,22 +234,33 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
 # Builds the VIgg structure describing the graph
 .VIstruct.ggplot = function(x) {
   xbuild = suppressMessages(ggplot_build(x))
+  
   # If this is a plot we really can't deal with, say so now
-  supportedClasses = c("CoordCartesian", "CoordFixed")
-  if (!sum(supportedClasses %in% .getGGCoord(x, xbuild)) > 0) {
-    message("VI cannot process ggplot objects with non-Cartesian coordinates")
+  supportedClasses = c("CoordCartesian", "CoordPolar", "CoordFlip")
+  if (!sum(.getGGCoord(x, xbuild) %in% supportedClasses) > 0) {
+    message("VI cannot process this ggplot objects coordinates")
     return(NULL)
   }
+  
+  #Deal with quirks of different coordinate system
+  coord = .getGGCoord(x, xbuild)
+  coordInformation = list()
+  if (coord == "CoordPolar") {
+    PolarTheta = x$coordinates$theta
+    PolarR = x$coordinates$r
+    coordInformation = .VIlist(PolarTheta=PolarTheta, PolarR=PolarR)
+  }
+
   title = .getGGTitle(x, xbuild)
   subtitle = .getGGSubtitle(x, xbuild)
   caption = .getGGCaption(x, xbuild)
   annotations = .VIlist(title=title, subtitle=subtitle, caption=caption)
-  xlabel = .getGGXLab(x, xbuild)
-  ylabel = .getGGYLab(x, xbuild)
+  xlabel = .getGGAxisLab(x, xbuild, 'x')
+  ylabel = .getGGAxisLab(x, xbuild, 'y')
   if (!.getGGScaleFree(x, xbuild)) {    # Can talk about axis ticks at top level unless scale_free
     samescale = TRUE
-    xticklabels = .getGGXTicks(x, xbuild, 1)
-    yticklabels = .getGGYTicks(x, xbuild, 1)
+    xticklabels = .getGGTicks(x, xbuild, 1, 'x')
+    yticklabels = .getGGTicks(x, xbuild, 1, 'y')
   } else {
     samescale = NULL
     xticklabels = NULL
@@ -247,7 +275,7 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
   layerCount = .getGGLayerCount(x, xbuild);
   VIstruct = .VIlist(annotations=annotations, xaxis=xaxis, yaxis=yaxis, legends=legends, panels=panels,
                      npanels=length(panels), nlayers=layerCount,
-                     panelrows=panelrows, panelcols=panelcols, flippedCoord=.isGGCoordFlipped(x), type="ggplot")
+                     panelrows=panelrows, panelcols=panelcols, coord=coord, coordInformation=coordInformation, type="ggplot")
   class(VIstruct) = "VIstruct"
   return(VIstruct)
 }
@@ -305,10 +333,10 @@ VI.ggplot = function(x, Describe=FALSE, threshold=10, template=system.file("whis
     scalefree = .getGGScaleFree(x, xbuild)
     panel[["samescale"]] = if (!scalefree) TRUE      # Might want to move this into pre-processing step
     if (scalefree) { 
-      panel[["xticklabels"]] = .getGGXTicks(x, xbuild, i)
-      panel[["yticklabels"]] = .getGGYTicks(x, xbuild, i)
-      panel[["xlabel"]] = .getGGXLab(x, xbuild) # Won't actually change over the panels
-      panel[["ylabel"]] = .getGGYLab(x, xbuild) # But we still want to mention them
+      panel[["xticklabels"]] = .getGGTicks(x, xbuild, 1, 'x')
+      panel[["yticklabels"]] = .getGGTicks(x, xbuild, 1, 'y')
+      panel[["xlabel"]] = .getGGAxisLab(x, xbuild, 'x') # Won't actually change over the panels
+      panel[["ylabel"]] = .getGGAxisLab(x, xbuild, 'y') # But we still want to mention them
 
     }
     vars = list()
