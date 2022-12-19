@@ -35,35 +35,39 @@
   return(invisible(text))
 }
 
-## Axes
-.getGGXLab = function(x, xbuild) {
-  return(x$labels$x)
-}
-
-.getGGYLab = function(x, xbuild) {
-  return(x$labels$y)
-}
-
-.getGGXTicks = function(x, xbuild, layer) {
-  # The location of this item is changing in an upcoming ggplot version
-  if ("panel_ranges" %in% names(xbuild$layout)) {
-    return(xbuild$layout$panel_ranges[[layer]]$x.labels)   # ggplot 2.2.1
-  }
-  else {
-    xlabs <- xbuild$layout$panel_params[[1]]$x$get_labels()
-    return (xlabs[!is.na(xlabs)])
+.getGGAxisLab = function(x, xbuild, axis) {
+  if (!.isGGCoordFlipped(x)) {
+    # Make sure it has axis ticks for it to have a axis
+    if (is.null(.getGGTicks(x, xbuild, axis = axis)))
+      return(NULL)
+    else 
+      return(x$labels[[axis]])
+  } else {
+    # Return the opposite of the axis because the coord are flipped
+    if (axis == 'y') {
+      return(x$labels$x)
+    } else {
+      return(x$labels$y)
+    }
   }
 }
 
-.getGGYTicks = function(x, xbuild, layer) {
-  # The location of this item is changing in an upcoming ggplot version
-  if ("panel_ranges" %in% names(xbuild$layout)) {
-    return(xbuild$layout$panel_ranges[[layer]]$y.labels)   # ggplot 2.2.1
+.getGGTicks = function(x, xbuild, layer, axis) {
+  if (.getGGCoord(x, xbuild) == "CoordPolar") {
+    if (.isGGAxisTheta(x,axis)) {
+      labs = xbuild$layout$panel_params[[1]]$theta.labels
+    } else {
+      labs = xbuild$layout$panel_params[[1]]$r.labels
+    }
+  } else {
+    labs = xbuild$layout$panel_params[[1]][[axis]]$get_labels()
   }
-  else {
-    ylabs <- xbuild$layout$panel_params[[1]]$y$get_labels()
-    return (ylabs[!is.na(ylabs)])
+  if (all(labs[!is.na(labs)] != '')) {
+    return(labs[!is.na(labs)])
+  } else {
+    return(NULL)
   }
+
 }
 
 # Guides
@@ -81,7 +85,11 @@
 
 # Coordinates
 .getGGCoord = function(x, xbuild) {
-  return(class(x$coordinates)[1])
+  coords = class(x$coordinates)
+  if (sum("CoordFlip" %in% coords) > 0) return("CoordFlip")
+  if (sum("CoordPolar" %in% coords) > 0) return("CoordPolar")
+  if (sum("CoordCartesian" %in% coords) > 0) return("CoordCartesian")
+  return('unknown')
 }
 
 #Bar Orientation
@@ -410,4 +418,32 @@
   numberOfVisiblePoints = data.frame(roundedPoints) |> distinct() |> nrow()
   numberOfPoints = length(roundedPoints$x)
   (numberOfVisiblePoints / numberOfPoints)
+}
+
+#####################################################################
+##-----------------Coordinate system helper functions--------------##
+#####################################################################
+
+
+##########################
+## Flipped coordinates
+##########################
+
+## Gets whether the plot is CoordFlip or not
+.isGGCoordFlipped = function(x) {
+  return(.getGGCoord(x) == "CoordFlip")
+}
+
+##########################
+## Polar coordinates
+##########################
+
+## Tests if the plot is GGCoordFlipped
+.isGGCoordPolar = function(x) {
+  return(.getGGCoord(x) == "CoordPolar")
+}
+
+## Tests if the given axis is the theta axis
+.isGGAxisTheta = function(x, axis) {
+  x$coordinates$theta == axis
 }
