@@ -1,40 +1,45 @@
 Package: BrailleR
 Title: Improved Access for Blind Users
 Version: 0.33.4
+Authors@R: c(
+    person("A. Jonathan R.", "Godfrey", , "a.j.godfrey@massey.ac.nz", role = c("aut", "cre")),
+    person("Debra", "Warren", , "dwar068@aucklanduni.ac.nz", role = "aut"),
+    person("Donal", "Fitzpatrick", , "donal.fitzpatrick@dcu.ie", role = "ctb"),
+    person("Duncan", "Murdoch", , "murdoch.duncan@gmail.com", role = "ctb"),
+    person("Greg", "Snow", , "greg.snow@imail.org", role = "ctb"),
+    person("Henrik", "Bengtsson", , "henrikb@braju.com", role = "ctb"),
+    person("James", "Curtis", , "james@curtis.net.nz", role = "ctb"),
+    person("James", "Thompson", , "1jamesthompson1@gmail.com", role = "aut"),
+    person("JooYoung", "Seo", , "jooyoung@psu.edu", role = "ctb"),
+    person("Marshall", "Flax", , "marshall.flax@gmail.com", role = "ctb"),
+    person("Paul", "Murrell", , "paul@stat.auckland.ac.nz", role = "aut"),
+    person("Sophie", "Banks", , "sb@xxx.com", role = "ctb"),
+    person("Timothy", "Bilton", , "tbilton@gmail.com", role = "aut"),
+    person("Tony", "Hirst", , "tony.hirst@open.ac.uk", role = "ctb"),
+    person("Tsan-Kuang", "Lee", , "developer@tklee.com", role = "ctb"),
+    person("Volker", "Sorge", , "v.sorge@mathjax.org", role = "aut"),
+    person("Yihui", "Xie", , "xie@yihui.name", role = "ctb")
+  )
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
-Authors@R: c(person("A. Jonathan R.", "Godfrey", role=c("aut", "cre"), email="a.j.godfrey@massey.ac.nz"),
-    person("Debra", "Warren", email = "dwar068@aucklanduni.ac.nz", role = "aut"),
-    person("Donal", "Fitzpatrick", email = "donal.fitzpatrick@dcu.ie", role = "ctb"),
-    person("Duncan", "Murdoch", email = "murdoch.duncan@gmail.com", role = "ctb"),
-    person("Greg", "Snow", email = "greg.snow@imail.org", role = "ctb"),
-    person("Henrik", "Bengtsson", email = "henrikb@braju.com", role = "ctb"),
-    person("James", "Curtis", email = "james@curtis.net.nz", role = "ctb"),
-    person("James", "Thompson", email = "1jamesthompson1@gmail.com", role = "aut"),
-    person("JooYoung", "Seo", email = "jooyoung@psu.edu", role = "ctb"),
-    person("Marshall", "Flax", email = "marshall.flax@gmail.com", role = "ctb"),
-    person("Paul", "Murrell", email = "paul@stat.auckland.ac.nz", role = "aut"),
-    person("Sophie", "Banks", email = "sb@xxx.com", role = "ctb"),
-    person("Timothy", "Bilton", email = "tbilton@gmail.com", role = "aut"),
-    person("Tony", "Hirst", email = "tony.hirst@open.ac.uk", role = "ctb"),
-    person("Tsan-Kuang", "Lee", email = "developer@tklee.com", role = "ctb"),
-    person("Volker", "Sorge", email = "v.sorge@mathjax.org", role = "aut"),
-    person("Yihui", "Xie", email = "xie@yihui.name", role = "ctb"))
 Description: Blind users do not have access to the graphical output from R
-    without printing the content of graphics windows to an embosser of some kind. This
-    is not as immediate as is required for efficient access to statistical output.
-    The functions here are created so that blind people can make even better use
-    of R. This includes the text descriptions of graphs, convenience functions
-    to replace the functionality offered in many GUI front ends, and experimental
-    functionality for optimising graphical content to prepare it for embossing as
-    tactile images.
+    without printing the content of graphics windows to an embosser of
+    some kind. This is not as immediate as is required for efficient
+    access to statistical output.  The functions here are created so that
+    blind people can make even better use of R. This includes the text
+    descriptions of graphs, convenience functions to replace the
+    functionality offered in many GUI front ends, and experimental
+    functionality for optimising graphical content to prepare it for
+    embossing as tactile images.
 License: GPL-2
+URL: https://github.com/ajrgodfrey/BrailleR
+BugReports: https://github.com/ajrgodfrey/BrailleR/issues
 Depends:
     R (>= 3.4.0)
 Imports:
     devtools,
     dplyr,
     extrafont,
-    ggplot2,
+    ggplot2 (>= 3.0.0),
     gridGraphics,
     gridSVG,
     hunspell,
@@ -63,10 +68,12 @@ Suggests:
     rstatix,
     spelling,
     tidyverse
-SystemRequirements: Python 3 and wxPython 4.0
-VignetteBuilder: knitr
-URL: https://github.com/ajrgodfrey/BrailleR
-BugReports: https://github.com/ajrgodfrey/BrailleR/issues
-RoxygenNote: 7.1.2
-RdMacros: mathjaxr, Rdpack
+VignetteBuilder: 
+    knitr
+RdMacros: 
+    mathjaxr,
+    Rdpack
+Encoding: UTF-8
 Language: en-US
+RoxygenNote: 7.1.2
+SystemRequirements: Python 3 and wxPython 4.0
