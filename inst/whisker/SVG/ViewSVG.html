@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>View your accessible svg webpages</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <body>
+    <div id="main">
+      <div id="site_content">
+        <div id="accessible-statistics-diagrams" class="section level1 content">
+          <h1>Accessible Statistics Diagrams</h1>
+          <p>Important note: SVG files are not rendered properly in all browsers, notably Internet Explorer. We recommend use of Firefox or Google Chrome if you are working in Windows.</p>
+          <p>Please click on one of the examples below to get to the demo: 
+          {{#files}}
+          <a href={{file}}>{{file}}</a>
+          {{/files}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
