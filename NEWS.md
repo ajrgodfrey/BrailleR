@@ -14,6 +14,7 @@
 - resolve issue #61, fix geom_boxplot VI output and add outlier information to VI output.
 - Add ggplot to describe
 - Add basic CoordFlip and CoordPolar support to VI()
+- Refresh SVG functions and documentation. Move all SVG over to whisker templates.
 
 # BrailleR 0.33.3
 -Update author files
