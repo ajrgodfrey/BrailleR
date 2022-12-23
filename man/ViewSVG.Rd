@@ -10,7 +10,8 @@ ViewSVG(file = "index")
   \item{file}{The file basename to be used. This file will be made in the current directory.}
 }
 \details{
-This will create a html file that has a list of the available svg in the current directory. This only supports the current working directory at the moment. However this is planned on changing in the future. To make the functions you can use the \code{MakeAccessibleSVG()}} function
+This will create a html file that has a list of the available svg in the current directory. This only supports the current working directory at the moment. However this is planned on changing in the future. To make the files you can use the \code{MakeAccessibleSVG()} function
+}
 \value{
 NULL. This function exists for its  side effects only.
 }
@@ -39,4 +40,8 @@ MakeAccessibleSVG(histogram, file="histogram")
 
 # Display the 'home' page
 ViewSVG()
+}
+
+\seealso{
+  \code{\link{MakeAccessibleSVG}}
 }

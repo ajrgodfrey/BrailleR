@@ -56,5 +56,5 @@ dev.off()
 }
 
 \seealso{
-  \code{\link{MakeAccessibleSVGMethod}}
+  \code{\link{MakeAccessibleSVG}}
 }

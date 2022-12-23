@@ -38,3 +38,7 @@ dev.off()  # destroy graphics device, now that we're done with it
 
 BrowseSVG(file)
 }
+
+\seealso{
+  \code{\link{MakeAccessibleSVG}, \link{SVGThis}, \link{AddXML}}
+}
