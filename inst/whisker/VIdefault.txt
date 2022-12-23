@@ -25,6 +25,8 @@ This is an untitled chart with no subtitle or caption.<br>
 {{#yaxis}}{{^singlepanel}}Each sub-chart{{/singlepanel}}{{#singlepanel}}It{{/singlepanel}} has y-axis '{{ylabel}}'
 {{#samescale}} with labels {{#ytickitems}}{{label}}{{sep}}{{/ytickitems}}{{/samescale}}
 .<br>{{/yaxis}}
+{{#CoordPolar}}The coordinates have been converted to polar coordinates with theta as {{PolarTheta}} and radius as {{PolarR}}.<br>{{/CoordPolar}}
+{{#CoordFlip}}The coordinates are flipped so for everything below x and y axis have been flipped while 'Horizontal' and 'Vertical' also need to be interpreted as the other way around.<br>{{/CoordFlip}}
 {{#legends}}
 {{^hidden}}There is a legend indicating {{aes}} is used to show {{mapping}}
 {{#scalediscrete}}, with {{scalenlevels}} levels:
