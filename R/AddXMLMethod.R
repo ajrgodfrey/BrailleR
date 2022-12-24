@@ -76,6 +76,7 @@ AddXML.ggplot = function(x, file) {
     root = XML::xmlRoot(doc)
     annotations = .AddXMLAddNode(root, "annotations")
     components = list()
+    
     backgroundGrob = grid.grep(gPath("panel.background..rect"), grep=TRUE)
     titleGrob = grid.grep(gPath("title", "text"), grep=TRUE)
     if (length(titleGrob) > 0) {
@@ -83,34 +84,62 @@ AddXML.ggplot = function(x, file) {
       title = .AddXMLAddTitle(annotations, title=xs$title, id=titleId)
       components[[length(components) + 1]] = title
     }
-    xAxisLabelGrob = paste0(grid.grep(gPath("xlab-b", "text"), grep=TRUE)$name, ".1")
-    xAxisTickLabelGrob = paste0(grid.grep(gPath("axis-b", "axis", "axis", "text"), grep = TRUE)$name, ".1")
-    xAxis = .AddXMLAddXAxis(annotations, label=xs$xaxis$xlabel, values=xs$xaxis$xticklabels,
-                            fullLabelId=xAxisLabelGrob, fullTickLabelId=xAxisTickLabelGrob)
+    xAxisLabelGrob = paste0(grid.grep(
+        gPath("xlab-b", "titleGrob", "text"), grep=TRUE)$name,
+      ".1")
+    xAxisTickLabelGrob = paste0(grid.grep(
+        gPath("axis-b", "absoluteGrob", "axis", "axis", "titleGrob", "text"),
+        grep = TRUE)$name,
+      ".1")
+    
+    xAxis = .AddXMLAddXAxis(annotations,
+                            label=xs$xaxis$xlabel,
+                            values=xs$xaxis$xticklabels,
+                            fullLabelId=xAxisLabelGrob,
+                            fullTickLabelId=xAxisTickLabelGrob)
     components[[length(components) + 1]] = xAxis
-    yAxisLabelGrob = paste0(grid.grep(gPath("ylab-l", "text"), grep=TRUE)$name, ".1")
-    yAxisTickLabelGrob = paste0(grid.grep(gPath("axis-l", "axis", "axis", "text"), grep = TRUE)$name, ".1")
-    yAxis = .AddXMLAddYAxis(annotations, label=xs$yaxis$ylabel, values=xs$yaxis$yticklabels,
-                            fullLabelId=yAxisLabelGrob, fullTickLabelId=yAxisTickLabelGrob)
+    
+    yAxisLabelGrob = paste0(grid.grep(
+        gPath("ylab-l", "titleGrob", "text"),
+        grep=TRUE)$name,
+      ".1")
+    yAxisTickLabelGrob = paste0(grid.grep(
+        gPath("axis-l", "absoluteGrob", "axis", "axis", "titleGrob", "text"),
+        grep = TRUE)$name,
+      ".1")
+    yAxis = .AddXMLAddYAxis(annotations,
+                            label=xs$yaxis$ylabel,
+                            values=xs$yaxis$yticklabels,
+                            fullLabelId=yAxisLabelGrob,
+                            fullTickLabelId=yAxisTickLabelGrob)
     components[[length(components)+1]] = yAxis
+    
     if (xs$npanels == 1) {
           for (layerNum in 1:xs$nlayers) {
-            layer = .AddXMLAddGGPlotLayer(annotations, xs$panels[[1]]$panellayers[[layerNum]])    
+            layer = .AddXMLAddGGPlotLayer(annotations,
+                                      xs$panels[[1]]$panellayers[[layerNum]])
             components[[length(components) + 1]] = layer
           }
     } 
     # Else, should warn about not handling faceted charts -- or else handle them!
     chart <- .AddXMLAddChart(annotations, type="Chart",
-                             speech=paste(ifelse(is.null(xs$title), "Chart",
-                                                 paste("Chart with title ", xs$title)),
-                                          " with x-axis ", xs$xaxis$xlabel,
-                                          " and y-axis ",xs$yaxis$ylabel),
-                             # Currently speech2 is same as speech
-                             speech2=paste(ifelse(is.null(xs$title), "Chart",
-                                                 paste("Chart with title ", xs$title)),
-                                          " with x-axis ", xs$xaxis$xlabel,
-                                          " and y-axis ",xs$yaxis$ylabel),  
-                             children=components)
+                            speech=paste(
+                              ifelse(
+                                is.null(xs$title),
+                                "Chart",
+                                paste("Chart with title ", xs$title)),
+                               
+                              " with x-axis ", xs$xaxis$xlabel,
+                              " and y-axis ",xs$yaxis$ylabel),
+                            # Currently speech2 is same as speech
+                            speech2=paste(
+                              ifelse(
+                                is.null(xs$title),
+                                "Chart",
+                                paste("Chart with title ", xs$title)),
+                              " with x-axis ", xs$xaxis$xlabel,
+                              " and y-axis ",xs$yaxis$ylabel),  
+                            children=components)
     .AddXMLAddComponents(chart, components)
     
     XML::saveXML(doc=doc, file=file)

@@ -1,4 +1,12 @@
-var $jscomp={scope:{}};$jscomp.defineProperty="function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(c.get||c.set)throw new TypeError("ES3 does not support getters and setters.");a!=Array.prototype&&a!=Object.prototype&&(a[b]=c.value)};$jscomp.getGlobal=function(a){return"undefined"!=typeof window&&window===a?a:"undefined"!=typeof global&&null!=global?global:a};$jscomp.global=$jscomp.getGlobal(this);$jscomp.SYMBOL_PREFIX="jscomp_symbol_";
+<html>
+  <head>
+    <title>Accessible Statistics</title>
+  </head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
+  <script type="text/javascript">
+    var $jscomp={scope:{}};$jscomp.defineProperty="function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(c.get||c.set)throw new TypeError("ES3 does not support getters and setters.");a!=Array.prototype&&a!=Object.prototype&&(a[b]=c.value)};$jscomp.getGlobal=function(a){return"undefined"!=typeof window&&window===a?a:"undefined"!=typeof global&&null!=global?global:a};$jscomp.global=$jscomp.getGlobal(this);$jscomp.SYMBOL_PREFIX="jscomp_symbol_";
 $jscomp.initSymbol=function(){$jscomp.initSymbol=function(){};$jscomp.global.Symbol||($jscomp.global.Symbol=$jscomp.Symbol)};$jscomp.symbolCounter_=0;$jscomp.Symbol=function(a){return $jscomp.SYMBOL_PREFIX+(a||"")+$jscomp.symbolCounter_++};
 $jscomp.initSymbolIterator=function(){$jscomp.initSymbol();var a=$jscomp.global.Symbol.iterator;a||(a=$jscomp.global.Symbol.iterator=$jscomp.global.Symbol("iterator"));"function"!=typeof Array.prototype[a]&&$jscomp.defineProperty(Array.prototype,a,{configurable:!0,writable:!0,value:function(){return $jscomp.arrayIterator(this)}});$jscomp.initSymbolIterator=function(){}};$jscomp.arrayIterator=function(a){var b=0;return $jscomp.iteratorPrototype(function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}})};
 $jscomp.iteratorPrototype=function(a){$jscomp.initSymbolIterator();a={next:a};a[$jscomp.global.Symbol.iterator]=function(){return this};return a};$jscomp.array=$jscomp.array||{};$jscomp.iteratorFromArray=function(a,b){$jscomp.initSymbolIterator();a instanceof String&&(a+="");var c=0,d={next:function(){if(c<a.length){var e=c++;return{value:b(e,a[e]),done:!1}}d.next=function(){return{done:!0,value:void 0}};return d.next()}};d[Symbol.iterator]=function(){return d};return d};
@@ -121,3 +129,112 @@ cacc.RetrievalUtil.getData_=function(a,b,c,d){(c=a.getAttribute(c)||cacc.Retriev
 cacc.RetrievalUtil.getParam_=function(a,b,c){if(!a.id)return null;var d=cacc.RetrievalUtil.getUrlParameters_()[a.id];if(!d)return null;d+=c;a.setAttribute(b,d);return d};cacc.RetrievalUtil.getUrlParameters_=function(){for(var a={},b,c=window.location.href.slice(window.location.href.indexOf("?")+1).split("&"),d=0;d<c.length;d++)b=c[d].split("="),a[b[0]]=b[1];return a};cacc.RetrievalUtil.fromUri_=function(a,b){"file:"===location.protocol?b(null):$.ajax({url:a,success:b})};cacc.Base=function(){this.version="0.1";this.molMap=cacc.RetrievalUtil.forDocument();this.explorerMap={}};goog.addSingletonGetter(cacc.Base);cacc.Base.prototype.init=function(){0<Object.keys(this.molMap).length&&cacc.CssUtil.documentCmlStyle();for(var a in this.molMap)this.initElement(a,this.molMap[a])};
 cacc.Base.prototype.initElement=function(a,b){b.hasAttribute("has-svg")&&b.hasAttribute("has-cml")||this.redoInitElement_(a,b);if("true"===b.getAttribute("has-svg")&&"true"===b.getAttribute("has-cml")){b.setAttribute("tabindex","0");b.setAttribute("role","application");var c=b.querySelector("div.svg").children[0],d=b.querySelector("div.cml").children[0];c&&d&&(c.setAttribute("aria-hidden","true"),d.setAttribute("aria-hidden","true"),c=new cacc.Molecule(b,c,d),this.explorerMap[a]=new cacc.Explorer(c),
 cacc.CssUtil.moleculeStyle(c))}};cacc.Base.prototype.redoInitElement_=function(a,b){var c=goog.bind(function(){this.initElement(a,b)},this);setTimeout(c,500)};cacc.Base.config={MSG_VISIBLE:!0,MAG_ACTIVE:!0};
+
+  </script>
+  <script type="text/javascript" defer>
+    document.addEventListener("DOMContentLoaded", function() {
+      cacc.Base.getInstance().init();
+    });
+  </script>
+  </head>
+  <body>
+    <!-- DW - This fix needed for ggplot, as its bars otherwise have only a
+      fill and no border and hence don't display correctly in MakeAccessibleSVG
+      Should consider whether to only run this for MakeAccessibleSVG.ggplot
+      Tried to make the selection as narrow as possible to avoid unwanted side-effects
+    -->
+    <style>
+      svg g[id^=geom_rect] rect {
+        stroke-opacity: 1;
+      }
+    </style>
+    <div class="container">
+      <div class="content">
+        <div class="ChemAccess-element" id="mole1" tabindex="0" role="application">
+          <div class="svg">
+            {{{svg}}}
+          </div>
+          <div class="cml">
+            {{{xml}}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{#key}}
+    <p>Tab to or mouseclick on the diagram and use the following keys for interactive exploration:</p>
+    <table>
+      <tr>
+        <th>Key:</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>Activate keyboard driven exploration</td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <td>Activate menu driven exploration</td>
+      </tr>
+      <tr>
+        <td>Escape</td>
+        <td>Leave exploration mode</td>
+      </tr>
+      <tr>
+        <td>&emsp;</td>
+      </tr>
+      <tr>
+        <td>Cursor down</td>
+        <td>Explore next lower level</td>
+      </tr>
+      <tr>
+        <td>Cursor up</td>
+        <td>Explore next upper level</td>
+      </tr>
+      <tr>
+        <td>Cursor right</td>
+        <td>Explore next element on level</td>
+      </tr>
+      <tr>
+        <td>Cursor left</td>
+        <td>Explore previous element on level</td>
+      </tr>
+      <tr>
+        <td>&emsp;</td>
+      </tr>
+      <tr>
+        <td>X</td>
+        <td>Toggle description mode</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>De/activate direct magnification</td>
+      </tr>
+      <tr>
+        <td>N</td>
+        <td>De/activate stepwise magnification</td>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>Toggle subtitles</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td>Cycle contrast settings</td>
+      </tr>
+      <tr>
+        <td>T</td>
+        <td>Monochrome colours</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>Toggle language (if available)</td>
+      </tr>
+    </table>
+    {{/key}}
+    {{#footer}}
+    <div class="footer">
+      <p style="text-align: center; font-size: 10px;">&copy; Progressive Accessibility Solutions 2017</p>
+    </div>
+    {{/footer}}
+  </body>
+</html>

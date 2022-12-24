@@ -117,12 +117,12 @@
 }
 
 ## Constructs a ggplot layer
-## TODO:  Currently assumes histogram or line (and probably plenty of other assumptions)
 .AddXMLAddGGPlotLayer = function(root, x=NULL, panel=1) {
   annotation = .AddXMLAddAnnotation(root, position=4, 
                                     id=paste("center", panel, x$layernum, sep="-"), kind="grouped")
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
+  # This is the same structure as found in the VI method for ggplots.
   if (x$type == "bar") {    # Bar chart
     barCount = nrow(x$data)
     barGrob = grid.grep(gPath("geom_rect"), grep=TRUE)
@@ -139,28 +139,34 @@
       
       # If no density values then assume it's a categorical x-axis
       if (is.null(chartData$density))  
-        annotations[[i]] = .AddXMLcategoricalBar(root, position=i, 
-                                            x=signif(chartData$x[i], 4),
-                                            count=chartData$ymax[i] - chartData$ymin[i], 
-                                            id=barId)
+        annotations[[i]] = .AddXMLcategoricalBar(
+          root,
+          position=i, 
+          x=signif(chartData$x[i], 4),
+          count=chartData$ymax[i] - chartData$ymin[i], 
+          id=barId)
       
       else
-        annotations[[i]] = .AddXMLcenterBar(root, position=i, mid=signif(chartData$x[i],4),
-                                        count=chartData$ymax[i] - chartData$ymin[i], 
-                                        density=ifelse(is.null(chartData$density), NA, chartData$density[i]),
-                                        start=signif(chartData$xmin[i], 4), 
-                                        end=signif(chartData$xmax[i], 4), id=barId)
+        annotations[[i]] = .AddXMLcenterBar(
+          root,
+          position=i,
+          mid=signif(chartData$x[i],4),
+          count=chartData$ymax[i] - chartData$ymin[i], 
+          density=ifelse(is.null(chartData$density), NA, chartData$density[i]),
+          start=signif(chartData$xmin[i], 4), 
+          end=signif(chartData$xmax[i], 4),
+          id=barId)
     }
   } else if (x$type=="line") { # Line chart
     segmentCount = nrow(x$data)-1    # One less than the number of points
     # For now, assume that all layers are this layer type
     # TODO:  Fix this
-    lineGrobs = grid.grep(gPath("GRID.polyline"), grep=TRUE, global=TRUE)
+    lineGrobs = grid.grep(gPath("panel", "panel-1", "GRID.polyline"), grep=TRUE, global=TRUE)
     lineGrob = lineGrobs[[x$layernum]]
     XML::addAttributes(annotation$root, speech="Line graph",
                        speech2=paste("Line graph with", segmentCount, "segments"),
                        # Better to report #lines or #segs?  
-                       # Line can be discontiguous (comprised of polylines 1a, 1b, ...)
+                       # Line can be discontinuous (comprised of polylines 1a, 1b, ...)
                        type="Center")
     annotations = list()
     data = x$data 

@@ -1,21 +1,25 @@
 
-MakeAccessibleSVG = function(x, file = "test", view=interactive(), ...) {
+MakeAccessibleSVG = function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
             UseMethod("MakeAccessibleSVG")
           }
 
 MakeAccessibleSVG.default =
-    function(x, file = "test", view=interactive(), ...) {
+    function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
       svgfile = SVGThis(x, paste0(file, ".svg"))
       xmlfile = AddXML(x, paste0(file, ".xml"))
           BrowseSVG(file=file, view=view, ...)
       .SVGAndXMLMade()
+      if (cleanup) {
+        unlink(paste0(file, ".xml"))
+        unlink(paste0(file, ".svg"))
+      }
       return(invisible(NULL))
 }
 
 MakeAccessibleSVG.histogram = MakeAccessibleSVG.scatterplot = MakeAccessibleSVG.default
 
 MakeAccessibleSVG.tsplot =
-    function(x, file = "test", view=interactive(), ...) {
+    function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
       svgfile = SVGThis(x, paste0(file, ".svg"))
       if (x$Continuous) {
         .RewriteSVG.tsplot(x, paste0(file, ".svg"))
@@ -23,17 +27,27 @@ MakeAccessibleSVG.tsplot =
       xmlfile = AddXML(x, paste0(file, ".xml"))
           BrowseSVG(file=file, view=view, ...)
       .SVGAndXMLMade()
+      if (cleanup) {
+        unlink(paste0(file, ".xml"))
+        unlink(paste0(file, ".svg"))
+      }
       return(invisible(NULL))
 }
 
 MakeAccessibleSVG.ggplot =
-    function(x, file = "test", view=interactive(), ...) {
-      pdf(NULL)  # create non-displaying graphics device for SVGThis
+    function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
+      pdf(NULL)  # create non-displaying graphics device for SVGThis and AddXML
       svgfile = SVGThis(x, paste0(file, ".svg"),createDevice=FALSE)
-      xmlfile = AddXML(x, paste0(file, ".xml"))  # needs device to do grid.grep()
+      xmlfile = AddXML(x, paste0(file, ".xml")) 
       dev.off()  # destroy graphics device, now that we're done with it
       
-        BrowseSVG(file=file, view=view, ...)
+      BrowseSVG(file=file, view=view, ...)
+      
       .SVGAndXMLMade()
+      
+      if (cleanup) {
+        unlink(paste0(file, ".xml"))
+        unlink(paste0(file, ".svg"))
+      }
       return(invisible(NULL))
 }
