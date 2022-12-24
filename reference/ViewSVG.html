@@ -84,18 +84,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ViewSVG</span><span class="op">(</span>dir<span class="op">=</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ViewSVG</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"index"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>dir</dt>
-<dd><p>the directory to search for content; currently limited to the current working directory</p></dd>
+    <dl><dt>file</dt>
+<dd><p>The file basename to be used. This file will be made in the current directory.</p></dd>
 
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>Two files are copied from the package folders and an index file is written that contains the necessary links to all accessible SVG files.</p>
+    <p>This will create a html file that has a list of the available svg in the current directory. This only supports the current working directory at the moment. However this is planned on changing in the future. To make the files you can use the <code><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG()</a></code> function</p>
     </div>
     <div id="value">
     <h2>Value</h2>
@@ -109,9 +109,62 @@
     </div>
     <div id="author">
     <h2>Author</h2>
-    <p>A. Jonathan R. Godfrey</p>
+    <p>A. Jonathan R. Godfrey and James A. Thompson</p>
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p><code><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG</a></code></p></div>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make a few svg webpages</span></span></span>
+<span class="r-in"><span><span class="va">tsplot</span> <span class="op">=</span> <span class="fu"><a href="TSPlot.html">TimeSeriesPlot</a></span><span class="op">(</span><span class="va">airquality</span>, x<span class="op">=</span><span class="va">airquality</span><span class="op">$</span><span class="va">Temp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG</a></span><span class="op">(</span><span class="va">tsplot</span>, file <span class="op">=</span> <span class="st">"tsplot"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This is an untitled chart with no subtitle or caption.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'Time' with labels 0, 50, 100 and 150.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis 'Temp' with labels 60, 70, 80 and 90.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The chart is a set of 1 line.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Line 1 connects 153 points.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> SVG and XML files created successfully.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">barChart</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Orange</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Tree</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG</a></span><span class="op">(</span><span class="va">barChart</span>, file <span class="op">=</span> <span class="st">"barChart"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This is an untitled chart with no subtitle or caption.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'Tree' with labels 3, 1, 5, 2 and 4.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis 'count' with labels 0, 2, 4 and 6.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The chart is a bar chart with 5 vertical bars.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bar 1 is centered at 1, and length is from 0 to 7.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bar 2 is centered at 2, and length is from 0 to 7.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bar 3 is centered at 3, and length is from 0 to 7.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bar 4 is centered at 4, and length is from 0 to 7.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bar 5 is centered at 5, and length is from 0 to 7.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> SVG and XML files created successfully.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">histogram</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">attenu</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">dist</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">histogram</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+<span class="r-plt img"><img src="ViewSVG-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This is an untitled chart with no subtitle or caption.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'dist' with labels 0, 100, 200 and 300.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis 'count' with labels 0, 20 and 40.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The chart is a bar chart with 30 vertical bars.</span>
+<span class="r-in"><span><span class="fu"><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG</a></span><span class="op">(</span><span class="va">histogram</span>, file<span class="op">=</span><span class="st">"histogram"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This is an untitled chart with no subtitle or caption.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'dist' with labels 0, 100, 200 and 300.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis 'count' with labels 0, 20 and 40.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The chart is a bar chart with 30 vertical bars.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> SVG and XML files created successfully.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display the 'home' page</span></span></span>
+<span class="r-in"><span><span class="fu">ViewSVG</span><span class="op">(</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
