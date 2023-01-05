@@ -34,6 +34,9 @@ TimeSeriesPlot = function(.data, x, time=NULL, base=FALSE, ...){
       x = .data$Y
       #Get correct ylab
       Out$ylab = ifelse(is.null(MC$ylab[[1]]), deparse(MC$.data), MC$ylab)
+    } else if (!is.data.frame(.data)) {
+      x = .data
+      .data = data.frame(x=x)
     }
     
     if (is.null(time)) time = 1:length(x)
