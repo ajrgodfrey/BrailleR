@@ -9,11 +9,11 @@
 \title{Create and display a accessible exploration webpage SVG of graph}
 \description{Creates the necessary SVG and XML files for a graph object (as long as it has a class assigned). Then turns them into a html file and opens it for viewing (if a interactive session) in your browser.}
 \usage{
-MakeAccessibleSVG(x, file = "test", view=interactive(), cleanup = TRUE, ...)
+MakeAccessibleSVG(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, ...)
 }
 \arguments{
   \item{x}{a graph object for which a method exists}
-  \item{file}{The shared name for the SVG and XML files to be created.}
+  \item{file}{The shared name for the SVG, XML and HTML files to be created. It will also be the title of the html webpage.}
   \item{view}{launch in browser; this is the default when in interactive session}
   \item{cleanup}{Whether the function should remove the svg and xml files after they have bee embedded into the hmtml file.}
   \item{...}{arguments passed on to other methods/functions}

@@ -24,7 +24,8 @@ BrowseSVG = function(file="test", key=TRUE, footer=TRUE, view=interactive()) {
   data = list(xml = xmlString,
               svg = svgString,
               footer = footer,
-              key = key)
+              key = key,
+              title = file)
   
   htmlTemplate = system.file("whisker/SVG/template.html", package = "BrailleR") |>
     readLines()

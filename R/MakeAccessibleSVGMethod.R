@@ -1,10 +1,10 @@
 
-MakeAccessibleSVG = function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
+MakeAccessibleSVG = function(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, ...) {
             UseMethod("MakeAccessibleSVG")
           }
 
 MakeAccessibleSVG.default =
-    function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
+    function(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, ...) {
       svgfile = SVGThis(x, paste0(file, ".svg"))
       xmlfile = AddXML(x, paste0(file, ".xml"))
           BrowseSVG(file=file, view=view, ...)
@@ -19,7 +19,7 @@ MakeAccessibleSVG.default =
 MakeAccessibleSVG.histogram = MakeAccessibleSVG.scatterplot = MakeAccessibleSVG.default
 
 MakeAccessibleSVG.tsplot =
-    function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
+    function(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, ...) {
       svgfile = SVGThis(x, paste0(file, ".svg"))
       if (x$Continuous) {
         .RewriteSVG.tsplot(x, paste0(file, ".svg"))
@@ -35,7 +35,7 @@ MakeAccessibleSVG.tsplot =
 }
 
 MakeAccessibleSVG.ggplot =
-    function(x, file = "test", view=interactive(), cleanup = TRUE, ...) {
+    function(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, ...) {
       pdf(NULL)  # create non-displaying graphics device for SVGThis and AddXML
       svgfile = SVGThis(x, paste0(file, ".svg"),createDevice=FALSE)
       xmlfile = AddXML(x, paste0(file, ".xml")) 
