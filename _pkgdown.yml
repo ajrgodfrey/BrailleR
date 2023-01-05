@@ -1,2 +1,4 @@
-url: ~
+url: http://ajrgodfrey.github.io/BrailleR/
+template:
+  bootstrap: 5
 

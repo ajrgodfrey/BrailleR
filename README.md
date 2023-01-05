@@ -1,7 +1,10 @@
 # The BrailleR package is a collection of tools to make use of R a happier experience for blind people.
 
 
-The BrailleR package does have dependencies, all of which are available on CRAN. Version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. The leading zero infers that this package is under ongoing development to get to the state where it delivers the original aims of the package. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
+
+BrailleR version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. The leading zero infers that this package is under ongoing development to get to the state where it delivers the original aims of the package. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
+
+The BrailleR package does have dependencies, all of which are available on CRAN. 
 
 [![Dependencies](https://tinyverse.netlify.com/badge/BrailleR)](https://cran.r-project.org/package=BrailleR)  [![Github version](https://img.shields.io/badge/devel%20version-0.32.1-blue.svg)](https://github.com/ajrgodfrey/BrailleR) [![Last commit badge](https://img.shields.io/github/last-commit/ajrgodfrey/BrailleR.svg)](https://github.com/ajrgodfrey/BrailleR/commits/blue)
 
@@ -22,7 +25,7 @@ The BrailleR package does have dependencies, all of which are available on CRAN.
 
 Blind people cannot use RStudio and depending on the combination of operating system and screen reading software we choose to use, we might have differing levels of success with the standard R GUI.
 
-R is perhaps the most blind-friendly statistical software option because all scripts can be written in plain text, using the text editor a user prefers, and all output can be saved in a wide range of file formats. The advent of R markdown and other reproducible research techniques can offer the blind user a degree of efficiency that is not offered in many other statistical software options.
+R is perhaps the most blind-friendly statistical software option because all scripts can be written in plain text, using the text editor a user prefers, and all output can be saved in a wide range of file formats. The advent of R markdown and other reproducible research techniques can offer the blind user a degree of efficiency that is not offered in many other statistical software options. In addition, the processed Rmd files are usually HTML which are the best supported files in terms of screen reader development.
 
 
 ###  Specific objectives of BrailleR
@@ -32,6 +35,7 @@ R is perhaps the most blind-friendly statistical software option because all scr
 3. Make it easier for blind users to create their own R markdown documents.
 5. Replace the tasks other users can do quickly using the RStudio IDE.
 
+If these criteria were met, then the `BrailleR` package would be supporting blind people through their first courses in statistics, and perhaps/hopefully into second or third courses.
 
 ### Installation of BrailleR
 
