@@ -31,7 +31,8 @@ Description: Blind users do not have access to the graphical output from R
     functionality for optimising graphical content to prepare it for
     embossing as tactile images.
 License: GPL-2
-URL: https://github.com/ajrgodfrey/BrailleR
+URL: https://github.com/ajrgodfrey/BrailleR,
+    http://ajrgodfrey.github.io/BrailleR/
 BugReports: https://github.com/ajrgodfrey/BrailleR/issues
 Depends:
     R (>= 3.4.0)
