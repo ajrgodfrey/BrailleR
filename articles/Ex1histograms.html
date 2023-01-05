@@ -129,27 +129,25 @@ A histogram of 1000 random values from a normal distribution
 </div>
 <pre><code>This is a histogram, with the title: with the title: Histogram of x
 "x" is marked on the x-axis.
-Tick marks for the x-axis are at: -4, -2, 0, 2, and 4 
+Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 16 bins with equal widths, starting at -4 and ending at 4 .
+It has 14 bins with equal widths, starting at -3.5 and ending at 3.5 .
 The mids and counts for the bins are:
-mid = -3.75  count = 1 
 mid = -3.25  count = 3 
-mid = -2.75  count = 3 
-mid = -2.25  count = 16 
-mid = -1.75  count = 53 
-mid = -1.25  count = 96 
-mid = -0.75  count = 148 
-mid = -0.25  count = 195 
-mid = 0.25  count = 175 
-mid = 0.75  count = 161 
-mid = 1.25  count = 79 
-mid = 1.75  count = 48 
-mid = 2.25  count = 14 
-mid = 2.75  count = 6 
-mid = 3.25  count = 1 
-mid = 3.75  count = 1</code></pre>
+mid = -2.75  count = 7 
+mid = -2.25  count = 18 
+mid = -1.75  count = 48 
+mid = -1.25  count = 82 
+mid = -0.75  count = 140 
+mid = -0.25  count = 206 
+mid = 0.25  count = 193 
+mid = 0.75  count = 138 
+mid = 1.25  count = 100 
+mid = 1.75  count = 42 
+mid = 2.25  count = 17 
+mid = 2.75  count = 5 
+mid = 3.25  count = 1</code></pre>
 <p>The VI() command actually calls the VI.histogram() command as the
 hist() command creates an object of class “histogram”.</p>
 </div>
@@ -181,19 +179,18 @@ hist&gt; MyHist=graphics::hist(x, xlab="random normal values", main="Example his
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -4.5 -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5
-[16]  3.0  3.5
+ [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   0   1   0  13  39 102 160 179 200 137 104  48   9   6   1
+ [1]   2   3  11  38  91 146 186 208 144 100  49  18   3   1
 
 $density
- [1] 0.002 0.000 0.002 0.000 0.026 0.078 0.204 0.320 0.358 0.400 0.274 0.208
-[13] 0.096 0.018 0.012 0.002
+ [1] 0.004 0.006 0.022 0.076 0.182 0.292 0.372 0.416 0.288 0.200 0.098 0.036
+[13] 0.006 0.002
 
 $mids
- [1] -4.25 -3.75 -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25
-[13]  1.75  2.25  2.75  3.25
+ [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
+[13]  2.75  3.25
 
 $xname
 [1] "x"
@@ -210,19 +207,18 @@ hist&gt; MyHist=hist(x, xlab="random normal values", main="Example histogram (Br
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -4.5 -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5
-[16]  3.0  3.5
+ [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 
 $counts
- [1]   1   0   1   0  13  39 102 160 179 200 137 104  48   9   6   1
+ [1]   2   3  11  38  91 146 186 208 144 100  49  18   3   1
 
 $density
- [1] 0.002 0.000 0.002 0.000 0.026 0.078 0.204 0.320 0.358 0.400 0.274 0.208
-[13] 0.096 0.018 0.012 0.002
+ [1] 0.004 0.006 0.022 0.076 0.182 0.292 0.372 0.416 0.288 0.200 0.098 0.036
+[13] 0.006 0.002
 
 $mids
- [1] -4.25 -3.75 -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25
-[13]  1.75  2.25  2.75  3.25
+ [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
+[13]  2.75  3.25
 
 $xname
 [1] "x"
@@ -251,18 +247,18 @@ $ExtraArgs$sub
 
 
 $NBars
-[1] 16
+[1] 14
 
 $par
 $par$xaxp
-[1] -4  2  3
+[1] -3  3  6
 
 $par$yaxp
 [1]   0 200   4
 
 
 $xTicks
-[1] -4 -2  0  2
+[1] -3 -2 -1  0  1  2  3
 
 $yTicks
 [1]   0  50 100 150 200
@@ -274,26 +270,24 @@ hist&gt; # The VI() method then uses the extra information stored
 hist&gt; VI(MyHist)
 This is a histogram, with the title: with the title: Example histogram (BrailleR package)
 "x" is marked on the x-axis.
-Tick marks for the x-axis are at: -4, -2, 0, and 2 
+Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 16 bins with equal widths, starting at -4.5 and ending at 3.5 .
+It has 14 bins with equal widths, starting at -3.5 and ending at 3.5 .
 The mids and counts for the bins are:
-mid = -4.25  count = 1 
-mid = -3.75  count = 0 
-mid = -3.25  count = 1 
-mid = -2.75  count = 0 
-mid = -2.25  count = 13 
-mid = -1.75  count = 39 
-mid = -1.25  count = 102 
-mid = -0.75  count = 160 
-mid = -0.25  count = 179 
-mid = 0.25  count = 200 
-mid = 0.75  count = 137 
-mid = 1.25  count = 104 
-mid = 1.75  count = 48 
-mid = 2.25  count = 9 
-mid = 2.75  count = 6 
+mid = -3.25  count = 2 
+mid = -2.75  count = 3 
+mid = -2.25  count = 11 
+mid = -1.75  count = 38 
+mid = -1.25  count = 91 
+mid = -0.75  count = 146 
+mid = -0.25  count = 186 
+mid = 0.25  count = 208 
+mid = 0.75  count = 144 
+mid = 1.25  count = 100 
+mid = 1.75  count = 49 
+mid = 2.25  count = 18 
+mid = 2.75  count = 3 
 mid = 3.25  count = 1</code></pre>
 </div>
 <div class="section level3">
