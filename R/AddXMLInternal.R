@@ -169,16 +169,54 @@
                        # Line can be discontinuous (comprised of polylines 1a, 1b, ...)
                        type="Center")
     annotations = list()
-    data = x$data 
-    for (i in 1:segmentCount) {
-      lineId = paste(lineGrob$name, "1", sep=".") # ID of the polyline
-      annotations[[i]] = .AddXMLcenterLine(root, position=i, id=lineId,
-                                           data$x[i], data$y[i],
-                                           data$x[i+1], data$y[i+1])
+    
+    data = x$data
+    
+    lineId = paste(lineGrob$name, "1", sep=".") # ID of the polyline
+    
+    #Summarizing the data
+    maxItems = 10
+    if (segmentCount > maxItems) {
+      min = min(data$x)
+      max = max(data$x)
+      breaks = seq(min, max, length.out = maxItems+1)
+      mins = breaks[1:(maxItems)]
+      maxs = breaks[2:(maxItems+1)]
+      meansAndSD = mapply(
+        function(min, max) {
+          sectionData = data$y[data$x < max & data$x >= min]
+          list(mean = mean(sectionData),
+               sd = ifelse(is.na(sd(sectionData)), 0, sd(sectionData)))
+        },
+        mins, maxs)
+      summarised = TRUE
+      segmentCount = maxItems
+    } else {
+      summarised = FALSE
+    }
+    
+    for (i in 1:(segmentCount)) {
+      if (summarised) {
+        desc = paste(.AddXMLFormatNumber(meansAndSD[,i]$mean),
+                     "mean with sd",
+                     .AddXMLFormatNumber(meansAndSD[,i]$sd),
+                     "going from",
+                     .AddXMLFormatNumber(mins[i]),
+                     "to",
+                     .AddXMLFormatNumber(maxs[i]))
+      } else {
+        desc = paste(.AddXMLFormatNumber(data$y[i]),
+                     "at",
+                     .AddXMLFormatNumber(data$x[i]),
+                     ifelse(i<segmentCount, " line start", " line end"),
+                     i)
+      }
+      annotations[[i]] = .AddXMLPoint(root, position=i, id=lineId, speech = desc)
       # TODO:  Not correctly handling NA or out-of-range data values, nor dates
       # Should check for dates with inherit(,"Date") -- but looks like I
       # need to do that on the main data not the layer data
     }
+    
   } else {            # TODO:  warn about layer types we don't recognize
     return(NULL)
   }
@@ -217,13 +255,10 @@
 # Current fudge for this -- define each segment with a dummy name that doesn't actually
 # exist in the SVG.  Then give it a passive child which is the whole
 # polyline.  This keeps the whole line visible while individual segments are described
-.AddXMLcenterLine = function(root, position=1, startx, starty, endx, endy,
-                            id=NULL) {
-  fakeSegmentId = paste(id,position,sep=".") # Pretend there are separate segments
-  
+.AddXMLPoint = function(root, position=1, x, y, id=NULL, speech = paste0("(", signif(x), ",", signif(y), ") number ", position)) {
+  fakeSegmentId = paste(id,position,sep=".")
   annotation = .AddXMLAddAnnotation(root, position=position, id=fakeSegmentId, kind="active")
   dummyAnnotation = list(.AddXMLAddAnnotation(root, position=position, id=id, kind="passive"))
-  speech=paste0("Line ", position, " from (", startx, ",", starty, ") to (", endx, ",", endy, ")")
   XML::addAttributes(annotation$root, speech=speech, speech2=speech)
   .AddXMLAddComponents(annotation, dummyAnnotation)
   .AddXMLAddChildren(annotation, dummyAnnotation)
@@ -522,4 +557,12 @@
     .AddXMLAddChildren(parent, annotations)
     .AddXMLAddParents(parent, annotations)
     return(invisible(annotations))
-  }
+}
+
+.AddXMLFormatNumber = function(x) {
+  if ((x > 9999 | x < 0.001) & !is.nan(x))
+    useScientific = TRUE
+  else
+    useScientific = FALSE
+  format(x, digits=4, scientific = useScientific)
+}
