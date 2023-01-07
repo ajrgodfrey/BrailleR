@@ -18,20 +18,20 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/BrailleR.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/BrailleRHistory.html">History of the BrailleR package</a>
-    <a class="dropdown-item" href="../articles/Ex1histograms.html">The BrailleR package Example 1</a>
-    <a class="dropdown-item" href="../articles/Ex2BasicNumerical.html">The BrailleR package Example 2</a>
-    <a class="dropdown-item" href="../articles/Ex3UnivariateDescription.html">The BrailleR package Example 3</a>
-    <a class="dropdown-item" href="../articles/Ex4SingleResponseOneGroupingFactor.html">The BrailleR package Example 4</a>
-    <a class="dropdown-item" href="../articles/GettingStarted.html">Getting started with the BrailleR package</a>
+    <a class="dropdown-item" href="../articles/ExploringGraphs.html">Exploring Graphs</a>
     <a class="dropdown-item" href="../articles/IntroWriteR.html">Getting started with the WriteR application</a>
-    <a class="dropdown-item" href="../articles/qplot.html">Testing the VI.ggplot() within the BrailleR package"</a>
+    <a class="dropdown-item" href="../articles/BrailleRHistory.html">History of the BrailleR package</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -107,18 +107,19 @@
 <span class="r-plt img"><img src="hist-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">MyHist</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $breaks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16]  4.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $counts</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]   7  25  35  63 162 193 209 157  75  46  21   4   2   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]   2   5  18  44 102 132 196 170 163 102  36  23   6   0   1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $density</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.014 0.050 0.070 0.126 0.324 0.386 0.418 0.314 0.150 0.092 0.042 0.008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.004 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.004 0.010 0.036 0.088 0.204 0.264 0.392 0.340 0.326 0.204 0.072 0.046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.012 0.000 0.002</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mids</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  3.25  3.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  2.75  3.25  3.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $xname</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "x"</span>
@@ -134,18 +135,19 @@
 <span class="r-plt img"><img src="hist-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">MyHist</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $breaks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16]  4.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $counts</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]   7  25  35  63 162 193 209 157  75  46  21   4   2   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]   2   5  18  44 102 132 196 170 163 102  36  23   6   0   1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $density</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.014 0.050 0.070 0.126 0.324 0.386 0.418 0.314 0.150 0.092 0.042 0.008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.004 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.004 0.010 0.036 0.088 0.204 0.264 0.392 0.340 0.326 0.204 0.072 0.046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.012 0.000 0.002</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mids</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25  2.75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  3.25  3.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  2.75  3.25  3.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $xname</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "x"</span>
@@ -174,18 +176,18 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $NBars</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par$xaxp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3  4  7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -2  4  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par$yaxp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0 200   4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $xTicks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3 -2 -1  0  1  2  3  4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -2  0  2  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $yTicks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0  50 100 150 200</span>
@@ -197,24 +199,25 @@
 <span class="r-in"><span><span class="fu"><a href="VI.html">VI</a></span><span class="op">(</span><span class="va">MyHist</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This is a histogram, with the title: with the title: Example histogram (BrailleR package)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "x" is marked on the x-axis.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, 3, and 4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -2, 0, 2, and 4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are a total of 1000 elements for this variable.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It has 14 bins with equal widths, starting at -3 and ending at 4 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has 15 bins with equal widths, starting at -3.5 and ending at 4 .</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The mids and counts for the bins are:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.75  count = 7 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.25  count = 25 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 35 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 63 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 162 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 193 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 209 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 157 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 75 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 46 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 21 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.25  count = 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -3.25  count = 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.75  count = 5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.25  count = 18 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 44 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 102 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 132 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 196 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 170 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 163 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 102 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 36 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 23 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.25  count = 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.75  count = 1</span>
 </code></pre></div>
     </div>

@@ -2,15 +2,16 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  BrailleR: BrailleR.html
   BrailleRHistory: BrailleRHistory.html
   Ex1histograms: Ex1histograms.html
   Ex2BasicNumerical: Ex2BasicNumerical.html
   Ex3UnivariateDescription: Ex3UnivariateDescription.html
   Ex4SingleResponseOneGroupingFactor: Ex4SingleResponseOneGroupingFactor.html
-  GettingStarted: GettingStarted.html
+  ExploringGraphs: ExploringGraphs.html
   IntroWriteR: IntroWriteR.html
   qplot: qplot.html
-last_built: 2023-01-05T07:09Z
+last_built: 2023-01-07T05:36Z
 urls:
   reference: http://ajrgodfrey.github.io/BrailleR/reference
   article: http://ajrgodfrey.github.io/BrailleR/articles

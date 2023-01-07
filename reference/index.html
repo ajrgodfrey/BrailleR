@@ -18,20 +18,20 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/BrailleR.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/BrailleRHistory.html">History of the BrailleR package</a>
-    <a class="dropdown-item" href="../articles/Ex1histograms.html">The BrailleR package Example 1</a>
-    <a class="dropdown-item" href="../articles/Ex2BasicNumerical.html">The BrailleR package Example 2</a>
-    <a class="dropdown-item" href="../articles/Ex3UnivariateDescription.html">The BrailleR package Example 3</a>
-    <a class="dropdown-item" href="../articles/Ex4SingleResponseOneGroupingFactor.html">The BrailleR package Example 4</a>
-    <a class="dropdown-item" href="../articles/GettingStarted.html">Getting started with the BrailleR package</a>
+    <a class="dropdown-item" href="../articles/ExploringGraphs.html">Exploring Graphs</a>
     <a class="dropdown-item" href="../articles/IntroWriteR.html">Getting started with the WriteR application</a>
-    <a class="dropdown-item" href="../articles/qplot.html">Testing the VI.ggplot() within the BrailleR package"</a>
+    <a class="dropdown-item" href="../articles/BrailleRHistory.html">History of the BrailleR package</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -57,9 +57,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="explore-graphs">Explore Graphs<a class="anchor" aria-label="anchor" href="#explore-graphs"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Explore ggplot graphs in accsessible ways.</p>
 
       
     </div><div id="" class="section level2">
@@ -69,39 +69,29 @@
 
       <dl><dt>
           
-          
+          <code><a href="VI.html">VI()</a></code> 
         </dt>
-        <dd>Internal functions for adding the necessary XML content for accessible graphs in SVG format</dd>
+        <dd>Extract information from a graphical object</dd>
       </dl><dl><dt>
           
-          <code><a href="AddXMLMethod.html">AddXML()</a></code> 
+          <code><a href="sort.VIgraph.html">sort(<i>&lt;VIgraph&gt;</i>)</a></code> 
         </dt>
-        <dd>Create XML files to sit alongside SVG files in order to make an accessible graph experience.</dd>
+        <dd>Sort VI.ggplot points list</dd>
       </dl><dl><dt>
           
-          <code><a href="AugmentMethod.html">Augment()</a></code> 
+          <code><a href="grep.VIgraph.html">grep(<i>&lt;VIgraph&gt;</i>)</a></code> <code><a href="grep.VIgraph.html">gsub(<i>&lt;VIgraph&gt;</i>)</a></code> 
         </dt>
-        <dd>add additional detail to the stored object for a graph</dd>
+        <dd>String manipulation of the output produced by VI.ggplot</dd>
       </dl><dl><dt>
           
-          <code><a href="AutoSpellCheck.html">AutoSpellCheck()</a></code> 
+          <code><a href="Describe.html">Describe()</a></code> 
         </dt>
-        <dd>Automatic fixing of typos</dd>
+        <dd>Describe method to help visualize plot types.</dd>
       </dl><dl><dt>
           
-          <code><a href="BRLThis.html">BRLThis()</a></code> 
+          <code><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG()</a></code> 
         </dt>
-        <dd>Convert a graph to a pdf ready for embossing</dd>
-      </dl><dl><dt>
-          
-          <code><a href="BrailleR-package.html">BrailleR-package</a></code> <code><a href="BrailleR-package.html">BrailleR</a></code> 
-        </dt>
-        <dd>Improved Access for Blind Users</dd>
-      </dl><dl><dt>
-          
-          <code><a href="BrailleRUsefulLinks.html">BrailleRHome()</a></code> <code><a href="BrailleRUsefulLinks.html">BrailleRInAction()</a></code> <code><a href="BrailleRUsefulLinks.html">LURN()</a></code> <code><a href="BrailleRUsefulLinks.html">Google()</a></code> <code><a href="BrailleRUsefulLinks.html">google()</a></code> <code><a href="BrailleRUsefulLinks.html">R4DS()</a></code> <code><a href="BrailleRUsefulLinks.html">r4ds()</a></code> <code><a href="BrailleRUsefulLinks.html">WriteRHome()</a></code> 
-        </dt>
-        <dd>Open the home page for the BrailleR Project, the Google search engine, the BrailleR in Action book, or the Let's Use R Now (LURN) book in your browser</dd>
+        <dd>Create and display a accessible exploration webpage SVG of graph</dd>
       </dl><dl><dt>
           
           <code><a href="BrowseSVG.html">BrowseSVG()</a></code> 
@@ -109,24 +99,111 @@
         <dd>Merge svg and xml file in html file</dd>
       </dl><dl><dt>
           
-          <code><a href="CleanCSV.html">CleanCSV()</a></code> 
+          <code><a href="SVGThis.html">SVGThis()</a></code> 
         </dt>
-        <dd>clean out unwanted white space from a  csv file</dd>
+        <dd>Save commonly used graphs as structured SVG files.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ViewSVG.html">ViewSVG()</a></code> 
+        </dt>
+        <dd>Create the necessary files to allow interactive viewing of SVG</dd>
+      </dl><dl><dt>
+          
+          <code><a href="AddXMLMethod.html">AddXML()</a></code> 
+        </dt>
+        <dd>Create XML files to sit alongside SVG files in order to make an accessible graph experience.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="WTF.html">WTF()</a></code> 
+        </dt>
+        <dd>What's this figure?</dd>
+      </dl></div><div class="section level2">
+      <h2 id="graph-and-analysis-shortcuts">Graph and analysis shortcuts<a class="anchor" aria-label="anchor" href="#graph-and-analysis-shortcuts"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions to help speed up graph making and analysis tasks</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="boxplot.html">boxplot()</a></code> 
+        </dt>
+        <dd>Create a standard boxplot with a few extra elements added to the output object</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dotplot.html">dotplot()</a></code> 
+        </dt>
+        <dd>create a dotplot using stripchart</dd>
+      </dl><dl><dt>
+          
+          <code><a href="hist.html">hist()</a></code> 
+        </dt>
+        <dd>Create a standard histogram with a few extra elements added to the output object</dd>
+      </dl><dl><dt>
+          
+          <code><a href="OneFactor.html">OneFactor()</a></code> 
+        </dt>
+        <dd>Analysis for a continuous response for one group factor</dd>
+      </dl><dl><dt>
+          
+          <code><a href="OnePredictor.html">OnePredictor()</a></code> 
+        </dt>
+        <dd>Exploration of the relationship between a response and a single predictor</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ScatterPlot.html">ScatterPlot()</a></code> <code><a href="ScatterPlot.html">FittedLinePlot()</a></code> 
+        </dt>
+        <dd>Create a standard scatter plot with a few extra elements added to the output object</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ThreeFactors.html">ThreeFactors()</a></code> 
+        </dt>
+        <dd>A convenience function for a Three-way analysis</dd>
+      </dl><dl><dt>
+          
+          <code><a href="TSPlot.html">TimeSeriesPlot()</a></code> 
+        </dt>
+        <dd>Create a standard time series plot with a few extra elements added to the output object</dd>
+      </dl><dl><dt>
+          
+          <code><a href="TwoFactors.html">TwoFactors()</a></code> 
+        </dt>
+        <dd>A convenience function for a two-way analysis</dd>
+      </dl><dl><dt>
+          
+          <code><a href="UniDesc.html">UniDesc()</a></code> 
+        </dt>
+        <dd>Descriptive statistics and graphs for univariate data</dd>
+      </dl><dl><dt>
+          
+          <code><a href="WhereXY.html">WhereXY()</a></code> 
+        </dt>
+        <dd>Count points in a scatter plot</dd>
+      </dl></div><div class="section level2">
+      <h2 id="shortcuts-macros">Shortcuts / Macros<a class="anchor" aria-label="anchor" href="#shortcuts-macros"></a></h2>
+      
+      <p class="section-desc"></p><p>Other shortcut functions to speed up common task</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="BrailleRUsefulLinks.html">BrailleRHome()</a></code> <code><a href="BrailleRUsefulLinks.html">BrailleRInAction()</a></code> <code><a href="BrailleRUsefulLinks.html">LURN()</a></code> <code><a href="BrailleRUsefulLinks.html">Google()</a></code> <code><a href="BrailleRUsefulLinks.html">google()</a></code> <code><a href="BrailleRUsefulLinks.html">R4DS()</a></code> <code><a href="BrailleRUsefulLinks.html">r4ds()</a></code> <code><a href="BrailleRUsefulLinks.html">WriteRHome()</a></code> 
+        </dt>
+        <dd>Open the home page for the BrailleR Project, the Google search engine, the BrailleR in Action book, or the Let's Use R Now (LURN) book in your browser</dd>
       </dl><dl><dt>
           
           <code><a href="DataViewer.html">DataViewer()</a></code> 
         </dt>
         <dd>Open a data object in your chosen spreadsheet software</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Deprecated.html">GetPython27()</a></code> <code><a href="Deprecated.html">GetWxPython27()</a></code> <code><a href="Deprecated.html">MakeAllInOneSlide()</a></code> <code><a href="Deprecated.html">MakeSlidy()</a></code> <code><a href="Deprecated.html">MakeSlideShow()</a></code> 
-        </dt>
-        <dd>Deprecated functions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Describe.html">Describe()</a></code> 
-        </dt>
-        <dd>Describe method to help visualize plot types.</dd>
       </dl><dl><dt>
           
           <code><a href="Embossers.html">Premier100()</a></code> 
@@ -144,34 +221,19 @@
         <dd>extract the example text from a help page</dd>
       </dl><dl><dt>
           
-          <code><a href="GetGoing.html">GetGoing()</a></code> 
-        </dt>
-        <dd>Set options for using brailleR</dd>
-      </dl><dl><dt>
-          
           <code><a href="GetWriteR.html">Get7zip()</a></code> <code><a href="GetWriteR.html">GetCygwin()</a></code> <code><a href="GetWriteR.html">GetPandoc()</a></code> <code><a href="GetWriteR.html">GetPython3()</a></code> <code><a href="GetWriteR.html">GetRStudio()</a></code> <code><a href="GetWriteR.html">GetWriteR()</a></code> <code><a href="GetWriteR.html">GetWxPython3()</a></code> 
         </dt>
         <dd>Download and install software (Windows users only)</dd>
       </dl><dl><dt>
           
-          <code><a href="Internal.html">FindCSSFile()</a></code> <code><a href="Internal.html">InQuotes()</a></code> <code><a href="Internal.html">nNonMissing()</a></code> 
+          <code><a href="history.html">history()</a></code> 
         </dt>
-        <dd>Internal functions for the BrailleR package</dd>
+        <dd>View the history of the current workspace</dd>
       </dl><dl><dt>
           
           <code><a href="JoinBlindRUG.html">JoinBlindRUG()</a></code> <code><a href="JoinBlindRUG.html">ThankYou()</a></code> 
         </dt>
         <dd>Send an email based on a template</dd>
-      </dl><dl><dt>
-          
-          <code><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG()</a></code> 
-        </dt>
-        <dd>Create and display a accessible exploration webpage SVG of graph</dd>
-      </dl><dl><dt>
-          
-          <code><a href="MakeAllFormats.html">MakeAllFormats()</a></code> 
-        </dt>
-        <dd>Prepare the options for conversion of an R markdown file.</dd>
       </dl><dl><dt>
           
           <code><a href="MakeBatch.html">MakeBatch()</a></code> <code><a href="MakeBatch.html">MakeAdminBatch()</a></code> 
@@ -189,34 +251,14 @@
         <dd>Work flow convenience functions</dd>
       </dl><dl><dt>
           
-          <code><a href="MakeRprofile.html">MakeRprofile()</a></code> 
-        </dt>
-        <dd>Load BrailleR on Startup in Current Working Directory</dd>
-      </dl><dl><dt>
-          
-          
-        </dt>
-        <dd>Turn a set of Rmd files into an HTML slide show</dd>
-      </dl><dl><dt>
-          
           <code><a href="NewFunction.html">NewFunction()</a></code> 
         </dt>
         <dd>Create a template for a new function</dd>
       </dl><dl><dt>
           
-          <code><a href="OneFactor.html">OneFactor()</a></code> 
+          <code><a href="notepad.html">Notepad()</a></code> 
         </dt>
-        <dd>Analysis for a continuous response for one group factor</dd>
-      </dl><dl><dt>
-          
-          <code><a href="OnePredictor.html">OnePredictor()</a></code> 
-        </dt>
-        <dd>Exploration of the relationship between a response and a single predictor</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Options.html">GoBlind()</a></code> <code><a href="Options.html">GoSighted()</a></code> <code><a href="Options.html">GoAdvanced()</a></code> <code><a href="Options.html">GoNovice()</a></code> <code><a href="Options.html">LatexOn()</a></code> <code><a href="Options.html">LatexOff()</a></code> <code><a href="Options.html">ViewOn()</a></code> <code><a href="Options.html">ViewOff()</a></code> 
-        </dt>
-        <dd>Set package options</dd>
+        <dd>Open standard Windows tools quickly</dd>
       </dl><dl><dt>
           
           <code><a href="PandocAll.html">PandocAll()</a></code> 
@@ -224,9 +266,9 @@
         <dd>Convert files using pandoc.</dd>
       </dl><dl><dt>
           
-          <code><a href="PrepareWriteR.html">WriteR()</a></code> <code><a href="PrepareWriteR.html">TestPython()</a></code> <code><a href="PrepareWriteR.html">TestWX()</a></code> <code><a href="PrepareWriteR.html">PrepareWriteR()</a></code> 
+          <code><a href="pdf2html.html">pdf2html()</a></code> 
         </dt>
-        <dd>Getting started with WriteR</dd>
+        <dd>Convert a pdf file to html</dd>
       </dl><dl><dt>
           
           <code><a href="R2txtJG.html">txtStart()</a></code> <code><a href="R2txtJG.html">txtOut()</a></code> <code><a href="R2txtJG.html">txtStop()</a></code> <code><a href="R2txtJG.html">txtComment()</a></code> <code><a href="R2txtJG.html">txtSkip()</a></code> 
@@ -239,24 +281,9 @@
         <dd>Load a package by installing it if necessary</dd>
       </dl><dl><dt>
           
-          <code><a href="SVGThis.html">SVGThis()</a></code> 
-        </dt>
-        <dd>Save commonly used graphs as structured SVG files.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ScatterPlot.html">ScatterPlot()</a></code> <code><a href="ScatterPlot.html">FittedLinePlot()</a></code> 
-        </dt>
-        <dd>Create a standard scatter plot with a few extra elements added to the output object</dd>
-      </dl><dl><dt>
-          
           <code><a href="SetOptions.html">ChooseEmbosser()</a></code> <code><a href="SetOptions.html">ChooseStyle()</a></code> <code><a href="SetOptions.html">ChooseSlideStyle()</a></code> <code><a href="SetOptions.html">ResetDefaults()</a></code> <code><a href="SetOptions.html">SetAuthor()</a></code> <code><a href="SetOptions.html">SetBRLPointSize()</a></code> <code><a href="SetOptions.html">SetPaperHeight()</a></code> <code><a href="SetOptions.html">SetPaperWidth()</a></code> <code><a href="SetOptions.html">SetLanguage()</a></code> <code><a href="SetOptions.html">SetMakeUpper()</a></code> <code><a href="SetOptions.html">SetPValDigits()</a></code> <code><a href="SetOptions.html">SetSigLevel()</a></code> 
         </dt>
         <dd>Functions for setting package options.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="SetupBrailleR.html">SetupBrailleR()</a></code> 
-        </dt>
-        <dd>Establish the BrailleR folder for the user</dd>
       </dl><dl><dt>
           
           <code><a href="SpellCheck.html">SpellCheck()</a></code> 
@@ -269,44 +296,9 @@
         <dd>Spell checking a file or all files within a specified folder</dd>
       </dl><dl><dt>
           
-          <code><a href="TSPlot.html">TimeSeriesPlot()</a></code> 
-        </dt>
-        <dd>Create a standard time series plot with a few extra elements added to the output object</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ThreeFactors.html">ThreeFactors()</a></code> 
-        </dt>
-        <dd>A convenience function for a Three-way analysis</dd>
-      </dl><dl><dt>
-          
-          <code><a href="TwoFactors.html">TwoFactors()</a></code> 
-        </dt>
-        <dd>A convenience function for a two-way analysis</dd>
-      </dl><dl><dt>
-          
-          <code><a href="UniDesc.html">UniDesc()</a></code> 
-        </dt>
-        <dd>Descriptive statistics and graphs for univariate data</dd>
-      </dl><dl><dt>
-          
           <code><a href="UpdateGraph.html">UpdateGraph()</a></code> <code><a href="UpdateGraph.html">Main()</a></code> <code><a href="UpdateGraph.html">XLab()</a></code> <code><a href="UpdateGraph.html">YLab()</a></code> 
         </dt>
         <dd>extract or alter graph parameters</dd>
-      </dl><dl><dt>
-          
-          <code><a href="VI.html">VI()</a></code> 
-        </dt>
-        <dd>Extract information from a graphical object</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ViewSVG.html">ViewSVG()</a></code> 
-        </dt>
-        <dd>Create the necessary files to allow interactive viewing of SVG</dd>
-      </dl><dl><dt>
-          
-          <code><a href="WTF.html">WTF()</a></code> 
-        </dt>
-        <dd>What's this figure?</dd>
       </dl><dl><dt>
           
           <code><a href="WhatIs.html">CheckIt()</a></code> <code><a href="WhatIs.html">check_it()</a></code> <code><a href="WhatIs.html">what_is()</a></code> <code><a href="WhatIs.html">WhatIs()</a></code> 
@@ -314,61 +306,114 @@
         <dd>Investigate data objects</dd>
       </dl><dl><dt>
           
-          <code><a href="WhereXY.html">WhereXY()</a></code> 
-        </dt>
-        <dd>Count points in a scatter plot</dd>
-      </dl><dl><dt>
-          
           <code><a href="WhichFile.html">WhichFile()</a></code> 
         </dt>
         <dd>Find a text string  in files</dd>
       </dl><dl><dt>
           
-          <code><a href="boxplot.html">boxplot()</a></code> 
+          <code><a href="AutoSpellCheck.html">AutoSpellCheck()</a></code> 
         </dt>
-        <dd>Create a standard boxplot with a few extra elements added to the output object</dd>
+        <dd>Automatic fixing of typos</dd>
       </dl><dl><dt>
           
-          <code><a href="dotplot.html">dotplot()</a></code> 
+          <code><a href="Internal.html">FindCSSFile()</a></code> <code><a href="Internal.html">InQuotes()</a></code> <code><a href="Internal.html">nNonMissing()</a></code> 
         </dt>
-        <dd>create a dotplot using stripchart</dd>
+        <dd>Internal functions for the BrailleR package</dd>
       </dl><dl><dt>
           
-          <code><a href="grep.VIgraph.html">grep(<i>&lt;VIgraph&gt;</i>)</a></code> <code><a href="grep.VIgraph.html">gsub(<i>&lt;VIgraph&gt;</i>)</a></code> 
+          <code><a href="BRLThis.html">BRLThis()</a></code> 
         </dt>
-        <dd>String manipulation of the output produced by VI.ggplot</dd>
+        <dd>Convert a graph to a pdf ready for embossing</dd>
       </dl><dl><dt>
           
-          <code><a href="hist.html">hist()</a></code> 
+          <code><a href="CleanCSV.html">CleanCSV()</a></code> 
         </dt>
-        <dd>Create a standard histogram with a few extra elements added to the output object</dd>
+        <dd>clean out unwanted white space from a  csv file</dd>
       </dl><dl><dt>
           
-          <code><a href="history.html">history()</a></code> 
+          <code><a href="MakeAllFormats.html">MakeAllFormats()</a></code> 
         </dt>
-        <dd>View the history of the current workspace</dd>
+        <dd>Prepare the options for conversion of an R markdown file.</dd>
       </dl><dl><dt>
           
-          <code><a href="notepad.html">Notepad()</a></code> 
-        </dt>
-        <dd>Open standard Windows tools quickly</dd>
-      </dl><dl><dt>
           
-          <code><a href="pdf2html.html">pdf2html()</a></code> 
         </dt>
-        <dd>Convert a pdf file to html</dd>
-      </dl><dl><dt>
-          
-          <code><a href="sort.VIgraph.html">sort(<i>&lt;VIgraph&gt;</i>)</a></code> 
-        </dt>
-        <dd>Sort VI.ggplot points list</dd>
+        <dd>Turn a set of Rmd files into an HTML slide show</dd>
       </dl><dl><dt>
           
           <code><a href="unfinished.html">VI.barplot</a></code> <code><a href="unfinished.html">VI.density</a></code> <code><a href="unfinished.html">VI.aovlist</a></code> <code><a href="unfinished.html">VI.Date</a></code> <code><a href="unfinished.html">VI.factor</a></code> <code><a href="unfinished.html">VI.glm</a></code> <code><a href="unfinished.html">VI.manova</a></code> <code><a href="unfinished.html">VI.mlm</a></code> <code><a href="unfinished.html">VI.stepfun</a></code> <code><a href="unfinished.html">VI.table</a></code> 
         </dt>
         <dd>Unfinished Methods to help vision impaired useRs</dd>
+      </dl></div><div class="section level2">
+      <h2 id="brailler-related">BrailleR related<a class="anchor" aria-label="anchor" href="#brailler-related"></a></h2>
+      
+      <p class="section-desc"></p><p>All other function not otherwise categorized</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="BrailleR-package.html">BrailleR-package</a></code> <code><a href="BrailleR-package.html">BrailleR</a></code> 
+        </dt>
+        <dd>Improved Access for Blind Users</dd>
+      </dl><dl><dt>
+          
+          <code><a href="SetupBrailleR.html">SetupBrailleR()</a></code> 
+        </dt>
+        <dd>Establish the BrailleR folder for the user</dd>
+      </dl><dl><dt>
+          
+          <code><a href="GetGoing.html">GetGoing()</a></code> 
+        </dt>
+        <dd>Set options for using brailleR</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MakeRprofile.html">MakeRprofile()</a></code> 
+        </dt>
+        <dd>Load BrailleR on Startup in Current Working Directory</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Options.html">GoBlind()</a></code> <code><a href="Options.html">GoSighted()</a></code> <code><a href="Options.html">GoAdvanced()</a></code> <code><a href="Options.html">GoNovice()</a></code> <code><a href="Options.html">LatexOn()</a></code> <code><a href="Options.html">LatexOff()</a></code> <code><a href="Options.html">ViewOn()</a></code> <code><a href="Options.html">ViewOff()</a></code> 
+        </dt>
+        <dd>Set package options</dd>
+      </dl><dl><dt>
+          
+          <code><a href="PrepareWriteR.html">WriteR()</a></code> <code><a href="PrepareWriteR.html">TestPython()</a></code> <code><a href="PrepareWriteR.html">TestWX()</a></code> <code><a href="PrepareWriteR.html">PrepareWriteR()</a></code> 
+        </dt>
+        <dd>Getting started with WriteR</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Deprecated.html">GetPython27()</a></code> <code><a href="Deprecated.html">GetWxPython27()</a></code> <code><a href="Deprecated.html">MakeAllInOneSlide()</a></code> <code><a href="Deprecated.html">MakeSlidy()</a></code> <code><a href="Deprecated.html">MakeSlideShow()</a></code> 
+        </dt>
+        <dd>Deprecated functions</dd>
+      </dl></div><div class="section level2">
+      <h2 id="exposed-internal-funtion">Exposed internal funtion<a class="anchor" aria-label="anchor" href="#exposed-internal-funtion"></a></h2>
+      
+      <p class="section-desc"></p><p>There are functions that all ought to be treated as internal functions</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          
+        </dt>
+        <dd>Internal functions for adding the necessary XML content for accessible graphs in SVG format</dd>
+      </dl><dl><dt>
+          
+          <code><a href="AugmentMethod.html">Augment()</a></code> 
+        </dt>
+        <dd>add additional detail to the stored object for a graph</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

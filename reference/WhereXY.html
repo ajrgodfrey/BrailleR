@@ -18,20 +18,20 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/BrailleR.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/BrailleRHistory.html">History of the BrailleR package</a>
-    <a class="dropdown-item" href="../articles/Ex1histograms.html">The BrailleR package Example 1</a>
-    <a class="dropdown-item" href="../articles/Ex2BasicNumerical.html">The BrailleR package Example 2</a>
-    <a class="dropdown-item" href="../articles/Ex3UnivariateDescription.html">The BrailleR package Example 3</a>
-    <a class="dropdown-item" href="../articles/Ex4SingleResponseOneGroupingFactor.html">The BrailleR package Example 4</a>
-    <a class="dropdown-item" href="../articles/GettingStarted.html">Getting started with the BrailleR package</a>
+    <a class="dropdown-item" href="../articles/ExploringGraphs.html">Exploring Graphs</a>
     <a class="dropdown-item" href="../articles/IntroWriteR.html">Getting started with the WriteR application</a>
-    <a class="dropdown-item" href="../articles/qplot.html">Testing the VI.ggplot() within the BrailleR package"</a>
+    <a class="dropdown-item" href="../articles/BrailleRHistory.html">History of the BrailleR package</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -99,26 +99,26 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1  2  3 4 Sum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   0  4  5 1  10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   0 11 11 1  23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1  4  9 0  14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  2  1 0   3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 1 21 26 2  50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      1  2  3 4 Sum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    1  0  0 0   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3  4  5 3  15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    8 10  5 4  27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    0  1  5 1   7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 12 15 15 8  50</span>
 <span class="r-in"><span><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1  2 3 Sum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1  8 1  10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 19 3  23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2  9 3  14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  3 0   3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 4 39 7  50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      1  2  3 Sum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    1  0  0   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    4  6  5  15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   10 11  6  27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    0  3  4   7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 15 20 15  50</span>
 <span class="r-in"><span><span class="fu">WhereXY</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, xDist<span class="op">=</span><span class="st">"other"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      1  2  3  4 Sum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    5  4  3  2  14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    2  4  3  3  12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2  4  2  3  11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    2  5  2  4  13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 11 17 10 12  50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      1  2 3  4 Sum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    4  2 2  4  12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    2  3 2  3  10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    8  6 2  4  20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1  1 2  4   8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sum 15 12 8 15  50</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

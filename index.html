@@ -52,19 +52,19 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
+  <a class="nav-link" href="articles/BrailleR.html">Get started</a>
+</li>
+<li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/BrailleRHistory.html">History of the BrailleR package</a>
-    <a class="dropdown-item" href="articles/Ex1histograms.html">The BrailleR package Example 1</a>
-    <a class="dropdown-item" href="articles/Ex2BasicNumerical.html">The BrailleR package Example 2</a>
-    <a class="dropdown-item" href="articles/Ex3UnivariateDescription.html">The BrailleR package Example 3</a>
-    <a class="dropdown-item" href="articles/Ex4SingleResponseOneGroupingFactor.html">The BrailleR package Example 4</a>
-    <a class="dropdown-item" href="articles/GettingStarted.html">Getting started with the BrailleR package</a>
+    <a class="dropdown-item" href="articles/ExploringGraphs.html">Exploring Graphs</a>
     <a class="dropdown-item" href="articles/IntroWriteR.html">Getting started with the WriteR application</a>
-    <a class="dropdown-item" href="articles/qplot.html">Testing the VI.ggplot() within the BrailleR package"</a>
+    <a class="dropdown-item" href="articles/BrailleRHistory.html">History of the BrailleR package</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -93,13 +93,14 @@
 <div class="page-header"><h1 id="the-brailler-package-is-a-collection-of-tools-to-make-use-of-r-a-happier-experience-for-blind-people">The BrailleR package is a collection of tools to make use of R a happier experience for blind people.<a class="anchor" aria-label="anchor" href="#the-brailler-package-is-a-collection-of-tools-to-make-use-of-r-a-happier-experience-for-blind-people"></a>
 </h1></div>
 <p>BrailleR version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. The leading zero infers that this package is under ongoing development to get to the state where it delivers the original aims of the package. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.</p>
-<p>The BrailleR package does have dependencies, all of which are available on CRAN.</p>
-<p><a href="https://cran.r-project.org/package=BrailleR" class="external-link"><img src="https://tinyverse.netlify.com/badge/BrailleR" alt="Dependencies"></a> <a href="https://github.com/ajrgodfrey/BrailleR" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.32.1-blue.svg" alt="Github version"></a> <a href="https://github.com/ajrgodfrey/BrailleR/commits/blue" class="external-link"><img src="https://img.shields.io/github/last-commit/ajrgodfrey/BrailleR.svg" alt="Last commit badge"></a></p>
+<p>The BrailleR package does have dependencies, all of which are available on CRAN. <!-- badges: start --> <a href="https://cran.r-project.org/package=BrailleR" class="external-link"><img src="https://tinyverse.netlify.com/badge/BrailleR" alt="Dependencies"></a></p>
+<p><a href="https://github.com/ajrgodfrey/BrailleR" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.32.1-blue.svg" alt="Github version"></a></p>
+<p><a href="https://github.com/ajrgodfrey/BrailleR/commits/blue" class="external-link"><img src="https://img.shields.io/github/last-commit/ajrgodfrey/BrailleR.svg" alt="Last commit badge"></a></p>
 <p><a href="https://cran.r-project.org/package=BrailleR" class="external-link"><img src="http://www.r-pkg.org/badges/version/BrailleR" alt="CRAN_Status_Badge"></a></p>
-<p><a href="https://cran.r-project.org/web/checks/check_results_BrailleR.html" class="external-link"><img src="https://cranchecks.info/badges/summary/BrailleR" alt="CRAN checks"></a> <a href="https://cran.r-project.org/package=BrailleR" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-month/BrailleR?color=green" alt="Downloads per month"></a></p>
+<p><a href="https://cran.r-project.org/web/checks/check_results_BrailleR.html" class="external-link"><img src="https://cranchecks.info/badges/summary/BrailleR" alt="CRAN checks"></a></p>
+<p><a href="https://cran.r-project.org/package=BrailleR" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-month/BrailleR?color=green" alt="Downloads per month"></a></p>
 <p><a href="https://cran.r-project.org/package=BrailleR" class="external-link"><img src="https://www.r-pkg.org/badges/version/BrailleR?color=black" alt="Release version"></a></p>
-<!-- badges: start -->
-
+<p><a href="https://github.com/ajrgodfrey/BrailleR/actions" class="external-link"><img src="https://github.com/ajrgodfrey/BrailleR/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <!-- badges: end --></p>
 <div class="section level3">
 <h3 id="blind-peoples-use-of-r">Blind people’s use of R<a class="anchor" aria-label="anchor" href="#blind-peoples-use-of-r"></a>
 </h3>
@@ -187,22 +188,17 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>A. Jonathan R. Godfrey <br><small class="roles"> Author, maintainer </small>  </li>
+<li>A. Jonathan R. Godfrey <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8129-8835" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Debra Warren <br><small class="roles"> Author </small>  </li>
-<li>James Thompson <br><small class="roles"> Author </small>  </li>
-<li>Paul Murrell <br><small class="roles"> Author </small>  </li>
-<li>Timothy Bilton <br><small class="roles"> Author </small>  </li>
+<li>James Thompson <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4768-795X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Paul Murrell <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3224-8858" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Timothy Bilton <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-5945-3766" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Volker Sorge <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/ajrgodfrey/BrailleR/actions" class="external-link"><img src="https://github.com/ajrgodfrey/BrailleR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
