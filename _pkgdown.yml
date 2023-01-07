@@ -2,3 +2,97 @@ url: http://ajrgodfrey.github.io/BrailleR/
 template:
   bootstrap: 5
 
+articles:
+- title: Use BrailleR
+  navbar: ~
+  contents:
+  - ExploringGraphs
+  - IntroWriteR
+  - BrailleRHistory
+- title: Examples
+  desc: >
+    Various sets of example pages
+  contents:
+  - starts_with("Ex")
+  - qplot
+
+reference:
+- title: Explore Graphs
+  desc:  Explore ggplot graphs in accsessible ways.
+  contents:
+  - VI
+  - sort.VIgraph
+  - grep.VIgraph
+  - Describe
+  - MakeAccessibleSVG
+  - BrowseSVG
+  - SVGThis
+  - ViewSVG
+  - AddXML
+  - WTF
+  
+- title: Graph and analysis shortcuts
+  desc: Functions to help speed up graph making and analysis tasks
+  contents:
+  - boxplot
+  - dotplot
+  - hist
+  - OneFactor
+  - OnePredictor
+  - ScatterPlot
+  - ThreeFactors
+  - TimeSeriesPlot
+  - TwoFactors
+  - UniDesc
+  - WhereXY
+
+- title: Shortcuts / Macros
+  desc: Other shortcut functions to speed up common task
+  contents:
+  - BrailleRUsefulLinks
+  - DataViewer
+  - Premier100
+  - FindReplace
+  - GetExampleText
+  - Get7zip
+  - history
+  - JoinBlindRUG
+  - MakeBatch
+  - MakeReadable
+  - History2Rmd
+  - NewFunction
+  - Notepad
+  - PandocAll
+  - pdf2html
+  - txtStart
+  - Require
+  - ChooseEmbosser
+  - SpellCheck
+  - SpellCheckFiles
+  - UpdateGraph
+  - CheckIt
+  - WhichFile
+  - AutoSpellCheck
+  - FindCSSFile
+  - BRLThis
+  - CleanCSV
+  - MakeAllFormats
+  - MakeSlideShow
+  - unfinished
+  
+- title: BrailleR related
+  desc: All other function not otherwise categorized
+  contents:
+  - BrailleR
+  - SetupBrailleR
+  - GetGoing
+  - MakeRprofile
+  - GoBlind
+  - WriteR
+  - Deprecated
+  
+- title: Exposed internal funtion
+  desc: There are functions that all ought to be treated as internal functions
+  contents:
+  - AddXMLInternal
+  - AugmentMethod
