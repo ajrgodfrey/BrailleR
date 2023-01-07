@@ -1,0 +1,33 @@
+---
+title: "Exploring Graphs"
+author: "James A. Thompson"
+bibliography: BrailleRPublications.bib
+vignette: >
+  %\VignetteIndexEntry{Exploring Graphs}
+  %\VignetteEngine{knitr::rmarkdown}
+output: knitr:::html_vignette
+---
+
+_Work in progress_
+
+*Problem*\
+Much of statistics course work in your first year will revolve around making and interpreting graphs. Now for a sighted user R and R studio with ggplot2 etc it is quite a straight forward procedure. However without the use of sight this becomes a challenge.\
+*Solution*\
+In BrailleR there are three avenues that can be taken to fix this they are: [VI], [Describe] and [SVG Plots]. Each of these are designed to serve the user and give them potential to 'view' the information a graph has to offer.
+
+# Describe
+Much of the work and frame work is here but this section just needs to be written
+
+# VI
+Likewise with Describe much of the hard work is done. Expansion of support for more geoms but other than that this section ought to be written in the current status.
+
+# SVG Plots
+Unlike the other two this is very much in its infancy. Regardless the section can still have quite a bit written about it.
+
+## GGPlot
+When the plot is transferred to SVG all of the axis info and title info will remain unchanged.
+However when you are exploring the plot the readout will be formatted and more than likely rounded to make it easy to read and quickly get the information.
+
+### Geom_line
+
+Each line will only have a max of 10 view able components. This means that if there are more than ten points that hte line is mapped onto you will get to see a area stat for 10 different intervals in the plot.

@@ -5,19 +5,21 @@
 BrailleR version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. The leading zero infers that this package is under ongoing development to get to the state where it delivers the original aims of the package. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
 
 The BrailleR package does have dependencies, all of which are available on CRAN. 
+<!-- badges: start -->
+[![Dependencies](https://tinyverse.netlify.com/badge/BrailleR)](https://cran.r-project.org/package=BrailleR)
 
-[![Dependencies](https://tinyverse.netlify.com/badge/BrailleR)](https://cran.r-project.org/package=BrailleR)  [![Github version](https://img.shields.io/badge/devel%20version-0.32.1-blue.svg)](https://github.com/ajrgodfrey/BrailleR) [![Last commit badge](https://img.shields.io/github/last-commit/ajrgodfrey/BrailleR.svg)](https://github.com/ajrgodfrey/BrailleR/commits/blue)
+[![Github version](https://img.shields.io/badge/devel%20version-0.32.1-blue.svg)](https://github.com/ajrgodfrey/BrailleR)
 
+[![Last commit badge](https://img.shields.io/github/last-commit/ajrgodfrey/BrailleR.svg)](https://github.com/ajrgodfrey/BrailleR/commits/blue)
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)  
 
+[![CRAN checks](https://cranchecks.info/badges/summary/BrailleR)](https://cran.r-project.org/web/checks/check_results_BrailleR.html)
 
-
-[![CRAN checks](https://cranchecks.info/badges/summary/BrailleR)](https://cran.r-project.org/web/checks/check_results_BrailleR.html)  [![Downloads per month](http://cranlogs.r-pkg.org/badges/last-month/BrailleR?color=green)](https://cran.r-project.org/package=BrailleR)
+[![Downloads per month](http://cranlogs.r-pkg.org/badges/last-month/BrailleR?color=green)](https://cran.r-project.org/package=BrailleR)
 
 [![Release version](https://www.r-pkg.org/badges/version/BrailleR?color=black)](https://cran.r-project.org/package=BrailleR)
 
-<!-- badges: start -->
 [![R build status](https://github.com/ajrgodfrey/BrailleR/workflows/R-CMD-check/badge.svg)](https://github.com/ajrgodfrey/BrailleR/actions)
 <!-- badges: end -->
 
