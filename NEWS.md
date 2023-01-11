@@ -8,6 +8,8 @@
 - add functionality for winget tools into new winget.R file; should streamline software installation down the track
 - deprecated functions relating to Python 2.7 and functions for making slide shows
 - updated template files so that chunk options are moved from opening fence to commented lines
+- changed to use whisker templates by adding {{.}} around the items that need to be changed
+- added a few functions to choose a template and be given some guidance on its use; see ChooseTemplate()
 - resolve issue #31, add default shape message.
 - resolve issue #34, add information about visible points. It only works at the moment up to point size of 18.
 - resolve issue #62, add ggplot support for TimeSeries
