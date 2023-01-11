@@ -1,4 +1,5 @@
+
 ```{r}
-#| label = "getDataName"
-DataName = read.csv("FileName", , stringsAsFactors = TRUE) |> mutate() |> glimpse()
+#| label = "get{{DataName}}"
+{{DataName}} = read.csv("{{FileName}}", stringsAsFactors = TRUE) |> mutate() |> glimpse()
 ```
