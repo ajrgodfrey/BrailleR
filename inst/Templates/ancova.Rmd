@@ -1,30 +1,31 @@
+
 ```{r}
-#| label = "DataNamePlot",
-#| fig.cap = "Plot of ResponseName versus Covariate with fitted lines
-#| added for each FactorName."
+#| label = "{{DataName}}Plot",
+#| fig.cap = "Plot of {{ResponseName}} versus {{Covariate}} with fitted lines
+#| added for each {{FactorName}}."
 library(ggplot2)
-DataName |> ggplot(aes(y=ResponseName, x=Covariate, group =FactorName)) + geom.point() + geom_smooth(method="lm")
+{{DataName}} |> ggplot(aes(y = {{ResponseName}}, x = {{Covariate}}, group = {{FactorName}})) + geom.point() + geom_smooth(method="lm")
 ```
 
 ```{r}
-#| label = "DataName.lm"
-DataName.lm1 = lm(ResponseName ~ FactorName, data=DataName)
-DataName.lm2 = lm(ResponseName ~ FactorName+Covariate, data=DataName)
-DataName.lm3 = lm(ResponseName ~ FactorName*Covariate, data=DataName)
-anova(DataName.lm1, DataName.lm2, DataName.lm3)
+#| label = "{{DataName}}.lm"
+{{DataName}}.lm1 = lm({{ResponseName}} ~ {{FactorName}}, data = {{DataName}})
+{{DataName}}.lm2 = lm({{ResponseName}} ~ {{FactorName}}+{{Covariate}}, data = {{DataName}})
+{{DataName}}.lm3 = lm({{ResponseName}} ~ {{FactorName}}*{{Covariate}}, data = {{DataName}})
+anova({{DataName}}.lm1, {{DataName}}.lm2, {{DataName}}.lm3)
 ```
 
 
 ```{r}
-#| label = "glanceDataName.lm"
+#| label = "glance{{DataName}}.lm"
 library(broom)
-glance(DataName.lm1, DataName.lm2, DataName.lm3) |> kable(caption=Comparison of three models relating to ANCOVA of ResponseName using FactorName for groups and the covariate Covariate.")
+glance({{DataName}}.lm1, {{DataName}}.lm2, {{DataName}}.lm3) |> kable(caption=Comparison of three models relating to ANCOVA of {{ResponseName}} using {{FactorName}} for groups and the {{covariate}} Covariate.")
 ```
 
 
 ```{r}
-#| label = "plotDataName.lm",
-#| fig.cap = "Residual analysis for DataName.lm"
+#| label = "plot{{DataName}}.lm",
+#| fig.cap = "Residual analysis for {{DataName}}.lm"
 library(ggfortify)
-DataName.lm3 |> autoplot()
+{{DataName}}.lm3 |> autoplot()
 ```

@@ -6,7 +6,8 @@ library(moments)
 ```
 
 ```{r}
-#| label = "ResponseName.at"
-ResponseName.at = agostino.test(ResponseName)
+#| label = "{{ResponseName}}.at"
+{{ResponseName}}.at = {{ResponseName}} |> agostino.test()
+{{ResponseName}}.at
 ```
 

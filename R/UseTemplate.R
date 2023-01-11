@@ -19,8 +19,7 @@ return(paste0(TXT, collapse="\n"))
 
 .UseTemplate = function(templateFile, NewFile=NULL, Changes=list()){
 TXT = readLines(system.file(paste0("Templates/", templateFile), package="BrailleR"))
-whisker.render(template=templateFile, data=Changes)
-OutText = paste0(TXT, collapse="\n")
+OutText = whisker.render(template=TXT, data=Changes)
 if(!is.null(NewFile)){ 
 cat(OutText, file=NewFile)
 .NewFile(NewFile)
@@ -52,5 +51,6 @@ for(Template in TemplateList){
 cat(.UseTemplate(Template, Changes=Changes), "\n\n\n", file=Outfile, append=TRUE)
 }
 .NewFile(Outfile)
+message("N.B. it will not be processed untill all {{.}} elements have been replaced with meaningful text.")
 return(invisible(TRUE))
 }

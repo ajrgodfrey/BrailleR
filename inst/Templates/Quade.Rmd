@@ -2,7 +2,7 @@
 ## Quade test with unreplicated blocked data
 
 ```{r}
-#| label = "DataName.qt"
-DataName.qt = quade.test(ResponseName ~ FactorName | BlockingName, data=DataName)
+#| label = "{{DataName}}.qt"
+{{DataName}}.qt = quade.test({{ResponseName}} ~ {{FactorName}} | {{BlockingName}}, data = {{DataName}})
 ```
 

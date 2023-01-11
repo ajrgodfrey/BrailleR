@@ -14,8 +14,8 @@ library(rstatix)
 
 
 ```{r}
-#| label = "DataName.ft"
-DataName.ft = DataName |> friedman_test(ResponseName ~ FactorName | BlockingName)
-DataName.ft |> kable(caption="Friedman test for ResponseName disaggregated by FactorName, and adjusting for BlockName.")
+#| label = "{{DataName}}.ft"
+{{DataName}}.ft = {{DataName}} |> friedman_test({{ResponseName}} ~ {{FactorName}} | {{BlockingName}})
+{{DataName}}.ft |> kable(caption="Friedman test for {{ResponseName}} disaggregated by {{FactorName}}, and adjusting for {{BlockingName}}.")
 ```
 
