@@ -15,3 +15,16 @@ TXT = gsub(find[i], replace[i], TXT)
 }
 return(paste0(TXT, collapse="\n"))
 }
+
+
+.UseTemplate = function(templateFile, NewFile=NULL, Changes=list()){
+TXT = readLines(system.file(paste0("Templates/", templateFile), package="BrailleR"))
+whisker.render(template=templateFile, data=Changes)
+OutText = paste0(TXT, collapse="\n")
+if(!is.null(NewFile)){ 
+cat(OutText, file=NewFile)
+.NewFile(NewFile)
+}
+return(OutText)
+}
+
