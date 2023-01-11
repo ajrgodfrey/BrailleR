@@ -204,15 +204,19 @@
         breaks <- seq(min, max, length.out = maxItems + 1)
         mins <- breaks[1:(maxItems)]
         maxs <- breaks[2:(maxItems + 1)]
-        meansAndSD <- mapply(
-          function(min, max) {
-            sectionData <- lineData$y[lineData$x < max & lineData$x >= min]
-            list(
-              mean = mean(sectionData),
-              sd = ifelse(is.na(sd(sectionData)), 0, sd(sectionData))
-            )
+        slope_Range_Median <- mapply(
+          function(min, max, data) {
+            data |>
+              filter(x < max, x >= min) |>
+              mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+              drop_na() |>
+              select(matches("(start|end)\\w")) |>
+              mutate(slope = (startY - endY) / (startX - endX)) |>
+              summarise(min = min(slope), max = max(slope), median = median(slope)) |>
+              as.list()
           },
-          mins, maxs
+          mins, maxs, list(data = lineData),
+          SIMPLIFY = FALSE
         )
         summarised <- TRUE
         lineCount <- maxItems
@@ -223,13 +227,21 @@
       for (i in 1:(lineCount)) {
         if (summarised) {
           desc <- paste(
-            .AddXMLFormatNumber(meansAndSD[, i]$mean),
-            "mean with sd",
-            .AddXMLFormatNumber(meansAndSD[, i]$sd),
-            "going from",
-            .AddXMLFormatNumber(mins[i]),
+            .AddXMLFormatNumber(slope_Range_Median[[i]]$min),
             "to",
-            .AddXMLFormatNumber(maxs[i])
+            .AddXMLFormatNumber(slope_Range_Median[[i]]$max),
+            "with median",
+            .AddXMLFormatNumber(slope_Range_Median[[i]]$median)
+          )
+          desc2 <- paste(
+            "x from ",
+            lineData$x[lineData$x >= mins[i]][1],
+            "to",
+            lineData$x[lineData$x < maxs[i]] |> tail(n = 1),
+            "y from ",
+            lineData$y[lineData$x >= mins[i]][1],
+            "to",
+            lineData$y[lineData$x < maxs[i]] |> tail(n = 1)
           )
         } else {
           desc <- paste(
@@ -239,8 +251,9 @@
             ifelse(i < segmentCount, " line start", " line end"),
             i
           )
+          desc2 <- desc
         }
-        annotations[[i]] <- .AddXMLPoint(root, position = i, id = lineId, speech = desc)
+        annotations[[i]] <- .AddXMLPoint(root, position = i, id = lineId, speech = desc, speech2 = desc2)
         # TODO:  Not correctly handling NA or out-of-range data values, nor dates
         # Should check for dates with inherit(,"Date") -- but looks like I
         # need to do that on the main data not the layer data
@@ -292,11 +305,11 @@
 # Current fudge for this -- define each segment with a dummy name that doesn't actually
 # exist in the SVG.  Then give it a passive child which is the whole
 # polyline.  This keeps the whole line visible while individual segments are described
-.AddXMLPoint <- function(root, position = 1, x, y, id = NULL, speech = paste0("(", signif(x), ",", signif(y), ") number ", position)) {
+.AddXMLPoint <- function(root, position = 1, x, y, id = NULL, speech = paste0("(", signif(x), ",", signif(y), ") number ", position), speech2 = speech) {
   fakeSegmentId <- paste(id, position, sep = ".")
   annotation <- .AddXMLAddAnnotation(root, position = position, id = fakeSegmentId, kind = "active")
   dummyAnnotation <- list(.AddXMLAddAnnotation(root, position = position, id = id, kind = "passive"))
-  XML::addAttributes(annotation$root, speech = speech, speech2 = speech)
+  XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
   .AddXMLAddComponents(annotation, dummyAnnotation)
   .AddXMLAddChildren(annotation, dummyAnnotation)
   .AddXMLAddParents(annotation, dummyAnnotation)
@@ -654,7 +667,7 @@
 }
 
 .AddXMLFormatNumber <- function(x) {
-  if ((x > 9999 | x < 0.001) & !is.nan(x)) {
+  if (!is.nan(x) & ifelse(abs(x) < 1, nchar(as.character((abs(x)))) - 2, nchar(as.character((abs(x))))) > 8) {
     useScientific <- TRUE
   } else {
     useScientific <- FALSE
