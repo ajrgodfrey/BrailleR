@@ -1,7 +1,9 @@
 \name{MakeRmdFiles}
+\alias{History2Qmd}
 \alias{History2Rmd}
 \alias{ProcessAllMd}
 \alias{ProcessAllRmd}
+\alias{R2Qmd}
 \alias{R2Rmd}
 \alias{RemoveBOM}
 \alias{rnw2Rmd}
@@ -9,8 +11,10 @@
 \description{Time-saving functions that help create files in more useful formats for later use.}
 \usage{
 History2Rmd(file = "History.Rmd")
+History2Qmd(file = "History.Qmd")
 
 R2Rmd(ScriptFile)
+R2Qmd(ScriptFile)
 
 ProcessAllMd(dir =".")
 ProcessAllRmd(dir =".", method = "render")
