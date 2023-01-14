@@ -1,0 +1,27 @@
+
+```{r}
+#| label = "GetNortestPkg"
+library(nortest)
+```
+
+
+
+```{r}
+#| label = "{{DataName}}-{{ResponseName}}Normality"
+NormalityResults = matrix(0, nrow=6, ncol=2)
+dimnames(NormalityResults) = list(c("Shapiro-Wilk", "Anderson-Darling", "Cramer-von Mises",
+"Lilliefors (Kolmoorov-Smirnov)", "Pearson chi-square", "Shapiro-Francia"), c("Statistic", "P Value"))
+{{ResponseName}}.swt = {{ResponseName}} |> shapiro.test()
+NormalityResults[1,] = c({{ResponseName}}.swt$statistic, {{ResponseName}}.swt$p.value)
+{{ResponseName}}.adt = {{ResponseName}} |> ad.test()
+NormalityResults[2,] = c({{ResponseName}}.adt$statistic, {{ResponseName}}.adt$p.value)
+{{ResponseName}}.cvmt = {{ResponseName}} |> cvm.test()
+NormalityResults[3,] = c({{ResponseName}}.cvmt$statistic, {{ResponseName}}.cvmt$p.value)
+{{ResponseName}}.lkst = {{ResponseName}} |> lillie.test()
+NormalityResults[4,] = c({{ResponseName}}.lkst$statistic, {{ResponseName}}.lkst$p.value)
+{{ResponseName}}.pt = {{ResponseName}} |> pearson.test()
+NormalityResults[5,] = c({{ResponseName}}.pt$statistic, {{ResponseName}}.pt$p.value)
+{{ResponseName}}.sft = {{ResponseName}} |> sf.test()
+NormalityResults[6,] = c({{ResponseName}}.sft$statistic, {{ResponseName}}.sft$p.value)
+NormalityResults |> kable(caption="Normality tests for {{ResponseName}}.")
+```

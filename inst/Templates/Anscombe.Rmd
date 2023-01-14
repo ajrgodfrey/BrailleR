@@ -8,7 +8,7 @@ library(moments)
 ```
 
 ```{r}
-#| label = "ResponseName.agt"
-ResponseName.agt = anscombe.test(ResponseName)
+#| label = "{{ResponseName}}.agt"
+{{ResponseName}}.agt = {{ResponseName}} |> anscombe.test()
 ```
 

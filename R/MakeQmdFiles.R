@@ -7,7 +7,7 @@ History2Qmd =
         Lines = readLines(TempFile)
         LineNo = 1:length(Lines)
         cat(paste0('---\ntitle: "History from R session on ', format(Sys.Date(), "%A %d %B %Y"),
-            '"\nauthor: "by ', getOption("BrailleR.Author"), '"\ndate: ', format(Sys.Date(), \'%A %d %B %Y\'), '\n---\n\n```{r setup, nclude=FALSE}\nlibrary(knitr)
+            '"\nauthor: "by ', getOption("BrailleR.Author"), '"\ndate: ', format(Sys.Date(), "%A %d %B %Y"), '\n---\n\n```{r setup, nclude=FALSE}\nlibrary(knitr)
 opts_chunk$set(comment="", fig.cap="to fix")
 ```\n\n'), file = file)
         cat(paste0("```{r}
@@ -35,7 +35,7 @@ R2Qmd =
         Lines[Lines == ""] = "```  \n\n```{r}  "
         Lines = Lines[ShowLines]
 
-        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author"), '"\ndate: ', format(Sys.Date(), \'%A %d %B %Y\'), '\n---\n\n```{r}'),
+        cat(paste0('---\ntitle: ""\nauthor: "', getOption("BrailleR.Author"), '"\ndate: ', format(Sys.Date(), "%A %d %B %Y"), '\n---\n\n```{r}'),
             file = QmdFile)
         cat(paste0("\n", Lines, "  "), file = QmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = QmdFile, append = TRUE)

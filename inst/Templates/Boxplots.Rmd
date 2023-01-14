@@ -1,7 +1,7 @@
 
 ```{r}  
-#| label = "DataNameBoxplots",
-#| fig.cap = "Comparative boxplots for ResponseName grouped by
-#| FactorName."
-DataName |> ggplot(aes(y=ResponseName, x=FactorName)) + geom_boxplot()
+#| label = "{{DataName}}Boxplots",
+#| fig.cap = "Comparative boxplots for {{ResponseName}} grouped by
+#| {{FactorName}}."
+{{DataName}} |> ggplot(aes(y={{ResponseName}}, x={{FactorName}})) + geom_boxplot()
 ``` 

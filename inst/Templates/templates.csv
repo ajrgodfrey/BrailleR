@@ -2,32 +2,31 @@ Template,Type,Description,Changes
 GetData.Rmd,basic,import data from csv file; includes `mutate()` and glimpse()`,DataName FileName
 Agostino.Rmd,EDA,evaluate skewness (normal has no skewness),ResponseName
 ancova.Rmd,regression,"fit simple regression, one way, and full ANCOVA models; adds scatter plot with fitted lines and performs the residual analysis",DataName ResponseName Covariate FactorName
-Anscombe.Rmd,,,DataName
-Bartlett.Rmd,homogeneity of variance,,DataName
-Blocking.Rmd,experiments,,DataName
-Bonett.Rmd,,,DataName
-Boxplots.Rmd,EDA,,DataName
+Anscombe.Rmd,EDA,evaluate kurtosis (normal has no kurtosis),ResponseName
+Bartlett.Rmd,homogeneity of variance,Perform Bartlett's test of the null hypothesis that the variances in each of the groups (samples) are the same.,DataName ResponseName FactorName
+Bonett.Rmd,EDA,evaluate kurtosis (normal has no kurtosis),ResponseName
+Boxplots.Rmd,EDA,create comparative boxplots,DataName ResponseName FactorName
 Brewsch.Rmd,,,DataName
 Dotplots.Rmd,EDA,,DataName
 Dunnett.Rmd,experiments,,DataName
 DurbinWatson.Rmd,goodness of fit,,DataName
 EMMeans.Rmd,,,DataName
-EmptyChunk.Rmd,basic,,DataName
+EmptyChunk.Rmd,basic,,-
 FittedLinePlot.Rmd,EDA,,DataName
 Fligner.Rmd,,,DataName
 Friedman.Rmd,experiments,analyse unreplicated blocked data.,DataName ResponseName FactorName BlockingName
-GetLibs.Rmd,basic,,DataName
+GetLibs.Rmd,basic,,
 GroupSummary.Rmd,EDA,,DataName
 Heterogeneity.Rmd,homogeneity of variance,,DataName
-Jarque.Rmd,,,DataName
+Jarque.Rmd,EDA,Jarque-Bera test for normality,ResponseName
 Kruskal.Rmd,,,DataName
 LatinSquare.Rmd,experiments,,DataName
 Levene.Rmd,homogeneity of variance,,DataName
 Linearity.Rmd,goodness of fit,,DataName
 MDS.Rmd,advanced,,DataName
 NonNested.Rmd,advanced,,DataName
-OneWayLM.Rmd,experiments,,DataName
-OneWayTest.Rmd,experiments,,DataName
+OneWayLM.Rmd,experiments,,DataName ResponseName FactorName
+OneWayTest.Rmd,experiments,,DataName ResponseName FactorName
 PCA.Rmd,advanced,,DataName
 PolyReg.Rmd,regression,,DataName
 Quade.Rmd,experiments,analyse unreplicated blocked data.,DataName ResponseName FactorName BlockingName
@@ -37,10 +36,11 @@ ResidualAnalysis.Rmd,regression,,DataName
 ScatterPlot.Rmd,EDA,,DataName
 SerialCorrelation.Rmd,goodness of fit,,DataName
 SimpleRegression.Rmd,regression,,DataName
-simpleYAMLHeader.Rmd,basic,,DataName
+simpleYAMLHeader.Rmd,basic,,
 SplitPlot.Rmd,experiments,,DataName
-StandardSetupChunk.Rmd,basic,,DataName
+StandardSetupChunk.Rmd,basic,,
 ThreeWay.Rmd,experiments,,DataName
 TukeyHSD.Rmd,experiments,,DataName
 TwoWay.Rmd,experiments,,DataName
-YAMLHeader.Rmd,basic,,DataName
+YAMLHeader.Rmd,basic,,
+NormalityTests.Rmd,EDA,perform a set of normality tests and tabulate the results,DataName ResponseName

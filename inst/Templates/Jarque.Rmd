@@ -6,6 +6,6 @@ library(moments)
 ```
 
 ```{r}
-#| label = "ResponseName.jbt"
-ResponseName.jbt = jarque.test(ResponseName)
+#| label = "{{ResponseName}}.jbt"
+{{ResponseName}}.jbt = {{ResponseName}} |> jarque.test()
 ```

@@ -27,7 +27,8 @@ Issue the following commands at the R prompt
 
 These commands automatically download the installation files and start the installation process going. The downloaded files will be saved in your MyBrailleR folder. You will need to follow the instructions and answer questions that arise whenever you install new software. These are reputable installation files from the primary sites for Python and wxPython. Windows and any security software you might have should know that, but you can never tell! You will probably need to let Windows know it is OK to install the software in the default location. That pop-up might not appear as the window with focus so if things look like they're going slowly, look around for the pop-up window.
 
-Once you have completed both installations, you are ready to go. You shouldn't need those installation files again, but keep them just in case.
+Once you have completed both installations, you are ready to go. You shouldn't need those installation files again, but keep them just in case. They will have been saved in your `MyBrailleR` folder.
+
 
 ## Opening WriteR from BrailleR
 
@@ -54,3 +55,5 @@ Navigate to the current working directory using your file browser. To find out w
 
 Open the HTML file and see how the markdown has been rendered. You may need to switch back and forth between the WriteR window and your browser to compare the plain text and the beautiful HTML.
 
+
+Now edit the Rmd file in WriteR to your heart's content.
