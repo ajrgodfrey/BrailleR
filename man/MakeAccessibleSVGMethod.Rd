@@ -46,6 +46,9 @@ histogram = ggplot(attenu, aes(x=dist)) +
 geom_histogram()
   histogram
 MakeAccessibleSVG(histogram)
+
+# Cleaning up
+unlink("test.html")
 }
 
 \references{

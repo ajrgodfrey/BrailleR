@@ -45,6 +45,9 @@ P. Dengler et al. (2011) Scalable vector graphics (SVG) 1.1, second edition. W3C
 library(ggplot2)
 p = ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point()
 SVGThis(p)
+
+# Cleaning up afterwards
+unlink("test.svg")
 }
 
 \seealso{

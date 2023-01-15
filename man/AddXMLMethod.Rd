@@ -53,6 +53,8 @@ AddXML(simpleHist, file = "histogram.xml")
 # Close the current PDF graphic device
 dev.off()
 
+#Cleaning up afterwards
+unlink("histogram.xml")
 }
 
 \seealso{

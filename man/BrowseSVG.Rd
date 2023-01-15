@@ -37,6 +37,11 @@ xmlfile = AddXML(simpleHist, paste0(file, ".xml"))
 dev.off()  # destroy graphics device, now that we're done with it
 
 BrowseSVG(file)
+
+#Cleaing up from BrowseSVG
+unlink(paste0(file, ".svg"))
+unlink(paste0(file, ".xml"))
+unlink(paste0(file, ".html"))
 }
 
 \seealso{
