@@ -4,12 +4,12 @@ Description: Tests for higher-order serial correlation.
 
 
 ```{r}
-#| label = "GetLibLMTest"
+#| label = "GetLibLMTestPkg"
 library(lmtest)
 ```
 
 ```{r}
-#| label = "DataName.bg"
-DataName.bg = bgtest(DataName.lm)
+#| label = "{{DataName}}.bg"
+{{DataName}}.bg = {{DataName}}.lm |> bgtest()
 ```
 

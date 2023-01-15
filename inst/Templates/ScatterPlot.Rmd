@@ -1,11 +1,11 @@
 
 ```{r}
-#| label = "DataNamePlot",
-#| fig.cap = "Plot of ResponseName versus PredictorName with smoother
+#| label = "{{DataName}}Plot",
+#| fig.cap = "Plot of {{ResponseName}} versus {{PredictorName}} with smoother
 #| added."
 library(ggplot2)
-DataName |> select(ResponseName, PredictorName) |> filter(!is.na(ResponseName), !is.na(PredictorName)) |>
-ggplot(aes(y=ResponseName, x=PredictorName)) + geom_point() + geom_smooth()
+{{DataName}} |> select({{ResponseName}}, {{PredictorName}}) |> filter(!is.na({{ResponseName}}), !is.na({{PredictorName}})) |>
+ggplot(aes(y={{ResponseName}}, x={{PredictorName}})) + geom_point() + geom_smooth()
 ```
 
 

@@ -6,9 +6,9 @@ Anscombe.Rmd,EDA,evaluate kurtosis (normal has no kurtosis),ResponseName
 Bartlett.Rmd,homogeneity of variance,Perform Bartlett's test of the null hypothesis that the variances in each of the groups (samples) are the same.,DataName ResponseName FactorName
 Bonett.Rmd,EDA,evaluate kurtosis (normal has no kurtosis),ResponseName
 Boxplots.Rmd,EDA,create comparative boxplots,DataName ResponseName FactorName
-Brewsch.Rmd,,,DataName
-Dotplots.Rmd,EDA,,DataName
-Dunnett.Rmd,experiments,,DataName
+Brewsch.Rmd,goodness of fit,Tests for higher-order serial correlation.,DataName
+Dotplots.Rmd,EDA,"create dotplots, but this is actually just a scatter plot really",DataName ResponseName FactorName
+Dunnett.Rmd,experiments,perform Dunnett's multiple comparison procedure; assumes first level of treatment is the control; produces tables and graphs.,DataName ResponseName FactorName
 DurbinWatson.Rmd,goodness of fit,,DataName
 EMMeans.Rmd,,,DataName
 EmptyChunk.Rmd,basic,,-
@@ -33,7 +33,7 @@ Quade.Rmd,experiments,analyse unreplicated blocked data.,DataName ResponseName F
 RandomBlock.Rmd,experiments,perform a two-way analysis for blocked and grouped data; blocks assumed random; residual analysis included.,DataName ResponseName FactorName BlockingName
 RCB.Rmd,experiments,perform a two-way analysis for blocked and grouped data; blocks assumed fixed; residual analysis included.,DataName ResponseName FactorName BlockingName
 ResidualAnalysis.Rmd,regression,,DataName
-ScatterPlot.Rmd,EDA,,DataName
+ScatterPlot.Rmd,EDA,create a scatter plot with a smoother overalid.,DataName ResponseName PredictorName
 SerialCorrelation.Rmd,goodness of fit,,DataName
 SimpleRegression.Rmd,regression,,DataName
 simpleYAMLHeader.Rmd,basic,,
