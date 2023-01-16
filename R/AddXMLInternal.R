@@ -125,7 +125,7 @@
 }
 
 ## Constructs a ggplot layer
-.AddXMLAddGGPlotLayer <- function(root, x = NULL, panel = 1) {
+.AddXMLAddGGPlotLayer <- function(root, x = NULL, panel = 1, summarisedSections = 5) {
   annotation <- .AddXMLAddAnnotation(root,
     position = 4,
     id = paste("center", panel, x$layernum, sep = "-"), kind = "grouped"
@@ -189,21 +189,18 @@
     data <- x$data
     numberOfLines <- length(x$lines)
 
-    lineId <- paste(lineGrob$name, "1", sep = ".") # ID of the polyline
-
     for (lineNum in 1:numberOfLines) {
       lineId <- paste(lineGrob$name, lineNum, sep = ".") # ID of the polyline
 
       lineData <- x$lines[[lineNum]]$scaledata
       lineCount <- nrow(lineData) - 1
       # Summarizing the data
-      maxItems <- 5
-      if (lineCount > maxItems) {
+      if (lineCount > summarisedSections) {
         min <- min(lineData$x)
         max <- max(lineData$x)
-        breaks <- seq(min, max, length.out = maxItems + 1)
-        mins <- breaks[1:(maxItems)]
-        maxs <- breaks[2:(maxItems + 1)]
+        breaks <- seq(min, max, length.out = summarisedSections + 1)
+        mins <- breaks[1:(summarisedSections)]
+        maxs <- breaks[2:(summarisedSections + 1)]
         slope_Range_Median <- mapply(
           function(min, max, data) {
             data |>
@@ -219,7 +216,7 @@
           SIMPLIFY = FALSE
         )
         summarised <- TRUE
-        lineCount <- maxItems
+        lineCount <- summarisedSections
       } else {
         summarised <- FALSE
       }
@@ -259,12 +256,71 @@
         # need to do that on the main data not the layer data
       }
     }
+  } else if (x$type == "point") {
+    numberOfPoints <- nrow(x$data)
+
+    pointGrobs <- grid.grep(gPath("panel", "panel-1", "geom_point"), grep = TRUE, global = TRUE)
+    pointGrob <- pointGrobs[[x$layernum]]
+
+    XML::addAttributes(annotation$root,
+      speech = "Point graph",
+      speech2 = paste("Point graph with", numberOfPoints, "points"),
+      type = "Center"
+    )
+    annotations <- list()
+    data <- x$data
+    # Summarise into section when greater than 10 points
+    if (numberOfPoints > 10) {
+      breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
+      mins <- breaks[1:(summarisedSections)]
+      maxs <- breaks[2:(summarisedSections + 1)]
+      mean_sd_num <- mapply(
+        function(min, max, data) {
+          data |>
+            filter(x < max, x >= min) |>
+            summarise(mean = mean(y), sd = sd(y), count = n())
+        },
+        mins, maxs, list(data = data),
+        SIMPLIFY = FALSE
+      )
+      summarised <- TRUE
+      numberOfPoints <- summarisedSections
+    } else {
+      summarised <- FALSE
+    }
+
+    # Get annotations for each point / summarized section
+    for (i in 1:numberOfPoints) {
+      if (summarised) {
+        desc <- paste(
+          "mean:", .AddXMLFormatNumber(mean_sd_num[[i]]$mean),
+          "sd:", .AddXMLFormatNumber(mean_sd_num[[i]]$sd),
+          "n:", .AddXMLFormatNumber(mean_sd_num[[i]]$count)
+        )
+      } else {
+        desc <- paste0(
+          "(", .AddXMLFormatNumber(data$x[i]),
+          .AddXMLFormatNumber(data$y[i]), ")"
+        )
+      }
+      annotations[[i]] <- .AddXMLTestAdd(root,
+        position = i,
+        id = pointGrob$name,
+        speech = desc
+      )
+    }
   } else { # TODO:  warn about layer types we don't recognize
     return(NULL)
   }
   .AddXMLAddComponents(annotation, annotations)
   .AddXMLAddChildren(annotation, annotations)
   .AddXMLAddParents(annotation, annotations)
+  return(invisible(annotation))
+}
+
+.AddXMLTestAdd <- function(root, position = 1, id = NULL, speech, speech2 = speech) {
+  annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, 1, position, sep = "."), kind = "active")
+  XML::addAttributes(annotation$root, speech = speech, speech2 = speech)
   return(invisible(annotation))
 }
 
