@@ -40,6 +40,13 @@ MakeAccessibleSVG(histogram, file="histogram")
 
 # Display the 'home' page
 ViewSVG()
+
+# Cleaning up afterwards
+# Created by the MakeAccessibleSVG (xml and svg are auto deleted)
+unlink("histogram.html")
+unlink("barChart.html")
+unlink("tsplot.html")
+unlink("index.html") # Created by the ViewSVG function
 }
 
 \seealso{

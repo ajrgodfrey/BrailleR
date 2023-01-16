@@ -20,7 +20,7 @@ ViewSVG = function(file = "index"){
   
   
   if(interactive()){
-    browseURL("index.html") 
+    browseURL(fileName) 
   }
   
   return(invisible(NULL))
