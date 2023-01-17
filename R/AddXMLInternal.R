@@ -126,6 +126,22 @@
 
 ## Constructs a ggplot layer
 .AddXMLAddGGPlotLayer <- function(root, x = NULL, panel = 1, summarisedSections = 5) {
+  # Functions used within this function
+  summariseLayer <- function(data, FUN) {
+    breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
+    mins <- breaks[1:(summarisedSections)]
+    maxs <- breaks[2:(summarisedSections + 1)]
+    summarisedData <- mapply(
+      function(min, max, data) {
+        data |>
+          dplyr::filter(x < max, x >= min) |>
+          FUN()
+      },
+      mins, maxs, list(data = data),
+      SIMPLIFY = FALSE
+    )
+  }
+
   annotation <- .AddXMLAddAnnotation(root,
     position = 4,
     id = paste("center", panel, x$layernum, sep = "-"), kind = "grouped"
@@ -133,6 +149,8 @@
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
   # This is the same structure as found in the VI method for ggplots.
+  annotations <- list()
+  data <- x$data
   if (x$type == "bar") { # Bar chart
     barCount <- nrow(x$data)
     barGrob <- grid.grep(gPath("geom_rect"), grep = TRUE)
@@ -141,7 +159,6 @@
       speech2 = paste("Histogram with", barCount, "bars"),
       type = "Center"
     )
-    annotations <- list()
     chartData <- x$data
     for (i in 1:barCount) {
       barId <- paste(barGrob$name, "1", i, sep = ".")
@@ -184,9 +201,6 @@
       # Line can be discontinuous (comprised of polylines 1a, 1b, ...)
       type = "Center"
     )
-    annotations <- list()
-
-    data <- x$data
     numberOfLines <- length(x$lines)
 
     for (lineNum in 1:numberOfLines) {
@@ -196,30 +210,25 @@
       lineCount <- nrow(lineData) - 1
       # Summarizing the data
       if (lineCount > summarisedSections) {
-        min <- min(lineData$x)
-        max <- max(lineData$x)
-        breaks <- seq(min, max, length.out = summarisedSections + 1)
-        mins <- breaks[1:(summarisedSections)]
-        maxs <- breaks[2:(summarisedSections + 1)]
-        slope_Range_Median <- mapply(
-          function(min, max, data) {
-            data |>
-              filter(x < max, x >= min) |>
-              mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
-              drop_na() |>
-              select(matches("(start|end)\\w")) |>
-              mutate(slope = (startY - endY) / (startX - endX)) |>
-              summarise(min = min(slope), max = max(slope), median = median(slope)) |>
-              as.list()
-          },
-          mins, maxs, list(data = lineData),
-          SIMPLIFY = FALSE
-        )
+        slope_Range_Median <- summariseLayer(lineData, function(data) {
+          data |>
+            dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+            tidyr::drop_na() |>
+            dplyr::select(matches("(start|end)\\w")) |>
+            dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
+            dplyr::summarise(min = min(slope), max = max(slope), median = median(slope)) |>
+            as.list()
+        })
         summarised <- TRUE
         lineCount <- summarisedSections
       } else {
         summarised <- FALSE
       }
+
+      # Getting this data so that I can get the starts and finishes of the line groups
+      breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
+      mins <- breaks[1:(summarisedSections)]
+      maxs <- breaks[2:(summarisedSections + 1)]
 
       for (i in 1:(lineCount)) {
         if (summarised) {
@@ -250,7 +259,7 @@
           )
           desc2 <- desc
         }
-        annotations[[i]] <- .AddXMLPoint(root, position = i, id = lineId, speech = desc, speech2 = desc2)
+        annotations[[i]] <- .AddXMLLines(root, position = i, id = lineId, speech = desc, speech2 = desc2)
         # TODO:  Not correctly handling NA or out-of-range data values, nor dates
         # Should check for dates with inherit(,"Date") -- but looks like I
         # need to do that on the main data not the layer data
@@ -267,22 +276,12 @@
       speech2 = paste("Point graph with", numberOfPoints, "points"),
       type = "Center"
     )
-    annotations <- list()
-    data <- x$data
     # Summarise into section when greater than 10 points
     if (numberOfPoints > 10) {
-      breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
-      mins <- breaks[1:(summarisedSections)]
-      maxs <- breaks[2:(summarisedSections + 1)]
-      mean_sd_num <- mapply(
-        function(min, max, data) {
-          data |>
-            filter(x < max, x >= min) |>
-            summarise(mean = mean(y), sd = sd(y), count = n())
-        },
-        mins, maxs, list(data = data),
-        SIMPLIFY = FALSE
-      )
+      mean_sd_num <- summariseLayer(data, function(data) {
+        data |>
+          dplyr::summarise(mean = mean(y), sd = sd(y), count = n())
+      })
       summarised <- TRUE
       numberOfPoints <- summarisedSections
     } else {
@@ -303,10 +302,51 @@
           .AddXMLFormatNumber(data$y[i]), ")"
         )
       }
-      annotations[[i]] <- .AddXMLTestAdd(root,
+      annotations[[i]] <- .AddXMLPoint(root,
         position = i,
         id = pointGrob$name,
         speech = desc
+      )
+    }
+  } else if (x$type == "smooth") {
+    smoothGrobs <- grid.grep(gPath("panel", "panel-1", "geom_smooth", "GRID"), grep = TRUE, global = TRUE)
+    smoothLineGrob <- smoothGrobs[[1]]
+
+    if (x$ci) {
+      seGrob <- grid.grep(gPath("panel", "panel-1", "geom_smooth", "geom_ribbon", "GRID"), grep = TRUE, global = TRUE)
+    }
+
+    XML::addAttributes(annotation$root,
+      speech = "Smoother graph",
+      speech2 = paste0("Smoother graph", ifelse(x$ci, paste(" with", x$level, "confidence bands"), ""), ""),
+      type = "Center"
+    )
+
+    if (!x$ci) {
+      data$ymin <- 0
+      data$ymax <- 0
+    }
+    summarisedData <- summariseLayer(data, function(data) {
+      data |>
+        dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+        dplyr::mutate(CIWidth = ymax - ymin) |>
+        tidyr::drop_na() |>
+        dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
+        dplyr::summarise(min = min(slope), max = max(slope), median = median(slope), avg_width = mean(CIWidth)) |>
+        as.list()
+    })
+
+    for (i in 1:summarisedSections) {
+      desc <- paste(
+        "slope range:", paste0("(", .AddXMLFormatNumber(summarisedData[[i]]$min), ",", .AddXMLFormatNumber(summarisedData[[i]]$max), ")"),
+        "median:", .AddXMLFormatNumber(summarisedData[[i]]$median),
+        ifelse(x$ci, paste("CI width:", .AddXMLFormatNumber(summarisedData[[i]]$avg_width)), "")
+      )
+      annotations[[i]] <- .AddXMLSmooth(root,
+        position = i,
+        id = smoothLineGrob$name,
+        speech = desc,
+        CI_ID = seGrob
       )
     }
   } else { # TODO:  warn about layer types we don't recognize
@@ -318,9 +358,39 @@
   return(invisible(annotation))
 }
 
-.AddXMLTestAdd <- function(root, position = 1, id = NULL, speech, speech2 = speech) {
+# Still a work in progress as the se bars are not shown.
+# TODO: make se bars actually display.
+.AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech, seGrob_ID = NULL) {
+  annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, 1, position, sep = "."), kind = "active")
+  XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
+
+  ## This current section doesn't do anything to display the error bars.
+  ## Work need to be done on this
+  if (!rlang::is_empty(seGrob_ID)) {
+    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrob_ID[[1]]$name, ".1", ".1"), kind = "passive") |>
+      list() |>
+      .AddXMLAddComponents(annotation, node = _)
+    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrob_ID[[2]]$name, ".1", ".1"), kind = "passive") |>
+      list() |>
+      .AddXMLAddComponents(annotation, node = _)
+  }
+
+
+  ## Adding in the whole line as a passive component of all of the sections so
+  ## That the whole line is always highlighted.
+  .AddXMLAddAnnotation(root, position = position, id = paste0(id, ".1"), kind = "passive") |>
+    list() |>
+    .AddXMLAddComponents(annotation, node = _)
+
+  return(invisible(annotation))
+}
+
+# This is a work in progress
+# TODO: Make points actually show
+.AddXMLPoint <- function(root, position = 1, id = NULL, speech, speech2 = speech) {
   annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, 1, position, sep = "."), kind = "active")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech)
+
   return(invisible(annotation))
 }
 
@@ -356,12 +426,13 @@
   )
   return(invisible(annotation))
 }
+
 # Polyline is problematic as we can't highlight each segment visually, but still want
 # to describle them separately
 # Current fudge for this -- define each segment with a dummy name that doesn't actually
 # exist in the SVG.  Then give it a passive child which is the whole
 # polyline.  This keeps the whole line visible while individual segments are described
-.AddXMLPoint <- function(root, position = 1, x, y, id = NULL, speech = paste0("(", signif(x), ",", signif(y), ") number ", position), speech2 = speech) {
+.AddXMLLines <- function(root, position = 1, x, y, id = NULL, speech = paste0("(", signif(x), ",", signif(y), ") number ", position), speech2 = speech) {
   fakeSegmentId <- paste(id, position, sep = ".")
   annotation <- .AddXMLAddAnnotation(root, position = position, id = fakeSegmentId, kind = "active")
   dummyAnnotation <- list(.AddXMLAddAnnotation(root, position = position, id = id, kind = "passive"))

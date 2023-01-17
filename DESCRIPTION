@@ -54,6 +54,7 @@ Imports:
     rmarkdown,
     roloc,
     rolocISCCNBS,
+    tidyr,
     whisker,
     XML,
     xtable

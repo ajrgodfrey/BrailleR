@@ -33,6 +33,7 @@ repos:
           (.*/|)\.travis\.yml|
           (.*/|)appveyor\.yml|
           (.*/|)NAMESPACE|
+          (.*/|)DESCRIPTION|
           (.*/|)renv/settings\.dcf|
           (.*/|)renv\.lock|
           (.*/|)WORDLIST|
