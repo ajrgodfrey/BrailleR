@@ -346,7 +346,7 @@
         position = i,
         id = smoothLineGrob$name,
         speech = desc,
-        CI_ID = seGrob
+        seGrobs = seGrob
       )
     }
   } else { # TODO:  warn about layer types we don't recognize
@@ -360,17 +360,17 @@
 
 # Still a work in progress as the se bars are not shown.
 # TODO: make se bars actually display.
-.AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech, seGrob_ID = NULL) {
+.AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech, seGrobs = NULL) {
   annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, 1, position, sep = "."), kind = "active")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
 
   ## This current section doesn't do anything to display the error bars.
   ## Work need to be done on this
-  if (!rlang::is_empty(seGrob_ID)) {
-    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrob_ID[[1]]$name, ".1", ".1"), kind = "passive") |>
+  if (!rlang::is_empty(seGrobs)) {
+    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrobs[[1]]$name, ".1", ".1"), kind = "passive") |>
       list() |>
       .AddXMLAddComponents(annotation, node = _)
-    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrob_ID[[2]]$name, ".1", ".1"), kind = "passive") |>
+    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrobs[[2]]$name, ".1", ".1"), kind = "passive") |>
       list() |>
       .AddXMLAddComponents(annotation, node = _)
   }
