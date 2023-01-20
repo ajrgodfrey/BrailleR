@@ -131,6 +131,8 @@
     breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
     mins <- breaks[1:(summarisedSections)]
     maxs <- breaks[2:(summarisedSections + 1)]
+    # As max will be the same as the last item we will increase max by 1 to include the final data point
+    maxs[5] <- maxs[5] + 1
     summarisedData <- mapply(
       function(min, max, data) {
         data |>
@@ -280,7 +282,7 @@
     if (numberOfPoints > 10) {
       mean_sd_num <- summariseLayer(data, function(data) {
         data |>
-          dplyr::summarise(mean = mean(y), sd = sd(y), count = n())
+          dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
       })
       summarised <- TRUE
       numberOfPoints <- summarisedSections
@@ -369,10 +371,10 @@
   if (!rlang::is_empty(seGrobs)) {
     .AddXMLAddAnnotation(root, position = position, id = paste0(seGrobs[[1]]$name, ".1", ".1"), kind = "passive") |>
       list() |>
-      .AddXMLAddComponents(annotation, node = _)
+      .AddXMLAddComponents(annotation, nodes = _)
     .AddXMLAddAnnotation(root, position = position, id = paste0(seGrobs[[2]]$name, ".1", ".1"), kind = "passive") |>
       list() |>
-      .AddXMLAddComponents(annotation, node = _)
+      .AddXMLAddComponents(annotation, nodes = _)
   }
 
 
@@ -380,7 +382,7 @@
   ## That the whole line is always highlighted.
   .AddXMLAddAnnotation(root, position = position, id = paste0(id, ".1"), kind = "passive") |>
     list() |>
-    .AddXMLAddComponents(annotation, node = _)
+    .AddXMLAddComponents(annotation, nodes = _)
 
   return(invisible(annotation))
 }

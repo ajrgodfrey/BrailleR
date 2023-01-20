@@ -160,6 +160,12 @@ cacc.CssUtil.moleculeStyle(c))}};cacc.Base.prototype.redoInitElement_=function(a
         </div>
       </div>
     </div>
+    {{#vi}}
+    <h2>VI output</h2>
+    {{/vi}}
+    {{#vi}}
+    {{vi}}<br>
+    {{/vi}}
     {{#key}}
     <p>Tab to or mouseclick on the diagram and use the following keys for interactive exploration:</p>
     <table>
@@ -231,6 +237,17 @@ cacc.CssUtil.moleculeStyle(c))}};cacc.Base.prototype.redoInitElement_=function(a
       </tr>
     </table>
     {{/key}}
+    {{#has_description}}
+    <h2>Description</h2>
+    {{/has_description}}
+    {{#description}}
+    <h3>{{name}}</h3>
+    {{title}}
+    <h4>General</h3>
+    {{general}}
+    <h4>R hints</h3>
+    {{RHints}}
+    {{/description}}
     {{#footer}}
     <div class="footer">
       <p style="text-align: center; font-size: 10px;">&copy; Progressive Accessibility Solutions 2017</p>

@@ -6,15 +6,16 @@
   its XML annotations. Then launches a browser tab to allow viewing and
   interactive exploration of the SVG diagram.}
 \usage{
-BrowseSVG(file="test", key=TRUE, footer = TRUE, view=interactive()) 
+BrowseSVG(file="test", key=TRUE, footer = TRUE, view=interactive(), ggplot_object = NULL) 
 }
 \arguments{
   \item{file}{the filename for the HTML file; this should correspond to
     basename of an existing SVG and its XML annotations}
   \item{key}{include key for explorer's keyboard commands in webpage}
   \item{footer}{Whether the footer should be showed at bottom of webpage}
-  \item{view}{launch in browser; this is the default when running in an interactive
-  session}
+  \item{view}{launch in browser; this is the default when running in an interactive session}
+  \item{ggplot_object}{This is the plot that the svg and XML are based off. If it is included than there will be the VI and the Describe information in the webpage.}
+  
 }
 \details{
   A HTML file is written in the current working directory. This HTML file will have the embeded svg and xml files as well as the javascript to help with the exploration of the graph. Note that it is required that you already have a svg and xml file in the current directory for it to work.}
