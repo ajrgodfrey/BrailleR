@@ -1,3 +1,4 @@
+
 ```{r}
 #| label = "getLibs"
 library(tidyverse)
@@ -6,8 +7,8 @@ library(knitr)
 ```
 
 ```{r}
-#| label = "DataName.pc"
-DataName.pc = DataName |>
+#| label = "{{DataName}}.pc"
+{{DataName}}.pc = {{DataName}} |>
   select(where(is.numeric)) |> 
 prcomp(center=TRUE, scale=FALSE)
 ```
@@ -15,43 +16,43 @@ prcomp(center=TRUE, scale=FALSE)
 
 ```{r}
 #| label = "GetVariances"
-DataName.pc |>
+{{DataName}}.pc |>
   tidy(matrix = "pcs") |> 
-kable(caption="Principal Component contributions for the DataName data.")
+kable(caption="Principal Component contributions for the {{DataName}} data.")
 ```
 
 
 ```{r}
-#| label = "ScreePlotDataName.pc",
+#| label = "ScreePlot{{DataName}}.pc",
 #| fig.cap = "Scree plot for the principal components analysis of the
-#| DataName data."
-DataName.pc |> plot()
+#| {{DataName}} data."
+{{DataName}}.pc |> plot()
 ```
 
 
 ```{r }
 #| label = "getLoadings"
-DataName.pc$rotation |>
-kable(caption="Principal Component Loadings for the DataName data.")
+{{DataName}}.pc$rotation |>
+kable(caption="Principal Component Loadings for the {{DataName}} data.")
 ```
 
 
 ```{r}
-#| label = "biplotDataName.pc",
-#| fig.cap = "Biplot for the DataName data."
-DataName.pc |> biplot()
+#| label = "biplot{{DataName}}.pc",
+#| fig.cap = "Biplot for the {{DataName}} data."
+{{DataName}}.pc |> biplot()
 ```
 
 ```{r}
-#| label = "augmentDataName.pc"
-DataName.pc.fit = DataName.pc |> augment(DataName)  
+#| label = "augment{{DataName}}.pc"
+{{DataName}}.pc.fit = {{DataName}}.pc |> augment(DataName)  
 ```
 
 
 ```{r}
-#| label = "scatterDataName.pc",
+#| label = "scatter{{DataName}}.pc",
 #| fig.cap = "Scatter plot of the first and second principle component
 #| scores."
-DataName.pc.fit |> ggplot(aes(x=.fittedPC1, y=.fittedPC2)) + 
+{{DataName}}.pc.fit |> ggplot(aes(x=.fittedPC1, y=.fittedPC2)) + 
   geom_point(size = 1.5) 
 ```

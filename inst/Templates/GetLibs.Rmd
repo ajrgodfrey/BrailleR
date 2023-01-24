@@ -2,6 +2,6 @@
 #| label = "getLibs",
 #| include = FALSE
 library(tidyverse)
-library(PkgName)
+library({{PkgName}})
 ```
 

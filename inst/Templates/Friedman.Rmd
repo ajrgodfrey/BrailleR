@@ -8,7 +8,7 @@ The null hypothesis is that apart from an effect of blocks, the location paramet
 
 
 ```{r}
-#| label = "GetRStatix"
+#| label = "GetRStatixPkg"
 library(rstatix)
 ```
 

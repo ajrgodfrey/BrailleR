@@ -8,36 +8,38 @@ library(knitr)
 
 ```{r}
 #| label = "getDistMat"
+## add commands here to make
+# DistMat
 ```
 
 ```{r}
-#| label = "DataName.mds"
-DataName.mds = DistMat |>
+#| label = "{{DataName}}.mds"
+{{DataName}}.mds = DistMat |>
 cmdscale() 
-colnames(DataName.mds) = c("x", "y")
+colnames({{DataName}}.mds) = c("x", "y")
 ```
 
 ```{r}
-#| label = "DataName.kmeans"
-DataName.kmeans = kmeans(DataName.mds , NClust)
-DataName.kmeans |> tidy() |> kable(caption="Cluster details fort he DataName data.")
+#| label = "{{DataName}}.kmeans"
+{{DataName}}.kmeans = kmeans({{DataName}}.mds , NClust)
+{{DataName}}.kmeans |> tidy() |> kable(caption="Cluster details fort he {{DataName}} data.")
 ```
 
 ```{r}
 #| label = "addClusters"
-DataName.mds = DataName.mds |>
+{{DataName}}.mds = {{DataName}}.mds |>
 as_tibble() |>
-mutate(Labels = labels(DistMat), Cluster = as.factor(DataName.kmeans$cluster))
+mutate(Labels = labels(DistMat), Cluster = as.factor({{DataName}}.kmeans$cluster))
 ```
 
 
 ```{r}
-#| label = "plotDataName.mds",
-#| fig.cap = "Multidimensional scaling of the DataName data."
-DataName.mds |>ggplot(aes(x=x, y=y, groups=Cluster)) + geom_point()
+#| label = "plot{{DataName}}.mds",
+#| fig.cap = "Multidimensional scaling of the {{DataName}} data."
+{{DataName}}.mds |>ggplot(aes(x=x, y=y, groups=Cluster)) + geom_point()
 ```
 
 ```{r}
 #| label = "getClusters"
-DataName.mds |> arrange(Cluster) |> kable(caption="Cluster memberships for the DataName data.")
+{{DataName}}.mds |> arrange(Cluster) |> kable(caption="Cluster memberships for the {{DataName}} data.")
 ```

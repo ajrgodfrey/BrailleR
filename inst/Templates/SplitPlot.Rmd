@@ -1,21 +1,21 @@
 
 ```{r}
-#| label = "DataName.lme"
+#| label = "{{DataName}}.lme"
 library(nlme)
-DataName.lme = lme(ResponseName ~ BlockingName+Factor1Name*Factor2Name, random=1|MainPlotID, data=DataName)
+{{DataName}}.lme = lme({{ResponseName}} ~ {{BlockingName}}+{{Factor1Name}}*{{Factor2Name}}, random=1|{{MainPlotID}}, data = {{DataName}})
 library(broom)
-augment(DataName.lme)
-anova(DataName.lme)
+{{DataName}}.lme |> augment()
+{{DataName}}.lme |> anova()
 ```
 
 ```{r}
-#| label = "glanceDataName.lme"
-glance(DataName.lme) |> kable()
+#| label = "glance{{DataName}}.lme"
+{{DataName}}.lme |> glance() |> kable()
 ```
 
 ```{r}
-#| label = "plotDataName.lme",
-#| fig.cap = "Residual analysis for DataName.lme"
+#| label = "plot{{DataName}}.lme",
+#| fig.cap = "Residual analysis for {{DataName}}.lme"
 library(ggfortify)
-autoplot(DataName.lme)
+{{DataName}}.lme |> autoplot()
 ```

@@ -5,13 +5,13 @@ Description: Performs the Breusch-Pagan test against heteroskedasticity.
 
 
 ```{r}
-#| label = "GetLibLMTest"
+#| label = "GetLMTestPkg"
 library(lmtest)
 ```
 
 ```{r}
-#| label = "DataName.lm.bp"
-DataName.lm.bp = bptest(DataName.lm)
+#| label = "{{DataName}}.lm.bp"
+{{DataName}}.lm.bp = {{DataName}}.lm |> bptest()
 ```
 
 ## Harrison-McCabe test
@@ -21,8 +21,8 @@ Description: Harrison-McCabe test for heteroskedasticity.
 
 
 ```{r}
-#| label = "DataName.lm.hmc"
-DataName.lm.hmc = hmctest(DataName.lm)
+#| label = "{{DataName}}.lm.hmc"
+{{DataName}}.lm.hmc = {{DataName}}.lm |> hmctest()
 ```
 
 
@@ -31,8 +31,8 @@ DataName.lm.hmc = hmctest(DataName.lm)
 Description: Goldfeld-Quandt test against heteroskedasticity.
 
 ```{r}
-#| label = "DataName.lm.gq"
-DataName.lm.gq = gqtest(DataName.lm)
+#| label = "{{DataName}}.lm.gq"
+{{DataName}}.lm.gq = {{DataName}}.lm |> gqtest()
 ```
 
 

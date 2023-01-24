@@ -1,9 +1,9 @@
 
 ```{r}
-#| label = "plotModelName",
-#| fig.cap = "Residual analysis for ModelName."
+#| label = "plot{{ModelName}}",
+#| fig.cap = "Residual analysis for {{ModelName}}."
 library(ggfortify)
-autoplot(ModelName)
+{{ModelName}} |> autoplot()
 ```
 
 

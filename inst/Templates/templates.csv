@@ -9,38 +9,38 @@ Boxplots.Rmd,EDA,create comparative boxplots,DataName ResponseName FactorName
 Brewsch.Rmd,goodness of fit,Tests for higher-order serial correlation.,DataName
 Dotplots.Rmd,EDA,"create dotplots, but this is actually just a scatter plot really",DataName ResponseName FactorName
 Dunnett.Rmd,experiments,perform Dunnett's multiple comparison procedure; assumes first level of treatment is the control; produces tables and graphs.,DataName ResponseName FactorName
-DurbinWatson.Rmd,goodness of fit,,DataName
-EMMeans.Rmd,,,DataName
-EmptyChunk.Rmd,basic,,-
-FittedLinePlot.Rmd,EDA,,DataName
-Fligner.Rmd,,,DataName
+DurbinWatson.Rmd,goodness of fit,test for serial correlation in residuals,DataName
+EMMeans.Rmd,experiments,tabulate and plot estimated marginal means for a treatment factor.,DataName ResponseName FactorName
+EmptyChunk.Rmd,basic,provide an empty chunk so does nothing,-
+FittedLinePlot.Rmd,EDA,create a scatter plot with a straight line overlaid,DataName ResponseName PredictorName
+Fligner.Rmd,homogeneity of variance,Perform a Fligner-Killeen (median) test of the null that the variances in each of the groups (samples) are the same.,DataName ResponseName FactorName
 Friedman.Rmd,experiments,analyse unreplicated blocked data.,DataName ResponseName FactorName BlockingName
-GetLibs.Rmd,basic,,
-GroupSummary.Rmd,EDA,,DataName
-Heterogeneity.Rmd,homogeneity of variance,,DataName
+GetLibs.Rmd,basic,load packages; includes tidyverse and one option.,PkgName
+GroupSummary.Rmd,EDA,find the mean and standard error for each group.,DataName ResponseName FactorSet
+Heterogeneity.Rmd,homogeneity of variance,perform three tests for nonconstant variance.,DataName
 Jarque.Rmd,EDA,Jarque-Bera test for normality,ResponseName
-Kruskal.Rmd,,,DataName
-LatinSquare.Rmd,experiments,,DataName
-Levene.Rmd,homogeneity of variance,,DataName
-Linearity.Rmd,goodness of fit,,DataName
-MDS.Rmd,advanced,,DataName
-NonNested.Rmd,advanced,,DataName
-OneWayLM.Rmd,experiments,,DataName ResponseName FactorName
-OneWayTest.Rmd,experiments,,DataName ResponseName FactorName
+Kruskal.Rmd,experiments,perform Kruskal's test on one-way data; also uses Dunn's multiple comparison procedure on the results.,DataName ResponseName FactorName
+LatinSquare.Rmd,experiments,analyse a Latin-square experiment; includes finding marginal means and the residual analysis.,DataName ResponseName RowFactor ColFactor FactorName
+Levene.Rmd,homogeneity of variance,perform Levene's test for constant group variance.,DataName ResponseName FactorName
+Linearity.Rmd,goodness of fit,perform three different linearity tests.,DataName
+MDS.Rmd,advanced,generate the coordinates for a 2d mds and cluster the results using `kmeans()`; plot the results; requires user input.,DataName
+NonNested.Rmd,advanced,perform three tests to compare two linear models that are not necessarily nested.,DataName
+OneWayLM.Rmd,experiments,use a linear model (ANOVA) for a single factor; creates residual analysis.,DataName ResponseName FactorName
+OneWayTest.Rmd,experiments,"fit a one-way model, allowing for unequal variances; performs the posthoc test for differences in group means.",DataName ResponseName FactorName
 PCA.Rmd,advanced,,DataName
-PolyReg.Rmd,regression,,DataName
+PolyReg.Rmd,regression,fit polynomial models up to degree 4; compare them using `anova()` and perform a residual analysis.,DataName ResponseName PredictorName
 Quade.Rmd,experiments,analyse unreplicated blocked data.,DataName ResponseName FactorName BlockingName
 RandomBlock.Rmd,experiments,perform a two-way analysis for blocked and grouped data; blocks assumed random; residual analysis included.,DataName ResponseName FactorName BlockingName
 RCB.Rmd,experiments,perform a two-way analysis for blocked and grouped data; blocks assumed fixed; residual analysis included.,DataName ResponseName FactorName BlockingName
-ResidualAnalysis.Rmd,regression,,DataName
-ScatterPlot.Rmd,EDA,create a scatter plot with a smoother overalid.,DataName ResponseName PredictorName
-SerialCorrelation.Rmd,goodness of fit,,DataName
-SimpleRegression.Rmd,regression,,DataName
+ResidualAnalysis.Rmd,regression,generate the residual analysis plots using the `ggfortify` package.,ModelName
+ScatterPlot.Rmd,EDA,create a scatter plot with a smoother overlaid.,DataName ResponseName PredictorName
+SerialCorrelation.Rmd,goodness of fit,performs two tests for serial correlation.,DataName
+SimpleRegression.Rmd,regression,"produce a fitted line; the model used for that line, and produce the residual analysis.",DataName ResponseName PredictorName
 simpleYAMLHeader.Rmd,basic,,
-SplitPlot.Rmd,experiments,,DataName
+SplitPlot.Rmd,experiments,perform a split plot analysis using a random effect for main plot units.,DataName ResponseName Factor1Name Factor2Name BlockingName MainPlotID
 StandardSetupChunk.Rmd,basic,,
-ThreeWay.Rmd,experiments,,DataName
-TukeyHSD.Rmd,experiments,,DataName
-TwoWay.Rmd,experiments,,DataName
+ThreeWay.Rmd,experiments,fit the model for the three factor model; produce the residual analysis; further user input is required.,DataName ResponseName Factor1Name Factor2Name Factor3Name
+TukeyHSD.Rmd,experiments,"find the Tukey multiple comparison results; includes compact letter displays, confidence intervals and plots them.",DataName ResponseName FactorName
+TwoWay.Rmd,experiments,fit the model for the two factor model; produce the residual analysis; further user input is required.,DataName ResponseName Factor1Name Factor2Name
 YAMLHeader.Rmd,basic,,
 NormalityTests.Rmd,EDA,perform a set of normality tests and tabulate the results,DataName ResponseName

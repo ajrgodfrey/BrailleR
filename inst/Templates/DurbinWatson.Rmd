@@ -3,12 +3,12 @@
 
 
 ```{r}
-#| label = "GetLibLMTest"
+#| label = "GetLMTestPkg"
 library(lmtest)
 ```
 
 ```{r}
-#| label = "DataName.dw"
-DataName.dw = dwtest(DataName.lm)
+#| label = "{{DataName}}.dw"
+{{DataName}}.dw = {{DataName}}.lm |> dwtest()
 ```
 

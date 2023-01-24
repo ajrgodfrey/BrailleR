@@ -10,23 +10,24 @@ library(broom)
 ## Tukey's Honestly sinificant difference
 
 ```{r}
-#| label = "DataName.hsd"
-DataName.hsd = glht(DataName.lm, linfct = mcp(FactorName = "Tukey"))
-DataName.hsd |> tidy() |> kable(caption="Tukey's Honestly Significant Differences for the DataName data.)
+#| label = "{{DataName}}.hsd"
+{{DataName}}.hsd = glht({{DataName}}.lm, linfct = mcp({{FactorName}} = "Tukey"))
+{{DataName}}.hsd |> tidy() |> kable(caption="Tukey's Honestly Significant Differences for the {{DataName}} data.)
 ```
+
 ```{r}
 #| label = "getSummary"
-DataName.hsd |> summary() |> tidy() |> kable(caption="Summary of Tukey's Honestly Significant Differences for the DataName data.)
+{{DataName}}.hsd |> summary() |> tidy() |> kable(caption="Summary of Tukey's Honestly Significant Differences for the {{DataName}} data.)
 ```
 
 ```{r}
 #| label = "getCLD"
-DataName.hsd |> cld()  |> tidy() |> kable(caption="Compact letter display for Tukey's Honestly Significant Differences for the DataName data.)
+{{DataName}}.hsd |> cld()  |> tidy() |> kable(caption="Compact letter display for Tukey's Honestly Significant Differences for the {{DataName}} data.)
 ```
 
 ```{r}
-#| label = "plotDataName.hsd",
-#| fig.cap = "Plot of Tukey's HSD for ResponseName grouped by
-#| FactorName."
-plot(DataName.hsd)
+#| label = "plot{{DataName}}.hsd",
+#| fig.cap = "Plot of Tukey's HSD for {{ResponseName}} grouped by
+#| {{FactorName}}."
+{{DataName}}.hsd |> plot()
 ```

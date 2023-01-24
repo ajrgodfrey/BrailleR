@@ -3,13 +3,14 @@
 
 
 ```{r}
-#| label = "GetLibLMTest"
+#| label = "GetLMTestPkg"
 library(lmtest)
 ```
 
 ```{r}
-#| label = "DataName.cox"
-DataName.cox = coxtest(DataName.lm1,DataName.lm2)
+#| label = "{{DataName}}.cox"
+{{DataName}}.cox = coxtest({{DataName}}.lm1,{{DataName}}.lm2)
+{{DataName}}.cox
 ```
 
 ## The encompassing test of Davidson & MacKinnon for comparing non-nested models.
@@ -17,8 +18,9 @@ DataName.cox = coxtest(DataName.lm1,DataName.lm2)
 
 
 ```{r}
-#| label = "DataName.encomp"
-DataName.encomp = encomptest(DataName.lm1,DataName.lm2)
+#| label = "{{DataName}}.encomp"
+{{DataName}}.encomp = encomptest({{DataName}}.lm1,{{DataName}}.lm2)
+{{DataName}}.encomp
 ```
 
 
@@ -26,7 +28,8 @@ DataName.encomp = encomptest(DataName.lm1,DataName.lm2)
 ## The Davidson-MacKinnon J test for comparing non-nested models
 
 ```{r}
-#| label = "DataName.j"
-DataName.j = jtest(DataName.lm1,DataName.lm2)
+#| label = "{{DataName}}.j"
+{{DataName}}.j = jtest({{DataName}}.lm1,{{DataName}}.lm2)
+{{DataName}}.j
 ```
 

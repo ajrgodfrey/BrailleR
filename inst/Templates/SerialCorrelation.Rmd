@@ -4,13 +4,14 @@
 Description: Performs the Durbin-Watson test for autocorrelation of disturbances.
 
 ```{r}
-#| label = "GetLibLMTest"
+#| label = "GetLibLMTestPkg"
 library(lmtest)
 ```
 
 ```{r}
-#| label = "DataName.dw"
-DataName.dw = dwtest(DataName.lm)
+#| label = "{{DataName}}.dw"
+{{DataName}}.dw = {{DataName}}.lm |> dwtest()
+{{DataName}}.dw
 ```
 
 
@@ -19,7 +20,8 @@ DataName.dw = dwtest(DataName.lm)
 Description: performs the Breusch-Godfrey test for higher-order serial correlation.
 
 ```{r}
-#| label = "DataName.bg"
-DataName.bg = bgtest(DataName.lm, order=10)
+#| label = "{{DataName}}.bg"
+{{DataName}}.bg = {{DataName}}.lm |> bgtest(order=10)
+{{DataName}}.bg
 ```
 

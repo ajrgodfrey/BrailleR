@@ -1,13 +1,14 @@
+
 ```{r}
-#| label = "DescDataName"
-DataName |> 
-drop_na(ResponseName) |> 
-group_by(FactorSet) |> 
+#| label = "Desc{{DataName}}"
+{{DataName}} |> 
+drop_na({{ResponseName}}) |> 
+group_by({{FactorSet}}) |> 
 summarise(
-Mean = mean(ResponseName),
-StDev = sd(ResponseName),
+Mean = mean({{ResponseName}}),
+StDev = sd({{ResponseName}}),
 Count = n()
 ) |>
 mutate(StdErr = StDev/sqrt(Count)) |>
-kable(caption="Descriptive statistics for ResponseName disaggregated by FactorSet.")
+kable(caption="Descriptive statistics for {{ResponseName}} disaggregated by {{FactorSet}}.")
 ```
