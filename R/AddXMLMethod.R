@@ -278,7 +278,7 @@ AddXML.tsplot <- function(x, file) {
   XMax <- max(x$xTicks)
   xAxis <- .AddXMLAddAxis(
     annotations,
-    axsi = "x", label = x$ExtraArgs$xlab, values = xValues,
+    axis = "x", label = x$ExtraArgs$xlab, values = xValues,
     speechLong = paste("x axis", x$ExtraArgs$xlab, "ranges from", XMin, "to", XMax)
   )
 

@@ -9,9 +9,12 @@
 \title{Create and display a accessible exploration webpage SVG of graph}
 \description{Creates the necessary SVG and XML files for a graph object (as long as it has a class assigned). Then turns them into a html file and opens it for viewing (if a interactive session) in your browser.}
 \usage{
-MakeAccessibleSVG(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, ...)
-
-MakeAccessibleSVG.ggplot(x, file = paste0(deparse(substitute(x)), "-SVG"), view=interactive(), cleanup = TRUE, VI_and_Describe = TRUE, ...)
+MakeAccessibleSVG(x,
+file = paste0(deparse(substitute(x)), "-SVG"),
+view=interactive(), cleanup = TRUE, ...)
+\method{MakeAccessibleSVG}{ggplot}(x,
+file = paste0(deparse(substitute(x)), "-SVG"),
+view=interactive(), cleanup = TRUE, VI_and_Describe = TRUE, ...)
 }
 \arguments{
   \item{x}{a graph object for which a method exists}

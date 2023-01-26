@@ -127,26 +127,25 @@
 ## Constructs a ggplot layer
 .AddXMLAddGGPlotLayer <- function(root, x = NULL, panel = 1, summarisedSections = 5) {
   # Functions used within this function
-  summariseLayer <- function(data, FUN) {
-    breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
-    mins <- breaks[1:(summarisedSections)]
-    maxs <- breaks[2:(summarisedSections + 1)]
-    # As max will be the same as the last item we will increase max by 1 to include the final data point
-    maxs[5] <- maxs[5] + 1
+  summariseLayer <- function(data, FUN = function(x) x) {
+    mins_maxs <- length(data$x) |>
+      .GetSummarizedAmounts()
+
     summarisedData <- mapply(
       function(min, max, data) {
         data |>
-          dplyr::filter(x < max, x >= min) |>
+          dplyr::slice(min:max) |>
           FUN()
       },
-      mins, maxs, list(data = data),
+      min = mins_maxs$mins, max = mins_maxs$maxs, list(data = data),
       SIMPLIFY = FALSE
     )
   }
 
+  layerGroupID <- paste("center", panel, x$layernum, sep = "-")
   annotation <- .AddXMLAddAnnotation(root,
     position = 4,
-    id = paste("center", panel, x$layernum, sep = "-"), kind = "grouped"
+    id = layerGroupID, kind = "grouped"
   )
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
   # individual data points if there are thousands of them
@@ -191,25 +190,36 @@
       }
     }
   } else if (x$type == "line") { # Line chart
-    segmentCount <- nrow(x$data) - 1 # One less than the number of points
-    # For now, assume that all layers are this layer type
-    # TODO:  Fix this
-    lineGrobs <- grid.grep(gPath("panel", "panel-1", "GRID.polyline"), grep = TRUE, global = TRUE)
-    lineGrob <- lineGrobs[[x$layernum]]
+    numberOfLines <- length(x$lines)
+    lineGrobName <- .GetGeomID.GeomLine()
     XML::addAttributes(annotation$root,
       speech = "Line graph",
-      speech2 = paste("Line graph with", segmentCount, "segments"),
+      speech2 = paste("Line graph with", numberOfLines, "lines"),
       # Better to report #lines or #segs?
       # Line can be discontinuous (comprised of polylines 1a, 1b, ...)
       type = "Center"
     )
-    numberOfLines <- length(x$lines)
 
     for (lineNum in 1:numberOfLines) {
-      lineId <- paste(lineGrob$name, lineNum, sep = ".") # ID of the polyline
-
       lineData <- x$lines[[lineNum]]$scaledata
       lineCount <- nrow(lineData) - 1
+
+      segmentAnnotations <- list()
+      # ID of the line g tag
+      lineGTagID <- paste(lineGrobName, lineNum, sep = ".")
+
+      # Add the lineGTag annotation
+      lineGTagAnnotation <- .AddXMLAddAnnotation(root,
+        position = lineNum,
+        id = lineGTagID, kind = "grouped"
+      )
+      XML::addAttributes(lineGTagAnnotation$root,
+        speech = paste("Line", lineNum),
+        speech2 = paste("Line", lineNum, "with", lineCount, "segments"),
+        type = "Center"
+      )
+
+
       # Summarizing the data
       if (lineCount > summarisedSections) {
         slope_Range_Median <- summariseLayer(lineData, function(data) {
@@ -218,7 +228,7 @@
             tidyr::drop_na() |>
             dplyr::select(matches("(start|end)\\w")) |>
             dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
-            dplyr::summarise(min = min(slope), max = max(slope), median = median(slope)) |>
+            dplyr::summarise(min = min(slope), max = max(slope), mean = mean(slope)) |>
             as.list()
         })
         summarised <- TRUE
@@ -231,15 +241,15 @@
       breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
       mins <- breaks[1:(summarisedSections)]
       maxs <- breaks[2:(summarisedSections + 1)]
-
       for (i in 1:(lineCount)) {
         if (summarised) {
           desc <- paste(
+            "slope range",
             .AddXMLFormatNumber(slope_Range_Median[[i]]$min),
             "to",
             .AddXMLFormatNumber(slope_Range_Median[[i]]$max),
-            "with median",
-            .AddXMLFormatNumber(slope_Range_Median[[i]]$median)
+            "with mean",
+            .AddXMLFormatNumber(slope_Range_Median[[i]]$mean)
           )
           desc2 <- paste(
             "x from ",
@@ -253,19 +263,34 @@
           )
         } else {
           desc <- paste(
-            .AddXMLFormatNumber(lineData$y[i]),
-            "at",
+            .AddXMLFormatNumber((lineData$y[i + 1] - lineData$y[i]) / (lineData$x[i + 1] - lineData$x[i])),
+            "slope from x",
             .AddXMLFormatNumber(lineData$x[i]),
-            ifelse(i < segmentCount, " line start", " line end"),
-            i
+            "to x",
+            .AddXMLFormatNumber(lineData$x[i + 1])
           )
-          desc2 <- desc
+          desc2 <- paste0(
+            "line from (",
+            .AddXMLFormatNumber(lineData$x[i]),
+            ",",
+            .AddXMLFormatNumber(lineData$y[i]),
+            ") to (",
+            .AddXMLFormatNumber(lineData$x[i + 1]),
+            ",",
+            .AddXMLFormatNumber(lineData$y[i + 1]),
+            ")"
+          )
         }
-        annotations[[i]] <- .AddXMLLines(root, position = i, id = lineId, speech = desc, speech2 = desc2)
+
+        segmentAnnotations[[i]] <- .AddXMLLine(root, position = i, id = paste(lineGTagID, letters[i], sep = "."), speech = desc, speech2 = desc2)
         # TODO:  Not correctly handling NA or out-of-range data values, nor dates
         # Should check for dates with inherit(,"Date") -- but looks like I
         # need to do that on the main data not the layer data
       }
+      .AddXMLAddComponents(lineGTagAnnotation, segmentAnnotations)
+      .AddXMLAddChildren(lineGTagAnnotation, segmentAnnotations)
+      .AddXMLAddParents(lineGTagAnnotation, segmentAnnotations)
+      annotations[[lineNum]] <- lineGTagAnnotation
     }
   } else if (x$type == "point") {
     numberOfPoints <- nrow(x$data)
@@ -429,19 +454,9 @@
   return(invisible(annotation))
 }
 
-# Polyline is problematic as we can't highlight each segment visually, but still want
-# to describle them separately
-# Current fudge for this -- define each segment with a dummy name that doesn't actually
-# exist in the SVG.  Then give it a passive child which is the whole
-# polyline.  This keeps the whole line visible while individual segments are described
-.AddXMLLines <- function(root, position = 1, x, y, id = NULL, speech = paste0("(", signif(x), ",", signif(y), ") number ", position), speech2 = speech) {
-  fakeSegmentId <- paste(id, position, sep = ".")
-  annotation <- .AddXMLAddAnnotation(root, position = position, id = fakeSegmentId, kind = "active")
-  dummyAnnotation <- list(.AddXMLAddAnnotation(root, position = position, id = id, kind = "passive"))
+.AddXMLLine <- function(root, position = 1, id = NULL, speech = NULL, speech2 = speech) {
+  annotation <- .AddXMLAddAnnotation(root, position = position, id = id, kind = "active")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
-  .AddXMLAddComponents(annotation, dummyAnnotation)
-  .AddXMLAddChildren(annotation, dummyAnnotation)
-  .AddXMLAddParents(annotation, dummyAnnotation)
   return(invisible(annotation))
 }
 
@@ -802,4 +817,21 @@
     useScientific <- FALSE
   }
   format(x, digits = 4, scientific = useScientific)
+}
+
+#' Get the number of data points and how many to summarise it to for a geom layer
+#'
+#' @param xs A .VI.struct pbject layer. To get the right data it would look something
+#' like this `.VIstruct.ggplot_object[["panels"]][[panelNum]][["panellayers"]][[layerNum]]`
+#' @param ...
+#'
+#' @return A 2 length vector with the first item being the number of summarized
+#' section to make and the second element being the number of data points in
+#' geom_layer
+.getSummarizedAmount <- function(xs, ...) {
+  UseMethod(".getSummarizedAmount")
+}
+
+.getSummarizedAmount.GeomLine <- function(xs, ...) {
+  # Nothing
 }

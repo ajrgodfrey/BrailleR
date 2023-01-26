@@ -57,7 +57,8 @@ Imports:
     tidyr,
     whisker,
     XML,
-    xtable
+    xtable,
+    methods
 Suggests:
     broom,
     emmeans,
