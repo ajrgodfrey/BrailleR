@@ -12,17 +12,23 @@
 #' grid.grep style commands to work
 #'
 #' @param x This is the object with the class you want to use
+#' @param layer Which layer is this geom.
+#' @param ...  These are extra paramter that might be needed for particular geoms
 #'
 #' @return A ID string that is the overall string needed in the svg and xml
 #' If there are many elements then it is the most overarching selection
-.GetGeomID <- function(x, ...) {
+.GetGeomID <- function(x, layer = 1, ...) {
   UseMethod(".GetGeomID")
 }
 
-.GetGeomID.GeomLine <- function(x, ...) {
-  # Currently hard coded to get the first layer will need to change later
+.GetGeomID.GeomLine <- function(x, layer = 1, ...) {
   lineGrob <- grid.grep(gPath("panel", "panel-1", "GRID.polyline"), grep = TRUE, global = TRUE)[[1]]
   paste(lineGrob$name, "1", sep = ".")
+}
+
+.GetGeomID.GeomPoint <- function(x, layer = 1, ...) {
+  pointGrob <- grid.grep(gPath("panel", "panel-1", "geom_point"), grep = TRUE, global = TRUE)[[layer]]
+  paste(pointGrob$name, "1", sep = ".")
 }
 
 

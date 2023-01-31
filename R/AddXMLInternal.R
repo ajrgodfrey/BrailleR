@@ -295,45 +295,93 @@
   } else if (x$type == "point") {
     numberOfPoints <- nrow(x$data)
 
-    pointGrobs <- grid.grep(gPath("panel", "panel-1", "geom_point"), grep = TRUE, global = TRUE)
-    pointGrob <- pointGrobs[[x$layernum]]
+    pointGrobID <- .GetGeomID.GeomPoint()
 
     XML::addAttributes(annotation$root,
       speech = "Point graph",
       speech2 = paste("Point graph with", numberOfPoints, "points"),
       type = "Center"
     )
+
+    # Going to provide warning about using unknown shapes
+    if (!all(data$shape %in% c(16, 19))) {
+      warning("You are using a non default point shape. Currently the location of that point in the webpage is incorrect. The summaring information is unaffected.")
+    }
+
     # Summarise into section when greater than 10 points
-    if (numberOfPoints > 10) {
+    if (numberOfPoints > 5) {
       mean_sd_num <- summariseLayer(data, function(data) {
         data |>
           dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
       })
-      summarised <- TRUE
-      numberOfPoints <- summarisedSections
-    } else {
-      summarised <- FALSE
-    }
 
-    # Get annotations for each point / summarized section
-    for (i in 1:numberOfPoints) {
-      if (summarised) {
+      # Get the order of points
+      orderOfIDs <- data.frame(x = data$x, id = 1:length(data$x)) |>
+        dplyr::arrange(x) |>
+        select(id) |>
+        unlist()
+      mins_maxs <- .GetSummarizedAmounts(numberOfPoints)
+
+      # Loop through all of the summarized sections and
+      for (summarizedSection in 1:length(mean_sd_num)) {
+        # Add summarized section
         desc <- paste(
-          "mean:", .AddXMLFormatNumber(mean_sd_num[[i]]$mean),
-          "sd:", .AddXMLFormatNumber(mean_sd_num[[i]]$sd),
-          "n:", .AddXMLFormatNumber(mean_sd_num[[i]]$count)
+          "mean:", .AddXMLFormatNumber(mean_sd_num[[summarizedSection]]$mean),
+          "sd:", .AddXMLFormatNumber(mean_sd_num[[summarizedSection]]$sd),
+          "n:", .AddXMLFormatNumber(mean_sd_num[[summarizedSection]]$count)
         )
-      } else {
+
+        summarizedSectionAnnotation <- .AddXMLAddAnnotation(root,
+          summarizedSection,
+          id = paste(pointGrobID, letters[summarizedSection], sep = "."),
+          kind = "grouped",
+          attributes = list(speech = desc)
+        )
+
+        # Add individual points
+        # Only do so if there are less than 100 points
+        # This is because the time taken to add all of the annotations is too long.
+        # TODO:: optimize XML interactions to allow more data to be handled.
+        if (length(data$x) < 100) {
+          pointsNumberToAdd <- orderOfIDs[mins_maxs$mins[summarizedSection]:mins_maxs$maxs[summarizedSection]]
+          pointAnnotations <- list()
+
+          pointAnnotations <- lapply(pointsNumberToAdd, function(pointID) {
+            i <- match(pointID, pointsNumberToAdd)
+            shape <- data$shape[i]
+            colour <- data$fill[i]
+            if (is.na(colour)) colour <- "black"
+            size <- data$size[i]
+            desc2 <- paste("Shape:", shape, "colour:", colour[1], "size:", .AddXMLFormatNumber(size))
+            .AddXMLAddAnnotation(root,
+              position = i,
+              id = paste(pointGrobID, pointID, sep = "."),
+              attributes =
+                list(
+                  speech = paste0("(", data$x[pointID], ", ", data$y[pointID], ")"),
+                  speech2 = desc2
+                )
+            )
+          })
+
+          .AddXMLAddChildren(summarizedSectionAnnotation, pointAnnotations)
+          .AddXMLAddComponents(summarizedSectionAnnotation, pointAnnotations)
+          .AddXMLAddParents(summarizedSectionAnnotation, pointAnnotations)
+        }
+        annotations[[summarizedSection]] <- summarizedSectionAnnotation
+      }
+    } else {
+      for (i in 1:numberOfPoints) {
         desc <- paste0(
           "(", .AddXMLFormatNumber(data$x[i]),
           .AddXMLFormatNumber(data$y[i]), ")"
         )
+        annotations[[i]] <- .AddXMLPoint(root,
+          position = i,
+          id = paste(pointGrobID, i, sep = "."),
+          speech = desc
+        )
       }
-      annotations[[i]] <- .AddXMLPoint(root,
-        position = i,
-        id = pointGrob$name,
-        speech = desc
-      )
     }
   } else if (x$type == "smooth") {
     smoothGrobs <- grid.grep(gPath("panel", "panel-1", "geom_smooth", "GRID"), grep = TRUE, global = TRUE)
@@ -415,9 +463,8 @@
 # This is a work in progress
 # TODO: Make points actually show
 .AddXMLPoint <- function(root, position = 1, id = NULL, speech, speech2 = speech) {
-  annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, 1, position, sep = "."), kind = "active")
+  annotation <- .AddXMLAddAnnotation(root, position = position, id = id, kind = "active")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech)
-
   return(invisible(annotation))
 }
 
@@ -469,20 +516,28 @@
 }
 
 ## Construct an SRE annotation element.
-.AddXMLAddAnnotation <- function(root, position = 1, id = "", kind = "active") {
-  annotation <- .AddXMLAddNode(root, "annotation")
-  element <- .AddXMLAddNode(annotation, kind, id)
-  ## This should be changed!
+.AddXMLAddAnnotation <- function(root, position = 1, id = "", kind = "active", attributes = NULL) {
+  children <- list(
+    element = .AddXMLAddNode(NULL, kind, id),
+    position = .AddXMLAddNode(NULL, "position", position),
+    parents = .AddXMLAddNode(NULL, "parents"),
+    children = .AddXMLAddNode(NULL, "children"),
+    component = .AddXMLAddNode(NULL, "component"),
+    neighbours = .AddXMLAddNode(NULL, "neighbours")
+  )
+
+  annotation <- .AddXMLAddNode(root, "annotation", children = children, attrs = attributes)
+
   node <- list(
     root = annotation,
-    element = element,
-    position = .AddXMLAddNode(annotation, "position", content = position),
-    parents = .AddXMLAddNode(annotation, "parents"),
-    children = .AddXMLAddNode(annotation, "children"),
-    component = .AddXMLAddNode(annotation, "component"),
-    neighbours = .AddXMLAddNode(annotation, "neighbours")
+    element = children$element,
+    position = children$position,
+    parents = children$parents,
+    children = children$children,
+    component = children$component,
+    neighbours = children$neighbours
   )
-  # jg    .AddXMLstoreComponent(id, node)
+
   return(invisible(node))
 }
 
@@ -495,37 +550,29 @@
 }
 
 ## Add a new node with tag name and optionally text content to the given root.
-.AddXMLAddNode <- function(root, tag, content = "") {
-  node <- XML::newXMLNode(paste("sre:", tag, sep = ""), parent = root)
-  if (content != "") {
-    XML::newXMLTextNode(content, parent = node)
-  }
+.AddXMLAddNode <- function(root, tag, content = NULL, children = list(content), attrs = NULL) {
+  node <- XML::newXMLNode(paste("sre:", tag, sep = ""),
+    content,
+    parent = root,
+    .children = children,
+    attrs = attrs
+  )
   return(invisible(node))
 }
 
 # A shallow clone function for leaf nodes only. Avoids problems with duplicating
 # namespaces.
 .AddXMLclone <- function(root, node) {
-  newNode <- XML::newXMLNode(XML::xmlName(node, full = TRUE), parent = root)
-  XML::newXMLTextNode(XML::xmlValue(node), parent = newNode)
+  newNode <- XML::newXMLNode(XML::xmlName(node, full = TRUE), XML::xmlValue(node), parent = root)
   return(invisible(newNode))
 }
 
 ## Add components to an annotation
 .AddXMLAddComponents <- function(annotation, nodes) {
   clone <- function(x) {
-    if (XML::xmlName(x$element) != "grouped") {
-      .AddXMLclone(annotation$component, x$element)
-    } else {
-      .AddXMLAddBaseComponents(annotation, x)
-    }
+    .AddXMLclone(annotation$component, x$element)
   }
   lapply(nodes, clone)
-}
-
-.AddXMLAddBaseComponents <- function(annotation, node) {
-  clone <- function(x) .AddXMLclone(annotation$component, x)
-  lapply(xmlChildren(node$component), clone)
 }
 
 ## Add children to an annotation

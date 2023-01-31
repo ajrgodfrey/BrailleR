@@ -78,6 +78,50 @@
   XML::saveXML(svgDoc, file = file)
 }
 
+.RewriteSVG.GeomPoint <- function(x, file, type, layer = 1) {
+  svgDoc <- XML::xmlParseDoc(file)
+
+  parentgeomPointID <- .GetGeomID(type)
+
+  parentGTag <- XML::getNodeSet(
+    svgDoc,
+    paste0('//*[@id="', parentgeomPointID, '"]')
+  )[[1]]
+
+  pointNodes <- XML::xmlChildren(parentGTag)
+
+  structLayer <- .VIstruct.ggplot(x)[["panels"]][[1]][["panellayers"]][[layer]][["scaledata"]]
+  numPoints <- structLayer$x |> length()
+
+  orderOfIDs <- data.frame(x = structLayer$x, id = 1:numPoints) |>
+    dplyr::arrange(x) |>
+    select(id) |>
+    unlist()
+
+  mins_maxs <- .GetSummarizedAmounts(numPoints)
+  numberOfSummarizedSections <- mins_maxs$mins |> length()
+  # Only summarized the points if there are atelast 5 summarized secionts
+  if (numPoints > 5) {
+    # For each section go through get all of the use tags that should be in
+    # The section and move them there
+    for (sectionNum in 1:numberOfSummarizedSections) {
+      # Create new section tag
+      newSectionGTag <- XML::newXMLNode("g",
+        parent = parentGTag,
+        attrs = list(id = paste(parentgeomPointID, letters[sectionNum], sep = "."))
+      )
+      XML::addChildren(parentGTag, newSectionGTag)
+      for (pointNum in orderOfIDs[mins_maxs$min[sectionNum]:mins_maxs$max[sectionNum]]) {
+        # Move node
+        pointNode <- pointNodes[[pointNum * 2]]
+        XML::addChildren(newSectionGTag, pointNode)
+      }
+    }
+  }
+  # Save modified svg doc
+  XML::saveXML(svgDoc, file = file)
+}
+
 .RewriteSVG.tsplot <- function(x, file) {
   svgDoc <- XML::xmlParseDoc(file) ## "Temperature.svg"
   nodes <- XML::getNodeSet(

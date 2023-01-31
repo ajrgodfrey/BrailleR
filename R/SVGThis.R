@@ -116,6 +116,12 @@ SVGThis.ggplot <-
   function(x, file = "test.svg", createDevice = TRUE, ...) {
     #      x=Augment(x)
     #      grid.force()
+
+    if (length(x$data$x) > 1000) {
+      warning("You are trying to make a svg from a plot with lots of points it might take quite some time.")
+    }
+
+
     if (createDevice) {
       pdf(NULL)
     }
