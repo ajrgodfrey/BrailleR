@@ -378,7 +378,7 @@ print(xtable(Results, caption=TabCapt, label=\"',
       if (Process) {
         # finish writing markdown and process the written file into html and an R script
         knit2html(Filename, quiet = TRUE,
-                  stylesheet = FindCSSFile(getOption("BrailleR.Style")))
+                meta = list(css = FindCSSFile(getOption("BrailleR.Style"))))
         file.remove(sub(".Rmd", ".md", Filename))
         purl(Filename, quiet = TRUE)
         if (View) browseURL(sub(".Rmd", ".html", Filename))
