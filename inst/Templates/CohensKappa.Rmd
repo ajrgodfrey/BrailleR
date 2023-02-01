@@ -1,0 +1,19 @@
+
+## Cohen's Kappa
+
+Description: calculates weighted and unweighted kappa statistics and their 95% confidence intervals.
+
+
+```{r}
+#! label="GetVCDPkg"
+library(vcd)
+```
+
+
+```{r}
+#! label = "{{DataName}}.K"
+{{DataName}}.K <- Kappa({{DataName}})
+summary({{DataName}}.K)
+print({{DataName}}.K, CI = TRUE)
+```
+
