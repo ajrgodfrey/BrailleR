@@ -128,18 +128,12 @@
 .AddXMLAddGGPlotLayer <- function(root, x = NULL, panel = 1, summarisedSections = 5) {
   # Functions used within this function
   summariseLayer <- function(data, FUN = function(x) x) {
-    mins_maxs <- length(data$x) |>
-      .GetSummarizedAmounts()
-
-    summarisedData <- mapply(
-      function(min, max, data) {
+    .SplitData(seq_along(data$x)) |>
+      lapply(function(indexs) {
         data |>
-          dplyr::slice(min:max) |>
+          dplyr::slice(indexs) |>
           FUN()
-      },
-      min = mins_maxs$mins, max = mins_maxs$maxs, list(data = data),
-      SIMPLIFY = FALSE
-    )
+      })
   }
 
   layerGroupID <- paste("center", panel, x$layernum, sep = "-")
@@ -310,17 +304,19 @@
 
     # Summarise into section when greater than 10 points
     if (numberOfPoints > 5) {
-      mean_sd_num <- summariseLayer(data, function(data) {
-        data |>
-          dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
-      })
+      mean_sd_num <- data |>
+        arrange(x) |>
+        summariseLayer(function(data) {
+          data |>
+            dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
+        })
 
       # Get the order of points
       orderOfIDs <- data.frame(x = data$x, id = 1:length(data$x)) |>
         dplyr::arrange(x) |>
         select(id) |>
         unlist()
-      mins_maxs <- .GetSummarizedAmounts(numberOfPoints)
+      pointGroups <- .SplitData(1:numberOfPoints)
 
       # Loop through all of the summarized sections and
       for (summarizedSection in 1:length(mean_sd_num)) {
@@ -343,7 +339,7 @@
         # This is because the time taken to add all of the annotations is too long.
         # TODO:: optimize XML interactions to allow more data to be handled.
         if (length(data$x) < 100) {
-          pointsNumberToAdd <- orderOfIDs[mins_maxs$mins[summarizedSection]:mins_maxs$maxs[summarizedSection]]
+          pointsNumberToAdd <- orderOfIDs[pointGroups[[summarizedSection]]]
           pointAnnotations <- list()
 
           pointAnnotations <- lapply(pointsNumberToAdd, function(pointID) {
@@ -384,12 +380,8 @@
       }
     }
   } else if (x$type == "smooth") {
-    smoothGrobs <- grid.grep(gPath("panel", "panel-1", "geom_smooth", "GRID"), grep = TRUE, global = TRUE)
-    smoothLineGrob <- smoothGrobs[[1]]
+    geomGrobID <- .GetGeomID.GeomSmooth()
 
-    if (x$ci) {
-      seGrob <- grid.grep(gPath("panel", "panel-1", "geom_smooth", "geom_ribbon", "GRID"), grep = TRUE, global = TRUE)
-    }
 
     XML::addAttributes(annotation$root,
       speech = "Smoother graph",
@@ -407,21 +399,39 @@
         dplyr::mutate(CIWidth = ymax - ymin) |>
         tidyr::drop_na() |>
         dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
-        dplyr::summarise(min = min(slope), max = max(slope), median = median(slope), avg_width = mean(CIWidth)) |>
+        dplyr::summarise(
+          min = min(slope), max = max(slope),
+          mean = mean(slope), median = median(slope),
+          avg_width = mean(CIWidth), median_width = median(CIWidth),
+          rangeCI = max(CIWidth) - min(CIWidth)
+        ) |>
         as.list()
     })
 
     for (i in 1:summarisedSections) {
-      desc <- paste(
-        "slope range:", paste0("(", .AddXMLFormatNumber(summarisedData[[i]]$min), ",", .AddXMLFormatNumber(summarisedData[[i]]$max), ")"),
-        "median:", .AddXMLFormatNumber(summarisedData[[i]]$median),
-        ifelse(x$ci, paste("CI width:", .AddXMLFormatNumber(summarisedData[[i]]$avg_width)), "")
+      sectionDesc <- paste(
+        "average slope: ", .AddXMLFormatNumber(summarisedData[[i]]$mean),
+        ifelse(x$ci, paste("CI width:", .AddXMLFormatNumber(summarisedData[[i]]$avg_width), ""), "")
       )
+
+      lineDesc <- paste(
+        "slope range:", paste0("(", .AddXMLFormatNumber(summarisedData[[i]]$min), ",", .AddXMLFormatNumber(summarisedData[[i]]$max), ")"),
+        "median slope:", .AddXMLFormatNumber(summarisedData[[i]]$median)
+      )
+
+      ciDesc <- ifelse(x$ci, paste(
+        "median CI width:", .AddXMLFormatNumber(summarisedData[[i]]$median_width),
+        "width range:", .AddXMLFormatNumber(summarisedData[[i]]$rangeCI)
+      ), "")
+
+
       annotations[[i]] <- .AddXMLSmooth(root,
         position = i,
-        id = smoothLineGrob$name,
-        speech = desc,
-        seGrobs = seGrob
+        id = geomGrobID,
+        speech = sectionDesc,
+        ci = x$ci,
+        lineDesc = lineDesc,
+        ciDesc = ciDesc
       )
     }
   } else { # TODO:  warn about layer types we don't recognize
@@ -435,27 +445,29 @@
 
 # Still a work in progress as the se bars are not shown.
 # TODO: make se bars actually display.
-.AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech, seGrobs = NULL) {
-  annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, 1, position, sep = "."), kind = "active")
+.AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech,
+                          ci = TRUE, lineDesc, ciDesc) {
+  annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, letters[position], sep = "."), kind = "grouped")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
 
-  ## This current section doesn't do anything to display the error bars.
-  ## Work need to be done on this
-  if (!rlang::is_empty(seGrobs)) {
-    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrobs[[1]]$name, ".1", ".1"), kind = "passive") |>
+  # Add in a reference to the seGrob if it exists
+  items <- .AddXMLAddAnnotation(root, 1,
+    id = paste("line", letters[position], sep = "."),
+    attributes = list(speech = lineDesc)
+  ) |>
+    list()
+  if (ci) {
+    items <- .AddXMLAddAnnotation(root, 2,
+      id = paste("ci", letters[position], sep = "."),
+      attributes = list(speech = ciDesc)
+    ) |>
       list() |>
-      .AddXMLAddComponents(annotation, nodes = _)
-    .AddXMLAddAnnotation(root, position = position, id = paste0(seGrobs[[2]]$name, ".1", ".1"), kind = "passive") |>
-      list() |>
-      .AddXMLAddComponents(annotation, nodes = _)
+      append(items, values = _)
   }
 
-
-  ## Adding in the whole line as a passive component of all of the sections so
-  ## That the whole line is always highlighted.
-  .AddXMLAddAnnotation(root, position = position, id = paste0(id, ".1"), kind = "passive") |>
-    list() |>
-    .AddXMLAddComponents(annotation, nodes = _)
+  .AddXMLAddChildren(annotation, items)
+  .AddXMLAddComponents(annotation, items)
+  .AddXMLAddParents(annotation, items)
 
   return(invisible(annotation))
 }

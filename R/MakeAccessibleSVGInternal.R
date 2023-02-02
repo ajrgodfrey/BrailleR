@@ -4,7 +4,7 @@
 
 
 #' Search graphic for ID of Geom
-#'
+#' @rdname MakeAccessibleSVGInternal
 #' This can be used by the AddXML function as well as SVG functions to know how to
 #' modify and create the XML / svg. These IDs are the link that is between the XML and the SVG
 #'
@@ -21,6 +21,10 @@
   UseMethod(".GetGeomID")
 }
 
+.GetGeomID.default <- function(x, layer = 1, ...) {
+  # By default we dont know what it is
+}
+
 .GetGeomID.GeomLine <- function(x, layer = 1, ...) {
   lineGrob <- grid.grep(gPath("panel", "panel-1", "GRID.polyline"), grep = TRUE, global = TRUE)[[1]]
   paste(lineGrob$name, "1", sep = ".")
@@ -31,30 +35,39 @@
   paste(pointGrob$name, "1", sep = ".")
 }
 
-
-#' Get summarized counts for a length
-#'
-#' @param numberOfDataPoints This is the number of data points that are to be
-#' put into groups
-#'
-#' @return A list with 2 vectors. There is a mins and a max vecotr. These vectors
-#' are where the sections start and stop. The max will be the same as the next min.
-#' Theses numbers will be returned as rank indices rather than the actual data.
-#'
-#'
-
-.GetSummarizedAmounts <- function(numberOfDataPoints, numberOfSections = 5) {
-  UseMethod(".GetSummarizedAmounts")
+.GetGeomID.GeomSmooth <- function(x, layer = 1, ...) {
+  smoothGrob <- grid.grep(gPath("panel", "panel-1", "geom_smooth"), grep = TRUE, global = TRUE)[[layer]]
+  paste(smoothGrob$name, "1", sep = ".")
 }
 
-.GetSummarizedAmounts.default <- function(numberOfDataPoints, numberOfSections = 5) {
-  if (numberOfDataPoints > 5) {
-    breaks <- seq(1, numberOfDataPoints, length.out = numberOfSections + 1)
-    mins <- breaks[1:(numberOfSections)]
-    maxs <- breaks[2:(numberOfSections + 1)]
-
-    list(mins = mins, maxs = maxs) |> lapply(round)
+#' @rdname MakeAccessibleSVGInternal
+#'
+#' Split a vector into a certain number of sections with either overlapping or not.
+#'
+#' @param overlapping Whether the data should overlap on the upper breaks.
+#' This is needed by the svg tags.
+#' @param dataToBeSplit A vector of numbers to be split
+.SplitData <- function(dataToBeSplit, overlapping = FALSE) {
+  nSections <- 5
+  pointsSplit <- split(
+    dataToBeSplit,
+    cut(seq_along(dataToBeSplit),
+      nSections,
+      labels = FALSE,
+      include.lowest = TRUE
+    )
+  )
+  if (overlapping) {
+    pointsSplit |>
+      seq_along() |>
+      lapply(function(i) {
+        if (i != length(pointsSplit)) {
+          c(pointsSplit[[i]], pointsSplit[[i + 1]][1])
+        } else {
+          pointsSplit[[i]]
+        }
+      })
   } else {
-    list(mins = 1:(numberOfDataPoints - 1), maxs = 2:numberOfDataPoints)
+    pointsSplit
   }
 }
