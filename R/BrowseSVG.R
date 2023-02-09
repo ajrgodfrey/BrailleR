@@ -24,7 +24,7 @@ BrowseSVG <- function(file = "test", key = TRUE, footer = TRUE, view = interacti
   if (!is.null(ggplot_object)) {
     # Get the Describe output
     Description <- Describe(ggplot_object, whichLayer = "all")
-    if (is(Description, "multidescription")) {
+    if (is(Description, "multiDescription")) {
       Description <- unclass(Description)
       Description <- lapply(seq_along(Description), function(i) {
         Description[[i]]$name <- names(Description)[[i]]

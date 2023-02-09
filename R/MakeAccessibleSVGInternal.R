@@ -11,33 +11,74 @@
 #' It is very important to remember that the graph must be current plotted for the
 #' grid.grep style commands to work
 #'
-#' @param x This is the object with the class you want to use
+#' @param graphObject The graph object you want to be getting the id from
 #' @param layer Which layer is this geom.
-#' @param ...  These are extra paramter that might be needed for particular geoms
 #'
 #' @return A ID string that is the overall string needed in the svg and xml
 #' If there are many elements then it is the most overarching selection
-.GetGeomID <- function(x, layer = 1, ...) {
-  UseMethod(".GetGeomID")
+.GetGeomID <- function(graphObject, layer = 1) {
+  graphLayers <- graphObject$layers
+
+  thisLayerIDBase <- graphLayers[[layer]]$geom |>
+    .GetGeomIDBase()
+
+  if (is.null(thisLayerIDBase)) {
+    return()
+  }
+
+  geomGrobs <- grid.grep(gPath("panel", "panel-1", thisLayerIDBase), grep = TRUE, global = TRUE) |>
+    Filter(function(element) {
+      element$n == 4
+    }, x = _)
+
+  numberOfPreviousMatches <- if (layer == 1) {
+    # No previous matches if this is the first layer
+    0
+  } else {
+    graphLayers[1:(layer - 1)] |>
+      lapply(function(layer) {
+        thisLayerIDBase == .GetGeomIDBase(layer$geom)
+      }) |>
+      unlist() |>
+      sum()
+  }
+  geomGrob <- geomGrobs[[numberOfPreviousMatches + 1]]
+
+  # Always need to add the .1 to the end.
+  .CreateID(geomGrob$name, "1")
+}
+#' @rdname MakeAccessibleSVgInternal
+#'
+#' This is more or less a dictionary that will return what the base g tag
+#' Id for the geom will start with.
+#'
+#' For Example a geom_line layer will have a g tag that starts with GRID.poyline
+#' This function is used by the .GetGeomID to get the correct layers base g tag id.
+#'
+#' @param layerClass The geom object that has the layer class.
+#'
+.GetGeomIDBase <- function(layerClass) {
+  UseMethod(".GetGeomIDBase")
 }
 
-.GetGeomID.default <- function(x, layer = 1, ...) {
-  # By default we dont know what it is
+.GetGeomIDBase.default <- function(layerClass) {
+  # Nothing to happen on return
 }
 
-.GetGeomID.GeomLine <- function(x, layer = 1, ...) {
-  lineGrob <- grid.grep(gPath("panel", "panel-1", "GRID.polyline"), grep = TRUE, global = TRUE)[[1]]
-  paste(lineGrob$name, "1", sep = ".")
+.GetGeomIDBase.GeomLine <- function(layerClass) {
+  return("GRID.polyline")
 }
 
-.GetGeomID.GeomPoint <- function(x, layer = 1, ...) {
-  pointGrob <- grid.grep(gPath("panel", "panel-1", "geom_point"), grep = TRUE, global = TRUE)[[layer]]
-  paste(pointGrob$name, "1", sep = ".")
+.GetGeomIDBase.GeomPoint <- function(layerClass) {
+  return("geom_point")
 }
 
-.GetGeomID.GeomSmooth <- function(x, layer = 1, ...) {
-  smoothGrob <- grid.grep(gPath("panel", "panel-1", "geom_smooth"), grep = TRUE, global = TRUE)[[layer]]
-  paste(smoothGrob$name, "1", sep = ".")
+.GetGeomIDBase.GeomSmooth <- function(layerClass) {
+  return("geom_smooth")
+}
+
+.GetGeomIDBase.GeomBar <- function(layerClass) {
+  return("geom_rect")
 }
 
 #' @rdname MakeAccessibleSVGInternal
@@ -70,4 +111,26 @@
   } else {
     pointsSplit
   }
+}
+
+#' Create label from parts
+#'
+#' This shold be used rather than doing a manual paste to help prevent any changes
+#' in the future from being to damaging.
+#'
+#' @param ... These should be strings to be added togather
+.CreateID <- function(...) {
+  paste(..., sep = ".")
+}
+
+#' Find out if a GeomLine line is disjoint
+#'
+#' Given the scale data for a line find out if it is disjoint or not.
+#'
+#' @param scaleData Scale data from the ggplot_build object. Can easily be retirieved
+#' from the .VIStruct
+#'
+#' @return A Boolean value as to whether this line from the line data is disjoint.
+.IsGeomLineDisjoint <- function(scaledata) {
+  any(is.na(scaledata$y))
 }

@@ -9,10 +9,10 @@
 #' the svg for.
 #' @return NULL
 #'
-.RewriteSVG <- function(x, file, type, ...) {
+.RewriteSVG <- function(x, file, type, layer, ...) {
   svgDoc <- XML::xmlParseDoc(file)
 
-  geomGTagID <- .GetGeomID(type)
+  geomGTagID <- .GetGeomID(x, layer)
   if (is.null(geomGTagID)) {
     return()
   }
@@ -21,15 +21,11 @@
     paste0('//*[@id="', geomGTagID, '"]')
   )[[1]]
 
-  .RewriteSVGGeom(x, type, geomGTagID, geomGTag, ...)
+  .RewriteSVGGeom(x, type, geomGTagID, geomGTag, layer, ...)
 
   XML::saveXML(svgDoc, file = file)
 
   return(invisible())
-}
-
-.RewriteSVGGeom.default <- function(x, type, geomGTagID, geomGTag, ...) {
-  # Nothing is to be done by deafult
 }
 
 #' @rdname .RewriteSVG
@@ -46,30 +42,56 @@
   UseMethod(".RewriteSVGGeom", type)
 }
 
+.RewriteSVGGeom.default <- function(x, type, geomGTagID, geomGTag, ...) {
+  # Nothing is to be done by deafult
+}
+
 .RewriteSVGGeom.GeomLine <- function(x, type, geomGTagID, geomGTag, layer = 1) {
+  struct <- .VIstruct.ggplot(x)[["panels"]][[1]][["panellayers"]][[layer]]
+
   # Need to figure out how many lines there are
-  numLines <- .VIstruct.ggplot(x)[["panels"]][[1]][["panellayers"]][[layer]][["lines"]] |>
+  numLines <- struct[["lines"]] |>
     length()
 
   for (lineNum in 1:numLines) {
     # Will grab the correct polyline as there will be a text and polyline for each line.
     # The poly line gets deleted at end of this loop
     # So the next polyine will always be + 1 the line number
-    actualPolyLine <- XML::xmlChildren(geomGTag)[[lineNum + 1]]
+    if (.IsGeomLineDisjoint(struct$lines[[lineNum]]$scaledata)) {
+      regex <- paste0(.CreateID(geomGTagID, lineNum), "[a-z]")
+      polylinesToBeSplit <- XML::xmlChildren(geomGTag) |>
+        Filter(function(polyline) {
+          numMatches <- XML::xmlGetAttr(polyline, "id") |>
+            grep(regex, x = _) |>
+            length()
+          # Only if there is just one match
+          numMatches == 1
+        }, x = _)
 
-    # Get the g tag for the line for the segments to go into
-    segmentParentGTagID <- paste(geomGTagID, lineNum, sep = ".")
-    segmentParentGTag <- XML::newXMLNode("g",
-      parent = geomGTag,
-      attrs = list(id = segmentParentGTagID)
-    )
-    XML::addChildren(geomGTag, segmentParentGTag)
+      newSegmentIDs <- polylinesToBeSplit |>
+        lapply(XML::xmlGetAttr, name = "id")
+    } else {
+      polylinesToBeSplit <- XML::xmlChildren(geomGTag)[[lineNum + 1]] |>
+        list()
+      newSegmentIDs <- .CreateID(geomGTagID, lineNum)
+    }
 
-    # Split the line into smaller polylines
-    .RewriteSVG_SplitPoly(segmentParentGTag,
-      actualPolyLine,
-      id = segmentParentGTagID
-    )
+
+    polylinesToBeSplit |>
+      mapply(function(line, i, segmentIDs) {
+        # Get the g tag for the line for the segments to go into
+        segmentParentGTag <- XML::newXMLNode("g",
+          parent = geomGTag,
+          attrs = list(id = segmentIDs)
+        )
+        XML::addChildren(geomGTag, segmentParentGTag)
+
+        # Split the line into smaller polylines
+        .RewriteSVG_SplitPoly(segmentParentGTag,
+          line,
+          id = segmentIDs
+        )
+      }, line = _, i = seq_along(polylinesToBeSplit), segmentIDs = newSegmentIDs)
   }
 }
 
@@ -124,7 +146,7 @@
     # it will actually be highlighted
     XML::`xmlAttrs<-`(polygonTag, value = c(`stroke-opacity` = 0.4, `stroke-width` = 0.4))
 
-    .RewriteSVG_SplitPoly(polygonGTag, polygonTag, id = "ci", type = "polygon")
+    .RewriteSVG_SplitPoly(polygonGTag, polygonTag, id = .CreateID(layer, "smoother_ci"), type = "polygon")
 
     ## Move polygon to base geomGTag
     XML::addChildren(geomGTag, polygonGTag)
@@ -138,7 +160,7 @@
 
   polylineTag <- XML::xmlChildren(polylineGTag)$polyline
 
-  .RewriteSVG_SplitPoly(polylineGTag, polylineTag, id = "line")
+  .RewriteSVG_SplitPoly(polylineGTag, polylineTag, id = .CreateID(layer, "smoother_line"))
 
   ## Take the 2 g tag with 5 polygon/polyline tags inside each of them.
   ## I want to zip them together so that I have 5 g tags with a polyline and polygon in each of them.
@@ -181,9 +203,9 @@
 #'
 .RewriteSVG_SplitPoly <- function(parentGTag, originalPoly, id = "", type = "polyline") {
   ## Copy attributes from the original segment
-  lineAttr <- XML::xmlAttrs(originalPoly)
-  lineAttr <- lineAttr[!(names(lineAttr) %in% c("id", "points"))]
-  lineAttr <- split(lineAttr, names(lineAttr))
+  polyAttr <- XML::xmlAttrs(originalPoly)
+  polyAttr <- polyAttr[!(names(polyAttr) %in% c("id", "points"))]
+  polyAttr <- split(polyAttr, names(polyAttr))
 
   ## Get the line points
   points <- originalPoly |>
@@ -251,7 +273,7 @@
   ## For each segment add in a new poly with all the correct attributes
   seq_along(pointsSplit) |>
     lapply(function(i) {
-      args <- lineAttr
+      args <- polyAttr
       args$id <- paste(id, letters[i], sep = ".")
       if (type == "polyline") args$`fill-opacity` <- "0"
       args$points <- paste(pointsSplit[[i]], collapse = " ")

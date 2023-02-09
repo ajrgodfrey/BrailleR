@@ -125,20 +125,22 @@
 }
 
 ## Constructs a ggplot layer
-.AddXMLAddGGPlotLayer <- function(root, x = NULL, panel = 1, summarisedSections = 5) {
+.AddXMLAddGGPlotLayer <- function(root, x = NULL, graphObject, panel = 1, summarisedSections = 5) {
   # Functions used within this function
-  summariseLayer <- function(data, FUN = function(x) x) {
-    .SplitData(seq_along(data$x)) |>
+  summariseLayer <- function(data, FUN = function(x) x, overlap = FALSE) {
+    .SplitData(seq_along(data$x), overlapping = overlap) |>
       lapply(function(indexs) {
         data |>
           dplyr::slice(indexs) |>
+          drop_na(x, y) |>
+          dplyr::distinct() |>
           FUN()
       })
   }
 
   layerGroupID <- paste("center", panel, x$layernum, sep = "-")
   annotation <- .AddXMLAddAnnotation(root,
-    position = 4,
+    position = 3 + x$layernum,
     id = layerGroupID, kind = "grouped"
   )
   # TODO:  For all layer types:  need heuristic to avoid trying to describe
@@ -148,44 +150,44 @@
   data <- x$data
   if (x$type == "bar") { # Bar chart
     barCount <- nrow(x$data)
-    barGrob <- grid.grep(gPath("geom_rect"), grep = TRUE)
+    barGeomID <- .GetGeomID(graphObject, x$layernum)
     XML::addAttributes(annotation$root,
-      speech = "Histogram bars",
-      speech2 = paste("Histogram with", barCount, "bars"),
+      speech = "Bar graph",
+      speech2 = paste("Bar graph with", barCount, "bars"),
       type = "Center"
     )
-    chartData <- x$data
+
     for (i in 1:barCount) {
-      barId <- paste(barGrob$name, "1", i, sep = ".")
+      barId <- .CreateID(barGeomID, i)
       # TODO: histogram bars have density but other geom_bar objects won't
       # Need to not fail if density not present
       # Generally, need to deal with missing values better
 
       # If no density values then assume it's a categorical x-axis
-      if (is.null(chartData$density)) {
+      if (is.null(data$density)) {
         annotations[[i]] <- .AddXMLcategoricalBar(
           root,
           position = i,
-          x = signif(chartData$x[i], 4),
-          count = chartData$ymax[i] - chartData$ymin[i],
+          x = signif(data$x[i], 4),
+          count = data$ymax[i] - data$ymin[i],
           id = barId
         )
       } else {
         annotations[[i]] <- .AddXMLcenterBar(
           root,
           position = i,
-          mid = signif(chartData$x[i], 4),
-          count = chartData$ymax[i] - chartData$ymin[i],
-          density = ifelse(is.null(chartData$density), NA, chartData$density[i]),
-          start = signif(chartData$xmin[i], 4),
-          end = signif(chartData$xmax[i], 4),
+          mid = signif(data$x[i], 4),
+          count = data$ymax[i] - data$ymin[i],
+          density = ifelse(is.null(data$density), NA, data$density[i]),
+          start = signif(data$xmin[i], 4),
+          end = signif(data$xmax[i], 4),
           id = barId
         )
       }
     }
   } else if (x$type == "line") { # Line chart
     numberOfLines <- length(x$lines)
-    lineGrobName <- .GetGeomID.GeomLine()
+    lineGrobName <- .GetGeomID(graphObject, x$layernum)
     XML::addAttributes(annotation$root,
       speech = "Line graph",
       speech2 = paste("Line graph with", numberOfLines, "lines"),
@@ -196,9 +198,8 @@
 
     for (lineNum in 1:numberOfLines) {
       lineData <- x$lines[[lineNum]]$scaledata
-      lineCount <- nrow(lineData) - 1
+      disjointLine <- .IsGeomLineDisjoint(lineData)
 
-      segmentAnnotations <- list()
       # ID of the line g tag
       lineGTagID <- paste(lineGrobName, lineNum, sep = ".")
 
@@ -209,77 +210,148 @@
       )
       XML::addAttributes(lineGTagAnnotation$root,
         speech = paste("Line", lineNum),
-        speech2 = paste("Line", lineNum, "with", lineCount, "segments"),
+        speech2 = ifelse(disjointLine,
+          paste("Line", lineNum, "is disjoint"),
+          paste("Line", lineNum, "with", lineData$x |> length() - 1, "segments")
+        ),
         type = "Center"
       )
 
+      segmentAnnotations <- list()
 
-      # Summarizing the data
-      if (lineCount > summarisedSections) {
-        slope_Range_Median <- summariseLayer(lineData, function(data) {
-          data |>
-            dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
-            tidyr::drop_na() |>
-            dplyr::select(matches("(start|end)\\w")) |>
-            dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
-            dplyr::summarise(min = min(slope), max = max(slope), mean = mean(slope)) |>
-            as.list()
-        })
-        summarised <- TRUE
-        lineCount <- summarisedSections
+      # Test if the lineData has na and by extension if there will be disjointness
+      if (disjointLine) {
+        # This bit of code was made iwth help from SO:
+        # https://stackoverflow.com/questions/75379649/split-a-df-into-a-list-with-groups-of-values-withouts-nas
+        disjointLines <- lineData |>
+          group_by(group = cumsum(is.na(y))) |>
+          filter(!(is.na(y) & n() > 1)) |>
+          group_split() |>
+          Filter(function(x) nrow(x) >= 2, x = _)
+
+        numOfDisjointLines <- length(disjointLines)
+        lineSeq <- seq_along(disjointLines)
       } else {
-        summarised <- FALSE
+        lineSeq <- c(1)
       }
 
-      # Getting this data so that I can get the starts and finishes of the line groups
-      breaks <- seq(min(data$x), max(data$x), length.out = summarisedSections + 1)
-      mins <- breaks[1:(summarisedSections)]
-      maxs <- breaks[2:(summarisedSections + 1)]
-      for (i in 1:(lineCount)) {
-        if (summarised) {
-          desc <- paste(
-            "slope range",
-            .AddXMLFormatNumber(slope_Range_Median[[i]]$min),
-            "to",
-            .AddXMLFormatNumber(slope_Range_Median[[i]]$max),
-            "with mean",
-            .AddXMLFormatNumber(slope_Range_Median[[i]]$mean)
-          )
-          desc2 <- paste(
-            "x from ",
-            lineData$x[lineData$x >= mins[i]][1],
-            "to",
-            lineData$x[lineData$x < maxs[i]] |> tail(n = 1),
-            "y from ",
-            lineData$y[lineData$x >= mins[i]][1],
-            "to",
-            lineData$y[lineData$x < maxs[i]] |> tail(n = 1)
-          )
-        } else {
-          desc <- paste(
-            .AddXMLFormatNumber((lineData$y[i + 1] - lineData$y[i]) / (lineData$x[i + 1] - lineData$x[i])),
-            "slope from x",
-            .AddXMLFormatNumber(lineData$x[i]),
-            "to x",
-            .AddXMLFormatNumber(lineData$x[i + 1])
-          )
-          desc2 <- paste0(
-            "line from (",
-            .AddXMLFormatNumber(lineData$x[i]),
-            ",",
-            .AddXMLFormatNumber(lineData$y[i]),
-            ") to (",
-            .AddXMLFormatNumber(lineData$x[i + 1]),
-            ",",
-            .AddXMLFormatNumber(lineData$y[i + 1]),
-            ")"
-          )
-        }
 
-        segmentAnnotations[[i]] <- .AddXMLLine(root, position = i, id = paste(lineGTagID, letters[i], sep = "."), speech = desc, speech2 = desc2)
-        # TODO:  Not correctly handling NA or out-of-range data values, nor dates
-        # Should check for dates with inherit(,"Date") -- but looks like I
-        # need to do that on the main data not the layer data
+      if (disjointLine && numOfDisjointLines == 0) {
+        segmentAnnotations[[1]] <- .AddXMLAddAnnotation(root,
+          position = 1,
+          id = lineGrobName, kind = "active"
+        )
+        XML::addAttributes(segmentAnnotations[[1]]$root,
+          speech = "There are not enough points for this line to actually be drawn.",
+          speech2 = "This means there are less than 2 points without that are sequential to each other in the data"
+        )
+      } else {
+        for (disjointLineIndex in lineSeq) {
+          if (disjointLine) {
+            lineData <- disjointLines[[disjointLineIndex]]
+            lineCount <- lineData$x |> length() - 1
+
+            disjointLineGTag <- paste(lineGrobName, paste0(lineNum, letters[disjointLineIndex]), sep = ".")
+            segmentAnnotations[[disjointLineIndex]] <- .AddXMLAddAnnotation(root,
+              position = disjointLineIndex,
+              id = disjointLineGTag, kind = "grouped"
+            )
+            XML::addAttributes(segmentAnnotations[[disjointLineIndex]]$root,
+              speech = paste("Disjoint Line", disjointLineIndex),
+              speech2 = paste(
+                "Disjoint Line", disjointLineIndex,
+                "with", lineCount, "segments"
+              )
+            )
+          } else {
+            lineCount <- nrow(lineData) - 1
+          }
+
+          if (lineCount > summarisedSections) {
+            slope_Range_Median <- summariseLayer(lineData, function(data) {
+              data |>
+                dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+                tidyr::drop_na() |>
+                dplyr::select(matches("(start|end)\\w")) |>
+                dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
+                dplyr::summarise(min = min(slope), max = max(slope), mean = mean(slope)) |>
+                as.list()
+            }, overlap = TRUE)
+            summarised <- TRUE
+            lineCount <- summarisedSections
+          } else {
+            summarised <- FALSE
+            # This just needs some value for the mapply to loop through correctly
+            slope_Range_Median <- 1:lineCount
+          }
+
+          splitData <- lineData$x |>
+            seq_along() |>
+            .SplitData(overlapping = TRUE)
+
+          subLineSegmentsAnnotations <- mapply(
+            function(i, splitIndices, lineData, summary) {
+              if (summarised) {
+                desc <- paste(
+                  "slope range",
+                  .AddXMLFormatNumber(summary$min),
+                  "to",
+                  .AddXMLFormatNumber(summary$max),
+                  "with mean",
+                  .AddXMLFormatNumber(summary$mean)
+                )
+                desc2 <- paste(
+                  "x from ",
+                  lineData$x[splitIndices[1]],
+                  "to",
+                  lineData$x[splitIndices |> tail(n = 1)],
+                  "y from ",
+                  lineData$y[splitIndices[1]],
+                  "to",
+                  lineData$y[splitIndices |> tail(n = 1)]
+                )
+              } else {
+                desc <- paste(
+                  .AddXMLFormatNumber((lineData$y[i + 1] - lineData$y[i]) / (lineData$x[i + 1] - lineData$x[i])),
+                  "slope from x",
+                  .AddXMLFormatNumber(lineData$x[i]),
+                  "to x",
+                  .AddXMLFormatNumber(lineData$x[i + 1])
+                )
+                desc2 <- paste0(
+                  "line from (",
+                  .AddXMLFormatNumber(lineData$x[i]),
+                  ",",
+                  .AddXMLFormatNumber(lineData$y[i]),
+                  ") to (",
+                  .AddXMLFormatNumber(lineData$x[i + 1]),
+                  ",",
+                  .AddXMLFormatNumber(lineData$y[i + 1]),
+                  ")"
+                )
+              }
+              .AddXMLLine(root,
+                position = i,
+                id = .CreateID(ifelse(disjointLine, disjointLineGTag, lineGTagID), letters[i]),
+                speech = desc, speech2 = desc2
+              )
+            },
+            i = if (summarised) seq_along(splitData) else 1:lineCount,
+            splitIndices = splitData,
+            summary = slope_Range_Median,
+            MoreArgs = list(lineData = lineData),
+            SIMPLIFY = FALSE
+          ) |>
+            suppressWarnings()
+
+          if (disjointLine) {
+            .AddXMLAddComponents(segmentAnnotations[[disjointLineIndex]], subLineSegmentsAnnotations)
+            .AddXMLAddChildren(segmentAnnotations[[disjointLineIndex]], subLineSegmentsAnnotations)
+            .AddXMLAddParents(segmentAnnotations[[disjointLineIndex]], subLineSegmentsAnnotations)
+          } else {
+            segmentAnnotations <- subLineSegmentsAnnotations
+          }
+        }
       }
       .AddXMLAddComponents(lineGTagAnnotation, segmentAnnotations)
       .AddXMLAddChildren(lineGTagAnnotation, segmentAnnotations)
@@ -287,9 +359,13 @@
       annotations[[lineNum]] <- lineGTagAnnotation
     }
   } else if (x$type == "point") {
-    numberOfPoints <- nrow(x$data)
+    # Rmeove all the NAs in the data
+    data <- x$data |>
+      drop_na(x, y)
 
-    pointGrobID <- .GetGeomID.GeomPoint()
+    numberOfPoints <- nrow(data)
+
+    pointGrobID <- .GetGeomID(graphObject, x$layernum)
 
     XML::addAttributes(annotation$root,
       speech = "Point graph",
@@ -380,7 +456,7 @@
       }
     }
   } else if (x$type == "smooth") {
-    geomGrobID <- .GetGeomID.GeomSmooth()
+    geomGrobID <- .GetGeomID(graphObject, x$layernum)
 
 
     XML::addAttributes(annotation$root,
@@ -429,9 +505,9 @@
         position = i,
         id = geomGrobID,
         speech = sectionDesc,
-        ci = x$ci,
         lineDesc = lineDesc,
-        ciDesc = ciDesc
+        ciDesc = ciDesc,
+        layer = x$layernum
       )
     }
   } else { # TODO:  warn about layer types we don't recognize
@@ -446,19 +522,19 @@
 # Still a work in progress as the se bars are not shown.
 # TODO: make se bars actually display.
 .AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech,
-                          ci = TRUE, lineDesc, ciDesc) {
+                          lineDesc, ciDesc, layer) {
   annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, letters[position], sep = "."), kind = "grouped")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
 
   # Add in a reference to the seGrob if it exists
   items <- .AddXMLAddAnnotation(root, 1,
-    id = paste("line", letters[position], sep = "."),
+    id = .CreateID(layer, "smoother_line", letters[position]),
     attributes = list(speech = lineDesc)
   ) |>
     list()
-  if (ci) {
+  if (ciDesc != "") {
     items <- .AddXMLAddAnnotation(root, 2,
-      id = paste("ci", letters[position], sep = "."),
+      id = .CreateID(layer, "smoother_ci", letters[position]),
       attributes = list(speech = ciDesc)
     ) |>
       list() |>
@@ -876,21 +952,4 @@
     useScientific <- FALSE
   }
   format(x, digits = 4, scientific = useScientific)
-}
-
-#' Get the number of data points and how many to summarise it to for a geom layer
-#'
-#' @param xs A .VI.struct pbject layer. To get the right data it would look something
-#' like this `.VIstruct.ggplot_object[["panels"]][[panelNum]][["panellayers"]][[layerNum]]`
-#' @param ...
-#'
-#' @return A 2 length vector with the first item being the number of summarized
-#' section to make and the second element being the number of data points in
-#' geom_layer
-.getSummarizedAmount <- function(xs, ...) {
-  UseMethod(".getSummarizedAmount")
-}
-
-.getSummarizedAmount.GeomLine <- function(xs, ...) {
-  # Nothing
 }

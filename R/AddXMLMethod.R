@@ -137,7 +137,8 @@ AddXML.ggplot <- function(x, file) {
     for (layerNum in 1:xs$nlayers) {
       layer <- .AddXMLAddGGPlotLayer(
         annotations,
-        xs$panels[[1]]$panellayers[[layerNum]]
+        xs$panels[[1]]$panellayers[[layerNum]],
+        graphObject = x
       )
       components[[length(components) + 1]] <- layer
     }

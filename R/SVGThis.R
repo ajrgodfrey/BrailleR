@@ -117,10 +117,9 @@ SVGThis.ggplot <-
     #      x=Augment(x)
     #      grid.force()
 
-    if (length(x$data$x) > 1000) {
-      warning("You are trying to make a svg from a plot with lots of points it might take quite some time.")
+    if (length(x$data$x) > 10000) {
+      warning("You are trying to make a svg from a plot with lots of data it might take quite some time.")
     }
-
 
     if (createDevice) {
       pdf(NULL)
@@ -129,9 +128,10 @@ SVGThis.ggplot <-
     gridSVG::grid.export(name = file)
 
     # Loop through layers and change svg as needed
-    lapply(x$layers, function(x, graphObject, file) {
-      .RewriteSVG(graphObject, file, x$geom)
-    }, graphObject = x, file = file)
+    1:length(x$layers) |>
+      lapply(function(layerIndex, graphObject, file) {
+        .RewriteSVG(graphObject, file, x$layer[[layerIndex]]$geom, layerIndex)
+      }, graphObject = x, file = file)
 
     if (createDevice) {
       dev.off()
