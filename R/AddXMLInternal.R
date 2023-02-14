@@ -145,7 +145,7 @@
     lapply(function(indexs) {
       data |>
         dplyr::slice(indexs) |>
-        drop_na(x, y) |>
+        tidyr::drop_na(x, y) |>
         dplyr::distinct() |>
         FUN()
     })
@@ -177,7 +177,7 @@
 .AddXMLAddGGPlotLayer.point <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
   # Rmeove all the NAs in the data
   data <- graphObjectStruct$data |>
-    drop_na(x, y)
+    tidyr::drop_na(x, y)
 
   numberOfPoints <- nrow(data)
 

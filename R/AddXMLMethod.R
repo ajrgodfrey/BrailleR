@@ -80,7 +80,7 @@ AddXML.ggplot <- function(x, file) {
   components <- list()
 
   backgroundGrob <- grid.grep(gPath("panel.background..rect"), grep = TRUE)
-  titleGrob <- grid.grep(gPath("title", "text"), grep = TRUE)
+  titleGrob <- grid.grep(gPath("plot.title", "text"), grep = TRUE)
   if (length(titleGrob) > 0) {
     titleId <- paste0(titleGrob$name, ".1")
     title <- .AddXMLAddTitle(annotations, title = xs$title, id = titleId)
