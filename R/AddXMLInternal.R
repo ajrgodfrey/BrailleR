@@ -112,10 +112,11 @@
   )
   annotations <- list()
   for (i in 1:length(hist$mids)) {
-    annotations[[i]] <- .AddXMLcenterBar(root,
-      position = i, mid = hist$mids[i],
+    annotations[[i]] <- .AddXMLGGplotGeomItem.bar(root,
+      position = i, x = hist$mids[i],
       count = hist$counts[i], density = hist$density[i],
-      start = hist$breaks[i], end = hist$breaks[i + 1]
+      start = hist$breaks[i], end = hist$breaks[i + 1],
+      categorical = FALSE
     )
   }
   .AddXMLAddComponents(annotation, annotations)
@@ -124,90 +125,253 @@
   return(invisible(annotation))
 }
 
-## Constructs a ggplot layer
-.AddXMLAddGGPlotLayer <- function(root, x = NULL, graphObject, panel = 1, summarisedSections = 5) {
-  # Functions used within this function
-  summariseLayer <- function(data, FUN = function(x) x, overlap = FALSE) {
-    .SplitData(seq_along(data$x), overlapping = overlap) |>
-      lapply(function(indexs) {
-        data |>
-          dplyr::slice(indexs) |>
-          drop_na(x, y) |>
-          dplyr::distinct() |>
-          FUN()
-      })
+#' Summarise a ggplot layer data.
+#'
+#' This will create a list with a elements that summarise a certain section of data.
+#' It uses the .SplitData function which is also used by the RewriteSVG function so
+#' it should all line up.
+#'
+#' You will know the element names of each of the section elements in the returned list
+#' as you will have given the function that processes the dfs.
+#'
+#' @param data The data for particular layer
+#' @param FUN The function which will summarise the certain sections of data
+#' @param overlap Whether the data sections should have overlapping elements at their ends.
+#' It is used for GeomLines and such where they are connected.
+#'
+#' @return A list of length <= 5 that has each element as summary of the section of data.
+.AddXMLSummariseGGPlotLayer <- function(data, FUN = function(x) x, overlap = FALSE) {
+  .SplitData(seq_along(data$x), overlapping = overlap) |>
+    lapply(function(indexs) {
+      data |>
+        dplyr::slice(indexs) |>
+        drop_na(x, y) |>
+        dplyr::distinct() |>
+        FUN()
+    })
+}
+
+#' Add XML elements to make it work with a ggplot layers svg elements
+#'
+#' The layer classes it uses are the ones which are given by the VIstruct command.
+#' So rather then GeomLine it line and GeomPoint is point etc.
+#'
+#' @param root the XML annotation tag root.
+#' @param layerRoot The root of this layer annotation used to add the speech to it which is layer  specific.
+#' @param graphObjectStruct This is the struct that is produced by sending the ggplot graph to VIstruct
+#' It should only be for the specific layer.
+#' @param geomID This is the geomID and should match the SVG element ID that encompasses
+#' All of the individual layer svg elements
+#' @param panel The panel of te plot this is on. There is currently no implementation
+#' that supports the panel
+#' @param summarisedSections How many sections data should be summarised to.
+#' This is also the max amount of data that can exist before it is summarised
+#' @param ... These can be passed on to specific layer geoms.
+#' However due to how this is called in the AddXML it isnt used.
+#'
+#' @return The annotation that covers this graph layer
+.AddXMLAddGGPlotLayer <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
+  UseMethod(".AddXMLAddGGPlotLayer", graphObjectStruct)
+}
+
+.AddXMLAddGGPlotLayer.point <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
+  # Rmeove all the NAs in the data
+  data <- graphObjectStruct$data |>
+    drop_na(x, y)
+
+  numberOfPoints <- nrow(data)
+
+  XML::addAttributes(layerRoot,
+    speech = "Point graph",
+    speech2 = paste("Point graph with", numberOfPoints, "points"),
+    type = "Center"
+  )
+
+  # Going to provide warning about using unknown shapes
+  if (!all(data$shape %in% c(16, 19))) {
+    warning("You are using a non default point shape. Currently the location of that point in the webpage is incorrect. The summaring information is unaffected.")
   }
 
-  layerGroupID <- paste("center", panel, x$layernum, sep = "-")
-  annotation <- .AddXMLAddAnnotation(root,
-    position = 3 + x$layernum,
-    id = layerGroupID, kind = "grouped"
+  # Summarise into section when greater than 10 points
+  if (numberOfPoints > 5) {
+    mean_sd_num <- data |>
+      arrange(x) |>
+      .AddXMLSummariseGGPlotLayer(function(data) {
+        data |>
+          dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
+      })
+
+    # Get the order of points
+    orderOfIDs <- data.frame(x = data$x, id = 1:length(data$x)) |>
+      dplyr::arrange(x) |>
+      select(id) |>
+      unlist()
+    pointGroups <- .SplitData(1:numberOfPoints)
+
+    # For each summarized section create a annotation and return the list of annotations
+    mapply(
+      function(summarizedSectionNum, summarisedData) {
+        # Add summarized section
+        desc <- paste(
+          "mean:", .AddXMLFormatNumber(summarisedData$mean),
+          "sd:", .AddXMLFormatNumber(summarisedData$sd),
+          "n:", .AddXMLFormatNumber(summarisedData$count)
+        )
+
+        summarizedSectionAnnotation <- .AddXMLAddAnnotation(root,
+          summarizedSectionNum,
+          id = paste(geomID, letters[summarizedSectionNum], sep = "."),
+          kind = "grouped",
+          attributes = list(speech = desc)
+        )
+
+        # Add individual points
+        # Only do so if there are less than 100 points
+        # This is because the time taken to add all of the annotations is too long.
+        # TODO:: optimize XML interactions to allow more data to be handled.
+        if (length(data$x) < 100) {
+          pointsNumberToAdd <- orderOfIDs[pointGroups[[summarizedSectionNum]]]
+          pointAnnotations <- list()
+
+          pointAnnotations <- lapply(pointsNumberToAdd, function(pointID) {
+            i <- match(pointID, pointsNumberToAdd)
+            shape <- data$shape[pointID]
+            colour <- data$fill[pointID]
+            if (is.na(colour)) colour <- "black"
+            size <- data$size[pointID]
+            desc2 <- paste("Shape:", shape, "colour:", colour[1], "size:", .AddXMLFormatNumber(size))
+            .AddXMLAddAnnotation(root,
+              position = i,
+              id = paste(geomID, pointID, sep = "."),
+              attributes =
+                list(
+                  speech = paste0("(", data$x[pointID], ", ", data$y[pointID], ")"),
+                  speech2 = desc2
+                )
+            )
+          })
+
+          .AddXMLAddChildren(summarizedSectionAnnotation, pointAnnotations)
+          .AddXMLAddComponents(summarizedSectionAnnotation, pointAnnotations)
+          .AddXMLAddParents(summarizedSectionAnnotation, pointAnnotations)
+        }
+        summarizedSectionAnnotation
+      },
+      summarizedSectionNum = seq_along(mean_sd_num),
+      summarisedData = mean_sd_num,
+      SIMPLIFY = FALSE
+    )
+  } else {
+    # If there a so few points just create annotatino for each point and return list
+    mapply(
+      function(pointNum, pointData) {
+        desc <- paste0(
+          "(", .AddXMLFormatNumber(pointData$x),
+          .AddXMLFormatNumber(pointData$y), ")"
+        )
+        .AddXMLGGplotGeomItem(root,
+          graphObjectStruct,
+          position = pointNum,
+          id = paste(geomID, pointNum, sep = "."),
+          speech = desc
+        )
+      },
+      pointNum = seq_along(data$x),
+      pointData = data,
+      SIMPLIFY = FALSE
+    )
+  }
+}
+
+.AddXMLAddGGPlotLayer.smooth <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
+  data <- graphObjectStruct$data
+
+  XML::addAttributes(layerRoot,
+    speech = "Smoother graph",
+    speech2 = paste0("Smoother graph", ifelse(graphObjectStruct$ci, paste(" with", graphObjectStruct$level, "confidence bands"), ""), ""),
+    type = "Center"
   )
-  # TODO:  For all layer types:  need heuristic to avoid trying to describe
-  # individual data points if there are thousands of them
-  # This is the same structure as found in the VI method for ggplots.
-  annotations <- list()
-  data <- x$data
-  if (x$type == "bar") { # Bar chart
-    barCount <- nrow(x$data)
-    barGeomID <- .GetGeomID(graphObject, x$layernum)
-    XML::addAttributes(annotation$root,
-      speech = "Bar graph",
-      speech2 = paste("Bar graph with", barCount, "bars"),
-      type = "Center"
-    )
 
-    for (i in 1:barCount) {
-      barId <- .CreateID(barGeomID, i)
-      # TODO: histogram bars have density but other geom_bar objects won't
-      # Need to not fail if density not present
-      # Generally, need to deal with missing values better
+  if (!graphObjectStruct$ci) {
+    data$ymin <- 0
+    data$ymax <- 0
+  }
+  summarisedData <- .AddXMLSummariseGGPlotLayer(data, function(data) {
+    data |>
+      dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+      dplyr::mutate(CIWidth = ymax - ymin) |>
+      tidyr::drop_na() |>
+      dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
+      dplyr::summarise(
+        min = min(slope), max = max(slope),
+        mean = mean(slope), median = median(slope),
+        avg_width = mean(CIWidth), median_width = median(CIWidth),
+        rangeCI = max(CIWidth) - min(CIWidth)
+      ) |>
+      as.list()
+  })
+  # Go thorugh each summarised section and create a annotation for it.
+  mapply(
+    function(summarisedSectionData, i) {
+      sectionDesc <- paste(
+        "average slope: ", .AddXMLFormatNumber(summarisedSectionData$mean),
+        ifelse(graphObjectStruct$ci, paste("CI width:", .AddXMLFormatNumber(summarisedSectionData$avg_width), ""), "")
+      )
 
-      # If no density values then assume it's a categorical x-axis
-      if (is.null(data$density)) {
-        annotations[[i]] <- .AddXMLcategoricalBar(
-          root,
-          position = i,
-          x = signif(data$x[i], 4),
-          count = data$ymax[i] - data$ymin[i],
-          id = barId
-        )
-      } else {
-        annotations[[i]] <- .AddXMLcenterBar(
-          root,
-          position = i,
-          mid = signif(data$x[i], 4),
-          count = data$ymax[i] - data$ymin[i],
-          density = ifelse(is.null(data$density), NA, data$density[i]),
-          start = signif(data$xmin[i], 4),
-          end = signif(data$xmax[i], 4),
-          id = barId
-        )
-      }
-    }
-  } else if (x$type == "line") { # Line chart
-    numberOfLines <- length(x$lines)
-    lineGrobName <- .GetGeomID(graphObject, x$layernum)
-    XML::addAttributes(annotation$root,
-      speech = "Line graph",
-      speech2 = paste("Line graph with", numberOfLines, "lines"),
-      # Better to report #lines or #segs?
-      # Line can be discontinuous (comprised of polylines 1a, 1b, ...)
-      type = "Center"
-    )
+      lineDesc <- paste(
+        "slope range:", paste0("(", .AddXMLFormatNumber(summarisedSectionData$min), ",", .AddXMLFormatNumber(summarisedSectionData$max), ")"),
+        "median slope:", .AddXMLFormatNumber(summarisedSectionData$median)
+      )
 
-    for (lineNum in 1:numberOfLines) {
-      lineData <- x$lines[[lineNum]]$scaledata
+      ciDesc <- ifelse(graphObjectStruct$ci,
+        paste(
+          "median CI width:", .AddXMLFormatNumber(summarisedSectionData$median_width),
+          "width range:", .AddXMLFormatNumber(summarisedSectionData$rangeCI)
+        ), ""
+      )
+
+
+      .AddXMLGGplotGeomItem(root,
+        graphObjectStruct,
+        position = i,
+        id = geomID,
+        speech = sectionDesc,
+        lineDesc = lineDesc,
+        ciDesc = ciDesc,
+        layer = graphObjectStruct$layernum
+      )
+    },
+    summarisedSectionData = summarisedData,
+    i = seq_along(summarisedData),
+    SIMPLIFY = FALSE
+  )
+}
+
+.AddXMLAddGGPlotLayer.line <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
+  numberOfLines <- length(graphObjectStruct$lines)
+
+  XML::addAttributes(layerRoot,
+    speech = "Line graph",
+    speech2 = paste("Line graph with", numberOfLines, "lines"),
+    # Better to report #lines or #segs?
+    # Line can be discontinuous (comprised of polylines 1a, 1b, ...)
+    type = "Center"
+  )
+  # Loop through each line in the layer and create a annotation for each one of them.
+  mapply(
+    function(lineNum, lineData) {
+      lineData <- lineData$scaledata
       disjointLine <- .IsGeomLineDisjoint(lineData)
 
       # ID of the line g tag
-      lineGTagID <- paste(lineGrobName, lineNum, sep = ".")
+      lineGTagID <- .CreateID(geomID, lineNum)
 
-      # Add the lineGTag annotation
+      ## Create line g tag annotation with descriptions
       lineGTagAnnotation <- .AddXMLAddAnnotation(root,
         position = lineNum,
         id = lineGTagID, kind = "grouped"
       )
+
       XML::addAttributes(lineGTagAnnotation$root,
         speech = paste("Line", lineNum),
         speech2 = ifelse(disjointLine,
@@ -217,7 +381,6 @@
         type = "Center"
       )
 
-      segmentAnnotations <- list()
 
       # Test if the lineData has na and by extension if there will be disjointness
       if (disjointLine) {
@@ -235,294 +398,228 @@
         lineSeq <- c(1)
       }
 
-
-      if (disjointLine && numOfDisjointLines == 0) {
-        segmentAnnotations[[1]] <- .AddXMLAddAnnotation(root,
+      # Make sure there are enough points to consitute a line
+      # If there are then loop through each of the disjoint lines
+      # When the line is whole it is simply treated as a special case of a single disjoint line.
+      segmentAnnotations <- if (disjointLine && numOfDisjointLines == 0) {
+        noLineAnnotation <- .AddXMLAddAnnotation(root,
           position = 1,
-          id = lineGrobName, kind = "active"
+          id = geomID, kind = "active"
         )
-        XML::addAttributes(segmentAnnotations[[1]]$root,
+        XML::addAttributes(noLineAnnotation,
           speech = "There are not enough points for this line to actually be drawn.",
           speech2 = "This means there are less than 2 points without that are sequential to each other in the data"
         )
+        noLineAnnotation
       } else {
-        for (disjointLineIndex in lineSeq) {
-          if (disjointLine) {
-            lineData <- disjointLines[[disjointLineIndex]]
-            lineCount <- lineData$x |> length() - 1
+        # Create annotation for each disjoint line or single whole line
+        mapply(
+          function(disjointLineIndex) {
+            if (disjointLine) {
+              lineData <- disjointLines[[disjointLineIndex]]
+              lineCount <- lineData$x |> length() - 1
 
-            disjointLineGTag <- paste(lineGrobName, paste0(lineNum, letters[disjointLineIndex]), sep = ".")
-            segmentAnnotations[[disjointLineIndex]] <- .AddXMLAddAnnotation(root,
-              position = disjointLineIndex,
-              id = disjointLineGTag, kind = "grouped"
-            )
-            XML::addAttributes(segmentAnnotations[[disjointLineIndex]]$root,
-              speech = paste("Disjoint Line", disjointLineIndex),
-              speech2 = paste(
-                "Disjoint Line", disjointLineIndex,
-                "with", lineCount, "segments"
+              disjointLineGTag <- paste(geomID, paste0(lineNum, letters[disjointLineIndex]), sep = ".")
+              disjointLineAnnotation <- .AddXMLAddAnnotation(root,
+                position = disjointLineIndex,
+                id = disjointLineGTag, kind = "grouped"
               )
-            )
-          } else {
-            lineCount <- nrow(lineData) - 1
-          }
-
-          if (lineCount > summarisedSections) {
-            slope_Range_Median <- summariseLayer(lineData, function(data) {
-              data |>
-                dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
-                tidyr::drop_na() |>
-                dplyr::select(matches("(start|end)\\w")) |>
-                dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
-                dplyr::summarise(min = min(slope), max = max(slope), mean = mean(slope)) |>
-                as.list()
-            }, overlap = TRUE)
-            summarised <- TRUE
-            lineCount <- summarisedSections
-          } else {
-            summarised <- FALSE
-            # This just needs some value for the mapply to loop through correctly
-            slope_Range_Median <- 1:lineCount
-          }
-
-          splitData <- lineData$x |>
-            seq_along() |>
-            .SplitData(overlapping = TRUE)
-
-          subLineSegmentsAnnotations <- mapply(
-            function(i, splitIndices, lineData, summary) {
-              if (summarised) {
-                desc <- paste(
-                  "slope range",
-                  .AddXMLFormatNumber(summary$min),
-                  "to",
-                  .AddXMLFormatNumber(summary$max),
-                  "with mean",
-                  .AddXMLFormatNumber(summary$mean)
+              XML::addAttributes(disjointLineAnnotation$root,
+                speech = paste("Disjoint Line", disjointLineIndex),
+                speech2 = paste(
+                  "Disjoint Line", disjointLineIndex,
+                  "with", lineCount, "segments"
                 )
-                desc2 <- paste(
-                  "x from ",
-                  lineData$x[splitIndices[1]],
-                  "to",
-                  lineData$x[splitIndices |> tail(n = 1)],
-                  "y from ",
-                  lineData$y[splitIndices[1]],
-                  "to",
-                  lineData$y[splitIndices |> tail(n = 1)]
-                )
-              } else {
-                desc <- paste(
-                  .AddXMLFormatNumber((lineData$y[i + 1] - lineData$y[i]) / (lineData$x[i + 1] - lineData$x[i])),
-                  "slope from x",
-                  .AddXMLFormatNumber(lineData$x[i]),
-                  "to x",
-                  .AddXMLFormatNumber(lineData$x[i + 1])
-                )
-                desc2 <- paste0(
-                  "line from (",
-                  .AddXMLFormatNumber(lineData$x[i]),
-                  ",",
-                  .AddXMLFormatNumber(lineData$y[i]),
-                  ") to (",
-                  .AddXMLFormatNumber(lineData$x[i + 1]),
-                  ",",
-                  .AddXMLFormatNumber(lineData$y[i + 1]),
-                  ")"
-                )
-              }
-              .AddXMLLine(root,
-                position = i,
-                id = .CreateID(ifelse(disjointLine, disjointLineGTag, lineGTagID), letters[i]),
-                speech = desc, speech2 = desc2
               )
-            },
-            i = if (summarised) seq_along(splitData) else 1:lineCount,
-            splitIndices = splitData,
-            summary = slope_Range_Median,
-            MoreArgs = list(lineData = lineData),
-            SIMPLIFY = FALSE
-          ) |>
-            suppressWarnings()
+            } else {
+              lineCount <- nrow(lineData) - 1
+            }
 
-          if (disjointLine) {
-            .AddXMLAddComponents(segmentAnnotations[[disjointLineIndex]], subLineSegmentsAnnotations)
-            .AddXMLAddChildren(segmentAnnotations[[disjointLineIndex]], subLineSegmentsAnnotations)
-            .AddXMLAddParents(segmentAnnotations[[disjointLineIndex]], subLineSegmentsAnnotations)
-          } else {
-            segmentAnnotations <- subLineSegmentsAnnotations
-          }
-        }
+            if (lineCount > summarisedSections) {
+              slope_Range_Median <- .AddXMLSummariseGGPlotLayer(lineData, function(data) {
+                data |>
+                  dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+                  tidyr::drop_na() |>
+                  dplyr::select(matches("(start|end)\\w")) |>
+                  dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
+                  dplyr::summarise(min = min(slope), max = max(slope), median = median(slope)) |>
+                  as.list()
+              }, overlap = TRUE)
+              summarised <- TRUE
+              lineCount <- summarisedSections
+            } else {
+              summarised <- FALSE
+              # This just needs some value for the mapply to loop through correctly
+              slope_Range_Median <- 1:lineCount
+            }
+
+            splitData <- lineData$x |>
+              seq_along() |>
+              .SplitData(overlapping = TRUE)
+
+            subLineSegmentsAnnotations <- mapply(
+              function(i, splitIndices, lineData, summary) {
+                if (summarised) {
+                  desc <- paste(
+                    "slope range",
+                    .AddXMLFormatNumber(summary$min),
+                    "to",
+                    .AddXMLFormatNumber(summary$max),
+                    "with median",
+                    .AddXMLFormatNumber(summary$median)
+                  )
+                  desc2 <- paste(
+                    "x from ",
+                    lineData$x[splitIndices[1]],
+                    "to",
+                    lineData$x[splitIndices |> tail(n = 1)],
+                    "y from ",
+                    lineData$y[splitIndices[1]],
+                    "to",
+                    lineData$y[splitIndices |> tail(n = 1)]
+                  )
+                } else {
+                  desc <- paste(
+                    .AddXMLFormatNumber((lineData$y[i + 1] - lineData$y[i]) / (lineData$x[i + 1] - lineData$x[i])),
+                    "slope from x",
+                    .AddXMLFormatNumber(lineData$x[i]),
+                    "to x",
+                    .AddXMLFormatNumber(lineData$x[i + 1])
+                  )
+                  desc2 <- paste0(
+                    "line from (",
+                    .AddXMLFormatNumber(lineData$x[i]),
+                    ",",
+                    .AddXMLFormatNumber(lineData$y[i]),
+                    ") to (",
+                    .AddXMLFormatNumber(lineData$x[i + 1]),
+                    ",",
+                    .AddXMLFormatNumber(lineData$y[i + 1]),
+                    ")"
+                  )
+                }
+                .AddXMLGGplotGeomItem(root,
+                  graphObjectStruct,
+                  position = i,
+                  id = .CreateID(ifelse(disjointLine, disjointLineGTag, lineGTagID), letters[i]),
+                  speech = desc, speech2 = desc2
+                )
+              },
+              i = if (summarised) seq_along(splitData) else 1:lineCount,
+              splitIndices = splitData,
+              summary = slope_Range_Median,
+              MoreArgs = list(lineData = lineData),
+              SIMPLIFY = FALSE
+            ) |>
+              suppressWarnings()
+
+
+            # If there are disjoint lines this loop through mutliple times
+            # If not this will looop through once and so it needs to just return the one element
+            if (disjointLine) {
+              .AddXMLAddComponents(disjointLineAnnotation, subLineSegmentsAnnotations)
+              .AddXMLAddChildren(disjointLineAnnotation, subLineSegmentsAnnotations)
+              .AddXMLAddParents(disjointLineAnnotation, subLineSegmentsAnnotations)
+              disjointLineAnnotation
+            } else {
+              subLineSegmentsAnnotations
+            }
+          },
+          disjointLineIndex = lineSeq,
+          SIMPLIFY = FALSE
+        )
       }
+
+      # This is to effectivly delist the segment annotation.
+      if (!disjointLine) {
+        segmentAnnotations <- segmentAnnotations[[1]]
+      }
+
       .AddXMLAddComponents(lineGTagAnnotation, segmentAnnotations)
       .AddXMLAddChildren(lineGTagAnnotation, segmentAnnotations)
       .AddXMLAddParents(lineGTagAnnotation, segmentAnnotations)
-      annotations[[lineNum]] <- lineGTagAnnotation
-    }
-  } else if (x$type == "point") {
-    # Rmeove all the NAs in the data
-    data <- x$data |>
-      drop_na(x, y)
-
-    numberOfPoints <- nrow(data)
-
-    pointGrobID <- .GetGeomID(graphObject, x$layernum)
-
-    XML::addAttributes(annotation$root,
-      speech = "Point graph",
-      speech2 = paste("Point graph with", numberOfPoints, "points"),
-      type = "Center"
-    )
-
-    # Going to provide warning about using unknown shapes
-    if (!all(data$shape %in% c(16, 19))) {
-      warning("You are using a non default point shape. Currently the location of that point in the webpage is incorrect. The summaring information is unaffected.")
-    }
-
-    # Summarise into section when greater than 10 points
-    if (numberOfPoints > 5) {
-      mean_sd_num <- data |>
-        arrange(x) |>
-        summariseLayer(function(data) {
-          data |>
-            dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
-        })
-
-      # Get the order of points
-      orderOfIDs <- data.frame(x = data$x, id = 1:length(data$x)) |>
-        dplyr::arrange(x) |>
-        select(id) |>
-        unlist()
-      pointGroups <- .SplitData(1:numberOfPoints)
-
-      # Loop through all of the summarized sections and
-      for (summarizedSection in 1:length(mean_sd_num)) {
-        # Add summarized section
-        desc <- paste(
-          "mean:", .AddXMLFormatNumber(mean_sd_num[[summarizedSection]]$mean),
-          "sd:", .AddXMLFormatNumber(mean_sd_num[[summarizedSection]]$sd),
-          "n:", .AddXMLFormatNumber(mean_sd_num[[summarizedSection]]$count)
-        )
-
-        summarizedSectionAnnotation <- .AddXMLAddAnnotation(root,
-          summarizedSection,
-          id = paste(pointGrobID, letters[summarizedSection], sep = "."),
-          kind = "grouped",
-          attributes = list(speech = desc)
-        )
-
-        # Add individual points
-        # Only do so if there are less than 100 points
-        # This is because the time taken to add all of the annotations is too long.
-        # TODO:: optimize XML interactions to allow more data to be handled.
-        if (length(data$x) < 100) {
-          pointsNumberToAdd <- orderOfIDs[pointGroups[[summarizedSection]]]
-          pointAnnotations <- list()
-
-          pointAnnotations <- lapply(pointsNumberToAdd, function(pointID) {
-            i <- match(pointID, pointsNumberToAdd)
-            shape <- data$shape[i]
-            colour <- data$fill[i]
-            if (is.na(colour)) colour <- "black"
-            size <- data$size[i]
-            desc2 <- paste("Shape:", shape, "colour:", colour[1], "size:", .AddXMLFormatNumber(size))
-            .AddXMLAddAnnotation(root,
-              position = i,
-              id = paste(pointGrobID, pointID, sep = "."),
-              attributes =
-                list(
-                  speech = paste0("(", data$x[pointID], ", ", data$y[pointID], ")"),
-                  speech2 = desc2
-                )
-            )
-          })
-
-          .AddXMLAddChildren(summarizedSectionAnnotation, pointAnnotations)
-          .AddXMLAddComponents(summarizedSectionAnnotation, pointAnnotations)
-          .AddXMLAddParents(summarizedSectionAnnotation, pointAnnotations)
-        }
-        annotations[[summarizedSection]] <- summarizedSectionAnnotation
-      }
-    } else {
-      for (i in 1:numberOfPoints) {
-        desc <- paste0(
-          "(", .AddXMLFormatNumber(data$x[i]),
-          .AddXMLFormatNumber(data$y[i]), ")"
-        )
-        annotations[[i]] <- .AddXMLPoint(root,
-          position = i,
-          id = paste(pointGrobID, i, sep = "."),
-          speech = desc
-        )
-      }
-    }
-  } else if (x$type == "smooth") {
-    geomGrobID <- .GetGeomID(graphObject, x$layernum)
-
-
-    XML::addAttributes(annotation$root,
-      speech = "Smoother graph",
-      speech2 = paste0("Smoother graph", ifelse(x$ci, paste(" with", x$level, "confidence bands"), ""), ""),
-      type = "Center"
-    )
-
-    if (!x$ci) {
-      data$ymin <- 0
-      data$ymax <- 0
-    }
-    summarisedData <- summariseLayer(data, function(data) {
-      data |>
-        dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
-        dplyr::mutate(CIWidth = ymax - ymin) |>
-        tidyr::drop_na() |>
-        dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
-        dplyr::summarise(
-          min = min(slope), max = max(slope),
-          mean = mean(slope), median = median(slope),
-          avg_width = mean(CIWidth), median_width = median(CIWidth),
-          rangeCI = max(CIWidth) - min(CIWidth)
-        ) |>
-        as.list()
-    })
-
-    for (i in 1:summarisedSections) {
-      sectionDesc <- paste(
-        "average slope: ", .AddXMLFormatNumber(summarisedData[[i]]$mean),
-        ifelse(x$ci, paste("CI width:", .AddXMLFormatNumber(summarisedData[[i]]$avg_width), ""), "")
-      )
-
-      lineDesc <- paste(
-        "slope range:", paste0("(", .AddXMLFormatNumber(summarisedData[[i]]$min), ",", .AddXMLFormatNumber(summarisedData[[i]]$max), ")"),
-        "median slope:", .AddXMLFormatNumber(summarisedData[[i]]$median)
-      )
-
-      ciDesc <- ifelse(x$ci, paste(
-        "median CI width:", .AddXMLFormatNumber(summarisedData[[i]]$median_width),
-        "width range:", .AddXMLFormatNumber(summarisedData[[i]]$rangeCI)
-      ), "")
-
-
-      annotations[[i]] <- .AddXMLSmooth(root,
-        position = i,
-        id = geomGrobID,
-        speech = sectionDesc,
-        lineDesc = lineDesc,
-        ciDesc = ciDesc,
-        layer = x$layernum
-      )
-    }
-  } else { # TODO:  warn about layer types we don't recognize
-    return(NULL)
-  }
-  .AddXMLAddComponents(annotation, annotations)
-  .AddXMLAddChildren(annotation, annotations)
-  .AddXMLAddParents(annotation, annotations)
-  return(invisible(annotation))
+      lineGTagAnnotation
+    },
+    lineNum = seq_along(graphObjectStruct$lines),
+    lineData = graphObjectStruct$lines,
+    SIMPLIFY = FALSE
+  )
 }
 
-# Still a work in progress as the se bars are not shown.
-# TODO: make se bars actually display.
-.AddXMLSmooth <- function(root, position = 1, id = NULL, speech, speech2 = speech,
-                          lineDesc, ciDesc, layer) {
+.AddXMLAddGGPlotLayer.bar <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
+  data <- graphObjectStruct$data
+
+  barCount <- nrow(data)
+
+  XML::addAttributes(layerRoot,
+    speech = "Bar graph",
+    speech2 = paste("Bar graph with", barCount, "bars"),
+    type = "Center"
+  )
+
+  # TODO: histogram bars have density but other geom_bar objects won't
+  # Need to not fail if density not present
+  # Generally, need to deal with missing values better
+  mapply(
+    function(i, x, y, ymax, ymin, xmin, xmax, density) {
+      barId <- .CreateID(geomID, i)
+      # If no density values then assume it's a categorical x-axis
+      .AddXMLGGplotGeomItem(
+        root,
+        graphObjectStruct,
+        position = i,
+        x = signif(x, 4),
+        count = ymax - ymin,
+        density = ifelse(is.null(density), NA, density[i]),
+        start = signif(xmin, 4),
+        end = signif(xmax, 4),
+        id = barId,
+        categorical = is.null(density)
+      )
+    },
+    i = seq_along(data$y),
+    x = data$x,
+    y = data$y,
+    ymax = data$ymax, ymin = data$ymin,
+    xmax = data$xmax, xmin = data$xmin,
+    MoreArgs = (list(density = data$density)),
+    SIMPLIFY = FALSE
+  )
+}
+
+.AddXMLAddGGPlotLayer.default <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
+  warning("This layer type: ", class(graphObjectStruct), " is not supported by MakeAccessibleSVG")
+  return(invisible())
+}
+
+
+#' Add geom item to the XML
+#'
+#' These functions are used by the .AddXMLAddGGplotLayer functions
+#' There should be one function for each of the layer types.
+#'
+#' For some of them they are quite simple so they are defered to other types.
+#' For other ones they can be quite complex.
+#'
+#' @param root This the the annotation root of the document
+#' @param position The position of the item
+#' @param id the text which will be in the first element which is a active/grouped etc tag.
+#' @param speech The first description of the annotation
+#' @param speech2 The second slightly more detailed description. Or it can be used to tell different information.
+#' @param ... Extra parameters for particular types.
+#' @param graphObject This is what the dispatch is run on.
+#'
+#' @return Wil return invisibly the annotation object as there are cases where it is
+#' just the side effects you are after.
+.AddXMLGGplotGeomItem <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, ...) {
+  UseMethod(".AddXMLGGplotGeomItem", graphObject)
+}
+
+.AddXMLGGplotGeomItem.default <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, ...) {
+  stop("This type is not supported: ", class(graphObject))
+}
+
+.AddXMLGGplotGeomItem.smooth <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, lineDesc, ciDesc, layer) {
   annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, letters[position], sep = "."), kind = "grouped")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
 
@@ -548,53 +645,44 @@
   return(invisible(annotation))
 }
 
-# This is a work in progress
-# TODO: Make points actually show
-.AddXMLPoint <- function(root, position = 1, id = NULL, speech, speech2 = speech) {
+.AddXMLGGplotGeomItem.point <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, ...) {
   annotation <- .AddXMLAddAnnotation(root, position = position, id = id, kind = "active")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech)
   return(invisible(annotation))
 }
 
-.AddXMLcenterBar <- function(root, position = 1, mid = NULL, count = NULL, density = NULL, start = NULL, end = NULL,
-                             id = NULL) {
-  rectId <- ifelse(is.null(id), .AddXMLmakeId("rect", paste("1.1", position, sep = ".")), id)
+.AddXMLGGplotGeomItem.bar <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech,
+                                      x = NULL, count = NULL, density = NULL, start = NULL, end = NULL,
+                                      categorical = TRUE) {
+  rectId <- ifelse(is.null(id), .AddXMLmakeId("rect", .CreateID("1.1", position)), id)
   annotation <- .AddXMLAddAnnotation(root,
     position = position,
     id = rectId,
     kind = "active"
   )
-  XML::addAttributes(annotation$root,
-    speech = paste("Bar", position, "at", mid, "with value", count),
-    speech2 = paste(
-      "Bar", position, "between x values", start,
-      "and", end, " with y value", count, "and density", signif(density, 3)
-    ),
-    type = "Bar"
-  )
-  return(invisible(annotation))
-}
-.AddXMLcategoricalBar <- function(root, position = 1, x = NULL, count = NULL, id = NULL) {
-  rectId <- ifelse(is.null(id), .AddXMLmakeId("rect", paste("1.1", position, sep = ".")), id)
-  annotation <- .AddXMLAddAnnotation(root,
-    position = position,
-    id = rectId,
-    kind = "active"
-  )
-  XML::addAttributes(annotation$root,
-    speech = paste("Bar", position, "at", x, "with value", count),
-    speech2 = paste("Bar", position, "at x value", x, " with y value", count),
-    type = "Bar"
-  )
+
+  if (categorical) {
+    XML::addAttributes(annotation$root,
+      speech = paste("Bar", position, "at", x, "with value", count),
+      speech2 = paste("Bar", position, "at x value", x, " with y value", count),
+      type = "Bar"
+    )
+  } else {
+    XML::addAttributes(annotation$root,
+      speech = paste("Bar", position, "at", x, "with value", count),
+      speech2 = paste(
+        "Bar", position, "between x values", start,
+        "and", end, " with y value", count, "and density", signif(density, 3)
+      ),
+      type = "Bar"
+    )
+  }
   return(invisible(annotation))
 }
 
-.AddXMLLine <- function(root, position = 1, id = NULL, speech = NULL, speech2 = speech) {
-  annotation <- .AddXMLAddAnnotation(root, position = position, id = id, kind = "active")
-  XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
-  return(invisible(annotation))
+.AddXMLGGplotGeomItem.line <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech) {
+  return(.AddXMLGGplotGeomItem.point(root, graphObject, position, id, speech, speech2))
 }
-
 
 ## Auxiliary methods for annotations
 ##

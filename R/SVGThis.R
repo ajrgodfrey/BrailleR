@@ -114,9 +114,6 @@ SVGThis.eulerr <-
 # if FALSE it will use the currently active device
 SVGThis.ggplot <-
   function(x, file = "test.svg", createDevice = TRUE, ...) {
-    #      x=Augment(x)
-    #      grid.force()
-
     if (length(x$data$x) > 10000) {
       warning("You are trying to make a svg from a plot with lots of data it might take quite some time.")
     }
@@ -127,12 +124,11 @@ SVGThis.ggplot <-
     print(x)
     gridSVG::grid.export(name = file)
 
-    # Loop through layers and change svg as needed
-    1:length(x$layers) |>
-      lapply(function(layerIndex, graphObject, file) {
-        .RewriteSVG(graphObject, file, x$layer[[layerIndex]]$geom, layerIndex)
-      }, graphObject = x, file = file)
 
+    # Rewrite the SVG to that it works with the AddXML
+    .RewriteSVG(x, file)
+
+    # Delete the display device
     if (createDevice) {
       dev.off()
     }

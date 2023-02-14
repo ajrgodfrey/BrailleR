@@ -1,27 +1,32 @@
 #' Rewrite a SVG so that it cna be properly explored with diagcess via the XML.
 #' @rdname .RewriteSVG
-#' The Rewrite SVG is a wrapper around the .RewrtieSVGGeom function. THis function provides
-#' the actual work of the rewriting.
+#' The Rewrite SVG is a wrapper around the .RewrtieSVGGeom function. It will loop through each
+#' of the layers and do the necessary changes.
 #'
 #' @param x The graph object that the svg comes from
 #' @param file The file of the SVG
-#' @param type This should be a ojbect of the class of geom you are trying to rewrite
-#' the svg for.
 #' @return NULL
 #'
-.RewriteSVG <- function(x, file, type, layer, ...) {
+.RewriteSVG <- function(x, file, ...) {
   svgDoc <- XML::xmlParseDoc(file)
 
-  geomGTagID <- .GetGeomID(x, layer)
-  if (is.null(geomGTagID)) {
-    return()
-  }
-  geomGTag <- XML::getNodeSet(
-    svgDoc,
-    paste0('//*[@id="', geomGTagID, '"]')
-  )[[1]]
+  # Loop through each layer and write the geom.
+  seq_along(x$layers) |>
+    lapply(function(layerIndex, graphObject, file, svg) {
+      geomGTagID <- .GetGeomID(graphObject, layerIndex)
 
-  .RewriteSVGGeom(x, type, geomGTagID, geomGTag, layer, ...)
+      # If the geomGTagID is empty then this geom is not supported.
+      if (is.null(geomGTagID)) {
+        NULL
+      }
+
+      geomGTag <- XML::getNodeSet(
+        svg,
+        paste0('//*[@id="', geomGTagID, '"]')
+      )[[1]]
+
+      .RewriteSVGGeom(graphObject, x$layer[[layerIndex]]$geom, geomGTagID, geomGTag, layerIndex, ...)
+    }, graphObject = x, file = file, svg = svgDoc)
 
   XML::saveXML(svgDoc, file = file)
 
@@ -194,6 +199,8 @@
 #' This is used to split both polylines and polygons. It will behave slightly differently depending on the parameter.
 #' However by default it will split a polyline.
 #'
+#' Splitting of the points is doen with the .SplitPolyPoint functions.
+#'
 #' @param parentGTag This is the parent g tag which the new polylines will be children of
 #' @param id The id of the new polyline. The id of these new polylines will be the argument with a letter added to end.
 #' @param originalPoly original poly that you wish to split up.
@@ -212,75 +219,25 @@
     XML::xmlGetAttr("points") |>
     strsplit(" ") |>
     unlist()
+
+
+  # Split the points up based on the type of poly it is
   nSections <- ifelse(length(points) > 5, 5, length(points))
-
-  if (type == "polyline") {
-    pointsSplit <- .SplitData(points, overlapping = TRUE)
-  } else if (type == "polygon") {
-    # Polygon points start and work there way round the outside
-    # I will split this into top and bottom
-    pointsTopAndBottom <-
-      # Split the data into top and bottom
-      split(
-        points,
-        cut(seq_along(points),
-          2,
-          labels = FALSE,
-          include.lowest = TRUE
-        )
-      ) |>
-      # Split each top and bottom section into sections
-      lapply(function(points) {
-        split(
-          points,
-          cut(seq_along(points),
-            nSections,
-            labels = FALSE,
-            include.lowest = TRUE
-          )
-        )
-      }) |>
-      # Go through the top and bottom and add one point from the next seciton
-      # This is so there will be a continous polygon
-      lapply(function(pointsCollection) {
-        pointsCollection |>
-          seq_along() |>
-          lapply(function(i) {
-            if (i != length(pointsCollection)) {
-              c(pointsCollection[[i]], pointsCollection[[i + 1]][1])
-            } else {
-              pointsCollection[[i]]
-            }
-          })
-      })
-
-    # As the points go aroudn the permiter the top needs to be reversed so that
-    # it starts at the lower end.
-    pointsTopAndBottom[[2]] <- rev(pointsTopAndBottom[[2]])
-
-    # Combine the top and bottom sections so that you just have nsection number
-    # of sections with top and bottom coordinates
-    pointsSplit <- mapply(c,
-      pointsTopAndBottom[[1]],
-      pointsTopAndBottom[[2]],
-      SIMPLIFY = FALSE
-    )
-  } else {
-    warning(paste("Sorry type '", type, "' is not supported yet"))
-  }
-
+  pointsSplit <- .SplitPolyPoints(points, structure(type, class = type), nSections)
 
   ## For each segment add in a new poly with all the correct attributes
   seq_along(pointsSplit) |>
     lapply(function(i) {
       args <- polyAttr
       args$id <- paste(id, letters[i], sep = ".")
+
       if (type == "polyline") args$`fill-opacity` <- "0"
+
       args$points <- paste(pointsSplit[[i]], collapse = " ")
 
-      newPolyline <- XML::newXMLNode(type, parent = parentGTag, attrs = args)
+      newPoly <- XML::newXMLNode(type, parent = parentGTag, attrs = args)
 
-      XML::addChildren(parentGTag, newPolyline)
+      XML::addChildren(parentGTag, newPoly)
     })
 
   ## Remove old line
@@ -288,6 +245,80 @@
 
   return(invisible())
 }
+
+#' @rdname .RewriteSVG
+#'
+#' These functions will take a vector of points and split them into a certain number of sections.
+#'
+#' @param points A vector of points to be split into
+#' @param polyType The poly type that the points come
+#' @param nSections This is the number of resultant sections
+#'
+#' @return A list of vectors of points.
+.SplitPolyPoints <- function(points, polyType, nSections) {
+  UseMethod(".SplitPolyPoints", polyType)
+}
+
+.SplitPolyPoints.polyline <- function(points, polyType, nSections) {
+  .SplitData(points, overlapping = TRUE)
+}
+
+.SplitPolyPoints.polygon <- function(points, polyType, nSections) {
+  # Polygon points start and work there way round the outside
+  # I will split this into top and bottom
+  pointsTopAndBottom <-
+    # Split the data into top and bottom
+    split(
+      points,
+      cut(seq_along(points),
+        2,
+        labels = FALSE,
+        include.lowest = TRUE
+      )
+    ) |>
+    # Split each top and bottom section into sections
+    lapply(function(points) {
+      split(
+        points,
+        cut(seq_along(points),
+          nSections,
+          labels = FALSE,
+          include.lowest = TRUE
+        )
+      )
+    }) |>
+    # Go through the top and bottom and add one point from the next seciton
+    # This is so there will be a continous polygon
+    lapply(function(pointsCollection) {
+      pointsCollection |>
+        seq_along() |>
+        lapply(function(i) {
+          if (i != length(pointsCollection)) {
+            c(pointsCollection[[i]], pointsCollection[[i + 1]][1])
+          } else {
+            pointsCollection[[i]]
+          }
+        })
+    })
+
+  # As the points go aroudn the permiter the top needs to be reversed so that
+  # it starts at the lower end.
+  pointsTopAndBottom[[2]] <- rev(pointsTopAndBottom[[2]])
+
+  # Combine the top and bottom sections so that you just have nsection number
+  # of sections with top and bottom coordinates
+  mapply(c,
+    pointsTopAndBottom[[1]],
+    pointsTopAndBottom[[2]],
+    SIMPLIFY = FALSE
+  )
+}
+
+.SplitPolyPoints.default <- function(points, polyType, nSections) {
+  warning(paste("Sorry type '", class(type), "' is not supported yet"))
+  points
+}
+
 
 # vs Currently we hardcode the attributes. Should simply be copied.
 # Old functions only held for backwards support with base R

@@ -135,12 +135,30 @@ AddXML.ggplot <- function(x, file) {
 
   if (xs$npanels == 1) {
     for (layerNum in 1:xs$nlayers) {
-      layer <- .AddXMLAddGGPlotLayer(
-        annotations,
-        xs$panels[[1]]$panellayers[[layerNum]],
-        graphObject = x
+      layerGroupID <- paste("center", 1, layerNum, sep = "-")
+      layerAnnotation <- .AddXMLAddAnnotation(annotations,
+        position = 3 + layerNum,
+        id = layerGroupID, kind = "grouped"
       )
-      components[[length(components) + 1]] <- layer
+
+      layerStruct <- xs$panels[[1]]$panellayers[[layerNum]]
+
+      layerAnnotations <- .AddXMLAddGGPlotLayer(
+        annotations,
+        layerAnnotation$root,
+        structure(layerStruct, class = layerStruct$type),
+        .GetGeomID(x, layerNum)
+      )
+
+      # Keep moving if this layer is not supported
+      if (is.null(layerAnnotations)) {
+        next
+      }
+
+      .AddXMLAddComponents(layerAnnotation, layerAnnotations)
+      .AddXMLAddChildren(layerAnnotation, layerAnnotations)
+      .AddXMLAddParents(layerAnnotation, layerAnnotations)
+      components[[length(components) + 1]] <- layerAnnotation
     }
   }
   # Else, should warn about not handling faceted charts -- or else handle them!
