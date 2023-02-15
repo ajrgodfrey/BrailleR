@@ -353,7 +353,7 @@
   return(invisible(NULL))
 }
 
-.RewriteSVGGeom.tsplot <- function(x, file) {
+.RewriteSVG.tsplot <- function(x, file) {
   svgDoc <- XML::xmlParseDoc(file) ## "Temperature.svg"
   nodes <- XML::getNodeSet(
     svgDoc,

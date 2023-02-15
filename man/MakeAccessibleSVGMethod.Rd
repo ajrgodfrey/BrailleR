@@ -58,7 +58,9 @@ geom_histogram()
 MakeAccessibleSVG(histogram)
 
 # Cleaning up
-unlink("test.html")
+unlink("barChart-SVG.html")
+unlink("histogram-SVG.html")
+unlink("tsplot-SVG.html")
 }
 
 \references{
