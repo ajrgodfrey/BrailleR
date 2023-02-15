@@ -7,19 +7,29 @@
 \alias{MakeAccessibleSVG.tsplot}
 
 \title{Create and display a accessible exploration webpage SVG of graph}
-\description{Creates the necessary SVG and XML files for a graph object (as long as it has a class assigned). Then turns them into a html file and opens it for viewing (if a interactive session) in your browser.}
+\description{Creates the necessary SVG and XML files for a graph object (as long as graph type is supported). Then turns them into a html file and opens it for viewing (if a interactive session) in your browser.}
 \usage{
-MakeAccessibleSVG(x, file = "test", view=interactive(), cleanup = TRUE, ...)
+MakeAccessibleSVG(x,
+file = paste0(deparse(substitute(x)), "-SVG"),
+view=interactive(), cleanup = TRUE, ...)
+\method{MakeAccessibleSVG}{ggplot}(x,
+file = paste0(deparse(substitute(x)), "-SVG"),
+view=interactive(), cleanup = TRUE, VI_and_Describe = TRUE, ...)
 }
 \arguments{
   \item{x}{a graph object for which a method exists}
-  \item{file}{The shared name for the SVG and XML files to be created.}
+  \item{file}{The shared name for the SVG, XML and HTML files to be created. It will also be the title of the html webpage.}
   \item{view}{launch in browser; this is the default when in interactive session}
   \item{cleanup}{Whether the function should remove the svg and xml files after they have bee embedded into the hmtml file.}
+  \item{VI_and_Describe}{Whether to include the VI and Describe outputs in the built webpage.}
   \item{...}{arguments passed on to other methods/functions}
 }
 \details{
-This is experimental work. It works for some baseplots like Boxplots, Histograms and Scatter plots. In ggplot it only works with geom_line and geom_bar (this includes histograms and geom_cols) for ggplot. This function can be thought of as just a shortcut for quickly creating a SVG webpage for exploration. Each individual step can be done with the \code{SVGThis()}, \code{AddXML()} and \code{BrowseSVG()} functions. Using this is currently the quickest workflow for accessing the SVG features of BrailleR.
+This function can be thought of as just a shortcut for quickly creating a SVG webpage for exploration. Each individual step can be done with the \code{SVGThis()}, \code{AddXML()} and \code{BrowseSVG()} functions. Using this is currently the quickest workflow for accessing the SVG features of BrailleR.
+
+More information can be found in the Exploring graphs vignette.
+
+It has support for some of the base plots however you can consider this support deprecated.
 }
 \value{NULL. This function is solely for the purpose of creating SVG and XML files and displaying them}
 

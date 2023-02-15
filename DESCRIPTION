@@ -62,9 +62,12 @@ Imports:
     rmarkdown,
     roloc,
     rolocISCCNBS,
+    tidyr,
     whisker,
     XML,
-    xtable
+    xtable,
+    methods,
+    grDevices
 Suggests:
     broom,
     emmeans,

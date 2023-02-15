@@ -1,7 +1,9 @@
+^.*\.Rproj$
 ^CONDUCT\.md$
-^cran-comments\.md$
-^readme.md$
+^\.Rproj\.user$
 ^\.github$
 ^_pkgdown\.yml$
+^cran-comments\.md$
 ^docs$
 ^pkgdown$
+^readme.md$
