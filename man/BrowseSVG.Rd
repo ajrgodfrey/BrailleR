@@ -18,7 +18,9 @@ BrowseSVG(file="test", key=TRUE, footer = TRUE, view=interactive(), ggplot_objec
   
 }
 \details{
-  A HTML file is written in the current working directory. This HTML file will have the embeded svg and xml files as well as the javascript to help with the exploration of the graph. Note that it is required that you already have a svg and xml file in the current directory for it to work.}
+  A HTML file is written in the current working directory. This HTML file will have the embeded svg and xml files as well as the javascript (diagcess) to help with the exploration of the graph. Note that it is required that you already have a svg and xml file in the current directory for it to work.
+  
+  It is much easier however to just use the \code{MakeAccessibleSVG} function directly which does it all for you}
 \value{
 NULL. This function exists for its side effects only.
 }
