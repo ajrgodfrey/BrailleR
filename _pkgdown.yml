@@ -18,7 +18,7 @@ articles:
 
 reference:
 - title: Explore Graphs
-  desc:  Explore ggplot graphs in accsessible ways.
+  desc:  Explore ggplot graphs in accessible ways.
   contents:
   - VI
   - sort.VIgraph
@@ -90,9 +90,4 @@ reference:
   - GoBlind
   - WriteR
   - Deprecated
-  
-- title: Exposed internal funtion
-  desc: There are functions that all ought to be treated as internal functions
-  contents:
-  - AddXMLInternal
   - AugmentMethod

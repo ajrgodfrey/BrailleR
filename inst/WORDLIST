@@ -2,6 +2,7 @@ Acknowledgements
 AddXML
 ajrgodfrey
 al
+AugmentMethod
 AutoSpellCheck
 AutoSpellList
 baseplots
@@ -11,8 +12,10 @@ BlindRUG
 BOM
 brailleR
 BrailleR
+BrailleRHistory
 BrailleRHome
 BrailleROptions
+BrailleRUsefulLinks
 BRL
 BRLThis
 BrowseSVG
@@ -32,12 +35,14 @@ colour
 colours
 css
 csv
+DataViewer
 dcf
 De
 DEIMS
 Dengler
 deprocated
 deprocation
+desc
 Devian
 devian
 devtools
@@ -52,10 +57,12 @@ enscript
 eps
 et
 etxt
+ExploringGraphs
 extrafont
 factanal
 fanfold
 finalise
+FindCSSFile
 FindReplace
 FittedLinePlot
 fittedlineplot
@@ -71,6 +78,7 @@ GetWriteR
 GetWxPython
 gg
 ggplot
+github
 glm
 GoBlind
 godfrey
@@ -90,6 +98,8 @@ importFrom
 InQuotes
 installr
 internalised
+IntroWriteR
+io
 Javascript
 javascript
 JoinBlindRUG
@@ -109,6 +119,7 @@ MakeAllInOneSlide
 MakeBatch
 MakeReadable
 MakeRmd
+MakeRprofile
 MakeSlideShow
 MakeSlideshow
 MakeSlidy
@@ -118,6 +129,7 @@ mathjax
 mouseclick
 murrell
 MyBrailleR
+navbar
 nd
 NewFunction
 normalizePath
@@ -213,6 +225,7 @@ ThankYou
 Theodor
 ThreeFactors
 Tidyverse
+TimeSeriesPlot
 titbits
 toupper
 travis
@@ -222,6 +235,7 @@ TwoFactors
 txtOut
 txtStart
 UniDesc
+UpdateGraph
 UseGitHub
 UseR
 useRs
@@ -237,6 +251,8 @@ wd
 wdtxt
 WEIMS
 WhatIs
+WhereXY
+WhichFile
 Wickham
 wordlist
 WriteR
