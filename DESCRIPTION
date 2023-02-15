@@ -1,6 +1,6 @@
 Package: BrailleR
 Title: Improved Access for Blind Users
-Version: 0.33.4
+Version: 0.99.0
 Authors@R: c(
     person("A. Jonathan R.", "Godfrey", , "a.j.godfrey@massey.ac.nz", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0002-8129-8835")),

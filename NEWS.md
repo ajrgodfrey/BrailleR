@@ -1,4 +1,6 @@
 # BrailleR 0.99.0
+- did some cleaning up to de-clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0
+
 
 # BrailleR 0.33.4
 - fix issue #35 with incorrect bin counts
