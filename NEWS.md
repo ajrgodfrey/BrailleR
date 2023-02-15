@@ -1,3 +1,5 @@
+# BrailleR 0.99.0
+
 # BrailleR 0.33.4
 - fix issue #35 with incorrect bin counts
 - fix issue #24, correcting base r plot titles in VI
