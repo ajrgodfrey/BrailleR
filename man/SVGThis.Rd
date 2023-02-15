@@ -17,7 +17,6 @@
 SVGThis(x, file = "test.svg", ...)
 \method{SVGThis}{ggplot}(x, file = "test.svg", createDevice = TRUE, ...)
 }
-}
 \arguments{
   \item{x}{a graph object for which a method exists}
   \item{file}{The SVG file to be created.}
