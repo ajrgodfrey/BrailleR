@@ -64,7 +64,8 @@ Imports:
     whisker,
     XML,
     xtable,
-    methods
+    methods,
+    grDevices
 Suggests:
     broom,
     emmeans,
