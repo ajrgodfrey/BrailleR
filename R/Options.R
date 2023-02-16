@@ -293,7 +293,7 @@ SetPValDigits =
       digits = as.integer(digits)
       if (digits > 1) {
         options(BrailleR.PValDigits = digits)
-        .UpdatedSettingMSG(What="BrailleR.PValDigits option for the number of decimal places to display for p values", To=digits))
+        .UpdatedSettingMSG(What="BrailleR.PValDigits option for the number of decimal places to display for p values", To=digits)
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
