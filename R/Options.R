@@ -320,9 +320,7 @@ SetSigLevel =
     function(alpha, Permanent = interactive(), Local = interactive()) {
       if ((0 < alpha) & (alpha < 1)) {
         options(BrailleR.SigLevel = alpha)
-        message(
-            "The BrailleR.SigLevel option for the level of alpha has been changed to ",
-            alpha, ".")
+        .UpdatedSettingMSG("BrailleR.SigLevel option for the level of alpha",To=alpha)
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
@@ -350,24 +348,21 @@ SetSigLevel =
 GoSighted =
     function() {
       options(BrailleR.VI = FALSE)
-      message(
-          "By going sighted, you have turned off the automatic generation of text descriptions of graphs.\n")
+      .GoSightedMSG()
       return(invisible(NULL))
     }
 
 GoBlind =
     function() {
       options(BrailleR.VI = TRUE)
-      message(
-          "By going blind, you have turned on the automatic generation of text descriptions of graphs.\n")
+      .GoBlindMSG()
       return(invisible(NULL))
     }
 
 GoAdvanced =
     function() {
       options(BrailleR.Advanced = TRUE)
-      message(
-          "By going advanced, you have reduced the verbosity of text descriptions of graphs.\n")
+      .GoAdvancedMSG()
       return(invisible(NULL))
     }
 
@@ -375,8 +370,7 @@ GoAdvanced =
 GoNovice =
     function() {
       options(BrailleR.Advanced = FALSE)
-      message(
-          "By going novice, you have returned to receiving all of the automatically generated text descriptions of graphs.\n")
+      .GoNoviceMSG()
       return(invisible(NULL))
     }
 
@@ -384,28 +378,28 @@ GoNovice =
 
 ViewOn = function() {
            options(BrailleR.View = TRUE)
-           message("You have turned the automatic opening of html pages on.\n")
-           return(invisible(NULL))
+           .ViewOnMSG()
+           return(invisble(NULL))
          }
 
 ViewOff =
     function() {
       options(BrailleR.View = FALSE)
-      message("You have turned the automatic opening of html pages off.\n\n")
+      .ViewOffMSG()
       return(invisible(NULL))
     }
 
 LatexOn =
     function() {
       options(BrailleR.Latex = TRUE)
-      message("You have turned the automatic generation of LaTeX tables on.\n")
+      .LatexOnMSG()
       return(invisible(NULL))
     }
 
 LatexOff =
     function() {
       options(BrailleR.Latex = FALSE)
-      message("You have turned the automatic generation of LaTeX tables off.\n")
+      .LatexOffMSG()
       return(invisible(NULL))
     }
 

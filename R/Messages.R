@@ -75,10 +75,41 @@ message(NewFile, " has been updated ", where)
 return(invisible(NULL))
 }
 
+.GoAdvancedMSG =     function() {
+message("By going advanced, you have reduced the verbosity of text descriptions of graphs.")
+return(invisible(NULL))
+}
+
+
+.GoBlindMSG =     function() {
+message("By going blind, you have turned on the automatic generation of text descriptions of graphs.")
+return(invisible(NULL))
+}
+
+.GoNoviceMSG =     function() {
+message("By going novice, you have returned to receiving all of the automatically generated text descriptions of graphs.")
+return(invisible(NULL))
+}
+
+.GoSightedMSG =     function() {
+message("By going sighted, you have turned off the automatic generation of text descriptions of graphs.")
+return(invisible(NULL))
+}
 
 
 .InstallPython =     function() {
 message("You could use GetPython3() and GetWxPython3() to help install them.")
+return(invisible(NULL))
+}
+
+
+.LatexOffMSG =     function() {
+message("You have turned the automatic generation of LaTeX tables off.")
+return(invisible(NULL))
+}
+
+.LatexOnMSG =     function() {
+message("You have turned the automatic generation of LaTeX tables on.")
 return(invisible(NULL))
 }
 
@@ -180,5 +211,16 @@ return(invisible(NULL))
 
 .UpdatedSettingMSG =     function(What, To) {
 message(            "The", What, "has been changed to ", To, "and saved in your settings file.")
+return(invisible(NULL))
+}
+
+
+.ViewOffMSG =     function() {
+message("You have turned the automatic opening of html pages off.")
+return(invisible(NULL))
+}
+
+.ViewOnMSG =     function() {
+message("You have turned the automatic opening of html pages on.")
 return(invisible(NULL))
 }
