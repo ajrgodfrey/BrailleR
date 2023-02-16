@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BrailleR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.33.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,9 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SVGThis</span><span class="op">(</span><span class="va">x</span>, file <span class="op">=</span> <span class="st">"test.svg"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SVGThis</span><span class="op">(</span><span class="va">x</span>, file <span class="op">=</span> <span class="st">"test.svg"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for ggplot</span></span>
+<span><span class="fu">SVGThis</span><span class="op">(</span><span class="va">x</span>, file <span class="op">=</span> <span class="st">"test.svg"</span>, createDevice <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -75,15 +77,19 @@
   <dt>file</dt>
 <dd><p>The SVG file to be created.</p></dd>
 
+  <dt>createDevice</dt>
+<dd><p>Whether this function should creates it own none displaying device and print the graph on it. If FALSE will print the graph on the current device.</p></dd>
+
   <dt>...</dt>
 <dd><p>Arguments to be passed to the methods.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The Cairo SVG device found in the <span class="pkg">gr.devices</span> package does not create a structured SVG file that includes the semantics of the graphic being displayed. The SVG created by the <span class="pkg">gridSVG</span> package does meet this need, but only works on graphs drawn using the <span class="pkg">grid</span> package. Any graph created using functions from the more common <span class="pkg">graphics</span> package can be converted to the <span class="pkg">grid</span> package system using the <span class="pkg">gridGraphics</span> package.</p>
-<p>The <code>SVGThis.ggplot</code> method accepts argument <code>createDevice</code> (default TRUE) - if true the method creates its own null pdf device to draw the graph on, if false it draws on the current device.</p>
+    <p>Most of the work of the function is done <code><a href="https://rdrr.io/pkg/gridSVG/man/grid.export.html" class="external-link">gridSVG::grid.export</a></code> function. After this there is a rewrite of the SVG so that it can work better with the XML and create a easy accessible experience of the graph.</p>
+<p>The produced SVG can also be used as just that a SVG. However note that quite possibly some rewriting will of been done. The rewriting does not change how the graph looks.</p>
 <p>To view your graph as a accessible svg you can use the <code><a href="MakeAccessibleSVGMethod.html">MakeAccessibleSVG()</a></code> function.</p>
+<p>The Cairo SVG device found in the <span class="pkg">gr.devices</span> package does not create a structured SVG file that includes the semantics of the graphic being displayed. The SVG created by the <span class="pkg">gridSVG</span> package does meet this need, but only works on graphs drawn using the <span class="pkg">grid</span> package. Any graph created using functions from the more common <span class="pkg">graphics</span> package can be converted to the <span class="pkg">grid</span> package system using the <span class="pkg">gridGraphics</span> package.</p>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -98,7 +104,7 @@
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
-    <p>A. Jonathan R. Godfrey and Paul Murrell</p>
+    <p>A. Jonathan R. Godfrey, Paul Murrell and James Thompson</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

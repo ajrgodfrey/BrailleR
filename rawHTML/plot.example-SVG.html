@@ -1,0 +1,1077 @@
+<html>
+  <head>
+    <title>plot.example-SVG</title>
+  </head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type=text/javascript src=https://cdn.jsdelivr.net/npm/diagcess/dist/diagcess.js></script>
+  <script type=text/javascript>
+        document.addEventListener("DOMContentLoaded", function() {
+          diagcess.Base.init();
+        })
+  </script>
+  </head>
+  <body>
+    <!-- DW - This fix needed for ggplot, as its bars otherwise have only a
+      fill and no border and hence don't display correctly in MakeAccessibleSVG
+      Should consider whether to only run this for MakeAccessibleSVG.ggplot
+      Tried to make the selection as narrow as possible to avoid unwanted side-effects
+    -->
+    <style>
+      svg g[id^=geom_rect] rect {
+        stroke-opacity: 1;
+      }
+    </style>
+    <div class="container">
+      <div class="content">
+        <div class="ChemAccess-element" id="mole1" tabindex="0" role="application">
+          <div class="svg">
+            <?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="504px" height="504px" viewBox="0 0 504 504" version="1.1">
+  <metadata xmlns:gridsvg="http://www.stat.auckland.ac.nz/~paul/R/gridSVG/">
+    <gridsvg:generator name="gridSVG" version="1.7-4" time="2023-02-16 16:46:53"/>
+    <gridsvg:argument name="name" value="plot.example-SVG.svg"/>
+    <gridsvg:argument name="exportCoords" value="none"/>
+    <gridsvg:argument name="exportMappings" value="none"/>
+    <gridsvg:argument name="exportJS" value="none"/>
+    <gridsvg:argument name="res" value="72"/>
+    <gridsvg:argument name="prefix" value=""/>
+    <gridsvg:argument name="addClasses" value="FALSE"/>
+    <gridsvg:argument name="indent" value="TRUE"/>
+    <gridsvg:argument name="htmlWrapper" value="FALSE"/>
+    <gridsvg:argument name="usePaths" value="vpPaths"/>
+    <gridsvg:argument name="uniqueNames" value="TRUE"/>
+    <gridsvg:separator name="id.sep" value="."/>
+    <gridsvg:separator name="gPath.sep" value="::"/>
+    <gridsvg:separator name="vpPath.sep" value="::"/>
+  </metadata>
+  <g transform="translate(0, 504) scale(1, -1)">
+    <g id="gridSVG" fill="none" stroke="rgb(0,0,0)" stroke-dasharray="none" stroke-width="0.75" font-size="12" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" opacity="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" fill-opacity="0" font-weight="normal" font-style="normal">
+      <defs>
+        <symbol id="gridSVG.pch19" viewBox="-5 -5 10 10" overflow="visible">
+          <circle cx="0" cy="0" r="3.75"/>
+        </symbol>
+      </defs>
+      <g id="layout.1">
+        <g id="layout.2">
+          <defs>
+            <clipPath id="layout::background.1-9-12-1.1.clipPath">
+              <rect x="0" y="0" width="504" height="504" fill="none" stroke="none"/>
+            </clipPath>
+          </defs>
+          <g id="layout::background.1-9-12-1.1" clip-path="url(#layout::background.1-9-12-1.1.clipPath)">
+            <g id="background.1-9-12-1.1">
+              <g id="plot.background..rect.56.1">
+                <rect id="plot.background..rect.56.1.1" x="0" y="0" width="504" height="504" transform="" stroke-width="1.07" stroke="rgb(255,255,255)" fill="rgb(255,255,255)" stroke-dasharray="none" stroke-opacity="1" fill-opacity="1"/>
+              </g>
+            </g>
+          </g>
+          <defs>
+            <clipPath id="layout::panel.7-5-7-5.1.clipPath">
+              <rect x="33.48" y="31.91" width="465.04" height="466.61" fill="none" stroke="none"/>
+            </clipPath>
+          </defs>
+          <g id="layout::panel.7-5-7-5.1" clip-path="url(#layout::panel.7-5-7-5.1.clipPath)">
+            <g id="panel.7-5-7-5.1">
+              <g id="panel-1.gTree.34.1">
+                <g id="grill.gTree.32.1">
+                  <g id="panel.background..rect.23.1">
+                    <rect id="panel.background..rect.23.1.1" x="33.48" y="31.91" width="465.04" height="466.61" transform="" stroke-width="1.07" stroke="none" fill="rgb(235,235,235)" stroke-dasharray="none" stroke-opacity="0" fill-opacity="1"/>
+                  </g>
+                  <g id="panel.grid.minor.y..polyline.25.1">
+                    <polyline id="panel.grid.minor.y..polyline.25.1.1" points="33.48,156.23 498.52,156.23" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.minor.y..polyline.25.1.2" points="33.48,308.91 498.52,308.91" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.minor.y..polyline.25.1.3" points="33.48,461.59 498.52,461.59" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                  </g>
+                  <g id="panel.grid.minor.x..polyline.27.1">
+                    <polyline id="panel.grid.minor.x..polyline.27.1.1" points="53.21,31.91 53.21,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.minor.x..polyline.27.1.2" points="161.31,31.91 161.31,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.minor.x..polyline.27.1.3" points="269.4,31.91 269.4,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.minor.x..polyline.27.1.4" points="377.5,31.91 377.5,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.minor.x..polyline.27.1.5" points="485.6,31.91 485.6,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="0.53" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                  </g>
+                  <g id="panel.grid.major.y..polyline.29.1">
+                    <polyline id="panel.grid.major.y..polyline.29.1.1" points="33.48,79.9 498.52,79.9" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.major.y..polyline.29.1.2" points="33.48,232.57 498.52,232.57" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.major.y..polyline.29.1.3" points="33.48,385.25 498.52,385.25" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                  </g>
+                  <g id="panel.grid.major.x..polyline.31.1">
+                    <polyline id="panel.grid.major.x..polyline.31.1.2" points="107.26,31.91 107.26,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.major.x..polyline.31.1.3" points="215.36,31.91 215.36,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.major.x..polyline.31.1.4" points="323.45,31.91 323.45,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                    <polyline id="panel.grid.major.x..polyline.31.1.5" points="431.55,31.91 431.55,498.52" stroke="rgb(255,255,255)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                  </g>
+                </g>
+                <g id="geom_point.points.12.1">,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                  ,                <g id="geom_point.points.12.1.a"><use id="geom_point.points.12.1.28" href="#gridSVG.pch19" x="54.62" y="391.36" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.19" href="#gridSVG.pch19" x="65.64" y="391.36" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.20" href="#gridSVG.pch19" x="89.42" y="444.79" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.26" href="#gridSVG.pch19" x="100.23" y="344.03" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.27" href="#gridSVG.pch19" x="122.39" y="324.18" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.18" href="#gridSVG.pch19" x="128.88" y="421.89" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.3" href="#gridSVG.pch19" x="141.85" y="275.32" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/></g><g id="geom_point.points.12.1.b"><use id="geom_point.points.12.1.21" href="#gridSVG.pch19" x="157.52" y="255.47" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.1" href="#gridSVG.pch19" x="174.28" y="247.84" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.30" href="#gridSVG.pch19" x="190.49" y="227.99" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.32" href="#gridSVG.pch19" x="191.57" y="253.95" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.2" href="#gridSVG.pch19" x="201.84" y="247.84" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.9" href="#gridSVG.pch19" x="231.57" y="275.32" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/></g><g id="geom_point.points.12.1.c"><use id="geom_point.points.12.1.29" href="#gridSVG.pch19" x="233.73" y="168.45" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.8" href="#gridSVG.pch19" x="235.89" y="299.75" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.4" href="#gridSVG.pch19" x="238.6" y="253.95" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.23" href="#gridSVG.pch19" x="262.38" y="159.29" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.5" href="#gridSVG.pch19" x="262.92" y="212.72" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.10" href="#gridSVG.pch19" x="262.92" y="220.36" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/></g><g id="geom_point.points.12.1.d"><use id="geom_point.points.12.1.11" href="#gridSVG.pch19" x="262.92" y="198.98" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.6" href="#gridSVG.pch19" x="265.08" y="203.56" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.22" href="#gridSVG.pch19" x="271.57" y="163.87" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.7" href="#gridSVG.pch19" x="276.97" y="145.55" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.31" href="#gridSVG.pch19" x="276.97" y="156.23" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.13" href="#gridSVG.pch19" x="294.27" y="191.35" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/></g><g id="geom_point.points.12.1.e"><use id="geom_point.points.12.1.14" href="#gridSVG.pch19" x="299.67" y="159.29" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.24" href="#gridSVG.pch19" x="306.16" y="130.28" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.25" href="#gridSVG.pch19" x="306.7" y="220.36" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.12" href="#gridSVG.pch19" x="331.02" y="177.61" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.15" href="#gridSVG.pch19" x="458.57" y="86" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.17" href="#gridSVG.pch19" x="468.84" y="151.65" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/><use id="geom_point.points.12.1.16" href="#gridSVG.pch19" x="477.38" y="86" width="5.21" height="5.21" transform=" translate(-2.61,-2.61)" stroke="rgb(0,0,0)" fill="rgb(0,0,0)" font-size="5.21" stroke-width="1.36" stroke-opacity="1" fill-opacity="1"/></g></g>
+                <g id="geom_smooth.gTree.19.1">,                  ,                  ,                <g id="geom_smooth.gTree.19.1.a"><polygon fill="rgb(153,153,153)" fill-opacity="0.4" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="0.4" stroke-width="0.4" id="2.smoother_ci.a" points="54.62,477.31 59.97,464.97 65.32,453.24 70.67,442.17 76.02,431.8 81.37,422.14 86.72,413.2 92.08,404.93 97.43,397.27 102.78,390.03 108.13,382.76 113.48,375.37 118.83,367.87 124.18,360.31 129.54,352.74 134.89,345.23 140.24,337.85 134.89,281.74 129.54,289.98 124.18,298.2 118.83,306.29 113.48,314.14 108.13,321.62 102.78,328.57 97.43,334.83 92.08,340.44 86.72,345.32 81.37,349.38 76.02,352.57 70.67,354.91 65.32,356.39 59.97,357.07 54.62,356.98"/><polyline fill="none" fill-opacity="0" stroke="rgb(51,102,255)" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" stroke-width="2.13" id="2.smoother_line.a" points="54.62,417.14 59.97,411.02 65.32,404.82 70.67,398.54 76.02,392.18 81.37,385.76 86.72,379.26 92.08,372.69 97.43,366.05 102.78,359.3 108.13,352.19 113.48,344.76 118.83,337.08 124.18,329.25 129.54,321.36 134.89,313.49 140.24,305.72"/></g><g id="geom_smooth.gTree.19.1.b"><polygon fill="rgb(153,153,153)" fill-opacity="0.4" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="0.4" stroke-width="0.4" id="2.smoother_ci.b" points="140.24,337.85 145.59,330.65 150.94,323.69 156.29,317 161.64,310.66 167,304.87 172.35,299.82 177.7,295.69 183.05,292.48 188.4,289.92 193.75,287.49 199.11,284.54 204.46,280.45 209.81,275.48 215.16,270.26 220.51,265.35 225.86,261.09 220.51,208.43 215.16,210.02 209.81,211.52 204.46,213.81 199.11,217.51 193.75,221.62 188.4,225.69 183.05,229.52 177.7,233.02 172.35,236.4 167,240.09 161.64,244.72 156.29,250.9 150.94,258.05 145.59,265.66 140.24,273.6 134.89,281.74"/><polyline fill="none" fill-opacity="0" stroke="rgb(51,102,255)" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" stroke-width="2.13" id="2.smoother_line.b" points="140.24,305.72 145.59,298.15 150.94,290.87 156.29,283.95 161.64,277.69 167,272.48 172.35,268.11 177.7,264.36 183.05,261 188.4,257.8 193.75,254.56 199.11,251.03 204.46,247.13 209.81,243.5 215.16,240.14 220.51,236.89 225.86,233.6"/></g><g id="geom_smooth.gTree.19.1.c"><polygon fill="rgb(153,153,153)" fill-opacity="0.4" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="0.4" stroke-width="0.4" id="2.smoother_ci.c" points="225.86,261.09 231.21,257.34 236.57,253.43 241.92,248.47 247.27,242.18 252.62,235.55 257.97,229.38 263.32,224.14 268.67,219.33 274.03,214.68 279.38,210.59 284.73,207 290.08,204.07 295.43,202 300.78,200.94 306.13,201.03 311.49,201.93 306.13,138.3 300.78,144.49 295.43,150.42 290.08,155.96 284.73,160.97 279.38,165.37 274.03,169.25 268.67,173.16 263.32,176.9 257.97,180.98 252.62,185.84 247.27,190.73 241.92,195.21 236.57,199.16 231.21,202.91 225.86,206.11 220.51,208.43"/><polyline fill="none" fill-opacity="0" stroke="rgb(51,102,255)" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" stroke-width="2.13" id="2.smoother_line.c" points="225.86,233.6 231.21,230.12 236.57,226.3 241.92,221.84 247.27,216.46 252.62,210.69 257.97,205.18 263.32,200.52 268.67,196.24 274.03,191.96 279.38,187.98 284.73,183.98 290.08,180.01 295.43,176.21 300.78,172.71 306.13,169.66 311.49,166.95"/></g><g id="geom_smooth.gTree.19.1.d"><polygon fill="rgb(153,153,153)" fill-opacity="0.4" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="0.4" stroke-width="0.4" id="2.smoother_ci.d" points="311.49,201.93 316.84,202.84 322.19,203.57 327.54,204.03 332.89,204.16 338.24,203.96 343.6,203.4 348.95,202.5 354.3,201.25 359.65,199.68 365,197.8 370.35,195.63 375.7,193.2 381.06,190.52 386.41,187.64 391.76,184.59 397.11,181.4 391.76,76.46 386.41,77.59 381.06,79.01 375.7,80.75 370.35,82.85 365,85.3 359.65,88.15 354.3,91.39 348.95,95.05 343.6,99.14 338.24,103.65 332.89,108.58 327.54,113.92 322.19,119.64 316.84,125.69 311.49,131.97 306.13,138.3"/><polyline fill="none" fill-opacity="0" stroke="rgb(51,102,255)" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" stroke-width="2.13" id="2.smoother_line.d" points="311.49,166.95 316.84,164.26 322.19,161.6 327.54,158.97 332.89,156.37 338.24,153.8 343.6,151.27 348.95,148.78 354.3,146.32 359.65,143.91 365,141.55 370.35,139.24 375.7,136.97 381.06,134.77 386.41,132.62 391.76,130.53 397.11,128.5"/></g><g id="geom_smooth.gTree.19.1.e"><polygon fill="rgb(153,153,153)" fill-opacity="0.4" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="0.4" stroke-width="0.4" id="2.smoother_ci.e" points="397.11,181.4 402.46,178.12 407.81,174.79 413.16,171.48 418.52,168.26 423.87,165.19 429.22,162.36 434.57,159.88 439.92,157.84 445.27,156.33 450.62,155.44 455.98,155.24 461.33,155.76 466.68,157.01 472.03,158.96 477.38,161.57 477.38,53.12 472.03,57.29 466.68,60.99 461.33,64.19 455.98,66.86 450.62,68.99 445.27,70.63 439.92,71.82 434.57,72.65 429.22,73.2 423.87,73.57 418.52,73.86 413.16,74.14 407.81,74.48 402.46,74.95 397.11,75.59 391.76,76.46"/><polyline fill="none" fill-opacity="0" stroke="rgb(51,102,255)" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" stroke-width="2.13" id="2.smoother_line.e" points="397.11,128.5 402.46,126.53 407.81,124.64 413.16,122.81 418.52,121.06 423.87,119.38 429.22,117.78 434.57,116.26 439.92,114.83 445.27,113.48 450.62,112.22 455.98,111.05 461.33,109.98 466.68,109 472.03,108.12 477.38,107.34"/></g></g>
+              </g>
+            </g>
+          </g>
+          <g id="layout::spacer.8-6-8-6.1">
+            <g id="spacer.8-6-8-6.1"/>
+          </g>
+          <g id="layout::spacer.8-4-8-4.1">
+            <g id="spacer.8-4-8-4.1"/>
+          </g>
+          <g id="layout::spacer.6-6-6-6.1">
+            <g id="spacer.6-6-6-6.1"/>
+          </g>
+          <g id="layout::spacer.6-4-6-4.1">
+            <g id="spacer.6-4-6-4.1"/>
+          </g>
+          <g id="layout::axis-t.6-5-6-5.1">
+            <g id="axis-t.6-5-6-5.1"/>
+          </g>
+          <g id="layout::axis-l.7-4-7-4.1">
+            <g id="axis-l.7-4-7-4.1">
+              <g id="layout::axis-l.7-4-7-4::GRID.VP.6.1">
+                <g id="GRID.absoluteGrob.43.1">
+                  <g id="layout::axis-l.7-4-7-4::GRID.VP.6::axis.1">
+                    <g id="axis.1">
+                      <g id="layout::axis-l.7-4-7-4::GRID.VP.6::axis::axis.1-1-1-1.1">
+                        <g id="axis.1-1-1-1.1">
+                          <g id="layout::axis-l.7-4-7-4::GRID.VP.6::axis::axis.1-1-1-1::GRID.VP.4.1" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" stroke-opacity="1" font-weight="normal" font-style="normal">
+                            <g id="layout::axis-l.7-4-7-4::GRID.VP.6::axis::axis.1-1-1-1::GRID.VP.4::GRID.VP.5.1">
+                              <g id="GRID.titleGrob.41.1">
+                                <g id="GRID.text.40.1">
+                                  <g id="GRID.text.40.1.1" transform="translate(28.55, 79.9)" stroke-width="0.1">
+                                    <g id="GRID.text.40.1.1.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.40.1.1.text" text-anchor="end" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.40.1.1.tspan.1" dy="3.23" x="0">10</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                  <g id="GRID.text.40.1.2" transform="translate(28.55, 232.57)" stroke-width="0.1">
+                                    <g id="GRID.text.40.1.2.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.40.1.2.text" text-anchor="end" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.40.1.2.tspan.1" dy="3.23" x="0">20</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                  <g id="GRID.text.40.1.3" transform="translate(28.55, 385.25)" stroke-width="0.1">
+                                    <g id="GRID.text.40.1.3.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.40.1.3.text" text-anchor="end" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.40.1.3.tspan.1" dy="3.23" x="0">30</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                      <g id="layout::axis-l.7-4-7-4::GRID.VP.6::axis::axis.1-2-1-2.1">
+                        <g id="axis.1-2-1-2.1">
+                          <g id="GRID.polyline.42.1">
+                            <polyline id="GRID.polyline.42.1.1" points="30.74,79.9 33.48,79.9" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                            <polyline id="GRID.polyline.42.1.2" points="30.74,232.57 33.48,232.57" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                            <polyline id="GRID.polyline.42.1.3" points="30.74,385.25 33.48,385.25" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g id="layout::axis-r.7-6-7-6.1">
+            <g id="axis-r.7-6-7-6.1"/>
+          </g>
+          <g id="layout::axis-b.8-5-8-5.1">
+            <g id="axis-b.8-5-8-5.1">
+              <g id="layout::axis-b.8-5-8-5::GRID.VP.3.1">
+                <g id="GRID.absoluteGrob.39.1">
+                  <g id="layout::axis-b.8-5-8-5::GRID.VP.3::axis.1">
+                    <g id="axis.2">
+                      <g id="layout::axis-b.8-5-8-5::GRID.VP.3::axis::axis.1-1-1-1.1">
+                        <g id="axis.1-1-1-1.2">
+                          <g id="GRID.polyline.38.1">
+                            <polyline id="GRID.polyline.38.1.1" points="107.26,29.17 107.26,31.91" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                            <polyline id="GRID.polyline.38.1.2" points="215.36,29.17 215.36,31.91" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                            <polyline id="GRID.polyline.38.1.3" points="323.45,29.17 323.45,31.91" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                            <polyline id="GRID.polyline.38.1.4" points="431.55,29.17 431.55,31.91" stroke="rgb(51,51,51)" fill="none" stroke-width="1.07" stroke-dasharray="none" stroke-linecap="butt" stroke-opacity="1" fill-opacity="1"/>
+                          </g>
+                        </g>
+                      </g>
+                      <g id="layout::axis-b.8-5-8-5::GRID.VP.3::axis::axis.2-1-2-1.1">
+                        <g id="axis.2-1-2-1.1">
+                          <g id="layout::axis-b.8-5-8-5::GRID.VP.3::axis::axis.2-1-2-1::GRID.VP.1.1" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" stroke-opacity="1" font-weight="normal" font-style="normal">
+                            <g id="layout::axis-b.8-5-8-5::GRID.VP.3::axis::axis.2-1-2-1::GRID.VP.1::GRID.VP.2.1">
+                              <g id="GRID.titleGrob.37.1">
+                                <g id="GRID.text.35.1">
+                                  <g id="GRID.text.35.1.1" transform="translate(107.26, 26.98)" stroke-width="0.1">
+                                    <g id="GRID.text.35.1.1.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.35.1.1.text" text-anchor="middle" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.35.1.1.tspan.1" dy="6.46" x="0">2</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                  <g id="GRID.text.35.1.2" transform="translate(215.36, 26.98)" stroke-width="0.1">
+                                    <g id="GRID.text.35.1.2.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.35.1.2.text" text-anchor="middle" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.35.1.2.tspan.1" dy="6.46" x="0">3</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                  <g id="GRID.text.35.1.3" transform="translate(323.45, 26.98)" stroke-width="0.1">
+                                    <g id="GRID.text.35.1.3.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.35.1.3.text" text-anchor="middle" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.35.1.3.tspan.1" dy="6.46" x="0">4</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                  <g id="GRID.text.35.1.4" transform="translate(431.55, 26.98)" stroke-width="0.1">
+                                    <g id="GRID.text.35.1.4.scale" transform="scale(1, -1)">
+                                      <text x="0" y="0" id="GRID.text.35.1.4.text" text-anchor="middle" font-size="8.8" stroke="rgb(77,77,77)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(77,77,77)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                                        <tspan id="GRID.text.35.1.4.tspan.1" dy="6.46" x="0">5</tspan>
+                                      </text>
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g id="layout::xlab-t.5-5-5-5.1">
+            <g id="xlab-t.5-5-5-5.1"/>
+          </g>
+          <g id="layout::xlab-b.9-5-9-5.1">
+            <g id="xlab-b.9-5-9-5.1">
+              <g id="layout::xlab-b.9-5-9-5::GRID.VP.7.1" font-size="11" stroke="rgb(0,0,0)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" stroke-opacity="1" font-weight="normal" font-style="normal">
+                <g id="layout::xlab-b.9-5-9-5::GRID.VP.7::GRID.VP.8.1">
+                  <g id="axis.title.x.bottom..titleGrob.47.1">
+                    <g id="GRID.text.44.1">
+                      <g id="GRID.text.44.1.1" transform="translate(266, 15.8)" stroke-width="0.1">
+                        <g id="GRID.text.44.1.1.scale" transform="scale(1, -1)">
+                          <text x="0" y="0" id="GRID.text.44.1.1.text" text-anchor="middle" font-size="11" stroke="rgb(0,0,0)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(0,0,0)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                            <tspan id="GRID.text.44.1.1.tspan.1" dy="7.9" x="0">wt</tspan>
+                          </text>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g id="layout::ylab-l.7-3-7-3.1">
+            <g id="ylab-l.7-3-7-3.1">
+              <g id="layout::ylab-l.7-3-7-3::GRID.VP.9.1" font-size="11" stroke="rgb(0,0,0)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" stroke-opacity="1" font-weight="normal" font-style="normal">
+                <g id="layout::ylab-l.7-3-7-3::GRID.VP.9::GRID.VP.10.1">
+                  <g id="axis.title.y.left..titleGrob.50.1">
+                    <g id="GRID.text.48.1">
+                      <g id="GRID.text.48.1.1" transform="translate(5.48, 265.22)" stroke-width="0.1">
+                        <g id="GRID.text.48.1.1.scale" transform="scale(1, -1)">
+                          <text x="0" y="0" id="GRID.text.48.1.1.text" transform="rotate(-90)" text-anchor="middle" font-size="11" stroke="rgb(0,0,0)" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" fill="rgb(0,0,0)" stroke-opacity="1" fill-opacity="1" font-weight="normal" font-style="normal">
+                            <tspan id="GRID.text.48.1.1.tspan.1" dy="7.9" x="0">mpg</tspan>
+                          </text>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g id="layout::ylab-r.7-7-7-7.1">
+            <g id="ylab-r.7-7-7-7.1"/>
+          </g>
+          <g id="layout::subtitle.4-5-4-5.1">
+            <g id="subtitle.4-5-4-5.1"/>
+          </g>
+          <g id="layout::title.3-5-3-5.1">
+            <g id="title.3-5-3-5.1"/>
+          </g>
+          <g id="layout::caption.10-5-10-5.1">
+            <g id="caption.10-5-10-5.1"/>
+          </g>
+          <g id="layout::tag.2-2-2-2.1">
+            <g id="tag.2-2-2-2.1"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>,
+          </div>
+          <div class="cml">
+            <?xml version="1.0"?>
+<ggplot xmlns:sre="http://www.chemaccess.org/sre-schema">
+  <annotations>
+    <annotation speech="Label wt" speech2="Label wt" type="Label">
+      <active>GRID.text.44.1</active>
+      <position>1</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,,,    </annotation>
+    <annotation type="Line">
+      <passive>graphics-plot-1-bottom-axis-line-1.1</passive>
+      <position>1</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="Tick mark 2" speech2="2" type="Value">
+      <active>GRID.text.35.1.1</active>
+      <position>2</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.1</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-bottom-axis-ticks-1.1.1</passive>
+      <position>1</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.35.1.1</active>
+      </component>,,    </annotation>
+    <annotation speech="Tick mark 3" speech2="3" type="Value">
+      <active>GRID.text.35.1.2</active>
+      <position>3</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.2</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-bottom-axis-ticks-1.1.2</passive>
+      <position>1</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.35.1.2</active>
+      </component>,,    </annotation>
+    <annotation speech="Tick mark 4" speech2="4" type="Value">
+      <active>GRID.text.35.1.3</active>
+      <position>4</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.3</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-bottom-axis-ticks-1.1.3</passive>
+      <position>1</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.35.1.3</active>
+      </component>,,    </annotation>
+    <annotation speech="Tick mark 5" speech2="5" type="Value">
+      <active>GRID.text.35.1.4</active>
+      <position>5</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.4</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-bottom-axis-ticks-1.1.4</passive>
+      <position>1</position>
+      <parents>
+        <grouped>xaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.35.1.4</active>
+      </component>,,    </annotation>
+    <annotation speech="x axis: wt" speech2="x axis: wt with values from 2 to 5" type="Axis">
+      <grouped>xaxis</grouped>
+      <position>2</position>
+      <parents>
+        <grouped>chart</grouped>
+      </parents>
+      <children>
+        <active>GRID.text.44.1</active>
+        <active>GRID.text.35.1.1</active>
+        <active>GRID.text.35.1.2</active>
+        <active>GRID.text.35.1.3</active>
+        <active>GRID.text.35.1.4</active>
+      </children>
+      <component>
+        <active>GRID.text.44.1</active>
+        <passive>graphics-plot-1-bottom-axis-line-1.1</passive>
+        <active>GRID.text.35.1.1</active>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.1</passive>
+        <active>GRID.text.35.1.2</active>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.2</passive>
+        <active>GRID.text.35.1.3</active>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.3</passive>
+        <active>GRID.text.35.1.4</active>
+        <passive>graphics-plot-1-bottom-axis-ticks-1.1.4</passive>
+      </component>,,    </annotation>
+    <annotation speech="Label mpg" speech2="Label mpg" type="Label">
+      <active>GRID.text.48.1</active>
+      <position>1</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,,,    </annotation>
+    <annotation type="Line">
+      <passive>graphics-plot-1-left-axis-line-1.1</passive>
+      <position>1</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="Tick mark 10" speech2="10" type="Value">
+      <active>GRID.text.40.1.1</active>
+      <position>2</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-left-axis-ticks-1.1.1</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-left-axis-ticks-1.1.1</passive>
+      <position>1</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.40.1.1</active>
+      </component>,,    </annotation>
+    <annotation speech="Tick mark 20" speech2="20" type="Value">
+      <active>GRID.text.40.1.2</active>
+      <position>3</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-left-axis-ticks-1.1.2</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-left-axis-ticks-1.1.2</passive>
+      <position>1</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.40.1.2</active>
+      </component>,,    </annotation>
+    <annotation speech="Tick mark 30" speech2="30" type="Value">
+      <active>GRID.text.40.1.3</active>
+      <position>4</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,      <component>
+        <passive>graphics-plot-1-left-axis-ticks-1.1.3</passive>
+      </component>,,    </annotation>
+    <annotation type="Tick">
+      <passive>graphics-plot-1-left-axis-ticks-1.1.3</passive>
+      <position>1</position>
+      <parents>
+        <grouped>yaxis</grouped>
+      </parents>,,      <component>
+        <active>GRID.text.40.1.3</active>
+      </component>,,    </annotation>
+    <annotation speech="y axis: mpg" speech2="y axis: mpg with values from 10 to 30" type="Axis">
+      <grouped>yaxis</grouped>
+      <position>3</position>
+      <parents>
+        <grouped>chart</grouped>
+      </parents>
+      <children>
+        <active>GRID.text.48.1</active>
+        <active>GRID.text.40.1.1</active>
+        <active>GRID.text.40.1.2</active>
+        <active>GRID.text.40.1.3</active>
+      </children>
+      <component>
+        <active>GRID.text.48.1</active>
+        <passive>graphics-plot-1-left-axis-line-1.1</passive>
+        <active>GRID.text.40.1.1</active>
+        <passive>graphics-plot-1-left-axis-ticks-1.1.1</passive>
+        <active>GRID.text.40.1.2</active>
+        <passive>graphics-plot-1-left-axis-ticks-1.1.2</passive>
+        <active>GRID.text.40.1.3</active>
+        <passive>graphics-plot-1-left-axis-ticks-1.1.3</passive>
+      </component>,,    </annotation>
+    <annotation speech="Point graph" speech2="Point graph with 32 points" type="Center">
+      <grouped>center-1-1</grouped>
+      <position>4</position>
+      <parents>
+        <grouped>chart</grouped>
+      </parents>
+      <children>
+        <grouped>geom_point.points.12.1.a</grouped>
+        <grouped>geom_point.points.12.1.b</grouped>
+        <grouped>geom_point.points.12.1.c</grouped>
+        <grouped>geom_point.points.12.1.d</grouped>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </children>
+      <component>
+        <grouped>geom_point.points.12.1.a</grouped>
+        <grouped>geom_point.points.12.1.b</grouped>
+        <grouped>geom_point.points.12.1.c</grouped>
+        <grouped>geom_point.points.12.1.d</grouped>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </component>,,    </annotation>
+    <annotation speech="mean: 2.903e+01 sd: 3.869e+00 n: 7">
+      <grouped>geom_point.points.12.1.a</grouped>
+      <position>1</position>
+      <parents>
+        <grouped>center-1-1</grouped>
+      </parents>
+      <children>
+        <active>geom_point.points.12.1.28</active>
+        <active>geom_point.points.12.1.19</active>
+        <active>geom_point.points.12.1.20</active>
+        <active>geom_point.points.12.1.26</active>
+        <active>geom_point.points.12.1.27</active>
+        <active>geom_point.points.12.1.18</active>
+        <active>geom_point.points.12.1.3</active>
+      </children>
+      <component>
+        <active>geom_point.points.12.1.28</active>
+        <active>geom_point.points.12.1.19</active>
+        <active>geom_point.points.12.1.20</active>
+        <active>geom_point.points.12.1.26</active>
+        <active>geom_point.points.12.1.27</active>
+        <active>geom_point.points.12.1.18</active>
+        <active>geom_point.points.12.1.3</active>
+      </component>,,    </annotation>
+    <annotation speech="(1.513, 30.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.28</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(1.615, 30.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.19</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(1.835, 33.9)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.20</active>
+      <position>3</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(1.935, 27.3)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.26</active>
+      <position>4</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.14, 26)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.27</active>
+      <position>5</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.2, 32.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.18</active>
+      <position>6</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.32, 22.8)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.3</active>
+      <position>7</position>
+      <parents>
+        <grouped>geom_point.points.12.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="mean: 2.123e+01 sd: 1.001e+00 n: 6">
+      <grouped>geom_point.points.12.1.b</grouped>
+      <position>2</position>
+      <parents>
+        <grouped>center-1-1</grouped>
+      </parents>
+      <children>
+        <active>geom_point.points.12.1.21</active>
+        <active>geom_point.points.12.1.1</active>
+        <active>geom_point.points.12.1.30</active>
+        <active>geom_point.points.12.1.32</active>
+        <active>geom_point.points.12.1.2</active>
+        <active>geom_point.points.12.1.9</active>
+      </children>
+      <component>
+        <active>geom_point.points.12.1.21</active>
+        <active>geom_point.points.12.1.1</active>
+        <active>geom_point.points.12.1.30</active>
+        <active>geom_point.points.12.1.32</active>
+        <active>geom_point.points.12.1.2</active>
+        <active>geom_point.points.12.1.9</active>
+      </component>,,    </annotation>
+    <annotation speech="(2.465, 21.5)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.21</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_point.points.12.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.62, 21)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.1</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_point.points.12.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.77, 19.7)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.30</active>
+      <position>3</position>
+      <parents>
+        <grouped>geom_point.points.12.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.78, 21.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.32</active>
+      <position>4</position>
+      <parents>
+        <grouped>geom_point.points.12.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(2.875, 21)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.2</active>
+      <position>5</position>
+      <parents>
+        <grouped>geom_point.points.12.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.15, 22.8)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.9</active>
+      <position>6</position>
+      <parents>
+        <grouped>geom_point.points.12.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="mean: 1.912e+01 sd: 3.454e+00 n: 6">
+      <grouped>geom_point.points.12.1.c</grouped>
+      <position>3</position>
+      <parents>
+        <grouped>center-1-1</grouped>
+      </parents>
+      <children>
+        <active>geom_point.points.12.1.29</active>
+        <active>geom_point.points.12.1.8</active>
+        <active>geom_point.points.12.1.4</active>
+        <active>geom_point.points.12.1.23</active>
+        <active>geom_point.points.12.1.5</active>
+        <active>geom_point.points.12.1.10</active>
+      </children>
+      <component>
+        <active>geom_point.points.12.1.29</active>
+        <active>geom_point.points.12.1.8</active>
+        <active>geom_point.points.12.1.4</active>
+        <active>geom_point.points.12.1.23</active>
+        <active>geom_point.points.12.1.5</active>
+        <active>geom_point.points.12.1.10</active>
+      </component>,,    </annotation>
+    <annotation speech="(3.17, 15.8)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.29</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_point.points.12.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.19, 24.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.8</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_point.points.12.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.215, 21.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.4</active>
+      <position>3</position>
+      <parents>
+        <grouped>geom_point.points.12.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.435, 15.2)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.23</active>
+      <position>4</position>
+      <parents>
+        <grouped>geom_point.points.12.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.44, 18.7)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.5</active>
+      <position>5</position>
+      <parents>
+        <grouped>geom_point.points.12.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.44, 19.2)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.10</active>
+      <position>6</position>
+      <parents>
+        <grouped>geom_point.points.12.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="mean: 1.633e+01 sd: 1.601e+00 n: 6">
+      <grouped>geom_point.points.12.1.d</grouped>
+      <position>4</position>
+      <parents>
+        <grouped>center-1-1</grouped>
+      </parents>
+      <children>
+        <active>geom_point.points.12.1.11</active>
+        <active>geom_point.points.12.1.6</active>
+        <active>geom_point.points.12.1.22</active>
+        <active>geom_point.points.12.1.7</active>
+        <active>geom_point.points.12.1.31</active>
+        <active>geom_point.points.12.1.13</active>
+      </children>
+      <component>
+        <active>geom_point.points.12.1.11</active>
+        <active>geom_point.points.12.1.6</active>
+        <active>geom_point.points.12.1.22</active>
+        <active>geom_point.points.12.1.7</active>
+        <active>geom_point.points.12.1.31</active>
+        <active>geom_point.points.12.1.13</active>
+      </component>,,    </annotation>
+    <annotation speech="(3.44, 17.8)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.11</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_point.points.12.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.46, 18.1)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.6</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_point.points.12.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.52, 15.5)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.22</active>
+      <position>3</position>
+      <parents>
+        <grouped>geom_point.points.12.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.57, 14.3)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.7</active>
+      <position>4</position>
+      <parents>
+        <grouped>geom_point.points.12.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.57, 15)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.31</active>
+      <position>5</position>
+      <parents>
+        <grouped>geom_point.points.12.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.73, 17.3)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.13</active>
+      <position>6</position>
+      <parents>
+        <grouped>geom_point.points.12.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="mean: 1.423e+01 sd: 3.183e+00 n: 7">
+      <grouped>geom_point.points.12.1.e</grouped>
+      <position>5</position>
+      <parents>
+        <grouped>center-1-1</grouped>
+      </parents>
+      <children>
+        <active>geom_point.points.12.1.14</active>
+        <active>geom_point.points.12.1.24</active>
+        <active>geom_point.points.12.1.25</active>
+        <active>geom_point.points.12.1.12</active>
+        <active>geom_point.points.12.1.15</active>
+        <active>geom_point.points.12.1.17</active>
+        <active>geom_point.points.12.1.16</active>
+      </children>
+      <component>
+        <active>geom_point.points.12.1.14</active>
+        <active>geom_point.points.12.1.24</active>
+        <active>geom_point.points.12.1.25</active>
+        <active>geom_point.points.12.1.12</active>
+        <active>geom_point.points.12.1.15</active>
+        <active>geom_point.points.12.1.17</active>
+        <active>geom_point.points.12.1.16</active>
+      </component>,,    </annotation>
+    <annotation speech="(3.78, 15.2)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.14</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.84, 13.3)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.24</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(3.845, 19.2)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.25</active>
+      <position>3</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(4.07, 16.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.12</active>
+      <position>4</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(5.25, 10.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.15</active>
+      <position>5</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(5.345, 14.7)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.17</active>
+      <position>6</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="(5.424, 10.4)" speech2="Shape: 19 colour: black size: 1.5">
+      <active>geom_point.points.12.1.16</active>
+      <position>7</position>
+      <parents>
+        <grouped>geom_point.points.12.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="Smoother graph" speech2="Smoother graph with 95% confidence bands" type="Center">
+      <grouped>center-1-2</grouped>
+      <position>5</position>
+      <parents>
+        <grouped>chart</grouped>
+      </parents>
+      <children>
+        <grouped>geom_smooth.gTree.19.1.a</grouped>
+        <grouped>geom_smooth.gTree.19.1.b</grouped>
+        <grouped>geom_smooth.gTree.19.1.c</grouped>
+        <grouped>geom_smooth.gTree.19.1.d</grouped>
+        <grouped>geom_smooth.gTree.19.1.e</grouped>
+      </children>
+      <component>
+        <grouped>geom_smooth.gTree.19.1.a</grouped>
+        <grouped>geom_smooth.gTree.19.1.b</grouped>
+        <grouped>geom_smooth.gTree.19.1.c</grouped>
+        <grouped>geom_smooth.gTree.19.1.d</grouped>
+        <grouped>geom_smooth.gTree.19.1.e</grouped>
+      </component>,,    </annotation>
+    <annotation speech="average slope:  -9.143e+00 CI width: 4.932e+00 " speech2="average slope:  -9.143e+00 CI width: 4.932e+00 ">
+      <grouped>geom_smooth.gTree.19.1.a</grouped>
+      <position>1</position>
+      <parents>
+        <grouped>center-1-2</grouped>
+      </parents>
+      <children>
+        <active>2.smoother_line.a</active>
+        <active>2.smoother_ci.a</active>
+      </children>
+      <component>
+        <active>2.smoother_line.a</active>
+        <active>2.smoother_ci.a</active>
+      </component>,,    </annotation>
+    <annotation speech="slope range: (-1.044e+01,-8.102e+00) median slope: -8.784e+00">
+      <active>2.smoother_line.a</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="median CI width: 4.224e+00 width range: 3.877e+00">
+      <active>2.smoother_ci.a</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.a</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="average slope:  -6.071e+00 CI width: 4.23e+00 " speech2="average slope:  -6.071e+00 CI width: 4.23e+00 ">
+      <grouped>geom_smooth.gTree.19.1.b</grouped>
+      <position>2</position>
+      <parents>
+        <grouped>center-1-2</grouped>
+      </parents>
+      <children>
+        <active>2.smoother_line.b</active>
+        <active>2.smoother_ci.b</active>
+      </children>
+      <component>
+        <active>2.smoother_line.b</active>
+        <active>2.smoother_ci.b</active>
+      </component>,,    </annotation>
+    <annotation speech="slope range: (-1.001e+01,-4.223e+00) median slope: -4.966e+00">
+      <active>2.smoother_line.b</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="median CI width: 4.243e+00 width range: 4.45e-01">
+      <active>2.smoother_ci.b</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.b</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="average slope:  -5.64e+00 CI width: 3.287e+00 " speech2="average slope:  -5.64e+00 CI width: 3.287e+00 ">
+      <grouped>geom_smooth.gTree.19.1.c</grouped>
+      <position>3</position>
+      <parents>
+        <grouped>center-1-2</grouped>
+      </parents>
+      <children>
+        <active>2.smoother_line.c</active>
+        <active>2.smoother_ci.c</active>
+      </children>
+      <component>
+        <active>2.smoother_line.c</active>
+        <active>2.smoother_ci.c</active>
+      </component>,,    </annotation>
+    <annotation speech="slope range: (-7.623e+00,-4.036e+00) median slope: -5.282e+00">
+      <active>2.smoother_line.c</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="median CI width: 3.256e+00 width range: 7.357e-01">
+      <active>2.smoother_ci.c</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.c</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="average slope:  -3.213e+00 CI width: 6.591e+00 " speech2="average slope:  -3.213e+00 CI width: 6.591e+00 ">
+      <grouped>geom_smooth.gTree.19.1.d</grouped>
+      <position>4</position>
+      <parents>
+        <grouped>center-1-2</grouped>
+      </parents>
+      <children>
+        <active>2.smoother_line.d</active>
+        <active>2.smoother_ci.d</active>
+      </children>
+      <component>
+        <active>2.smoother_line.d</active>
+        <active>2.smoother_ci.d</active>
+      </component>,,    </annotation>
+    <annotation speech="slope range: (-3.552e+00,-2.766e+00) median slope: -3.245e+00">
+      <active>2.smoother_line.d</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="median CI width: 7.037e+00 width range: 2.805e+00">
+      <active>2.smoother_ci.d</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.d</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="average slope:  -1.866e+00 CI width: 6.134e+00 " speech2="average slope:  -1.866e+00 CI width: 6.134e+00 ">
+      <grouped>geom_smooth.gTree.19.1.e</grouped>
+      <position>5</position>
+      <parents>
+        <grouped>center-1-2</grouped>
+      </parents>
+      <children>
+        <active>2.smoother_line.e</active>
+        <active>2.smoother_ci.e</active>
+      </children>
+      <component>
+        <active>2.smoother_line.e</active>
+        <active>2.smoother_ci.e</active>
+      </component>,,    </annotation>
+    <annotation speech="slope range: (-2.598e+00,-1.027e+00) median slope: -1.898e+00">
+      <active>2.smoother_line.e</active>
+      <position>1</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="median CI width: 6e+00 width range: 1.317e+00">
+      <active>2.smoother_ci.e</active>
+      <position>2</position>
+      <parents>
+        <grouped>geom_smooth.gTree.19.1.e</grouped>
+      </parents>,,,,    </annotation>
+    <annotation speech="Chart  with x-axis  wt  and y-axis  mpg" speech2="Chart  with x-axis  wt  and y-axis  mpg" type="Chart">
+      <grouped>chart</grouped>
+      <position>1</position>,,      <children>
+        <grouped>xaxis</grouped>
+        <grouped>yaxis</grouped>
+        <grouped>center-1-1</grouped>
+        <grouped>center-1-2</grouped>
+      </children>
+      <component>
+        <grouped>xaxis</grouped>
+        <grouped>yaxis</grouped>
+        <grouped>center-1-1</grouped>
+        <grouped>center-1-2</grouped>
+      </component>,,    </annotation>
+  </annotations>
+</ggplot>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>VI output</h2>
+    This is an untitled chart with no subtitle or caption.<br>It has x-axis 'wt' with labels 2, 3, 4 and 5.<br>It has y-axis 'mpg' with labels 10, 20 and 30.<br>It has 2 layers.<br>Layer 1 is a set of 32 big solid circle points of which about 100% can be seen.<br>Layer 2 is a 'lowess' smoothed curve with 95% confidence intervals covering 18% of the graph.<br>
+    <p>Tab to or mouseclick on the diagram and use the following keys for interactive exploration:</p>
+    <table>
+      <tr>
+        <th>Key:</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>Activate keyboard driven exploration</td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <td>Activate menu driven exploration</td>
+      </tr>
+      <tr>
+        <td>Escape</td>
+        <td>Leave exploration mode</td>
+      </tr>
+      <tr>
+        <td>&emsp;</td>
+      </tr>
+      <tr>
+        <td>Cursor down</td>
+        <td>Explore next lower level</td>
+      </tr>
+      <tr>
+        <td>Cursor up</td>
+        <td>Explore next upper level</td>
+      </tr>
+      <tr>
+        <td>Cursor right</td>
+        <td>Explore next element on level</td>
+      </tr>
+      <tr>
+        <td>Cursor left</td>
+        <td>Explore previous element on level</td>
+      </tr>
+      <tr>
+        <td>&emsp;</td>
+      </tr>
+      <tr>
+        <td>X</td>
+        <td>Toggle description mode</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>De/activate direct magnification</td>
+      </tr>
+      <tr>
+        <td>N</td>
+        <td>De/activate stepwise magnification</td>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>Toggle subtitles</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td>Cycle contrast settings</td>
+      </tr>
+      <tr>
+        <td>T</td>
+        <td>Monochrome colours</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>Toggle language (if available)</td>
+      </tr>
+    </table>
+    <h2>Description</h2>
+    <h3>GeomPoint</h3>
+    A geom_point layer created with the ggplot2 framework
+    <h4>General</h3>
+    A scatter plot shows the relationship between two variables by plotting a symbol for each observation at the coordinates for the two variables.
+    <h4>R hints</h3>
+    A geom_point by default will by closed black dots. This can be changed with the `shape` parameter, while the size and colour can be changed with the `size` and `colour` parameter. These can be set to categorical variable to visually distinguish the groups
+    <h3>GeomSmooth</h3>
+    A geom_smooth layer created with the ggplot2 framework
+    <h4>General</h3>
+    Provide a smoothed line fitting the data. It will normally span the whole x range and by default has 2.5% confidence interval shaded in on either side of the line.
+    <h4>R hints</h3>
+    The shape of the line that is shown can vary significantly depending on what `method` is used. These can be set to lm, glm, gam, loess, but the default is loess
+    <div class="footer">
+      <p style="text-align: center; font-size: 10px;">&copy; Progressive Accessibility Solutions 2017</p>
+    </div>
+  </body>
+</html>

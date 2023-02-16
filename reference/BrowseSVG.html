@@ -14,7 +14,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BrailleR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.33.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">BrowseSVG</span><span class="op">(</span>file<span class="op">=</span><span class="st">"test"</span>, key<span class="op">=</span><span class="cn">TRUE</span>, footer <span class="op">=</span> <span class="cn">TRUE</span>, view<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">BrowseSVG</span><span class="op">(</span>file<span class="op">=</span><span class="st">"test"</span>, key<span class="op">=</span><span class="cn">TRUE</span>, footer <span class="op">=</span> <span class="cn">TRUE</span>, view<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, ggplot_object <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -86,13 +86,17 @@
 <dd><p>Whether the footer should be showed at bottom of webpage</p></dd>
 
   <dt>view</dt>
-<dd><p>launch in browser; this is the default when running in an interactive
-  session</p></dd>
+<dd><p>launch in browser; this is the default when running in an interactive session</p></dd>
 
+  <dt>ggplot_object</dt>
+<dd><p>This is the plot that the svg and XML are based off. If it is included than there will be the VI and the Describe information in the webpage.</p></dd>
+
+  
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>A HTML file is written in the current working directory. This HTML file will have the embeded svg and xml files as well as the javascript to help with the exploration of the graph. Note that it is required that you already have a svg and xml file in the current directory for it to work.</p>
+    <p>A HTML file is written in the current working directory. This HTML file will have the embeded svg and xml files as well as the javascript (diagcess) to help with the exploration of the graph. Note that it is required that you already have a svg and xml file in the current directory for it to work.</p>  
+<p>It is much easier however to just use the <code>MakeAccessibleSVG</code> function directly which does it all for you</p>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -120,8 +124,8 @@
 <span class="r-in"><span><span class="va">svgfile</span> <span class="op">=</span> <span class="fu"><a href="SVGThis.html">SVGThis</a></span><span class="op">(</span><span class="va">simpleHist</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">file</span>, <span class="st">".svg"</span><span class="op">)</span>,createDevice<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This is an untitled chart with no subtitle or caption.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'x' with labels -4, -2, 0 and 2.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis 'count' with labels 0.0, 2.5, 5.0, 7.5, 10.0 and 12.5.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has x-axis 'x' with labels -2, -1, 0, 1 and 2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has y-axis 'count' with labels 0, 3, 6 and 9.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The chart is a bar chart with 30 vertical bars.</span>
 <span class="r-in"><span><span class="va">xmlfile</span> <span class="op">=</span> <span class="fu"><a href="AddXMLMethod.html">AddXML</a></span><span class="op">(</span><span class="va">simpleHist</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">file</span>, <span class="st">".xml"</span><span class="op">)</span><span class="op">)</span> </span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># destroy graphics device, now that we're done with it</span></span></span>
