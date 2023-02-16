@@ -315,7 +315,7 @@
 }
 
 .SplitPolyPoints.default <- function(points, polyType, nSections) {
-  warning(paste("Sorry type '", class(type), "' is not supported yet"))
+  warning(paste("Sorry type '", class(polyType), "' is not supported yet"))
   points
 }
 
