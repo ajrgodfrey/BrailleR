@@ -1,5 +1,6 @@
 # BrailleR 0.99.0
 - did some cleaning up to de-clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0
+- removed dependency on magrittr as now using native pipe
 
 
 # BrailleR 0.33.4

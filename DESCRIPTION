@@ -53,7 +53,6 @@ Imports:
     gridSVG,
     hunspell,
     knitr,
-    magrittr,
     mathjaxr,
     moments,
     quarto,
