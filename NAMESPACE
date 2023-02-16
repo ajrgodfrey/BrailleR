@@ -23,10 +23,6 @@ importFrom("utils", "browseURL", "create.post", "download.file", "file.edit", "h
 importFrom("whisker", "whisker.render")
 importFrom("XML", "addAttributes", "newXMLDoc", "newXMLNode", "ensureNamespace", "newXMLTextNode", "xmlName", "xmlRoot", "saveXML", "getNodeSet", "xmlGetAttr", "addChildren", "removeChildren", "xmlChildren")
 importFrom("xtable", "xtable")
-<<<<<<< HEAD
-importFrom("grDevices", "dev.size")
-=======
->>>>>>> 0b9cc93d69dd2757e0c93a7f99da02c70e09b2c5
 S3method(AddXML,default)
   S3method(AddXML,boxplot)
   S3method(AddXML,dotplot)
