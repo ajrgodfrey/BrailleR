@@ -1,7 +1,9 @@
 Acknowledgements
 AddXML
+aes
 ajrgodfrey
 al
+aov
 AugmentMethod
 AutoSpellCheck
 AutoSpellList
@@ -33,6 +35,7 @@ cmd
 colocated
 colour
 colours
+CommonScatterplotGen
 css
 csv
 DataViewer
@@ -69,6 +72,18 @@ fittedlineplot
 flavours
 forma
 Galili
+gam
+GeomArea
+GeomBar
+GeomBlank
+GeomBoxplot
+GeomCol
+GeomHLine
+GeomLine
+GeomPoint
+GeomRibbon
+geoms
+GeomSmooth
 GetCygwin
 GetExampleText
 GetGoing
@@ -85,7 +100,9 @@ godfrey
 gridGraphics
 gridSVG
 gsub
+gTree
 HB
+hline
 hmtml
 HSD
 htest
@@ -110,6 +127,7 @@ knitr
 licence
 licenced
 lm
+loess
 LURN
 Maechler
 magrittr
@@ -261,8 +279,10 @@ WTF
 www
 WxPython
 wxPython
+xaxis
 xlab
 xtable
 YAML
+yaxis
 ylab
 zzz
