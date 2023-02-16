@@ -9,6 +9,7 @@ AutoSpellCheck
 AutoSpellList
 baseplots
 behaviour
+Bengtsson
 bibtex
 BlindRUG
 BOM
@@ -27,6 +28,7 @@ centred
 CheckIt
 ChooseEmbosser
 ChooseStyle
+ChooseTemplate
 ci
 CII
 CleanCSV
@@ -36,6 +38,8 @@ colocated
 colour
 colours
 CommonScatterplotGen
+CoordFlip
+CoordPolar
 css
 csv
 DataViewer
@@ -51,8 +55,10 @@ devian
 devtools
 diagcess
 Digitisation
+Donal
 dotplot
 dotplots
+dplyr
 DS
 ds
 embeded
@@ -101,7 +107,9 @@ gridGraphics
 gridSVG
 gsub
 gTree
+hasno
 HB
+Hirst
 hline
 hmtml
 HSD
@@ -120,6 +128,7 @@ io
 Javascript
 javascript
 JoinBlindRUG
+JooYoung
 js
 JYS
 Karlsruhe
@@ -144,6 +153,7 @@ MakeSlidy
 MakeUpper
 massey
 mathjax
+modernising
 mouseclick
 murrell
 MyBrailleR
@@ -168,6 +178,7 @@ Pigmentosa
 pkgdown
 png
 prcomp
+precommit
 PrepareWriteR
 ProcessAll
 ProcessAllMd
@@ -180,6 +191,7 @@ qplot
 quartile
 RBatch
 Rbatch
+Rdpack
 ReadMe
 Readme
 readme
@@ -208,6 +220,7 @@ SaveMySettings
 Scalable
 scalable
 ScatterPlot
+Seo
 SetAuthor
 SetMakeUpper
 SetOptionsRd
@@ -224,6 +237,7 @@ Sorge
 SpellCheck
 SpellCheckFiles
 stripchart
+strngs
 subfolder
 subfolders
 submenu
@@ -243,6 +257,7 @@ ThankYou
 Theodor
 ThreeFactors
 Tidyverse
+TimeSeries
 TimeSeriesPlot
 titbits
 toupper
@@ -258,6 +273,7 @@ UseGitHub
 UseR
 useRs
 UseTemplate
+UseTemplateList
 ViewPlus
 ViewSVG
 VIgraph
@@ -272,13 +288,16 @@ WhatIs
 WhereXY
 WhichFile
 Wickham
+winget
 wordlist
 WriteR
 WriteROptions
 WTF
+wth
 www
 WxPython
 wxPython
+wxpython
 xaxis
 xlab
 xtable
