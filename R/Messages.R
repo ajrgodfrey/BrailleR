@@ -11,12 +11,12 @@ return(invisible(NULL))
 }
 
 
-        .AnswerQuestions=function(){
+.AnswerQuestionsMSG = function(){
 message("You will be asked to enter answers for a series of questions.Hit <enter> to use the default shown in parentheses.")
 return(invisible(NULL))
 }
 
-.AuthorName =     function() {
+.AuthorNameMSG =     function() {
 message("Enter the name you want to use for authoring content. (",
                 getOption("BrailleR.Author"), ")")
 return(invisible(NULL))
@@ -46,6 +46,11 @@ message("Consult the help page for guidance on using these files in Windows Expl
 return(invisible(NULL))
 }
 
+.DefaultSignificanceMSG =     function() {
+message("What is the level of significance you plan to use as your default? (",
+getOption("BrailleR.SigLevel"), ")")
+return(invisible(NULL))
+}
 
 .DeleteAnytime  = function(){
 message("You can delete it at any time, but that will not uninstall the application.")
@@ -107,7 +112,7 @@ return(invisible(NULL))
 }
 
 .NoVIMethod =     function() {
-      message("There is no specific method written for  this type of object.")
+message("There is no specific method written for  this type of object.")
 message("You might try to use the print() function on the object or the str() command to investigate its contents.")
 return(invisible(NULL))
 }
@@ -119,7 +124,7 @@ return(invisible(NULL))
 }
 
 .OptionPermanent =     function() {
-message("and has overwritten the setting for all folders.")
+message("This has overwritten the setting for all folders.")
 return(invisible(NULL))
 }
 
@@ -136,6 +141,12 @@ message("You have reset all preferences to the original package defaults.")
 return(invisible(NULL))
 }
 
+
+
+.PValueDigitsMSG =     function() {
+message("How many decimal places do you wish p values to be rounded to? (", getOption("BrailleR.PValDigits"), ")")
+return(invisible(NULL))
+}
 
 .PythonVersion =     function() {
 VersionString = system2("python", "--version", stdout=TRUE, stderr=TRUE)
@@ -165,3 +176,9 @@ return(invisible(NULL))
 }
 
 
+
+
+.UpdatedSettingMSG =     function(What, To) {
+message(            "The", What, "has been changed to ", To, "and saved in your settings file.")
+return(invisible(NULL))
+}

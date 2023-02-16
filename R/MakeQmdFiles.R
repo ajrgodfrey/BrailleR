@@ -39,7 +39,7 @@ R2Qmd =
             file = QmdFile)
         cat(paste0("\n", Lines, "  "), file = QmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = QmdFile, append = TRUE)
-        .NewFile()
+        .NewFile(file = QmdFile)
         return(QmdFile)
       } else {
         .FileDoesNotExist(file)

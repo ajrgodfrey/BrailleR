@@ -1,21 +1,18 @@
 GetGoing =
     function() {
       if (interactive()) {
-        .AnswerQuestions()
+        .AnswerQuestionsMSG()
 
-        .AuthorName()
+        .AuthorNameMSG()
         name = readLines(n = 1)
         if (name != "") SetAuthor(name)
 
-        message(
-            "\nHow many decimal places do you wish p values to be rounded to? (",
-            getOption("BrailleR.PValDigits"), ")\n")
+        .PValueDigitsMSG()
+
         digits = as.numeric(readLines(n = 1))
         if (!is.na(digits)) SetSigLevel(digits)
 
-        message(
-            "\nWhat is the level of significance you plan to use as your default? (",
-            getOption("BrailleR.SigLevel"), ")")
+        .DefaultSignificanceMSG()
        alpha = as.numeric(readLines(n = 1))
         if (!is.na(alpha)) SetSigLevel(alpha)
 

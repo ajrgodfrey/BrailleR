@@ -101,8 +101,7 @@ VI.dotplot =
       cat(paste0('This graph has ', x$dotplots, ' printed ', x$VertHorz, '\n',
                  .getGraphName(x), '\n'))
       if (!is.null(x$ExtraArgs$dlab) | !is.null(x$ExtraArgs$glab)) {
-        warning(
-            "Use of dlab or glab arguments is not advised. Use xlab and ylab instead.")
+        .OldCodeWarning(Old="dlab or glab arguments", New = "xlab and ylab ")
       } else {
         cat(paste0(ifelse(length(x$ExtraArgs$xlab) > 0, InQuotes(x$ExtraArgs$xlab), 'No label'),
                    ' appears on the x-axis.\n',

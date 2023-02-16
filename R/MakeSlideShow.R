@@ -35,7 +35,7 @@ MakeAllInOneSlide =
 
         }  # end css file condition
             else {
-          warning("Cannot find the specified css file.")
+          ## war ning("Cannot find the specified css file.")
         }
       }  # end folder existence condition
           else {
@@ -133,7 +133,7 @@ MakeSlideShow =
 
         }  # end css file condition
             else {
-          warning("Cannot find the specified css file.")
+          ## war ning("Cannot find the specified css file.")
         }
       }  # end folder existence condition
           else {

@@ -168,8 +168,7 @@ SetBRLPointSize =
           .OptionLocal()
         }
       } else {
-        warning(
-            "The point size must be between 10 and 40 . \nNo change has been made to this setting.\n")
+        .NoChangeWarning("The point size must be between 10 and 40 .")
       }
       return(invisible(NULL))
     }
@@ -209,9 +208,8 @@ SetMakeUpper =
       Upper = as.logical(Upper)
       if (is.logical(Upper)) {
         options(BrailleR.MakeUpper = Upper)
-        message(
-            "The BrailleR.MakeUpper option for capitalising the initial letter of variable names has been changed to ",
-            Upper, ".")
+        .UpdatedSettingMSG(What="BrailleR.MakeUpper option for capitalising the initial letter of variable names", To=Upper) 
+
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
@@ -229,8 +227,7 @@ SetMakeUpper =
           .OptionLocal()
         }
       } else {
-        warning(
-            "The option must be either TRUE or FALSE.\nNo change has been made to this setting.\n")
+        .NoChangeWarning()
       }
       return(invisible(NULL))
     }
@@ -239,9 +236,7 @@ SetPaperHeight =
     function(Inches, Permanent = FALSE, Local = interactive()) {
       if ((5 < Inches) & (Inches < 14)) {
         options(BrailleR.PaperHeight = Inches)
-        message(
-            "The BrailleR.PaperHeight option for the height of the embossed images has been changed to ",
-            Inches, " inches.")
+        .UpdatedSettingMSG(What = "BrailleR.PaperHeight option for the height of the embossed images", To=paste(Inches, "inches"))
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
@@ -259,8 +254,7 @@ SetPaperHeight =
           .OptionLocal()
         }
       } else {
-        warning(
-            "The height must be between 5 and 14 inches. \nNo change has been made to this setting.\n")
+        .NoChangeWarning("The height must be between 5 and 14 inches.")
       }
       return(invisible(NULL))
     }
@@ -269,9 +263,7 @@ SetPaperWidth =
     function(Inches, Permanent = FALSE, Local = interactive()) {
       if ((5 < Inches) & (Inches < 14)) {
         options(BrailleR.PaperWidth = Inches)
-        message(
-            "The BrailleR.PaperWidth option for the width of the embossed images has been changed to ",
-            Inches, " inches.")
+        .UpdatedSettingMSG(What="BrailleR.PaperWidth option for the width of the embossed images", To=paste(Inches, "inches"))
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
@@ -289,8 +281,7 @@ SetPaperWidth =
           .OptionLocal()
         }
       } else {
-        warning(
-            "The width must be between 5 and 14 inches. \nNo change has been made to this setting.\n")
+        .NoChangeWarning("The width must be between 5 and 14 inches.")
       }
       return(invisible(NULL))
     }
@@ -302,9 +293,7 @@ SetPValDigits =
       digits = as.integer(digits)
       if (digits > 1) {
         options(BrailleR.PValDigits = digits)
-        message(
-            "The BrailleR.PValDigits option for the number of decimal places to display for p values has been changed to ",
-            digits, ".")
+        .UpdatedSettingMSG(What="BrailleR.PValDigits option for the number of decimal places to display for p values", To=digits))
         if (Permanent) {
           Prefs = paste0(getOption("BrailleR.Folder"), "BrailleROptions")
           OpSet = as.data.frame(read.dcf(Prefs, all = TRUE))
@@ -322,8 +311,7 @@ SetPValDigits =
           .OptionLocal()
         }
       } else {
-        warning(
-            "The number of digits must be an integer greater than one.\nNo change has been made to this setting.\n")
+        .NoChangeWarning("The number of digits must be an integer greater than one")
       }
       return(invisible(NULL))
     }
@@ -352,8 +340,7 @@ SetSigLevel =
           .OptionLocal()
         }
       } else {
-        warning(
-            "The level of alpha must be between 0 and 1. \nNo change has been made to this setting.\n")
+        .NoChangeWarning("The level of alpha must be between 0 and 1.")
       }
       return(invisible(NULL))
     }

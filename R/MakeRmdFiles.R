@@ -11,7 +11,7 @@ opts_chunk$set(comment="", fig.cap="to fix")
 ```\n\n'), file = file)
         cat(paste0("```{r line", LineNo, "}  \n", Lines, "\n```  \n\n"),
             file = file, append = TRUE)
-        .NewFile()
+        .NewFile(file = file)
         return(file)
       } else {
         .InteractiveOnly()
@@ -37,7 +37,7 @@ R2Rmd =
             file = RmdFile)
         cat(paste0("\n", Lines, "  "), file = RmdFile, append = TRUE)
         cat("\n# end of input  \n```  \n\n", file = RmdFile, append = TRUE)
-        .NewFile()
+        .NewFile(file = RmdFile)
         return(RmdFile)
       } else {
         .FileDoesNotExist()

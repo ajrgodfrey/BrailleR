@@ -135,7 +135,7 @@ Describe.ggplot <-
       return(NULL)
       # No available description
     } else if (length(descriptions) == 0) {
-      warning("None of you selected layers have a description yet.")
+      warning("None of your selected layers have a description yet.")
       return(NULL)
       # Only one description
     } else {

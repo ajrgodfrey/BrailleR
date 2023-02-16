@@ -4,8 +4,7 @@ dotplot = function(x, ...) {
 
 dotplot.default =
     function(x, ...) {
-      warning(
-          "The dotplot command is a wrapper for stripchart, and is not a base R function.")
+      .NotBaseRWarning("The dotplot command is a wrapper for stripchart,")
       MC <- match.call(expand.dots = TRUE)
       MC[[1L]] <- quote(graphics::stripchart)
       names(MC)[2] = ""
@@ -33,8 +32,7 @@ dotplot.default =
 
 dotplot.formula =
     function(x, ...) {
-      warning(
-          "The dotplot command is a wrapper for stripchart, and is not a base R function.")
+      .NotBaseRWarning("The dotplot command is a wrapper for stripchart,")
       MC <- match.call(expand.dots = TRUE)
       MC[[1L]] <- quote(graphics::stripchart)
       names(MC)[2] = ""

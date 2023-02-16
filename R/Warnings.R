@@ -71,6 +71,12 @@ return(invisible(NULL))
 }
 
 
+
+.NoChangeWarning =     function(text="The option must be either TRUE or FALSE.") {
+warning(text, "\nNo change has been made to this setting.")
+return(invisible(NULL))
+}
+
 .NoConversion =     function() {
 warning("There was a problem and no conversion was possible.")
 return(invisible(NULL))
@@ -81,7 +87,16 @@ warning("There is no current graphics device to investigate.")
 return(invisible(NULL))
 }
 
+.NotBaseRWarning =     function(text = "") {
+warning(text, "and is not a base R function.")
+return(invisible(NULL))
+}
 
+
+.OldCodeWarning =     function(Old="", New="") {
+warning("Use of ", Old, "is not advised. Use", New, "instead.")
+return(invisible(NULL))
+}
 
 
 .OverWriteNeeded =     function(file=NULL) {
@@ -96,7 +111,7 @@ return(invisible(NULL))
 }
 
 .TempUnavailable =     function() {
-message("This command is temporarily unavailable.")
+warning("This command is temporarily unavailable.")
 return(invisible(NULL))
 }
 
