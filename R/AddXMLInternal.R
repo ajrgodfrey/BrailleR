@@ -139,13 +139,18 @@
 #' @param overlap Whether the data sections should have overlapping elements at their ends.
 #' It is used for GeomLines and such where they are connected.
 #'
+#' @note
+#' You should use the .data$ prefix when references the value in the data frame. This helps prevent a note in the cmd check
+#'
 #' @return A list of length <= 5 that has each element as summary of the section of data.
-.AddXMLSummariseGGPlotLayer <- function(data, FUN = function(x) x, overlap = FALSE) {
+.AddXMLSummariseGGPlotLayer <- function(data, FUN = function(x) {
+                                          x
+                                        }, overlap = FALSE) {
   .SplitData(seq_along(data$x), overlapping = overlap) |>
     lapply(function(indexs) {
       data |>
         dplyr::slice(indexs) |>
-        tidyr::drop_na(x, y) |>
+        tidyr::drop_na(.data$x, .data$y) |>
         dplyr::distinct() |>
         FUN()
     })
@@ -177,7 +182,7 @@
 .AddXMLAddGGPlotLayer.point <- function(root, layerRoot, graphObjectStruct, geomID, panel = 1, summarisedSections = 5, ...) {
   # Rmeove all the NAs in the data
   data <- graphObjectStruct$data |>
-    tidyr::drop_na(x, y)
+    tidyr::drop_na(.data$x, .data$y)
 
   numberOfPoints <- nrow(data)
 
@@ -195,15 +200,15 @@
   # Summarise into section when greater than 10 points
   if (numberOfPoints > 5) {
     mean_sd_num <- data |>
-      arrange(x) |>
+      arrange(.data$x) |>
       .AddXMLSummariseGGPlotLayer(function(data) {
         data |>
-          dplyr::summarise(mean = mean(y), sd = ifelse(is.na(sd(y)), 0, sd(y)), count = n())
+          dplyr::summarise(mean = mean(.data$y), sd = ifelse(is.na(sd(.data$y)), 0, sd(.data$y)), count = n())
       })
 
     # Get the order of points
     orderOfIDs <- data.frame(x = data$x, id = 1:length(data$x)) |>
-      dplyr::arrange(x) |>
+      dplyr::arrange(.data$x) |>
       select(id) |>
       unlist()
     pointGroups <- .SplitData(1:numberOfPoints)
@@ -298,15 +303,15 @@
   }
   summarisedData <- .AddXMLSummariseGGPlotLayer(data, function(data) {
     data |>
-      dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
-      dplyr::mutate(CIWidth = ymax - ymin) |>
+      dplyr::mutate(startX = .data$x, endX = lead(.data$x), startY = .data$y, endY = lead(.data$y)) |>
+      dplyr::mutate(CIWidth = .data$ymax - .data$ymin) |>
       tidyr::drop_na() |>
-      dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
+      dplyr::mutate(slope = (.data$startY - .data$endY) / (.data$startX - .data$endX)) |>
       dplyr::summarise(
-        min = min(slope), max = max(slope),
-        mean = mean(slope), median = median(slope),
-        avg_width = mean(CIWidth), median_width = median(CIWidth),
-        rangeCI = max(CIWidth) - min(CIWidth)
+        min = min(.data$slope), max = max(.data$slope),
+        mean = mean(.data$slope), median = median(.data$slope),
+        avg_width = mean(.data$CIWidth), median_width = median(.data$CIWidth),
+        rangeCI = max(.data$CIWidth) - min(.data$CIWidth)
       ) |>
       as.list()
   })
@@ -387,8 +392,8 @@
         # This bit of code was made iwth help from SO:
         # https://stackoverflow.com/questions/75379649/split-a-df-into-a-list-with-groups-of-values-withouts-nas
         disjointLines <- lineData |>
-          group_by(group = cumsum(is.na(y))) |>
-          filter(!(is.na(y) & n() > 1)) |>
+          group_by(group = cumsum(is.na(.data$y))) |>
+          filter(!(is.na(.data$y) & n() > 1)) |>
           group_split() |>
           Filter(function(x) nrow(x) >= 2, x = _)
 
@@ -438,11 +443,11 @@
             if (lineCount > summarisedSections) {
               slope_Range_Median <- .AddXMLSummariseGGPlotLayer(lineData, function(data) {
                 data |>
-                  dplyr::mutate(startX = x, endX = lead(x), startY = y, endY = lead(y)) |>
+                  dplyr::mutate(startX = .data$x, endX = lead(.data$x), startY = .data$y, endY = lead(.data$y)) |>
                   tidyr::drop_na() |>
                   dplyr::select(matches("(start|end)\\w")) |>
-                  dplyr::mutate(slope = (startY - endY) / (startX - endX)) |>
-                  dplyr::summarise(min = min(slope), max = max(slope), median = median(slope)) |>
+                  dplyr::mutate(slope = (.data$startY - .data$endY) / (.data$startX - .data$endX)) |>
+                  dplyr::summarise(min = min(.data$slope), max = max(.data$slope), median = median(.data$slope)) |>
                   as.list()
               }, overlap = TRUE)
               summarised <- TRUE
