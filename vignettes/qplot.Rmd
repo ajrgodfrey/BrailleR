@@ -19,7 +19,6 @@ commands are included below but commented out.
 ```{r GetLibraries}     
 library(BrailleR)   
 library(ggplot2)   
-library(magrittr)
 dsmall = diamonds[1:100,]   
 ```  
 

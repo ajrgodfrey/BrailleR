@@ -379,7 +379,7 @@ GoNovice =
 ViewOn = function() {
            options(BrailleR.View = TRUE)
            .ViewOnMSG()
-           return(invisble(NULL))
+           return(invisible(NULL))
          }
 
 ViewOff =
