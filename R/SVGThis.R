@@ -21,7 +21,7 @@
 .MakeTigerReady <-
   function(svgfile) { # for alterations needed on all SVG files
     if (file.exists(svgfile)) {
-      cat("\n", file = svgfile, append = TRUE) # otherwise warnings returned
+      cat("\n", file = svgfile, append = TRUE) # otherwise problems 
       # on readLines() below
       temp <- readLines(con = svgfile)
       writeLines(gsub("ISO8859-1", "ASCII", temp), con = svgfile)
@@ -53,7 +53,7 @@ SVGThis.default <-
         # no specific processing to be done in this function.
       } # end open device condition
       else { # no current device
-        warning("There is no current graphics device to convert to SVG.\n")
+        .NoGraphicsDevice("to convert to SVG.")
       }
     } # end interactive condition
     else { # not interactive session

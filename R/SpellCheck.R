@@ -6,9 +6,8 @@ SpellCheck =
           cat(paste0(ThisFile, ": "))
           if (file.exists(ThisFile)) {
             file.copy(ThisFile, paste0(ThisFile, ".bak"), overwrite = FALSE)
-            cat("\n", file = ThisFile, append = TRUE)  # otherwise warnings
-                                                       # returned on readLines()
-                                                       # below
+            cat("\n", file = ThisFile, append = TRUE)  # otherwise problems 
+                                                       # on readLines() below
             OldText <- readLines(con = ThisFile)
             Mistakes = SpellCheckFiles(file = ThisFile)
             for (i in names(Mistakes[[1]])) {

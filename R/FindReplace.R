@@ -1,7 +1,7 @@
 FindReplace =
     function(file, find, replace) {
       if (file.exists(file)) {
-        cat("\n", file = file, append = TRUE)  # otherwise warnings returned on
+        cat("\n", file = file, append = TRUE)  # otherwise problems on
                                                # readLines() below
         OldText <- readLines(con = file)
         NoLines = length(OldText)

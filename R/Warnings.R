@@ -82,8 +82,8 @@ warning("There was a problem and no conversion was possible.")
 return(invisible(NULL))
 }
 
-.NoGraphicsDevice =     function() {
-warning("There is no current graphics device to investigate.")
+.NoGraphicsDevice =     function(Text="to investigate.") {
+warning("There is no current graphics device", Text)
 return(invisible(NULL))
 }
 
