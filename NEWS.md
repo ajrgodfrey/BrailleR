@@ -1,8 +1,6 @@
 # BrailleR 1.0.0
 - first production release. Still plenty to add, but the original intention of the package has now been met.
-
-
-
+- removed explicit CITATION file. This then required explicit date specification in DESCRIPTION.
 
 # BrailleR 0.99.0
 - did some cleaning up to de-clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0
@@ -10,8 +8,6 @@
 - removed rlang as a dependency; redundant for some time probably
 - removed other dependencies (on base packages) from imports
 - responded to June 28 CRAN check
-
-
 
 # BrailleR 0.33.4
 - fix issue #35 with incorrect bin counts
