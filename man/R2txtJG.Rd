@@ -87,7 +87,7 @@ The txtOut function is a short cut for the txtStart command that uses the curren
 	 output.  Use the \code{txtComment} functions to add a comment.  This will show up as a line offset
 	 by whitespace in the transcript file.
 	 If \code{cmdtxt} is specified then that line
-	 will be inserted into \code{cmdfile} preceded by a \# so it
+	 will be inserted into \code{cmdfile} preceded by a hash symbol  so it
 	 will be skipped if sourced or copied.
 
 	 The \code{txtSkip}  function will run the

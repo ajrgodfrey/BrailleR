@@ -2,7 +2,7 @@
 
 
 
-BrailleR version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. The leading zero infers that this package is under ongoing development to get to the state where it delivers the original aims of the package. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
+BrailleR version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. From July 2023, the version number starts with a 1 because development over ten years means we believe the package delivers on the original aims of the BrailleR Project. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
 
 The BrailleR package does have dependencies, all of which are available on CRAN. 
 <!-- badges: start -->
@@ -37,7 +37,7 @@ R is perhaps the most blind-friendly statistical software option because all scr
 3. Make it easier for blind users to create their own R markdown documents.
 5. Replace the tasks other users can do quickly using the RStudio IDE.
 
-If these criteria were met, then the `BrailleR` package would be supporting blind people through their first courses in statistics, and perhaps/hopefully into second or third courses.
+If these criteria are all met, then the `BrailleR` package can support blind people through their first courses in statistics, and perhaps/hopefully into second or third courses.
 
 ### Installation of BrailleR
 

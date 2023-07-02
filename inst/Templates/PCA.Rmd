@@ -45,7 +45,7 @@ kable(caption="Principal Component Loadings for the {{DataName}} data.")
 
 ```{r}
 #| label = "augment{{DataName}}.pc"
-{{DataName}}.pc.fit = {{DataName}}.pc |> augment(DataName)  
+{{DataName}}.pc.fit = {{DataName}}.pc |> augment({{DataName}})  
 ```
 
 

@@ -1,8 +1,16 @@
+# BrailleR 1.0.0
+- first production release. Still plenty to add, but the original intention of the package has now been met.
+
+
+
+
 # BrailleR 0.99.0
 - did some cleaning up to de-clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0
 - removed dependency on magrittr as now using native pipe
 - removed rlang as a dependency; redundant for some time probably
 - removed other dependencies (on base packages) from imports
+- responded to June 28 CRAN check
+
 
 
 # BrailleR 0.33.4
