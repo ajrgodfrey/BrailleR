@@ -2,7 +2,7 @@
 
 
 
-BrailleR version numbers are of the form a.b.c, where a.b is the major version and c is the minor version. From July 2023, the version number starts with a 1 because development over ten years means we believe the package delivers on the original aims of the BrailleR Project. The second part of the major version is odd for development and even for CRAN releases. Minor version increments just help track progress.
+BrailleR version numbers are of the form a.b.c, where a is the major version b is the minor version, and c is the pactch version. From July 2023, the version number starts with a 1 because development over ten years means we believe the package delivers on the original aims of the BrailleR Project. The minor version is odd for development and even for CRAN releases. Patch version increments just help track progress.
 
 The BrailleR package does have dependencies, all of which are available on CRAN. 
 <!-- badges: start -->
