@@ -1,3 +1,5 @@
+# BrailleR 1.0.2
+
 # BrailleR 1.0.0
 - first production release. Still plenty to add, but the original intention of the package has now been met.
 - removed explicit CITATION file. This then required explicit date specification in DESCRIPTION.

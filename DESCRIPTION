@@ -1,6 +1,6 @@
 Package: BrailleR
 Title: Improved Access for Blind Users
-Version: 1.0.1
+Version: 1.0.2
 Date: 2023-07-07
 Authors@R: c(
     person("A. Jonathan R.", "Godfrey", , "a.j.godfrey@massey.ac.nz", role = c("aut", "cre"),
