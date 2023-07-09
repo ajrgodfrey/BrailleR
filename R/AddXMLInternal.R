@@ -624,7 +624,7 @@
   stop("This type is not supported: ", class(graphObject))
 }
 
-.AddXMLGGplotGeomItem.smooth <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, lineDesc, ciDesc, layer) {
+.AddXMLGGplotGeomItem.smooth <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, lineDesc, ciDesc, layer, ...) {
   annotation <- .AddXMLAddAnnotation(root, position = position, id = paste(id, letters[position], sep = "."), kind = "grouped")
   XML::addAttributes(annotation$root, speech = speech, speech2 = speech2)
 
@@ -658,7 +658,7 @@
 
 .AddXMLGGplotGeomItem.bar <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech,
                                       x = NULL, count = NULL, density = NULL, start = NULL, end = NULL,
-                                      categorical = TRUE) {
+                                      categorical = TRUE, ...) {
   rectId <- ifelse(is.null(id), .AddXMLmakeId("rect", .CreateID("1.1", position)), id)
   annotation <- .AddXMLAddAnnotation(root,
     position = position,
@@ -685,7 +685,7 @@
   return(invisible(annotation))
 }
 
-.AddXMLGGplotGeomItem.line <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech) {
+.AddXMLGGplotGeomItem.line <- function(root, graphObject, position = 1, id = NULL, speech, speech2 = speech, ...) {
   return(.AddXMLGGplotGeomItem.point(root, graphObject, position, id, speech, speech2))
 }
 

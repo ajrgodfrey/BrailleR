@@ -1,6 +1,6 @@
-#' Rewrite a SVG so that it cna be properly explored with diagcess via the XML.
+#' Rewrite a SVG so that it can be properly explored with diagcess via the XML.
 #' @rdname .RewriteSVG
-#' The Rewrite SVG is a wrapper around the .RewrtieSVGGeom function. It will loop through each
+#' The Rewrite SVG is a wrapper around the .RewriteSVGGeom function. It will loop through each
 #' of the layers and do the necessary changes.
 #'
 #' @param x The graph object that the svg comes from
@@ -48,10 +48,10 @@
 }
 
 .RewriteSVGGeom.default <- function(x, type, geomGTagID, geomGTag, ...) {
-  # Nothing is to be done by deafult
+  # Nothing is to be done by default
 }
 
-.RewriteSVGGeom.GeomLine <- function(x, type, geomGTagID, geomGTag, layer = 1) {
+.RewriteSVGGeom.GeomLine <- function(x, type, geomGTagID, geomGTag, layer = 1, ...) {
   struct <- .VIstruct.ggplot(x)[["panels"]][[1]][["panellayers"]][[layer]]
 
   # Need to figure out how many lines there are
@@ -100,7 +100,7 @@
   }
 }
 
-.RewriteSVGGeom.GeomPoint <- function(x, type, geomGTagID, geomGTag, layer = 1) {
+.RewriteSVGGeom.GeomPoint <- function(x, type, geomGTagID, geomGTag, layer = 1, ...) {
   pointNodes <- XML::xmlChildren(geomGTag)
 
   structLayer <- .VIstruct.ggplot(x)[["panels"]][[1]][["panellayers"]][[layer]][["scaledata"]]
@@ -133,7 +133,7 @@
   }
 }
 
-.RewriteSVGGeom.GeomSmooth <- function(x, type, geomGTagID, geomGTag, layer = 1) {
+.RewriteSVGGeom.GeomSmooth <- function(x, type, geomGTagID, geomGTag, layer = 1, ...) {
   ribbonAndLine <- XML::xmlChildren(geomGTag)
   ## Checking to see if it has a SE ribbon around the fitted line.
   if (length(ribbonAndLine) == 3) {
