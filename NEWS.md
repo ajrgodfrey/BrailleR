@@ -1,4 +1,8 @@
 # BrailleR 1.0.2
+- improved CRAN test picked up inconsistencies with internal functions
+
+# BrailleR 1.0.1
+- deleted detritus
 
 # BrailleR 1.0.0
 - first production release. Still plenty to add, but the original intention of the package has now been met.
