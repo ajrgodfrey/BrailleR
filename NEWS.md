@@ -1,3 +1,5 @@
+# BrailleR 1.1.0
+
 # BrailleR 1.0.2
 - improved CRAN test picked up inconsistencies with internal functions
 
