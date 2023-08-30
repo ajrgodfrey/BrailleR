@@ -1,8 +1,6 @@
 # BrailleR 1.1.0
 - added GetPython() to mirror GetPython3(); ditto for GetWxPython()
-
-
-
+- R Sprint 2023 work with Deepayan led to improvement in the ability to extract content of graphics devices; added him as author
 
 # BrailleR 1.0.2
 - improved CRAN test picked up inconsistencies with internal functions
