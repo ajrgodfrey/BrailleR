@@ -46,7 +46,7 @@ return(TestWx == 0)
 
 
 
-GetPython3 =
+GetPython = GetPython3 =
     function(x64=TRUE) {
       .GetPython(3, x64=x64)
       return(invisible(NULL))
@@ -60,7 +60,6 @@ GetPython3 =
             if (requireNamespace("installr")) {
               .DownloadAFile()
 bit = .ifelse(x64, 64, 32)
-
             installr::install.python(version_number = version, download_dir=getOption("BrailleR.Folder"), keep_install_file = TRUE, x64=x64)
              .Added2MyBrailleR()
              .DeleteAnytime()
@@ -87,7 +86,7 @@ bit = .ifelse(x64, 64, 32)
 
 
 
-GetWxPython3 =
+GetWxPython = GetWxPython3 =
     function() {
       Success = FALSE
       if (interactive()) {

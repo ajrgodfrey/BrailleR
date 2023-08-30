@@ -4,8 +4,10 @@
 \alias{Get7zip}
 \alias{GetRStudio}
 \alias{GetPython3}
+\alias{GetPython}
 \alias{GetCygwin}
 \alias{GetWxPython3}
+\alias{GetWxPython}
 \title{Download and install software (Windows users only)}
 \usage{
 Get7zip()
@@ -14,12 +16,14 @@ GetCygwin(x64 = TRUE)
 
 GetPandoc()
 
+GetPython(x64 = TRUE)
 GetPython3(x64 = TRUE)
 
 GetRStudio()
 
 GetWriteR()
 
+GetWxPython()
 GetWxPython3()
 }
 \arguments{
@@ -34,7 +38,7 @@ NULL. The downloaded file is saved in the user's MyBrailleR folder.
 }
 \note{Use of this function assumes you are happy for a file to be downloaded and saved on your hard drive. You can go to your MyBrailleR folder and delete the executable at any time.}
 \description{
-Anyone wishing to make use of the WriteR application must have pandoc installed.
+Anyone wishing to make use any of the WriteR applications must have pandoc installed.
 
 Users that do not have Python and wxPython installed cannot use the WriteR application file as provided by the BrailleR package. This command  gets an installer that can run independently of Python.
 

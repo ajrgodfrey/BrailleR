@@ -1,7 +1,12 @@
 # BrailleR 1.1.0
+- added GetPython() to mirror GetPython3(); ditto for GetWxPython()
+
+
+
 
 # BrailleR 1.0.2
 - improved CRAN test picked up inconsistencies with internal functions
+- available on CRAN
 
 # BrailleR 1.0.1
 - deleted detritus
