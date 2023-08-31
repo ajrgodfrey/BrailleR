@@ -21,8 +21,8 @@ A named list of named vectors. Names of list elements are the C function calls u
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-plot(x=1:20, y=x^2)
-abline(h=100)
+plot(x=c(1:20), y=runif(20))
+abline(h=0.5)
 
 p = recordPlot()
 summary(p)

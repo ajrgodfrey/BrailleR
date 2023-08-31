@@ -27,6 +27,7 @@ for(Element in summaryDisplayList){
 # add the names from DS' argument list found in .plotc_arglist
 
 }
+return(summaryDisplayList)
 }
 
 
