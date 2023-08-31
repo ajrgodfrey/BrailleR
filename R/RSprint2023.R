@@ -2,7 +2,7 @@
 
 
 # to be named more helpfully
-summarizeDL <- function()
+wtf <- function()
 {
     recordedPlot <- recordPlot()
 summary(recordedPlot)
