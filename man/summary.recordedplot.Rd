@@ -3,7 +3,7 @@
 \title{Summarise the display list for a  graphics device}
 \description{Base graphics are created using a series of calls to C routines. This function gathers the names of these calls and the values of the arguments as supplied. Names of the arguments are then added. The display list must be retrived before the graphics device is closed, but this could be stored for later summarisation.}
 \usage{
-summary.recordedplot(object, ...)
+\method{summary}{recordedplot}(object, ...)
 }
 \arguments{
   \item{object}{the display list created by recordPlot().}
