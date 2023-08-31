@@ -1,27 +1,30 @@
+# this was made possible with much help and insight from Deepayan
 
+
+# to be named more helpfully
 summarizeDL <- function()
 {
-    p <- recordPlot()
-summary(p)
+    recordedPlot <- recordPlot()
+summary(recordedPlot)
 #now pass through a whisker template
 }
 
-# with much help and insight from Deepayan
-summary.plot = function(){
-     getCall <- function(x) {
+summary.recordedplot = function(object, ...){
+     .getCall <- function(x) {
          structure(list(x[[2]][-1]), 
                   names = x[[2]][1][[1]]$name)
      }
-semiOut=    lapply(p[[1]], getCall) |> do.call(what = c)
-
+semiOut=    lapply(object[[1]], .getCall) |> do.call(what = c)
 Out = lapply(semiOut, unlist)
+# name the vectors now
+Out = .addCFunctionArgNames(Out)
 return(Out)
 }
 
 
-.addCFunctionArgNames=function(summaryDisplayList){
+.addCFunctionArgNames = function(summaryDisplayList){
 for(Element in summaryDisplayList){
-# add the names from DS' argument list
+# add the names from DS' argument list found in .plotc_arglist
 
 }
 }
@@ -31,7 +34,7 @@ for(Element in summaryDisplayList){
 # The argument list may not be complete or correct in all cases, and will need to be verified.
 # There are other functions that may be called (that definitely happens for grid-based plots), so this should only be considered as a starting point.
 
-.plotc_arglist1 <- 
+.plotc_arglist <- 
     list(C_plot_new = c(""),
          C_plot_window = c(""),
          C_axis = c("side, at, labels, tick, line, pos, outer, font, lty, lwd, lwd.ticks, col, col.ticks, hadj, padj, gap.axis, ..."),
