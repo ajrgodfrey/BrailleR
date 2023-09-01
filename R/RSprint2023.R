@@ -17,7 +17,7 @@ summary.recordedplot = function(object, ...){
 semiOut=    lapply(object[[1]], .getCall) |> do.call(what = c)
 Out = lapply(semiOut, unlist)
 # name the vectors now
-Out = .addCFunctionArgNames(Out)
+#Out = .addCFunctionArgNames(Out)
 return(Out)
 }
 

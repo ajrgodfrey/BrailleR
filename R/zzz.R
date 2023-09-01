@@ -15,6 +15,8 @@
       }
     }
 
+
+BrailleR <- NULL
 .onLoad =
     function(libname, pkgname) {
       ns <- getNamespace(pkgname)
@@ -50,7 +52,7 @@
 
 
       options(BrailleR.View = interactive())
-      BrailleR = new.env(parent = .GlobalEnv)
+      BrailleR <<- new.env(parent = .GlobalEnv)
       if (interactive()) {
         options("menu.graphics" = FALSE)
       }
