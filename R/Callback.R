@@ -1,3 +1,4 @@
+BrailleR <- NULL
 
 SessionLog <- function(file = "") {
     df <- .get_session_log()

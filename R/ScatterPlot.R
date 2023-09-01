@@ -63,7 +63,7 @@ plot.fittedlineplot = function(x, ...){
     x = .RemoveExtraGraphPars(x)
     suppressWarnings(do.call(plot, c(x, Pars)))
   if(any(class(x) == "fittedlineplot")) do.call(abline, fitline)
-    return(invisible(NULL))
+    return(invisible(x))
 }
 
 plot.scatterplot = print.fittedlineplot = print.scatterplot = plot.fittedlineplot

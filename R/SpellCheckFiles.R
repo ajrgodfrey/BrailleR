@@ -48,5 +48,6 @@ print.wordlist =
         cat(paste0("File: ", names(x)[i], "\n"))
         cat(paste0(names(x[[i]]), " ", gsub(",", " ", x[[i]]), "\n"))
       }
+    return(invisible(x))
     }
 

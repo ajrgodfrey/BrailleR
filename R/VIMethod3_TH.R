@@ -161,9 +161,10 @@
 
 ### Print function for the object created by VI.ggplot
 ### Prints the text component of the object
+
 print.VIgraph <- function(x, ...) {
   cat(x$text, sep = "\n")
-  invisible(x)
+  return(invisible(x))
 }
 
 # Small helper function - builds list excluding items that are null or length 0

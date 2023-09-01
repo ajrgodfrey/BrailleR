@@ -47,7 +47,7 @@ print.description <-
     template <- paste(readLines(system.file("whisker/Describe/Describedefault.txt", package = "BrailleR")), collapse = "\n")
     output <- whisker::whisker.render(template, x)
     cat(output, "\n\n")
-    return(invisible(NULL))
+    return(invisible(x))
   }
 
 print.multiDescription <-
@@ -55,6 +55,7 @@ print.multiDescription <-
     for (element in x) {
       print(element)
     }
+    return(invisible(x))
   }
 
 Describe.default <-
