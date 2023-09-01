@@ -1,3 +1,4 @@
+# with much help from Gabe Becker
 BrailleR <- NULL
 
 SessionLog <- function(file = "") {
@@ -33,4 +34,3 @@ SessionLog <- function(file = "") {
 }
 
 
-addTaskCallback(.callback, data = BrailleR, name = "BrailleR_logger")

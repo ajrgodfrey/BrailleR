@@ -53,6 +53,7 @@ BrailleR <- NULL
 
       options(BrailleR.View = interactive())
       BrailleR <<- new.env(parent = .GlobalEnv)
+      addTaskCallback(.callback, data = BrailleR, name = "BrailleR_logger")
       if (interactive()) {
         options("menu.graphics" = FALSE)
       }
