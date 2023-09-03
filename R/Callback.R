@@ -1,8 +1,23 @@
 # with much help from Gabe Becker
 BrailleR <- NULL
 
-SessionLog <- function(file = "") {
-    df <- .get_session_log()
+
+GrabLast <- function(file = "", n=1) {
+.SessionLogWorker(file = file, n=n) 
+return(invisible(NULL))
+}
+
+SessionLog <- function(file = "", n=NULL) {
+.SessionLogWorker(file = file, n=NULL) 
+return(invisible(NULL))
+}
+
+.SessionLogWorker <- function(file = "", n=NULL) {
+    df <- .get_session_log() 
+if(!is.null(n)){
+NRows = nrow(df)
+df = df[(NRows+1-n): NRows, ]
+}
     mapply(function(expr, pr) cat(c(paste(">", paste(expr, collapse = "\n")), pr, ""), sep = "\n", file = file),
            expr = df$expr,
            pr = df$pr_output)
