@@ -5,7 +5,7 @@
 \description{
 Retrieve the output from the last n top level calls, or the hole current session. These functions are designed to cater for situations where the output scrolls off the screen and is no longer accessible to a screen reader user.}
 \usage{
-Grablast(file = "", n=1)
+GrabLast(file = "", n=1)
 
 SessionLog(file = "", n=MULL)
 }
