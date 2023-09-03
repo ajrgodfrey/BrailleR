@@ -7,7 +7,7 @@ Retrieve the output from the last n top level calls, or the hole current session
 \usage{
 GrabLast(file = "", n=1)
 
-SessionLog(file = "", n=MULL)
+SessionLog(file = "", n=NULL)
 }
 \arguments{
   \item{file}{a filename; if left unspecified, the output is printed in the console}

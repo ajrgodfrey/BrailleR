@@ -19,7 +19,7 @@ A named list of named vectors. Names of list elements are the C function calls u
 }
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-to fix
+to fix}
 \examples{
 plot(x=c(1:20), y=runif(20))
 abline(h=0.5)
