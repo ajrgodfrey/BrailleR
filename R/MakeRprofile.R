@@ -1,5 +1,6 @@
 MakeRprofile =
     function(Overwrite = FALSE) {
+      if (interactive()) {
       if (!file.exists(".Rprofile")) Overwrite = TRUE
 
       if (Overwrite) {
@@ -11,6 +12,9 @@ MakeRprofile =
       } else {
 .FileExists(file=".Rprofile")
         .OverWriteNeeded()
+      }
+      } else {
+        .InteractiveOnly()
       }
       return(invisible(NULL))
     }

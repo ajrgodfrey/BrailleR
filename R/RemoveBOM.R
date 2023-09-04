@@ -1,4 +1,5 @@
 RemoveBOM = function(file){
+      if (interactive()) {
 FileLines = readLines(file)
 Line1 = FileLines[1]
 
@@ -8,6 +9,9 @@ writeLines(FileLines, con=file)
 .Done()
 return(invisible(TRUE))
 }
+      } else {
+        .InteractiveOnly()
+      }
 return(invisible(TRUE))
 }
 

@@ -1,4 +1,5 @@
 Rnw2Rmd = function(file){
+      if (interactive()) {
 FindReplace(file, "<<>>=", "```{r}")
 FindReplace(file, "<<", "```{r ")
 FindReplace(file, "@", "```")
@@ -23,6 +24,9 @@ Txt = readLines(file)
 NoLines=length(Txt)
 while(all(Txt[(NoLines-1):NoLines] == "")) {NoLines=NoLines-1}
 writeLines(Txt[1:NoLines], con=file)
+      } else {
+        .InteractiveOnly()
+      }
 return(invisible(NULL))
 }
 
