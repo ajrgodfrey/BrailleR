@@ -35,7 +35,6 @@ BrailleR <- NULL
         # to do: # ask for permission to write a local copy
         ## write.dcf(OpSet, file="BrailleROptions")
       }
-
       OpSet$BrailleR.Folder = Folder
       OpSet$BrailleR.SigLevel = as.numeric(OpSet$BrailleR.SigLevel)
       OpSet$BrailleR.PValDigits = as.numeric(OpSet$BrailleR.PValDigits)
@@ -44,17 +43,14 @@ BrailleR <- NULL
       OpSet$BrailleR.PaperWidth = as.numeric(OpSet$BrailleR.PaperWidth)
       OpSet$BrailleR.PaperHeight = as.numeric(OpSet$BrailleR.PaperHeight)
       #OpSet$ = as.numeric(OpSet$)
-
       do.call(options, as.list(OpSet))
       Op <- getOption("repos")
       Op["CRAN"] <- "https://cran.rstudio.com/"
       options(repos = Op)
-
-
       options(BrailleR.View = interactive())
       BrailleR <<- new.env(parent = .GlobalEnv)
-      addTaskCallback(.callback, data = BrailleR, name = "BrailleR_logger")
       if (interactive()) {
+        addTaskCallback(.callback, data = BrailleR, name = "BrailleR_logger")
         options("menu.graphics" = FALSE)
       }
     }

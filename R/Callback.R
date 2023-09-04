@@ -3,12 +3,20 @@ BrailleR <- NULL
 
 
 GrabLast <- function(file = "", n=1) {
+      if (interactive()) {
 .SessionLogWorker(file = file, n=n) 
+      } else {
+        .InteractiveOnly()
+      }
 return(invisible(NULL))
 }
 
 SessionLog <- function(file = "", n=NULL) {
+      if (interactive()) {
 .SessionLogWorker(file = file, n=NULL) 
+      } else {
+        .InteractiveOnly()
+      }
 return(invisible(NULL))
 }
 
