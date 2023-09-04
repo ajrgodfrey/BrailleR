@@ -54,9 +54,6 @@ message(paste("The", file, "uses the following terms that must be replaced:", Su
         .InteractiveOnly()
 file=NULL
       }
-      } else {
-        .InteractiveOnly()
-      }
 return(file)
 }
 
