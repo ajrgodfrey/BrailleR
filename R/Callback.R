@@ -2,6 +2,18 @@
 BrailleR <- NULL
 
 
+ShowMe <- function(file = NULL, n=1) {
+      if (interactive()) {
+if(is.null(file)){ file = paste0(tempfile(), ".txt")}
+.SessionLogWorker(file = file, n=n) 
+browseURL(file)
+      } else {
+        .InteractiveOnly()
+      }
+return(invisible(NULL))
+}
+
+
 GrabLast <- function(file = "", n=1) {
       if (interactive()) {
 .SessionLogWorker(file = file, n=n) 
