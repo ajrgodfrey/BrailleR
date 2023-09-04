@@ -18,10 +18,10 @@ for(i in 1:length(replace)){
 TXT = gsub(find[i], replace[i], TXT)
 }
 }
+return(paste0(TXT, collapse="\n"))
       } else {
         .InteractiveOnly()
       }
-return(paste0(TXT, collapse="\n"))
 }
 
 
@@ -33,10 +33,10 @@ if(!is.null(NewFile)){
 cat(OutText, file=NewFile)
 .NewFile(NewFile)
 }
+return(OutText)
       } else {
         .InteractiveOnly()
       }
-return(OutText)
 }
 
 .ChooseTemplate = function(){

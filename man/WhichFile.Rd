@@ -8,7 +8,7 @@ WhichFile(String, Folder, fixed = TRUE, DoesExist = TRUE)
 \arguments{
   \item{String}{The text string or regular expression being sought.}
   \item{Folder}{The head folder to start searching in.}
-  \item{fixed}{Fixed text string or if FALSE, a regular expression that will be passed togrep().}
+  \item{fixed}{Fixed text string or if FALSE, a regular expression that will be passed to grep().}
   \item{DoesExist}{If TRUE, it shows the files that do include the text string of interest; if FALSE, files that lack the search string are returned.}
 }
 \details{

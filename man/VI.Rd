@@ -65,7 +65,7 @@ description is printed.
 \note{
 The \code{VI.lm} method fails if you use  the one line \code{VI(lm(...))} even if the model is named using \code{VI(Model1 <- lm(...))}. It does work if two explicit commands are used. For example \code{Model1 = lm(...)} followed by \code{VI(Model1)}.
 
-The ggplot2 package contains many layers and not all of them have a VI output yet. However most of the commonly used ones do. Regardless the VI output should be considered experimental with some results being potenitally misleading.
+The ggplot2 package contains many layers and not all of them have a VI output yet. However most of the commonly used ones do. Regardless the VI output should be considered experimental with some results being potentially misleading.
 }
 \author{
 A. Jonathan R. Godfrey, Debra Warren, Sophie Banks, Tony Hirst, Timothy P. Bilton and James A. Thompson

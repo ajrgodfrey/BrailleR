@@ -14,7 +14,7 @@ MakeSlidy(...)
 MakeSlideShow(...)
 }
 \arguments{
-\item{...}{cover for unnecessary arguments going to deprocated functions.}
+\item{...}{cover for unnecessary arguments going to deprecated functions.}
 }
 \details{ These functions are redundant.
 

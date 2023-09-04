@@ -2,7 +2,7 @@
 \alias{MakeBatch}
 \alias{MakeAdminBatch}
 \title{Create batch files for processing R scripts and markdown files under Windows}
-\description{Convenience function for creating batch files that can be used under Windows to process R scripts, R markdown, and quarto  files. The main idea is that a user can click on the bacth files within Windows Explorer to get the desired task done faster.}
+\description{Convenience function for creating batch files that can be used under Windows to process R scripts, R markdown, and quarto  files. The main idea is that a user can click on the batch files within Windows Explorer to get the desired task done faster.}
 \usage{
 MakeBatch(file=NULL, static = FALSE)
 

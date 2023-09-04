@@ -20,7 +20,7 @@ TwoFactors(Response, Factor1, Factor2, Inter = FALSE, HSD = TRUE,
   \item{VI}{Logical: Should the VI method for blind users be employed?}
   \item{Latex}{Logical: Should the tabulated sections be saved in LaTeX format?}
   \item{View}{Logical: Should the HTML file be opened for inspection?}
-  \item{Modern}{Logical: Should the graphics be createdusing ggplot?}
+  \item{Modern}{Logical: Should the graphics be created using ggplot?}
 }
 \details{
 to complete}

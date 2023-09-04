@@ -1,7 +1,7 @@
 \name{GetGoing}
 \alias{GetGoing}
 \alias{GetingStarted}
-\title{Set options for using brailleR}
+\title{Set options for using BrailleR}
 \description{An interactive question-and-answer interface suitable for blind users wanting to set the options for using the BrailleR package.}
 \usage{
 GetGoing()

@@ -15,6 +15,6 @@ SessionLog(file = "", n=NULL)
 }
 \details{
 A stack of top level calls and the resulting output is stored, courtesy of a setting established on package load. These functions retrieve elements from that stack.}
-\value{NULL, invisibly; not the output wich is either printed to the console or the file specified}
+\value{NULL, invisibly; not the output which is either printed to the console or the file specified}
 \author{Gabe Becker and some very minor edits from A. Jonathan R. Godfrey}
 

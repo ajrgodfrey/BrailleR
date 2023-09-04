@@ -20,7 +20,7 @@ View = getOption("BrailleR.View"), Modern=TRUE)
   \item{VI}{Logical: Should the VI method for blind users be employed?}
   \item{Latex}{Logical: Should the tabulated sections be saved in LaTeX format?}
   \item{View}{Logical: Should the HTML file be opened for inspection?}
-  \item{Modern}{Logical: Should the graphics be createdusing ggplot?}
+  \item{Modern}{Logical: Should the graphics be created using ggplot?}
 }
 \details{This function writes an R markdown file that is knitted into HTML and purled into an R script. All graphs are saved in subdirectories in png, eps, pdf and svg formats. Tabulated results are stored in files suitable for importing into LaTeX documents.}
 \value{This function is used for creation of the files saved in the working directory and a few of its subdirectories.}

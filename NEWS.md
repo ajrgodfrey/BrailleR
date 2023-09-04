@@ -16,7 +16,7 @@
 - removed explicit CITATION file. This then required explicit date specification in DESCRIPTION.
 
 # BrailleR 0.99.0
-- did some cleaning up to de-clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0
+- did some cleaning up to reduce clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0
 - removed dependency on magrittr as now using native pipe
 - removed rlang as a dependency; redundant for some time probably
 - removed other dependencies (on base packages) from imports
@@ -143,7 +143,7 @@
 - attempting to remove all references to the reticulate package
 - added TestPython() and TestWX() functions which test system setup.
 - added Messages.R and Warnings.R to create text strings that get used in multiple functions. All now use internal functions
-- deprecated GetPython27() and GetWxPython27(); updated help pages to show deprocation
+- deprecated GetPython27() and GetWxPython27(); updated help pages to show deprecation
 
 
 
