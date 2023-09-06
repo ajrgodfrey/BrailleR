@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BrailleR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,13 +58,28 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="brailler-110">BrailleR 1.1.0<a class="anchor" aria-label="anchor" href="#brailler-110"></a></h2>
+<ul><li>added GetPython() to mirror GetPython3(); ditto for GetWxPython()</li>
+<li>R Project Sprint 2023 work with Deepayan led to improvement in the ability to extract content of graphics devices; added him as author</li>
+<li>R Project Sprint 2023 work with Gabe led to a working solution to extract recent console output; added him as author. See ShowMe(), SessionLog(), and GrabLast()</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.2" id="brailler-102">BrailleR 1.0.2<a class="anchor" aria-label="anchor" href="#brailler-102"></a></h2><p class="text-muted">CRAN release: 2023-07-10</p>
+<ul><li>improved CRAN test picked up inconsistencies with internal functions</li>
+<li>available on CRAN</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="brailler-101">BrailleR 1.0.1<a class="anchor" aria-label="anchor" href="#brailler-101"></a></h2>
+<ul><li>deleted detritus</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="brailler-100">BrailleR 1.0.0<a class="anchor" aria-label="anchor" href="#brailler-100"></a></h2>
 <ul><li>first production release. Still plenty to add, but the original intention of the package has now been met.</li>
 <li>removed explicit CITATION file. This then required explicit date specification in DESCRIPTION.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.99.0" id="brailler-0990">BrailleR 0.99.0<a class="anchor" aria-label="anchor" href="#brailler-0990"></a></h2>
-<ul><li>did some cleaning up to de-clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0</li>
+<ul><li>did some cleaning up to reduce clutter, check examples, add documentation, and all the good things that must be done prior to v1.0.0</li>
 <li>removed dependency on magrittr as now using native pipe</li>
 <li>removed rlang as a dependency; redundant for some time probably</li>
 <li>removed other dependencies (on base packages) from imports</li>
@@ -196,7 +211,7 @@
 <li>attempting to remove all references to the reticulate package</li>
 <li>added TestPython() and TestWX() functions which test system setup.</li>
 <li>added Messages.R and Warnings.R to create text strings that get used in multiple functions. All now use internal functions</li>
-<li>deprecated GetPython27() and GetWxPython27(); updated help pages to show deprocation</li>
+<li>deprecated GetPython27() and GetWxPython27(); updated help pages to show deprecation</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.29.5" id="brailler-0295">BrailleR 0.29.5<a class="anchor" aria-label="anchor" href="#brailler-0295"></a></h2>
@@ -564,7 +579,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by A. Jonathan R. Godfrey, Debra Warren, James Thompson, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
+  <p></p><p>Developed by A. Jonathan R. Godfrey, Debra Warren, Deepayan Sarkar, Gabriel Becker, James Thompson, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
 </div>
 
 <div class="pkgdown-footer-right">

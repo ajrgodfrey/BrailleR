@@ -121,6 +121,9 @@
     <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeRprofile.html</loc>
   </url>
   <url>
+    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeSlideShow.html</loc>
+  </url>
+  <url>
     <loc>http://ajrgodfrey.github.io/BrailleR/reference/NewFunction.html</loc>
   </url>
   <url>
@@ -149,6 +152,9 @@
   </url>
   <url>
     <loc>http://ajrgodfrey.github.io/BrailleR/reference/ScatterPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SessionLog.html</loc>
   </url>
   <url>
     <loc>http://ajrgodfrey.github.io/BrailleR/reference/SetOptions.html</loc>
@@ -221,6 +227,9 @@
   </url>
   <url>
     <loc>http://ajrgodfrey.github.io/BrailleR/reference/sort.VIgraph.html</loc>
+  </url>
+  <url>
+    <loc>http://ajrgodfrey.github.io/BrailleR/reference/summary.recordedplot.html</loc>
   </url>
   <url>
     <loc>http://ajrgodfrey.github.io/BrailleR/reference/unfinished.html</loc>

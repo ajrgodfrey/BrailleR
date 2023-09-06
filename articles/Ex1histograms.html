@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BrailleR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,20 +110,22 @@ A histogram of 1000 random values from a normal distribution
 Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 12 bins with equal widths, starting at -3 and ending at 3 .
+It has 14 bins with equal widths, starting at -3.5 and ending at 3.5 .
 The mids and counts for the bins are:
-mid = -2.75  count = 6 
-mid = -2.25  count = 16 
-mid = -1.75  count = 38 
-mid = -1.25  count = 91 
-mid = -0.75  count = 138 
-mid = -0.25  count = 188 
-mid = 0.25  count = 201 
-mid = 0.75  count = 170 
-mid = 1.25  count = 82 
-mid = 1.75  count = 44 
-mid = 2.25  count = 17 
-mid = 2.75  count = 9</code></pre>
+mid = -3.25  count = 2 
+mid = -2.75  count = 2 
+mid = -2.25  count = 15 
+mid = -1.75  count = 27 
+mid = -1.25  count = 123 
+mid = -0.75  count = 141 
+mid = -0.25  count = 186 
+mid = 0.25  count = 209 
+mid = 0.75  count = 146 
+mid = 1.25  count = 76 
+mid = 1.75  count = 45 
+mid = 2.25  count = 23 
+mid = 2.75  count = 4 
+mid = 3.25  count = 1</code></pre>
 <p>The VI() command actually calls the VI.histogram() command as the
 hist() command creates an object of class “histogram”.</p>
 </div>
@@ -155,18 +157,18 @@ hist&gt; MyHist=graphics::hist(x, xlab="random normal values", main="Example his
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
+ [1] -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
 
 $counts
- [1]   2   4  24  37  98 151 178 196 138  92  55  21   4
+ [1]   1   1   1  15  42  77 142 181 207 179  87  50  12   5
 
 $density
- [1] 0.004 0.008 0.048 0.074 0.196 0.302 0.356 0.392 0.276 0.184 0.110 0.042
-[13] 0.008
+ [1] 0.002 0.002 0.002 0.030 0.084 0.154 0.284 0.362 0.414 0.358 0.174 0.100
+[13] 0.024 0.010
 
 $mids
- [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75
+ [1] -3.75 -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75
+[13]  2.25  2.75
 
 $xname
 [1] "x"
@@ -183,18 +185,18 @@ hist&gt; MyHist=hist(x, xlab="random normal values", main="Example histogram (Br
 <pre><code>
 hist&gt; MyHist
 $breaks
- [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
+ [1] -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
 
 $counts
- [1]   2   4  24  37  98 151 178 196 138  92  55  21   4
+ [1]   1   1   1  15  42  77 142 181 207 179  87  50  12   5
 
 $density
- [1] 0.004 0.008 0.048 0.074 0.196 0.302 0.356 0.392 0.276 0.184 0.110 0.042
-[13] 0.008
+ [1] 0.002 0.002 0.002 0.030 0.084 0.154 0.284 0.362 0.414 0.358 0.174 0.100
+[13] 0.024 0.010
 
 $mids
- [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-[13]  2.75
+ [1] -3.75 -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75
+[13]  2.25  2.75
 
 $xname
 [1] "x"
@@ -223,18 +225,18 @@ $ExtraArgs$sub
 
 
 $NBars
-[1] 13
+[1] 14
 
 $par
 $par$xaxp
-[1] -3  3  6
+[1] -4  3  7
 
 $par$yaxp
 [1]   0 200   4
 
 
 $xTicks
-[1] -3 -2 -1  0  1  2  3
+[1] -4 -3 -2 -1  0  1  2  3
 
 $yTicks
 [1]   0  50 100 150 200
@@ -246,24 +248,25 @@ hist&gt; # The VI() method then uses the extra information stored
 hist&gt; VI(MyHist)
 This is a histogram, with the title: with the title: Example histogram (BrailleR package)
 "x" is marked on the x-axis.
-Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
+Tick marks for the x-axis are at: -4, -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 13 bins with equal widths, starting at -3.5 and ending at 3 .
+It has 14 bins with equal widths, starting at -4 and ending at 3 .
 The mids and counts for the bins are:
-mid = -3.25  count = 2 
-mid = -2.75  count = 4 
-mid = -2.25  count = 24 
-mid = -1.75  count = 37 
-mid = -1.25  count = 98 
-mid = -0.75  count = 151 
-mid = -0.25  count = 178 
-mid = 0.25  count = 196 
-mid = 0.75  count = 138 
-mid = 1.25  count = 92 
-mid = 1.75  count = 55 
-mid = 2.25  count = 21 
-mid = 2.75  count = 4</code></pre>
+mid = -3.75  count = 1 
+mid = -3.25  count = 1 
+mid = -2.75  count = 1 
+mid = -2.25  count = 15 
+mid = -1.75  count = 42 
+mid = -1.25  count = 77 
+mid = -0.75  count = 142 
+mid = -0.25  count = 181 
+mid = 0.25  count = 207 
+mid = 0.75  count = 179 
+mid = 1.25  count = 87 
+mid = 1.75  count = 50 
+mid = 2.25  count = 12 
+mid = 2.75  count = 5</code></pre>
 </div>
 <div class="section level3">
 <h3 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
@@ -292,7 +295,7 @@ messages.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by A. Jonathan R. Godfrey, Debra Warren, James Thompson, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
+<p>Developed by A. Jonathan R. Godfrey, Debra Warren, Deepayan Sarkar, Gabriel Becker, James Thompson, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
 </div>
 
 <div class="pkgdown-footer-right">

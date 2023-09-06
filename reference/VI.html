@@ -12,7 +12,7 @@ The method includes representations of summary methods that are more suitable fo
     
     <a class="navbar-brand me-2" href="../index.html">BrailleR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,7 +129,7 @@ description is printed.</p>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The <code>VI.lm</code> method fails if you use  the one line <code>VI(lm(...))</code> even if the model is named using <code>VI(Model1 &lt;- lm(...))</code>. It does work if two explicit commands are used. For example <code>Model1 = lm(...)</code> followed by <code>VI(Model1)</code>.</p>
-<p>The ggplot2 package contains many layers and not all of them have a VI output yet. However most of the commonly used ones do. Regardless the VI output should be considered experimental with some results being potenitally misleading.</p>
+<p>The ggplot2 package contains many layers and not all of them have a VI output yet. However most of the commonly used ones do. Regardless the VI output should be considered experimental with some results being potentially misleading.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -145,24 +145,25 @@ description is printed.</p>
 <span class="r-in"><span><span class="fu">VI</span><span class="op">(</span><span class="va">PlottedFig</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> This is a histogram, with the title: with the title: Histogram of RandomX</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "RandomX" is marked on the x-axis.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, 3, and 4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are a total of 500 elements for this variable.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It has 13 bins with equal widths, starting at -3.5 and ending at 3 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It has 14 bins with equal widths, starting at -3 and ending at 4 .</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The mids and counts for the bins are:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -3.25  count = 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.75  count = 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.25  count = 12 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 42 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 82 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 96 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 106 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 64 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 43 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 16 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.75  count = 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -2.25  count = 9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.75  count = 18 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -1.25  count = 47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.75  count = 79 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = -0.25  count = 83 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.25  count = 102 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 0.75  count = 84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.25  count = 45 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 1.75  count = 24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.25  count = 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 2.75  count = 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.25  count = 0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mid = 3.75  count = 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ggplot</span></span></span>
 <span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
@@ -198,7 +199,7 @@ description is printed.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by A. Jonathan R. Godfrey, Debra Warren, James Thompson, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
+  <p></p><p>Developed by A. Jonathan R. Godfrey, Debra Warren, Deepayan Sarkar, Gabriel Becker, James Thompson, Paul Murrell, Timothy Bilton, Volker Sorge.</p>
 </div>
 
 <div class="pkgdown-footer-right">
