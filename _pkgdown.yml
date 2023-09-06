@@ -30,6 +30,7 @@ reference:
   - ViewSVG
   - AddXML
   - WTF
+  - summary.recordedplot
   
 - title: Graph and analysis shortcuts
   desc: Functions to help speed up graph making and analysis tasks
@@ -79,6 +80,7 @@ reference:
   - MakeAllFormats
   - MakeSlideShow
   - unfinished
+  - SessionLog
   
 - title: BrailleR related
   desc: All other function not otherwise categorized
