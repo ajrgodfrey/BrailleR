@@ -10,7 +10,7 @@ do.call(paste0(".VI_", names(Out)[Element]), Out[[Element]])
 return(NULL)
 }
 
-summary.recordedplot = function(object){
+summary.recordedplot = function(object, ...){
      .getCall <- function(x) {
          structure(list(x[[2]][-1]), 
                   names = x[[2]][1][[1]]$name)
@@ -95,11 +95,3 @@ SlopedLines = Working [!is.null(Working$a) | !is.null(Working$b), ]
  cat(paste("There  is a", SlopedLines$lty, SlopedLines$col,  "line with slope", SlopedLines$b, "and intercept", SlopedLines$a, collapse="\n"), "\n") }
 
 }
-
-# following example used to make elements more identifiable during testing; not likely  in the real world :)
-XVec=(1:5)/2
-YVec=XVec^2
-plot(YVec~XVec)
-title(main="a main title")
-abline(b=1.1)
-abline(h=1.3)
