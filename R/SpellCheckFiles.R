@@ -28,11 +28,11 @@ SpellCheckFiles =
         }
       }
       # a little hack because Hadley doesn't want to export spell_check_file  from the devtools package
-      NS = getNamespace("devtools")
-      spell_check_file = get("spell_check_file", NS)
+#      NS = getNamespace("devtools")
+#      spell_check_file = get("spell_check_file", NS)
       checkLines = list()
       checkLines <- lapply(
-          checkFiles, spell_check_file, ignore = ignore, dict="en_us")
+          checkFiles, spelling::spell_check_file, ignore = ignore, dict="en_us")
       names(checkLines) = filenames
       class(checkLines) = c("wordlist", "data.frame")
       return(checkLines)

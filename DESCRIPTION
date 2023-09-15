@@ -90,6 +90,6 @@ RdMacros:
     mathjaxr,
     Rdpack
 Encoding: UTF-8
-Language: en-US
+Language: en-GB
 RoxygenNote: 7.1.2
 SystemRequirements: Python 3 and wxPython 4.0
