@@ -104,7 +104,7 @@ return(invisible(NULL))
 
 .VI_C_plot_new = function(...) {
 cat("A new graph has been created.\n")
-8:00 pm 18/09/2023return(invisible(NULL))
+return(invisible(NULL))
 } 
 
 .VI_C_title =   function(main, sub, xlab, ylab, line, outer, ...){
