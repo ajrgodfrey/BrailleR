@@ -1,5 +1,4 @@
 
-importFrom("devtools", "spell_check")
 import(dplyr)
 import(extrafont)
 importFrom("ggplot2", "aes", "geom_point", "geom_smooth", "ggplot", "ggplot_build", "qplot", "labs", "ylab", "xlab", "geom_line") 
@@ -17,6 +16,7 @@ importFrom("Rdpack","reprompt")
 import(rmarkdown)
 import(roloc)
 import(rolocISCCNBS)
+importFrom("spelling", "spell_check_file")
 importFrom("stats", "aggregate", "anova", "as.ts", "coef", "cor", "lm", "median", "na.omit", "qnorm", "rstudent", "sd", "is.ts") 
 importFrom("tools", "Rd2ex")
 importFrom("utils", "browseURL", "capture.output", "create.post", "download.file", "file.edit", "head", "menu", "packageVersion", "read.csv", "read.table", "savehistory", "Sweave", "str", "tail", "unzip", "write.csv") 

@@ -52,7 +52,6 @@ BugReports: https://github.com/ajrgodfrey/BrailleR/issues
 Depends:
     R (>= 3.4.0)
 Imports:
-    devtools,
     dplyr,
     extrafont,
     ggplot2 (>= 3.0.0),
@@ -67,6 +66,7 @@ Imports:
     rmarkdown,
     roloc,
     rolocISCCNBS,
+    spelling,
     tidyr,
     whisker,
     XML,
@@ -82,7 +82,6 @@ Suggests:
     multcomp,
     nortest,
     rstatix,
-    spelling,
     tidyverse
 VignetteBuilder: 
     knitr
