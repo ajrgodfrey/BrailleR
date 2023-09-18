@@ -56,7 +56,7 @@ return(x)
 }
 
 .BaseSymbolText = c("square", "circle", "triangle point up", "plus", "cross", "diamond", "triangle point down", "square cross", "star", "diamond plus", "circle plus", "square plus", "triangle plus", "star plus", "circle cross", "square cross", "filled square", "filled circle", "filled triangle point up", "filled diamond", "filled triangle point down", "filled circle plus", "filled square plus", "filled diamond plus", "filled triangle plus", "filled star", "filled square cross")
-names(.BaseSymbolsText) = .BaseSymbolsText
+names(.BaseSymbolText) = .BaseSymbolText
 
 
 .BaseBoxTypeText = c("n"="none", "o"="all", "l"="bottom-left", "7"="top-right", "c"="all but right", "u"="all but top", "]"="all but left")
