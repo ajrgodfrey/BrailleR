@@ -55,7 +55,7 @@ stop("incorrect input value")
 return(x)
 }
 
-.BaseSymbolsText = c("square", "circle", "triangle point up", "plus", "cross", "diamond", "triangle point down", "square cross", "star", "diamond plus", "circle plus", "square plus", "triangle plus", "star plus", "circle cross", "square cross", "filled square", "filled circle", "filled triangle point up", "filled diamond", "filled triangle point down", "filled circle plus", "filled square plus", "filled diamond plus", "filled triangle plus", "filled star", "filled square cross")
+.BaseSymbolText = c("square", "circle", "triangle point up", "plus", "cross", "diamond", "triangle point down", "square cross", "star", "diamond plus", "circle plus", "square plus", "triangle plus", "star plus", "circle cross", "square cross", "filled square", "filled circle", "filled triangle point up", "filled diamond", "filled triangle point down", "filled circle plus", "filled square plus", "filled diamond plus", "filled triangle plus", "filled star", "filled square cross")
 names(.BaseSymbolsText) = .BaseSymbolsText
 
 
