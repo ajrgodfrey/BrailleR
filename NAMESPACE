@@ -1,4 +1,5 @@
 
+importFrom("devtools", "reload")
 import(dplyr)
 import(extrafont)
 importFrom("ggplot2", "aes", "geom_point", "geom_smooth", "ggplot", "ggplot_build", "qplot", "labs", "ylab", "xlab", "geom_line") 
