@@ -106,69 +106,221 @@ to fix</p></div>
 <span class="r-in"><span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/recordplot.html" class="external-link">recordPlot</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_plot_new</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $palette2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $palette2[[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -16777216  -9743393 -11546527  -1665246  -1711576  -4453427 -15677451</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [8]  -6381922</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_plot_window</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1"                  "20"                 "0.0602548848837614"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "0.970144883962348"  ""                   NA                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plot_window[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plot_window[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05091451 0.99760807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plot_window[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plot_window[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   x1                   x2                   x3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  "1"                  "2"                  "3" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   x4                   x5                   x6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  "4"                  "5"                  "6" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   x7                   x8                   x9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  "7"                  "8"                  "9" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  x10                  x11                  x12 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 "10"                 "11"                 "12" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  x13                  x14                  x15 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 "13"                 "14"                 "15" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  x16                  x17                  x18 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 "16"                 "17"                 "18" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  x19                  x20                   y1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 "19"                 "20"  "0.444637111155316" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   y2                   y3                   y4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  "0.885540695860982"  "0.194849986582994" "0.0824026030022651" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   y5                   y6                   y7 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  "0.708783779526129"  "0.828205068362877"  "0.805444668745622" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   y8                   y9                  y10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  "0.207197023555636"   "0.48976288526319" "0.0943251645658165" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  y11                  y12                  y13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  "0.364576880587265"  "0.672069955151528"   "0.49421311262995" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  y14                  y15                  y16 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  "0.970144883962348"  "0.789180602878332"  "0.701015816535801" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  y17                  y18                  y19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   "0.49572887015529"   "0.42413509497419"  "0.146360349608585" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  y20                 xlab                 ylab </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "0.0602548848837614"            "c(1:20)"          "runif(20)" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  "p"                  "1"              "solid" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              "black"                   NA                  "1" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  "1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[1]]$x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[1]]$y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.07444423 0.54553403 0.99479835 0.80648120 0.84057637 0.50178978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.20428536 0.69483855 0.89200166 0.83290545 0.13932174 0.89446260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.60027623 0.19459408 0.05091451 0.06435220 0.99760807 0.28788683</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 0.44632774 0.97217559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[1]]$xlab</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "c(1:20)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[1]]$ylab</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "runif(20)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "p"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "solid"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "black"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[7]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_plotXY[[8]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1"     "TRUE"  NA      NA      "FALSE" NA      "solid" "1"     "1"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] NA      NA      NA     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[7]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[8]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[9]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "solid"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[10]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[11]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[12]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[13]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[14]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[15]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[16]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "2"     "TRUE"  NA      NA      "FALSE" NA      "solid" "1"     "1"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] NA      NA      NA     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[7]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[8]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[9]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "solid"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[10]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[11]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[12]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[13]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[14]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[15]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_axis[[16]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_box</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   which     lty </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "1" "solid" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_box$which</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_box$lty</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "solid"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "c(1:20)"   "runif(20)" NA          "FALSE"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_title[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_title[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_title[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "c(1:20)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_title[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "runif(20)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_title[[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_title[[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "0.5"   "FALSE" "black" "solid" "1"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "black"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[7]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "solid"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $C_abline[[8]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
 </code></pre></div>
