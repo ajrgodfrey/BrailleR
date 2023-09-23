@@ -110,22 +110,21 @@ A histogram of 1000 random values from a normal distribution
 Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 There are a total of 1000 elements for this variable.
 Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-It has 14 bins with equal widths, starting at -3.5 and ending at 3.5 .
+It has 13 bins with equal widths, starting at -3 and ending at 3.5 .
 The mids and counts for the bins are:
-mid = -3.25  count = 1 
-mid = -2.75  count = 1 
-mid = -2.25  count = 20 
-mid = -1.75  count = 44 
-mid = -1.25  count = 96 
-mid = -0.75  count = 143 
-mid = -0.25  count = 169 
-mid = 0.25  count = 209 
-mid = 0.75  count = 151 
-mid = 1.25  count = 95 
-mid = 1.75  count = 45 
-mid = 2.25  count = 19 
-mid = 2.75  count = 4 
-mid = 3.25  count = 3</code></pre>
+mid = -2.75  count = 8 
+mid = -2.25  count = 23 
+mid = -1.75  count = 58 
+mid = -1.25  count = 90 
+mid = -0.75  count = 147 
+mid = -0.25  count = 199 
+mid = 0.25  count = 180 
+mid = 0.75  count = 137 
+mid = 1.25  count = 102 
+mid = 1.75  count = 33 
+mid = 2.25  count = 16 
+mid = 2.75  count = 6 
+mid = 3.25  count = 1</code></pre>
 <p>The VI() command actually calls the VI.histogram() command as the
 hist() command creates an object of class “histogram”.</p>
 </div>
@@ -161,11 +160,11 @@ $breaks
 [16]  4.0
 
 $counts
- [1]   1   3  18  51 102 177 177 170 153  89  34  16   6   1   2
+ [1]   1   9  14  37 100 170 195 174 139  96  40  16   8   0   1
 
 $density
- [1] 0.002 0.006 0.036 0.102 0.204 0.354 0.354 0.340 0.306 0.178 0.068 0.032
-[13] 0.012 0.002 0.004
+ [1] 0.002 0.018 0.028 0.074 0.200 0.340 0.390 0.348 0.278 0.192 0.080 0.032
+[13] 0.016 0.000 0.002
 
 $mids
  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
@@ -190,11 +189,11 @@ $breaks
 [16]  4.0
 
 $counts
- [1]   1   3  18  51 102 177 177 170 153  89  34  16   6   1   2
+ [1]   1   9  14  37 100 170 195 174 139  96  40  16   8   0   1
 
 $density
- [1] 0.002 0.006 0.036 0.102 0.204 0.354 0.354 0.340 0.306 0.178 0.068 0.032
-[13] 0.012 0.002 0.004
+ [1] 0.002 0.018 0.028 0.074 0.200 0.340 0.390 0.348 0.278 0.192 0.080 0.032
+[13] 0.016 0.000 0.002
 
 $mids
  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
@@ -234,14 +233,14 @@ $par$xaxp
 [1] -2  4  3
 
 $par$yaxp
-[1]   0 150   3
+[1]   0 200   4
 
 
 $xTicks
 [1] -2  0  2  4
 
 $yTicks
-[1]   0  50 100 150
+[1]   0  50 100 150 200
 
 attr(,"class")
 [1] "Augmented" "histogram"
@@ -252,24 +251,24 @@ This is a histogram, with the title: with the title: Example histogram (BrailleR
 "x" is marked on the x-axis.
 Tick marks for the x-axis are at: -2, 0, 2, and 4 
 There are a total of 1000 elements for this variable.
-Tick marks for the y-axis are at: 0, 50, 100, and 150 
+Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
 It has 15 bins with equal widths, starting at -3.5 and ending at 4 .
 The mids and counts for the bins are:
 mid = -3.25  count = 1 
-mid = -2.75  count = 3 
-mid = -2.25  count = 18 
-mid = -1.75  count = 51 
-mid = -1.25  count = 102 
-mid = -0.75  count = 177 
-mid = -0.25  count = 177 
-mid = 0.25  count = 170 
-mid = 0.75  count = 153 
-mid = 1.25  count = 89 
-mid = 1.75  count = 34 
+mid = -2.75  count = 9 
+mid = -2.25  count = 14 
+mid = -1.75  count = 37 
+mid = -1.25  count = 100 
+mid = -0.75  count = 170 
+mid = -0.25  count = 195 
+mid = 0.25  count = 174 
+mid = 0.75  count = 139 
+mid = 1.25  count = 96 
+mid = 1.75  count = 40 
 mid = 2.25  count = 16 
-mid = 2.75  count = 6 
-mid = 3.25  count = 1 
-mid = 3.75  count = 2</code></pre>
+mid = 2.75  count = 8 
+mid = 3.25  count = 0 
+mid = 3.75  count = 1</code></pre>
 </div>
 <div class="section level3">
 <h3 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
