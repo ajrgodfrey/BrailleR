@@ -3,9 +3,8 @@
 - R Project Sprint 2023 work with Deepayan led to improvement in the ability to extract content of graphics devices; added him as author
 - R Project Sprint 2023 work with Gabe led to a working solution to extract recent console output; added him as author. 
      See the ShowMe(), SessionLog(), and GrabLast() functions.
-- removed dependency on devtools as spelling package is brought in.
-
-
+- removed hack to get  devtools function now spelling package is brought in.
+- added MyBrailleR() function to open the user folder.
 
 # BrailleR 1.0.2
 - improved CRAN test picked up inconsistencies with internal functions

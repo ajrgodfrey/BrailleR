@@ -1,3 +1,15 @@
+MyBrailleR = function(){
+      if (interactive()) {
+        if (.Platform$OS.type == "windows") {
+          browseURL(getOption("BrailleR.Folder"))
+        } else {
+          .WindowsOnly()
+        }
+      } else {
+        .InteractiveOnly()
+      }
+return(invisible(NULL))
+}
 
 Notepad = notepad = function(file=""){
       if (interactive()) {
