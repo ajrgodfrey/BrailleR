@@ -1,7 +1,7 @@
 
 \name{SetupBrailleR}
 \alias{SetupBrailleR}
-\alias(MyBrailleR)
+\alias{MyBrailleR}
 \title{Establish or open the BrailleR folder for the user}
 \usage{
 SetupBrailleR()
