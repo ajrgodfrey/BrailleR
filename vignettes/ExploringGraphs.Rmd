@@ -270,6 +270,7 @@ Within each individual line subtree if the line is disjoint there will be more s
 Once you are looking at either the continuous section or the whole section you can click through to actually look at the line.
 
 If there are more than 5 lines then it will summarizes them. If there are 5 or less then you can press through and individually see the line start and finish locations.
+
 ### Geom_Point
 ```{r svg geom point, eval = FALSE, echo=FALSE}
 point <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
