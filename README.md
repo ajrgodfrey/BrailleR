@@ -14,7 +14,7 @@ The BrailleR package does have dependencies, all of which are available on CRAN.
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/BrailleR)](https://cran.r-project.org/package=BrailleR)  
 
-[![CRAN checks](https://cranchecks.info/badges/summary/BrailleR)](https://cran.r-project.org/web/checks/check_results_BrailleR.html)
+[![CRAN checks](https://badges.cranchecks.info/summary/BrailleR.svg)](https://cran.r-project.org/web/checks/check_results_BrailleR.html)
 
 [![Downloads per month](http://cranlogs.r-pkg.org/badges/last-month/BrailleR?color=green)](https://cran.r-project.org/package=BrailleR)
 
