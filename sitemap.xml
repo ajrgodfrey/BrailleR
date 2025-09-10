@@ -1,237 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/404.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/BrailleR.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/BrailleRHistory.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex1histograms.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex2BasicNumerical.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex3UnivariateDescription.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex4SingleResponseOneGroupingFactor.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/ExploringGraphs.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/IntroWriteR.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/articles/qplot.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/index.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/rawHTML/plot.example-SVG.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/AddXMLMethod.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/AugmentMethod.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/AutoSpellCheck.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/BRLThis.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/BrailleR-package.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/BrailleRUsefulLinks.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/BrowseSVG.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/CleanCSV.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/DataViewer.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/Deprecated.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/Describe.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/Embossers.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/FindReplace.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/GetExampleText.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/GetGoing.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/GetWriteR.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/Internal.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/JoinBlindRUG.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeAccessibleSVGMethod.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeAllFormats.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeBatch.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeReadable.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeRmdFiles.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeRprofile.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeSlideShow.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/NewFunction.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/OneFactor.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/OnePredictor.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/Options.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/PandocAll.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/PrepareWriteR.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/R2txtJG.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/Require.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SVGThis.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/ScatterPlot.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SessionLog.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SetOptions.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SetupBrailleR.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SpellCheck.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/SpellCheckFiles.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/TSPlot.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/ThreeFactors.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/TwoFactors.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/UniDesc.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/UpdateGraph.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/VI.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/ViewSVG.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/WTF.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/WhatIs.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/WhereXY.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/WhichFile.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/boxplot.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/dotplot.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/grep.VIgraph.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/hist.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/history.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/notepad.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/pdf2html.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/sort.VIgraph.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/summary.recordedplot.html</loc>
-  </url>
-  <url>
-    <loc>http://ajrgodfrey.github.io/BrailleR/reference/unfinished.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/404.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/CONDUCT.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/BrailleR.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/BrailleRHistory.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex1histograms.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex2BasicNumerical.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex3UnivariateDescription.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/Ex4SingleResponseOneGroupingFactor.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/ExploringGraphs.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/IntroWriteR.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/index.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/articles/qplot.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/authors.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/index.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/news/index.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/rawHTML/plot.example-SVG.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/AddXMLMethod.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/AugmentMethod.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/AutoSpellCheck.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/BRLThis.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/BrailleR-package.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/BrailleRUsefulLinks.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/BrowseSVG.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/CleanCSV.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/DataViewer.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/Deprecated.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/Describe.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/Embossers.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/FindReplace.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/GetExampleText.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/GetGoing.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/GetWriteR.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/Internal.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/JoinBlindRUG.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeAccessibleSVGMethod.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeAllFormats.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeBatch.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeReadable.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeRmdFiles.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeRprofile.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/MakeSlideShow.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/NewFunction.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/OneFactor.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/OnePredictor.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/Options.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/PandocAll.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/PrepareWriteR.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/R2txtJG.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/Require.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/SVGThis.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/ScatterPlot.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/SessionLog.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/SetOptions.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/SetupBrailleR.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/SpellCheck.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/SpellCheckFiles.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/TSPlot.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/ThreeFactors.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/TwoFactors.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/UniDesc.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/UpdateGraph.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/VI.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/ViewSVG.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/WTF.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/WhatIs.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/WhereXY.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/WhichFile.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/boxplot.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/dotplot.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/grep.VIgraph.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/hist.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/history.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/index.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/notepad.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/pdf2html.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/sort.VIgraph.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/summary.recordedplot.html</loc></url>
+<url><loc>http://ajrgodfrey.github.io/BrailleR/reference/unfinished.html</loc></url>
 </urlset>
+
