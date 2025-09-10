@@ -1,7 +1,7 @@
 Package: BrailleR
 Title: Improved Access for Blind Users
-Version: 1.1.0
-Date: 2023-07-07
+Version: 1.2.0
+Date: 2025-09-11
 Authors@R: c(
     person("A. Jonathan R.", "Godfrey", email ="a.j.godfrey@massey.ac.nz", role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-8129-8835")),
@@ -54,7 +54,6 @@ Depends:
 Imports:
     devtools,
     dplyr,
-    extrafont,
     ggplot2 (>= 3.0.0),
     gridGraphics,
     gridSVG,

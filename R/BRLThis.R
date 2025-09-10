@@ -15,15 +15,20 @@
 # @param file A character string giving the filename where the image is to be saved.
 BRLThis =
     function(x, file) {
-      extrafont::loadfonts(quiet = TRUE)
-
+#      extrafont::loadfonts(quiet = TRUE)
       # need to add these arguments to the call
       # family="Braille Normal", cex=1, cex.axis=1, cex.main=1, cex.lab=1, cex.sub=1)
-      eval({
-             pdf(file, pointsize = 29)
-             x
-             dev.off()
-             extrafont::embed_fonts(file)  # , outfile=file)
-           }, parent.frame())
+#      eval({
+#             pdf(file, pointsize = 29)
+#             x
+#             dev.off()
+#             extrafont::embed_fonts(file)  # , outfile=file)
+#           }, parent.frame())
       return(invisible(NULL))
     }
+
+
+BRLThis =
+    function(x, file) {
+.DeprecatedFunction()
+}

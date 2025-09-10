@@ -1,4 +1,3 @@
-### problems so temporary override follows experimental work
 
 GetWriteR =
     function() {
