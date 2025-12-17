@@ -13,6 +13,7 @@ BRLThis(x, file)
 Nothing within the R session, but a pdf file will be created in the user's working directory.
 }
 \description{
+DEPRECATED. Do not use this function.
 The first argument to this function must be a call to create a graph, such as a histogram. Instead of opening a new graphics device, the graph will be created in a pdf file, with all text being presented using  a braille font. The function is somewhat experimental as the best braille font is not yet confirmed, and a number of examples need to be tested on a variety of embossers before full confidence in the function is given.
 }
 \details{
