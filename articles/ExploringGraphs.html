@@ -150,18 +150,18 @@ it will give you the text output.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">basicPlot</span></span></code></pre></div>
-<p><img src="ExploringGraphs_files/figure-html/VI%20implicit%20call-1.png" width="700"></p>
+<p><img src="ExploringGraphs_files/figure-html/VI%20implicit%20call-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'Sepal.Length' with labels 5, 6, 7 and 8.</span></span>
-<span><span class="co">## It has y-axis 'Sepal.Width' with labels 2.0, 2.5, 3.0, 3.5, 4.0 and 4.5.</span></span>
+<span><span class="co">## It has x-axis '' with labels 5, 6, 7 and 8.</span></span>
+<span><span class="co">## It has y-axis '' with labels 2.0, 2.5, 3.0, 3.5, 4.0 and 4.5.</span></span>
 <span><span class="co">## The chart is a set of 150 big solid circle points of which about 78% can be seen.</span></span></code></pre>
 <p>However you can also easily call it explicitly without having to
 print the graph.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/VI.html">VI</a></span><span class="op">(</span><span class="va">basicPlot</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'Sepal.Length' with labels 5, 6, 7 and 8.</span></span>
-<span><span class="co">## It has y-axis 'Sepal.Width' with labels 2.0, 2.5, 3.0, 3.5, 4.0 and 4.5.</span></span>
+<span><span class="co">## It has x-axis '' with labels 5, 6, 7 and 8.</span></span>
+<span><span class="co">## It has y-axis '' with labels 2.0, 2.5, 3.0, 3.5, 4.0 and 4.5.</span></span>
 <span><span class="co">## The chart is a set of 150 big solid circle points of which about 78% can be seen.</span></span></code></pre>
 <p>Below is not only a list of the supported Geom but also a little
 explanation about there printouts.</p>
@@ -173,8 +173,8 @@ explanation about there printouts.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">hline</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'mpg' with labels .</span></span>
-<span><span class="co">## It has y-axis 'cyl' with labels 4.950, 4.975, 5.000, 5.025 and 5.050.</span></span>
+<span><span class="co">## There is no x-axis.</span></span>
+<span><span class="co">## It has y-axis '' with labels 4.950, 4.975, 5.000, 5.025 and 5.050.</span></span>
 <span><span class="co">## The chart is 1 horizontal line as follows:</span></span>
 <span><span class="co">## Line at y position 5.</span></span></code></pre>
 <p>As this is quite a simple geom it is quite a simple printout.</p>
@@ -188,8 +188,8 @@ explanation about there printouts.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">point</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.</span></span>
-<span><span class="co">## It has y-axis 'cyl' with labels 4, 5, 6, 7 and 8.</span></span>
+<span><span class="co">## It has x-axis '' with labels 10, 15, 20, 25, 30 and 35.</span></span>
+<span><span class="co">## It has y-axis '' with labels 4, 5, 6, 7 and 8.</span></span>
 <span><span class="co">## The chart is a set of 32 big solid circle points of which about 81% can be seen.</span></span></code></pre>
 <p>Information will include here the number of points and the shape.
 There is also a percentage of approximately how many points can be seen.
@@ -204,10 +204,10 @@ Don’t worry it will only show you the percentage if it is accurate.</p>
 <code class="sourceCode R"><span><span class="va">bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">bar</span></span></code></pre></div>
-<pre><code><span><span class="co">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre>
+<pre><code><span><span class="co">## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.</span></span>
-<span><span class="co">## It has y-axis 'count' with labels 0, 1, 2, 3, 4 and 5.</span></span>
+<span><span class="co">## It has x-axis '' with labels 10, 15, 20, 25, 30 and 35.</span></span>
+<span><span class="co">## It has y-axis '' with labels 0, 1, 2, 3 and 4.</span></span>
 <span><span class="co">## The chart is a bar chart with 30 vertical bars.</span></span></code></pre>
 <p>Even though there is a geom_histogram, geom_bar and geom_col in the
 backend of ggplot it is the same. So for the VI they are treated all
@@ -222,8 +222,8 @@ pretty much the same.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">line</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.</span></span>
-<span><span class="co">## It has y-axis 'wt' with labels 2, 3, 4 and 5.</span></span>
+<span><span class="co">## It has x-axis '' with labels 10, 15, 20, 25, 30 and 35.</span></span>
+<span><span class="co">## It has y-axis '' with labels 2, 3, 4 and 5.</span></span>
 <span><span class="co">## The chart is a set of 1 line.</span></span>
 <span><span class="co">## Line 1 connects 32 points.</span></span></code></pre>
 <p>Very similar to the hline it will tell you about how many lines there
@@ -238,17 +238,17 @@ up the line.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">boxplot</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.</span></span>
-<span><span class="co">## It has y-axis 'as.factor(cyl)' with labels 4, 6 and 8.</span></span>
+<span><span class="co">## It has x-axis '' with labels 10, 15, 20, 25, 30 and 35.</span></span>
+<span><span class="co">## It has y-axis '' with labels 4, 6 and 8.</span></span>
 <span><span class="co">## The chart is a boxplot comprised of 3 horizontal boxes with whiskers.</span></span>
 <span><span class="co">## There is a box at y=1.</span></span>
-<span><span class="co">## It has median 26. The box goes from 22.8 to 30.4, and the whiskers extend to 21.4 and 33.9.</span></span>
+<span><span class="co">## It has median NA. The box goes from NA to NA, and the whiskers extend to 21.4 and 33.9.</span></span>
 <span><span class="co">## There are 0 outliers for this boxplot.</span></span>
 <span><span class="co">## There is a box at y=2.</span></span>
-<span><span class="co">## It has median 19.7. The box goes from 18.65 to 21, and the whiskers extend to 17.8 and 21.4.</span></span>
+<span><span class="co">## It has median NA. The box goes from NA to NA, and the whiskers extend to 17.8 and 21.4.</span></span>
 <span><span class="co">## There are 0 outliers for this boxplot.</span></span>
 <span><span class="co">## There is a box at y=3.</span></span>
-<span><span class="co">## It has median 15.2. The box goes from 14.4 to 16.25, and the whiskers extend to 13.3 and 18.7.</span></span>
+<span><span class="co">## It has median NA. The box goes from NA to NA, and the whiskers extend to 13.3 and 18.7.</span></span>
 <span><span class="co">## There are 1 max and 2 min outliers for this boxplot.</span></span></code></pre>
 <p>As a boxplot is effectively a 5 number summary with outliers this
 printout will include all of that information.</p>
@@ -263,8 +263,8 @@ printout will include all of that information.</p>
 <span><span class="va">smooth</span></span></code></pre></div>
 <pre><code><span><span class="co">## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'mpg' with labels 10, 15, 20, 25, 30 and 35.</span></span>
-<span><span class="co">## It has y-axis 'wt' with labels 1, 2, 3, 4, 5 and 6.</span></span>
+<span><span class="co">## It has x-axis '' with labels 10, 15, 20, 25, 30 and 35.</span></span>
+<span><span class="co">## It has y-axis '' with labels 1, 2, 3, 4, 5 and 6.</span></span>
 <span><span class="co">## The chart is a 'lowess' smoothed curve with 95% confidence intervals covering 15% of the graph.</span></span></code></pre>
 <p>This output tell you the method used to get the smoothed curve and
 the confidence interval level which is set.<br>
@@ -280,9 +280,9 @@ is</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_area</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">price</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ribbon</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
-<span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
-<span><span class="co">## The chart is a ribbon which is bound on the y axis, with non constant widths: 345, 2882, 5766, 10913 and 18018 with centers at: 172.5, 1441, 2883, 5456.5 and 9009. The ribbon takes up 65% of the graph.</span></span></code></pre>
+<span><span class="co">## It has x-axis '' with labels 0, 1, 2, 3, 4 and 5.</span></span>
+<span><span class="co">## It has y-axis '' with labels 0.0e+00, 4.0e+06, 8.0e+06 and 1.2e+07.</span></span>
+<span><span class="co">## The chart is a ribbon which is bound on the y axis, with non constant widths: 367, 807, 2593, 6814 and 18531 with centers at: 528.5, 275880, 4469320, 1824600 and 9265.5. The ribbon takes up 0.11% of the graph.</span></span></code></pre>
 <p>Once again this layer gives you some information about the layers
 data. It will tell you whether it is bound on the y or x axis and then
 if it is constant or non constant width. For it to be bound on the y
@@ -302,8 +302,8 @@ layer.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">23</span>, <span class="fl">6</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">blank</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
-<span><span class="co">## It has x-axis 'demand' with labels 10, 15 and 20.</span></span>
-<span><span class="co">## It has y-axis 'Time' with labels 0, 10, 20 and 30.</span></span>
+<span><span class="co">## It has x-axis '' with labels 10, 15 and 20.</span></span>
+<span><span class="co">## It has y-axis '' with labels 0, 10, 20 and 30.</span></span>
 <span><span class="co">## It has 2 layers.</span></span>
 <span><span class="co">## Layer 1 is a set of 1 line.</span></span>
 <span><span class="co">## Line 1 connects 6 points, at (8.3, 1), (10.3, 2), (15.6, 5), (16, 4), (19, 3) and (19.8, 7).</span></span>
@@ -505,7 +505,7 @@ this support could be considered deprecated.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

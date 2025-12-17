@@ -1,0 +1,40 @@
+# The BrailleR package Example 3
+
+## The BrailleR package Example 3.
+
+### Description of a single numeric variable
+
+There are many commands needed to get the numeric and graphic summary
+measures that might be required to collect all relevant information on a
+single numeric variable. The UniDesc() command has been written as a
+shortcut for a blind user who wishes to obtain: - the counts of points
+in the sample that were observed and not observed, - the mean and
+trimmed mean, - the five number summary: minimum, lower quartile,
+median, upper quartile, and maximum, - the interquartile range (IQR) and
+standard deviation, - measures of skewness and kurtosis (thanks to the
+moments package), - a histogram and/or a boxplot, - a normality
+(quantile-quantile) plot, - various tests for normality (thanks to the
+nortest package), and - tests on the significance of the skewness and
+kurtosis (again, thanks to the moments package).
+
+In addition, the blind user may need any/all of the graphs in a variety
+of formats (png, pdf, eps, or svg), nicely formatted tables for
+insertion into documents (LaTeX or HTML), and access to the code that
+generated these graphs and tables (an R script).
+
+The UniDesc() function can deliver all of this with minimal effort from
+the user. In addition, the output HTML file is opened automatically if R
+is being used interactively, giving the blind user immediate access to
+the information. The content is presented using sufficiently marked up
+HTML code including headings and tables so that the blind user can make
+best use of their screen reading software. All graphs included in the
+HTML file can be presented using a text description available from the
+VI() functionality of the BrailleR package.
+
+The main output document (HTML) can be viewed by issuing the command
+
+``` r
+example(UniDesc)
+```
+
+while running R interactively.

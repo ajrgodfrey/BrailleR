@@ -110,7 +110,7 @@ but commented out.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># summary(g1)   </span></span>
 <span><span class="va">g1</span>  </span></code></pre></div>
-<p><img src="qplot_files/figure-html/g1-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g1-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
@@ -127,42 +127,28 @@ document.</p>
 <code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, colour <span class="op">=</span> <span class="va">color</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g2)   </span></span>
 <span><span class="va">g2</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g2-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g2-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0.2, 0.4, 0.6 and 0.8.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 1000 and 2000.</span></span>
-<span><span class="co">## There is a legend indicating colour is used to show color, with 7 levels:</span></span>
-<span><span class="co">## D shown as very deep purple colour, </span></span>
-<span><span class="co">## E shown as vivid purplish blue colour, </span></span>
-<span><span class="co">## F shown as moderate blue colour, </span></span>
-<span><span class="co">## G shown as vivid bluish green colour, </span></span>
-<span><span class="co">## H shown as brilliant green colour, </span></span>
-<span><span class="co">## I shown as vivid yellow green colour and </span></span>
-<span><span class="co">## J shown as vivid greenish yellow colour.</span></span>
 <span><span class="co">## The chart is a set of 100 big solid circle points of which about 40% can be seen.</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, shape <span class="op">=</span> <span class="va">cut</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g3)   </span></span>
 <span><span class="va">g3</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: Using shapes for an ordinal variable is not advised</span></span></code></pre>
-<p><img src="qplot_files/figure-html/g3-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g3-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## Warning: Using shapes for an ordinal variable is not advised</span></span></code></pre>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0.2, 0.4, 0.6 and 0.8.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 1000 and 2000.</span></span>
-<span><span class="co">## There is a legend indicating shape is used to show cut, with 5 levels:</span></span>
-<span><span class="co">## Fair shown as solid circle shape, </span></span>
-<span><span class="co">## Good shown as solid triangle shape, </span></span>
-<span><span class="co">## Very Good shown as solid square shape, </span></span>
-<span><span class="co">## Premium shown as plus shape and </span></span>
-<span><span class="co">## Ideal shown as boxed X shape.</span></span>
 <span><span class="co">## The chart is a set of 100 points of which about 40% can be seen.</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to get semi-transparent points   </span></span>
 <span><span class="va">g4</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">diamonds</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g4)   </span></span>
 <span><span class="va">g4</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g4-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g4-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 5000, 10000 and 15000.</span></span>
@@ -174,7 +160,7 @@ document.</p>
 <span><span class="co"># summary(g5)   </span></span>
 <span><span class="va">g5</span></span></code></pre></div>
 <pre><code><span><span class="co">## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre>
-<p><img src="qplot_files/figure-html/g5-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g5-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0.2, 0.4, 0.6 and 0.8.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 0, 1000, 2000 and 3000.</span></span>
@@ -191,8 +177,8 @@ document.</p>
 <span><span class="va">g7a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"histogram"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g7a)   </span></span>
 <span><span class="va">g7a</span></span></code></pre></div>
-<pre><code><span><span class="co">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre>
-<p><img src="qplot_files/figure-html/g7-1.png" width="700"></p>
+<pre><code><span><span class="co">## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre>
+<p><img src="qplot_files/figure-html/g7-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0, 1, 2, 3, 4 and 5.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 5000, 10000 and 15000.</span></span>
@@ -204,7 +190,7 @@ document.</p>
 <span><span class="co">## (`stat_bin()`).</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: Removed 2 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">## (`geom_bar()`).</span></span></code></pre>
-<p><img src="qplot_files/figure-html/g7-2.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g7-2.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite outside the scale range</span></span>
 <span><span class="co">## (`stat_bin()`).</span></span></code></pre>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
@@ -219,7 +205,7 @@ document.</p>
 <pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite outside the scale range (`stat_bin()`).</span></span>
 <span><span class="co">## Removed 2 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">## (`geom_bar()`).</span></span></code></pre>
-<p><img src="qplot_files/figure-html/g7-3.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g7-3.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite outside the scale range</span></span>
 <span><span class="co">## (`stat_bin()`).</span></span></code></pre>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
@@ -233,7 +219,7 @@ document.</p>
 <pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite outside the scale range (`stat_bin()`).</span></span>
 <span><span class="co">## Removed 2 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">## (`geom_bar()`).</span></span></code></pre>
-<p><img src="qplot_files/figure-html/g7-4.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g7-4.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## Warning: Removed 32 rows containing non-finite outside the scale range</span></span>
 <span><span class="co">## (`stat_bin()`).</span></span></code></pre>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
@@ -245,7 +231,7 @@ document.</p>
 <span><span class="va">g11a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g11a)   </span></span>
 <span><span class="va">g11a</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g11-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g11-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 3000, 6000 and 9000.</span></span>
@@ -261,7 +247,7 @@ document.</p>
 <code class="sourceCode R"><span><span class="va">g11b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g11b)   </span></span>
 <span><span class="va">g11b</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g11-2.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g11-2.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 3000, 6000 and 9000.</span></span>
@@ -277,7 +263,7 @@ document.</p>
 <code class="sourceCode R"><span><span class="va">g12a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, weight <span class="op">=</span> <span class="va">carat</span><span class="op">)</span>   </span>
 <span><span class="co"># summary(g12a)   </span></span>
 <span><span class="va">g12a</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g11-3.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g11-3.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 2500, 5000 and 7500.</span></span>
@@ -293,7 +279,7 @@ document.</p>
 <code class="sourceCode R"><span><span class="va">g12b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">color</span>, data <span class="op">=</span> <span class="va">diamonds</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, weight <span class="op">=</span> <span class="va">carat</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span><span class="st">"carat"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g12b)   </span></span>
 <span><span class="va">g12b</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g11-4.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g11-4.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'color' with labels D, E, F, G, H, I and J.</span></span>
 <span><span class="co">## It has y-axis '' with labels 0, 2500, 5000 and 7500.</span></span>
@@ -310,7 +296,7 @@ document.</p>
 <span><span class="va">g13a</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">unemploy</span> <span class="op">/</span> <span class="va">pop</span>, data <span class="op">=</span> <span class="va">economics</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g13a)   </span></span>
 <span><span class="va">g13a</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g13-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g13-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'date' with labels 1960, 1970, 1980, 1990, 2000, 2010 and 2020.</span></span>
 <span><span class="co">## It has y-axis 'unemploy/pop' with labels 0.02, 0.03, 0.04 and 0.05.</span></span>
@@ -320,7 +306,7 @@ document.</p>
 <code class="sourceCode R"><span><span class="va">g13b</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">uempmed</span>, data <span class="op">=</span> <span class="va">economics</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span>    </span>
 <span><span class="co"># summary(g13b)   </span></span>
 <span><span class="va">g13b</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g13-2.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g13-2.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'date' with labels 1960, 1970, 1980, 1990, 2000, 2010 and 2020.</span></span>
 <span><span class="co">## It has y-axis 'uempmed' with labels 5, 10, 15, 20 and 25.</span></span>
@@ -331,7 +317,7 @@ document.</p>
 <span><span class="va">g16</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">carat</span>, <span class="va">price</span>, data <span class="op">=</span> <span class="va">dsmall</span>, log <span class="op">=</span> <span class="st">"xy"</span><span class="op">)</span>   </span>
 <span><span class="co"># summary(g16)   </span></span>
 <span><span class="va">g16</span></span></code></pre></div>
-<p><img src="qplot_files/figure-html/g16-1.png" width="700"></p>
+<p><img src="qplot_files/figure-html/g16-1.png" class="r-plt" width="700"></p>
 <pre><code><span><span class="co">## This is an untitled chart with no subtitle or caption.</span></span>
 <span><span class="co">## It has x-axis 'carat' with labels 0.3, 0.5 and 1.0.</span></span>
 <span><span class="co">## It has y-axis 'price' with labels 300, 1000 and 3000.</span></span>
@@ -346,7 +332,7 @@ document.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
