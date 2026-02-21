@@ -106,6 +106,7 @@
   structLayer <- .VIstruct.ggplot(x)[["panels"]][[1]][["panellayers"]][[layer]][["scaledata"]]
   numPoints <- structLayer$x |> length()
 
+  id <- NULL # silence the static analysis warning below
   orderOfIDs <- data.frame(x = structLayer$x, id = 1:numPoints) |>
     dplyr::arrange(x) |>
     select(id) |>
