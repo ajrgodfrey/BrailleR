@@ -188,7 +188,7 @@ plot.example = ggplot(mtcars, aes(wt, mpg)) +
   geom_smooth()
 MakeAccessibleSVG(plot.example)
 ```
-[example SVG webpage](../rawHTML/plot.example-SVG.html)
+[example SVG webpage](rawHTML/plot.example-SVG.html)
 
 ## How to use
 
