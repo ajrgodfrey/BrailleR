@@ -116,20 +116,21 @@ VI(PlottedFig)
 #> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 #> There are a total of 500 elements for this variable.
 #> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 
-#> It has 12 bins with equal widths, starting at -3 and ending at 3 .
+#> It has 13 bins with equal widths, starting at -3 and ending at 3.5 .
 #> The mids and counts for the bins are:
-#> mid = -2.75  count = 3 
-#> mid = -2.25  count = 11 
-#> mid = -1.75  count = 17 
-#> mid = -1.25  count = 41 
-#> mid = -0.75  count = 80 
-#> mid = -0.25  count = 101 
-#> mid = 0.25  count = 89 
-#> mid = 0.75  count = 69 
+#> mid = -2.75  count = 1 
+#> mid = -2.25  count = 6 
+#> mid = -1.75  count = 21 
+#> mid = -1.25  count = 49 
+#> mid = -0.75  count = 77 
+#> mid = -0.25  count = 88 
+#> mid = 0.25  count = 97 
+#> mid = 0.75  count = 71 
 #> mid = 1.25  count = 55 
-#> mid = 1.75  count = 21 
-#> mid = 2.25  count = 11 
-#> mid = 2.75  count = 2
+#> mid = 1.75  count = 25 
+#> mid = 2.25  count = 8 
+#> mid = 2.75  count = 1 
+#> mid = 3.25  count = 1
 
 # ggplot
 if(require(ggplot2)){

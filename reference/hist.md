@@ -66,19 +66,18 @@ MyHist=graphics::hist(x, xlab="random normal values", main="Example histogram (g
 
 MyHist
 #> $breaks
-#>  [1] -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
-#> [16]  3.5  4.0
+#>  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 #> 
 #> $counts
-#>  [1]   1   1   3  12  44  87 169 204 176 142  94  46  13   5   2   1
+#>  [1]   1   7  13  44  95 140 172 192 160 113  38  17   7   1
 #> 
 #> $density
-#>  [1] 0.002 0.002 0.006 0.024 0.088 0.174 0.338 0.408 0.352 0.284 0.188 0.092
-#> [13] 0.026 0.010 0.004 0.002
+#>  [1] 0.002 0.014 0.026 0.088 0.190 0.280 0.344 0.384 0.320 0.226 0.076 0.034
+#> [13] 0.014 0.002
 #> 
 #> $mids
-#>  [1] -3.75 -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75
-#> [13]  2.25  2.75  3.25  3.75
+#>  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
+#> [13]  2.75  3.25
 #> 
 #> $xname
 #> [1] "x"
@@ -94,19 +93,18 @@ MyHist=hist(x, xlab="random normal values", main="Example histogram (BrailleR pa
 
 MyHist
 #> $breaks
-#>  [1] -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
-#> [16]  3.5  4.0
+#>  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
 #> 
 #> $counts
-#>  [1]   1   1   3  12  44  87 169 204 176 142  94  46  13   5   2   1
+#>  [1]   1   7  13  44  95 140 172 192 160 113  38  17   7   1
 #> 
 #> $density
-#>  [1] 0.002 0.002 0.006 0.024 0.088 0.174 0.338 0.408 0.352 0.284 0.188 0.092
-#> [13] 0.026 0.010 0.004 0.002
+#>  [1] 0.002 0.014 0.026 0.088 0.190 0.280 0.344 0.384 0.320 0.226 0.076 0.034
+#> [13] 0.014 0.002
 #> 
 #> $mids
-#>  [1] -3.75 -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75
-#> [13]  2.25  2.75  3.25  3.75
+#>  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
+#> [13]  2.75  3.25
 #> 
 #> $xname
 #> [1] "x"
@@ -135,21 +133,21 @@ MyHist
 #> 
 #> 
 #> $NBars
-#> [1] 16
+#> [1] 14
 #> 
 #> $par
 #> $par$xaxp
-#> [1] -4  4  4
+#> [1] -3  3  6
 #> 
 #> $par$yaxp
-#> [1]   0 200   4
+#> [1]   0 150   3
 #> 
 #> 
 #> $xTicks
-#> [1] -4 -2  0  2  4
+#> [1] -3 -2 -1  0  1  2  3
 #> 
 #> $yTicks
-#> [1]   0  50 100 150 200
+#> [1]   0  50 100 150
 #> 
 #> attr(,"class")
 #> [1] "Augmented" "histogram"
@@ -158,25 +156,23 @@ MyHist
 VI(MyHist)
 #> This is a histogram, with the title: with the title: Example histogram (BrailleR package)
 #> "x" is marked on the x-axis.
-#> Tick marks for the x-axis are at: -4, -2, 0, 2, and 4 
+#> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
 #> There are a total of 1000 elements for this variable.
-#> Tick marks for the y-axis are at: 0, 50, 100, 150, and 200 
-#> It has 16 bins with equal widths, starting at -4 and ending at 4 .
+#> Tick marks for the y-axis are at: 0, 50, 100, and 150 
+#> It has 14 bins with equal widths, starting at -3.5 and ending at 3.5 .
 #> The mids and counts for the bins are:
-#> mid = -3.75  count = 1 
 #> mid = -3.25  count = 1 
-#> mid = -2.75  count = 3 
-#> mid = -2.25  count = 12 
+#> mid = -2.75  count = 7 
+#> mid = -2.25  count = 13 
 #> mid = -1.75  count = 44 
-#> mid = -1.25  count = 87 
-#> mid = -0.75  count = 169 
-#> mid = -0.25  count = 204 
-#> mid = 0.25  count = 176 
-#> mid = 0.75  count = 142 
-#> mid = 1.25  count = 94 
-#> mid = 1.75  count = 46 
-#> mid = 2.25  count = 13 
-#> mid = 2.75  count = 5 
-#> mid = 3.25  count = 2 
-#> mid = 3.75  count = 1
+#> mid = -1.25  count = 95 
+#> mid = -0.75  count = 140 
+#> mid = -0.25  count = 172 
+#> mid = 0.25  count = 192 
+#> mid = 0.75  count = 160 
+#> mid = 1.25  count = 113 
+#> mid = 1.75  count = 38 
+#> mid = 2.25  count = 17 
+#> mid = 2.75  count = 7 
+#> mid = 3.25  count = 1
 ```

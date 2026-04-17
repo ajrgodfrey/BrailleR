@@ -333,7 +333,7 @@ MakeAccessibleSVG(plot.example)
 ```
 
 [example SVG
-webpage](http://ajrgodfrey.github.io/BrailleR/rawHTML/plot.example-SVG.md)
+webpage](http://ajrgodfrey.github.io/BrailleR/articles/rawHTML/plot.example-SVG.md)
 
 ### How to use
 

@@ -277,7 +277,7 @@ Students.” Bad Herrenalb, Germany.
 
 ———. 2013b. “Statistical Software from a Blind Person’s Perspective: R
 Is the Best, but We Can Make It Better.” *The R Journal* 5 (1): 73–79.
-<https://journal.r-project.org/archive/2013-1/godfrey.pdf>.
+<https://journal.r-project.org/articles/RJ-2013-007/RJ-2013-007.pdf>.
 
 ———. 2013c. “Blindness in a Visual Discipline.” University of Waikato,
 Hamilton.
@@ -318,7 +318,7 @@ and Science 2016*, edited by Katsuhito Yamaguchi and Masakazu Suzuki,
 Godfrey, A. Jonathan R., and Robert Erhardt. 2014. “Addendum to
 “Statistical Software from a Blind Person’s Perspective".” *The R
 Journal* 6 (1): 182.
-<https://journal.r-project.org/archive/2014-1/godfrey-erhardt.pdf>.
+<https://journal.r-project.org/articles/RJ-2014-017/RJ-2014-017.pdf>.
 
 Godfrey, A. Jonathan R., and M. Theodor Loots. 2014. “Statistical
 Software (R, SAS, SPSS, and Minitab) for Blind Students and

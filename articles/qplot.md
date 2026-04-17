@@ -45,7 +45,7 @@ g1 = qplot(carat, price, data = diamonds)
 ```
 
     ## Warning: `qplot()` was deprecated in ggplot2 3.4.0.
-    ## This warning is displayed once every 8 hours.
+    ## This warning is displayed once per session.
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
     ## generated.
 

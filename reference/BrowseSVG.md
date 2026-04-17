@@ -70,13 +70,13 @@ pdf(NULL)  # create non-displaying graphics device for SVGThis and AddXML
 svgfile = SVGThis(simpleHist, paste0(file, ".svg"),createDevice=FALSE)
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 #> This is an untitled chart with no subtitle or caption.
-#> It has x-axis '' with labels -2, 0 and 2.
-#> It has y-axis '' with labels 0, 3, 6 and 9.
+#> It has x-axis '' with labels -2, -1, 0, 1, 2 and 3.
+#> It has y-axis '' with labels 0.0, 2.5, 5.0, 7.5, 10.0 and 12.5.
 #> The chart is a bar chart with 30 vertical bars.
 xmlfile = AddXML(simpleHist, paste0(file, ".xml")) 
 dev.off()  # destroy graphics device, now that we're done with it
-#> agg_record_1900067626 
-#>                     2 
+#> agg_record_1bb012b464ea 
+#>                       2 
 
 BrowseSVG(file)
 
