@@ -206,6 +206,7 @@
           dplyr::summarise(mean = mean(.data$y), sd = ifelse(is.na(sd(.data$y)), 0, sd(.data$y)), count = n())
       })
 
+    id <- NULL # silence the static analysis warning below
     # Get the order of points
     orderOfIDs <- data.frame(x = data$x, id = 1:length(data$x)) |>
       dplyr::arrange(.data$x) |>
