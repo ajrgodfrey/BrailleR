@@ -1,7 +1,7 @@
 \name{Embossers}
 \alias{Embossers}
 \alias{Premier100}
-\title{Prepare BrailleR settings for specific braille embossers}
+\title{Prepare BrailleR settings for specific Braille embossers}
 \usage{
 Premier100()
 }
@@ -14,7 +14,7 @@ Convenience functions for setting package options based on experimentation using
 \details{
 These functions are only relevant for owners of the specified embossers. Ownership of these models means the user has access to fonts that are licenced to the user.
 
-The Premier 100 embosser uses standard 11 by 11.5 inch fanfold braille paper. Printing in landscape or portrait is possible.
+The Premier 100 embosser uses standard 11 by 11.5 inch fanfold Braille paper. Printing in landscape or portrait is possible.
 }
 \examples{
 \donttest{

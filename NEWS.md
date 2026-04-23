@@ -1,22 +1,28 @@
 # BrailleR 1.2.0
 
 - removed use of the Extra Fonts package in order to return to CRAN
+- removed some examples from help pages which have long run times. The content can be more easily accommodated in `pkgdown` pages
+- accepted some proposed fixes via PR106 on GitHub
+- fixed spelling errors and false positives. Word list file updated; Plenty of Rd, Rmd, and md files updated
+
 
 # BrailleR 1.1.0
 
-- replaced code of conduct with newer version from usethis package.
-- added GetPython() to mirror GetPython3(); ditto for GetWxPython()
+- replaced code of conduct with newer version from `usethis` package.
+- added `GetPython()` to mirror `GetPython3()`; ditto for `GetWxPython()`
 - R Project Sprint 2023 work with Deepayan led to improvement in the ability to extract content of graphics devices; added him as author
 - R Project Sprint 2023 work with Gabe led to a working solution to extract recent console output; added him as author. 
-     See the ShowMe(), SessionLog(), and GrabLast() functions.
-- removed hack to get  devtools function now spelling package is brought in.
-- added MyBrailleR() function to open the user folder.
+     See the `ShowMe()`, `SessionLog()`, and `GrabLast()` functions.
+- removed hack to get  `devtools` function now spelling package is brought in.
+- added `MyBrailleR()` function to open the user folder.
 
 # BrailleR 1.0.2
+
 - improved CRAN test picked up inconsistencies with internal functions
 - available on CRAN
 
 # BrailleR 1.0.1
+
 - deleted detritus
 
 # BrailleR 1.0.0
@@ -42,7 +48,7 @@
 - updated template files so that chunk options are moved from opening fence to commented lines (should be ready for Quarto)
 - added several functions to make basic Quarto documents from history and an R script
 - changed to use whisker templates by adding {{.}} around the items that need to be changed
-- added a few functions to choose a template and be given some guidance on its use; see ChooseTemplate()
+- added a few functions to choose a template and be given some guidance on its use; see `ChooseTemplate()`
 - resolve issue #31, add default shape message.
 - resolve issue #34, add information about visible points. It only works at the moment up to point size of 18.
 - resolve issue #62, add ggplot support for TimeSeries
@@ -53,34 +59,34 @@
 
 # BrailleR 0.33.3
 -Update author files
--Change the VI.ggplot output for unrecognized graphs to correct spelling of cannot
+-Change the VI.ggplot output for unrecognised graphs to correct spelling of cannot
 
 # BrailleR 0.33.2
 - updated batch file creation so that they search for current version of R. Batch files should not require updating as a consequence.
 - start adding support for quarto.
-- converted templates to use the native pipe instead of the magrittr pipe
+- converted templates to use the native pipe instead of the `magrittr` pipe
 
 
 # BrailleR 0.33.1
 - working on modernising other convenience functions
 - serious compaction of code was possible; used new internal functions where code is repeated over convenience functions
-- WriteR was updated so that it does not create a settings file anywhere. Python 3.8 works but 3.10 has issues getting the necessary wxpython module installed. This creates incentive for getting stand alone version up and running.
+- `WriteR` was updated so that it does not create a settings file anywhere. Python 3.8 works but 3.10 has issues getting the necessary `wxpython` module installed. This creates incentive for getting stand alone version up and running.
 - added new verbosity setting for VI output. At this stage it hasno  impact.
 
 
 
 # BrailleR 0.33.0
-- updated ScatterPlot(), FittedLinePlot(), and TimeSeriesPlot() functions  to have both base and ggplot style graphics.
+- updated `ScatterPlot()`, `FittedLinePlot()`, and `TimeSeriesPlot()` functions  to have both base and ggplot style graphics.
 - updated qplot.Rmd vignette to remove all but one `VI()` command as they are redundant now that we get automatic descriptions of ggplot objects.
 - moved all stop() error message commands to stop.r and used hidden commands to pull the errors. Will make translation easier.
-- moved a lot of message() and warning() calls to use specific functions instead. Should reduce the number of text strngs that need translation.
-- added use of pkgdown
+- moved a lot of message() and warning() calls to use specific functions instead. Should reduce the number of text strings that need translation.
+- added use of `pkgdown`
 - updated templates to make use of pipe chains where possible
-- updated examples to use dplyr syntax
+- updated examples to use `dplyr` syntax
 - added quite a few more templates for tests that will help VI users
-- added UseTemplateList() as a fast wrapper for UseTemplate()
-- added use of Rdpack package for use of bibtex references in Rd files
-- brought ggplot style graphics into OnePredictor() with new `Modern=TRUE` while still allowing old-style graphs (must set `Modern=FALSE`)
+- added `UseTemplateList()` as a fast wrapper for `UseTemplate()`
+- added use of `Rdpack` package for use of bibtex references in Rd files
+- brought ggplot style graphics into `OnePredictor()` with new `Modern=TRUE` while still allowing old-style graphs (must set `Modern=FALSE`)
 - tried to reduce package dependencies list. Added packages to suggests list.
 
 # BrailleR 0.32.2 
@@ -89,9 +95,9 @@
 # BrailleR 0.32.1
 - feedback from manual CRAN inspection
 - removed commented code from examples in Rd files.
-- removed other aspects of examples that fail CRAN checking such as rm()
-- removed use of installed.packages()
-- had to search for specified text strings and for files lacking specified sections. The new function WhichFiles() was key in making sure this did not take forever.
+- removed other aspects of examples that fail CRAN checking such as `rm()`
+- removed use of `installed.packages()`
+- had to search for specified text strings and for files lacking specified sections. The new function `WhichFiles()` was key in making sure this did not take forever.
 - updated a few of the templates in inst/templates; these are meant to be snippets, not completely stand alone files.
 
 # BrailleR 0.32.0
@@ -100,9 +106,9 @@
 # BrailleR 0.31.4
 - Testing for a return to CRAN; looked right.
 - changed dates and version numbers in readiness for CRAN
-- had to remove orientation checking for bars in ggplot() graphs; see VI.internals. this forced introduction of rlang package dependency
-- forced option to be set that is equivalent to GoBlind() to get VI.ggplot() to be automatic
-- fixed doubling of VI() output for ggplot() output in qplot.Rmd vignette
+- had to remove orientation checking for bars in `ggplot()` graphs; see VI.internals. this forced introduction of `rlanng` package dependency
+- forced option to be set that is equivalent to `GoBlind()` to get `VI.ggplot()` to be automatic
+- fixed doubling of VI() output for `ggplot()` output in qplot.Rmd vignette
 - minor cosmetic updates for Rmd files
 - Some improved messaging.
 
@@ -110,14 +116,14 @@
 
 # BrailleR 0.31.3
 - cleaned Sophie's code. We now have geom_smooth() reporting method and existence of confidence intervals.
-- renamed BrailleR functions xlab() and ylab() to use upper camel case to resolve conflict with ggplot2.
+- renamed BrailleR functions `xlab()` and `ylab()` to use upper camel case to resolve conflict with ggplot2.
 - getting ready for contributions from Sophie Banks; added her to contributors list
 
 # BrailleR 0.31.2
 - removed travis-ci package service as it will move to a fee-for-service model in 2021
 - added GitHub actions to workflow; found trivial issues to fix.
 - added spell checking
-- added use of pkgdown
+- added use of `pkgdown`
 
 # BrailleR 0.31.1
 - removed the unclean check directory problem that would frustrate return to CRAN
@@ -129,7 +135,7 @@
 # BrailleR 0.31.0
 - merged PR26 to fix ggplot() axis labels.
 - added VI.htest()
-- added RemoveBOM function for taking the BOM off an Rmd file
+- added `RemoveBOM()` function for taking the BOM off an Rmd file
 - fixed .ProcessAll() so that it avoids the BOM problems created by use of the wrong text editor in Windows.
 - added PandocAll() to convert files of one type to another
 - added print method for objects of class VI so that the VI() functions can be enriched.
@@ -216,7 +222,7 @@
 - altered DESCRIPTION file to raise Paul and Debra to author from contributor in preparation for pull requests for VI.ggplot() work.
 - imported Debra Warren's work <smiles> via a PR on GitHub. This offers huge gains in VI.ggplot()
 - changed R dependency sought by CRAN on 29/9/17 by email.
-- internalised the R2txt.vars (should have done this ages ago!)
+- internalised the `R2txt.vars` (should have done this ages ago!)
  
 
 # BrailleR 0.27.0
@@ -268,7 +274,7 @@ Pushed to CRAN on 6 July 2017
 - added MakeSlidy() which takes a folder of Rmd files and turns them into a slidy presentation
 
 # BrailleR 0.25.3
-- WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.
+- WriteR() failed for JYS. Suggestion to use file.path() added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.
 - fixed URL for CRAN repository of package in CITATION file
 - then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.
 - added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), OnePredictor() etc 
@@ -410,13 +416,13 @@ type; it will also include the code chunks that are reused frequently in other f
 Successfully uploaded to CRAN
 
 # BrailleR 0.21.1
-- added option for braille font installation status
+- added option for Braille font installation status
 - ensured BRL options are of correct type on load of BrailleR.
-- created functions to change paper size and braille font point size.- included options for paper size and embosser type
+- created functions to change paper size and Braille font point size.- included options for paper size and embosser type
 - established DEFAULTS and PREFERENCES files so an update does not overwrite a user's preferences. If PREFERENCES does not exist, then it is created when next the package is loaded.
 - created ResetDefaults() to overwrite PREFERENCES with DEFAULTS.
 - added package dependency to devtools so that package reload can be managed.
-- added package dependency to extrafont so that braille fonts can be embedded in pdf files.
+- added package dependency to extrafont so that Braille fonts can be embedded in pdf files.
 - added functions for setting specific embosser models.
 - added SVGThis into package as experimental function.
 - added BRLThis into package as experimental function.
@@ -426,7 +432,7 @@ Successfully uploaded to CRAN
 - altered startup so that explicit use of the packages is initiated
 - investigated using Roxygen for package documentation. Conclusion is that it must be all or nothing. Nothing preferred at present.
 - fixed use of css for VI.lm()
-- added extra braille options in readiness for the experimental BRLThis() function.
+- added extra Braille options in readiness for the experimental BRLThis() function.
 - added fonts folder to package that includes the single font file "BRAILLE1.ttf" for Windows users and its licence file.
 
 # BrailleR 0.20

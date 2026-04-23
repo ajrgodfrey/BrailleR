@@ -93,7 +93,7 @@ The txtOut function is a short cut for the txtStart command that uses the curren
 	 The \code{txtSkip}  function will run the
 	 code in \code{expr} but will not include the commands or
 	 results in the transcript file (this can be used for side
-	 computations, or requests for help, etc.).
+	 computations, or requests for help).
 }
 \value{
   Most of these commands do not return anything of use.  The exception is:

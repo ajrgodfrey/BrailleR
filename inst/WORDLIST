@@ -13,6 +13,7 @@ Bengtsson
 bibtex
 BlindRUG
 BOM
+Braille
 BrailleR
 BrailleRHistory
 BrailleRHome
@@ -62,6 +63,7 @@ embeded
 enscript
 eps
 et
+etc
 etxt
 ExploringGraphs
 extrafont
@@ -101,15 +103,13 @@ github
 glm
 GoBlind
 godfrey
+grep
 gridGraphics
 gridSVG
 gsub
 gTree
-hasno
-HB
 Hirst
 hline
-hmtml
 HSD
 htest
 http
@@ -118,6 +118,7 @@ hunspell
 ICCHP
 ifelse
 importFrom
+Inf
 InQuotes
 installr
 internalised
@@ -151,6 +152,7 @@ MakeSlidy
 MakeUpper
 massey
 mathjax
+md
 modernising
 mouseclick
 murrell
@@ -166,6 +168,7 @@ onDetach
 OneFactor
 OnePredictor
 optimising
+org
 packageVersion
 Pandoc
 pandoc
@@ -173,6 +176,7 @@ PandocAll
 pch
 Personalising
 Pigmentosa
+pkg
 pkgdown
 png
 prcomp
@@ -185,6 +189,7 @@ PValDigits
 Py
 pyw
 qcc
+Qmd
 qplot
 quartile
 RBatch

@@ -46,14 +46,14 @@ SetSigLevel(alpha, Permanent = interactive(), Local = interactive())
 \item{Local}{Should the local copy of BrailleROptions be updated?}
   \item{name}{a character string to be used for author details in various file writing functions.}
   \item{Permanent}{Should the change be made permanent? Set to FALSE for a temporary change.}
-\item{pt}{The point size of the chosen braille font.}
+\item{pt}{The point size of the chosen Braille font.}
 \item{Upper}{Should the initial letter of variable names be capitalised in captions and filenames? Logical, initially set to TRUE.}
 }
 \details{More convenience functions for BrailleR users. Most are self explanatory, but the following details should be noted.
 
 The Choose...() functions are used for establishing default parameters for other details. The ChooseStyle() command can be used to alter the appearance of HTML output by way of cascading style sheets. You can create your own css file and add it to your user folder called MyBrailleR before calling this function. 
 
-The ChooseEmbosser() will look for the default settings recommended for particular types of embosser. Initial testing was done on a Tiger Premier 100 embosser manufactured by ViewPlus Inc. The default paper size is 11 by 11.5 inches, but the recommended embossing area for graphics is 10 by 10 inches. Please submit your preferences for any embosser to the package maintainer.
+The ChooseEmbosser() will look for the default settings recommended for particular types of embosser. Initial testing was done on a Tiger Premier 100 embosser manufactured by ViewPlus. The default paper size is 11 by 11.5 inches, but the recommended embossing area for graphics is 10 by 10 inches. Please submit your preferences for any embosser to the package maintainer.
 
 
 The Set..() commands will let the user specify any desired value for the options as long as it is valid: Options assumed to be character strings are checked to be so, integers must be integers and a proportion must be between zero and one.  

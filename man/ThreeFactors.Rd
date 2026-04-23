@@ -26,16 +26,3 @@ to complete}
 \seealso{
 The \code{\link{OneFactor}} script was the basis for this function;.
 }
-\examples{
-DIR = getwd()
-setwd(tempdir())
-TestData=data.frame(Resp=sample(54), expand.grid(F1=c("a","b","c"), 
-    F2=c("d","e","f"), F3=c("g","h","i"), rep=c(1,2)))
-attach(TestData)
-ThreeFactors(Resp,F1,F2,F3)
-detach(TestData)
-rm(TestData)
-# N.B. Various files and a folder were created in a temporary directory. 
-# Please investigate them to see how this function worked.
-setwd(DIR)
-}
