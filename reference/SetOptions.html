@@ -101,7 +101,7 @@
 <dd><p>Should the change be made permanent? Set to FALSE for a temporary change.</p></dd>
 
 <dt id="arg-pt">pt<a class="anchor" aria-label="anchor" href="#arg-pt"></a></dt>
-<dd><p>The point size of the chosen braille font.</p></dd>
+<dd><p>The point size of the chosen Braille font.</p></dd>
 
 <dt id="arg-upper">Upper<a class="anchor" aria-label="anchor" href="#arg-upper"></a></dt>
 <dd><p>Should the initial letter of variable names be capitalised in captions and filenames? Logical, initially set to TRUE.</p></dd>
@@ -111,7 +111,7 @@
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>More convenience functions for BrailleR users. Most are self explanatory, but the following details should be noted.</p>
 <p>The Choose...() functions are used for establishing default parameters for other details. The ChooseStyle() command can be used to alter the appearance of HTML output by way of cascading style sheets. You can create your own css file and add it to your user folder called MyBrailleR before calling this function.</p>
-<p>The ChooseEmbosser() will look for the default settings recommended for particular types of embosser. Initial testing was done on a Tiger Premier 100 embosser manufactured by ViewPlus Inc. The default paper size is 11 by 11.5 inches, but the recommended embossing area for graphics is 10 by 10 inches. Please submit your preferences for any embosser to the package maintainer.</p>
+<p>The ChooseEmbosser() will look for the default settings recommended for particular types of embosser. Initial testing was done on a Tiger Premier 100 embosser manufactured by ViewPlus. The default paper size is 11 by 11.5 inches, but the recommended embossing area for graphics is 10 by 10 inches. Please submit your preferences for any embosser to the package maintainer.</p>
 
 <p>The Set..() commands will let the user specify any desired value for the options as long as it is valid: Options assumed to be character strings are checked to be so, integers must be integers and a proportion must be between zero and one.</p>
 <p>SetPaperHeight and SetPaperWidth are temporary changes by default because some types of images are not meant to use the maximum area set down by the original default settings for an embosser. Careful experimentation may be required to get optimal results. If permanent changes are desired, then please contact the package maintainer to explain why you have made these changes so that we can help other users get the best from a wide range of embossers.</p>

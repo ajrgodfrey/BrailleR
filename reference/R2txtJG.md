@@ -115,7 +115,7 @@ so it will be skipped if sourced or copied.
 
 The `txtSkip` function will run the code in `expr` but will not include
 the commands or results in the transcript file (this can be used for
-side computations, or requests for help, etc.).
+side computations, or requests for help).
 
 ## Value
 

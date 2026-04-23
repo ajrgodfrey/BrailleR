@@ -113,22 +113,21 @@ PlottedFig=hist(RandomX)
 VI(PlottedFig)
 #> This is a histogram, with the title: with the title: Histogram of RandomX
 #> "RandomX" is marked on the x-axis.
-#> Tick marks for the x-axis are at: -3, -2, -1, 0, 1, 2, and 3 
+#> Tick marks for the x-axis are at: -2, -1, 0, 1, 2, and 3 
 #> There are a total of 500 elements for this variable.
 #> Tick marks for the y-axis are at: 0, 20, 40, 60, 80, and 100 
-#> It has 13 bins with equal widths, starting at -3 and ending at 3.5 .
+#> It has 12 bins with equal widths, starting at -2.5 and ending at 3.5 .
 #> The mids and counts for the bins are:
-#> mid = -2.75  count = 1 
-#> mid = -2.25  count = 6 
-#> mid = -1.75  count = 21 
+#> mid = -2.25  count = 7 
+#> mid = -1.75  count = 24 
 #> mid = -1.25  count = 49 
-#> mid = -0.75  count = 77 
-#> mid = -0.25  count = 88 
-#> mid = 0.25  count = 97 
-#> mid = 0.75  count = 71 
-#> mid = 1.25  count = 55 
-#> mid = 1.75  count = 25 
-#> mid = 2.25  count = 8 
+#> mid = -0.75  count = 75 
+#> mid = -0.25  count = 86 
+#> mid = 0.25  count = 103 
+#> mid = 0.75  count = 70 
+#> mid = 1.25  count = 52 
+#> mid = 1.75  count = 22 
+#> mid = 2.25  count = 10 
 #> mid = 2.75  count = 1 
 #> mid = 3.25  count = 1
 

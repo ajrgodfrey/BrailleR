@@ -34,7 +34,7 @@ view=interactive(), cleanup = TRUE, VI_and_Describe = TRUE, ...)
 - cleanup:
 
   Whether the function should remove the svg and xml files after they
-  have bee embedded into the hmtml file.
+  have bee embedded into the html file.
 
 - VI_and_Describe:
 

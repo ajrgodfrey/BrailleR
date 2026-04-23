@@ -1,6 +1,6 @@
 # Descriptive statistics and graphs for univariate data
 
-This function is a convenience function for analyzing univariate data.
+This function is a convenience function for analysing univariate data.
 It provides histograms, boxplots and tabulated results for normality
 tests as well as those for skewness and kurtosis. The intended use of
 this function is principally for a blind user of R who also has the
@@ -22,7 +22,7 @@ View = getOption("BrailleR.View"), PValDigits=getOption("BrailleR.PValDigits"))
 
 - Response:
 
-  The numeric vector to be analyzed. This must be specified as a
+  The numeric vector to be analysed. This must be specified as a
   variable that is directly available in the workspace, not as a
   data.frame\$variable construct.
 
@@ -99,21 +99,3 @@ requested) in (optionally) a subfolder of the current working directory.
 ## Author
 
 A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
-
-## Examples
-
-``` r
-if(require(nortest)){ # used in the Rmd file, not the UniDesc function
-DIR = getwd()
-setwd(tempdir())
-Ozone=airquality$Ozone
-UniDesc(Ozone)
-rm(Ozone)
-# N.B. Various files and a folder were created in a temporary directory. 
-# Please investigate them to see how this function worked.
-setwd(DIR)
-}
-#> Error in eval(parse_only(code), envir = envir): object 'Ozone.count' not found
-#> 
-#> Quitting from Ozone-UniDesc.Rmd:35-35
-```

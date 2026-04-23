@@ -85,27 +85,3 @@ Timothy P. Bilton and A. Jonathan R. Godfrey
 The
 [`OneFactor`](http://ajrgodfrey.github.io/BrailleR/reference/OneFactor.md)
 script was the basis for this function;.
-
-## Examples
-
-``` r
-DIR = getwd()
-setwd(tempdir())
-if(require(dplyr)){
-TG <- ToothGrowth |> mutate(dose = as.factor(dose))
-
-# Without interaction
-TwoFactors('len','supp','dose',Data=TG, Inter=FALSE)
-
-# With two-way interaction
-TwoFactors('len', 'supp', 'dose', Data=TG, Inter=TRUE)
-
-rm(TG); rm(TG)
-# N.B. Various files and a folder were created in a temporary directory. 
-# Please investigate them to see how this function worked.
-}
-#> Warning: This function is meant for use in interactive mode only.
-#> Warning: This function is meant for use in interactive mode only.
-#> Warning: object 'TG' not found
-setwd(DIR)
-```

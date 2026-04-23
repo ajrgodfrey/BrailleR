@@ -44,6 +44,15 @@ A. Jonathan R. Godfrey
 
 ``` r
 require(dplyr)
+#> Loading required package: dplyr
+#> 
+#> Attaching package: ‘dplyr’
+#> The following objects are masked from ‘package:stats’:
+#> 
+#>     filter, lag
+#> The following objects are masked from ‘package:base’:
+#> 
+#>     intersect, setdiff, setequal, union
 airquality %>% CheckIt() %>% arrange(Ozone) %>% head()
 #> Rows: 153
 #> Columns: 6

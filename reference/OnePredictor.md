@@ -78,22 +78,3 @@ See
 [`OneFactor`](http://ajrgodfrey.github.io/BrailleR/reference/OneFactor.md),
 and
 [`TwoFactors`](http://ajrgodfrey.github.io/BrailleR/reference/TwoFactors.md)
-
-## Examples
-
-``` r
-if(require(nortest)){ # used in a dependent function's Rmd file
-library(knitr)
-DIR = getwd()
-setwd(tempdir())
-data(airquality)
-OnePredictor("Ozone", "Wind", airquality)
-# N.B. Various files and a folder were created in a temporary directory. 
-# Please investigate them to see how this function worked.
-setwd(DIR)
-}
-#> Loading required package: nortest
-#> Warning: This function is meant for use in interactive mode only.
-#> Warning: This function is meant for use in interactive mode only.
-#> Warning: This function is meant for use in interactive mode only.
-```

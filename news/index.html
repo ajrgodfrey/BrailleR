@@ -44,15 +44,19 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.0" id="brailler-120">BrailleR 1.2.0<a class="anchor" aria-label="anchor" href="#brailler-120"></a></h2>
 <ul><li>removed use of the Extra Fonts package in order to return to CRAN</li>
+<li>removed some examples from help pages which have long run times. The content can be more easily accommodated in <code>pkgdown</code> pages</li>
+<li>accepted some proposed fixes via PR106 on GitHub</li>
+<li>fixed spelling errors and false positives. Word list file updated; Plenty of Rd, Rmd, and md files updated</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="brailler-110">BrailleR 1.1.0<a class="anchor" aria-label="anchor" href="#brailler-110"></a></h2>
-<ul><li>replaced code of conduct with newer version from usethis package.</li>
-<li>added GetPython() to mirror GetPython3(); ditto for GetWxPython()</li>
+<ul><li>replaced code of conduct with newer version from <code>usethis</code> package.</li>
+<li>added <code><a href="../reference/GetWriteR.html">GetPython()</a></code> to mirror <code><a href="../reference/GetWriteR.html">GetPython3()</a></code>; ditto for <code><a href="../reference/GetWriteR.html">GetWxPython()</a></code>
+</li>
 <li>R Project Sprint 2023 work with Deepayan led to improvement in the ability to extract content of graphics devices; added him as author</li>
-<li>R Project Sprint 2023 work with Gabe led to a working solution to extract recent console output; added him as author. See the ShowMe(), SessionLog(), and GrabLast() functions.</li>
-<li>removed hack to get devtools function now spelling package is brought in.</li>
-<li>added MyBrailleR() function to open the user folder.</li>
+<li>R Project Sprint 2023 work with Gabe led to a working solution to extract recent console output; added him as author. See the <code><a href="../reference/SessionLog.html">ShowMe()</a></code>, <code><a href="../reference/SessionLog.html">SessionLog()</a></code>, and <code><a href="../reference/SessionLog.html">GrabLast()</a></code> functions.</li>
+<li>removed hack to get <code>devtools</code> function now spelling package is brought in.</li>
+<li>added <code><a href="../reference/SetupBrailleR.html">MyBrailleR()</a></code> function to open the user folder.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.2" id="brailler-102">BrailleR 1.0.2<a class="anchor" aria-label="anchor" href="#brailler-102"></a></h2><p class="text-muted">CRAN release: 2023-07-10</p>
@@ -89,7 +93,8 @@
 <li>updated template files so that chunk options are moved from opening fence to commented lines (should be ready for Quarto)</li>
 <li>added several functions to make basic Quarto documents from history and an R script</li>
 <li>changed to use whisker templates by adding {{.}} around the items that need to be changed</li>
-<li>added a few functions to choose a template and be given some guidance on its use; see ChooseTemplate()</li>
+<li>added a few functions to choose a template and be given some guidance on its use; see <code>ChooseTemplate()</code>
+</li>
 <li>resolve issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/31" class="external-link">#31</a>, add default shape message.</li>
 <li>resolve issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/34" class="external-link">#34</a>, add information about visible points. It only works at the moment up to point size of 18.</li>
 <li>resolve issue <a href="https://github.com/ajrgodfrey/BrailleR/issues/62" class="external-link">#62</a>, add ggplot support for TimeSeries</li>
@@ -100,34 +105,37 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.33.3" id="brailler-0333">BrailleR 0.33.3<a class="anchor" aria-label="anchor" href="#brailler-0333"></a></h2>
-<p>-Update author files -Change the VI.ggplot output for unrecognized graphs to correct spelling of cannot</p>
+<p>-Update author files -Change the VI.ggplot output for unrecognised graphs to correct spelling of cannot</p>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.33.2" id="brailler-0332">BrailleR 0.33.2<a class="anchor" aria-label="anchor" href="#brailler-0332"></a></h2>
 <ul><li>updated batch file creation so that they search for current version of R. Batch files should not require updating as a consequence.</li>
 <li>start adding support for quarto.</li>
-<li>converted templates to use the native pipe instead of the magrittr pipe</li>
+<li>converted templates to use the native pipe instead of the <code>magrittr</code> pipe</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.33.1" id="brailler-0331">BrailleR 0.33.1<a class="anchor" aria-label="anchor" href="#brailler-0331"></a></h2>
 <ul><li>working on modernising other convenience functions</li>
 <li>serious compaction of code was possible; used new internal functions where code is repeated over convenience functions</li>
-<li>WriteR was updated so that it does not create a settings file anywhere. Python 3.8 works but 3.10 has issues getting the necessary wxpython module installed. This creates incentive for getting stand alone version up and running.</li>
+<li>
+<code>WriteR</code> was updated so that it does not create a settings file anywhere. Python 3.8 works but 3.10 has issues getting the necessary <code>wxpython</code> module installed. This creates incentive for getting stand alone version up and running.</li>
 <li>added new verbosity setting for VI output. At this stage it hasno impact.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.33.0" id="brailler-0330">BrailleR 0.33.0<a class="anchor" aria-label="anchor" href="#brailler-0330"></a></h2>
-<ul><li>updated ScatterPlot(), FittedLinePlot(), and TimeSeriesPlot() functions to have both base and ggplot style graphics.</li>
+<ul><li>updated <code><a href="../reference/ScatterPlot.html">ScatterPlot()</a></code>, <code><a href="../reference/ScatterPlot.html">FittedLinePlot()</a></code>, and <code><a href="../reference/TSPlot.html">TimeSeriesPlot()</a></code> functions to have both base and ggplot style graphics.</li>
 <li>updated qplot.Rmd vignette to remove all but one <code><a href="../reference/VI.html">VI()</a></code> command as they are redundant now that we get automatic descriptions of ggplot objects.</li>
 <li>moved all stop() error message commands to stop.r and used hidden commands to pull the errors. Will make translation easier.</li>
-<li>moved a lot of message() and warning() calls to use specific functions instead. Should reduce the number of text strngs that need translation.</li>
-<li>added use of pkgdown</li>
+<li>moved a lot of message() and warning() calls to use specific functions instead. Should reduce the number of text strings that need translation.</li>
+<li>added use of <code>pkgdown</code>
+</li>
 <li>updated templates to make use of pipe chains where possible</li>
-<li>updated examples to use dplyr syntax</li>
+<li>updated examples to use <code>dplyr</code> syntax</li>
 <li>added quite a few more templates for tests that will help VI users</li>
-<li>added UseTemplateList() as a fast wrapper for UseTemplate()</li>
-<li>added use of Rdpack package for use of bibtex references in Rd files</li>
-<li>brought ggplot style graphics into OnePredictor() with new <code>Modern=TRUE</code> while still allowing old-style graphs (must set <code>Modern=FALSE</code>)</li>
+<li>added <code><a href="../reference/FindReplace.html">UseTemplateList()</a></code> as a fast wrapper for <code><a href="../reference/FindReplace.html">UseTemplate()</a></code>
+</li>
+<li>added use of <code>Rdpack</code> package for use of bibtex references in Rd files</li>
+<li>brought ggplot style graphics into <code><a href="../reference/OnePredictor.html">OnePredictor()</a></code> with new <code>Modern=TRUE</code> while still allowing old-style graphs (must set <code>Modern=FALSE</code>)</li>
 <li>tried to reduce package dependencies list. Added packages to suggests list.</li>
 </ul></div>
     <div class="section level2">
@@ -138,9 +146,11 @@
 <h2 class="pkg-version" data-toc-text="0.32.1" id="brailler-0321">BrailleR 0.32.1<a class="anchor" aria-label="anchor" href="#brailler-0321"></a></h2><p class="text-muted">CRAN release: 2021-10-22</p>
 <ul><li>feedback from manual CRAN inspection</li>
 <li>removed commented code from examples in Rd files.</li>
-<li>removed other aspects of examples that fail CRAN checking such as rm()</li>
-<li>removed use of installed.packages()</li>
-<li>had to search for specified text strings and for files lacking specified sections. The new function WhichFiles() was key in making sure this did not take forever.</li>
+<li>removed other aspects of examples that fail CRAN checking such as <code><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm()</a></code>
+</li>
+<li>removed use of <code><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages()</a></code>
+</li>
+<li>had to search for specified text strings and for files lacking specified sections. The new function <code>WhichFiles()</code> was key in making sure this did not take forever.</li>
 <li>updated a few of the templates in inst/templates; these are meant to be snippets, not completely stand alone files.</li>
 </ul></div>
     <div class="section level2">
@@ -151,16 +161,16 @@
 <h2 class="pkg-version" data-toc-text="0.31.4" id="brailler-0314">BrailleR 0.31.4<a class="anchor" aria-label="anchor" href="#brailler-0314"></a></h2>
 <ul><li>Testing for a return to CRAN; looked right.</li>
 <li>changed dates and version numbers in readiness for CRAN</li>
-<li>had to remove orientation checking for bars in ggplot() graphs; see VI.internals. this forced introduction of rlang package dependency</li>
-<li>forced option to be set that is equivalent to GoBlind() to get VI.ggplot() to be automatic</li>
-<li>fixed doubling of VI() output for ggplot() output in qplot.Rmd vignette</li>
+<li>had to remove orientation checking for bars in <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> graphs; see VI.internals. this forced introduction of <code>rlanng</code> package dependency</li>
+<li>forced option to be set that is equivalent to <code><a href="../reference/Options.html">GoBlind()</a></code> to get <code><a href="../reference/VI.html">VI.ggplot()</a></code> to be automatic</li>
+<li>fixed doubling of VI() output for <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> output in qplot.Rmd vignette</li>
 <li>minor cosmetic updates for Rmd files</li>
 <li>Some improved messaging.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.31.3" id="brailler-0313">BrailleR 0.31.3<a class="anchor" aria-label="anchor" href="#brailler-0313"></a></h2>
 <ul><li>cleaned Sophie’s code. We now have geom_smooth() reporting method and existence of confidence intervals.</li>
-<li>renamed BrailleR functions xlab() and ylab() to use upper camel case to resolve conflict with ggplot2.</li>
+<li>renamed BrailleR functions <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab()</a></code> to use upper camel case to resolve conflict with ggplot2.</li>
 <li>getting ready for contributions from Sophie Banks; added her to contributors list</li>
 </ul></div>
     <div class="section level2">
@@ -168,7 +178,8 @@
 <ul><li>removed travis-ci package service as it will move to a fee-for-service model in 2021</li>
 <li>added GitHub actions to workflow; found trivial issues to fix.</li>
 <li>added spell checking</li>
-<li>added use of pkgdown</li>
+<li>added use of <code>pkgdown</code>
+</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.31.1" id="brailler-0311">BrailleR 0.31.1<a class="anchor" aria-label="anchor" href="#brailler-0311"></a></h2>
@@ -180,7 +191,7 @@
 <h2 class="pkg-version" data-toc-text="0.31.0" id="brailler-0310">BrailleR 0.31.0<a class="anchor" aria-label="anchor" href="#brailler-0310"></a></h2>
 <ul><li>merged PR26 to fix ggplot() axis labels.</li>
 <li>added VI.htest()</li>
-<li>added RemoveBOM function for taking the BOM off an Rmd file</li>
+<li>added <code><a href="../reference/MakeRmdFiles.html">RemoveBOM()</a></code> function for taking the BOM off an Rmd file</li>
 <li>fixed .ProcessAll() so that it avoids the BOM problems created by use of the wrong text editor in Windows.</li>
 <li>added PandocAll() to convert files of one type to another</li>
 <li>added print method for objects of class VI so that the VI() functions can be enriched.</li>
@@ -273,7 +284,7 @@
 <ul><li>altered DESCRIPTION file to raise Paul and Debra to author from contributor in preparation for pull requests for VI.ggplot() work.</li>
 <li>imported Debra Warren’s work <smiles> via a PR on GitHub. This offers huge gains in VI.ggplot()</smiles></li>
 <li>changed R dependency sought by CRAN on 29/9/17 by email.</li>
-<li>internalised the R2txt.vars (should have done this ages ago!)</li>
+<li>internalised the <code>R2txt.vars</code> (should have done this ages ago!)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.27.0" id="brailler-0270">BrailleR 0.27.0<a class="anchor" aria-label="anchor" href="#brailler-0270"></a></h2>
@@ -327,7 +338,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.25.3" id="brailler-0253">BrailleR 0.25.3<a class="anchor" aria-label="anchor" href="#brailler-0253"></a></h2>
-<ul><li>WriteR() failed for JYS. Suggestion to use file.path() from HB added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.</li>
+<ul><li>WriteR() failed for JYS. Suggestion to use file.path() added to WriteR(). Proved insufficient so hard wired quote marks for command line being issued have been included. JYS reported success.</li>
 <li>fixed URL for CRAN repository of package in CITATION file</li>
 <li>then fixed a bunch of other URLs from http to https in DESCRIPTION and vignette files.</li>
 <li>added folder of templates for (fairly) common analyses which are slightly beyond the OneFactor(), OnePredictor() etc type; it will also include the code chunks that are reused frequently in other functions.</li>
@@ -484,13 +495,13 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.21.1" id="brailler-0211">BrailleR 0.21.1<a class="anchor" aria-label="anchor" href="#brailler-0211"></a></h2>
-<ul><li>added option for braille font installation status</li>
+<ul><li>added option for Braille font installation status</li>
 <li>ensured BRL options are of correct type on load of BrailleR.</li>
-<li>created functions to change paper size and braille font point size.- included options for paper size and embosser type</li>
+<li>created functions to change paper size and Braille font point size.- included options for paper size and embosser type</li>
 <li>established DEFAULTS and PREFERENCES files so an update does not overwrite a user’s preferences. If PREFERENCES does not exist, then it is created when next the package is loaded.</li>
 <li>created ResetDefaults() to overwrite PREFERENCES with DEFAULTS.</li>
 <li>added package dependency to devtools so that package reload can be managed.</li>
-<li>added package dependency to extrafont so that braille fonts can be embedded in pdf files.</li>
+<li>added package dependency to extrafont so that Braille fonts can be embedded in pdf files.</li>
 <li>added functions for setting specific embosser models.</li>
 <li>added SVGThis into package as experimental function.</li>
 <li>added BRLThis into package as experimental function.</li>
@@ -501,7 +512,7 @@
 <li>altered startup so that explicit use of the packages is initiated</li>
 <li>investigated using Roxygen for package documentation. Conclusion is that it must be all or nothing. Nothing preferred at present.</li>
 <li>fixed use of css for VI.lm()</li>
-<li>added extra braille options in readiness for the experimental BRLThis() function.</li>
+<li>added extra Braille options in readiness for the experimental BRLThis() function.</li>
 <li>added fonts folder to package that includes the single font file “BRAILLE1.ttf” for Windows users and its licence file.</li>
 </ul></div>
     <div class="section level2">

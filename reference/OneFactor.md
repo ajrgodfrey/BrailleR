@@ -86,31 +86,3 @@ See
 [`OnePredictor`](http://ajrgodfrey.github.io/BrailleR/reference/OnePredictor.md),
 and
 [`TwoFactors`](http://ajrgodfrey.github.io/BrailleR/reference/TwoFactors.md)
-
-## Examples
-
-``` r
-DIR = getwd()
-setwd(tempdir())
-data(airquality)
-library(dplyr)
-#> 
-#> Attaching package: ‘dplyr’
-#> The following objects are masked from ‘package:stats’:
-#> 
-#>     filter, lag
-#> The following objects are masked from ‘package:base’:
-#> 
-#>     intersect, setdiff, setequal, union
-library(knitr)
-# the following line  returns an error:
-## OneFactor("Ozone", "Month", airquality, View=FALSE)
-# so we make a copy of the data.frame, and fix that:
-airquality2 = airquality |> mutate(Month = as.factor(Month))
-# and now all is good to try:
-OneFactor("Ozone", "Month", airquality2)
-#> Error in get(DataName): object 'airquality2' not found
-# N.B. Various files and a folder were created in a temporary directory. 
-# Please investigate them to see how this function worked.
-setwd(DIR)
-```

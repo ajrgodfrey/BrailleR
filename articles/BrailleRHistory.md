@@ -30,12 +30,12 @@ obtained my first computer because my residual vision at the time was
 limiting my reading speed. I have therefore operated a computer as a
 totally blind user throughout my adult life.
 
-I did not learn braille until after I completed my PhD. This might seem
+I did not learn Braille until after I completed my PhD. This might seem
 strange, but there was very little material in a suitable digital format
 for me to read throughout my student life. Things have changed and I now
 spend a lot more time reading material and doing programming where the
-accuracy of braille is absolutely necessary. Braille has now become a
-very important part of my working life and I have a braille display
+accuracy of Braille is absolutely necessary. Braille has now become a
+very important part of my working life and I have a Braille display
 connected to my computer most of the time.
 
 ## getting started

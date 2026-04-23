@@ -31,7 +31,7 @@ page](https://posit.co/download/rstudio-desktop/)
 WriteR is a simple text editor written in wxPython that needs Python and
 wxPython. Unfortunately, they are two separate downloads at present. You
 do not need this editor so do not install Python unless you are really
-keen.
+keen to use an experimental markdown editor.
 
 ## Installing the BrailleR package
 
@@ -87,12 +87,13 @@ the extra text to support any tactile images they do create.
 At present this is limited to only a few graph types found in base R
 functionality. [Example 1 shows how
 histogram](http://ajrgodfrey.github.io/BrailleR/articles/Ex1histograms.md)
-can be converted to a text representation.
+can be converted to a text representation. It is however much better if
+you use ggplot style graphs.
 
 ### BrailleR helps gain access to the content of the R console
 
 BrailleR makes text output (that is visually appealing) more useful for
-a blind user who is reliant on synthesized speech or braille output to
+a blind user who is reliant on synthesized speech or Braille output to
 interpret the results.
 
 [Example 2 on data
