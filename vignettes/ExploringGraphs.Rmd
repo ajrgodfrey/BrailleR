@@ -146,7 +146,7 @@ Once again this layer gives you some information about the layers data.
 It will tell you whether it is bound on the y or x axis and then if it is constant or non constant width.
 For it to be bound on the y axis means that it covers the whole range of x and vice versa for y.
 
-It includes some widths and centers throughout 5 points in the layer. The width will either be bottom to top for y bound or left to right for x bound.
+It includes some widths and centres throughout 5 points in the layer. The width will either be bottom to top for y bound or left to right for x bound.
 
 It also includes the area covered statistic found in the smooth layer.
 
@@ -221,7 +221,7 @@ I will explain a little bit about the structure of the graph and how you can exp
 The explanations will speak of trees, sub trees, parents, children and nodes. Hopefully you are familiar with what these words mean in this context.
 A quick summary is to think of a family tree. The root is Adam and Eve. Each of there descendant have there subtrees. Your parents are the final subtree for your branch and you and your siblings are all children nodes (assuming you don't have kids yet). Every person is a node.
 
-For these accessible svgs the graph is the root. Each section has its own sub tree.
+For these accessible SVGs the graph is the root. Each section has its own sub tree.
 The order of subtrees goes:
 
 1. title (if present)

@@ -12,7 +12,7 @@
 \alias{addInfo}
 
 \title{Save commonly used graphs as structured SVG files.}
-\description{Converts a graph object (as long as it has a class assigned) to an SVG file that can be viewed using a browser (not IE). At present, the SVG needs manual editing using the Tiger Transformer software before viewing in the Tiger Player.}
+\description{Converts a graph object (as long as it has a class assigned) to an SVG file that can be viewed using a browser. At present, the SVG needs manual editing using the Tiger Transformer software before viewing in the Tiger Player.}
 \usage{
 SVGThis(x, file = "test.svg", ...)
 \method{SVGThis}{ggplot}(x, file = "test.svg", createDevice = TRUE, ...)
