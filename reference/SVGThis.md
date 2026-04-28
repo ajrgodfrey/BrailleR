@@ -1,9 +1,9 @@
 # Save commonly used graphs as structured SVG files.
 
 Converts a graph object (as long as it has a class assigned) to an SVG
-file that can be viewed using a browser (not IE). At present, the SVG
-needs manual editing using the Tiger Transformer software before viewing
-in the Tiger Player.
+file that can be viewed using a browser. At present, the SVG needs
+manual editing using the Tiger Transformer software before viewing in
+the Tiger Player.
 
 ## Usage
 

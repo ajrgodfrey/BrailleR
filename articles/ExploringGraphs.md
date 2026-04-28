@@ -256,7 +256,7 @@ It will tell you whether it is bound on the y or x axis and then if it
 is constant or non constant width. For it to be bound on the y axis
 means that it covers the whole range of x and vice versa for y.
 
-It includes some widths and centers throughout 5 points in the layer.
+It includes some widths and centres throughout 5 points in the layer.
 The width will either be bottom to top for y bound or left to right for
 x bound.
 
@@ -377,7 +377,7 @@ subtrees. Your parents are the final subtree for your branch and you and
 your siblings are all children nodes (assuming you don’t have kids yet).
 Every person is a node.
 
-For these accessible svgs the graph is the root. Each section has its
+For these accessible SVGs the graph is the root. Each section has its
 own sub tree. The order of subtrees goes:
 
 1.  title (if present)

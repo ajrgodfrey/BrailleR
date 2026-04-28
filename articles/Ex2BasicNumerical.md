@@ -20,7 +20,7 @@ summary(airquality)
      Mean   : 42.13   Mean   :185.9   Mean   : 9.958   Mean   :77.88  
      3rd Qu.: 63.25   3rd Qu.:258.8   3rd Qu.:11.500   3rd Qu.:85.00  
      Max.   :168.00   Max.   :334.0   Max.   :20.700   Max.   :97.00  
-     NA's   :37       NA's   :7                                       
+     NAs    :37       NAs    :7                                       
          Month            Day      
      Min.   :5.000   Min.   : 1.0  
      1st Qu.:6.000   1st Qu.: 8.0  
@@ -40,8 +40,8 @@ VI(airquality)
 ```
 
     The summary of each variable is
-    Ozone: Min. 1   1st Qu. 18   Median 31.5   Mean 42.1293103448276   3rd Qu. 63.25   Max. 168   NA's 37  
-    Solar.R: Min. 7   1st Qu. 115.75   Median 205   Mean 185.931506849315   3rd Qu. 258.75   Max. 334   NA's 7  
+    Ozone: Min. 1   1st Qu. 18   Median 31.5   Mean 42.1293103448276   3rd Qu. 63.25   Max. 168   NAs 37  
+    Solar.R: Min. 7   1st Qu. 115.75   Median 205   Mean 185.931506849315   3rd Qu. 258.75   Max. 334   NAs 7  
     Wind: Min. 1.7   1st Qu. 7.4   Median 9.7   Mean 9.95751633986928   3rd Qu. 11.5   Max. 20.7  
     Temp: Min. 56   1st Qu. 72   Median 79   Mean 77.8823529411765   3rd Qu. 85   Max. 97  
     Month: Min. 5   1st Qu. 6   Median 7   Mean 6.99346405228758   3rd Qu. 8   Max. 9  
