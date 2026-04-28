@@ -78,7 +78,7 @@ AddXML(simpleHist, file = "histogram.xml")
 
 # Close the current PDF graphic device
 dev.off()
-#> agg_record_1bc17df082a7 
+#> agg_record_1b9162bc9483 
 #>                       2 
 
 #Cleaning up afterwards
