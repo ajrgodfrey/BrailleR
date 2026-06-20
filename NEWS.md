@@ -1,3 +1,5 @@
+# BrailleR 1.2.1
+
 # BrailleR 1.2.0
 
 - removed use of the Extra Fonts package in order to return to CRAN
