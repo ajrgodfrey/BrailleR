@@ -82,7 +82,7 @@ hline
 ```
 As this is quite a simple geom it is quite a simple printout.
 
-It will tell you how many lines and at what height they are at.
+It will tell you how many horizontal lines there are, and at what height they are at.
 
 ### GeomPoint
 ```{r VI geomPoint, fig.show='hide'}
@@ -163,7 +163,8 @@ GeomBlank is made by the expand_limits function. It is a normal layer like all t
 So what this VI does is explain the effect that this layer had on the limits. It shall tell you how much larger the x and y axis are.
 
 ## Base
-Base R graphics support is kept in here and does work to some extant. However it should be considered deprecated and replaced by the ggplot graphics.
+
+Base R graphics support is kept in here and does work to some extent. However it should be considered deprecated and replaced by the ggplot graphics.
 
 There is support for the base plots:
 
@@ -188,7 +189,8 @@ plot.example = ggplot(mtcars, aes(wt, mpg)) +
   geom_smooth()
 MakeAccessibleSVG(plot.example)
 ```
-[example SVG webpage](rawHTML/plot.example-SVG.html)
+
+It cannot be shown here because it is interactive.
 
 ## How to use
 
