@@ -90,5 +90,5 @@ RdMacros:
     Rdpack
 Encoding: UTF-8
 Language: en-GB
-RoxygenNote: 7.1.2
 SystemRequirements: Python 3 and wxPython 4.0
+Config/roxygen2/version: 8.0.0

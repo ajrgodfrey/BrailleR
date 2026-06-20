@@ -1,4 +1,5 @@
 # BrailleR 1.2.1
+- fixed a URL found in CRAN checks
 
 # BrailleR 1.2.0
 
