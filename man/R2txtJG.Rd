@@ -13,6 +13,8 @@
 
   They work as combinations of \code{sink} and \code{history} with a
   couple of extra bells and whistles.
+
+They were primitive; using R markdown or Quarto markdown processes is now a much superior workflow.
 }
 \usage{
 txtStart(file, commands=TRUE, results=TRUE, append=FALSE, cmdfile,
@@ -113,7 +115,10 @@ Do not use these functions in combination with the \pkg{R2HTML} package or \code
   \code{\link{Sweave}}, the odfWeave package, the R2HTML package, the
   R2wd package }
 \examples{
-\dontrun{
+\donttest{
+oldwd = getwd()
+on.exit(setwd(oldwd))
+setwd(tempdir())
 txtStart()
 txtComment('This is todays transcript')
 date()
@@ -127,5 +132,5 @@ Sys.time()
 }
 }
 \keyword{ character }
-\keyword{ IO }% __ONLY ONE__ keyword per line
+\keyword{ IO }
 \keyword{ utilities }

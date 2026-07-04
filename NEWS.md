@@ -1,6 +1,8 @@
 # BrailleR 1.2.2
  making changes on CRAN submission rejection.
-- added \donttest{} to five examples
+- added \donttest{} to five examples- removed don't run from examples
+- ensured use of a temporary directory where possible. N.B. Some commands are designed with the express purpose of writing to the user's working directory.
+
 
 # BrailleR 1.2.1
 - fixed a URL found in CRAN checks
