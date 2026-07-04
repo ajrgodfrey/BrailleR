@@ -28,6 +28,7 @@ I would love to see this function become redundant. This will happen if the extr
 The base R implementation of the \code{\link[graphics]{boxplot}} function should be consulted; see the entry in the \pkg{\link{graphics}} package
 }
 \examples{
+\donttest{
 x=rnorm(1000)
 op = par(mfcol=c(2,1))
 # the stamdard boxplot function returns
@@ -41,4 +42,5 @@ par(op)
 
 # The VI() method then uses the extra information stored
 VI(MyBoxplot)
+}
 }

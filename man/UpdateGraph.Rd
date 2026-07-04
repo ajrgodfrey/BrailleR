@@ -27,6 +27,7 @@ Specify the label to be an empty text string if the desire is to delete the curr
 \value{The graph object will be updated in the global environment if a new value is assigned.}
 \author{A. Jonathan R. Godfrey}
 \examples{
+\donttest{
 attach(airquality)
 op = par(mfcol=c(3,2))
 #test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
@@ -41,4 +42,5 @@ op = par(mfcol=c(3,2))
 #update(test2) # to fix
 par(op)
 detach(airquality)
+}
 }

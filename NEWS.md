@@ -1,3 +1,7 @@
+# BrailleR 1.2.2
+ making changes on CRAN submission rejection.
+- added \donttest{} to five examples
+
 # BrailleR 1.2.1
 - fixed a URL found in CRAN checks
 

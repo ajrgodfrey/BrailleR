@@ -34,15 +34,8 @@ It has support for some of the base plots however you can consider this support 
 \value{NULL. This function is solely for the purpose of creating SVG and XML files and displaying them}
 
 \examples{
-#Base R
-#boxplot = boxplot(rnorm(1e4))
-#MakeAccessibleSVG(boxplot, view = F)
-
-#attach(airquality)
-#scatter = ScatterPlot(x=Wind, y=Ozone, pch=4, base=TRUE)
-#detach(airquality)
-#MakeAccessibleSVG(scatter)
-
+\donttest{
+data(airquality)
 #ggplot2
 library(ggplot2)
 tsplot = TimeSeriesPlot(airquality, x=airquality$Temp)
@@ -62,7 +55,7 @@ unlink("barChart-SVG.html")
 unlink("histogram-SVG.html")
 unlink("tsplot-SVG.html")
 }
-
+}
 \references{
 P. Dengler et al. (2011) Scalable vector graphics (SVG) 1.1, second edition. W3C recommendation, W3C. http://www.w3.org/TR/2011/REC-XML11-20110816/
 }

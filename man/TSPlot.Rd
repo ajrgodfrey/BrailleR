@@ -36,6 +36,7 @@ Godfrey, A.J.R. (2013) \sQuote{Statistical Software from a Blind Person's Perspe
 A. Jonathan R. Godfrey and James A. Thompson
 }
 \examples{
+\donttest{
 # with base
 attach(airquality)
 op = par(mfcol=c(3,2))
@@ -59,5 +60,6 @@ if(require(ggplot2)){
    withTitle
    withLabs = TimeSeriesPlot(sunspots, ylab="Number of spots", xlab="Year")
    withLabs
+}
 }
 }
