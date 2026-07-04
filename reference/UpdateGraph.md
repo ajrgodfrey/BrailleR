@@ -48,6 +48,7 @@ A. Jonathan R. Godfrey
 ## Examples
 
 ``` r
+# \donttest{
 attach(airquality)
 op = par(mfcol=c(3,2))
 #test1 = TimeSeriesPlot(x=Wind, col=4, base=TRUE)
@@ -62,4 +63,5 @@ op = par(mfcol=c(3,2))
 #update(test2) # to fix
 par(op)
 detach(airquality)
+# }
 ```

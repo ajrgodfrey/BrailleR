@@ -29,6 +29,7 @@ functionality of the BrailleR package.
 The main output document (HTML) can be viewed by issuing the command
 
 ``` r
+
 example(OneFactor)
 ```
 

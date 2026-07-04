@@ -71,26 +71,27 @@ consulted; see the entry in the
 ## Examples
 
 ``` r
+# \donttest{
 x=rnorm(1000)
 op = par(mfcol=c(2,1))
 # the stamdard boxplot function returns
 MyBoxplot=graphics::boxplot(x, main="Example boxplot (graphics package)", horizontal=TRUE)
 MyBoxplot
 #> $stats
-#>              [,1]
-#> [1,] -2.419820346
-#> [2,] -0.644741797
-#> [3,] -0.002118877
-#> [4,]  0.597188875
-#> [5,]  2.446781428
+#>            [,1]
+#> [1,] -2.4198203
+#> [2,] -0.6513523
+#> [3,] -0.0210760
+#> [4,]  0.5949458
+#> [5,]  2.4467814
 #> 
 #> $n
 #> [1] 1000
 #> 
 #> $conf
 #>             [,1]
-#> [1,] -0.06417069
-#> [2,]  0.05993293
+#> [1,] -0.08334602
+#> [2,]  0.04119402
 #> 
 #> $out
 #>  [1]  2.595524  2.556924  3.586945  3.037581  2.468741 -2.626042 -2.904221
@@ -108,20 +109,20 @@ MyBoxplot=boxplot(x, main="Example boxplot (BrailleR package)", horizontal=TRUE)
 
 MyBoxplot
 #> $stats
-#>              [,1]
-#> [1,] -2.419820346
-#> [2,] -0.644741797
-#> [3,] -0.002118877
-#> [4,]  0.597188875
-#> [5,]  2.446781428
+#>            [,1]
+#> [1,] -2.4198203
+#> [2,] -0.6513523
+#> [3,] -0.0210760
+#> [4,]  0.5949458
+#> [5,]  2.4467814
 #> 
 #> $n
 #> [1] 1000
 #> 
 #> $conf
 #>             [,1]
-#> [1,] -0.06417069
-#> [2,]  0.05993293
+#> [1,] -0.08334602
+#> [2,]  0.04119402
 #> 
 #> $out
 #>  [1]  2.595524  2.556924  3.586945  3.037581  2.468741 -2.626042 -2.904221
@@ -203,8 +204,9 @@ VI(MyBoxplot)
 #> This variable  has 1000 values.
 #> An outlier is marked at: 2.595524 2.556924 3.586945 3.037581 2.468741 -2.626042 -2.904221 -2.778434 -2.786975 2.506002 
 #> The whiskers extend to -2.41982 and 2.446781 from the ends of the box, 
-#> which are at -0.6447418 and 0.5971889 
-#> The median, -0.002118877 is 52 % from the left end of the box to the right end.
-#> The right whisker is 1.04 times the length of the left whisker.
+#> which are at -0.6513523 and 0.5949458 
+#> The median, -0.021076 is 51 % from the left end of the box to the right end.
+#> The right whisker is 1.05 times the length of the left whisker.
 #> 
+# }
 ```

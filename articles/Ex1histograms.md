@@ -8,6 +8,7 @@ The first and most commonly used example demonstrating the value of the
 BrailleR package to a blind user is the creation of a histogram.
 
 ``` r
+
 x=rnorm(1000)
 VI(hist(x))
 ```
@@ -58,8 +59,10 @@ This is best illustrated using the example included in the
 BrailleR::hist() function.
 
 ``` r
+
 example(hist)
 ```
+
 
     hist> x=rnorm(1000)
 
@@ -67,6 +70,7 @@ example(hist)
     hist> MyHist=graphics::hist(x, xlab="random normal values", main="Example histogram (graphics package)")
 
 ![](Ex1histograms_files/figure-html/BrailleRHistExample-1.png)
+
 
     hist> MyHist
     $breaks
@@ -96,6 +100,7 @@ example(hist)
     hist> MyHist=hist(x, xlab="random normal values", main="Example histogram (BrailleR package)")
 
 ![](Ex1histograms_files/figure-html/BrailleRHistExample-2.png)
+
 
     hist> MyHist
     $breaks

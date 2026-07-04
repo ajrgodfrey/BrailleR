@@ -74,6 +74,7 @@ A. Jonathan R. Godfrey and James A. Thompson
 ## Examples
 
 ``` r
+# \donttest{
 # with base
 attach(airquality)
 op = par(mfcol=c(3,2))
@@ -117,4 +118,5 @@ if(require(ggplot2)){
 #> It has y-axis 'Number of spots' with labels 0, 50, 100, 150, 200 and 250.
 #> The chart is a set of 1 line.
 #> Line 1 connects 2820 points.
+# }
 ```

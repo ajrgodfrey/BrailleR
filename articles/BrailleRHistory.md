@@ -86,6 +86,7 @@ re-processing of these numbers that leads to the text description that
 follows.
 
 ``` r
+
 library(BrailleR)
 ```
 
@@ -107,6 +108,7 @@ library(BrailleR)
     ##     grep, gsub
 
 ``` r
+
 x=rnorm(1000)
 VI(hist(x))
 ```
@@ -160,7 +162,7 @@ who were already using R for their courses. One such person tested R and
 a screen reader and managed to find a solution to a problem posed in
 Godfrey (2013b) which led to an addendum (Godfrey and Erhardt 2014).
 
-I presented some of my work via a poster (Godfrey 2013c) at the NZ
+I presented some of my work via a poster (Godfrey 2013a) at the NZ
 Statistical Association conference in Hamilton during November 2013.
 This ‘poster’ presentation was developed as a multimedia presentation so
 that the audience could observe video footage, handle tactile images and
@@ -257,63 +259,65 @@ professionals who assist blind students in their own countries.
 
 ## References
 
-Godfrey, A. Jonathan R. 2009. “Are Statistics Courses Accessible?” In
+Godfrey, A. Jonathan R. 2009. “Are Statistics Courses Accessible?”
 *Proceedings of the Workshop on e-Inclusion in Mathematics and Science
-2009*, 72–80. Fukuoka, Japan.
+2009* (Fukuoka, Japan), 72–80.
 
-———. 2011. “R.” Telc, The Czech Republic.
+Godfrey, A. Jonathan R. 2011. *R*. Telc, The Czech Republic.
 
-———. 2012a. “Putting It All Together — a Blind Person’s Perspective on
-Document Preparation.” In *Proceedings of Digitization and e-Inclusion
-in Mathematics and Science*, edited by Katsuhito Yamaguchi and Masakazu
-Suzuki, 135–41. Tokyo, Japan.
+Godfrey, A. Jonathan R. 2012a. “Putting It All Together — a Blind
+Person’s Perspective on Document Preparation.” In *Proceedings of
+Digitization and e-Inclusion in Mathematics and Science*, edited by
+Katsuhito Yamaguchi and Masakazu Suzuki. Tokyo, Japan.
 
-———. 2012b. “The BrailleR Project.” In *Proceedings of Digitization and
-e-Inclusion in Mathematics and Science*, edited by Katsuhito Yamaguchi
-and Masakazu Suzuki, 89–95. Tokyo, Japan.
+Godfrey, A. Jonathan R. 2012b. “The BrailleR Project.” In *Proceedings
+of Digitization and e-Inclusion in Mathematics and Science*, edited by
+Katsuhito Yamaguchi and Masakazu Suzuki. Tokyo, Japan.
 
-———. 2013a. “Using R: The Most Accessible Statistical Software for Blind
-Students.” Bad Herrenalb, Germany.
+Godfrey, A. Jonathan R. 2013a. *Blindness in a Visual Discipline*.
+University of Waikato, Hamilton.
 
-———. 2013b. “Statistical Software from a Blind Person’s Perspective: R
-Is the Best, but We Can Make It Better.” *The R Journal* 5 (1): 73–79.
+Godfrey, A. Jonathan R. 2013b. “Statistical Software from a Blind
+Person’s Perspective: R Is the Best, but We Can Make It Better.” *The R
+Journal* 5 (1): 73–79.
 <https://journal.r-project.org/articles/RJ-2013-007/RJ-2013-007.pdf>.
 
-———. 2013c. “Blindness in a Visual Discipline.” University of Waikato,
-Hamilton.
+Godfrey, A. Jonathan R. 2013c. *Using R: The Most Accessible Statistical
+Software for Blind Students*. Bad Herrenalb, Germany.
 
-———. 2014a. “A Review of Statistical Software for Blind Students.”
-Paris, France.
+Godfrey, A. Jonathan R. 2014a. *A Review of Statistical Software for
+Blind Students*. Paris, France.
 
-———. 2014b. “Introduction to R: The Most Accessible Statistical Software
-for Blind Students.” Paris, France.
+Godfrey, A. Jonathan R. 2014b. *Introduction to R: The Most Accessible
+Statistical Software for Blind Students*. Paris, France.
 
-———. 2014c. “Practical Use of R by Blind People.” University of
-California, Los Angeles.
+Godfrey, A. Jonathan R. 2014c. *Practical Use of R by Blind People*.
+University of California, Los Angeles.
 
-———. 2014d. “R and LaTeX — a Powerful Combination for Assignment
-Preparation.” Paris, France.
+Godfrey, A. Jonathan R. 2014d. *R and LaTeX — a Powerful Combination for
+Assignment Preparation*. Paris, France.
 
-———. 2015. “While My Base R Gently Weeps.” Aalborg, Denmark.
+Godfrey, A. Jonathan R. 2015. *While My Base R Gently Weeps*. Aalborg,
+Denmark.
 
-———. 2016a. “A Review of Statistical Software for Blind Students.” Linz,
-Austria.
+Godfrey, A. Jonathan R. 2016a. *A Review of Statistical Software for
+Blind Students*. Linz, Austria.
 
-———. 2016b. “Introduction to R: The Most Accessible Statistical Software
-for Blind Students.” Linz, Austria.
+Godfrey, A. Jonathan R. 2016b. *Introduction to R: The Most Accessible
+Statistical Software for Blind Students*. Linz, Austria.
 
-———. 2018. *BrailleR: Improved Access for Blind Users*. Massey
-University. <https://CRAN.R-project.org/package=BrailleR>.
+Godfrey, A. Jonathan R. 2018. *BrailleR: Improved Access for Blind
+Users*. Massey University.
+<https://CRAN.R-project.org/package=BrailleR>.
 
-Godfrey, A. Jonathan R., and Timothy P. Bilton. 2016. “R Markdown:
-Lifesaver or Death Trap?” Stanford University, California.
+Godfrey, A. Jonathan R., and Timothy P. Bilton. 2016. *R Markdown:
+Lifesaver or Death Trap?* Stanford University, California.
 
 Godfrey, A. Jonathan R., and James M. P. Curtis. 2016. “Simple Authoring
 of Statistical Analyses by and for Blind People.” In *Proceedings of the
 International Workshop on Digitization and e-Inclusion in Mathematics
-and Science 2016*, edited by Katsuhito Yamaguchi and Masakazu Suzuki,
-47–54. Kanegawa, Japan.
-<https://workshop.sciaccess.net/DEIMS2016/index.html>.
+and Science 2016*, edited by Katsuhito Yamaguchi and Masakazu Suzuki.
+Kanegawa, Japan. <https://workshop.sciaccess.net/DEIMS2016/index.html>.
 
 Godfrey, A. Jonathan R., and Robert Erhardt. 2014. “Addendum to
 “Statistical Software from a Blind Person’s Perspective".” *The R
@@ -328,7 +332,7 @@ Practitioners.” *Journal of Statistical Software, Software Reviews* 58
 Godfrey, A. Jonathan R., and Paul Murrell. 2016. “Statistical Graphs
 Made Tactile.” In *Proceedings of the International Workshop on
 Digitization and e-Inclusion in Mathematics and Science 2016*, edited by
-Katsuhito Yamaguchi and Masakazu Suzuki, 69–74. Kanegawa, Japan.
+Katsuhito Yamaguchi and Masakazu Suzuki. Kanegawa, Japan.
 
 Snow, Greg. 2010. *TeachingDemos: Demonstrations for Teaching and
 Learning*.

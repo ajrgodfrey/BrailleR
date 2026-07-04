@@ -75,7 +75,7 @@ svgfile = SVGThis(simpleHist, paste0(file, ".svg"),createDevice=FALSE)
 #> The chart is a bar chart with 30 vertical bars.
 xmlfile = AddXML(simpleHist, paste0(file, ".xml")) 
 dev.off()  # destroy graphics device, now that we're done with it
-#> agg_record_1b91130c3ca8 
+#> agg_record_1bfc19690953 
 #>                       2 
 
 BrowseSVG(file)

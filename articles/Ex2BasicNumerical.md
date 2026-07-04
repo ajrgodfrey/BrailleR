@@ -10,6 +10,7 @@ to read as the processing of information is done line by line. For
 example:
 
 ``` r
+
 summary(airquality)
 ```
 
@@ -36,8 +37,10 @@ variable by variable instead of summary statistic by summary statistic.
 For example:
 
 ``` r
+
 VI(airquality)
 ```
+
 
     The summary of each variable is
     Ozone: Min. 1   1st Qu. 18   Median 31.5   Mean 42.1293103448276   3rd Qu. 63.25   Max. 168   NAs 37  

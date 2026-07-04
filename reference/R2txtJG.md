@@ -6,6 +6,9 @@ script file.
 They work as combinations of `sink` and `history` with a couple of extra
 bells and whistles.
 
+They were primitive; using R markdown or Quarto markdown processes is
+now a much superior workflow.
+
 ## Usage
 
 ``` r
@@ -151,16 +154,44 @@ the R2HTML package, the R2wd package
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
+oldwd = getwd()
+on.exit(setwd(oldwd))
+setwd(tempdir())
 txtStart()
+#> Error in txtStart(): argument "file" is missing, with no default
 txtComment('This is todays transcript')
+#> Error in cat("\n", txt, "\n\n", file = .R2txt.vars$con): invalid connection
 date()
+#> [1] "Sat Jul  4 23:39:47 2026"
 x <- rnorm(25)
 summary(x)
+#>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+#> -2.00232 -0.86744  0.11319 -0.07451  0.71442  1.88882 
 stem(x)
+#> 
+#>   The decimal point is at the |
+#> 
+#>   -2 | 0
+#>   -1 | 76530
+#>   -0 | 97651
+#>    0 | 113456679
+#>    1 | 00019
+#> 
 txtSkip(?hist)
+#> Help on topic ‘hist’ was found in the following packages:
+#> 
+#>   Package               Library
+#>   BrailleR              /home/runner/work/_temp/Library
+#>   graphics              /opt/R/4.6.1/lib/R/library
+#> 
+#> 
+#> Using the first match ...
 hist(x)
+
 Sys.Date()
+#> [1] "2026-07-04"
 Sys.time()
-} # }
+#> [1] "2026-07-04 23:39:47 UTC"
+# }
 ```

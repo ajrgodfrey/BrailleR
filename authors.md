@@ -53,12 +53,12 @@ Source:
 
 Godfrey A, Warren D, Sarkar D, Becker G, Thompson J, Murrell P, Bilton
 T, Sorge V (2026). *BrailleR: Improved Access for Blind Users*. R
-package version 1.2.0, <https://github.com/ajrgodfrey/BrailleR>.
+package version 1.2.2, <https://github.com/ajrgodfrey/BrailleR>.
 
     @Manual{,
       title = {BrailleR: Improved Access for Blind Users},
       author = {A. Jonathan R. Godfrey and Debra Warren and Deepayan Sarkar and Gabriel Becker and James Thompson and Paul Murrell and Timothy Bilton and Volker Sorge},
       year = {2026},
-      note = {R package version 1.2.0},
+      note = {R package version 1.2.2},
       url = {https://github.com/ajrgodfrey/BrailleR},
     }

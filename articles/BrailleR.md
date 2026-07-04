@@ -24,7 +24,7 @@ It is a good idea to install RStudio, even if you can’t actually use it
 as a blind person using screen reading software. The reason is that
 RStudio installs a few other useful tools that we will make use of by
 other means. Get it from the [RStudio download
-page](https://posit.co/download/rstudio-desktop/)
+page](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads)
 
 ### One programming language — Python
 
@@ -41,6 +41,7 @@ CRAN repository is recommended. This would be done by issuing the
 following two commands in an R session:
 
 ``` r
+
 chooseCRANmirror(ind=1)
 install.packages("BrailleR")
 ```
@@ -54,6 +55,7 @@ version of the BrailleR package. You can update all installed packages
 using the commands:
 
 ``` r
+
 chooseCRANmirror(ind=1)
 update.packages(ask=FALSE)
 ```
@@ -64,6 +66,7 @@ the first of the following lines, the package start messages will also
 appear.
 
 ``` r
+
 library(BrailleR)
 ```
 
@@ -145,6 +148,7 @@ name `BrailleR`. Do this using the
 function. e.g.
 
 ``` r
+
 SetAuthor("Jonathan Godfrey")
 ```
 

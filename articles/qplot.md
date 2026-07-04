@@ -15,6 +15,7 @@ offers something to show that things have changed from one plot to
 another. Summary commands are included below but commented out.
 
 ``` r
+
 library(BrailleR)   
 ```
 
@@ -36,11 +37,13 @@ library(BrailleR)
     ##     grep, gsub
 
 ``` r
+
 library(ggplot2)   
 dsmall = diamonds[1:100,]   
 ```
 
 ``` r
+
 g1 = qplot(carat, price, data = diamonds)   
 ```
 
@@ -50,6 +53,7 @@ g1 = qplot(carat, price, data = diamonds)
     ## generated.
 
 ``` r
+
 # summary(g1)   
 g1  
 ```
@@ -62,6 +66,7 @@ g1
     ## The chart is a set of 53940 big solid circle points of which about 3.4% can be seen.
 
 ``` r
+
 # VI(g1)   ### automatic since BrailleR v0.32.0
 ```
 
@@ -75,6 +80,7 @@ N.B. All [`VI()`](http://ajrgodfrey.github.io/BrailleR/reference/VI.md)
 commands can now be deleted from this document.
 
 ``` r
+
 g2 = qplot(carat, price, data = dsmall, colour = color)    
 # summary(g2)   
 g2
@@ -88,6 +94,7 @@ g2
     ## The chart is a set of 100 big solid circle points of which about 40% can be seen.
 
 ``` r
+
 g3 = qplot(carat, price, data = dsmall, shape = cut)    
 # summary(g3)   
 g3
@@ -105,6 +112,7 @@ g3
     ## The chart is a set of 100 points of which about 40% can be seen.
 
 ``` r
+
 # to get semi-transparent points   
 g4 = qplot(carat, price, data = diamonds, alpha = I(1/100))    
 # summary(g4)   
@@ -120,6 +128,7 @@ g4
     ## It has alpha set to 0.01.
 
 ``` r
+
 # to add a smoother (default is loess for n<1000)   
 g5 = qplot(carat, price, data = dsmall, geom = c("point", "smooth"))    
 # summary(g5)   
@@ -138,6 +147,7 @@ g5
     ## Layer 2 is a 'lowess' smoothed curve with 95% confidence intervals covering 17% of the graph.
 
 ``` r
+
 #! g5a = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), span = 1)    
 library(splines)    
 #! g5b = qplot(carat, price, data = dsmall, geom = c("point", "smooth"), method = "lm")    
@@ -145,6 +155,7 @@ library(splines)
 ```
 
 ``` r
+
 # univariate plots   
 g7a = qplot(carat, data = diamonds, geom = "histogram")    
 # summary(g7a)   
@@ -161,6 +172,7 @@ g7a
     ## The chart is a bar chart with 30 vertical bars.
 
 ``` r
+
 g7b = qplot(carat, data = diamonds, geom = "histogram", binwidth = 1, xlim = c(0,3))    
 g7b
 ```
@@ -184,6 +196,7 @@ g7b
     ## Bar 2 is centered at 2, and length is from 0 to 5316.
 
 ``` r
+
 g7c = qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.1, xlim = c(0,3))
 g7c
 ```
@@ -203,6 +216,7 @@ g7c
     ## The chart is a bar chart with 29 vertical bars.
 
 ``` r
+
 g7d = qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.01, xlim = c(0,3))    
 # summary(g7d)   
 g7d
@@ -223,6 +237,7 @@ g7d
     ## The chart is a bar chart with 299 vertical bars.
 
 ``` r
+
 # bar charts for categorical variable   
 g11a = qplot(color, data = diamonds)    
 # summary(g11a)   
@@ -244,6 +259,7 @@ g11a
     ## Bar 7 is centered at 7, and length is from 0 to 2808.
 
 ``` r
+
 g11b = qplot(color, data = diamonds, geom = "bar")    
 # summary(g11b)   
 g11b
@@ -264,6 +280,7 @@ g11b
     ## Bar 7 is centered at 7, and length is from 0 to 2808.
 
 ``` r
+
 g12a = qplot(color, data = diamonds, geom = "bar", weight = carat)   
 # summary(g12a)   
 g12a
@@ -284,6 +301,7 @@ g12a
     ## Bar 7 is centered at 7, and length is from 0 to 3263.28.
 
 ``` r
+
 g12b = qplot(color, data = diamonds, geom = "bar", weight = carat) + scale_y_continuous("carat")    
 # summary(g12b)   
 g12b
@@ -304,6 +322,7 @@ g12b
     ## Bar 7 is centered at 7, and length is from 0 to 3263.28.
 
 ``` r
+
 # time series plots   
 g13a = qplot(date, unemploy / pop, data = economics, geom = "line")    
 # summary(g13a)   
@@ -319,6 +338,7 @@ g13a
     ## Line 1 connects 574 points.
 
 ``` r
+
 g13b = qplot(date, uempmed, data = economics, geom = "line")    
 # summary(g13b)   
 g13b
@@ -333,6 +353,7 @@ g13b
     ## Line 1 connects 574 points.
 
 ``` r
+
 # rescaling of the axes   
 g16 = qplot(carat, price, data = dsmall, log = "xy")   
 # summary(g16)   

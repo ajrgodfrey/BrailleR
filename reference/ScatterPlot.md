@@ -74,6 +74,7 @@ A. Jonathan R. Godfrey
 ## Examples
 
 ``` r
+# \donttest{
 attach(airquality)
 op = par(mfcol=c(3,2))
 plot(x=Wind, y=Ozone, pch=4)
@@ -98,4 +99,5 @@ test2 #does the plot method work?
 
 par(op)
 detach(airquality)
+# }
 ```

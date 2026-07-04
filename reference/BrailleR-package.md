@@ -15,8 +15,8 @@ content to prepare it for embossing as tactile images.
 |----------|------------|
 | Package: | BrailleR   |
 | Type:    | Package    |
-| Version: | 1.2.0      |
-| Date:    | 2025-12-12 |
+| Version: | 1.2.2      |
+| Date:    | 2026-07-20 |
 | License: | GPL-2      |
 
 ## Author

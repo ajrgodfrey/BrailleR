@@ -17,6 +17,7 @@ potential to ‘view’ the information a graph has to offer.
 All of the code below is run after these ‘setup’ functions
 
 ``` r
+
 library(ggplot2)
 library(BrailleR)
 ```
@@ -33,6 +34,7 @@ information about how this graph type works in ggplot.
 An example of this would be something like this
 
 ``` r
+
 basicPlot <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point()
 
@@ -87,6 +89,7 @@ it will give you the text output.
 This effect can be seen below
 
 ``` r
+
 basicPlot <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point()
 
@@ -104,6 +107,7 @@ However you can also easily call it explicitly without having to print
 the graph.
 
 ``` r
+
 VI(basicPlot)
 ```
 
@@ -118,6 +122,7 @@ explanation about there printouts.
 #### GeomHLine
 
 ``` r
+
 hline <- ggplot(mtcars, aes(mpg, cyl)) +
   geom_hline(yintercept = 5)
 hline
@@ -131,11 +136,13 @@ hline
 
 As this is quite a simple geom it is quite a simple printout.
 
-It will tell you how many lines and at what height they are at.
+It will tell you how many horizontal lines there are, and at what height
+they are at.
 
 #### GeomPoint
 
 ``` r
+
 point <- ggplot(mtcars, aes(mpg, cyl)) +
   geom_point()
 point
@@ -155,6 +162,7 @@ will only show you the percentage if it is accurate.
 #### GeomBar / GeomCol
 
 ``` r
+
 bar <- ggplot(mtcars, aes(mpg)) +
   geom_histogram()
 bar
@@ -176,6 +184,7 @@ There will be information just on the number of bars displayed.
 #### GeomLine
 
 ``` r
+
 line <- ggplot(mtcars, aes(mpg, wt)) +
   geom_line()
 line
@@ -194,6 +203,7 @@ up the line.
 #### GeomBoxplot
 
 ``` r
+
 boxplot <- ggplot(mtcars, aes(mpg, as.factor(cyl))) +
   geom_boxplot()
 boxplot
@@ -221,6 +231,7 @@ It shall include this summary for each boxplot in the layer.
 #### GeomSmooth
 
 ``` r
+
 smooth <- ggplot(mtcars, aes(mpg, wt)) +
   geom_smooth()
 smooth
@@ -241,6 +252,7 @@ This information can be used to quickly gauge how confident the graph is
 #### GeomRibbon / GeomArea
 
 ``` r
+
 ribbon <- ggplot(diamonds, aes(x = carat, y = price)) +
   geom_area(aes(y = price))
 ribbon
@@ -265,6 +277,7 @@ It also includes the area covered statistic found in the smooth layer.
 #### GeomBlank
 
 ``` r
+
 blank <- ggplot(BOD, aes(x = demand, y = Time)) +
   geom_line() +
   expand_limits(x = c(15, 23, 6), y = c(30))
@@ -288,7 +301,7 @@ limits. It shall tell you how much larger the x and y axis are.
 
 ### Base
 
-Base R graphics support is kept in here and does work to some extant.
+Base R graphics support is kept in here and does work to some extent.
 However it should be considered deprecated and replaced by the ggplot
 graphics.
 
@@ -326,14 +339,14 @@ webpages available in the current working directory.
 Below is the code used to make the example
 
 ``` r
+
 plot.example = ggplot(mtcars, aes(wt, mpg)) +
   geom_point() +
   geom_smooth()
 MakeAccessibleSVG(plot.example)
 ```
 
-[example SVG
-webpage](http://ajrgodfrey.github.io/BrailleR/articles/rawHTML/plot.example-SVG.md)
+It cannot be shown here because it is interactive.
 
 ### How to use
 
@@ -342,6 +355,7 @@ Using the function is as simple as passing a graph object to
 like this:
 
 ``` r
+
 simplePlot = ggplot(mtcars, aes(mpg, wt)) +
   geom_point()
   

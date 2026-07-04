@@ -84,15 +84,8 @@ A. Jonathan R. Godfrey, Volker Sorge and James A. Thompson
 ## Examples
 
 ``` r
-#Base R
-#boxplot = boxplot(rnorm(1e4))
-#MakeAccessibleSVG(boxplot, view = F)
-
-#attach(airquality)
-#scatter = ScatterPlot(x=Wind, y=Ozone, pch=4, base=TRUE)
-#detach(airquality)
-#MakeAccessibleSVG(scatter)
-
+# \donttest{
+data(airquality)
 #ggplot2
 library(ggplot2)
 tsplot = TimeSeriesPlot(airquality, x=airquality$Temp)
@@ -139,4 +132,5 @@ MakeAccessibleSVG(histogram)
 unlink("barChart-SVG.html")
 unlink("histogram-SVG.html")
 unlink("tsplot-SVG.html")
+# }
 ```
