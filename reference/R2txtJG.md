@@ -6,8 +6,8 @@ script file.
 They work as combinations of `sink` and `history` with a couple of extra
 bells and whistles.
 
-They were primitive; using R markdown or Quarto markdown processes is
-now a much superior workflow.
+They were primitive, but effective in the day; using R markdown or
+Quarto markdown processes is now a much superior workflow.
 
 ## Usage
 
@@ -139,7 +139,7 @@ direction.
 
 These commands do not do any fancy formatting of output, just what you
 see in the regular terminal window. If you want more formatted output
-then you should look into `Sweave` or the use of markdown documents..
+then you should look into `Sweave` or the use of markdown documents.
 
 Do not use these functions in combination with the R2HTML package or
 `sink`.
@@ -158,12 +158,12 @@ the R2HTML package, the R2wd package
 oldwd = getwd()
 on.exit(setwd(oldwd))
 setwd(tempdir())
-txtStart()
-#> Error in txtStart(): argument "file" is missing, with no default
+txtStart(tempfile())
+#> Output being copied to text file,
+#> use txtStop() to end.
 txtComment('This is todays transcript')
-#> Error in cat("\n", txt, "\n\n", file = .R2txt.vars$con): invalid connection
 date()
-#> [1] "Sat Jul  4 23:39:47 2026"
+#> [1] "Sun Jul  5 01:26:53 2026"
 x <- rnorm(25)
 summary(x)
 #>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
@@ -190,8 +190,10 @@ txtSkip(?hist)
 hist(x)
 
 Sys.Date()
-#> [1] "2026-07-04"
+#> [1] "2026-07-05"
 Sys.time()
-#> [1] "2026-07-04 23:39:47 UTC"
+#> [1] "2026-07-05 01:26:53 UTC"
+txtStop()
+setwd(oldwd)
 # }
 ```

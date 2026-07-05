@@ -3,11 +3,11 @@
   a script file.
 They work as combinations of sink and history with a
   couple of extra bells and whistles.
-They were primitive; using R markdown or Quarto markdown processes is now a much superior workflow."><meta property="og:description" content="These functions save a transcript of your commands and their output to
+They were primitive, but effective in the day; using R markdown or Quarto markdown processes is now a much superior workflow."><meta property="og:description" content="These functions save a transcript of your commands and their output to
   a script file.
 They work as combinations of sink and history with a
   couple of extra bells and whistles.
-They were primitive; using R markdown or Quarto markdown processes is now a much superior workflow."></head><body>
+They were primitive, but effective in the day; using R markdown or Quarto markdown processes is now a much superior workflow."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -55,7 +55,7 @@ They were primitive; using R markdown or Quarto markdown processes is now a much
   a script file.</p>
 <p>They work as combinations of <code>sink</code> and <code>history</code> with a
   couple of extra bells and whistles.</p>
-<p>They were primitive; using R markdown or Quarto markdown processes is now a much superior workflow.</p>
+<p>They were primitive, but effective in the day; using R markdown or Quarto markdown processes is now a much superior workflow.</p>
     </div>
 
     <div class="section level2">
@@ -169,7 +169,7 @@ They were primitive; using R markdown or Quarto markdown processes is now a much
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>These commands do not do any fancy formatting of output, just what you
 see in the regular terminal window.  If you want more formatted output
-then you should look into <code>Sweave</code> or the use of markdown documents..</p>
+then you should look into <code>Sweave</code> or the use of markdown documents.</p>
 <p>Do not use these functions in combination with the <span class="pkg">R2HTML</span> package or <code>sink</code>.</p>
     </div>
     <div class="section level2">
@@ -185,12 +185,12 @@ then you should look into <code>Sweave</code> or the use of markdown documents..
 <span class="r-in"><span><span class="va">oldwd</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">oldwd</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">txtStart</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txtStart():</span> argument "file" is missing, with no default</span>
+<span class="r-in"><span><span class="fu">txtStart</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Output being copied to text file,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> use txtStop() to end.</span>
 <span class="r-in"><span><span class="fu">txtComment</span><span class="op">(</span><span class="st">'This is todays transcript'</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cat("\n", txt, "\n\n", file = .R2txt.vars$con):</span> invalid connection</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html" class="external-link">date</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Sat Jul  4 23:39:47 2026"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Sun Jul  5 01:26:53 2026"</span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. </span>
@@ -217,9 +217,11 @@ then you should look into <code>Sweave</code> or the use of markdown documents..
 <span class="r-in"><span><span class="fu"><a href="hist.html">hist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="R2txtJG-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-07-04"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-07-05"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-07-04 23:39:47 UTC"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-07-05 01:26:53 UTC"</span>
+<span class="r-in"><span><span class="fu">txtStop</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">oldwd</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

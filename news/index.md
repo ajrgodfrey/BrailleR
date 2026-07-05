@@ -2,10 +2,11 @@
 
 ## BrailleR 1.2.2
 
-making changes on CRAN submission rejection. - added to five examples-
-removed don’t run from examples - ensured use of a temporary directory
-where possible. N.B. Some commands are designed with the express purpose
-of writing to the user’s working directory.
+making changes on CRAN submission rejection. - added don’t test” flag to
+five examples- removed don’t run from examples - ensured use of a
+temporary directory and/or file where possible. N.B. Some commands are
+designed with the express purpose of writing to the user’s working
+directory.
 
 ## BrailleR 1.2.1
 
