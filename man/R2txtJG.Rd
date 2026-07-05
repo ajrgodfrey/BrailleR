@@ -107,7 +107,7 @@ The txtOut function is a short cut for the txtStart command that uses the curren
 \note{
 These commands do not do any fancy formatting of output, just what you
 see in the regular terminal window.  If you want more formatted output
-then you should look into \code{Sweave} or the use of markdown documents..
+then you should look into \code{Sweave} or the use of markdown documents.
 
 Do not use these functions in combination with the \pkg{R2HTML} package or \code{sink}.
 }
