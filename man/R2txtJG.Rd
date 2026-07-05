@@ -130,6 +130,7 @@ hist(x)
 Sys.Date()
 Sys.time()
 txtStop()
+setwd(oldwd)
 }
 }
 \keyword{ character }
