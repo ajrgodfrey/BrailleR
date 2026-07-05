@@ -129,6 +129,7 @@ txtSkip(?hist)
 hist(x)
 Sys.Date()
 Sys.time()
+txtStop()
 }
 }
 \keyword{ character }
