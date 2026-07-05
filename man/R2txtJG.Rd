@@ -14,7 +14,7 @@
   They work as combinations of \code{sink} and \code{history} with a
   couple of extra bells and whistles.
 
-They were primitive; using R markdown or Quarto markdown processes is now a much superior workflow.
+They were primitive, but effective in the day; using R markdown or Quarto markdown processes is now a much superior workflow.
 }
 \usage{
 txtStart(file, commands=TRUE, results=TRUE, append=FALSE, cmdfile,
@@ -119,7 +119,7 @@ Do not use these functions in combination with the \pkg{R2HTML} package or \code
 oldwd = getwd()
 on.exit(setwd(oldwd))
 setwd(tempdir())
-txtStart()
+txtStart(tempfile())
 txtComment('This is todays transcript')
 date()
 x <- rnorm(25)
